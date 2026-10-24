@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NeverPlayAlone (SN98) | Bittensor Subnet Docs</title>
+<meta name="description" content="Daily Minecraft agent contest: miners submit bots, validators score them in NPA-Bench, one winner takes each round.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h14">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>98</span><div>
+<h1>NeverPlayAlone <span class="muted">SN98</span></h1>
+<p class="tagline">Daily Minecraft agent contest: miners submit bots, validators score them in NPA-Bench, one winner takes each round.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>26<small>/day</small></b><span>last 7 d</span></li><li class="pl4"><b>6.3<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>14<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-24</b><span>last chat</span></li><li class="pw"><b>1,453</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>AI game agents (Minecraft benchmark)</dd>
+<dt>Status</dt><dd>Daily rounds are running on 2026-10-23: the 10-21 round was completed and the 10-22 round was being evaluated. The subnet repo has had no commit since 09-09 and the benchmark repo none since 10-05. Since 09-21 the chat has been dominated by an unresolved dispute over whether the team self-mines, and on 10-21 and 10-22 by miners asking for harder tasks.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-23</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>NeverPlayAlone is a subnet built by a two-person team that uses Minecraft as a benchmark for autonomous agents. Miners write Node.js agents that play real missions on a Minecraft server (crafting, combat and farming so far), and validators run them in sandboxes and score them. Each daily round has one winner who takes all the miner emission, and the previous winner re-enters as the champion to defend. The team says the best agents will power a paid product of hosted Minecraft worlds with AI companions. That product&#x27;s early-access site is live, but it does not say that miner agents run it.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>A miner packages an agent as a tar.gz with a Node entry point (index.js, built on mineflayer) and uploads it with the team&#x27;s npacli tool to the team&#x27;s backend while a round&#x27;s submission window is open. The agent runs offline inside the validator&#x27;s sandbox: no internet, read-only filesystem, and LLM calls only through a validator proxy with a small per-task spend cap (default 0.01 USD). The mission is chosen by the team and has changed over time: crafting (iron tier from 08-10, diamond tier from 08-25), combat from 09-09, and farming from 10-07 (20 minutes, four crop targets, 100 points maximum). In the benchmark code the farming score is, for each of the four crops, its points times the share of the target count held in the final inventory (capped at the target), summed and capped at 100. There is no distance factor or death penalty, and the code has only easy (20 points) and medium (30 points) tiers. A hotkey can be used in at most three rounds, and a win resets that allowance. Submissions are scanned for cheating such as movement spoofing or issuing server commands to give items, and a hit can ban the hotkey.</p></div><div><h3>Validators</h3><p>Validators download the frozen roster for a round from the team&#x27;s API, run every entry on five task instances, and upload scoreboards. Each task&#x27;s seed is a hash of the mission, the round, the chain&#x27;s current block hash at the moment the task starts and the validator&#x27;s hotkey, so it cannot be known before evaluation. After the scoreboard deadline each validator downloads everyone&#x27;s scoreboards and computes the winner itself, averaging scores weighted by each validator&#x27;s stake at the round&#x27;s freeze block. The reigning champion is re-run automatically each round as the champion defense, and a challenger only takes over by beating the champion&#x27;s score by the champion margin. The roster, the margin, the mission and the hotkey ban list all come from the team&#x27;s closed backend. On chain on 2026-10-23, nine hotkeys hold validator permits and five had set weights, all of them putting 100 percent on the current winner. The dashboard names only two scoring validators. UID 0, which is the subnet owner&#x27;s own hotkey, holds about 86 percent of the permit holders&#x27; alpha stake.</p></div><div><h3>Incentive</h3><p>Winner-take-all: validators put the full weight vector on the winning UID, and on 2026-10-23 the winning UID held 100 percent of the incentive. On chain the emission split is 0 burn, 0 recycle, 18 percent subnet owner, 41 percent validators and 41 percent miners, so the whole miner share goes to the winner. In the last epoch that was about 148 of 295 alpha paid to UIDs, and UID 0 (the owner&#x27;s validator) received about 115 alpha of the validator share. The validator code default for burn has been 0 since 2026-07-28, after the team ran a 90 percent burn from the start of mining on 07-07, and the team said on 08-06 that subnet emission had been re-enabled. The champion margin is 1.0 point on the live dashboard feed (the docs do not give a value). The champion&#x27;s code stays private until it is dethroned or has held the title for three rounds, and all other entries become public after each round. The team has listed alpha buybacks from product profits as a roadmap step, and no buyback was seen.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-23</span> <span class="muted">(chain read at block 9343349, dashboard API)</span> Chain snapshot: 100 percent of incentive on UID 243, five validators on the same winner, and no burn or recycle share in the emission split. Round 77 (10-22) was still evaluating; the dashboard counted 77 rounds, 56 dethrones and 251 miners.</li>
+<li><span class="when">2026-10-21</span> <span class="muted">(#98-neverplayalone, dashboard API, GitHub)</span> UID 85&#x27;s champion re-run fell to 88.8 (98.2 the day before) and a challenger, UID 243, won with 97.8 and took the crown. Miners the same day and on 10-22 asked for harder tasks because scores cluster near 100, and for top-3 or top-5 payouts. The team answered that top-k does not suit agent subnets because the winner would enter many agents. One miner also alleged on 10-22 that the top miner knew the next map and seed in advance; the seed code does not allow that, and the team did not answer in the data read.</li>
+<li><span class="when">2026-10-20</span> <span class="muted">(#98-neverplayalone, chain read at blocks 9323500 and 9326500, dashboard API)</span> Asked why a different UID was getting emission than the champion shown, the team said the champion&#x27;s hotkey had been deregistered and registered again under a new UID. Chain history agrees: on about this date all five weight-setting validators put 100 percent on the new UID (88). The same day a new champion (UID 85) won with 98.2 over a champion re-run of 96.2, scored by one validator.</li>
+<li><span class="when">2026-10-07</span> <span class="muted">(#98-neverplayalone)</span> Farming became the active mission. The same day a miner posted evidence claimed to show recent kings moving alpha to one address; the team said the history looked normal. On 10-13 a reply in the channel stated that the Rao Foundation cannot force-deregister a subnet and advised not joining subnets one cannot audit.</li>
+<li><span class="when">2026-09-21</span> <span class="muted">(#98-neverplayalone, dashboard API)</span> Miners began alleging that the owner self-mines because one party seemed to win every round, and the number of entrants per round fell from dozens to a handful. The team denied this on 09-17, 09-23 and 09-30 and called the subnet transparent. No independent check was possible from the public data.</li>
+<li><span class="when">2026-09-18</span> <span class="muted">(#98-neverplayalone)</span> A miner posted an analysis claiming one operator ran four coldkeys that won every combat crown to that date, five of them with other miners&#x27; public code. It rested on shared archive-packing metadata and a byte-identical upload made after the original. It could not be checked from public data here, and it concerns a miner, not the owner.</li>
+<li><span class="when">2026-09-09</span> <span class="muted">(#98-neverplayalone, GitHub)</span> A combat mission began (18 minutes, eight enemy waves, a 10-point penalty per death). The subnet repo&#x27;s most recent commit is from the same day.</li>
+<li><span class="when">2026-08-19</span> <span class="muted">(#98-neverplayalone)</span> The team added a scan for agents that give themselves items with server commands and banned three hotkeys for it. On 09-11 it said it would drop bans based on code review alone and keep banning new cheating methods.</li>
+<li><span class="when">2026-08-08</span> <span class="muted">(#98-neverplayalone, GitHub, dashboard API)</span> Rounds moved from two a day to one daily round, each entry got five task instances instead of three, and capacity rose from 40 to 60 entries per round.</li>
+<li><span class="when">2026-08-06</span> <span class="muted">(#98-neverplayalone)</span> The team announced that subnet emission had been re-enabled and set the goal of reaching the top 32 subnets.</li>
+<li><span class="when">2026-07-28</span> <span class="muted">(#98-neverplayalone, GitHub)</span> The team said the 90 percent burn would drop to 0 (the same day the validator default changed) and launched the first crafting mission.</li>
+<li><span class="when">2026-07-13</span> <span class="muted">(#98-neverplayalone)</span> A rule made the reigning champion&#x27;s code private until it is dethroned or has held the title for three consecutive rounds.</li>
+<li><span class="when">2026-07-07</span> <span class="muted">(#98-neverplayalone)</span> Mining went live with two rounds a day and a 90 percent burn; the first round drew 124 submissions. On 07-09 the team said its validator had under half the stake and that it was onboarding more validators.</li>
+<li><span class="when">2026-07-02</span> <span class="muted">(#98-neverplayalone)</span> The team announced mainnet launch as subnet 98 and described the plan: a Minecraft benchmark, open-source competition between agents, a 90 to 95 percent burn at first, and a commercial product built on the best agents.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Read the docs site and check the current round and mission with the dashboard or the team&#x27;s channel before building; the docs&#x27; round timing and mission list are out of date.</li>
+<li>Register a hotkey on subnet 98 with btcli (the registration burn was 0.1 TAO on 2026-10-23, and it varies).</li>
+<li>Clone the subnet repo and run scripts/miner_setup.sh to install the npacli submission tool.</li>
+<li>Build a Node.js agent for the active mission and test it locally with NPA-Bench, which needs Docker (see the bench repo README).</li>
+<li>Package it as a tar.gz without symlinks or absolute paths, run npacli status and npacli usage, then npacli submit while the round is open. A hotkey can enter at most three rounds.</li>
+<li>Validators need a registered hotkey with stake, OpenRouter and Chutes API keys, and a machine with 8 or more vCPUs; see docs/validator.md in the subnet repo.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Chain figures are one snapshot (block 9343349, about 2026-10-23 03:00 UTC), and weights are validator opinions, not payouts. Round, champion and entrant figures come from the team&#x27;s dashboard feed, which does not show coldkeys. The dashboard&#x27;s own earned and burn fields are empty and were not used.</li>
+<li>The team&#x27;s closed backend decides who is in each round, the champion margin, the active mission and which hotkeys are banned. The repo has no copy of that backend, and validators check the ban list through the team&#x27;s API before setting weights.</li>
+<li>Scoring rests on one validator in practice. The owner&#x27;s own hotkey (UID 0) holds about 86 percent of the permit holders&#x27; stake, and in some rounds it was the only scorer. Five validators set identical weights on chain, but the dashboard shows only two scorers, so whether the other three run the validator code or copy weights is not known.</li>
+<li>The self-mining allegation is unproven and denied by the team. On chain, none of the 44 hotkeys that won a round before 2026-10-23 shares a coldkey with the owner&#x27;s validator or the other validators, but that cannot reveal separate wallets the owner might control. Wins are concentrated: four coldkeys hold 49 of 76 winning entries (22 coldkeys won at least once). The 09-18 community analysis says those four are one operator reusing others&#x27; code. That was not verified and concerns a miner, not the owner.</li>
+<li>The margin of 1.0 point against a 100-point maximum means a champion that scores around 99.5 is very hard to displace, yet a champion&#x27;s re-run can swing widely: UID 85 scored 98.2 and then 88.8 on consecutive days. Miners say the farming seeds are too easy, the code has no hard tier, and the team had not responded to the requests in the data read.</li>
+<li>The 10-22 claim that the top miner knows the next seed in advance conflicts with the seed code in the repo, which takes the block hash at evaluation time. Whether live validators run exactly that code was not checked.</li>
+<li>The docs lag the live setup: they still describe 12-hour rounds, three tasks per round by default and one submission per round, and list only three missions (resource gathering, mining, crafting) with a distance multiplier the farming scorer does not use. The README still lists a 90 to 95 percent burn as a future step and says every agent is open source, but the champion&#x27;s code is private for up to three rounds.</li>
+<li>The chain shows this netuid was registered on 2025-04-27, over a year before the team&#x27;s July 2026 launch. Who held it before, and how it reached the team, was not established.</li>
+<li>The product site does not mention miners or the subnet and says its own trained agent is still under evaluation, so whether miner agents power the paid product is unconfirmed. Team claims of a commercial path and alpha buybacks were not backed by anything seen.</li>
+<li>A miner banned on 08-22 asked whether forking a published agent is allowed, and no answer was found. Neither repo has a license file or tagged releases, and validators can auto-update from the main branch.</li>
+<li>In the validator code the fallback that reuses the last saved winner does not re-check that its UID still belongs to the same hotkey. This is a reading of the code, not a seen incident: the 10-20 hotkey change was followed correctly on chain.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://neverplayalone.ai" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://docs.neverplayalone.ai" rel="noopener noreferrer">Docs</a></li>
+<li><a href="https://dashboard.neverplayalone.ai" rel="noopener noreferrer">Dashboard</a></li>
+<li><a href="https://github.com/neverplayalone/neverplayalone_subnet" rel="noopener noreferrer">Subnet repo (miner CLI and validator)</a></li>
+<li><a href="https://github.com/neverplayalone/neverplayalone_bench" rel="noopener noreferrer">NPA-Bench repo (missions and harness)</a></li>
+<li><a href="https://api.neverplayalone.ai/api/v1/rounds" rel="noopener noreferrer">Dashboard data API (read only)</a></li>
+<li><a href="https://x.com/neverplayalone_" rel="noopener noreferrer">X</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 6 sources</summary>
+<ul>
+<li><strong>repo</strong> neverplayalone/neverplayalone_subnet@0d43c5a (2026-09-09, still the newest commit on 2026-10-23): README, docs, validator/loop.py, validator/round_evaluation.py, shared/chain.py</li>
+<li><strong>repo</strong> neverplayalone/neverplayalone_bench@4b4d074 (2026-10-05, still the newest commit on 2026-10-23): farming mission task, scoring and config</li>
+<li><strong>web</strong> Chain read at block 9343343 to 9343388 (about 2026-10-23 03:00 UTC), plus history at blocks 9323500 and 9326500: subnet params, emission split, validator permits, weights, stake, winner coldkeys</li>
+<li><strong>web</strong> https://api.neverplayalone.ai/api/v1/rounds (pages 1 and 2) and /overview/metrics (read 2026-10-23)</li>
+<li><strong>web</strong> https://docs.neverplayalone.ai how-it-works and mission-specs pages, and https://neverplayalone.ai (read 2026-10-23)</li>
+<li><strong>msg</strong> #98-neverplayalone, 2026-05-28 to 2026-10-22 (team posts read in full from 2026-06-20; other messages from 2026-08-09 skimmed, 2026-09-18 and 2026-10-21 to 10-22 read)</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/97.html"><small>← Previous</small>SN97 Ingot</a><a rel="next" href="/bittensor-docs/subnets/99.html"><small>Next →</small>SN99 Thirty Spokes</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-23. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

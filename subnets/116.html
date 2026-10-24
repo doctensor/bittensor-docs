@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Carbon (SN116) | Bittensor Subnet Docs</title>
+<meta name="description" content="Miners submit recipes for fast physics-AI models and validators rebuild them. Not paying yet: all weight goes to burn.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h20">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>116</span><div>
+<h1>Carbon <span class="muted">SN116</span></h1>
+<p class="tagline">Miners submit recipes for fast physics-AI models and validators rebuild them. Not paying yet: all weight goes to burn.</p>
+<span class="st s-transitioning">transitioning</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>12<small>/day</small></b><span>last 7 d</span></li><li class="pl4"><b>6.0<small>/day</small></b><span>days 8-30</span></li><li class="pl2"><b>0.38<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-24</b><span>last chat</span></li><li class="pw"><b>322</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>physics AI model discovery and evaluation</dd>
+<dt>Status</dt><dd>As of 2026-10-24 the team (Carbon Physics, Inc.) is still on testnet and development work: the owner says mining has not opened, nothing is paid and there is no launch date. The slot is live on mainnet (registered 2026-10-04), but at block 9355283 (2026-10-24 18:36Z) every validator gives all of its weight to the owner&#x27;s uid 0, so no miner is paid. The owner&#x27;s last message in the channel was on 2026-10-22.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-24</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>SN116 is run by Carbon Physics, Inc., which describes the subnet as discovery and evidence infrastructure for physics AI. Researchers and AI agents compete to find better ways of building fast models that stand in for slow physics simulations (battery charging, chip cooling, electric motors and similar). Carbon&#x27;s validators rebuild each candidate themselves and test it against reference physics before it can count. The slot was registered on mainnet on 2026-10-04 and the team says mining has not opened; on chain all validator weight currently goes to the owner&#x27;s uid 0. The company&#x27;s plan is to sell independent model evaluations and research to engineering customers.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Miners do not submit trained weights. They submit a reproducible construction recipe: the backbone, training procedure, hyperparameters, data handling, seeds and resource budget needed to rebuild the model from scratch. The website names Fourier Neural Operators and DeepONets as the launch families, and a 2026-10-17 repo design note says any complete, explicit pinned recipe should be allowed in time, with pretrained checkpoints barred. The owner said on 2026-10-22 that a miner may enter whichever challenge it likes, and that each challenge has its own practice image for miners and its own evaluation pack for validators. Miners practise on public practice cases and never see the protected exam cases. Carbon supplies a local browser app (Launchpad / Miner Control Center), a research agent called Graphite and an MCP interface for outside agents. As of 2026-10-21 submitting on testnet was not open: miners download the tools and practise locally.</p></div><div><h3>Validators</h3><p>Per the website and repo, a validator rebuilds the recipe on its own data in a fresh worker with no network, freezes the result as an inert model and tests it in a separate runtime. Mandatory physics checks come first (for example conservation, boundary behaviour and stability); failing one makes a result inadmissible whatever its accuracy. In the public scoring code (commit of 2026-10-18) a score pack has hard gates and three legs, physics, robustness and accuracy, combined as a weighted geometric mean, so a zero in any leg gives zero overall; the public packs are development fixtures. The owner said on 2026-10-22 that each score will be half accuracy and physics behaviour and half design value (how well the model picks the best design for each condition), and on 2026-10-16 that validation includes simulated design decisions made against the solver. That design-value half is not in the public score pack: its definition in the repo (value metric v2) is a development draft whose values the owner has yet to set.</p></div><div><h3>Incentive</h3><p>Not paying. On chain (mainnet, block 9355283, 2026-10-24 18:36Z) the subnet receives emission, split 18% owner, 41% validators and 41% miners, and RecycleOrBurn is set to Burn. All four validators with a permit give 100% of their weight to uid 0, the owner&#x27;s hotkey, so uid 0 holds 100% of the incentive (burned on the miner side) and, with its validator dividends, about 82% of what uids earned in the last epoch. No other miner uid has incentive; the same picture was read on 2026-10-23. The repo&#x27;s rule (carbon/rewards/winner_decay.py) is written as a testnet policy for netuid 567 with three challenges and no mainnet policy file was found: an epoch is split equally over the registered challenges, a challenge&#x27;s current winner gets its full share for 24 hours, the share then halves every further 24 hours, and everything unpaid burns to uid 0. The owner said on 2026-10-22 that emissions will be split evenly between active challenges. An older reward contract in the repo runs only in a local fixture. The code that would publish winner weights is an owner-run publisher that needs a standing owner authorization, publishes at most once per 360-block epoch and refuses an owner-coldkey winner on mainnet; the public repo holds no mainnet authorization or policy, and its chain constants still name testnet 567 only. The owner said on 2026-10-10 that there are no emissions until they are turned on, and on 2026-10-19 that miners will not be paid until the system produces something a customer will pay for.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-24</span> <span class="muted">(On-chain read (public node) and GitHub carbonphysicsai/Carbon)</span> A chain read at block 9355283 (18:36Z, a second read 47 minutes after the first) showed all four validators with a permit giving 100% of their weight to the owner&#x27;s uid 0, miner-side emission set to burn and no other uid with incentive; the only change since 2026-10-21 was an update of the subnet&#x27;s identity record (name, contact address and website, on 2026-10-21). Two of the three other validators with a permit are general validators registered on 120 and 82 subnets. The public repo&#x27;s main branch was still at its 2026-10-18 commit, so the practice-flow fix the owner described on 2026-10-20 was not yet public.</li>
+<li><span class="when">2026-10-22</span> <span class="muted">(#116 chat)</span> The owner listed five challenges planned for launch, not promised and still being qualified: electric-motor torque and ripple, AI chip cold plate, battery lithium plating, ribbed-bracket stiffness and burst thermal response. Miners may enter any one; emissions are to be split evenly across active challenges; each challenge&#x27;s scoring and exams are to be frozen and posted in the channel before it is added, and only the test conditions rotate, in batches. The team also announced an appearance on a revenue-focused show on 2026-10-23 about the commercial roadmap.</li>
+<li><span class="when">2026-10-21</span> <span class="muted">(#116 chat)</span> The owner said submitting on testnet was not open yet (practise locally), that the aim for the week was a clean version with four challenges, and gave no date. A team member said there is no public testnet leaderboard (state is on chain, netuid 567) and previewed a &#x27;Carbon Council&#x27; of committed holders and contributors with monthly stakeholder calls; this was a preview only.</li>
+<li><span class="when">2026-10-20</span> <span class="muted">(#116 chat)</span> A testnet miner reported that every Graphite practice run in the Launchpad failed with a contract error. The owner reproduced it, first said it was fixed, then clarified that the fix was tested internally but not on public main and would be batched with other fixes within a few days. A preview of a miner UI for practising active challenges and submitting was shared.</li>
+<li><span class="when">2026-10-19</span> <span class="muted">(#116 chat)</span> The team shared a weekly development update titled Path to Mainnet and an explainer for Challenge 01 (cooler AI compute). Only a short preview of the update was available when this page was written.</li>
+<li><span class="when">2026-10-17</span> <span class="muted">(GitHub carbonphysicsai/Carbon)</span> A repo design note set the engineering target as one pinned construction recipe, independent rebuild from fixed training data, separate evaluation of the frozen model and a single scoring core shared by miner practice and validators. It states that this is a target and not a delivered system.</li>
+<li><span class="when">2026-10-16</span> <span class="muted">(#116 chat)</span> The owner explained that miners cannot submit arbitrary models, so that the network is not gamed with models that are useless to customers, and that decision tests against the solver are being built into validation. The team also began a series of short explainers on the technology.</li>
+<li><span class="when">2026-10-13</span> <span class="muted">(#116 chat)</span> The owner gave an estimate of a week or two to launch, against the original 4-6 weeks.</li>
+<li><span class="when">2026-10-10</span> <span class="muted">(#116 chat)</span> Asked whether miners earn, the owner said there are no emissions until the team turns them on.</li>
+<li><span class="when">2026-10-09</span> <span class="muted">(#116 chat)</span> The owner said a first mainnet end-to-end test had run the day before, with challenge and score tuning still to do.</li>
+<li><span class="when">2026-10-06</span> <span class="muted">(#116 chat)</span> The owners introduced themselves and said the slot was registered through Bitstarter but that they run the subnet. They said 3 of 8 planned challenges (battery charging, AI chip cooling, precision motors) were wired into mining and validation for testing, and that mining was likely 4-6 weeks away.</li>
+<li><span class="when">2026-10-05</span> <span class="muted">(#116 chat and on-chain read)</span> The channel was claimed by the new operators; the chain dates this registration of netuid 116 to 2026-10-04. Posts in the channel before then concern a different, unclaimed occupant of the slot and are not about Carbon.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Mining has not opened and nothing is paid, so this is for trying the development tools only.</li>
+<li>Clone the GitHub repo and open it in the Ubuntu 24.04 dev container the repo provides (CPU is the supported profile).</li>
+<li>Run ./scripts/dev/bootstrap.sh, then ./scripts/dev/doctor.sh to check the environment matches what validators use.</li>
+<li>Run ./scripts/dev/canonical.sh --full to run a versioned example.</li>
+<li>To use the research tools (Launchpad, Graphite or the MCP interface) a miner must be registered on the subnet; the testnet used for development is netuid 567 (registered 2026-09-15). The owner said on 2026-10-21 that submitting on testnet is not open yet, so practise locally. A development submit is a signed message to a local service and writes nothing to the chain.</li>
+<li>Watch the #116 channel: the owner said he will announce there first when the tools are fully tested. As of 2026-10-24 the practice-flow fix he described on 2026-10-20 was not on the repo&#x27;s public main branch.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>The subnet is not paying miners and the team gave no launch date: 4-6 weeks (2026-10-06), about a week or two (2026-10-13) and, on 2026-10-21, that it is coming with a clean four-challenge version aimed for that week have all been stated, and nothing had launched by 2026-10-24.</li>
+<li>The launch set is unsettled. The website portfolio (unchanged between 2026-10-23 and 2026-10-24) lists eight proposed challenges; the owner said 3 were wired in (2026-10-06), aimed for 4 (2026-10-21) and named 5, not promised and still being qualified (2026-10-22). The repo&#x27;s only registered weight policy lists three testnet challenges.</li>
+<li>Chain read: at block 9355283 (2026-10-24) all four validators with a permit give 100% to uid 0, the owner&#x27;s hotkey and the burn uid in the code. Of the three other permit holders, two are hotkeys registered on 120 and 82 subnets (general multi-subnet validators, not Carbon-specific) and one is registered only on this subnet with almost no stake of its own; why they match the owner, and which software they run, was not checked. The chain&#x27;s emission flag is on, which only means the subnet receives emission.</li>
+<li>Reward rules: the 24-hour winner-decay rule is code for a testnet policy only (netuid 567, three challenges, last changed 2026-10-14); no mainnet policy file was found in the public repo, and the publisher code is owner-run, needs a standing authorization and refuses an owner-coldkey winner on mainnet, but the repo holds no mainnet authorization, so who sets the live mainnet weights is not shown by the repo. The older SCORE_REWARDS contract runs only in a local fixture.</li>
+<li>The owner&#x27;s description of the score (half accuracy and physics, half design value) exists only in chat. The public score pack has three legs (physics, robustness, accuracy), its packs are fixtures, and the design-value metric is a development draft.</li>
+<li>Testnet 567 is not a live competition: at block 8293532 (2026-10-24) it had 31 neurons, emission off, no incentive and validator weights at least 11 days old.</li>
+<li>The repo&#x27;s own status guide (reviewed 2026-09-28) still lists four challenges; the readiness record (2026-10-14) and website list eight, with readiness records for four. Every readiness record is a proposed development design and nothing is described as scientifically or production qualified.</li>
+<li>The repo does not establish any signed paying customers, validated prices or proven demand; the commercial plan (evidence audits, sponsored research, Alpha buyback and burn) is intent, not a recorded result.</li>
+<li>Most of the repo (about 8,000 files) was read at documentation level; only the reward policy, winner-decay, score-combine and weight-publisher code were read in code. The owner&#x27;s weekly X updates, a TAO Daily post and a revenue-show episode on the commercial plan were not readable.</li>
+<li>The repo licence is MIT for subnet software but proprietary for the Business, website and presentations folders, and it grants no rights in methods miners submit. GitHub shows the licence as unrecognised.</li>
+<li>The earlier chat history in this channel (July to early October) is about a previous occupant of netuid 116 and should not be read as Carbon&#x27;s history.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/carbonphysicsai/Carbon" rel="noopener noreferrer">GitHub</a></li>
+<li><a href="https://carbonphysics.ai/" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://carbonphysics.ai/miners/" rel="noopener noreferrer">Miners page</a></li>
+<li><a href="https://carbonphysics.ai/validators/" rel="noopener noreferrer">Validators page</a></li>
+<li><a href="https://carbonphysics.ai/portfolio/" rel="noopener noreferrer">Challenge portfolio</a></li>
+<li><a href="https://x.com/carbonphysicsai" rel="noopener noreferrer">X (Twitter)</a></li>
+<li><a href="https://github.com/carbonphysicsai/Carbon/blob/main/docs/DEVELOPMENT.md" rel="noopener noreferrer">Development setup guide</a></li>
+<li><a href="https://github.com/carbonphysicsai/Carbon/blob/main/SPEC.md" rel="noopener noreferrer">Protocol specification</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 5 sources</summary>
+<ul>
+<li><strong>msg</strong> #116 chat, 2026-10-05 to 2026-10-24</li>
+<li><strong>repo</strong> carbonphysicsai/Carbon README.md, docs/publications/PROJECT_STATUS.md, docs/development/CHALLENGE_READINESS.md, docs/development/CARBON_BUILD_TARGET.md, docs/development/SCORE_REWARDS.md, docs/development/value-metric-v2/DEFINITION.md, carbon/miner_mcp/README.md, carbon/rewards/winner_decay.py, carbon/rewards/weight_policies/, carbon/rewards/ledger.py, carbon/rewards/testnet_winner_publication.py, carbon/chain/publisher.py, carbon/chain/models.py, carbon/scoring/engine.py, LICENSE at commit 2d7cd75 (2026-10-18; main unchanged on 2026-10-24 at 18:45Z)</li>
+<li><strong>web</strong> https://carbonphysics.ai/ , /miners/ , /validators/ , /portfolio/ (read 2026-10-21, unchanged on 2026-10-24)</li>
+<li><strong>web</strong> https://api.github.com/repos/carbonphysicsai/Carbon (metadata and releases, 2026-10-21)</li>
+<li><strong>web</strong> Chain read at block 9355283 (2026-10-24 18:36Z UTC): SN116 (Carbon): registered 2026-10-04, tempo 360, 256 of 256 uids, commit-reveal on; emission weights burn/recycle/owner/validator/miner = 0/0/18/41/41 % (stored, same values as the chain default), RecycleOrBurn = Burn; uids under the owner hotkey or owner coldkey hold 100 % of incentive and 82.39 % of last-epoch emission (a floor); 4 validators have weight rows, on average 100 % of weight goes to uid 0. Same slot and settings as at block 9355046 (2026-10-24 17:49Z); also blocks 9343975 and 9347033 (2026-10-23) and testnet netuid 567 at block 8293532 (2026-10-24)</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/115.html"><small>← Previous</small>SN115 MoirAI</a><a rel="next" href="/bittensor-docs/subnets/117.html"><small>Next →</small>SN117 EveryFrame</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-24. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

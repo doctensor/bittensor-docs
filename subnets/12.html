@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ComputeHorde (SN12) | Bittensor Subnet Docs</title>
+<meta name="description" content="Trusted GPU compute for other subnets’ validators, but chain data shows about 97% of incentive going to one UID.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h12">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>12</span><div>
+<h1>ComputeHorde <span class="muted">SN12</span></h1>
+<p class="tagline">Trusted GPU compute for other subnets’ validators, but chain data shows about 97% of incentive going to one UID.</p>
+<span class="st s-quiet">quiet</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl4"><b>2.4<small>/day</small></b><span>last 7 d</span></li><li class="pl3"><b>1.3<small>/day</small></b><span>days 8-30</span></li><li class="pl4"><b>2.2<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-24</b><span>last chat</span></li><li class="pw"><b>9,211</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>GPU compute for subnet validation</dd>
+<dt>Status</dt><dd>Low chat (29 messages in the 30 days to 2026-10-20) and the last repository commit was 2026-09-18. The owner described the subnet as a “zombie” with one paying client on 2026-07-03 and said on 2026-10-12 that he had nothing solid to report.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-21</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>ComputeHorde aims to give validators of other Bittensor subnets cheap, trusted GPU capacity, so they do not need their own hardware or centralized clouds. Miners register executors, validators send them synthetic and organic jobs and check the results with the help of a trusted GPU. The project has a public SDK and a gateway for outside requests, but the chat shows little visible progress or named customers in 2026.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Run executors (several GPUs behind one miner hotkey) that accept jobs from validators. Only the A6000 hardware class is documented as supported, with A100 listed as next. Miners can post collateral with validators to be eligible for organic jobs, can run an optional DDoS shield and can preload common Docker images.</p></div><div><h3>Validators</h3><p>Run synthetic jobs and relay organic jobs coming from a facilitator, checking results against a separate trusted GPU. Each block mints compute allowance per miner and validator pair, scaled by validator stake, and a job spends allowance equal to its runtime. All validators score all miners for work that fits valid allowance blocks. Chain weights are set with commit-reveal.</p></div><div><h3>Incentive</h3><p>Paid runtime per miner is summed by coldkey and split across that coldkey’s hotkeys, with a 10% boost when a miner changes its declared main hotkey. Hardware classes have configurable weights. The validator code has a burn setting that sends a share of miner incentive to a burn target list, off by default in code. On 2026-10-21 the chain showed 97% of incentive on a single UID, with 7 of 8 weight-setting validators putting their top weight there. The owner has said in chat that the burn is about 99.5%, but this page did not confirm that UID is the burn target.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-20</span> <span class="muted">(#horde)</span> The owner said work is under way to run some other subnets’ validators on ComputeHorde, without naming them.</li>
+<li><span class="when">2026-10-12</span> <span class="muted">(#horde, chain)</span> The owner said the subnet identity was set, UIDs were trimmed, max UIDs were cut to 64 and the mechanism count set to 2 to test something. The chain shows 64 neurons, 64 max UIDs and 2 mechanisms.</li>
+<li><span class="when">2026-09-18</span> <span class="muted">(GitHub)</span> The latest commit to the ComputeHorde repository fixed eviction of old neurons in an allowance cleanup task.</li>
+<li><span class="when">2026-09-08</span> <span class="muted">(#horde)</span> Holders unable to sell alpha in apps were told alpha transfers are disabled on this subnet and to use a regular unstake through the command line or Polkadot-JS.</li>
+<li><span class="when">2026-09-03</span> <span class="muted">(#horde)</span> A heated thread questioned the subnet’s delivery and the owner’s holdings. The owner replied that he is still working on it and put its chance of success at not great. These are chat claims and were not verified here.</li>
+<li><span class="when">2026-08-17</span> <span class="muted">(#horde)</span> Asked about new validators, the owner said the subnet is permissionless and does not need more validators than it has.</li>
+<li><span class="when">2026-07-03</span> <span class="muted">(#horde)</span> The owner called the subnet not dead because it has a paying client, but not really alive either.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Read the repository README and the miner and validator READMEs; install scripts (install_miner.sh, install_validator.sh) are in the repo root.</li>
+<li>Test a miner on testnet netuid 174 before registering on mainnet 12, using a different port if you later mine from the same IP.</li>
+<li>A6000 is the only documented hardware class; check the pinned chat notes that other GPUs do not pass the A6000 class.</li>
+<li>Miners wanting organic jobs deposit collateral following the collateral-contracts guide linked from the README.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Burn rate and burn target were not verified. The repo default is no burn, the live value is a dynamic setting, and the chain pattern (97% of incentive on one UID) is only consistent with a heavy burn.</li>
+<li>No traffic, revenue or customer subnet could be confirmed; the owner mentions a paying client and work on other subnets without names.</li>
+<li>Chat includes strong accusations about the owner’s holdings and token sales. None were checked against the chain, and the page does not repeat them as fact.</li>
+<li>Alpha transfers being disabled comes from chat and was not checked on chain; try a plain unstake if swaps fail.</li>
+<li>Pinned messages and most guides date from 2024 and 2025 and may be out of date.</li>
+<li>Chain weights were read as aggregate shares only; hotkeys and addresses were not published.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://computehorde.io" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://github.com/backend-developers-ltd/ComputeHorde" rel="noopener noreferrer">GitHub</a></li>
+<li><a href="https://github.com/backend-developers-ltd/ComputeHorde/blob/master/compute_horde_sdk/README.md" rel="noopener noreferrer">SDK readme</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 4 sources</summary>
+<ul>
+<li><strong>repo</strong> backend-developers-ltd/ComputeHorde README, validator settings.py and scoring code, last commit 2026-09-18</li>
+<li><strong>web</strong> computehorde.io, read 2026-10-21</li>
+<li><strong>msg</strong> #horde 2026-06-14 to 2026-10-20 and pinned posts</li>
+<li><strong>web</strong> Chain read at block ~9331949: subnet info, parameters, weights and incentive aggregates for netuid 12</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/11.html"><small>← Previous</small>SN11 TrajectoryRL</a><a rel="next" href="/bittensor-docs/subnets/13.html"><small>Next →</small>SN13 Data Universe</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-21. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

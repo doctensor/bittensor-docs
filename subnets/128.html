@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ByteLeap (SN128) | Bittensor Subnet Docs</title>
+<meta name="description" content="GPU rental subnet: miners are paid in alpha only while their GPUs are leased, scored from the team&#x27;s central MeshHub.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h8">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>128</span><div>
+<h1>ByteLeap <span class="muted">SN128</span></h1>
+<p class="tagline">GPU rental subnet: miners are paid in alpha only while their GPUs are leased, scored from the team&#x27;s central MeshHub.</p>
+<span class="st s-unclear">unclear</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl3"><b>1.0<small>/day</small></b><span>last 7 d</span></li><li class="pl3"><b>0.74<small>/day</small></b><span>days 8-30</span></li><li class="pl3"><b>1.6<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-23</b><span>last chat</span></li><li class="pw"><b>1,201</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>compute (GPU rental)</dd>
+<dt>Status</dt><dd>On 2026-10-21 the chain showed emission enabled, 10 UIDs with incentive and 10 validators setting weights, and the team was answering in chat through 2026-10-20. But the repos have had no commit since 2026-08-11, the promised dashboard and conviction lock were not seen, and no independent evidence of rented compute was found. Emissions were stopped for this subnet on 2026-06-22 and the team says they resumed on 2026-08-17.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-21</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>ByteLeap describes itself as a decentralized public cloud: GPU hosts connect to the subnet and are rented out to customers as virtual machines or bare metal, and miners earn alpha only while their GPUs are leased. In practice the miner set has been an allowlist of partner compute centers, and the lease scores that drive weights come from a team-run service called MeshHub, so validators relay them rather than measure them. Community members have questioned for months whether the rewarded machines are independent from the team; the team says they are partners and promises a public dashboard, which was not available on 2026-10-21.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>A miner runs a Python node that aggregates one or more Go worker agents over WebSocket. Workers run on bare-metal GPU hosts (Ubuntu 22.04 or newer, kernel 6.0 or newer, 8 or more physical cores, 32 GB RAM, 500 GB disk; Docker and virtual machines are not supported) with an RTX 3090, 4090 or 5090, A100, H100, H200 or B200, and the GPUs are bound to VFIO so they can be passed through to customer VMs. The team said on 2026-08-18 that access is a limited allowlist of vetted partner compute centers, and on 2026-09-20 that miners can now connect their own GPU. A miner running the default setup reported on 2026-10-18 getting no tasks and no rewards, and the team replied that answering validator challenges earns nothing: only leased GPUs earn.</p></div><div><h3>Validators</h3><p>A validator runs a Python node that keeps a WebSocket connection to the team&#x27;s MeshHub service (the config requires an access token for it, and the example file ships a pre-filled one), stores the per-worker lease scores MeshHub broadcasts, adds them up per miner and normalizes the totals into weights. The code for random GPU challenges was deleted in January 2026, so the validator no longer measures anything itself. The validator README and example config still describe a 70/30 split between leases and challenges and are out of date. The example miner config only talks to a short list of whitelisted validators or to validators with at least 10,000 TAO stake.</p></div><div><h3>Incentive</h3><p>Weights are lease-only: a miner&#x27;s score is the sum of its workers&#x27; lease scores and weight is its share of the total. Lease scores are produced by the team&#x27;s MeshHub, so nobody outside the team can recompute them from public data. The team says rewards are paid per block in alpha while a GPU is rented, that stable online time matters (full online coefficient after 169 hours), and that revenue comes 100% from rentals; none of this could be verified. On chain on 2026-10-21: 10 UIDs had incentive (the top one 14.7%, the top five 64.5%), and all 10 validators that had set weights put their top weight on the same UID. The chain shows what is configured and set, not who runs those UIDs or whether their GPUs are rented.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-21</span> <span class="muted">(on-chain read (block 9332044))</span> Chain read: 256 of 256 UIDs used, emission enabled, 28 validator permits of which 10 had set weights (the other 18 had weights older than two tempos). Commit-reveal is off. Pool held about 4,019 TAO and the alpha price was about 0.0028 TAO.</li>
+<li><span class="when">2026-10-19</span> <span class="muted">(#byteleap)</span> Team told a miner that alpha is earned only when a GPU is leased, and that polling validators for challenges yields nothing. On 2026-10-20 it said lease status can be checked through an API, without naming one.</li>
+<li><span class="when">2026-10-08</span> <span class="muted">(#byteleap)</span> Team said that all revenue now comes from rentals, that its capacity is fully rented, that rental prices are on its website, that a public dashboard is under development, and that 4 to 8 GPUs per miner is the recommended range. None of this was independently confirmed.</li>
+<li><span class="when">2026-09-28</span> <span class="muted">(#byteleap)</span> A user could not finish renting a GPU on the website; the team said it had run out of GPUs and was waiting for new stock.</li>
+<li><span class="when">2026-09-20</span> <span class="muted">(#byteleap)</span> Team said miners can now connect their own GPU and earn alpha once it is rented. On 2026-09-24 it said a new update was coming soon; no matching commit appeared in the three repos.</li>
+<li><span class="when">2026-08-28</span> <span class="muted">(#byteleap)</span> An automated assessment bot posted a preliminary 2/10 rating, citing the allowlist, the central MeshHub dependency and no verifiable rentals. The team called it preliminary on 2026-09-02 and invited others to compete for the slot through conviction locking.</li>
+<li><span class="when">2026-08-17</span> <span class="muted">(#byteleap)</span> Team said its application for reinstatement was submitted and, later the same day, that emissions had resumed. Several users alleged self-mining by linked addresses and asked for a dashboard of real machines; the team replied that the rewarded UIDs include partner compute centers and promised a dashboard, permissionless access and a conviction lock. No announcement of the reinstatement was found in the network announcements channel.</li>
+<li><span class="when">2026-08-12</span> <span class="muted">(#byteleap)</span> Team posted a document, attached in chat, on the subnet&#x27;s economic activity over six months and why it should keep emissions, as requested by the network&#x27;s core team in June. The attachment was not read.</li>
+<li><span class="when">2026-08-11</span> <span class="muted">(#byteleap, GitHub)</span> Team announced an SDK upgrade for miner and validator and asked operators to update; both repos have a commit that day, the latest in any of the three repos.</li>
+<li><span class="when">2026-06-22</span> <span class="muted">(#announce)</span> Network announcements listed SN128 among the subnets whose emissions were ceased for having no miner distribution or no code.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Check that your hardware fits: bare metal, Ubuntu 22.04 or newer, kernel 6.0 or newer, 8 or more physical cores, 32 GB RAM, 500 GB disk, and one of the supported NVIDIA GPUs.</li>
+<li>Install the worker with the team&#x27;s install script or zip from its resource site, bind the GPUs to VFIO with the worker&#x27;s bind command, reboot and run the verify command.</li>
+<li>Set a worker name and the miner&#x27;s WebSocket address in the worker config, then start the worker service.</li>
+<li>Run the miner (python scripts/run_miner.py, PM2 recommended) with a registered hotkey; the team said on 2026-09-28 that both the miner and the worker must be deployed.</li>
+<li>Ask in the subnet channel whether your machine is accepted: the team described the miner set as an allowlist on 2026-08-18. Check lease status through the team&#x27;s API (location not given in chat).</li>
+<li>Validators: run python scripts/run_validator.py with a config that includes a MeshHub access token. The repos do not say how a token is obtained.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Lease scores come from a closed, team-run MeshHub service and the worker binary is not built from the public repo; nobody outside the team can check that rented compute exists.</li>
+<li>Chat is what the team said, not what was verified. The team&#x27;s statements on revenue, full rental, partner compute centers, alpha buybacks and never selling alpha were not checked against chain history or any dashboard.</li>
+<li>Validator and miner READMEs still describe challenge scoring (70/30 in the validator example config); the code is lease-only since 2026-01-20.</li>
+<li>The reinstatement of emissions after 2026-06-22 is stated by the team; the chain shows emission enabled on 2026-10-21, but the network announcements do not mention a reinstatement.</li>
+<li>The economic report posted in chat on 2026-08-12 was an attachment and was not read.</li>
+<li>Conviction lock amounts and who actually runs the rewarded machines were not examined. A later chain check (block 9334350, 2026-10-21) found that all 10 UIDs with incentive hold validator permits, that none of them advertises a serving axon (the published miner is an axon-based node), and that the 10 UIDs sit behind 9 distinct coldkeys, so chat claims that they all share one owner are not what the chain shows. The 10 validators that set weights all set the same ten-miner weight vector, and one of them is the subnet owner&#x27;s own hotkey. Chain data cannot show whether these operators are independent of the team or whether GPUs are rented.</li>
+<li>The validator example config ships a pre-filled MeshHub address and access token in a public repo; it is a credential that may have been rotated or revoked.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://byteleap.ai" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://byteleap.ai/pricing" rel="noopener noreferrer">GPU pricing page</a></li>
+<li><a href="https://github.com/byteleapai/byteleap-Miner" rel="noopener noreferrer">GitHub (Miner)</a></li>
+<li><a href="https://github.com/byteleapai/byteleap-Validator" rel="noopener noreferrer">GitHub (Validator)</a></li>
+<li><a href="https://github.com/byteleapai/byteleap-Worker" rel="noopener noreferrer">GitHub (Worker)</a></li>
+<li><a href="https://x.com/byteleap_ai" rel="noopener noreferrer">X</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 6 sources</summary>
+<ul>
+<li><strong>msg</strong> #byteleap 2026-06-04 to 2026-10-20 (chat), #announce 2026-06-22 and 2026-08-14</li>
+<li><strong>repo</strong> byteleapai/byteleap-Validator @9552e72 (2026-08-11): weight_manager.py, meshhub_client.py, models/database.py, config example, commit 8060707 (2026-01-20)</li>
+<li><strong>repo</strong> byteleapai/byteleap-Miner @cb6f296 (2026-08-11): README, config/miner_config.yaml</li>
+<li><strong>repo</strong> byteleapai/byteleap-Worker @ad78097 (2026-01-12): README, config</li>
+<li><strong>web</strong> https://byteleap.ai/pricing (read 2026-10-21, client-rendered)</li>
+<li><strong>web</strong> chain read: chain.py subnet 128, chain_neurons.py params, uids and weights 128 @ block 9332044 (2026-10-21)</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/127.html"><small>← Previous</small>SN127 Astrid</a><a rel="next" href="/bittensor-docs/subnets/163.html"><small>Next →</small>SN163 Safe Scan</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-21. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

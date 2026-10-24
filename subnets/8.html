@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vanta (SN8) | Bittensor Subnet Docs</title>
+<meta name="description" content="On-chain prop-firm engine: miners trade collateral-sized accounts and are paid weekly in emissions from their PnL.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h8">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>8</span><div>
+<h1>Vanta <span class="muted">SN8</span></h1>
+<p class="tagline">On-chain prop-firm engine: miners trade collateral-sized accounts and are paid weekly in emissions from their PnL.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl4"><b>3.1<small>/day</small></b><span>last 7 d</span></li><li class="pl3"><b>2.0<small>/day</small></b><span>days 8-30</span></li><li class="pl4"><b>4.2<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-24</b><span>last chat</span></li><li class="pw"><b>10,826</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>trading (on-chain prop firm)</dd>
+<dt>Status</dt><dd>Active on 2026-10-21: the repo was last committed on 2026-10-15, 14 of 18 validator permit holders had weights set, and chat was live through 2026-10-20. Chat says emissions were cut at network level in early September 2026; the chain showed emission enabled on 2026-10-21.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-21</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>Vanta (formerly the Proprietary Trading Network, built by Taoshi) is a trading subnet that works like an open prop firm. Miners trade crypto, forex, equities or commodities with accounts sized by the alpha they lock as collateral, validators track and price every order, and miners are paid in emissions in proportion to the profit they made. Team-run products on top include Vanta Trading, a prop-firm service that runs as one miner, and Hyperscaled. Whether the subnet earns enough outside revenue to justify its emissions is argued openly in chat and was not resolved there.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>A miner registers a hotkey, picks one asset class, locks collateral in the subnet&#x27;s alpha (theta in the docs) and sends LONG, SHORT or FLAT orders. Each theta locked unlocks 500 USD of trading capacity, with a minimum of 300 and a maximum of 1,000 theta. New miners start in a challenge period of up to 90 days and must show at least 61 trading days, no drawdown over 5%, returns above 10% (8% for forex) and a score at or above the 25th miner of their asset class. Passed miners are eliminated at a 5% intraday or 8% end-of-day drawdown. Entity miners are a variant: one hotkey hosts many subaccounts, each with its own account size, challenge and fees, so a single slot can serve many traders.</p></div><div><h3>Validators</h3><p>Validators receive miners&#x27; orders, price them from paid market-data feeds, and keep each miner&#x27;s positions, PnL, drawdown and penalties in ledgers. The docs set a validator stake of 1,000 alpha and weight setting every 5 minutes. Validators that rebuild their state restore from a checkpoint provided by the team.</p></div><div><h3>Incentive</h3><p>Since December 2025 the code uses debt-based scoring. Each week ends at 00:00 UTC on Sunday; a miner&#x27;s needed payout is its cumulative PnL in USD times penalties up to the end of the previous week, the actual payout is the emissions it has received (in USD), and weights are proportional to the remaining difference. Every miner also gets a small floor weight that depends on its stage (3x for main competition, 2x for probation, 1x for challenge). Any weight not owed to a miner goes to a burn address (UID 229 on mainnet). Average daily PnL carries 100% of the score; other metrics are tracked at 0%. On chain on 2026-10-21 the emission split between owner, validators and miners was 0%, 50% and 50%, matching the team&#x27;s 2026-10-20 post, and the subnet&#x27;s alpha emission was 1 alpha per block.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-21</span> <span class="muted">(on-chain read)</span> Chain read: 256 of 256 UIDs used, 18 validator permits with 14 setting weights. One UID received 77.6% of incentive and the top five received 99.9%; ten of the 14 validators put their top weight on that UID and two on the burn UID. The chain does not say who runs the top UID. The maximum number of UIDs was still 256.</li>
+<li><span class="when">2026-10-20</span> <span class="muted">(#vanta)</span> After the chain&#x27;s eTAO upgrade (announced 2026-10-19) the team said it moved to 0% owner, 50% validator and 50% miner emissions, which the chain confirms. It also said costs for Vanta Trading and a planned agentic trading platform will be covered from a separate wallet, and announced plans to enable Null Consensus (2,500 miners) and a permissionless Vanta Trading with USDC rails. These were announcements only.</li>
+<li><span class="when">2026-10-19</span> <span class="muted">(#vanta)</span> The team said buybacks in the first 18 days of October exceeded all of September, that all bought alpha is locked, and that it expects continued monthly growth. These figures are team-reported.</li>
+<li><span class="when">2026-10-16</span> <span class="muted">(#vanta)</span> A community member said the share of collected alpha used for burns had changed from 100% to 70%, with 30% going to a reserve. The team answered only that the reserve is for all miners; no details were found.</li>
+<li><span class="when">2026-10-14</span> <span class="muted">(GitHub taoshidev/vanta-network)</span> Repo updates through 2026-10-15 added instant funded accounts for entity miners, tools to reset and promote standard subaccounts, an order-type patch and a lazy check of unrealized PnL at payout.</li>
+<li><span class="when">2026-10-03</span> <span class="muted">(#vanta)</span> The team previewed entity-miner changes: higher registration cost for standard accounts, daily loss limit options of 3%, 4% or 5% with variable cost, and automatic moves of standard accounts into the pro challenge.</li>
+<li><span class="when">2026-09-26</span> <span class="muted">(#vanta)</span> The team said it sells owner emissions to fund operating and marketing costs, and that revenue from Vanta Trading, Vanta Labs and live trading is sent to a buyback wallet.</li>
+<li><span class="when">2026-09-09</span> <span class="muted">(#vanta)</span> After emissions to the subnet were cut in the first days of September, the team said it had delivered the changes requested: traders on Vanta Trading can choose what to do with the alpha they receive, and buyback revenue goes to a single wallet for tracking. The date emissions resumed was not found.</li>
+<li><span class="when">2026-09-07</span> <span class="muted">(#vanta)</span> A long public exchange between critics and the team. Critics said three years of emissions had not shown audited external revenue and that live hedging capital was small; they said alpha burns are largely miners paying to earn more. The team said payouts and burns are visible on chain, that over 4,000 traders had joined since April, and that live hedging capital was in the low six figures and growing.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Read docs/miner.md in the vanta-network repo, choose one asset class, and plan around its leverage caps and trading hours.</li>
+<li>Register a hotkey on netuid 8 (the chain showed a 0.0005 TAO registration burn on 2026-10-21). Never reuse a hotkey that was eliminated or deregistered: the network blacklists it permanently.</li>
+<li>Deposit collateral with the Vanta CLI: 300 to 1,000 theta, worth 500 USD of capacity each. Collateral can be slashed on losses.</li>
+<li>Send signals and stay inside the drawdown limits. To leave the challenge period you need at least 61 trading days, returns above 10% (8% forex) and a top-25 score in your asset class.</li>
+<li>Alternatively join an entity miner as a subaccount (Vanta Trading is one) or register your own; see docs/entity_miner.md for fees and cross-margin rules.</li>
+<li>To validate, follow docs/validator.md: 1,000 alpha stake, paid price-data feeds, and docs/regenerating_validator_state.md to restore state.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Chain state was read as aggregates: one UID holds 77.6% of incentive, but its owner was not identified and validator stakes were not read. The team says Vanta Trading is an entity miner; the chain does not confirm which UID that is. Weights are validator opinions, not payouts.</li>
+<li>Revenue, buyback, burn, collateral and trader-count figures come from the team (chat and its own sites). The dashboard and tokenomics pages are client-rendered and could not be read from the research machine, so no burn or buyback totals are published here.</li>
+<li>Whether the subnet creates enough outside revenue is disputed in chat: critics call burns internal token flows, the team points to eval fees, on-chain payouts and copy-trading. Neither side posted audited figures in the channel.</li>
+<li>Emissions were cut for the subnet in early September 2026 according to chat; the date they resumed, and the reasons beyond the team&#x27;s account, were not found.</li>
+<li>Docs and README lag code in places: the README still describes signals generically, while the code and chat describe a prop-firm model. The 2025 pinned posts (for example 175 USD of capacity per alpha) are superseded by the current 500 USD.</li>
+<li>Null Consensus, permissionless Vanta Trading with USDC rails and the agentic trading platform were announced in chat only; the chain still showed 256 maximum UIDs on 2026-10-21.</li>
+<li>A community report of a changed burn and reserve split (70% and 30%) on 2026-10-16 is not confirmed by code or chain.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://www.vantanetwork.io" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://github.com/taoshidev/vanta-network" rel="noopener noreferrer">GitHub</a></li>
+<li><a href="https://github.com/taoshidev/vanta-network/blob/main/docs/miner.md" rel="noopener noreferrer">Miner docs</a></li>
+<li><a href="https://github.com/taoshidev/vanta-network/blob/main/docs/entity_miner.md" rel="noopener noreferrer">Entity miner docs</a></li>
+<li><a href="https://github.com/taoshidev/vanta-network/blob/main/docs/validator.md" rel="noopener noreferrer">Validator docs</a></li>
+<li><a href="https://www.vantanetwork.io/dashboard" rel="noopener noreferrer">Dashboard (team)</a></li>
+<li><a href="https://www.vantanetwork.io/tokenomics" rel="noopener noreferrer">Tokenomics (team)</a></li>
+<li><a href="https://www.vantatrading.io" rel="noopener noreferrer">Vanta Trading (team product)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 5 sources</summary>
+<ul>
+<li><strong>repo</strong> taoshidev/vanta-network README.md, docs/miner.md, docs/entity_miner.md, docs/validator.md, vali_objects/scoring/debt_based_scoring.py, weight_calculator_manager.py @4b630b1 (2026-10-15)</li>
+<li><strong>web</strong> vantatrading.io home page (curl, 2026-10-21); vantanetwork.io /dashboard and /tokenomics (client-rendered, empty when read)</li>
+<li><strong>web</strong> On-chain read via public node: subnet info at block 9334324, params 9334306, uids 9334307, weights 9334320, SubnetEmissionWeights storage (2026-10-21)</li>
+<li><strong>msg</strong> #announce 2026-10-19 (eTAO release note)</li>
+<li><strong>msg</strong> #vanta, 2026-09-03 to 2026-10-20 plus pinned posts</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/7.html"><small>← Previous</small>SN7 Allways</a><a rel="next" href="/bittensor-docs/subnets/9.html"><small>Next →</small>SN9 IOTA</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-21. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>sundae_bar (SN121) | Bittensor Subnet Docs</title>
+<meta name="description" content="Miners submit AI skill files for business tasks; validators score them with LLM judges and the current leader earns.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h7">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>121</span><div>
+<h1>sundae_bar <span class="muted">SN121</span></h1>
+<p class="tagline">Miners submit AI skill files for business tasks; validators score them with LLM judges and the current leader earns.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>19<small>/day</small></b><span>last 7 d</span></li><li class="pl4"><b>6.5<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>7.7<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-23</b><span>last chat</span></li><li class="pw"><b>1,733</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>AI skills for business workflows</dd>
+<dt>Status</dt><dd>Challenges run back to back. SBC31 closed on 2026-10-21 and SBC32 (Compliance Gap Analysis) ran from 2026-10-22 until late on 2026-10-23, dated from chain weights. A chain read on 2026-10-24 (block 9354845) showed no Challenge being paid; the next brief was not visible because the chat archive stops on 2026-10-23.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-24</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>SN121 is run by Sundae Bar AI PLC, a London-listed company that sells AI agents and skills to businesses. The subnet works as a rolling series of Challenges, each a business workflow such as market-data comparability or compliance gap analysis. Miners compete to write the best skill for the Challenge, and the best skills can be integrated into the company&#x27;s commercial platform. The team says the long-term plan is for part of platform revenue to fund buybacks of the subnet token, but this is stated intent and is not visible in code.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Register a hotkey on the subnet, create an account on the sundae_bar Lab and connect that registered hotkey as the account&#x27;s wallet (the form checks the wallet against the subnet&#x27;s hotkey registry, not coldkey ownership). While a Challenge is open, upload a skill bundle: a SKILL.md of at most 10,000 bytes plus an optional references folder (up to 30 text files, 128,000 characters in total); a single SKILL.md is also accepted. The agent reads a reference file only when SKILL.md names it. There are two submission caps, a daily one (3 per day in the SBC32 brief) and a per-Challenge one (the README says 5 scored per hotkey); the Lab shows the current numbers. A new entry must also differ enough from earlier ones: under 93% similar to other miners and under 97% to the miner&#x27;s own.</p></div><div><h3>Validators</h3><p>The team&#x27;s validator hands each skill to an in-house evaluator (sbevals). A fixed base agent loads the skill, answers every scenario in the Challenge (4 in SBC32, 9 in SBC31), and several graders score the answers: skill use, scenario quality, a holistic rubric and a deterministic novelty check (typical weights 30/30/30/10, set per Challenge). Before scoring, integrity gates read every file and zero any skill that encodes the dataset, mirrors the rubric or addresses the judges. The suite, dataset and rubric are published on each Lab challenge page, each posted score carries a SHA-256 hash, and the evaluator is distributed as a public Docker image. Other validators either child-key to the team&#x27;s validator or set their own weights.</p></div><div><h3>Incentive</h3><p>Emissions follow whoever holds first place. The validator puts a fixed share of its weight on the current leader and the rest on UID 0, which is the owner hotkey (the chain setting is Burn, and the README calls the rest burned). The share is a setting: the open-source default is 20%, and the team&#x27;s live setting was 40%, confirmed on chain between 2026-10-21 and 2026-10-23. The weights go out as one plain setWeights call, rechecked every 30 minutes by default or when standings change. A different miner takes the lead only by beating the leader&#x27;s best score by a margin (0.01 per the README); inside it the incumbent keeps the lead. Between Challenges, 100% of miner incentive goes to UID 0, as read on chain on 2026-10-22 and 2026-10-24.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-24</span> <span class="muted">(chain read, block 9354845)</span> A chain read (block 9354845) found no Challenge being paid: incentive was 100% on UID 0 and all 8 validators with a permit put 100% of their weight on UID 0.</li>
+<li><span class="when">2026-10-23</span> <span class="muted">(chain weights and incentive, blocks 9349463 to 9349963)</span> SBC32&#x27;s paid window ended late in the evening UTC, about 32 hours after submissions opened. Chain weights moved from a 60/40 split (UID 0 and the leader) to 100% on UID 0 between roughly 23:00 and 00:00 UTC. The chat archive ends earlier, so no close announcement was visible.</li>
+<li><span class="when">2026-10-22</span> <span class="muted">(#sundae-bar; sundaebar.ai Lab)</span> SBC32 (Compliance Gap Analysis Skill) opened with 4 scenarios, a 10-step and 53,000-token budget per scenario and 3 submissions per day. After a hosting outage the evaluator lost a credential and the first 11 submissions scored 0 by error; the team paused submissions for about 45 minutes and said those entries would be re-evaluated.</li>
+<li><span class="when">2026-10-22</span> <span class="muted">(#sundae-bar)</span> Miners disputed fairness. Complaints covered the unannounced close time and the advantage of an early leader, with requests for a published close time and a minimum earning window. Allegations of self-mining were denied by the team. One miner reported that the integrity grader in the public evaluator image zeroes the SBC32 leader, and another found a local re-run of the leader&#x27;s bundle scored lower than the published score. The team described what drives a close time (production-level score, a review, the leader&#x27;s earnings, eval cost and commercial value). None of the claims were verified.</li>
+<li><span class="when">2026-10-21</span> <span class="muted">(#sundae-bar)</span> SBC31 closed at 22:00 UTC. The team also answered why SN121 shows one scoring validator: other validators child-key to it or set their own weights, and the suite, per-test rationale and score hashes are published so anyone can replay the ranking.</li>
+<li><span class="when">2026-10-16</span> <span class="muted">(#sundae-bar; GitHub bittensor-subnet)</span> SBC30 closed after the leader cleared the qualifying bar and the team&#x27;s review judged the skill ready for the platform. The README gained a leadership-margin and FAQ section, and a support post set out how to ask questions.</li>
+<li><span class="when">2026-10-14</span> <span class="muted">(#sundae-bar)</span> Announced skill bundles for SBC30 (SKILL.md plus a references folder) and said the integrity gates read the whole bundle. On 2026-10-15 the team removed an internal calibration field that a miner found exposed by the live challenge API.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Read the README (scoring, leader rule, bundle format, FAQ) before asking in chat, and check the Lab or chat for whether a Challenge is open: between Challenges nothing is paid.</li>
+<li>Register a hotkey on subnet 121, create a sundae_bar account and connect that registered hotkey as the account wallet, signing the message the form shows. After a re-registration, disconnect the old wallet and connect the new hotkey.</li>
+<li>Open the live Challenge brief on the Lab and download its suite files (suite.yaml, dataset, rubric) to see the scenarios and graders; the brief states the step and token budgets and the daily cap.</li>
+<li>Write a SKILL.md that teaches a method, put examples and templates in named reference files, and keep each file within the limits.</li>
+<li>Upload the folder, a zip or a single SKILL.md on the Lab form, then read the results JSON for grader rationale and gate results.</li>
+<li>To run a validator, register a hotkey with a validator permit and use the Docker Compose stack in the sb-validator repo, with model-provider keys.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Whether a Challenge is open changes within a day. On 2026-10-24 none was being paid on chain, and the chat archive stops on 2026-10-23, so check the Lab and chat for the next brief.</li>
+<li>The leader&#x27;s share is a team setting: 20% in the open-source validator default, 40% as read on chain from 2026-10-21 to 2026-10-23. The README says it can change at any time and a brief can override it, so re-read the weights before relying on it.</li>
+<li>Since SBC30 a close time is not published when a Challenge opens, and the team decides the close after a production-level score and a review. Earlier Challenges had fixed or &#x27;or sooner&#x27; close dates. Miners asked for a published close time and a minimum earning window; no team answer was seen.</li>
+<li>Chain data shows what validators set, not payouts. All 8 validators with a permit carried identical weights at every sample, which fits the README&#x27;s child-keying, but this read did not check whether the other 7 are child-keys or independent copies.</li>
+<li>The README says gate internals are not published, but the evaluator ships as a public Docker image that miners can inspect, and no source repository was found. A miner reported that its integrity grader zeroes the SBC32 leader; this is unverified and no team reply was seen.</li>
+<li>LLM judging is noisy: a miner&#x27;s local re-run of the SBC32 leader&#x27;s bundle scored lower than the published score, which is why a 0.01 leadership margin exists. The team says scores are not reproducible to the last digit.</li>
+<li>Chat disputes about copying and self-mining are unverified allegations, and the team denies them. The suite, per-test rationale, score hashes and weight code are published for audit, but the coordinator API and the gate logic were not read.</li>
+<li>The buyback plan tied to platform revenue is an intention in the README; no mechanism for it was found in the code, and chat questions about revenue went unanswered in the data read.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://www.sundaebar.ai/lab" rel="noopener noreferrer">Lab (live Challenge and leaderboard)</a></li>
+<li><a href="https://github.com/sundae-bar/bittensor-subnet" rel="noopener noreferrer">SN121 README</a></li>
+<li><a href="https://github.com/sundae-bar/sb-validator" rel="noopener noreferrer">Validator repo</a></li>
+<li><a href="https://www.sundaebar.ai/news/how-we-audit-scores" rel="noopener noreferrer">Dev log: how every score is audited</a></li>
+<li><a href="https://hub.docker.com/r/sundaebarai/sn121-skill-evals" rel="noopener noreferrer">Evaluator image on Docker Hub</a></li>
+<li><a href="https://www.sundaebar.ai/news" rel="noopener noreferrer">Dev log and news</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 7 sources</summary>
+<ul>
+<li><strong>repo</strong> sundae-bar/bittensor-subnet at commit 8fcfc1d (2026-10-16, on main): README.md</li>
+<li><strong>repo</strong> sundae-bar/sb-validator at commit 3a5a80b (v1.0.24, 2026-10-14): README.md, docker-compose.yaml, src/leaderboard.ts, src/weight-policy.ts, src/weights.ts, src/integrity.ts</li>
+<li><strong>web</strong> sundaebar.ai dev log &#x27;Show Your Work: How sundae_bar Audits Every Score&#x27; (2026-07-15), read 2026-10-24</li>
+<li><strong>web</strong> sundaebar.ai Lab challenge pages SBC31 (2026-10-21) and SBC32 (2026-10-24)</li>
+<li><strong>web</strong> hub.docker.com sundaebarai/sn121-skill-evals public tags (v1.0.34 to v1.0.38), read 2026-10-24</li>
+<li><strong>web</strong> Chain reads of netuid 121: dossier at block 9354845 (2026-10-24 17:08Z); incentive and weights at blocks 9331701 to 9353963 (2026-10-21 to 2026-10-24)</li>
+<li><strong>msg</strong> #121 sundae-bar, 2025-06-17 to 2026-10-23</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/120.html"><small>← Previous</small>SN120 Affine</a><a rel="next" href="/bittensor-docs/subnets/122.html"><small>Next →</small>SN122 CookingTAO</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-24. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

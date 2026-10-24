@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Liquidity (SN77) | Bittensor Subnet Docs</title>
+<meta name="description" content="Uniswap V3 liquidity mining: alpha holders vote on pools, a team server scores miners, validators copy the weights.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h11">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>77</span><div>
+<h1>Liquidity <span class="muted">SN77</span></h1>
+<p class="tagline">Uniswap V3 liquidity mining: alpha holders vote on pools, a team server scores miners, validators copy the weights.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl2"><b>0.43<small>/day</small></b><span>last 7 d</span></li><li class="pl1"><b>0.13<small>/day</small></b><span>days 8-30</span></li><li class="pl2"><b>0.62<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-21</b><span>last chat</span></li><li class="pw"><b>1,809</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>DeFi liquidity provision (Uniswap V3 on Ethereum)</dd>
+<dt>Status</dt><dd>On 2026-10-21 emission was enabled on chain, 15 UIDs held incentive, 11 validators had set weights and the team&#x27;s weight API was refreshing every few minutes. Chat is thin (11 messages in 30 days), the team&#x27;s July 2026 release has not appeared in the public repos, and chat says emissions were switched off at the network level in late June, and a bot post lists the subnet as switched back on by 2026-08-29.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-21</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>Subnet 77 pays miners for providing Uniswap V3 liquidity on Ethereum, mainly in wTAO pools, so that TAO is easier to buy and sell outside Bittensor. Alpha holders vote on which pools earn, and a server run by the team turns those votes and the miners&#x27; live positions into a weight vector. Validators download that vector and set it on chain, so scoring is centralised on the team&#x27;s server, though the formula is published and can be rerun by anyone.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Miners bridge TAO to wTAO on Ethereum, open Uniswap V3 positions in pools that holders have voted for (on 2026-10-21 the wTAO/WETH and wTAO/USDC pools, both at the 1% fee tier), register a hotkey on subnet 77 and link it to the Ethereum address holding the position with a signed claim. The server docs say the hotkey must be registered and hold alpha. Miners carry their own capital, swap fees, impermanent loss and any hedging costs. No minimum amount is documented.</p></div><div><h3>Validators</h3><p>Validators do not measure liquidity. The reference validator downloads the team server&#x27;s weight vector every 5 minutes, maps hotkeys to UIDs, smooths it with an exponential average (factor 0.2) and sets weights on chain every 101 blocks. It needs a registered hotkey and, by the team&#x27;s account on 2026-08-05, a cheap virtual server. A separate script in the client repo recomputes the weights from the server&#x27;s vote data and Uniswap positions read through The Graph (free API key) and prints a comparison table.</p></div><div><h3>Incentive</h3><p>Each voting alpha holder splits 10,000 points across pools, and a vote counts in proportion to that holder&#x27;s share of the alpha held by voters. Within a pool only positions that are in range at the current price score. The score is a Gaussian of the distance from the current tick to the lower bound, the midpoint (weighted 4 times) and the upper bound, using a width that depends on the fee tier (500 ticks at 1%), multiplied by the position&#x27;s liquidity, so narrow positions near the price earn more. Scores are normalised inside each pool and multiplied by the pool&#x27;s vote share. On chain the emission split between burn, recycle, owner, validators and miners was 0 / 0 / 18% / 41% / 41% on 2026-10-21.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-21</span> <span class="muted">(on-chain read (blocks 9334350 to 9334525), team API /weights and /pools)</span> Chain and API read: 256 of 256 UIDs, emission enabled, commit-reveal off, 14 validator permits of which 11 had set weights, all with the same top target. 15 UIDs had incentive, the top five holding 74%. The owner validator&#x27;s weight row had 110 targets and its top five matched the team API&#x27;s /weights (22%, 17%, 13%, 12%, 10%). Two pools carried almost all vote weight: wTAO/WETH about 80% and wTAO/USDC about 20%.</li>
+<li><span class="when">2026-10-20</span> <span class="muted">(#liquidity)</span> Team confirmed that a miner whose hotkey is deregistered has to register again.</li>
+<li><span class="when">2026-10-16</span> <span class="muted">(#liquidity)</span> After a user reported on 2026-10-15 that the API server looked down, the team brought it back and said the hosting provider had made an emergency restart and hardware change that broke the server&#x27;s auto-restart; safeguards were added.</li>
+<li><span class="when">2026-09-20</span> <span class="muted">(#liquidity)</span> A user reported that the owner&#x27;s validator had stopped setting weights about 54 hours earlier and said several other validators were copying the previous metagraph (not verified). The team said its chain endpoint had been dropping connections, switched to another one and restored weight setting.</li>
+<li><span class="when">2026-08-29</span> <span class="muted">(#rao)</span> A bot post in the root-subnet channel listed SN77 among 22 subnets switched from emissions off to on. Who runs the bot was not confirmed.</li>
+<li><span class="when">2026-07-28</span> <span class="muted">(#liquidity)</span> The server went down for 14 minutes after a rate limit on the chain node, which it was using to read stake amounts. The team switched to a public stake data endpoint.</li>
+<li><span class="when">2026-07-09</span> <span class="muted">(#liquidity, GitHub)</span> Asked about the update promised for 2026-07-07 (more ways to provide liquidity without impermanent loss, plus a lending-based buyback of the alpha token), the team said it was still putting the pieces together and waiting on third parties to review its code. No such release appears in the public repos.</li>
+<li><span class="when">2026-06-24</span> <span class="muted">(#liquidity, GitHub)</span> Team added a verify-weights script and instructions so anyone can recompute miner weights from the server&#x27;s inputs and The Graph.</li>
+<li><span class="when">2026-06-20</span> <span class="muted">(#liquidity)</span> A post in the channel demanded a document by Monday on what value the subnet brings and how the team&#x27;s alpha buybacks were justified, or emissions would be cut. On 2026-06-25 the team said getting emissions back was the network lead&#x27;s decision and that miners kept earning alpha meanwhile, and on 2026-06-29 a user said emissions had been turned off over the same question while a moderator pointed to the network lead&#x27;s public comments on the network&#x27;s more centralised approach.</li>
+<li><span class="when">2026-06-16</span> <span class="muted">(#liquidity)</span> After an outside team&#x27;s read-only test reported that the server&#x27;s weights matched chain weights closely, the team confirmed the server caches results for 5 minutes even though the HTTP header says 4 hours. The header was unchanged on 2026-10-21.</li>
+<li><span class="when">2026-05-19</span> <span class="muted">(#liquidity)</span> Miners and the team disagreed about profitability. The team said miners earned about 4,000 USD a day on about 250,000 USD of liquidity and were overpaid; miners said hedging and swap costs consumed roughly half or more of the return. None of the figures were verified.</li>
+<li><span class="when">2026-04-24</span> <span class="muted">(#liquidity)</span> The team&#x27;s website and API went down, and the team said it had to change how it pulls chain data, which affects how alpha amounts are calculated for anyone using the API.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Read the client repo README, then check you can fund Uniswap V3 positions on Ethereum: you need wTAO (bridged from TAO), a pool partner such as WETH or USDC, and ETH for gas.</li>
+<li>Register a hotkey on subnet 77 (the registration burn was 0.0005 TAO on 2026-10-21) and hold some alpha, since the address claim needs both.</li>
+<li>Open a position in a pool that currently has vote weight, which you can see at /pools (wTAO/WETH and wTAO/USDC, 1% fee tier, on 2026-10-21), in a narrow range around the current price. Positions outside their range score zero.</li>
+<li>Link the hotkey to the Ethereum address with the repo&#x27;s register script. It asks for the hotkey&#x27;s secret seed (32 bytes in hex) and an Ethereum private key; the team said the Ethereum key only signs the claim message, so you can sign it elsewhere and post the message yourself. Never paste keys into chat.</li>
+<li>Check your share at /weights and with `just verify-weights`, and rebalance when the price moves out of your range.</li>
+<li>Holders can vote with `just vote`; to run a validator use `just validate` with a registered hotkey.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Scoring runs on the team&#x27;s own server. The weight pipeline was interrupted on 2026-04-24 (API down), 2026-07-28 (server down), 2026-09-20 (owner validator stopped setting weights) and 2026-10-15 (API down), and validators simply copy the server, so an outage there stops weight updates.</li>
+<li>The public server repo&#x27;s last commit is 2025-09-02 and the team said on 2026-04-24 that its data pulling changed, so the live server may differ from the code. The client repo&#x27;s verify-weights script is described as mirroring production; I did not run it, so the match is from code and from the live API matching the owner validator&#x27;s chain weights.</li>
+<li>The update announced for 2026-07-07 (no-impermanent-loss liquidity and a lending-based buyback) is not in the repos and no release was announced as of 2026-10-21.</li>
+<li>Chat claims about how much miners earn or lose conflict and are unverified. Several miners reported that range, hedging and swap costs dominated results.</li>
+<li>The API lists 110 miner hotkeys but only 15 carry more than a trace of weight on 2026-10-21; the owner&#x27;s key (UID 0) received the largest single share of the last epoch&#x27;s alpha (37%), without a split between owner share and validator dividends. The top incentive UID (4) is not the owner&#x27;s key; who runs the others is not shown.</li>
+<li>That emissions were switched off in late June and on again by late August is supported by chat and a bot post, not by an official announcement I could find; the chain read is a snapshot.</li>
+<li>A moderator warned on 2026-09-02 that direct messages and friend requests offering help in this channel are scams. Chat shows miners with failed bridge transfers and unclear registration errors; use only the repo&#x27;s documented steps.</li>
+<li>The channel rules block investor and price questions, so token price and buyback discussion is not answered there.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/CreativeBuilds/sn77" rel="noopener noreferrer">GitHub (client, scripts and validator)</a></li>
+<li><a href="https://github.com/CreativeBuilds/sn77-server" rel="noopener noreferrer">GitHub (server code, last updated 2025-09-02)</a></li>
+<li><a href="https://sn77.xyz" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://77.creativebuilds.io/weights" rel="noopener noreferrer">Weights API (public GET)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 5 sources</summary>
+<ul>
+<li><strong>msg</strong> #liquidity 2025-10-12 to 2026-10-21 (200 archived messages, team replies read in full, later posts checked), #rao 2026-06-22 and 2026-08-29, #announce 2026-06 to 2026-10</li>
+<li><strong>repo</strong> CreativeBuilds/sn77 @87bef7c (2026-06-24): README.md, validator/index.ts, utils/weightCalculation.ts</li>
+<li><strong>repo</strong> CreativeBuilds/sn77-server @a319989 (2025-09-02): server.ts (position score, API docs, vote cooldown)</li>
+<li><strong>web</strong> https://77.creativebuilds.io/weights and /pools (read 2026-10-21 about 21:42 UTC, response headers checked)</li>
+<li><strong>web</strong> chain read: chain.py subnet 77, chain_neurons.py params, uids and weights 77 (including --uid 0), storage SubnetEmissionWeights 77, owner key comparison (booleans only) @ blocks 9334350 to 9334525 (2026-10-21)</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/76.html"><small>← Previous</small>SN76 Ormas</a><a rel="next" href="/bittensor-docs/subnets/78.html"><small>Next →</small>SN78 UMI</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-21. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

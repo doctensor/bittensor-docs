@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Data Universe (SN13) | Bittensor Subnet Docs</title>
+<meta name="description" content="Miners scrape X and Reddit data for validators and paying customers; live on-demand serving gates bulk-upload rewards.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h19">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>13</span><div>
+<h1>Data Universe <span class="muted">SN13</span></h1>
+<p class="tagline">Miners scrape X and Reddit data for validators and paying customers; live on-demand serving gates bulk-upload rewards.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl3"><b>1.1<small>/day</small></b><span>last 7 d</span></li><li class="pl4"><b>2.3<small>/day</small></b><span>days 8-30</span></li><li class="pl4"><b>4.7<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-24</b><span>last chat</span></li><li class="pw"><b>16,889</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>data scraping / social data</dd>
+<dt>Status</dt><dd>Chat active (63 messages in the last 30 days, latest 2026-10-21); the main repo was last pushed 2026-10-09 (release v1.18.74); the team dashboard showed 245 miners with data on 2026-10-21.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-21</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>Data Universe is Macrocosmos&#x27;s subnet for collecting public social-media data, mainly X posts and Reddit posts. Miners scrape and store the data, upload bulk snapshots for jobs the network requests, and answer live on-demand requests; validators re-scrape samples to check it. The team sells the resulting data through its Gravity scraping jobs, Nebula visualisation, dataset marketplace, SDK and MCP tools.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Scrape X and Reddit with Apify actors or their own scrapers (a custom scraper is recommended in the miner doc). Each miner is scored on three paths: P2P (an index of locally stored data buckets), S3 bulk upload (one Parquet snapshot per active Gravity job, about every 2 hours) and on-demand (polling every 5 seconds for live requests from customers and returning scraped rows). Miners need no GPU.</p></div><div><h3>Validators</h3><p>S3 uploads are checked by one designated Macrocosmos-run validator whose result the others fetch. It samples files committed to a block hash, checks file format, duplicates, empty rows, job match (at least 95%) and live re-scrapes 20 entities (at least 80% must match). On-demand submissions are sampled hourly: up to 3 per miner, 5 entities schema-checked and 1 re-fetched from the live source. Scraper outages count as neutral rather than as a miner failure.</p></div><div><h3>Incentive</h3><p>In the code, a miner&#x27;s score is P2P (capped at S3 plus on-demand) plus S3 plus on-demand, and the S3 term is capped at twice the on-demand term, so a miner with no on-demand activity earns nothing from bulk data (the code calls this cap temporary). S3 credit grows with the square of effective data size and is scaled by credibility to the power 2.5. After normalising, the validator code sends 70% of weight to the owner UID as a burn and spreads the rest over miners.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-21</span> <span class="muted">(#dataverse)</span> A miner asked in the channel for news on the burn rate; no reply had been posted when the archive was read.</li>
+<li><span class="when">2026-10-09</span> <span class="muted">(GitHub (commit 5031097, releases); #dataverse, 2026-10-03 and 2026-10-09)</span> A validator-side fix for false Reddit failures reached main and was released as v1.18.74: it skips engagement checks against creation-time archive snapshots, accepts edited post bodies and retries empty lookups once. A miner had measured 22% false failures on fresh on-demand posts on 2026-10-03.</li>
+<li><span class="when">2026-10-01</span> <span class="muted">(GitHub releases; #dataverse)</span> Release v1.18.73 improved S3 failure logging, limited the job-window scan to locally cached files and replaced the old contributor doc with AGENTS.md.</li>
+<li><span class="when">2026-09-27</span> <span class="muted">(#dataverse)</span> Validators failed most Reddit checks because the Reddit archive their scraper reads was down for maintenance; the team added a second archive as a fallback.</li>
+<li><span class="when">2026-09-23</span> <span class="muted">(#dataverse)</span> Owners said they had no firm roadmap yet, were working out plans in light of a new gate function, wanted to find product-market fit for on-demand and volume services, and that the burn was not changing at that time.</li>
+<li><span class="when">2026-08-22</span> <span class="muted">(#dataverse, 2026-08-22 and 2026-08-24)</span> The team restarted a validator with a fix that makes S3 decode errors fail closed; miners debated S3 and P2P exploits and whether the P2P path is still needed, with no decision posted.</li>
+<li><span class="when">2026-08-20</span> <span class="muted">(#dataverse; GitHub releases)</span> Release v1.18.71 changed how S3 files and scraper entities are sampled and stopped docking credibility when validation passes; dataverse-cli v0.2.0 and macrocosmos-mcp v0.2.2 shipped the same day.</li>
+<li><span class="when">2026-07-29</span> <span class="muted">(GitHub (common/constants.py commits); #dataverse 2026-09-03)</span> Code history: the burn was set to 0% on 2026-07-24 and restored to 70% on 2026-07-29; the team later said it was reviewing emission flow in light of a chain update.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Read the miner data compliance policy at the top of the repo README.</li>
+<li>Check that your scraper can fetch data before paying to register: the miner guide shows a curl test for Reddit, which currently blocks unauthenticated JSON requests, and says the registration fee is non-refundable.</li>
+<li>Clone the repo, install it in a Python 3.10 or newer environment, and set up an Apify token or your own scraper.</li>
+<li>Create a wallet and register a hotkey on subnet 13.</li>
+<li>Start the miner with python neurons/miner.py --netuid 13 and your wallet and hotkey names (the miner guide uses pm2); --offline pre-scrapes without answering validators.</li>
+<li>Watch the channel and releases: there is no miner auto-updater, so miner-facing changes are announced there.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Chain weights, emissions and registration costs were not read; the 70% burn is what the validator code on main applies, and a team statement on 2026-09-23 said it was unchanged then.</li>
+<li>The scoring doc, S3 doc and README were last edited in February 2026 and lag the code (the scoring doc still lists YouTube weights); the contributor guide AGENTS.md (2026-10-01) says the code is right where they disagree.</li>
+<li>The team site lists YouTube as a data source, but the miner code only has X and Reddit scrapers.</li>
+<li>Chat shows the Gravity job list shrinking to single digits in August, standing near 1,000 by mid-September, and a miner reporting it flipping between about 1,000 and 1 on 2026-10-07; the team said on 2026-10-08 it was looking at it, and a fix was not confirmed. The dashboard showed 1,229 active jobs on 2026-10-21.</li>
+<li>Release v1.18.74&#x27;s local tag points at the 2026-10-01 commit while its release notes list the change merged 2026-10-09; the merge date is used here.</li>
+<li>The version string inside neurons/__init__.py is stale (1.3.8) and is only used as the weight-setting version key.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/macrocosm-os/data-universe" rel="noopener noreferrer">GitHub (data-universe)</a></li>
+<li><a href="https://github.com/macrocosm-os/data-universe/blob/main/docs/miner.md" rel="noopener noreferrer">Miner guide</a></li>
+<li><a href="https://sn13-dashboard.api.macrocosmos.ai/" rel="noopener noreferrer">Public network dashboard</a></li>
+<li><a href="https://www.macrocosmos.ai/sn13" rel="noopener noreferrer">Macrocosmos SN13 page</a></li>
+<li><a href="https://x.com/Data_SN13" rel="noopener noreferrer">Team X account</a></li>
+<li><a href="https://github.com/macrocosm-os/dataverse-cli" rel="noopener noreferrer">dataverse-cli</a></li>
+<li><a href="https://github.com/macrocosm-os/macrocosmos-mcp" rel="noopener noreferrer">macrocosmos-mcp</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 5 sources</summary>
+<ul>
+<li><strong>repo</strong> macrocosm-os/data-universe @bb261aa (2026-10-09): AGENTS.md, README.md, docs/miner.md, docs/on_demand.md, rewards/miner_scorer.py, neurons/validator.py, common/constants.py, common/utils.py, vali_utils/s3_utils.py, vali_utils/miner_evaluator.py, scripts/start_validator.py</li>
+<li><strong>repo</strong> commits e089d65, 3aa555e (burn 2026-07-24 and 2026-07-29) and 5031097 (Reddit validation, 2026-10-08)</li>
+<li><strong>web</strong> api.github.com releases for macrocosm-os/data-universe (v1.18.71 to v1.18.74)</li>
+<li><strong>web</strong> sn13-dashboard.api.macrocosmos.ai, read 2026-10-21; macrocosmos.ai/sn13</li>
+<li><strong>msg</strong> #dataverse latest 200 messages 2026-08-05 to 2026-10-13, plus 2026-10-21</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/12.html"><small>← Previous</small>SN12 ComputeHorde</a><a rel="next" href="/bittensor-docs/subnets/14.html"><small>Next →</small>SN14 Cacheon</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-21. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

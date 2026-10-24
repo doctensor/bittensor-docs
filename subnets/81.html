@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reliquary (SN81) | Bittensor Subnet Docs</title>
+<meta name="description" content="Decentralized LLM post-training: miners generate leased RL rollouts, SFT data and benchmark runs for a team trainer.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h15">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>81</span><div>
+<h1>Reliquary <span class="muted">SN81</span></h1>
+<p class="tagline">Decentralized LLM post-training: miners generate leased RL rollouts, SFT data and benchmark runs for a team trainer.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>8.4<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>11<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>10<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-24</b><span>last chat</span></li><li class="pw"><b>2,317</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>decentralized LLM post-training</dd>
+<dt>Status</dt><dd>As of 2026-10-23 the team&#x27;s new async RL run on its 9B Teutonic model had been live about 12 hours (checkpoint version 3 published at 00:10 UTC and a public Hugging Face copy reaching ckpt-4 at 02:43 UTC). The old Qwen3-4B RL task was paused on 2026-10-21, and the team validator&#x27;s corpus and health endpoints returned HTTP 503 at the last check.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-23</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>Reliquary (SN81) is a post-training network for language models. Independent GPU miners generate model outputs, the team&#x27;s validator checks them and the team&#x27;s trainer uses them to improve models. It began as reinforcement learning (RL) on a small Qwen model; since 2026-10-22 the main task is a fully asynchronous RL run on the team&#x27;s 9B Teutonic model, where miners lease prompts, generate rollouts at their own pace and are paid for each token a validator&#x27;s own recomputation reproduces. Since 2026-09-24 the network has also paid for SFT and distillation data, agentic software-engineering jobs and, since 2026-10-20, benchmark evaluation runs, and the team offers it as a data and training service to other subnet teams.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Async RL (since 2026-10-22): run the miner command mine-async. The miner asks the team validator for leases on prompts in the environments it picks (SWE, terminal, competitive code, hard math, DAPO math, EnvScaler, instruction following), within a quota the validator sets from the miner&#x27;s measured throughput. It generates 16 rollouts per prompt, drawing each token with randomness the validator publishes, on the latest or a slightly older checkpoint (weight deltas download in the background), and must submit every leased group. For agentic tasks the miner only sends the model&#x27;s actions; the team&#x27;s signed sandboxes run and grade them. The CLI help says a 24 GB card cannot hold the 9B model&#x27;s default 262,144-token context, so a shorter context has to be set. Corpus and evaluation jobs (SFT data from a Qwen3.8-27B teacher, benchmark answers) ran as one miner process per job id against the team validator, with bf16 recommended; their state could not be re-read on 2026-10-23.</p></div><div><h3>Validators</h3><p>The team runs the single trainer and grading validator, which is also the subnet owner&#x27;s UID (237). It issues leases, grades every group, recomputes each token&#x27;s draw and rejects a rollout whose match is under 90 percent, trains on groups that are neither all right nor all wrong, audits the others by sampling, and publishes checkpoints as a signed index of sparse weight deltas through presigned storage links, with Hugging Face backups. The other validators (7 UIDs held validator permits on 2026-10-23) are weight-only: they replay the team&#x27;s per-period pay archives into weights on a CPU box and need read access to the team&#x27;s storage. The README says the system is auditable but not trustless; that text predates the async run.</p></div><div><h3>Incentive</h3><p>Async RL pays per matched token: a rollout matching the validator&#x27;s recomputation at 0.90 or better earns its matched tokens times its environment&#x27;s price, and the first scan of a never-tried prompt that comes back too easy or too hard earns 25 percent of an average trained group. Prices are one nominal rate times a per-environment multiplier of up to 4, adjusted every 5 minutes so each environment supplies its target share of what the trainer consumes (on 2026-10-23: SWE 23 percent, competitive code 21, hard math 21, terminal 18, DAPO math 13, EnvScaler 3, instruction following 1). Each 72-minute period is scaled so it never pays more than the task cap (0.8 on the team&#x27;s pay board), the rest burns, and period results enter chain weights through an EMA. On 2026-10-23 every multiplier sat at the 4x maximum in a hold state because no trainer speed had been measured yet. On chain the burn goes to the owner UID: it held about 99.8 percent of incentive around 20:25 UTC on 2026-10-22 and about 61 percent at 02:35 UTC on 2026-10-23, with 33 UIDs paid. The chain&#x27;s emission split is 18 percent owner, 41 validators and 41 miners. Corpus tasks (read 2026-10-21) paid each period the smaller of a cap and a price times verified tokens, with a team-stated ceiling of 0.9 alpha per million tokens.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-23</span> <span class="muted">(#81-reliquary; Hugging Face)</span> Team announced a public Hugging Face repo for the RL run&#x27;s model weights; it keeps only the latest checkpoint (ckpt-4 at 02:43 UTC) and squashes history.</li>
+<li><span class="when">2026-10-23</span> <span class="muted">(Subtensor chain read (blocks 9341316 and 9343176))</span> Chain read: the owner UID, whose incentive the chain burns, held about 99.8 percent of incentive around 20:25 UTC on 2026-10-22 and about 61 percent at 02:35 UTC on 2026-10-23 as pay from the new run entered the weights; 33 UIDs on 9 coldkeys were paid.</li>
+<li><span class="when">2026-10-23</span> <span class="muted">(#81-reliquary)</span> Team asked miners to opt in to a signed GPU, CPU and RAM declaration (a miner flag) so it can see which cards run the new run; informational only, it never affects score or pay.</li>
+<li><span class="when">2026-10-22</span> <span class="muted">(#81-reliquary)</span> New RL run went live: Teutonic 9B from the team&#x27;s SFT checkpoint, fully async with leases, token verification by recomputation (90 percent match floor), seven environments including SWE, terminal and competitive code, up to 64k tokens per answer, and held-out evaluations every few checkpoints. The validator&#x27;s RL routes briefly answered HTTP 503 and the team said it was fixed.</li>
+<li><span class="when">2026-10-22</span> <span class="muted">(#81-reliquary)</span> Miners questioned the high burn and one said they were mining at a loss; the team said no task had been running before the launch, that incentive on RL tasks adapts to trainer speed, and that the burn is automatic.</li>
+<li><span class="when">2026-10-21</span> <span class="muted">(#81-reliquary)</span> Team paused the Qwen3-4B RL task and posted the code change for the new run, listing SWE, terminal, competitive code, hard math, DAPO math and instruction following, with agentic sandboxes run on the team&#x27;s side.</li>
+<li><span class="when">2026-10-20</span> <span class="muted">(#81-reliquary)</span> First evaluation jobs opened: miners generate benchmark answers (GPQA, AIME and others) for the team&#x27;s SFT-tuned Teutonic model, with results to be published after grading; none had been seen in chat by 2026-10-23.</li>
+<li><span class="when">2026-10-16</span> <span class="muted">(#81-reliquary)</span> Team said it would rewrite its RL system before launching the planned Teutonic RL run and started offline SFT on about 10 billion collected tokens; the SFT phase was reported done on 2026-10-19.</li>
+<li><span class="when">2026-10-09</span> <span class="muted">(#81-reliquary)</span> Hard-math, science and competitive-code corpus jobs opened, with a per-task price ceiling of 0.9 alpha per million verified tokens.</li>
+<li><span class="when">2026-10-01</span> <span class="muted">(#81-reliquary)</span> Miners complained that mining was unprofitable at the current burn and several said they were leaving; one questioned whether some UIDs were team-run, which the team denied. Public endpoints for task caps and per-miner job status were added the same day.</li>
+<li><span class="when">2026-09-26</span> <span class="muted">(#81-reliquary)</span> First corpus (SFT data) job opened at 10 percent of emission, RL 90 percent; four jobs ran by 2026-09-30 and later jobs lowered RL&#x27;s share.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Do not rely on the README or docs/mining.md for the new run: they still describe the earlier window-based Qwen3-4B RL. Use the 2026-10-22 launch post in the channel and docs/rl-async-design.md in the repo, which is marked as a draft.</li>
+<li>Before committing GPUs, read the team validator&#x27;s public RL routes: /rl/pay (prices, multipliers, caps), /rl/prompts/state (which prompts are leasable, cooling down or retired) and /rl/checkpoint (latest checkpoint version).</li>
+<li>Register a hotkey on netuid 81, update to the latest main and run mine-async with the environments you want; the design pins vLLM to 0.30.x and refuses speculative decoding. Quantised weights are allowed, but the design&#x27;s own tests put fp8 weights around 0.96 to 0.97 match and 4-bit formats around 0.86, below the 0.90 floor.</li>
+<li>Optionally add the setup-sharing flag the team asked for on 2026-10-23. For the SFT-data and evaluation jobs, check that the team validator&#x27;s /corpus/tasks answers again before spending on them.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>The chain numbers are snapshots (blocks 9337776, 9339546, 9341316 and 9343176, times estimated from 12-second blocks). The burn share moved from about 99.8 to about 61 percent in roughly six hours; it is not a steady rate. Weights are validator opinions: the seven validators&#x27; rows fell into three different shapes (47, 58 and 73 percent to the owner UID).</li>
+<li>The README and docs/mining.md have not changed since 2026-10-21 and do not mention the async run. What is described here comes from the launch post, the repo code and docs/rl-async-design.md (marked draft, 2026-10-15), and the pay board; whether the deployed settings equal the repo defaults is checked only for the floor, cap and start pool shown on /rl/pay.</li>
+<li>The team validator&#x27;s /health, /state and /corpus/tasks returned HTTP 503 on 2026-10-23 while its /rl routes answered, so the current caps, prices and payments of the SFT-data and evaluation jobs are unknown since 2026-10-21. Evaluation results promised on 2026-10-20 and 2026-10-22 had not been seen.</li>
+<li>The run is new: only three checkpoint versions had been published about 9.5 hours after the launch post, and the pay board had no measured trainer speed, so prices were held at the maximum multiplier. Prices, caps and environments are placeholders in the code and change often; the team says it announces changes.</li>
+<li>The claim that any GPU and any inference engine works rests on the team&#x27;s own tests in a draft design (honest match about 0.986 on 3090, 5090, A6000 and L40 cards); the team asked miners to declare hardware to measure it in production.</li>
+<li>Rewards, grading, selection and checkpoint publication depend on one team-run trainer and team-controlled storage. The team validator is addressed by a bare IP over plain HTTP, and its RL routes returned 503 to a miner for a short time on 2026-10-22 until the team fixed it.</li>
+<li>A team statement on 2026-10-08 says customer revenue will fund token burns to offset miner emissions; no such mechanism was found in the repo and no revenue figures were found. The 2026-10-01 allegation of team-run UIDs is unresolved: at block 9343176 no other paid UID shared the owner&#x27;s coldkey, but other team-held coldkeys cannot be excluded.</li>
+<li>The SN3 team said in its channel on 2026-08-31 that it planned to post-train Teutonic I on Reliquary, and the repo docs never mention SN3; which Teutonic version SN3 itself runs was not verified.</li>
+<li>The Hugging Face repo for the new run&#x27;s weights (created 2026-10-23) holds only the latest checkpoint and squashes history, so earlier checkpoints cannot be fetched from it; the signed delta index on the team validator is the other route.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/reliquadotai/reliquary" rel="noopener noreferrer">GitHub</a></li>
+<li><a href="https://github.com/reliquadotai/reliquary/blob/main/docs/mining.md" rel="noopener noreferrer">Mining guide (describes the earlier Qwen3-4B RL)</a></li>
+<li><a href="https://github.com/reliquadotai/reliquary/blob/main/docs/validating.md" rel="noopener noreferrer">Validator guide</a></li>
+<li><a href="https://www.reliqua.ai" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://www.reliqua.ai/dashboard" rel="noopener noreferrer">Dashboard</a></li>
+<li><a href="https://huggingface.co/ReliquaryForge/Teutonic-I-Reliquary-SFT" rel="noopener noreferrer">Teutonic SFT model (Hugging Face)</a></li>
+<li><a href="https://huggingface.co/ReliquaryForge/Teutonic-I-Reliquary-RL" rel="noopener noreferrer">Teutonic RL checkpoints (Hugging Face, latest only)</a></li>
+<li><a href="https://huggingface.co/ReliquaryForge/qwen3-4b-base-dapo-v4" rel="noopener noreferrer">Earlier RL checkpoints, Qwen3-4B-Base (Hugging Face)</a></li>
+<li><a href="http://62.238.81.36:8000/rl/pay" rel="noopener noreferrer">RL pay board (team validator, plain HTTP)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 4 sources</summary>
+<ul>
+<li><strong>repo</strong> reliquadotai/reliquary@6de0166a (2026-10-22), README.md, docs/rl-async-design.md, docs/validating.md, reliquary/validator/rl_ledger.py, reliquary/validator/rl_price.py, reliquary/validator/weight_only.py, reliquary/cli/main.py; earlier read adde1e81 (2026-10-21) of docs/mining.md, docs/concepts.md, docs/task-lifecycle.md, docs/design/2026-10-03-sft-period-clock-design.md, reliquary/validator/corpus_periods.py, reliquary/corpus/audit_policy.py</li>
+<li><strong>web</strong> Team validator /rl/pay, /rl/checkpoint and /rl/prompts/state read 2026-10-23 (/health, /state and /corpus/tasks returned 503); the same validator&#x27;s /health and /corpus/tasks read 2026-10-21; link checks of the page&#x27;s links 2026-10-23; Hugging Face API for ReliquaryForge/Teutonic-I-Reliquary-RL read 2026-10-23</li>
+<li><strong>web</strong> Subtensor chain reads for netuid 81 at blocks 9337776, 9339546, 9341316 and 9343166 to 9343176 (subnet facts, parameters, incentive and weight aggregates, owner-slot checks; addresses masked)</li>
+<li><strong>msg</strong> #81-reliquary 2026-09-12 to 2026-10-23; #3 (Teutonic) 2026-08-31</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/80.html"><small>← Previous</small>SN80 OpenRoboto</a><a rel="next" href="/bittensor-docs/subnets/83.html"><small>Next →</small>SN83 CliqueAI</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-23. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

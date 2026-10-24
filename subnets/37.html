@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aurelius (SN37) | Bittensor Subnet Docs</title>
+<meta name="description" content="Miners train sparse autoencoders for a fixed 7B model; only the current champion earns, after a 70% base burn.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h19">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>37</span><div>
+<h1>Aurelius <span class="muted">SN37</span></h1>
+<p class="tagline">Miners train sparse autoencoders for a fixed 7B model; only the current champion earns, after a 70% base burn.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl4"><b>3.4<small>/day</small></b><span>last 7 d</span></li><li class="pl4"><b>2.0<small>/day</small></b><span>days 8-30</span></li><li class="pl2"><b>0.62<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-20</b><span>last chat</span></li><li class="pw"><b>862</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>interpretability (sparse autoencoder competition)</dd>
+<dt>Status</dt><dd>Chat active through 2026-10-20 (57 messages in the last 30 days); the team said on 2026-10-15 that its new mechanism was live after a period on burn, and calls it an open beta. Main repo last pushed 2026-10-20.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-21</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>Aurelius runs a competition in which miners train sparse autoencoders (SAEs), interpretability tools that read a model&#x27;s internal activations, for one pinned model: OLMo-2 7B at layer 16. An evaluator scores each submission by how much of the model&#x27;s prediction quality the SAE preserves, and the winner takes the lane. The team says submitted SAEs feed its Proba product for debugging fine-tuning data. The repo describes SAEs as the first lane, with probes and steering vectors possible later.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Train an SAE on your own GPUs (32,768 features on 4,096-dimension activations), export a bundle of two files (cfg.json and sae_weights.safetensors, up to 2 GiB), then run the miner service on a Linux machine with a public IPv4 address and a hotkey-only wallet copy. Upload and stage the bundle; the evaluator pulls it. Each evaluation costs 10 work-tokens (WT), bought by transferring SN37 alpha at 1 WT per alpha. Uploading alone does not submit.</p></div><div><h3>Validators</h3><p>The chain shows a single validator permit (max_validators was cut from 64 to 1 on 2026-10-10, which the team called null consensus mode). Evaluation uses a rotating text draw seeded by a finalized block: the SAE is spliced into the model and cross-entropy loss recovered is measured, plus checks on sparsity (mean active features 40 to 120, at most half dead), copying against earlier decoders, and an SAE-Bench probing and absorption battery. The public repo has the miner and shared protocol, not the evaluator or validator code.</p></div><div><h3>Incentive</h3><p>Only the eligible rank-1 champion gets a positive lane score. A challenger must beat the incumbent on the same draw by at least 0.003, or a quarter of the incumbent&#x27;s remaining gap if larger; ties keep the incumbent. A base burn of 70% is taken first, then the champion&#x27;s share is scaled by a multiplier based on SN37 alpha its coldkey owns (about 16% at 100 alpha, 95% at 10,000), and anything unpaid is burned. At block 9334315 about 71% of incentive sat on the owner-keyed UID 200, which the repo names as the burn destination.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-20</span> <span class="muted">(#37 aurelius)</span> After miners said the top SAEs were within about 0.001 and the 0.003 minimum gap blocked challengers, the team said the gap is partly intended but it would adjust the rules to increase competition.</li>
+<li><span class="when">2026-10-18</span> <span class="muted">(#37 aurelius)</span> A miner reported seven straight evaluations failing with an infrastructure error. The team said they were marked refund-eligible and that it fixed the issue halting the competition.</li>
+<li><span class="when">2026-10-17</span> <span class="muted">(#37 aurelius; GitHub repo Aurelius-Protocol)</span> A miner found the fund command refused the chain&#x27;s runtime version. Repo fixes followed on 2026-10-17 (runtime 479) and 2026-10-20 (runtime 481).</li>
+<li><span class="when">2026-10-15</span> <span class="muted">(#37 aurelius)</span> The owner said the new incentive mechanism was up and running and that mining was officially live, with the public miner repo linked.</li>
+<li><span class="when">2026-10-10</span> <span class="muted">(#37 aurelius (hyperparameter tracker and team reply))</span> Subnet settings changed to a single validator (commit-reveal was toggled off and back on). The team described this as a move to null consensus mode while testing the public miner.</li>
+<li><span class="when">2026-10-06</span> <span class="muted">(#37 aurelius; GitHub repo Aurelius-Protocol)</span> The team told validators the next versions need much more compute including GPUs, and disabled auto-updating validators until they opt back in. The repo added a validator master switch that defaults to off.</li>
+<li><span class="when">2026-09-17</span> <span class="muted">(#37 aurelius)</span> After holders asked about missed deadlines, the team said the new incentive mechanism was delayed by testnet bugs and that Proba, its fine-tuning data debugging product, was still in a design-partner stage.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Read INCENTIVES.md and lanes/lane1.md in the repo; the miner asks you to accept the incentive terms before serving or funding.</li>
+<li>Prepare a Linux machine with Python 3.11 or 3.12, uv and a public IPv4 address, plus a hotkey registered on SN37, TAO for fees and SN37 alpha for evaluation fees.</li>
+<li>Install per the README, make a hotkey-only wallet copy with prepare_wallet_view.py, fill in .env, and run aurelius-miner serve --netuid 37 --port 8091.</li>
+<li>Buy WT with aurelius-miner fund (preview first, then --execute) and wait for the signed receipt; a chain transfer alone does not credit WT.</li>
+<li>Train an SAE for the pinned model and layer with SAE-Lens 6.46.0, check it with aurelius-sae check, then upload and stage it and watch results with aurelius-sae status --refresh --accounting --netuid 37.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>The docs call the incentive rules an open beta that can change at any moment, say the signed public config is authoritative, and say the team may audit and adjust rewards retroactively.</li>
+<li>Only the champion earns. Miners said on 2026-10-19 the top SAEs were nearly tied, and one stated the champion&#x27;s score (not verified); the team said on 2026-10-20 it plans to tweak the rules.</li>
+<li>The evaluator and validator code is not in the public repo, and the chain shows one validator permit, so weights reflect one operator&#x27;s evaluation. Chain weights are opinions, not payouts.</li>
+<li>Chain and config were read once, on 2026-10-21 (config version 31, block 9334317). The README and .env.example pin runtime 479 while a 2026-10-20 repo update admits runtime 481 for funding; check before sending funds.</li>
+<li>A stake-retention mechanism (hold-time credit, exit penalties and debt, a WT bonus) is described as built but disabled, with details unpublished.</li>
+<li>The team&#x27;s launch dates slipped repeatedly between July and mid-October. Proba and the claim that miner SAEs feed it come from the team and were not verified.</li>
+<li>Not read: the whitepaper, evaluator code, any leaderboard or champion identity, and market data. Chat is moderated against price discussion, so none is included.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/Aurelius-Protocol/Aurelius-Protocol" rel="noopener noreferrer">GitHub (miner and protocol)</a></li>
+<li><a href="https://aureliusaligned.ai" rel="noopener noreferrer">Project site</a></li>
+<li><a href="https://aureliusaligned.ai/product" rel="noopener noreferrer">Proba product page</a></li>
+<li><a href="https://central.aureliusaligned.ai/api/config" rel="noopener noreferrer">Signed public configuration</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 4 sources</summary>
+<ul>
+<li><strong>repo</strong> Aurelius-Protocol/Aurelius-Protocol @4be6392 (2026-10-20): README.md, INCENTIVES.md, lanes/lane1.md, docs/funding-runtime481-verification.md, .env.example, subnet/src/subnet/operator/burn_authority.py, commit history</li>
+<li><strong>web</strong> central.aureliusaligned.ai/api/config version 31 (signed team config, read 2026-10-21); aureliusaligned.ai and /product (2026-10-21)</li>
+<li><strong>web</strong> Bittensor chain read, read-only: subnet info at block 9334321, hyperparameters 9334309, UID and incentive aggregates 9334315, validator weights 9334317, owner-key comparison 9334319 (2026-10-21)</li>
+<li><strong>msg</strong> #37 aurelius, 2026-07-16 to 2026-10-20</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/36.html"><small>← Previous</small>SN36 Epago</a><a rel="next" href="/bittensor-docs/subnets/38.html"><small>Next →</small>SN38 ChronoLLM</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-21. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

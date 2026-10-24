@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>blockmachine (SN19) | Bittensor Subnet Docs</title>
+<meta name="description" content="Pay-per-request RPC and archive-node network across 11 chains; miners run nodes, validators audit gateway logs.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h13">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>19</span><div>
+<h1>blockmachine <span class="muted">SN19</span></h1>
+<p class="tagline">Pay-per-request RPC and archive-node network across 11 chains; miners run nodes, validators audit gateway logs.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>8.4<small>/day</small></b><span>last 7 d</span></li><li class="pl4"><b>5.4<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>8.2<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-23</b><span>last chat</span></li><li class="pw"><b>1,538</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>blockchain RPC and archive node infrastructure</dd>
+<dt>Status</dt><dd>Live product on 2026-10-23: the website lists 11 networks as live, the chain shows all 256 UIDs occupied with 38 miners earning incentive (block 9,343,888), the team kept adjusting miner rules through 2026-10-22, and the sixth monthly buyback settled on 2026-10-15. The miner repo&#x27;s last commit is 2026-10-14 and the validator repo&#x27;s is 2026-09-17; neither changed between 2026-10-21 and 2026-10-23.</dd>
+<dt>Confidence</dt><dd>high</dd>
+<dt>Researched</dt><dd>2026-10-23</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>blockmachine sells JSON-RPC access to blockchain nodes, including archive nodes, through a gateway that routes each customer request to a competing miner&#x27;s node and bills only for successful answers. Miners bring their own nodes for Bittensor and ten EVM chains. Validators read the gateway&#x27;s logs, re-check sampled answers against reference nodes and set weights from the work each miner served. The subnet is run by the Taostats team, whose own indexer is the biggest named customer.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>A miner runs a node of an accepted client for one chain, declares it as archive (history back to genesis) or full (recent blocks only), and puts the team&#x27;s nginx gateway in front of it. They then register it with the bm command-line tool along with a secret and a price bid. Each hotkey may register at most one archive and one full node per chain. Nodes must pass automatic eligibility tests (right chain, honest client string, near the chain tip, working subscriptions, real archive depth) before they get traffic. Archive nodes can also run an optional capacity helper. Base nodes must have Flashblocks enabled since 2026-10-14. The capacity test&#x27;s expected answers follow the team&#x27;s reference nodes: on 2026-10-22 the team said its Robinhood reference runs Nitro 3.11 as a path-scheme archive with a full transaction index, and a Scroll miner reported the expected style flipping between reth and l2geth on 2026-10-21.</p></div><div><h3>Validators</h3><p>Validators fetch network settings from a team-run registry, read each epoch&#x27;s gateway logs and per-miner compute-unit (CU) allocation files from team-run storage, and sample answers to re-run against reference nodes. A confirmed wrong answer bans the miner&#x27;s coldkey. In plain words, the validator code values each miner&#x27;s CU at its bid, scales the total to the 41% miner pool and turns that into weights; because the alpha price cancels out and every bid is now the same $0.50 per million CU, a miner&#x27;s weight is simply its share of the CU credited to non-banned miners. Banned coldkeys get zero. Anything left unallocated goes to a sink UID (default 103), which on chain is the owner&#x27;s hotkey slot and held no incentive on 2026-10-23, so burn was zero. If the scale looks wrong (more than 10 times the pool) the code refuses to pay it out and burns the remainder instead. Validator code does not compute capacity scores, the top-five archive rule or eligibility; those are applied by the team&#x27;s gateway and registry before the files validators read. On chain at block 9,343,888 twelve UIDs held validator permits and nine of them had set weights within the last epoch, all with the same shape (47 targets, same top target), which fits everyone running the public software on the same data. The team&#x27;s own validator held about 31% of permitted validator stake and a different validator about 57%; the whitepaper says up to 64 validators can be permitted.</p></div><div><h3>Incentive</h3><p>Emissions split 41% to miners, 41% to validators and 18% to the owner; the chain&#x27;s emission-split setting confirms those shares. Miners are paid first for paid customer traffic, and from 2026-10-16 every bid is fixed at $0.50 per million CU, so price no longer differentiates miners. The rest of the miner pool is a base incentive shared equally across the 11 chains, credited as extra CU. Per chain, 90% goes to the five archive nodes that served the most CU that epoch and 10% follows recent-block CU from all eligible nodes. A capacity test (a timed burst of traces, state, log and block queries, weighted 15/35/35/15 for EVM chains) scales a node&#x27;s routing share, and latency and reliability scores feed routing too. The public miner dashboard&#x27;s numbers match the team&#x27;s latency rule (full marks up to 100 ms P95, falling linearly to zero at 1,000 ms) and a reliability ramp that reaches full marks after seven good epochs. An epoch is 7,200 blocks, about 24 hours. On 2026-10-23 the last epoch&#x27;s miner incentive was spread over 38 UIDs held by 37 coldkeys: the top UID had 20.7% and the top five 61.2%, and no incentive-earning UID shared the owner&#x27;s coldkey. The team buys alpha monthly from paid-traffic revenue and burns it.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-22</span> <span class="muted">(#19-blockmachine)</span> The team told a new Robinhood archive miner that its reference node runs the Nitro 3.11 line, is a path-scheme archive and keeps a full transaction index (lookup limit 0).</li>
+<li><span class="when">2026-10-21</span> <span class="muted">(#19-blockmachine)</span> A Scroll miner reported that the 13:00 UTC capacity run switched the expected answers from reth-style to l2geth-style, charging 14 of 17 nodes the same questions, and that they flipped back later that day. The team had not replied in the channel by 2026-10-22.</li>
+<li><span class="when">2026-10-20</span> <span class="muted">(#19-blockmachine)</span> Capacity tests were raised to three runs a day. Miners were still asking how gateway queueing counts toward measured P95 latency; no answer in the channel by 2026-10-21.</li>
+<li><span class="when">2026-10-16</span> <span class="muted">(#19-blockmachine, blockmachine.io)</span> Miner bids were fixed at 0.5 (the site says $0.50 per million CU) so nobody competes on price.</li>
+<li><span class="when">2026-10-15</span> <span class="muted">(#19-blockmachine, blockmachine.io/buybacks)</span> Buyback cycle 6 settled: 28.58 TAO bought 3,183.94 alpha ($7,475.77), which the team said was up 89% on September. The public ledger shows six settled cycles and 9,797.31 alpha bought in total.</li>
+<li><span class="when">2026-10-14</span> <span class="muted">(#19-blockmachine, GitHub miner repo)</span> Immunity period raised from 3,600 to 21,600 blocks (about three days). A new capacity-helper release shipped, and Base nodes were required to enable Flashblocks.</li>
+<li><span class="when">2026-10-11</span> <span class="muted">(#19-blockmachine)</span> The team said testnet had been turned off as not useful.</li>
+<li><span class="when">2026-10-08</span> <span class="muted">(#19-blockmachine)</span> Arc RPC went live. The team switched Avalanche off, citing almost no paid usage and only one successful archive miner.</li>
+<li><span class="when">2026-09-23</span> <span class="muted">(#19-blockmachine)</span> The team announced that from the next finalized epoch the archive base incentive goes only to the top five archive nodes on each chain by traffic served. The same day it changed free-tier limits (keyless 60 requests/min, keyed 300 requests/min).</li>
+<li><span class="when">2026-09-21</span> <span class="muted">(#19-blockmachine)</span> The base incentive was set back to an equal split across chains instead of following customer demand, which the team called unpredictable because of enterprise trials.</li>
+<li><span class="when">2026-09-16</span> <span class="muted">(#19-blockmachine)</span> Commit-reveal weights were switched off on the subnet. The team also shortened payout lag so an epoch is paid at the end of the following epoch.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Pick a chain from the 11 live networks and sync an accepted client (reth for Ethereum and Base, op-reth for Optimism, bor for Polygon, nitro for Arbitrum, Arc and Robinhood, subtensor for Bittensor and so on). The miner README has the exact client table and the full or archive depth each node type must serve.</li>
+<li>Register a hotkey on netuid 19. The site says one hotkey per coldkey is accepted. All 256 UIDs were occupied on 2026-10-23 (chain read), so a new registration replaces the lowest-ranked UID after the 21,600-block immunity period; the registration burn was about 1 TAO on that date.</li>
+<li>Install the CLI with pip install blockmachine (Python 3.10 or newer) and run bm miner login.</li>
+<li>On the node&#x27;s server run the install script from the miner README. It sets up the nginx gateway with TLS and a secret in front of your RPC port.</li>
+<li>Register with bm miner add (endpoint, alias, secret, price), then check bm miner test and bm miner show. A new node must pass the eligibility battery first.</li>
+<li>Check your nodes on the public miner dashboard (Eligibility, Capacity tests, Live routing score and Payouts tabs). Archive operators can download the last test with bm miner capacity-pack and optionally install the capacity helper; the README warns that this raises the bar for everyone.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Chain facts were read on 2026-10-23 at block 9,343,888 and change every epoch. Weights are validators&#x27; opinions, not payouts, and the payout, share and buyback numbers on blockmachine.io are the team&#x27;s own data.</li>
+<li>The gateway, registry and epoch finalizer are not public. Validators read files those systems produce, so the capacity score, the top-five rule, eligibility and the routing score&#x27;s extra factor cannot be checked against validator code. The dashboard&#x27;s routing score is higher than latency, reliability, success and price alone would give, which the team attributes to capacity.</li>
+<li>The miner README is out of date in places: it lists Avalanche and omits Arc, says an epoch is about 72 minutes (the validator README, whitepaper and site say 7,200 blocks, about 24 hours), documents a testnet the team says is off, and shows price examples per CU while the site quotes $0.50 per million CU. The miner dashboard&#x27;s pool selectors still list Avalanche.</li>
+<li>Capacity test scheduling (three runs a day since 2026-10-20) comes from team statements in chat. The questions are unpublished, and the expected answer style has changed without announcement at least once (Scroll, 2026-10-21, one miner&#x27;s report), so a node can score differently between runs for reasons it cannot see in advance. The team said the latency rule may get stricter.</li>
+<li>How latency is clocked is not settled: the team said on 2026-10-20 that it covers requests the node answers and that new-heads pushes are not timed, but a miner asked on 2026-10-20 whether gateway queueing or waiting for a pinned block counts and had no answer by 2026-10-22.</li>
+<li>A pinned post from 2026-07-02 says miners need locked conviction of at least 300 alpha, and 70% of cumulative free-tier incentive, to earn free-tier incentive. That rule is not on the website or in the validator README and was not verified on chain or in code.</li>
+<li>The validator README says a confirmed wrong answer is a permanent coldkey ban, while the whitepaper calls a ban a human decision and does not say permanent. Two Ethereum nodes were banned from 2026-09-09 for not broadcasting customer transactions; no reversal was found in chat after 2026-09-14.</li>
+<li>Buyback cycle 7 had not settled as of 2026-10-23; the ledger shows six cycles and 9,797.31 alpha burned or held in total.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://blockmachine.io/" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://blockmachine.io/incentive-mechanism" rel="noopener noreferrer">How miner rewards work</a></li>
+<li><a href="https://blockmachine.io/miners" rel="noopener noreferrer">Miner performance dashboard</a></li>
+<li><a href="https://blockmachine.io/buybacks" rel="noopener noreferrer">Buyback ledger</a></li>
+<li><a href="https://blockmachine.io/roadmap" rel="noopener noreferrer">Roadmap</a></li>
+<li><a href="https://github.com/taostat/blockmachine-miner" rel="noopener noreferrer">Miner repo (gateway, eligibility and capacity rules)</a></li>
+<li><a href="https://github.com/taostat/blockmachine-validator" rel="noopener noreferrer">Validator repo</a></li>
+<li><a href="https://github.com/taostat/blockmachine" rel="noopener noreferrer">Project overview repo</a></li>
+<li><a href="https://github.com/taostat/blockmachine-miner/releases" rel="noopener noreferrer">Miner repo releases (capacity helper)</a></li>
+<li><a href="https://blockmachine.io/whitepaper" rel="noopener noreferrer">Whitepaper (payout and burn rules)</a></li>
+<li><a href="https://blockmachine.io/docs" rel="noopener noreferrer">Customer docs</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 6 sources</summary>
+<ul>
+<li><strong>repo</strong> taostat/blockmachine-miner commit 451d323 (2026-10-14): README (eligibility, capacity testing, base incentive, pricing, CLI), releases capacity-helper-v1 and v2; no newer commits on 2026-10-23</li>
+<li><strong>repo</strong> taostat/blockmachine-validator commit 25ca87c (2026-09-17, VERSION 0.2.14, re-checked 2026-10-23): README, common/scoring/weights.py, chain/submitter.py, config.py, weights/loop.py, api/logs_client.py, verification/blacklist.py</li>
+<li><strong>repo</strong> taostat/blockmachine commit 031c1da (2026-07-27): README</li>
+<li><strong>web</strong> https://blockmachine.io/, /incentive-mechanism, /buybacks, /miners (public dashboard: payouts, live routing score, capacity tests, eligibility), /roadmap, /whitepaper, /docs (read 2026-10-23)</li>
+<li><strong>web</strong> Chain read at block 9,343,888 to 9,343,907 (2026-10-23, spec 483): netuid 19 parameters, neuron incentive and dividends, validator permits, weights, weight age, stake, emission-split setting</li>
+<li><strong>msg</strong> #19-blockmachine, 2026-04-21 to 2026-10-22, including pinned posts and hyperparameter bot posts</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/18.html"><small>← Previous</small>SN18 Zeus</a><a rel="next" href="/bittensor-docs/subnets/20.html"><small>Next →</small>SN20 Witness</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-23. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

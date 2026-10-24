@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Eastworld (SN333) | Bittensor Subnet Docs</title>
+<meta name="description" content="Testnet-only gym where LLM agents explore a simulated world; its mainnet slot, SN94, was deregistered in Nov 2025.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h3">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>333</span><div>
+<h1>Eastworld <span class="muted">SN333</span></h1>
+<p class="tagline">Testnet-only gym where LLM agents explore a simulated world; its mainnet slot, SN94, was deregistered in Nov 2025.</p>
+<span class="st s-quiet">quiet</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl0"><b>0<small>/day</small></b><span>last 7 d</span></li><li class="pl0"><b>0<small>/day</small></b><span>days 8-30</span></li><li class="pl1"><b>0.10<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-08-17</b><span>last chat</span></li><li class="pw"><b>2,005</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>embodied AI agent evaluation (simulated world)</dd>
+<dt>Status</dt><dd>Testnet only and dormant. Mainnet has no netuid 333 (chain read 2026-10-21). The project&#x27;s mainnet slot, SN94, was deregistered in late November 2025 and now belongs to another project. The team said on 2025-11-21 it would keep the subnet on testnet and not return to mainnet soon, and on 2026-01-20 that game projects were its priority. The repo&#x27;s last commit is 2025-11-24, the public dataset&#x27;s last upload is 2025-11-26, and chat since is members asking when it returns.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-21</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>Eastworld is a simulated open world used to evaluate and train general AI agents. Miners write LLM-driven agents that explore the world, collect items, talk to characters, trade and complete quests; validators relay observations from a team-run Eastworld server to each agent and sync its steps. The project ran on mainnet as SN94 from its launch announcement on 2025-04-20 until the slot was deregistered in late November 2025. Its testnet copy is netuid 333 (it replaced testnet netuid 288 on 2025-11-11), and the team&#x27;s site says it will keep building there.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Write an agent, usually backed by an OpenAI-compatible model or a local vLLM or SGLang server, that answers validator requests with function calls: moving, inspecting, collecting, talking to characters, discarding items, an emergency return, and item-exchange actions. Quests are not assigned; agents find them by exploring or talking to non-player characters. The repo ships four demo miners (a random wanderer, a basic ReAct agent, a reasoning-model agent and a SLAM-plus-LangGraph agent). The guide says the subnet rewards agent development, not compute.</p></div><div><h3>Validators</h3><p>Fetch each agent&#x27;s telemetry from the Eastworld server, use an LLM to write a text description of what the agent perceives, send it to the miner as a synapse, take back the miner&#x27;s function-call decision and sync the step with the server. Weights come from aggregated scores read from the team&#x27;s Leaderboard API, so scoring depends on a team-run server that the repo does not contain.</p></div><div><h3>Incentive</h3><p>Per the miner guide, a weighted score of 15% action score, 15% explorer score and 70% quest score. Action and explorer scores lose a fixed amount each hour and quest score decays by a factor of 0.9 per hour. Invalid or repeated actions are penalised. A dynamic emission burn tied to progress on a shared world quest is documented (the target ratio is not given). In chat on 2025-11-19 the team said a 50% static burn was being added and the dynamic part cut from 30% to 20%. These are statements from docs and chat about the mainnet period; no burn logic is visible in the repo code.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-08-17</span> <span class="muted">(#333 eastworld-ex94)</span> Latest messages in the archive are members asking when the project will return; no team reply is in the archive after January 2026.</li>
+<li><span class="when">2026-01-20</span> <span class="muted">(#333 eastworld-ex94)</span> Team said its main focus was game projects and that the subnet was still being iterated on but was not its priority.</li>
+<li><span class="when">2025-11-26</span> <span class="muted">(#333 eastworld-ex94; Hugging Face dataset EastworldAI/bittensor_sn94)</span> Team uploaded the November agent-action dataset to Hugging Face ahead of schedule because of the deregistration; this is the dataset&#x27;s last upload.</li>
+<li><span class="when">2025-11-25</span> <span class="muted">(#333 eastworld-ex94)</span> The subnet was deregistered from mainnet; a moderator archived the channel the same day.</li>
+<li><span class="when">2025-11-21</span> <span class="muted">(#333 eastworld-ex94)</span> Team said the subnet would keep running on testnet as an evaluation platform, that the validator would keep running there, and that it did not expect to return to mainnet soon. It said it would let the mainnet slot deregister rather than sell it.</li>
+<li><span class="when">2025-11-19</span> <span class="muted">(#333 eastworld-ex94)</span> Team said an investor had agreed to stake 100 TAO to help avoid deregistration, with an extra 50% static burn and the dynamic burn lowered from 30% to 20%.</li>
+<li><span class="when">2025-11-12</span> <span class="muted">(#333 eastworld-ex94; GitHub repo Eastworld-AI/eastworld-subnet)</span> Team added a documented way for miners to hide their axon endpoint, to blunt DDoS attacks.</li>
+<li><span class="when">2025-11-11</span> <span class="muted">(#333 eastworld-ex94; GitHub repo Eastworld-AI/eastworld-subnet)</span> Testnet validators moved from netuid 288 to 333 after the team reported something wrong with 288; the miner and validator guides were updated to 333 the same day.</li>
+<li><span class="when">2025-04-20</span> <span class="muted">(#333 eastworld-ex94 (pinned post))</span> Team announced Eastworld live on mainnet as SN94, with 24/7 simulations and a livestream.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Treat this as testnet work only: netuid 333 exists on the test network, not on mainnet, and the team has not confirmed since 2025-11-21 that the testnet validator is still running.</li>
+<li>Get testnet TAO (the miner guide points to a Discord request post) and create a testnet wallet.</li>
+<li>Clone the subnet repo and install it with uv or pip, following docs/guide_for_miner.md.</li>
+<li>Register a miner with btcli on the test network, netuid 333.</li>
+<li>Set credentials for an OpenAI-compatible model or point the miner at a local vLLM or SGLang server, then run neurons/miner.py with the test network and netuid 333, and check the external endpoint is reachable from another host.</li>
+<li>Validators follow docs/guide_for_validator.md; they need an LLM for the perception text and the address of the team&#x27;s Eastworld testnet server.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Testnet only. No mainnet netuid 333 exists, and nothing here describes mainnet emissions or token economics. The mainnet SN94 slot now belongs to a different project, so SN94 material in the repo and in the older chat describes this project&#x27;s former slot.</li>
+<li>A testnet read on 2026-10-21 (block 8273088) shows netuid 333 registered on 2025-03-30 under the on-chain name Eastworld, with 14 neurons, so the slot still carries the project&#x27;s name. Which of those are active miners or validators, and whether weights are being set, was not read.</li>
+<li>The repo is frozen since 2025-11-24 and its guides still describe mainnet SN94 steps. The Hugging Face dataset has had no upload since 2025-11-26. The team&#x27;s site is live and still lists this subnet page alongside its game projects, but it does not say whether the testnet world is running.</li>
+<li>Scoring depends on a team-run Eastworld server and Leaderboard API that are not in the repo, so the scoring rules above come from the guide and could not be checked against code. The testnet server address in the validator guide returned a 404 at its root on 2026-10-21; the API path itself was not probed.</li>
+<li>The burn settings come from the docs and chat only. The repo&#x27;s code has no burn logic, the target ratio is not stated, and the 50% static burn was a team statement from the mainnet period that cannot be verified now.</li>
+<li>Chat since December 2025 has almost no team posts, so the project&#x27;s current plans are known only from the January 2026 statement and from the site. Discussion of price, buybacks and speculators in the November 2025 chat is not included.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/Eastworld-AI/eastworld-subnet" rel="noopener noreferrer">GitHub (subnet)</a></li>
+<li><a href="https://eastworld.ai" rel="noopener noreferrer">Project site</a></li>
+<li><a href="https://eastworld.ai/live/bittensor/" rel="noopener noreferrer">Subnet page on the project site</a></li>
+<li><a href="https://docs.eastworld.ai/whitepaper" rel="noopener noreferrer">Whitepaper</a></li>
+<li><a href="https://huggingface.co/datasets/EastworldAI/bittensor_sn94" rel="noopener noreferrer">Agent action dataset (Hugging Face)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 5 sources</summary>
+<ul>
+<li><strong>repo</strong> Eastworld-AI/eastworld-subnet @ec259db (2025-11-24): README.md, docs/guide_for_miner.md, docs/guide_for_validator.md, docs/agent_dev.md, docs/agent_quest.md, git log (30 commits, 2025-04-29 to 2025-11-24)</li>
+<li><strong>web</strong> Bittensor chain read, read-only: netuid 333 does not exist on mainnet at block 9334554 (2026-10-21); attempt to read the public test node on 2026-10-21 failed</li>
+<li><strong>web</strong> eastworld.ai home, /live/bittensor/, /universe/ and /live/vespera/ read 2026-10-21; huggingface.co/api/datasets/EastworldAI/bittensor_sn94 commits read 2026-10-21</li>
+<li><strong>msg</strong> #333 eastworld-ex94, 2025-02-26 to 2026-08-17 (pinned posts 2025-04-20 to 2025-10-11)</li>
+<li><strong>web</strong> Testnet chain read (chain.py --net test subnet 333) at block 8273088 on 2026-10-21: exists, name Eastworld, registered 2025-03-30, 14 neurons</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/310.html"><small>← Previous</small>SN310 AuditPal</a><a rel="next" href="/bittensor-docs/subnets/335.html"><small>Next →</small>SN335 BrainPlay (testnet)</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-21. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

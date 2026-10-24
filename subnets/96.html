@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Verathos (SN96) | Bittensor Subnet Docs</title>
+<meta name="description" content="Decision-model inference: miners serve open-weight models that give a probability for each option of a typed question.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h0">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>96</span><div>
+<h1>Verathos <span class="muted">SN96</span></h1>
+<p class="tagline">Decision-model inference: miners serve open-weight models that give a probability for each option of a typed question.</p>
+<span class="st s-transitioning">transitioning</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl4"><b>2.7<small>/day</small></b><span>last 7 d</span></li><li class="pl4"><b>5.4<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>14<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-24</b><span>last chat</span></li><li class="pw"><b>2,037</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>AI inference (decision models)</dd>
+<dt>Status</dt><dd>Product changed on 2026-10-15 from verified LLM inference to Verathos Decide. The service is live and all four models report operational, but on 2026-10-24 the team&#x27;s own economics data shows 0.00 USD of paid usage in total (one 2.58 USD top-up on launch day), daily requests down from 1,787 on 2026-10-15 to a few dozen, and two more mechanisms (private serving on Macs, a training competition) still in development.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-24</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>Since 2026-10-15 SN96 runs Verathos Decide: open-weight &#x27;decision&#x27; models that read a state (a ticket, code change, document or image) and answer typed questions (yes/no, choice, scale) with a probability for every option in one forward pass. It is served through a System One compatible API, and each answer carries a receipt signed by the miner. Before this the subnet offered verified LLM inference with proof and mesh protocols called Gleipnir and Sleipnir; the team retired that LLM API and did not migrate its old validator platform. The owner runs the gateway, the auditor and the model catalog.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Miners run one supported model per NVIDIA GPU on Ubuntu 22.04 or 24.04, with a public IP, one open TCP port (default 8091) and a registered hotkey. The installer picks the model that pays best and keeps itself updated. Exact weights are required: quantized weights fail verification. A miner declares its capacity, the auditor tests it, and the score stays zero until capacity is proven in a throughput test. Endpoints are found through native chain state (axon plus a signed manifest commitment), not an EVM registry.</p></div><div><h3>Validators</h3><p>There are two kinds. Light validators need no GPU and apply the weights the owner&#x27;s auditor publishes. Full validators (the docs set a minimum stake of 10,000) run float32 reference engines for each model, send canary prompts (16 per model per epoch, 10 per endpoint) and apply the auditor&#x27;s verdicts. A hard failure is any probability more than 0.10 away from the reference, or a flipped top answer when the reference margin is at least 0.20. A statistical failure is a mean absolute difference of 0.005 or more over 3 epochs. A failure sets the score to zero and puts all of that hotkey&#x27;s endpoints on probation for 6 epochs. The subnet epoch in these docs is 180 blocks, which is not the chain tempo of 360. Once per epoch the auditor also sends each endpoint its declared request rate at the same moment and credits what is delivered. On 2026-10-24 the chain showed 17 validator permits and 7 validators with weights set. The auditor is the subnet owner&#x27;s hotkey on UID 0 and is one of those 7. Only four permit holders hold a meaningful share of the subnet&#x27;s alpha (16%, 11%, 10% and 4%); ten others had not set weights for about 85 days.</p></div><div><h3>Incentive</h3><p>Scoring in the code: each model has a share of the epoch&#x27;s emission (on 2026-10-24: 0.17 kev-4b, 0.22 clef-flash, 0.33 d3-flash, 0.28 d3-mini). That share is split among the model&#x27;s scored endpoints by proven capacity times availability times availability to real users times a latency factor limited to 0.7-1.3. Scores are smoothed with an EMA (alpha 0.2) and summed per UID. The miners&#x27; weights are then scaled to the miner share (0.15), any usage and referral pool weights are added, and everything not paid out lands on the owner&#x27;s UID, which the chain burns (RecycleOrBurn is set to Burn). The repo and whitepaper describe a usage pool (up to 75%, funded by paid requests) and a referral pool (up to 10%). Live on 2026-10-24: alpha emission 7,200 a day by the team&#x27;s figure, 18% owner cut, miners 2,952 a day, about 85% burned; usage and referral pools 0% because no paid usage exists. The chain showed 85.5% of incentive on the owner UID, and the team&#x27;s published weights matched the chain&#x27;s incentive on the same 20 UIDs within about one point. The whitepaper says revenue should buy alpha, with 90% burned and 10% held as a platform fee, but this is an operator commitment, not enforced on chain, and the burn ledger listed no buybacks.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-24</span> <span class="muted">(verathos.ai economics and network data, api.verathos.ai, on-chain read)</span> Team data and a chain read at block 9,354,845: 16 miner hotkeys with 133 listed endpoints (125 scored; 8 not yet scored, with an &#x27;identity not proven at its URL&#x27; error), declared capacity 757 requests per second against 551 credited, all four models operational. Requests since launch total 2,586 with 435k input tokens, 8 accounts, 1 paying and 0.00 USD of paid usage. Daily requests after the 1,787 on 2026-10-15 were 176, 125, 51, 54, 65, 43, 28 and 45, then 212 so far on 2026-10-24. The auditor sits on the owner UID, and 7 validators put most of their weight on it. SN106 (Nodexo) was still registered.</li>
+<li><span class="when">2026-10-23</span> <span class="muted">(#verathos, GitHub verathos-ai/verathos-decide)</span> The channel was almost silent after 2026-10-18: one short exchange on 2026-10-23 in which the team asked a user to back a negative claim with evidence. As of 2026-10-24 the team&#x27;s repository had no commits after 2026-10-14.</li>
+<li><span class="when">2026-10-18</span> <span class="muted">(#verathos)</span> Miners said earnings were below electricity cost. The team replied that raising emission would not change the equilibrium and said two further mechanisms were nearly done: a private serving lane for Apple Macs and a training competition. Their roadmap page lists both as built but not live.</li>
+<li><span class="when">2026-10-16</span> <span class="muted">(#verathos)</span> Miners asked where the 75% usage portion is paid. The team said 15% is fixed and the usage pool releases as paid requests arrive, and that a per-UID view of usage earnings did not exist yet.</li>
+<li><span class="when">2026-10-15</span> <span class="muted">(#verathos)</span> Cut-over to Verathos Decide. Team posts gave three different block numbers for the switch. The team also said the 9B model (kev-9b) was discontinued on price versus quality.</li>
+<li><span class="when">2026-10-14</span> <span class="muted">(GitHub verathos-ai/verathos-decide)</span> The verathos-decide repository became public (v1.0.0, then 1.0.1; last commit the same day).</li>
+<li><span class="when">2026-10-12</span> <span class="muted">(#verathos)</span> The team announced the switch to Verathos Decide for 2026-10-15, with the LLM API retired and the legacy validator platform not migrated. Validator stalls and a hosting outage the same week put some miners on probation until the team validator cleared them.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Check hardware against the README: an Ubuntu 22.04 or 24.04 machine with an NVIDIA GPU (kev-4b needs about 15 GiB and clef-flash about 21 GiB in bf16), a public IP and one open TCP port (default 8091).</li>
+<li>Register a hotkey on netuid 96 (the chain showed a 0.1 TAO registration burn on 2026-10-24).</li>
+<li>Follow docs/MINING.md in verathos-decide. The installer picks the model and updates itself; use unquantized weights.</li>
+<li>Expect a zero score until the auditor&#x27;s throughput test credits your declared capacity; on 2026-10-24 eight endpoints were still waiting with an error saying their identity was not proven at their URL, so check that the declared address answers.</li>
+<li>Compare the expected pay with your costs first: the subnet&#x27;s own data showed 0.00 USD of paid usage, and miners in chat said pay was below electricity cost on 2026-10-18.</li>
+<li>To validate, follow docs/VALIDATING.md: light mode needs no GPU, full mode needs the minimum stake and reference-engine RAM or GPUs.</li>
+<li>To use the models as a customer, create a key at verathos.ai/account/keys and call POST /v1/systemone on api.verathos.ai.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Chain figures (read 2026-10-24 at block 9,354,845, aggregates only): 256 of 256 UIDs, commit-reveal on, 17 permits, 7 weight setters, 85.5% of incentive on the owner UID. Weights are validator opinions, not payouts.</li>
+<li>UID 0 is called the owner slot in the repo docs and whitepaper. The chain check agrees: the owner hotkey and the auditor are on UID 0, and it is the only UID under the owner&#x27;s coldkey.</li>
+<li>Usage, request counts, emission split and listed capacity come from the team&#x27;s own pages and API, read on 2026-10-24, and were not independently checked. The team&#x27;s 7,200 alpha a day and the chain&#x27;s last-epoch emission (about 5,900 a day) were not reconciled. No buybacks were listed.</li>
+<li>Whether the usage pool is on in the catalog committed on chain was not read. The team&#x27;s signed network data reports a usage share of 0.0 rather than none, and the code only does that when the pool is configured, so it probably is, but this is an inference.</li>
+<li>The owner runs the gateway and auditor and commits the catalog (models, prices, tolerances, miner share), as the whitepaper says itself.</li>
+<li>The new docs never mention Gleipnir or Sleipnir. Whether the old mesh is still served is not stated.</li>
+<li>On-chain identity still points to the legacy repository and describes an inference and training subnet.</li>
+<li>Team posts on 2026-09-28 and 2026-10-01 said the sibling subnet SN106 would be wound down and its miners pushed to SN96. On 2026-10-24 SN106 was still registered with emission enabled; how the wind-down will work was not researched.</li>
+<li>Team posts in September said some alpha is sold monthly to fund costs; whether a sale happened around 2026-10-15 was not found.</li>
+<li>Two permit holders earn about 10-11% of dividends with almost no alpha stake; the reason was not checked.</li>
+<li>Miner pay reports in chat are individual claims, not measurements.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://verathos.ai" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://github.com/verathos-ai/verathos-decide" rel="noopener noreferrer">GitHub (Verathos Decide)</a></li>
+<li><a href="https://verathos.ai/economics" rel="noopener noreferrer">Economics (team dashboard)</a></li>
+<li><a href="https://verathos.ai/api/economics" rel="noopener noreferrer">Economics data (JSON)</a></li>
+<li><a href="https://verathos.ai/roadmap" rel="noopener noreferrer">Roadmap</a></li>
+<li><a href="https://verathos.ai/whitepaper.md" rel="noopener noreferrer">Whitepaper</a></li>
+<li><a href="https://api.verathos.ai/v1/status" rel="noopener noreferrer">API model status</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 7 sources</summary>
+<ul>
+<li><strong>repo</strong> verathos-ai/verathos-decide README.md, docs/SCORING.md, MINING.md, VALIDATING.md, DISCOVERY.md, THROUGHPUT_AUDIT.md, SUBNET_ADMIN.md, src/verathos/validator/scoring.py, __main__.py, chain.py, usage.py at commit 0c0e8ec (2026-10-14; no newer commits on 2026-10-24)</li>
+<li><strong>web</strong> verathos.ai/llms.txt and /whitepaper.md (read 2026-10-21)</li>
+<li><strong>web</strong> verathos.ai/api/economics, /api/economics/series, /api/stats and the signed /api/network document (read 2026-10-24, epoch 51,971)</li>
+<li><strong>web</strong> api.verathos.ai/v1/models and /v1/status (2026-10-24)</li>
+<li><strong>web</strong> verathos.ai/economics and /roadmap, rendered in a browser (2026-10-21)</li>
+<li><strong>web</strong> On-chain read via public node at block 9,354,845 (2026-10-24 17:08Z): subnet info, params, uids, weights, emission split, owner and stake checks</li>
+<li><strong>msg</strong> #verathos, pinned posts and chat 2026-07-30 to 2026-10-23</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/95.html"><small>← Previous</small>SN95 Actual</a><a rel="next" href="/bittensor-docs/subnets/97.html"><small>Next →</small>SN97 Ingot</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-24. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

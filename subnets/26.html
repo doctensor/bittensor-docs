@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Perturb (SN26) | Bittensor Subnet Docs</title>
+<meta name="description" content="Miners attack an ImageNet classifier and train hardened versions; tasks, reports and burn rate go through a team API.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h14">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>26</span><div>
+<h1>Perturb <span class="muted">SN26</span></h1>
+<p class="tagline">Miners attack an ImageNet classifier and train hardened versions; tasks, reports and burn rate go through a team API.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>8.4<small>/day</small></b><span>last 7 d</span></li><li class="pl4"><b>3.9<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>7.3<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-24</b><span>last chat</span></li><li class="pw"><b>5,207</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>adversarial robustness (image classifier attacks and adversarial training)</dd>
+<dt>Status</dt><dd>Scanning is live: on 2026-10-21 (about 11:55 UTC) the team&#x27;s task feed, three of the four validators that report to its API and the public dataset had all updated within the hour. The training track&#x27;s public evaluation feed shows a score of zero for every committed model, the product is described as days away, and the last repo commit is 2026-10-03.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-21</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>Perturb is a subnet about adversarial robustness for image models. Miners try to make a fixed classifier (EfficientNetV2-L) misread an ImageNet image using changes too small to see, and they can also fine-tune that classifier on the verified attacks so it holds up better. Verified attacks are published as a public Hugging Face dataset. The team says it is moving to a product phase that sells robustness testing and data, and it keeps vision-language models as the next target; none of that service layer is in the public repo.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Scanning track: every 2 minutes the team&#x27;s task generator publishes one ImageNet-1k training image at its API. Miners have a 40 second window to perturb it so the classifier&#x27;s prediction changes, upload the result to their own storage (Hippius by default, R2 also works) and submit the URL plus a pixel hash. Miners do not serve an axon. The repo ships only a simple PGD baseline and says competitive miners must optimise it. Training track: a miner fine-tunes EfficientNetV2-L with the repo&#x27;s training scripts on ImageNet-1k plus the public adversarial dataset, uploads it to Hugging Face and commits the repo, revision and a hash of model plus hotkey on chain. The repo is made public one block after the commit.</p></div><div><h3>Validators</h3><p>Validators take the current task and the submitted images from the team API and score each one locally. A response must keep its L-inf change between 0.003 and 0.03, keep SSIM at 0.98 or higher and PSNR at 38 dB or higher, and change the predicted label; any failure scores 0. Otherwise the score rewards a small L-inf and RMSE change (weighted 0.7 and 0.3), with small bonuses for margin and for the number of changed pixels. Each miner&#x27;s reported score is the average of its last 300 rounds. Validators send reports to the team API, then fetch every validator&#x27;s report, rank miners per report, and use the stake-weighted mean rank. For the training track they evaluate every committed model once a day at 00:00 UTC on 1,000 ImageNet-1k validation images plus up to 400 adversarial dataset rows. The daily sample is seeded from the dataset commit pinned at that time, so it cannot be computed in advance.</p></div><div><h3>Incentive</h3><p>Per the code, miner emissions split 80 percent to scanning and 20 percent to training. Scanning pays the top 3 by consensus rank 75, 20 and 5 percent and nothing to anyone else. The training share goes entirely to one winner per day: the model with the best overall score, 30 percent clean accuracy and 70 percent adversarial accuracy since 2026-10-03, provided it beats the original model&#x27;s overall score by more than 0.005 and stays within 0.02 of its clean accuracy. Ties inside 0.005 go to the earliest commit. With no eligible model the whole allocation goes to scanning. Validators also fetch a burn rate from the team API and send that share to a burn UID; it read 0 on 2026-10-21. Chain weights were not read.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-21</span> <span class="muted">(project API and Hugging Face feeds, #26-perturb)</span> Public feeds showed the dataset updated at 11:44 UTC, three validator reports updated within two minutes of each other, and a training evaluation feed (updated 00:18 UTC) listing 23 committed models, all with zero scores. A miner also asked the team to check whether non-validators can see other miners&#x27; submissions; no team reply was seen by 09:23 UTC.</li>
+<li><span class="when">2026-10-20</span> <span class="muted">(#26-perturb)</span> A team member said the product launch was days away. No product page or service was found in the repo or on the project site in this pass.</li>
+<li><span class="when">2026-10-05</span> <span class="muted">(#26-perturb)</span> The team announced a move into a product phase, targeting launch the following month, with buybacks continuing and a share of future revenue going to them.</li>
+<li><span class="when">2026-10-04</span> <span class="muted">(#26-perturb, GitHub commits 2026-10-03)</span> Model scoring moved to 70 percent adversarial and 30 percent clean accuracy, scanning payouts switched to stake-weighted consensus rank, and the team said miner emissions were back to 100 percent.</li>
+<li><span class="when">2026-09-28</span> <span class="muted">(#26-perturb, GitHub commit)</span> The daily evaluation sample is now seeded from the pinned adversarial dataset commit instead of the date alone.</li>
+<li><span class="when">2026-09-26</span> <span class="muted">(#26-perturb)</span> Members posted analyses: the top scanning miners scored almost identically, a stock miner scored far below them, and the image set and daily evaluation sample were predictable. A team member replied that the point was fair and would be fixed, and said the task source had moved from ImageNet-100 to ImageNet-1K.</li>
+<li><span class="when">2026-09-21</span> <span class="muted">(#26-perturb, GitHub commits)</span> Training track went live with the 80/20 scanning and training split and the 75/20/5 scanning payout. The team said miner emissions would be temporarily reduced to 10 percent and announced a 500T alpha buyback.</li>
+<li><span class="when">2026-07-22</span> <span class="muted">(#26-perturb (pinned))</span> A pinned post set out the direction: a decentralized adversarial stress-testing network for AI systems, vision-language models first, with an always-on layer attacking frontier models and a service layer for customers&#x27; own models.</li>
+<li><span class="when">2026-07-01</span> <span class="muted">(#26-perturb (pinned))</span> Scoring update: margin and novelty terms, a 300-round score history, a rank-based payout (70, 15 and a shared 15 percent at that point) and a public leaderboard.</li>
+<li><span class="when">2026-06-16</span> <span class="muted">(#26-perturb)</span> Challenge images moved to the ImageNet-100 training split, the LLM-based challenge check was removed and validator timeouts were extended for the larger EfficientNetV2-L workload.</li>
+<li><span class="when">2026-05-07</span> <span class="muted">(#26-perturb (pinned))</span> Mainnet launch was announced with a whitepaper, a public GitHub repo and a three-person team (CEO, CTO, co-founder).</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Register a hotkey on netuid 26 and clone the repo.</li>
+<li>Miner: run bash ./scripts/setup_common.sh miner, copy scripts/miner.env.example to scripts/miner.env and fill in the wallet, hotkey, netuid, network and storage credentials, then run bash ./scripts/run_miner.sh. The baseline attack is deliberately simple; the 40 second window is the constraint to optimise for.</li>
+<li>Training track: accept the ImageNet-1k terms on Hugging Face, fill in training/.env, then use train.py, evaluate.py and submit.py in training/. A new model is evaluated from the next day&#x27;s snapshot.</li>
+<li>Validator: run bash ./scripts/setup_common.sh validator, copy scripts/validator.env.example to scripts/validator.env, set the wallet, a PERTURB_API_KEY and an HF_TOKEN whose account accepted the ImageNet-1k terms, then run bash ./scripts/run_validator.sh.</li>
+<li>Hardware from the README: miner minimum 4 vCPU and 16 GB RAM (a GPU with 8 GB or more is recommended); validator minimum 8 vCPU, 32 GB RAM and a GPU with 12 GB or more.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Chain weights, stake and the ownership of any miner UID were not read. The code shows what validators are meant to do; code at a commit proves what was written, not what the live validators run, and validators were asked to update on 09-21, 09-28 and 10-04.</li>
+<li>The task, the submitted images, each validator&#x27;s leaderboard report, the burn rate and the commitment snapshot all come from services at api.perturbai.io run by the team. Validators rank from those reports instead of re-deriving them, and the burn rate can change emissions without a code release. How a validator obtains a PERTURB_API_KEY is not documented in the README.</li>
+<li>On 2026-10-21 the top scanning miners&#x27; 300-round averages were within about 0.004 of each other, and in the 11:55 UTC reports their last-round scores were within 0.0003 of each other. Community members have repeatedly said this means shared ownership or self-mining, or a hardware advantage. The team said on 09-15 that it runs no miners. None of this was verified, and this page draws no conclusion.</li>
+<li>A 09-26 analysis found a stock upstream miner scoring far below the top group on 60 live tasks and read that as prepared attacks on a static image set. The team said the task source then moved to ImageNet-1K. Whether the gap persists was not retested here.</li>
+<li>The training evaluation feed read zero for all 23 committed models (updated 2026-10-21 00:18 UTC). Members reported the same for the 09-25 and 09-26 runs and asked whether they would be re-run; no team answer was found. Per the code, with no eligible model the scanning track receives the whole miner allocation.</li>
+<li>The evaluation uses a public dataset that grows every ~30 minutes and is built from attacks on the original model, so miners can train on data close to the test. The 09-28 seed change stops precomputing future samples, but a member also raised a feedback loop in which top attackers fill the next day&#x27;s evaluation set.</li>
+<li>The 100T buyback was stated on 09-11 and a 500T buyback was announced on 09-21 and said to be starting 09-30. Neither was checked on chain.</li>
+<li>The product, pricing and revenue targets in the whitepaper are plans, not results. The repo contains only the scanning and training subnet code, and its last commit is 2026-10-03. One of the four validators reporting to the API last reported on 2026-10-05.</li>
+<li>The repo is under an individual GitHub account and has no license in GitHub&#x27;s metadata.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://www.perturbai.io/whitepaper" rel="noopener noreferrer">Whitepaper (v3.0, October 2026)</a></li>
+<li><a href="https://www.perturbai.io/" rel="noopener noreferrer">Project site</a></li>
+<li><a href="https://leaderboard.perturbai.io/" rel="noopener noreferrer">Leaderboard</a></li>
+<li><a href="https://github.com/0xsigurd/Perturb" rel="noopener noreferrer">GitHub repo</a></li>
+<li><a href="https://github.com/0xsigurd/Perturb/blob/main/training/README.md" rel="noopener noreferrer">Training track guide (repo)</a></li>
+<li><a href="https://huggingface.co/datasets/perturb-ai/efficientnet-v2-l-adv-dataset" rel="noopener noreferrer">Adversarial dataset (Hugging Face)</a></li>
+<li><a href="https://api.perturbai.io/api/v1/burn-rate" rel="noopener noreferrer">Burn rate feed (team API)</a></li>
+<li><a href="https://api.perturbai.io/training/evaluations" rel="noopener noreferrer">Training evaluations feed (team API)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 5 sources</summary>
+<ul>
+<li><strong>repo</strong> 0xsigurd/Perturb@0dad954 (2026-10-03): README.md, training/README.md, perturbnet/{constants,emissions,model_evaluation,api_client,task_timing}.py, commit log</li>
+<li><strong>msg</strong> #26-perturb, 2026-05-06 to 2026-10-21 (pinned posts 05-07, 07-01, 07-22; team posts 09-11, 09-15, 09-21, 09-23, 09-26, 09-28, 10-04, 10-05, 10-20)</li>
+<li><strong>web</strong> https://www.perturbai.io/whitepaper (v3.0, read 2026-10-21)</li>
+<li><strong>web</strong> api.perturbai.io: /api/v1/task, /api/v1/validators, /api/v1/leaderboard/&lt;validator&gt;, /api/v1/burn-rate, /training/evaluations, /training/commitments (public GETs, read 2026-10-21; hotkeys not used)</li>
+<li><strong>web</strong> https://huggingface.co/api/datasets/perturb-ai/efficientnet-v2-l-adv-dataset (read 2026-10-21)</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/25.html"><small>← Previous</small>SN25 UR</a><a rel="next" href="/bittensor-docs/subnets/28.html"><small>Next →</small>SN28 SayGM (gm)</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-21. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

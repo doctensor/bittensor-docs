@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Investing88 (SN88) | Bittensor Subnet Docs</title>
+<meta name="description" content="Decentralized hedge fund: miners file Tao/Alpha and US-stock portfolios, validators score risk-adjusted daily returns.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h16">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>88</span><div>
+<h1>Investing88 <span class="muted">SN88</span></h1>
+<p class="tagline">Decentralized hedge fund: miners file Tao/Alpha and US-stock portfolios, validators score risk-adjusted daily returns.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl4"><b>5.0<small>/day</small></b><span>last 7 d</span></li><li class="pl4"><b>3.7<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>8.7<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-24</b><span>last chat</span></li><li class="pw"><b>8,102</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>investment strategies (decentralized asset management)</dd>
+<dt>Status</dt><dd>Live and being changed: the validator code reached v1.7.0 on 2026-09-24 (incentivized conviction), the live asset ratio read on 2026-10-21 splits emissions between Tao/Alpha, US stocks and a conviction staging UID, and the team was answering miner questions through 2026-10-21.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-21</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>Investing88 is run by Mobius Fund as a decentralized hedge fund. Miners submit portfolio allocations in a simulated environment, either for Tao/Alpha staking or for US stocks and ETFs. Validators score the daily results, and the team combines top strategies into ensemble strategies that it uses for its own products, including the 88 Quant Fund, the 88 Public Index and an 88 Root validator. Pages describing external client revenue are older than the current state of the project.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>A miner picks one asset class (it cannot be changed after the first submission) and keeps a strategy file named after its hotkey: a single Python dict of allocations, with negative values meaning shorts for stocks. The miner program, or the zero-code KYM web app, submits it to the team&#x27;s API whenever the file&#x27;s timestamp changes. US stock orders count as market-on-open if filed before 09:28 ET and market-on-close if filed before 15:50 ET. To limit UID spam, a coldkey needs 192 alpha staked plus 64 alpha paid, and chat on 2026-10-07 added that every new UID requires 64 alpha. New UIDs appear on the dashboard after one day and have a 3-day immunity period.</p></div><div><h3>Validators</h3><p>Validators fetch profit-and-loss, days-active, similarity and asset-ratio data from the team&#x27;s API roughly every half hour, apply the scoring code in the public repo and set weights. The PnL itself is computed by the team&#x27;s API, not by validators. The code zeroes out strategies that ended their window below their start value, reduces scores for near-duplicate strategies, inactivity, and heavy cash or short exposure, and rescales each asset class to its share of emissions. The team also keeps a public blacklist of UIDs it judges to be coasting.</p></div><div><h3>Incentive</h3><p>The score is the product of four terms (return over maximum drawdown, a profit-versus-loss ratio, a Kelly-normalized win-odds term and daily compounded return) over a 50-day rolling window, with new miners scaled down for their first 30 days and the top two profit days clipped. Emissions are split by a team-set asset ratio; the live ratio on 2026-10-21 was 45.5% Tao/Alpha, 45.5% US stocks and 9% to UID 142, a staging hotkey for incentivized conviction. The team says that 9% is passed on weekly to investors in proportion to alpha locked as conviction, with the owner wallet excluded.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-17</span> <span class="muted">(#88-investing)</span> The team said it was preparing the first report on its root validator since it went live on 2026-09-03 and expected upcoming protocol changes to be neutral for the subnet.</li>
+<li><span class="when">2026-10-14</span> <span class="muted">(#88-investing)</span> The team said MetaTrader integration was coming soon and called it the subnet&#x27;s next major milestone.</li>
+<li><span class="when">2026-10-07</span> <span class="muted">(#88-investing)</span> The team clarified entry costs: every new UID requires 64 alpha, immunity lasts 3 days, and an unprofitable UID can be deregistered depending on registration pace.</li>
+<li><span class="when">2026-09-28</span> <span class="muted">(#88-investing)</span> The team said on-chain basket-swap limits remained a handicap despite the per-swap fee falling from 0.5 to 0.005 TAO, and that a scoring update and an MT5 integration were being worked on.</li>
+<li><span class="when">2026-09-24</span> <span class="muted">(GitHub repo, #88-investing)</span> Miner and validator code v1.7.0 added incentivized conviction. The live ratio now routes a fixed 9% share of miner emissions to a staging UID, from which the team says it distributes to alpha lockers weekly.</li>
+<li><span class="when">2026-09-20</span> <span class="muted">(#88-investing)</span> The team blacklisted six UIDs for coasting (strong early profits, then little activity) and said it would do so earlier and without warning from then on. A seventh UID was announced the next day.</li>
+<li><span class="when">2026-09-03</span> <span class="muted">(#88-investing)</span> The 88 root validator, registered on 2026-08-16 and validating only this subnet at first, became a root validator across all subnets.</li>
+<li><span class="when">2026-08-11</span> <span class="muted">(#88-investing)</span> The team set out two products powered by miner intelligence: the 88 Root Validator (a take percentage whose profits fund 88 buybacks) and the 88 Quant Fund and Public Index, which are being merged.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Read the repo README and strat/README.md, then run the bundled simst tool on the example strategy files to backtest ideas before registering.</li>
+<li>Register a hotkey on netuid 88 and make sure the coldkey holds the required alpha (192 staked plus 64 paid per the README; the team has said every new UID needs 64 alpha).</li>
+<li>Either install the repo and start the miner with pm2, or use the KYM web app for zero-code submission.</li>
+<li>Put a strategy file named after your hotkey in Investing/strat/ (asset class key &#x27;_&#x27;: 0 for Tao/Alpha, 1 for US stocks) and wait for the first submission to register the neuron.</li>
+<li>Check the dashboard after the next daily score run (00:00 UTC for Tao/Alpha, 06:00 UTC for stocks) and watch the 3-day immunity window.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Chain weights, the validator set and actual incentive paid to miners were not read. The asset ratio and blacklist come from the team&#x27;s API and the dashboard as read on 2026-10-21.</li>
+<li>Validators rely on the team&#x27;s API for PnL, days, similarity and the asset ratio, so the public scoring code cannot be checked end to end. Two of those endpoints timed out from the research machine on 2026-10-21, though the assets page responded.</li>
+<li>The 9% incentivized-conviction distribution is run by the team off-chain; the repo only routes the share to UID 142. Whether weekly distributions have actually run was not verified.</li>
+<li>The subnet overview doc was written around late 2025 and describes a client-facing revenue plan; in September 2026 the team said first clients had not yet been onboarded. No revenue or fund performance figures were verified.</li>
+<li>Entry costs are described slightly differently in the README (192 staked plus 64 paid) and in chat (64 alpha per new UID); it is not clear whether the 192 is one-time per coldkey.</li>
+<li>Blacklisting rests on team judgement, including KYM user data, and has been applied without prior warning since 2026-09-21. Planned items (MT5/MetaTrader integration, a scoring update) are not in the repo as of its last commit on 2026-09-24.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://investing88.ai/" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://db.investing88.ai/" rel="noopener noreferrer">Miner dashboard</a></li>
+<li><a href="https://kym.investing88.ai/" rel="noopener noreferrer">KYM (zero-code mining)</a></li>
+<li><a href="https://api.investing88.ai/assets" rel="noopener noreferrer">Supported assets and live asset ratio</a></li>
+<li><a href="https://github.com/mobiusfund/investing" rel="noopener noreferrer">GitHub (miner, validator, scoring)</a></li>
+<li><a href="https://github.com/mobiusfund/investing/blob/main/Investing/doc/Subnet88.md" rel="noopener noreferrer">Subnet overview doc</a></li>
+<li><a href="https://x.com/Investing88ai" rel="noopener noreferrer">Official X account</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 3 sources</summary>
+<ul>
+<li><strong>repo</strong> mobiusfund/investing@4859a58 (2026-09-24, v1.7.0): README, strat/README.md, Investing/doc/Subnet88.md, neurons/validator.py, Investing/core/etc.py, api.py, const.py, min_compute.yml</li>
+<li><strong>web</strong> https://api.investing88.ai/assets (asset ratio header and supported assets, read 2026-10-21); https://investing88.ai/, db.investing88.ai, kym.investing88.ai (landing pages)</li>
+<li><strong>msg</strong> #88-investing, 2025-04 to 2026-10-21, including pinned posts and team replies</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/87.html"><small>← Previous</small>SN87 Provenonce (Proof of Assurance)</a><a rel="next" href="/bittensor-docs/subnets/89.html"><small>Next →</small>SN89 InfiniteQuant</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-21. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

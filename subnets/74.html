@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gittensor (SN74) | Bittensor Subnet Docs</title>
+<meta name="description" content="Pays developers for merged PRs and GPU compute, but since 2026-10-12 all miner emission is recycled to the owner uid.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h14">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>74</span><div>
+<h1>Gittensor <span class="muted">SN74</span></h1>
+<p class="tagline">Pays developers for merged PRs and GPU compute, but since 2026-10-12 all miner emission is recycled to the owner uid.</p>
+<span class="st s-unclear">unclear</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl3"><b>1.6<small>/day</small></b><span>last 7 d</span></li><li class="pl3"><b>1.8<small>/day</small></b><span>days 8-30</span></li><li class="pl4"><b>5.3<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-23</b><span>last chat</span></li><li class="pw"><b>5,340</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>open-source contribution rewards, GPU inference optimisation and compute</dd>
+<dt>Status</dt><dd>Live on mainnet and the team is still talking in the channel, but as of 2026-10-21 nothing is being paid to miners. The newest code on main (commit of 2026-10-12) empties the repository registry and gives the compute pool no share, a team member said on 2026-10-19 that miner emission is at 100 percent burn, and on chain all 11 weight-setting validators put 100 percent of weight on one neuron (uid 0), which is the owner slot. No reason or end date has been published.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-21</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>Gittensor is a subnet that set out to reward open-source work: miners link a GitHub account to a hotkey, and validators score their merged pull requests to whitelisted repositories. Over August to October 2026 the team narrowed this to a few team-run projects (a GPU inference runtime called sparkinfer and an agent-strategy competition called Spark-Hermes) and added a GPU compute pool. Since 2026-10-12 the code no longer tracks any repository and sets the miner share of emission to recycle, so the mechanism described in the README and the docs site is currently not paying anyone.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Per the docs site and README: there is no miner neuron to run. A miner posts a fine-grained GitHub access token to validators with the project&#x27;s command-line tool, the GitHub user is pinned to the hotkey (a different account needs a new hotkey), and the miner then contributes pull requests to repositories on the registry. Two team-run tracks were paid in 2026: sparkinfer, where a source pull request must show a verified speed-up over the current best on one real RTX 5090 and pass accuracy checks (tiers by percentage speed-up, docs-only pull requests earn nothing); and Spark-Hermes, where miners submit written strategy files for one pinned agent, which are scored on hidden Python bug-fix tasks in two-hour rounds. A compute track pays for running a verified GPU server and renting GPUs out (admitted cards listed on the docs site include RTX 5090, RTX PRO 6000, L40S, H100, H200, B200 and B300).</p></div><div><h3>Validators</h3><p>Per the docs site and code: every two hours a validator loads recent pull requests (30-day look-back by default), filters and scores them, and applies eligibility rules per repository (defaults: at least 3 merged pull requests and at least 80 percent merged out of merged plus closed; repositories can override). The base score is a saturating curve on a token-level measure of the changed source code, plus a small bonus, or a fixed value a repository sets. Repository weights come from a local JSON registry file; if the file is missing or empty nothing is allocated. Compute pay comes from a signed controller scorecard and only counts when the compute pool has a share. Weights on chain are set with commit-reveal.</p></div><div><h3>Incentive</h3><p>Documented design: miner emission is split across registered repositories by each repository&#x27;s share, with leftover share, empty repository slices and any unused non-OSS share recycled to uid 0. Before the change the registry listed three repositories (sparkinfer 25 percent, Spark-Hermes 20 percent, a third at 5 percent, so about half of miner emission recycled). In commit 884ce17 (merged 2026-10-12) the registry was emptied and the OSS share set to 1.0, which leaves the compute pool zero: everything recycles. On chain at block about 9.33 million (2026-10-21) incentive was non-zero on exactly one neuron, uid 0, and a boolean check confirmed that uid is both the owner hotkey and owner coldkey slot of the subnet. The team calls this a burn or recycle (chat 2026-08-28 and 2026-10-19); whether the owner could spend that alpha was not checked.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-21</span> <span class="muted">(on-chain read, GitHub, #gittensor)</span> Chain read: 256 of 256 neurons registered, commit-reveal on, 12 validator permits of which 11 had set weights, all 100 percent on uid 0. The main branch of the Gittensor repository still stood at the 2026-10-12 commit; the last chat messages that day were users asking about the cause and a user guessing that compute did not catch on (not a team statement).</li>
+<li><span class="when">2026-10-19</span> <span class="muted">(#gittensor)</span> A team member said miner emission is at 100 percent burn currently, replying to a user asking why all emission goes to one hotkey.</li>
+<li><span class="when">2026-10-14</span> <span class="muted">(GitHub (entrius/gittensor pull request 1840))</span> A draft pull request (not merged) proposed verifying signed attestations for &#x27;optimization challenges&#x27;, where a miner&#x27;s solver is run head to head against the current best.</li>
+<li><span class="when">2026-10-13</span> <span class="muted">(#gittensor)</span> A user asked why no repository is tracked any more; no answer is in the archive.</li>
+<li><span class="when">2026-10-12</span> <span class="muted">(GitHub (entrius/gittensor, gittensor-model-hub/Spark-Hermes), #gittensor)</span> Merge of the change that empties the repository registry and sets compute share to 0 (commit message: burn all miner emissions). The same day the Spark-Hermes team expanded rounds to six episodes on eight GPUs; its last closed round ended that evening and no later commits were found.</li>
+<li><span class="when">2026-10-11</span> <span class="muted">(#gittensor, GitHub (gittensor-ai-lab/sparkinfer))</span> The validator GPU that had been down since 2026-10-09 was restored. sparkinfer v0.6.34 had been released the day before and its last push was this day.</li>
+<li><span class="when">2026-10-05</span> <span class="muted">(GitHub (entrius/gittensor commit log))</span> Repository history shows the compute pool raised to 30 percent of miner emission, followed by a stream of work on a whole-box GPU rental market until 2026-10-10.</li>
+<li><span class="when">2026-09-22</span> <span class="muted">(Spark-Hermes public round index)</span> First closed round of the Spark-Hermes strategy competition.</li>
+<li><span class="when">2026-09-02</span> <span class="muted">(#gittensor)</span> Team announced compute mining as live in alpha: pay for serving verified GPU inference, a 5 percent emission cap, and an announced rate of 0.70 US dollars per verified GPU-hour for one RTX 5090.</li>
+<li><span class="when">2026-08-28</span> <span class="muted">(#gittensor)</span> A team member said emission going to the owner uid is burned or recycled rather than paid to the owner.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>First ask in the subnet channel whether miner emission has resumed: as of 2026-10-21 the code and the chain recycle all of it, so contributing now earns nothing.</li>
+<li>Open-source track (docs.gittensor.io, OSS contributions page): create a fine-grained GitHub access token, post it to validators with the project&#x27;s command-line tool, then contribute pull requests to repositories that are on the registry again.</li>
+<li>sparkinfer: read CONTRIBUTING.md in the repository; a paid change needs a measured speed-up over the current best on an RTX 5090, and docs-only changes are not paid.</li>
+<li>Spark-Hermes: read the repository README for the round format (two-hour submission windows, practice bugs, hidden scoring bugs).</li>
+<li>Compute track: the docs site describes admitted NVIDIA cards and the up and rent commands; it was read only as documentation here and no running fleet was found.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Docs versus code and chain: the docs site (OSS page last updated 2026-10-01) and the README still describe miners being paid, while code and chain show the opposite as of 2026-10-21. The docs had not been updated after the change.</li>
+<li>The reason for the 100 percent recycle and any end date are not in the channel archive. Repository main has no commit after 2026-10-12 and the only open work found is a draft pull request that is not on main.</li>
+<li>The check that uid 0 is the owner slot is a boolean comparison on chain; whether the owner can spend the alpha that accrues there was not checked, so this page repeats the team&#x27;s word &#x27;burn&#x27; without confirming it.</li>
+<li>On chain, the per-block TAO injected into the subnet pool read 0 on the dates sampled from about 2026-10-13 (it was non-zero around 2026-10-10); the cause was not checked and no price or pool numbers are published here.</li>
+<li>A critic wrote on 2026-09-26 that the sparkinfer repository owner self-mines, and the team said it had answered that repeatedly; this research found no first-hand evidence either way. Users also questioned perfect scores and trajectories with no edits in Spark-Hermes on 2026-10-11 and 2026-10-12; the team said it would check and no resolution was found.</li>
+<li>Fleet size and real demand for the compute pool were not found (the project&#x27;s compute page is rendered in the browser and could not be read with a plain fetch).</li>
+<li>Chat is what the team said; code is what it does. Individual handles, hotkeys and quotes are deliberately not published.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://gittensor.io" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://docs.gittensor.io" rel="noopener noreferrer">Docs</a></li>
+<li><a href="https://github.com/entrius/gittensor" rel="noopener noreferrer">GitHub (entrius/gittensor)</a></li>
+<li><a href="https://github.com/gittensor-ai-lab/sparkinfer" rel="noopener noreferrer">sparkinfer (GPU inference runtime)</a></li>
+<li><a href="https://github.com/gittensor-model-hub/Spark-Hermes" rel="noopener noreferrer">Spark-Hermes (agent strategy competition)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 6 sources</summary>
+<ul>
+<li><strong>msg</strong> #gittensor 2026-08-16 to 2026-10-21 (newest team message 2026-10-19)</li>
+<li><strong>repo</strong> entrius/gittensor@884ce17 (2026-10-12): README, constants, emission allocation, registry file and its history</li>
+<li><strong>repo</strong> gittensor-ai-lab/sparkinfer@f86e43c (2026-10-11) and gittensor-model-hub/Spark-Hermes@cafd8d5 (2026-10-12)</li>
+<li><strong>web</strong> https://docs.gittensor.io (index, OSS contributions, compute mining), read 2026-10-21</li>
+<li><strong>web</strong> Spark-Hermes public round index and live feed, GitHub pull request 1840, read 2026-10-21</li>
+<li><strong>web</strong> On-chain reads 2026-10-21, blocks 9252506 to 9334519: identity, parameters, neuron and weight state, owner boolean checks (no addresses recorded)</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/72.html"><small>← Previous</small>SN72 StreetVision (NATIX) / chillyshort</a><a rel="next" href="/bittensor-docs/subnets/75.html"><small>Next →</small>SN75 Hippius</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-21. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

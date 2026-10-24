@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Data Annotation (CanopyMRV) (SN498) | Bittensor Subnet Docs</title>
+<meta name="description" content="Testnet-only subnet where miners outline tree crowns on satellite tiles to build a climate-MRV dataset.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h6">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>498</span><div>
+<h1>Data Annotation (CanopyMRV) <span class="muted">SN498</span></h1>
+<p class="tagline">Testnet-only subnet where miners outline tree crowns on satellite tiles to build a climate-MRV dataset.</p>
+<span class="st s-transitioning">transitioning</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl3"><b>1.6<small>/day</small></b><span>last 7 d</span></li><li class="pl3"><b>1.9<small>/day</small></b><span>days 8-30</span></li><li class="pl3"><b>1.0<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-20</b><span>last chat</span></li><li class="pw"><b>116</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>data labeling (climate MRV: satellite tree-crown annotation)</dd>
+<dt>Status</dt><dd>Testnet only. The team&#x27;s own site says the subnet is validating on testnet and is not yet live on mainnet, and chat through 2026-10-19 repeats &quot;mainnet soon&quot; without a date. The team shipped releases until 2026-10-12 and answered miner feedback on 2026-10-19. Whether netuid 498 is registered on mainnet was not checked on-chain.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-21</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>Subnet 498, run by Technology Nucleus and branded CanopyMRV, is meant to produce labeled satellite imagery for climate verification (carbon accounting and deforestation compliance). Miners run their own vision models to outline tree crowns on image tiles and upload the results. Validators score miners against a hidden labeled set and use a vision model to choose which miner&#x27;s record to keep for each unlabeled image, which together form the dataset the team wants to sell. Everything described here runs on the Bittensor testnet.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Miners receive a task of up to 30 image tiles per round, each with an ID that is unique to their hotkey, and have 600 seconds from dispatch to answer. They detect trees with any model they choose (the repo ships SegFormer, YOLO, a self-hosted REST, OpenAI fine-tuning and Qwen2-VL backends) and upload a JSON file of polygons, boxes, class, confidence and area to Cloudflare R2, then return its address. Answers must match the round&#x27;s batch ID, stay within size and polygon-complexity limits, and avoid crude boxes or spiky outlines.</p></div><div><h3>Validators</h3><p>A validator plans tasks that mix hidden labeled (golden) images in with unlabeled public images; every sampled miner gets the same images. Golden images are scored by a fidelity function: 60 percent overlap with the true shape (a match needs at least 0.5 IoU) and 40 percent class agreement, reduced for false positives, for large differences in carbon-weighted canopy area, and for geometry that looks like box gaming, saw-tooth outlines or non-vegetation. For public images, a private vision-model step picks at most one miner&#x27;s record per image, or leaves it unassigned. Parts of the validator (round loop, task planner, selection adapter) ship only as encrypted files, so they cannot be read from the repo.</p></div><div><h3>Incentive</h3><p>In the readable code, each miner&#x27;s round score is 0.7 times its golden-set fidelity plus 0.3 times the larger of an adoption bonus and a selection share (the fraction of public images where its record was chosen, scaled down for low fidelity). The adoption bonus stays at zero by design until an audit path that does not yet exist confirms ground truth. Scores are smoothed with a moving average (default weight 0.1 on the newest round). Before weights are set, miners below 5 percent of the top score get nothing, and the rest share a small floor (capped at 20 percent of the total) plus a share proportional to score. The earlier winner-takes-all rule was replaced by per-image selection in Architecture v1.5 (2026-09-29). Chain weights were not read.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-19</span> <span class="muted">(#data-annotation)</span> A user asked when mainnet launches; no dated answer appears in the channel archive through 2026-10-20.</li>
+<li><span class="when">2026-10-18</span> <span class="muted">(#data-annotation)</span> A miner reported that the validator stopped sending tasks for about nine hours (like an earlier outage on 2026-10-01) and listed four code concerns. The team replied on 2026-10-19 that tasks should be flowing again, which the miner confirmed; it said one concern (the validator-only storage script) is temporary until more validators join, and that it would come back on the confidence-handling concern.</li>
+<li><span class="when">2026-10-12</span> <span class="muted">(#data-annotation and GitHub)</span> Team said accuracy passed 60 percent after v1.7. Last commit in the public repo (R2 storage changes, per-round directories, SegFormer memory handling).</li>
+<li><span class="when">2026-10-07</span> <span class="muted">(#data-annotation)</span> v1.7.0 on testnet: crude boxes, canvas-covering rectangles and spiky outlines score zero, confidence outside 0 to 1 is rejected, and masks are checked against vegetation.</li>
+<li><span class="when">2026-10-05</span> <span class="muted">(#data-annotation)</span> Three technical articles published (architecture, incentive mechanics, vision and ground truth). The ground-truth article says the team&#x27;s pipeline and a certified human benchmark disagree sharply on crown counts in dense canopy and that the team does not yet know which is right. A miner reported the same day that incentive was by then spread across six UIDs, the top one at about 26 percent, after the reward curve was rebuilt.</li>
+<li><span class="when">2026-09-29</span> <span class="muted">(#data-annotation)</span> Architecture v1.5 live on testnet: the best annotation per image is picked from all miners instead of one overall winner.</li>
+<li><span class="when">2026-09-24</span> <span class="muted">(#data-annotation)</span> v1.2.0 on testnet: gateway checks on submitted shapes, incentive floor capped at 20 percent, matches need 0.5 IoU against golden targets, quorum rule for consensus and anti-plagiarism checks.</li>
+<li><span class="when">2026-09-20</span> <span class="muted">(#data-annotation)</span> Dashboard v1.0.0 went live with a miner leaderboard.</li>
+<li><span class="when">2026-09-17</span> <span class="muted">(#data-annotation)</span> Welcome post: testnet is running, mainnet is described as coming soon. Stated focus is climate verification (EUDR deforestation compliance and carbon MRV).</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Clone the Tech-Nucleus repo (the README quickstart names a different GitHub account), make a Python virtual environment and run pip install -r requirements.txt.</li>
+<li>Copy .env.example to .env and set your wallet name, Cloudflare R2 credentials and a model backend (see MINER.md for the payload schema and limits).</li>
+<li>Create a testnet wallet and register a hotkey on testnet netuid 498; the team offered faucet tokens in chat on 2026-09-21.</li>
+<li>Start the miner: python neurons/miner.py --netuid 498 --subtensor.network test with your wallet, hotkey, axon port and model path.</li>
+<li>Check the batch ID of every task and answer only for the images of that batch. Validator setup is not documented in a usable way because key modules are encrypted.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Testnet only. Nothing here describes mainnet emissions or economics, and the number 498 is the testnet netuid the team uses; a mainnet read on 2026-10-21 (block 9334628) found no netuid 498 there, and a testnet read (block 8273072) shows it registered on 2026-06-07 with 19 neurons and no on-chain name set.</li>
+<li>Part of the validator (round loop, epoch planner, public-image selection) is distributed as encrypted modules decrypted at runtime with a key from the environment or a .env file. How public-image selection works and how round results become on-chain scores cannot be verified from the repo. Chain weights were not read.</li>
+<li>The ground truth is, by the team&#x27;s own account, produced by its own multi-stage AI pipeline and checked against a small number of certified human labels; the published benchmark figures cover one tile and changed between the 2026-10-07 chat post and the site as read on 2026-10-21. The team says the pipeline and the human benchmark disagree on crown counts in dense canopy.</li>
+<li>The repo&#x27;s image loader describes 10 m Sentinel-2 chips with Hansen and JRC golden labels, while the site describes 0.30 m WorldView-3 chips and a Restor TCD benchmark. Which dataset the live testnet validator uses was not verified.</li>
+<li>Docs lag code: README, MINER.md and VALIDATOR.md say v1.5.0 while the package version is 1.7.0. MINER.md says polygon outlines get priority from a vision judge; a code comment in the golden scorer says golden labels are boxes and miner polygons cannot change that score. Whether live golden labels carry polygons was not verified.</li>
+<li>Hardware advice conflicts: min_compute.yml lists 8 GB VRAM and an A100 as recommended (it looks like template boilerplate), while the team said on 2026-09-23 that even a 2 GB GPU can do well and a miner said one consumer GPU is enough.</li>
+<li>The network is small and run mostly by the team: a miner counted three outside miners plus team-run miners on 2026-10-04, and the team said the validator-only setup is temporary until more validators join. Miners reported task outages on 2026-10-01 and 2026-10-18.</li>
+<li>An open concern from 2026-10-18 is confirmed in the repo as of 2026-10-12: the per-image fidelity function trusts miner-supplied confidence (default 0.95 when missing, 25 percent of its composite) and checks vegetation on only the first 30 polygons. It feeds the dataset score; whether it affects rewards was not traced, and the team&#x27;s promised follow-up is not in the archive.</li>
+<li>A miner reported on 2026-10-04 that the golden set is tree only and that shrub or field classes count as hallucinations; this is one participant&#x27;s report, not team documentation.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/Tech-Nucleus/DataAnnotation" rel="noopener noreferrer">GitHub (Tech-Nucleus/DataAnnotation)</a></li>
+<li><a href="https://mrv.technonucleus.com/" rel="noopener noreferrer">Dashboard and articles (CanopyMRV)</a></li>
+<li><a href="https://mrv.technonucleus.com/articles/autonomous-frontier-vision" rel="noopener noreferrer">Article: Autonomous Frontier Vision</a></li>
+<li><a href="https://technonucleus.com" rel="noopener noreferrer">Technology Nucleus</a></li>
+<li><a href="https://x.com/CanopyMRV" rel="noopener noreferrer">X (CanopyMRV)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 6 sources</summary>
+<ul>
+<li><strong>repo</strong> Tech-Nucleus/DataAnnotation@e26a728 (2026-10-12): README.md, MINER.md, VALIDATOR.md, docs/ARCHITECTURE.md, min_compute.yml</li>
+<li><strong>repo</strong> Tech-Nucleus/DataAnnotation@e26a728: template/hazard/annotation_eval.py, geometry_quality.py, dual_reward.py, incentives.py, climate_mrv_corpus.py</li>
+<li><strong>repo</strong> Tech-Nucleus/DataAnnotation@e26a728: neurons/validator.py, template/utils/config.py, template/miner/geometry.py, template/validator/_security_loader.py</li>
+<li><strong>msg</strong> #data-annotation 2026-09-17 to 2026-10-20 (read via the chat archive)</li>
+<li><strong>web</strong> https://mrv.technonucleus.com/ and /articles/autonomous-frontier-vision (read 2026-10-21)</li>
+<li><strong>web</strong> Chain reads (chain.py subnet 498, 2026-10-21): mainnet at block 9334628 exists False; testnet (--net test) at block 8273072 exists True, registered 2026-06-07, 19 neurons, no name set</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/476.html"><small>← Previous</small>SN476 Sluice</a><a rel="next" href="/bittensor-docs/subnets/554.html"><small>Next →</small>SN554 Sentinel</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-21. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BitMind (moving to Yugos) (SN34) | Bittensor Subnet Docs</title>
+<meta name="description" content="Moving from deepfake detection to Yugos: miners build routers that pick the model, provider and effort per request.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h22">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>34</span><div>
+<h1>BitMind (moving to Yugos) <span class="muted">SN34</span></h1>
+<p class="tagline">Moving from deepfake detection to Yugos: miners build routers that pick the model, provider and effort per request.</p>
+<span class="st s-transitioning">transitioning</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>46<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>16<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>12<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-24</b><span>last chat</span></li><li class="pw"><b>8,518</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>inference routing (previously deepfake and AI-media detection)</dd>
+<dt>Status</dt><dd>On 2026-10-21 the team announced that SN34 would change completely, from deepfake detection to Yugos, and said it would go live later that day. The Yugos code was public the same day. When checked around 23:50 UTC, the chain still showed the old payout layout, the Yugos console page said coming soon and the dashboard hostname did not resolve, so the switch was announced but not confirmed live.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-21</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>BitMind ran SN34 as a contest between detectors and generators of AI-made media (GAS, the Generative Adversarial Subnet). On 2026-10-21 the team announced Yugos, which replaces it with a contest to produce the best decision model for inference: a router that, for each request, chooses which model, which provider and how much effort to use. The team said all mining would move to Yugos once it launches, and that the old competition stays technically open until then. The Yugos product is an OpenAI-compatible routing API from BitMind Holdings Limited, with its console still marked as coming soon when checked.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Under Yugos a miner submits a router: a model.py that picks, for each request, which provider, model and effort level to call, trained weights in model.safetensors, and a models.json listing every choice it may use. The router makes one call at a time and may read the reply before calling again; the last reply is graded, and a call outside models.json scores zero. The team&#x27;s hosted service makes the provider calls, so graded runs need no provider keys, and the router has no network access during evaluation. The package can hold up to 24 GiB and 4,096 files. Evaluation is paid for in US dollars through a card-payment page tied to the hotkey. Until Yugos goes live, the team said the old detector and generator mining stays technically open.</p></div><div><h3>Validators</h3><p>Yugos validators do not run miner code, call model providers or grade answers. They fetch a signed result from the team&#x27;s evaluation service at upload.yugos.ai, check its hash, subnet, rule version (yugos-overall-v2) and age, map the champion hotkeys to UIDs, and set weights at least 100 blocks apart. They need a validator permit or the owner hotkey. The exam, the grading and the measurement of cost and time all happen inside the team&#x27;s hosted service, so validators relay its decisions rather than re-scoring them. On chain (2026-10-21) the subnet uses commit-reveal with a one-epoch delay, a 100-block limit between weight updates, a weights version key of 404020 and allows a single weight target, which the Yugos validator&#x27;s own winner-take-all check requires.</p></div><div><h3>Incentive</h3><p>Per the Yugos repository on 2026-10-21, a challenger router is compared with the reigning champion on the same questions in three categories: chat and question answering (40 percent), math and code (35) and agentic work (25). Net value is extra correct answers, with hard questions counting double, minus extra spend and extra time, priced against a reference. A challenger is promoted only if every category passes its gates (valid evidence, a time budget, and quality within 2 to 5 points of the reference, also on the hard and private subsets) and the 5th-percentile paired bootstrap net value is above 0.2. Validators then pay the current champion 85 percent, the previous one 10 and the one before 5; empty seats go to the current champion. Until the switch the old rules apply: 40 percent of emissions to image detection, 40 to video, 4 to audio and 16 to generators, each detector lane paying its latest three kings 85, 10 and 5.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-21</span> <span class="muted">(#mind, 2026-10-21)</span> The team announced Yugos, a plan to replace the detection and generation contests with a contest for the best inference decision model. In chat the team said all mining will be Yugos once launched, that the old media competition is technically still open until then, that miners fund evaluation by card payment rather than TAO to avoid selling TAO for provider calls (described as an initial choice), and that launch was planned for the same day.</li>
+<li><span class="when">2026-10-21</span> <span class="muted">(BitMind-AI/yugos GitHub; yugos.ai; upload.yugos.ai model list, read 2026-10-21)</span> The Yugos code went public the same day, with miner, validator, scoring and model-list docs and a local benchmark runner. The team&#x27;s hosted service listed 777 priced models across 11 providers, including the Bittensor inference subnets SayGM, Engy and Chutes. The product site showed its console as coming soon, and the dashboard hostname linked from the repository did not resolve.</li>
+<li><span class="when">2026-10-19</span> <span class="muted">(#mind, 2026-10-17 to 2026-10-20)</span> After miners asked about cutting the audio-track submission fee, the team said updates would be announced that week. The validator machine was briefly down for provider maintenance and came back the same day. On 2026-10-20 the team said the split between the detector and generator sides is fixed by the team.</li>
+<li><span class="when">2026-10-13</span> <span class="muted">(#mind, 2026-10-05 to 2026-10-14; GASBench GitHub, 2026-10-13)</span> GASBench 0.11.4 corrected audio dataset labels that had been contaminated, after a miner reported it. Miners praised the new holdouts as less saturated, while others complained that the team engages little with feedback and that the 0.5 TAO resubmission cost is too high.</li>
+<li><span class="when">2026-10-12</span> <span class="muted">(#mind, 2026-10-08 to 2026-10-13)</span> After generator miners reported falling fool rates, the team widened the pool of detectors used for generator-only test runs from the top 5 to the top 10 and shortened the window to one hour.</li>
+<li><span class="when">2026-10-06</span> <span class="muted">(#mind, 2026-10-06; GASBench GitHub releases)</span> Uploads were frozen while private holdout sets were released publicly and a new benchmark version (GASBench 0.11.2, with 75,000 images, 35,000 videos and 50,000 audio samples) was published. Uploads reopened within hours.</li>
+<li><span class="when">2026-09-05</span> <span class="muted">(#mind (pinned), 2026-09-05)</span> Version 5.0.0 was announced for the following Sunday: one king per modality paid on every tempo with an 85/10/5 split across the last three winners, detector miner burn dropping to zero, and one submission per hotkey.</li>
+<li><span class="when">2026-09-02</span> <span class="muted">(#mind (pinned), 2026-09-02)</span> The team said emissions had been disabled after a network-level review judged its escrow payout design to circumvent emission rules. Round 23 closed on 2026-09-03 as the last round under that design.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Check the team channel first: the switch to Yugos was announced on 2026-10-21 and was not confirmed live when this page was researched.</li>
+<li>Install Python 3.11 or newer and the yugos package from the BitMind-AI/yugos repository; add the yugos-evals package for local test runs.</li>
+<li>Read the live model list (the world card at upload.yugos.ai/world/cards/active, no account needed) and copy examples/starter-router, which calls a cheap OpenRouter model.</li>
+<li>Train a router, list every provider, model and effort it may call in models.json, and test it locally with yugos-evals using your own provider keys; local runs are not competition scores.</li>
+<li>Register a hotkey (the docs advise testnet 169 first, then mainnet SN34, where registration cost 0.5 TAO on 2026-10-21), build the package with yugos pack and send it with yugos submit; pay for the evaluation on the card-payment page it opens and keep the receipt file.</li>
+<li>The old detector and generator guides (the gascli tool) apply only until the switch.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Launch was not confirmed at research time. The team said Yugos would launch on 2026-10-21; around 23:50 UTC the console page said coming soon, the dashboard hostname in the repository (competition.yugos.ai) did not resolve, and no first champion could be seen. Check the team channel and the chain before acting.</li>
+<li>A chain read on 2026-10-21 (blocks 9335223 and 9335241, about 23:45 to 23:50 UTC) still showed the old layout: six validators set weights, each over 14 to 82 uids, 82 uids earned incentive and the top uid held 36.2 percent. A Yugos vector would have at most three targets. Weights are validator opinions, not payouts. The emission split is the standard 18 percent owner, 41 validators and 41 miners with no burn, and owner-directed emission is recycled. The subnet&#x27;s on-chain identity still read BitMind, described as deepfake detection, and still pointed to the old repository at block 9335275.</li>
+<li>The evaluation is run by the team&#x27;s hosted service. The questions, the reference panel, the grading and the cost and time measurements are not in the public repository, and validators do not re-grade. Local yugos-evals runs use public benchmarks and are not competition results.</li>
+<li>The docs give different funding figures: a minimum payment of 0.50 US dollars in the miner guide, a minimum checkout of 1.00 dollar in the code, and about 100 dollars locked when an evaluation is confirmed in the agent guide. The service&#x27;s own quote is what counts.</li>
+<li>Small differences between docs and code: the code labels the reward rule winner-take-all while paying three champions 85, 10 and 5 percent, and the bootstrap test uses a fixed random seed that the docs do not mention.</li>
+<li>If the switch goes ahead, the old GAS rules (fool-rate gate for generators, 0.5 TAO burn for extra submissions, the lane split) become history; check the team channel for what replaces them.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/BitMind-AI/yugos" rel="noopener noreferrer">Yugos GitHub</a></li>
+<li><a href="https://github.com/BitMind-AI/yugos/blob/main/docs/miner.md" rel="noopener noreferrer">Yugos miner guide</a></li>
+<li><a href="https://github.com/BitMind-AI/yugos/blob/main/docs/scoring.md" rel="noopener noreferrer">Yugos scoring doc</a></li>
+<li><a href="https://github.com/BitMind-AI/yugos/blob/main/docs/validator.md" rel="noopener noreferrer">Yugos validator guide</a></li>
+<li><a href="https://yugos.ai" rel="noopener noreferrer">Yugos product site</a></li>
+<li><a href="https://yugos.ai/docs" rel="noopener noreferrer">Yugos API docs (launch preview)</a></li>
+<li><a href="https://github.com/BitMind-AI/bitmind-subnet" rel="noopener noreferrer">GitHub (legacy subnet code)</a></li>
+<li><a href="https://github.com/BitMind-AI/gasbench" rel="noopener noreferrer">GitHub (legacy benchmark)</a></li>
+<li><a href="https://github.com/BitMind-AI/bitmind-subnet/blob/main/docs/Incentive.md" rel="noopener noreferrer">Legacy incentive mechanism doc</a></li>
+<li><a href="https://github.com/BitMind-AI/bitmind-subnet/blob/main/docs/Discriminative-Mining.md" rel="noopener noreferrer">Legacy detector mining guide</a></li>
+<li><a href="https://github.com/BitMind-AI/bitmind-subnet/blob/main/docs/Generative-Mining.md" rel="noopener noreferrer">Legacy generator mining guide</a></li>
+<li><a href="https://competition.bitmind.ai/" rel="noopener noreferrer">Legacy competition site</a></li>
+<li><a href="https://github.com/BitMind-AI/dfresearch" rel="noopener noreferrer">Legacy training toolkit</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 8 sources</summary>
+<ul>
+<li><strong>repo</strong> BitMind-AI/yugos README.md, llms.txt, docs/miner.md, scoring.md, validator.md, models.md, and packages/yugos competition/rules.py, competition/net_value.py, validator.py at 5e22671 (2026-10-21)</li>
+<li><strong>repo</strong> BitMind-AI/bitmind-subnet README.md, docs/Incentive.md at 5fd9672 (2026-09-28, version 5.0.10); an unmerged 2026-10-21 branch only refreshes dependency pins (5.0.11)</li>
+<li><strong>repo</strong> BitMind-AI/gasbench git log and releases through v0.11.4 (2026-10-13)</li>
+<li><strong>web</strong> https://yugos.ai and https://yugos.ai/docs (read 2026-10-21: console coming soon, OpenAI-compatible API preview)</li>
+<li><strong>web</strong> https://upload.yugos.ai/world/cards/active (public model list, synced 2026-10-21 23:11 UTC: 11 providers, 777 priced models)</li>
+<li><strong>web</strong> Chain read, mainnet SN34, 2026-10-21: validator weights at block 9335223, neuron and incentive summary at block 9335241, subnet parameters at block 9335275, on-chain identity, emission split and recycle setting</li>
+<li><strong>msg</strong> #mind pinned announcements 2026-01-22 to 2026-09-19</li>
+<li><strong>msg</strong> #mind, team and miner discussion 2026-10-02 to 2026-10-21</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/33.html"><small>← Previous</small>SN33 ReadyAI</a><a rel="next" href="/bittensor-docs/subnets/36.html"><small>Next →</small>SN36 Epago</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-21. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Enigma (SN63) | Bittensor Subnet Docs</title>
+<meta name="description" content="Prize-bounty subnet for RSA factoring and peaked quantum circuits; wins pay from an on-chain treasury and go open source">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h9">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>63</span><div>
+<h1>Enigma <span class="muted">SN63</span></h1>
+<p class="tagline">Prize-bounty subnet for RSA factoring and peaked quantum circuits; wins pay from an on-chain treasury and go open source</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl4"><b>3.4<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>7.3<small>/day</small></b><span>days 8-30</span></li><li class="pl4"><b>4.1<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-24</b><span>last chat</span></li><li class="pw"><b>884</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>cryptography and quantum bounties</dd>
+<dt>Status</dt><dd>As of 2026-10-23 the team site lists two open Breaking RSA milestones (560-bit at $15,000 and 1024-bit at $250,000), and Hardening Quantum Proof is waiting for its next level (team said on 2026-10-22 there is no timeline yet). The code repo was last updated on 2026-10-20. Chat is slow: 14 messages in the channel since 2026-10-20. On chain, miner emission is flowing to the treasury hotkeys as designed.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-23</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>Enigma (SN63) is a bounty subnet run by qBitTensor Labs. It posts hard problems as numbered milestones with a prize attached; the first solver who passes validation takes the whole prize and the winning code is published as open source. Two challenges are live, each built with an outside partner: Breaking RSA (factor semiprimes of growing size, with Terra Quantum) and Hardening Quantum Proof (find the hidden peak of an obfuscated quantum circuit using classical methods only, with BlueQubit). A first challenge, on breaking the treasury wallet itself, closed on 2026-05-21 with no winner. Winning RSA and quantum-circuit solvers are archived in two open-source repos.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Write a solver as a Docker project, test it locally with the repo&#x27;s workbench, then submit the zip with the mine-enigma CLI. The CLI uploads the zip to the team&#x27;s platform, pays a TAO fee on chain only after the upload succeeds (the site shows about 0.1 TAO per submission) and stores a record that the miner process serves to trusted validators. Resubmissions are unlimited. The miner process itself needs only 1 CPU core and 8 GB RAM; the heavy computing happens in the solver on the validator&#x27;s hardware. The lab&#x27;s terms bar its own employees, contractors and family from claiming prizes.</p></div><div><h3>Validators</h3><p>Validators ask miners for submissions, check the on-chain fee proof, register the work with the team&#x27;s Challenges API and run each solution in Docker with no network, a read-only root disk and a 4 hour wall time on a high-end GPU box (the docs name an RTX PRO 6000 class card with 96 GB VRAM, 24 vCPU, 85 GB RAM). The platform also hands out cross-check work so several validators agree. The number of passing runs a winner needs is set per milestone by the platform; chat says it was 3 and became 5 from Hardening Quantum Proof level 4. Validators also vote on prize payouts from the treasury. On chain at block 9343844 (2026-10-23) the subnet had 10 validator permits, 8 of which had set weights in the last 350 blocks.</p></div><div><h3>Incentive</h3><p>Miner emission does not go to miners by weight. By design and in the validator code, validators point their weights at one of five treasury sink hotkeys (the team platform names the sink for each tempo), so emission piles up as SN63 alpha for prize pools. Chain read at block 9343844 (2026-10-23, about 04:28 UTC): 99.98 percent of incentive sat on one sink hotkey and the remaining 0.02 percent was dust spread over seven other uids; each of the 8 validators that set weights put its weight on a single sink (three different sinks across them, consistent with the per-tempo rotation); none targeted the burn sink, which is the owner&#x27;s own hotkey. All five sink hotkeys share one coldkey, the vault named on the team&#x27;s governor page. The subnet&#x27;s emission split is 18 percent owner, 41 percent validators, 41 percent miners, with unallocated miner emission set to burn. Alpha held: the vault held about 435,600 alpha on SN63 and the separate wallet the team committed to the treasury about 117,400 alpha; most of both is staked on one large validator&#x27;s hotkey, which also holds about 92 percent of validator dividends and is the source of every payout (dollar value not computed). A prize leaves the vault only through a validator vote (docs: 60 percent approval, 50 percent quorum, about 3 days of voting, 1 day timelock). The governor page lists 13 payout proposals since 2026-05 (12 executed, 1 defeated; the nine with amounts shown total about 87,600 alpha). The defeated one, on 2026-07-06, was the 480-bit prize: the team said a mainnet release had broken gas estimation for the vote, so it paid the winner directly from its committed wallet. Prizes start at a baseline, for example $10k, and the team raises them at its own discretion while a milestone stays unsolved; on 2026-10-14 it said it may have raised an RSA prize too fast and was back to raising it slowly each week. The validator code also has an optional pool cap that would route emission to the burn sink above 200,000 alpha per active challenge; the vault holds more than that, yet no weight went to the burn sink on 2026-10-23, so the cap is not in force on the validators that set weights (or is configured differently; their settings are not public). The team&#x27;s announced next step is bounded per-challenge pools with overflow burned, no date given. It also says licensing of winning solutions to commercial users is meant to fund buybacks and stated on 2026-10-12 that no commercial licence revenue exists yet.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-23</span> <span class="muted">(chain read at block 9343844; qbittensorlabs.com/enigma, read 2026-10-23; #63-enigma)</span> Chain read: incentive 99.98 percent on one treasury sink hotkey, no weight on the burn sink; vault about 435,600 alpha and the committed wallet about 117,400 alpha on SN63. Team site the same day: prize pool $543,446, $265,000 committed to open milestones, $278,446 buffer, $137,500 paid out in total, 232 submissions, 10 milestones solved, 1 active challenge. A member said the 1024-bit RSA attempt continues and that general sieving alone does not solve it.</li>
+<li><span class="when">2026-10-22</span> <span class="muted">(#63-enigma; GitHub qbittensor-labs/breaking-rsa-solutions)</span> Team said Hardening Quantum Proof is coming along well but gave no release timeline, and that prize increases depend on the milestone and the partner. It pointed to the open-source Breaking RSA winners repo (340, 460, 480 and 500-bit solvers; 512 and 530-bit are not in it yet). Some members said the prizes look small next to the research value.</li>
+<li><span class="when">2026-10-20</span> <span class="muted">(GitHub qbittensor-labs/enigma)</span> Repo version 2.1.9: miner loop pacing fix (miners never set weights, so the loop now waits on its own last sync block). Earlier on 2026-10-13 the repo added Hardening Quantum Proof level 4 support. No commits since.</li>
+<li><span class="when">2026-10-14</span> <span class="muted">(#63-enigma 2026-10-13 to 2026-10-15; qbittensorlabs.com)</span> Hardening Quantum Proof level 4 opened at 16:00 UTC and was solved the same day for $10k (4 submissions per the team site); it required 5 validation runs. The team said it would not pay a second prize this time and that levels depend on BlueQubit preparing harder circuits. A validator operator&#x27;s GPU driver problem broke validation for part of the day and was reported fixed the same evening.</li>
+<li><span class="when">2026-10-02</span> <span class="muted">(#63-enigma; qbittensorlabs.com)</span> Team released a 560-bit RSA milestone, a larger jump than before. A miner argued on 2026-10-05 that it needs about three times the compute of 530-bit; the team answered on 2026-10-06 that earlier milestones saw gains of up to 2x and it saw room to raise the bar. The team site shows it at $15,000.</li>
+<li><span class="when">2026-09-29</span> <span class="muted">(#63-enigma)</span> 530-bit RSA milestone solved; team announced it in the channel.</li>
+<li><span class="when">2026-09-26</span> <span class="muted">(#63-enigma 2026-09-28; hqp-solutions repo)</span> Hardening Quantum Proof level 3 solved by two independent solutions within hours of each other; the team later paid the second solver $10k and published both.</li>
+<li><span class="when">2026-09-17</span> <span class="muted">(#63-enigma; qbittensorlabs.com)</span> Breaking RSA 512-bit milestone solved (a member said on 2026-09-27 the prize had been raised from $10k to $20k over about two weeks); the team announced it in the channel on 2026-09-18 and said the 1024-bit milestone was the one active next.</li>
+<li><span class="when">2026-09-09</span> <span class="muted">(#63-enigma 2026-09-02 and 2026-09-09; qbittensorlabs.com news)</span> Team said emission appeared to be turned back on after the 2026-09-02 halt (emission on SN63 and on the team&#x27;s other subnet, SN48, was switched off by an outside party over a concern that the mostly unpaid prize vault worked like a burn). Its article the same day said it would cap each challenge&#x27;s prize pool and burn what overflows.</li>
+<li><span class="when">2026-07-06</span> <span class="muted">(#63-enigma 2026-07-06; qbittensorlabs.com treasury pages)</span> The treasury vote for the 480-bit RSA prize was defeated on chain after a mainnet release broke gas estimation for the vote; the team paid the winner directly from the wallet it had committed to the treasury (5,873 alpha, shown on the team&#x27;s wallet page).</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Check the team site for which milestones are open and their prizes before you start; the repo README lags it.</li>
+<li>Clone the enigma repo, run pip install -e . and read the challenge README and the workbench README for the challenge you want. The winning solvers of earlier milestones are public (links above) and the team says to start from them.</li>
+<li>Build a Docker solver that reads the mounted challenge input and prints its result on stdout in the documented format.</li>
+<li>Test with enigma-workbench test breaking-rsa (or hardening-quantum-proof) --solution &lt;your_dir&gt; in Docker mode, which mirrors the validator.</li>
+<li>Zip that same directory, run the miner process with your hotkey, and submit with mine-enigma; the TAO fee is paid from your coldkey after the upload succeeds.</li>
+<li>Keep in mind the local run is the only free test: each submission carries a fee and winners must pass several validator runs.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>The chain read is one block (9343844, 2026-10-23); the sink hotkey that gets the emission rotates by tempo, so a later block will show a different one of the five. The chain shows where weight and stake sit, not what the team intends or what the platform decides.</li>
+<li>Whether validators run the optional pool cap, and with which setting, is not public. The cap code reads the number of active challenges from the team platform, which was not read. The conclusion that it is not in force rests on the burn sink getting no weight at one block.</li>
+<li>Alpha holdings are given in alpha only. The team site&#x27;s dollar figures (pool, committed, buffer, paid out) are team-reported, move live (the pool read $560,000 to $562,000 on 2026-10-21 and $543,446 on 2026-10-23) and were not reproduced from chain balances because no dated TAO/USD price was used.</li>
+<li>The governor page lists 13 payout proposals but three early ones show no amount, and the page does not say which milestone each paid; only the 2026-07-06 one is explained in chat.</li>
+<li>The README&#x27;s results paragraph is a July snapshot (it says RSA-500 was open) and the team site&#x27;s /next page still shows an older total ($70K paid across 6 milestones); the home page and chat were used for current milestones.</li>
+<li>The team gave two reasons for the level 3 second payout: a bug that let a second solution be validated after the first was already in review, and a wish to buy a novel technique. Both statements are in the channel (2026-10-14 and 2026-10-15).</li>
+<li>Some miners reported timeout errors where the fee was charged but the upload did not complete (2026-10-14); the team asked for evidence and had not said whether refunds were given.</li>
+<li>The team&#x27;s own thesis is that value comes from licensing winning solutions; on 2026-10-12 it said no licence revenue exists yet, and a livestream summary of 2026-10-01 says a first licensing deal is only being explored, so the commercial model is still unproven.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/qbittensor-labs/enigma" rel="noopener noreferrer">GitHub</a></li>
+<li><a href="https://www.qbittensorlabs.com/enigma" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://www.qbittensorlabs.com/enigma/challenges/breaking-rsa" rel="noopener noreferrer">Breaking RSA challenge page</a></li>
+<li><a href="https://www.qbittensorlabs.com/enigma/challenges/peaked-circuits" rel="noopener noreferrer">Hardening Quantum Proof challenge page</a></li>
+<li><a href="https://www.qbittensorlabs.com/enigma/treasury" rel="noopener noreferrer">Treasury (config, balances, payouts)</a></li>
+<li><a href="https://www.qbittensorlabs.com/enigma/rules" rel="noopener noreferrer">Competition rules</a></li>
+<li><a href="https://github.com/qbittensor-labs/breaking-rsa-solutions" rel="noopener noreferrer">Breaking RSA winning solutions</a></li>
+<li><a href="https://github.com/qbittensor-labs/hqp-solutions" rel="noopener noreferrer">Hardening Quantum Proof winning solutions</a></li>
+<li><a href="https://www.qbittensorlabs.com/news/emission-updates-and-whats-next" rel="noopener noreferrer">Team article on the emission halt and what is next</a></li>
+<li><a href="https://www.qbittensorlabs.com/next" rel="noopener noreferrer">Upcoming changes (team site)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 7 sources</summary>
+<ul>
+<li><strong>msg</strong> #63-enigma, 2026-07-06, 2026-09-02 to 2026-10-23</li>
+<li><strong>repo</strong> github.com/qbittensor-labs/enigma README.md, neurons/validator.py, qbittensor/utils/treasury_cap.py, treasury_sinks.py, burn_sinks.py, qbittensor/miner/README.md, qbittensor/validator/README.md, workbench challenge READMEs, min_compute.yml at commit c8ff8b2 (2026-10-20)</li>
+<li><strong>repo</strong> github.com/qbittensor-labs/hqp-solutions README.md at commit 9573dce (2026-10-05)</li>
+<li><strong>repo</strong> github.com/qbittensor-labs/breaking-rsa-solutions README.md at commit b24036d (2026-09-02)</li>
+<li><strong>web</strong> https://www.qbittensorlabs.com/enigma, its Breaking RSA and Hardening Quantum Proof pages, /enigma/treasury and the governor and committed-wallet detail pages, read 2026-10-21 and 2026-10-23</li>
+<li><strong>web</strong> https://www.qbittensorlabs.com/next, /news and /news/emission-updates-and-whats-next (dated 2026-09-09), read 2026-10-23</li>
+<li><strong>web</strong> Chain read at block 9343844 (2026-10-23 04:28 UTC): incentive and weights of netuid 63, emission split and burn setting, sink-hotkey, vault and committed-wallet stake at blocks 9343876 to 9343907</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/62.html"><small>← Previous</small>SN62 Ridges</a><a rel="next" href="/bittensor-docs/subnets/64.html"><small>Next →</small>SN64 Chutes</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-23. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

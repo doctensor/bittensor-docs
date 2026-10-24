@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Conjectures.io (SN66) | Bittensor Subnet Docs</title>
+<meta name="description" content="Pays bounties for Lean-verified proofs of open math conjectures, plus contests for faster code proven correct in Lean.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h6">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>66</span><div>
+<h1>Conjectures.io <span class="muted">SN66</span></h1>
+<p class="tagline">Pays bounties for Lean-verified proofs of open math conjectures, plus contests for faster code proven correct in Lean.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>20<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>21<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>24<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-23</b><span>last chat</span></li><li class="pw"><b>2,043</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>formal mathematics and verified software optimisation</dd>
+<dt>Status</dt><dd>Chat was busy through 2026-10-22. On 2026-10-23 the public API showed math submissions open, the FloatLib contest open and the DEFLATE contest closed, and the chain weights (block 9342911) matched FloatLib&#x27;s champion payout shape. The subnet is a rebuilt one: it was the Ninja coding-agent subnet until a pivot announced on 2026-07-28.</dd>
+<dt>Confidence</dt><dd>high</dd>
+<dt>Researched</dt><dd>2026-10-23</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>Conjectures.io pays bounties, in subnet alpha, to whoever first submits a Lean proof or counterexample for an open mathematical conjecture that the Lean kernel accepts and a human reviewer approves. Most statements come from Google DeepMind&#x27;s public Formal Conjectures repository. Alongside the math board, the team runs optimisation contests where faster code must come with a Lean proof that it behaves exactly like a specification. The subnet is co-developed by its owner and the Dendrite team. On chain it was registered on 2025-02-19 and all 256 slots were filled on 2026-10-23.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>For the math board, a miner picks an open problem (274 conjectures in the catalogue, 244 still open on both 2026-10-20 and 2026-10-23), writes a Lean proof or counterexample with any model or tooling, checks it for free locally or on the website, then pays one credit per verification attempt (0.25 TAO on the live API) and submits. The original AI chat logs behind the proof must be uploaded too, required for new reward targets since 2026-10-13; the terms (version 5, 2026-10-21) allow packages up to 256 MiB and let the reviewer ask for more logs instead of rejecting. The site says accepted logs may be sold or licensed, including for AI training. The math board needs no registered hotkey: accounts work through the website or the miner command-line tool, and the reward goes to a payout wallet. The optimisation contests do need a registered SN66 hotkey, and one registration buys one upload. DEFLATE asked for a Rust LZ77 parser plus a Lean proof, ran from 2026-09-28 and ended on 2026-10-14. FloatLib (called Tensor-kernels in chat) asks for one Lean file with proven binary32 add and mul plus sum and batched matrix multiply kernels; it was open on 2026-10-23. Since 2026-10-22 its entries are scored on a wider private test set, and an upload that copies an accepted kernel is rejected and still spends the registration.</p></div><div><h3>Validators</h3><p>The platform check is run by the team. It builds each bundle in a sandbox with the Lean kernel, a comparison against the pinned statement and a strict rule list (no sorry, extra axioms or native_decide). A Lean-valid proof then goes to a human reviewer who reads the chat logs and can reject it only for grounds listed in the published terms, such as an earlier public proof or a mismatched formalisation. The team said in August that every Lean-verified submission is reviewed manually for now. Both verdicts are published. On chain, 10 neurons held validator permits on 2026-10-23 and 9 of them had set weights, all giving the treasury neuron their top share (about 80 percent in eight cases, all of it in one). The repositories say only one live process may set weights for the team&#x27;s validator hotkey; the chain does not show who runs the other permit holders.</p></div><div><h3>Incentive</h3><p>Math bounties are paid from a team treasury in alpha. A newly opened problem starts at 2.5 percent of the available pool and rises to 12.5 percent over 15 days, and the amount is locked when a submission is made. The first accepted answer, proof or counterexample, takes the bounty. The treasury is filled by the weight vector: on 2026-10-23 the treasury neuron held about 81 percent of incentive and the other 20 percent of the weight was split 60, 30 and 10 over three neurons, which matches the shares FloatLib gives its three latest champions. A probe of one validator&#x27;s weights at ten dates shows that since 2026-10-14 the vector has been four targets (80 percent treasury, then 12, 6 and 2 percent); before that it was a DEFLATE-style spread over more than 100 neurons. DEFLATE has not been paid since 2026-10-14, and its last published weight snapshot is frozen at that date. The emission split set by the subnet is still the default, 18 percent owner, 41 percent validators and 41 percent miners. FloatLib is king-of-the-hill: a challenger must be at least 3 percent faster than the champion with a statistical test. The public API on 2026-10-23 reported 36 certified results, 163,366 alpha (USD 105,886) paid out and a treasury of 69,555 alpha (USD 45,082); USD figures are the API&#x27;s own estimates and move with the alpha price.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-22</span> <span class="muted">(#conjectures, 2026-10-22; conjectures.io public API; FloatLib repository commits)</span> The team said FloatLib entries are now scored on a much wider private test set (ML-like values, zeros, subnormals, NaN and infinity, many shapes) and that scores before and after are not comparable. Blatant copies of a kernel are rejected untimed. A major update with more kernels was announced for the coming week. Eight promotions had been made on the new basis by the end of the day. The same day the team reported miners proving a case of an amended lonely-runner conjecture in Lean; this is a team claim, and the API&#x27;s certified count was still 36 on 2026-10-23.</li>
+<li><span class="when">2026-10-21</span> <span class="muted">(#conjectures, 2026-10-20 to 2026-10-22; validator docs/trajectories and public catalogue API)</span> Chat-log terms version 5 took effect: no instruction to redact, logs must not hold live credentials, packages up to 256 MiB, and the reviewer may ask for more logs instead of rejecting. The owner also said PDFs are welcome but optional and offered one free submission when an account is created. Members said that Green&#x27;s open problems had been removed at the author&#x27;s request; the public catalogue confirms it, with 17 of 29 entries withdrawn for that reason and 20 withdrawn in all.</li>
+<li><span class="when">2026-10-19</span> <span class="muted">(#announce, 2026-10-19; #conjectures, 2026-10-19 and 2026-10-20; chain read 2026-10-23)</span> Mainnet release 481 (expressive TAO) lets a subnet&#x27;s owner key choose the owner, validator and miner emission split, with miners at least 33 percent. The owner said it wants miners to get more but that the key is held by someone else and legal matters come first. On 2026-10-23 the split was still 18, 41 and 41 percent.</li>
+<li><span class="when">2026-10-18</span> <span class="muted">(#conjectures, 2026-10-12 to 2026-10-22; validator GitHub commits)</span> Mathlib modules that miners had asked for on 2026-10-12 were added to the task headers. Miners asked on four days between 2026-10-18 and 2026-10-22 when new problems would be added; the owner said later in the week and none had appeared by the evening of 2026-10-22.</li>
+<li><span class="when">2026-10-15</span> <span class="muted">(#conjectures, 2026-10-15; conjectures.io blog; crates.io API)</span> The team published its DEFLATE results post and released the verified-deflate crate on crates.io. The post reports 648 accepted submissions, each with a Lean proof that it decodes to its input, and says the official leaderboard overfit: agreement with an unrelated test corpus fell sharply during the contest. On a fresh private holdout the official smallest-output parser kept only about 7 percent of its size gain. These are the team&#x27;s own measurements.</li>
+<li><span class="when">2026-10-14</span> <span class="muted">(#conjectures, 2026-10-14; chain reads at blocks 9272967 to 9283767)</span> The team ended the DEFLATE stage and opened the FloatLib (Tensor-kernels) contest. On chain, a validator&#x27;s weight vector moved from over 100 targets to a single treasury target and then to four targets between about 13:00 and 20:00 UTC the same day.</li>
+<li><span class="when">2026-10-13</span> <span class="muted">(#conjectures, 2026-10-13; validator docs/releases)</span> AI chat logs became required for every new reward target, with logs checked by a reviewer. The owner said the subnet has no revenue yet and that selling trajectory data is the planned first source.</li>
+<li><span class="when">2026-10-07</span> <span class="muted">(#conjectures, 2026-10-07)</span> The problem set was upgraded and submissions were briefly paused. Some problems were removed because they had been solved elsewhere, and after miner complaints about uneven sizes the owner halved the starting reward of new problems.</li>
+<li><span class="when">2026-09-28</span> <span class="muted">(#conjectures, 2026-09-28 and 2026-09-30)</span> The DEFLATE contest opened, running in parallel with the math board with a 20 percent competition share of validator weight. Submissions were paused for maintenance on 2026-09-30 and reopened the same afternoon.</li>
+<li><span class="when">2026-08-05</span> <span class="muted">(#conjectures, 2026-08-05 and 2026-08-06; validator docs/review-decisions)</span> Mining went live for open conjectures: no miner registration needed, any tooling, free preflight check, rewards only for solves, bounties paid in alpha. On 2026-08-06 the team explained that an early submission had exposed a wrong Lean formalisation of Erdős problem 15, so its bounty was smaller and the problem stayed open.</li>
+<li><span class="when">2026-07-28</span> <span class="muted">(#conjectures (pinned), 2026-07-28)</span> Owner announced that Subnet 66 leaves harness development (Ninja) and becomes Conjectures.io, citing how easily harness evaluations are overfit. Ninja emissions were directed to UID 0 during the rebuild.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Math board: read How it works and the FAQ, then either create an account on conjectures.io or install the miner CLI from the conjectures-miner repository (Python 3.12 or newer).</li>
+<li>Run conjectures status and conjectures tasks sync, then list tasks and fetch one with conjectures tasks challenge to get the exact Lean statement. A counterexample task wants the negation.</li>
+<li>Write the proof in Main.lean, which holds declarations only (imports, sorry, admit, axiom, native_decide and similar are refused), then run conjectures build and the free local checks.</li>
+<li>Keep the original AI chat logs for every agent session behind the work, buy a credit (the live price is on the site), upload the logs and submit, then watch the submission status. Set a payout wallet in account settings before a reward can be paid.</li>
+<li>Optimisation contests: register a hotkey on SN66 (btcli subnets register --netuid 66), clone the contest repository, run ./setup.sh and gate.py --bench to time ideas, then gate.py for the full local gate and miner/submit.py to submit. Check the contest page first to see whether submissions are open, and note that FloatLib now scores on a private test set you cannot see.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Price conflict: the live API and website show one credit costing 0.25 TAO, while the validator README, several docs and the miner CLI documentation still say 0.5 TAO. The site and API are newer; the repository says the price is a deployment setting, so the docs lag.</li>
+<li>Which process sets the weights is inferred. The chain shows 80 percent to the treasury and 20 percent split 60, 30 and 10 over three neurons, which matches FloatLib&#x27;s champion shares and the timing of its launch, and the FloatLib repository documents a separate weight setter that replaces the DEFLATE one. The validator repository&#x27;s own emissions worker can only pay a DEFLATE share, so its code does not describe what is live. Chain weights were read at one block plus a history probe of one validator row, and the neurons behind the uids were not identified.</li>
+<li>Rewards run through a team-controlled treasury and a discretionary human review that the team says is manual for now. The validator README still lists automated payout and the review decision service as unbuilt, while chat shows payouts being made after approval, so treat payout as operator-driven. Treasury wallet flows were not read on chain.</li>
+<li>The main risk named by the project is a formal statement that does not match the original conjecture, not an invalid Lean proof. Bounties can be reduced or withdrawn for that or when an earlier public proof appears. Of 309 catalogue entries on 2026-10-23, 49 were retired and 6 held, including most of Green&#x27;s open problems.</li>
+<li>Bounties are paid in alpha and re-priced from the live treasury, so amounts shown in USD move: the API&#x27;s paid-out estimate was about USD 114,000 on 2026-10-20 and USD 105,886 on 2026-10-23. Miners have raised uneven reward sizes, and the team changed starting rewards on 2026-10-07 and again with the 2026-10-13 policy.</li>
+<li>Chat logs are required for new reward targets and may be sold or licensed by the team, according to the site FAQ. Read the submission terms first.</li>
+<li>Revenue claims are plans: the owner said there was no revenue on 2026-10-13. The log-upload bonus for earlier solves is now in the published terms, but talks about a further optimisation contest and data-broker plans were stated only in chat.</li>
+<li>DEFLATE figures come from the team&#x27;s own announcement and blog post, which itself says the official leaderboard records overfit and that held-out results were weaker. Neither was independently re-run.</li>
+<li>A larger miner share of emissions was promised by the owner only as a plan that depends on a key held by someone else. Likewise a new batch of problems and a major FloatLib update were each promised for the current or following week and had not appeared by 2026-10-22.</li>
+<li>Treat unsolicited DMs offering support as scams; the team named only a few staff members as authorised support in a pinned notice.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://conjectures.io" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://conjectures.io/problems" rel="noopener noreferrer">Problems</a></li>
+<li><a href="https://conjectures.io/how-it-works" rel="noopener noreferrer">How it works</a></li>
+<li><a href="https://conjectures.io/faq" rel="noopener noreferrer">FAQ</a></li>
+<li><a href="https://conjectures.io/status" rel="noopener noreferrer">System status</a></li>
+<li><a href="https://conjectures.io/competitions/floatlib" rel="noopener noreferrer">FloatLib contest</a></li>
+<li><a href="https://conjectures.io/competitions/deflate" rel="noopener noreferrer">DEFLATE contest</a></li>
+<li><a href="https://conjectures.io/blog/deflate-competition-results" rel="noopener noreferrer">DEFLATE results blog post</a></li>
+<li><a href="https://github.com/conjectures-io" rel="noopener noreferrer">GitHub organisation</a></li>
+<li><a href="https://github.com/conjectures-io/conjectures-miner" rel="noopener noreferrer">Miner CLI</a></li>
+<li><a href="https://github.com/conjectures-io/conjectures-validator" rel="noopener noreferrer">Validator</a></li>
+<li><a href="https://github.com/conjectures-io/conjectures-tasks" rel="noopener noreferrer">Task pool</a></li>
+<li><a href="https://github.com/conjectures-io/conjectures-optimisation-deflate" rel="noopener noreferrer">DEFLATE contest repo</a></li>
+<li><a href="https://github.com/conjectures-io/conjectures-optimisation-float-kernels" rel="noopener noreferrer">FloatLib contest repo</a></li>
+<li><a href="https://crates.io/crates/verified-deflate" rel="noopener noreferrer">verified-deflate crate</a></li>
+<li><a href="https://github.com/google-deepmind/formal-conjectures" rel="noopener noreferrer">Formal Conjectures (statement source)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 8 sources</summary>
+<ul>
+<li><strong>repo</strong> conjectures-io/conjectures-validator README.md, docs/ (SUBNET, MINER, COMPETITION_API, policies, trajectories, releases), emissions_worker/ at e78afe9 (2026-10-22); earlier read at 6b0dba7 (2026-10-20)</li>
+<li><strong>repo</strong> conjectures-io/conjectures-optimisation-float-kernels README.md, docs/OPERATIONS.md, validator/reward.py and treasury.py at 4b7e838 (2026-10-22)</li>
+<li><strong>repo</strong> conjectures-io/conjectures-miner at 42e9954 (2026-10-16); conjectures-optimisation-deflate at 6bf303f; conjectures-tasks at f9ea4a9f (2026-10-18)</li>
+<li><strong>web</strong> https://conjectures.io/how-it-works, /faq, /status and the DEFLATE results blog post (fetched 2026-10-20 and 2026-10-23)</li>
+<li><strong>web</strong> conjectures.io public read API: /v1/catalog/meta, /v1/catalog/index, /v1/results/stats, /v1/competitions, /v1/competitions/floatlib/champions, /v1/system/status (fetched 2026-10-23); crates.io API and GitHub organisation listing (2026-10-23)</li>
+<li><strong>web</strong> Chain read at block 9342911 (about 2026-10-23 01:55 UTC): subnet parameters, emission split, incentive and weight concentration, plus a history probe of one validator&#x27;s weight row at ten earlier blocks from 2026-10-13 (uids only, hotkeys masked)</li>
+<li><strong>msg</strong> #conjectures pinned posts 2026-07-28 and 2026-08-05</li>
+<li><strong>msg</strong> #conjectures, 2026-08-06 to 2026-10-22 (team announcements and miner discussion); #announce, 2026-10-19</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/65.html"><small>← Previous</small>SN65 TPN (True Performance Network)</a><a rel="next" href="/bittensor-docs/subnets/67.html"><small>Next →</small>SN67 Harnyx</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-23. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

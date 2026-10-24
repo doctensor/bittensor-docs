@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Thirty Spokes (SN99) | Bittensor Subnet Docs</title>
+<meta name="description" content="Miners train a routing model that delegates tasks to LLMs; the crown goes to the best quality per dollar.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h21">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>99</span><div>
+<h1>Thirty Spokes <span class="muted">SN99</span></h1>
+<p class="tagline">Miners train a routing model that delegates tasks to LLMs; the crown goes to the best quality per dollar.</p>
+<span class="st s-unclear">unclear</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl3"><b>1.1<small>/day</small></b><span>last 7 d</span></li><li class="pl3"><b>1.2<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>10<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-23</b><span>last chat</span></li><li class="pw"><b>1,137</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>model routing / orchestration</dd>
+<dt>Status</dt><dd>The rules and tooling are documented and validators still set weights on chain, but the team&#x27;s public results stop at window 84 (2026-10-01), no duel has been judged in any published window since window 48 (2026-09-23), and the owner&#x27;s last post in the chat archive is from 2026-09-17. Checked 2026-10-21.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-21</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>Thirty Spokes is a routing subnet. Miners train a &#x27;conductor&#x27;, a full fine-tune of Qwen3.6-35B-A3B, that reads an agentic task, hands it to a model from the OpenRouter catalog, watches the outcome and retries or stops; it never writes the answer itself. One owner-run validator duels each challenger against the sitting king on fresh HLE and LiveCodeBench tasks and scores quality minus what that quality cost. The team also offers the result as an OpenAI-compatible gateway whose &#x27;auto&#x27; model routes requests. The v3 mechanism opened on 2026-09-12, but public activity has been thin since mid-September.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>A miner submits full model weights on the pinned architecture (bf16, safetensors only, about 70 GB, no adapters or custom code) with an ed25519 hotkey. Each hotkey gets exactly one submission, ever, and a refused upload spends it. The miner also registers their own OpenRouter key with a spend cap, because their conductor&#x27;s calls to worker models are paid from it. Uploads stay private; only a model that is crowned is published, and a loser&#x27;s weights are deleted after 14 days. A dev kit runs the validator&#x27;s admission checks locally and a testnet (netuid 526) is documented for rehearsal.</p></div><div><h3>Validators</h3><p>A single owner-run validator commits a window schedule (windows are about 5.5 hours, up to 3 duels each, queue depth 6), draws a fresh slice of 250 tasks per arm from HLE and LiveCodeBench using a chain-derived nonce, and checks first that the slice can tell two known policies apart. It runs the king once and each challenger against the same slice and the same recorded worker outcomes. Per benchmark, score = quality minus a measured exchange rate times spend. A challenger takes the crown only if its paired gain is above 0.05, a bootstrap lower bound is above zero, it still wins with its single best benchmark removed, and the median benchmark moved its way. Every window publishes a signed reveal with the slice, verdicts, costs and weights.</p></div><div><h3>Incentive</h3><p>In the repo&#x27;s config the king earns 85% of emissions and the five most recent ex-kings share a decaying pension of 5, 4, 3, 2 and 1 percent; the team&#x27;s console says an unfilled slot burns to uid 0. The owner said on 2026-09-07 and 2026-09-12 that miner emissions would be burned until a first king emerged. Chain read on 2026-10-21: three validators set weights and all three put 85% on uid 25, and one other uid holds the remaining 15%, which differs from the documented pension schedule (one ex-king would get 5%); the reason is not explained anywhere found. Weights are validator opinions, not payouts.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-21</span> <span class="muted">(chain read at block 9334347; team console)</span> Chain read: 256 of 256 uids registered, commit-reveal on, registration burn 0.5 TAO, 5 validator permits of which 3 have weights, all weighting uid 25 at 85%. The team&#x27;s console page still shows window 17 and uid 18 as king, which disagrees with the reveals and the chain.</li>
+<li><span class="when">2026-10-13</span> <span class="muted">(#thirtyspokes-99)</span> Miners asked whether the subnet has a new owner and when it would update; through 2026-10-19 the channel holds only further questions and no team reply.</li>
+<li><span class="when">2026-10-01</span> <span class="muted">(team public store)</span> Window 84 is the last published reveal (latest.json still says 84). Windows 52 to 84 show no duels, no crowning and the same weights slate (85% to uid 25, 15% to uid 18). The queue file last changed on 2026-09-24 and lists three waiting submissions.</li>
+<li><span class="when">2026-09-24</span> <span class="muted">(team public store (reveal for window 51); #thirtyspokes-99)</span> The window 51 reveal starts a new reign (number 3) recorded as &#x27;crowned by the subnet owner&#x27;, with no duel and no promotion entry in that reveal. Miners asked in chat how uid 25 became king and why three queued submissions were passed over; no answer appears in the channel.</li>
+<li><span class="when">2026-09-23</span> <span class="muted">(team public store; #thirtyspokes-99)</span> Public reveals resume at window 48 after none for windows 18 to 47. Miners had been asking since 2026-09-17 whether evaluation was paused.</li>
+<li><span class="when">2026-09-17</span> <span class="muted">(#thirtyspokes-99; GitHub)</span> Miners asked the owner to allow all OpenRouter models and to apply the 0.05 margin to the average rather than per benchmark; the owner said all models would be allowed soon. The repo&#x27;s last commit (2026-09-15) predates this, so whether it shipped is not confirmed. This is the owner&#x27;s last post found in the archive.</li>
+<li><span class="when">2026-09-16</span> <span class="muted">(team public store (reveal for window 17); #thirtyspokes-99)</span> The team&#x27;s window 17 reveal shows one challenger judged: its gain of about +0.036 did not clear the 0.05 margin, and the entry says the owner re-ran it on a fresh slice in place of the scheduled run. On 2026-09-17 a miner disputed how that window was handled and asked for the earlier verdict to be reinstated; the owner replied that everything is published and checkable with the local evaluator.</li>
+<li><span class="when">2026-09-12</span> <span class="muted">(#thirtyspokes-99)</span> The owner announced v3 live and mining open, starting at window 1 with a genesis king, with emissions burned until a first king emerged. A registration burn of 0.5 TAO matches a hyperparameter change logged the day before.</li>
+<li><span class="when">2026-09-07</span> <span class="muted">(#thirtyspokes-99; GitHub README)</span> The owner said miner emissions would be burned until the new incentive mechanism was ready, and the repo says the first-generation mechanism was retired that day. A moderator asked on 2026-09-08 whether the incentive mechanism was being replaced; the owner said the subnet name would stay and only the incentive mechanism would change.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>First check whether evaluation is running: the latest window in the public results store should be recent, and as of 2026-10-21 it was window 84 from 2026-10-01. A submission is a one-time shot per hotkey.</li>
+<li>Create an ed25519 hotkey (btcli defaults to sr25519, so pass --crypto-type ed25519) and register on netuid 99.</li>
+<li>Wait about a minute for the upload credential to be published automatically.</li>
+<li>Register your own OpenRouter key with a spend cap using the miner tool; your conductor&#x27;s worker calls run on it.</li>
+<li>Train full weights on Qwen/Qwen3.6-35B-A3B (pinned revision, bf16), run the local check from the dev kit, then submit the roughly 70 GB tree.</li>
+<li>To rehearse first, the guide says the same commands work on testnet netuid 526.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Status is &#x27;unclear&#x27;: documentation and chain weights say the mechanism is configured, but published evaluation stopped on 2026-10-01 and the owner has not posted in the channel since 2026-09-17.</li>
+<li>The 2026-09-24 reveal records the current king as crowned by the subnet owner without a duel. A text search of the repo&#x27;s docs and source found no rule describing such a crown, so the basis is not documented.</li>
+<li>On chain the second-place weight (15%) goes to one uid while the docs describe a five-deep 5/4/3/2/1 percent pension with unfilled slots burning; this mismatch is unexplained.</li>
+<li>The team console showed window 17 and a different king than the reveals and chain on 2026-10-21, so treat it as a stale view.</li>
+<li>Miners say only five OpenRouter models were allowed and that a win must beat the king by 0.05 on each benchmark; the docs describe an aggregate margin with breadth checks instead, and the owner said all models would be allowed. Which version runs is unconfirmed.</li>
+<li>Chain weights were read at one block and are validators&#x27; opinions, not proof of payouts; which weight-setter is the team&#x27;s validator was not established.</li>
+<li>Chat is what people said; reveals are what the owner&#x27;s validator published; none of it shows what the validator ran beyond its signed files. Price, emission and market figures are not given here.</li>
+<li>Where crowned models are published (models.thirtyspokes.ai) returned a not-found page at its root on 2026-10-21.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://www.thirtyspokes.ai/" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://thirtyspokes.ai/docs/mining" rel="noopener noreferrer">Mining guide</a></li>
+<li><a href="https://thirtyspokes.ai/dashboard" rel="noopener noreferrer">Console</a></li>
+<li><a href="https://github.com/ThirtySpokes99/thirtyspokes" rel="noopener noreferrer">GitHub</a></li>
+<li><a href="https://store.thirtyspokes.ai/v3/latest.json" rel="noopener noreferrer">Public results store (latest window)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 6 sources</summary>
+<ul>
+<li><strong>msg</strong> #thirtyspokes-99, 2026-09-02 to 2026-10-19 (team announcements 2026-09-07, 09-08, 09-12, 09-17; miner questions through 10-19)</li>
+<li><strong>repo</strong> ThirtySpokes99/thirtyspokes README.md, docs/MINER.md, docs/VALIDATOR.md, docs/WHITEPAPER.md, src/thirtyspokes/v3/config.py @ 439a718 (2026-09-15)</li>
+<li><strong>web</strong> https://thirtyspokes.ai/docs/mining, https://www.thirtyspokes.ai/ and https://thirtyspokes.ai/dashboard, read 2026-10-21</li>
+<li><strong>web</strong> Team public results store store.thirtyspokes.ai/v3/ latest.json, queue.json and reveal files for windows 17, 48 to 84, read 2026-10-21 (hotkeys not copied)</li>
+<li><strong>web</strong> Chain read at block 9334347 (2026-10-21): subnet parameters, uid incentive concentration and validator weights for netuid 99</li>
+<li><strong>web</strong> api.github.com repository metadata for ThirtySpokes99/thirtyspokes, 2026-10-21</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/98.html"><small>← Previous</small>SN98 NeverPlayAlone</a><a rel="next" href="/bittensor-docs/subnets/100.html"><small>Next →</small>SN100 Cortex</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-21. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

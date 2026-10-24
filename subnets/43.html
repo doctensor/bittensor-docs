@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Graphite (SN43) | Bittensor Subnet Docs</title>
+<meta name="description" content="Financial knowledge graph from filings; most miner weight goes to burn UIDs and the team listed the subnet for sale.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h13">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>43</span><div>
+<h1>Graphite <span class="muted">SN43</span></h1>
+<p class="tagline">Financial knowledge graph from filings; most miner weight goes to burn UIDs and the team listed the subnet for sale.</p>
+<span class="st s-transitioning">transitioning</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl1"><b>0.14<small>/day</small></b><span>last 7 d</span></li><li class="pl2"><b>0.52<small>/day</small></b><span>days 8-30</span></li><li class="pl4"><b>3.1<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-20</b><span>last chat</span></li><li class="pw"><b>4,903</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>data (financial knowledge graph)</dd>
+<dt>Status</dt><dd>On 2026-10-21 emission was enabled on chain and 4 non-owner UIDs held about 21% of incentive, but a team member posted on 2026-10-15 that the subnet is for sale and asked people not to buy its alpha token in the meantime. The public repo&#x27;s last commit is 2026-06-03 and chat describes later rule changes that are not in it. Emissions were stopped for this subnet in the network&#x27;s 2026-06-22 drop and were flowing again by late July.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-21</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>Graphite started as a graph-optimization subnet (routing and portfolio problems) and in April 2026 relaunched as a Financial Knowledge Graph: miners extract entities, relationships and facts from financial documents, starting with SEC filings, and attach a source URL, hash and quote to every claim. The team plans to sell access to the resulting graph through APIs. Only a fifth of the weight is set on miners; the rest is put on burn UIDs registered with the owner&#x27;s key. Miners and the team have argued since May over whether anyone outside the team can earn, and on 2026-10-15 the team said the subnet is for sale.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Miners run their own extraction process on any stack, subscribe to each validator&#x27;s event feed (new SEC filings) or submit their own discoveries, and post signed knowledge deltas to every validator. Each claim carries the source URL, a sha256 of the document and a quoted passage. Costs are the miner&#x27;s own (compute, and an LLM API if used). The team said on 2026-09-06 that miners must hold 1,000 alpha staked to be scored, but that rule is not in the public repo.</p></div><div><h3>Validators</h3><p>The validator fetches whitelisted source documents itself (sec.gov by default, plus official sites of twelve countries added on 2026-06-03), hashes them and checks the miner&#x27;s quotes. It scores each submission on eight weighted measures (accuracy, provenance, reproducibility, novelty, latency, depth, freshness, coverage) with minimum accuracy, provenance and novelty floors for discoveries. A verified fact that contradicts an unverified one halves the earlier miner&#x27;s multiplier, and the penalty compounds. On 2026-07-22 the team said it runs only the owner&#x27;s validator.</p></div><div><h3>Incentive</h3><p>Weights are set hourly. In the repo, a miner&#x27;s weight is the sum of its scores times its slash multiplier (the README says mean times the square root of the submission count, but the code and a 2026-05-29 team post use the sum). The miner weights are scaled to 20% of the total and the other 80% goes to one burn UID chosen by rotation. On chain on 2026-10-21 UID 20, which shares a coldkey with the subnet owner and holds a validator permit, had 79.1% of incentive; four other UIDs shared about 21%. The team says owner-key UIDs are burned; this was not traced.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-21</span> <span class="muted">(on-chain read (block 9334355))</span> Chain read: 256 of 256 UIDs, emission enabled, commit-reveal on, 11 validator permits of which 5 had set weights, all with the same top target (UID 20). Six UIDs had incentive; pool held about 12,249 TAO.</li>
+<li><span class="when">2026-10-15</span> <span class="muted">(#graphite)</span> A team member posted that Subnet 43 is available for sale, asked interested parties to get in touch, and asked people not to buy the alpha token in the meantime. The channel had no follow-up through 2026-10-20.</li>
+<li><span class="when">2026-09-18</span> <span class="muted">(#graphite)</span> Users noted that only two to four miners were getting emissions and criticised the 80% burn and the stake requirement. The team said owner-key UIDs are burn UIDs and that valid submissions are rewarded.</li>
+<li><span class="when">2026-09-16</span> <span class="muted">(#graphite)</span> Team said the latest update, including a 1,000 alpha miner stake meant to stop cheating and to let slashed miners buy their way back, was not yet published to the repository.</li>
+<li><span class="when">2026-09-06</span> <span class="muted">(#graphite)</span> Team reported an investigation into miners splitting documents into many tiny submissions (score inflation of 3.0x to 6.8x for three UIDs, plus database bloat), blacklisted some miners, and announced fact-based counting, deduplication and the 1,000 alpha stake.</li>
+<li><span class="when">2026-08-26</span> <span class="muted">(#graphite)</span> A miner argued that only UIDs registered in May earned. The team said it had found a bug it had introduced and would fix it in one to two weeks.</li>
+<li><span class="when">2026-08-11</span> <span class="muted">(#graphite)</span> Validator fell behind because 300 GB of miner submissions filled its disk; the team moved the data to cloud storage and cleared the backlog. Similar overloads were reported on 2026-06-14, 2026-07-18 and 2026-08-26.</li>
+<li><span class="when">2026-07-29</span> <span class="muted">(#graphite)</span> Team said the Financial Knowledge Graph is now 100% of the scoring, replacing the older TaoTrader yield task, and on 2026-07-30 said the burn is fixed at 80%.</li>
+<li><span class="when">2026-06-22</span> <span class="muted">(#announce, #graphite)</span> Network announcements listed SN43 among the subnets whose emissions were ceased; by late July chat shows emissions flowing again, with no reinstatement notice found in the announcements channel.</li>
+<li><span class="when">2026-05-26</span> <span class="muted">(#graphite)</span> Miner share of emissions raised from 5% to 20%, and a public dashboard of miner submissions was announced.</li>
+<li><span class="when">2026-04-30</span> <span class="muted">(#graphite, GitHub)</span> Team published the new Financial Knowledge Graph repository; miners were being paid from May.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Read the repo&#x27;s miner guide for the wire format, signing and scoring rules, and note that the README&#x27;s weight formula is older than the code.</li>
+<li>Register a hotkey on subnet 43 (registration burn was 0.1 TAO on 2026-10-21).</li>
+<li>Write or fork an extraction process; two reference miners are in the repo, a regex one and one that uses an LLM API you pay for.</li>
+<li>Connect to the validators found in the metagraph, take new filings from their event feed, and post signed submissions with source URL, hash and quote.</li>
+<li>Ask in the subnet channel whether the 1,000 alpha miner stake announced on 2026-09-06 is in force and whether the subnet has changed hands, because both are unconfirmed and the team has said it is for sale.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>The team listed the subnet for sale on 2026-10-15; ownership, rules and emissions could change at short notice.</li>
+<li>The repo&#x27;s last commit is 2026-06-03. The 1,000 alpha stake, fact-based counting and other later rules exist only in chat.</li>
+<li>README and guides describe weight as mean score times the square root of the submission count; the code and the team&#x27;s 2026-05-29 post use a sum.</li>
+<li>Burn UIDs in the repo defaults (74, 102, 155, 177) differ from the owner-key UID that held most incentive on 2026-10-21 (UID 20), so the live validator is configured differently from the repo defaults or runs newer code.</li>
+<li>Miners accuse the owner of self-mining and of blocking others; the team denies it. Dollar-per-day figures quoted in chat were not verified.</li>
+<li>The metagraph dashboard showed no data when read on 2026-10-21, so every contribution or graph size figure in chat is a team claim.</li>
+<li>Who runs the four other weight-setting validators and the four non-owner incentive UIDs is not shown by chat or chain.</li>
+<li>The chain identity still points at the old Graphite-Subnet repository, which has not changed since 2025-10-12.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/GraphiteAI/FinancialKnowledgeGraph/tree/main/sn43" rel="noopener noreferrer">GitHub (current, Financial Knowledge Graph)</a></li>
+<li><a href="https://github.com/GraphiteAI/Graphite-Subnet" rel="noopener noreferrer">GitHub (legacy Graphite-Subnet)</a></li>
+<li><a href="https://dashboard.graphite-ai.net/" rel="noopener noreferrer">Metagraph dashboard</a></li>
+<li><a href="https://graphite-ai.net/" rel="noopener noreferrer">Website</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 5 sources</summary>
+<ul>
+<li><strong>msg</strong> #graphite 2024-10 to 2026-10-20 (pinned posts, team posts from 2026-04-25, full chat from 2026-07-23), #announce 2026-06-22</li>
+<li><strong>repo</strong> GraphiteAI/FinancialKnowledgeGraph sn43 @743e54d (2026-06-03): README.md, docs/miner_readme.md, neurons/__init__.py, ingestion/multi_validator_client.py</li>
+<li><strong>repo</strong> GraphiteAI/Graphite-Subnet @503b551 (2025-10-12) and GraphiteAI/sn43 @08b3da5 (2025-12-26), checked for dates only</li>
+<li><strong>web</strong> https://dashboard.graphite-ai.net/ (read 2026-10-21, no data shown)</li>
+<li><strong>web</strong> chain read: chain.py subnet 43, chain_neurons.py params, uids and weights 43, coldkey comparison @ blocks 9334352 to 9334355 (2026-10-21)</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/41.html"><small>← Previous</small>SN41 Almanac</a><a rel="next" href="/bittensor-docs/subnets/44.html"><small>Next →</small>SN44 Score</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-21. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

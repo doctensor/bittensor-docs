@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Claims (SN111) | Bittensor Subnet Docs</title>
+<meta name="description" content="Extracts evidence-linked claims from scientific papers; a weekly pipeline competition is due on mainnet 9 Nov 2026">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h9">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>111</span><div>
+<h1>Claims <span class="muted">SN111</span></h1>
+<p class="tagline">Extracts evidence-linked claims from scientific papers; a weekly pipeline competition is due on mainnet 9 Nov 2026</p>
+<span class="st s-transitioning">transitioning</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>7.4<small>/day</small></b><span>last 7 d</span></li><li class="pl4"><b>6.3<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>14<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-24</b><span>last chat</span></li><li class="pw"><b>1,157</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>scientific data extraction</dd>
+<dt>Status</dt><dd>As of 2026-10-24 extraction rounds still run about 4 times a day and pay as before. The team&#x27;s weekly update of 2026-10-23 set the switch to a weekly competition of privately submitted pipelines run on team compute: testnet from Monday 2 November, mainnet from Monday 9 November 2026, first results Thursday 12 November, with current rounds continuing until then. On chain (block 9354650) about 90 percent of incentive goes to UID 39, the team&#x27;s operator recipient, and miners share the rest. The rules file for the new format was not published yet.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-24</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>Claims (SN111, run by the DeSciClaims team) turns scientific papers into structured records in which each claim is tied to evidence quoted from the source. Miners run an extraction pipeline on batches of papers, validators audit the output with AI judges into a trusted dataset the team calls Silver, and since 2026-09-27 miners also review the hardest cases of other miners, which produces a consensus-reviewed layer called Gold. The team announced mainnet live on 2026-08-28. It plans to replace per-round extraction with a weekly competition in which miners submit pipelines that the team runs itself, starting on mainnet on 2026-11-09.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Run an extraction pipeline on a batch of papers (the production profile is 50 papers per batch) and upload structured claim-evidence records to the team&#x27;s artifact API. The repo&#x27;s canonical miner is an agent pipeline that uses a published agent skill for reading papers; custom stacks are allowed. On mainnet each miner may submit up to 10 claims per paper (team statement, 2026-09-24). Miners are not picked every round: the team described selection lanes for first-time qualification, performance, rotation and fill, with roughly 4 batches a day. Qualified miners reported waiting 10 or more batches without a pick on 2026-10-22 and 2026-10-23, and the team said it found no recorded exclusion. Newcomer priority is limited per funding source over 30 days (three hotkeys, announced 2026-09-18; the team clarified on 2026-10-22 that the allowance counts distinct coldkeys, not UIDs under one coldkey); re-registering an old coldkey or funding a new one from a linked coldkey does not reset it, and the team said no exception mechanism exists. Since V1 every miner is also assigned review tasks about every 3 hours, chosen first among miners with fewer previous assignments and then those waiting longest, not at random and not by score: for each case, read the paper, pick the option it supports and quote evidence, within 30 minutes. A missed review scores zero. Review is not paid itself, but to stay eligible for extraction the average of the latest three review scores must be at least 0.75 (new miners are provisionally eligible). Miners currently pay their own model costs; the team says that ends under the new format. Hardware: 4 cores and 16 GB RAM minimum, no GPU needed with hosted models.</p></div><div><h3>Validators</h3><p>The validator keeps a reference extraction (Bronze), checks each miner claim for grounding in the source, and has two independent AI judges decide whether it is eligible, with a third breaking ties; judges do not see who submitted a claim. Accepted records form Silver, and a miner&#x27;s score reflects how much of Silver its claims cover. Since 2026-10-19 claims judged to say the same thing are grouped and the group&#x27;s coverage credit is split equally among the miners in it. In the consensus layer, hidden test cases with known answers measure each reviewer&#x27;s accuracy. Validators need 8 cores and 32 GB RAM at minimum (16 and 64 recommended) with hosted model access. Scoring runs through the team&#x27;s backend API. On chain, four validators hold permits and the owner hotkey holds about 87 percent of validator dividends (2026-10-24); whether the other validators reproduce scores independently was not checked.</p></div><div><h3>Incentive</h3><p>Current extraction rounds: the code defaults give first place 70 percent of the miner pool and four runner-up slots with decaying shares, which the team describes as 70/16/8/4/2, plus a newcomer adjustment. Most of the allocation does not reach competing miners. On chain at block 9354650 (2026-10-24) UID 39, which the team calls its operator recipient and not a competing miner, holds about 90 percent of incentive (it never set weights and has no validator permit), and three of the four validators put 90 percent of their weight on it. The remaining 10 percent follows the 70/16/8/4/2 ladder across five other UIDs (block 9346946, 2026-10-23), so first place earns about 7 percent of total weight; a miner put that at about 0.8 TAO a day and the on-chain share is consistent with that figure. The routing changed in October (dates estimated from block numbers): a plain ladder around 2026-10-05, about 90 percent to the owner hotkey on 2026-10-08 and 2026-10-09, and operator routing on UID 39 from between 2026-10-09 and 2026-10-10. The team says the operator share pays for data-production compute; where it goes after UID 39 is not visible on chain, since that hotkey holds no stake. The repo default is a different path (a 90 percent burn to the owner hotkey), so the live validator settings are inferred from the weights, not published. The subnet&#x27;s emission slots are the chain default, 0/0/18/41/41 percent for burn, recycle, owner, validator and miner. New format from 2026-11-09 (team statement, 2026-10-23, starting values): hotkeys that score at least 0.75 on the hidden known-answer cases in two or more review rounds in the 7 days before a Monday 12:00 UTC deadline may submit a pipeline package, with its hash committed on chain; only the team sees the code and scores are public. Packages may use any open-weight model on OpenRouter within an average cost of $0.09 per paper. They run on the same fresh papers in four stages: a check that collapses near-identical submissions, a 20-paper pre-screen that picks 12, a 120-paper round that picks the best three (one per operator), and a final of at least 500 papers against the production pipeline. A challenger must beat it by more than 2.13 standard errors and pass a miner review check on contested claims; ties go to the incumbent. Results and weights are due Thursdays at 18:00 UTC. On payouts the team said the emission split does not change: 90 percent of miner emissions fund production and the other 10 percent is a pool split 70/20/10 among the top three, which it estimated at about $1,500 a week for the winner. The update itself words this as 70 percent to the pipeline in production, a difference the team has not reconciled. Unclaimed rewards are burned. Miners asked for a larger share (25 percent for a trial, or a temporary rise until 9 November); the team said any increase must be sustainable and tied to better participation and output (2026-10-23).</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-24</span> <span class="muted">(api.claims111.ai/public/production-quality)</span> The team&#x27;s public API showed about 195-202 new papers a day for 2026-10-17 to 2026-10-23, 7,565 cumulative papers at the end of 2026-10-23, and 95-97 percent of accepted claims approved by both judges outright over that week.</li>
+<li><span class="when">2026-10-23</span> <span class="muted">(#111-claims 2026-10-23)</span> Weekly update: testnet for the new pipeline competition opens 2 November and mainnet starts 9 November (first results 12 November), with private package submissions, a $0.09 per-paper cost cap and a four-stage evaluation. It also listed shared credit for equivalent claims, automatic 503 retries and a paper corpus with known answers (selection weighted 60 percent known-answer papers, 20 percent DMT, 20 percent diabetes). The team added that the emission split is unchanged.</li>
+<li><span class="when">2026-10-21</span> <span class="muted">(#111-claims 2026-10-21; GitHub)</span> Team stated that UID 39 is its configured operator recipient, that 90 percent is allocated to it and 10 percent through the miner payout system, and that any change would be announced with an effective date. A retry fix for backend 503 upload errors was committed the same day.</li>
+<li><span class="when">2026-10-19</span> <span class="muted">(#111-claims 2026-10-20; GitHub)</span> Equivalence-group shared coverage went live on mainnet (repo default changed the same day). Miners saw top scores drop from about 0.75-0.83 to about 0.60; the team said it had promised the change but missed announcing a cutover date.</li>
+<li><span class="when">2026-10-15</span> <span class="muted">(#111-claims)</span> Team confirmed a selection bug: a history query hit a 1,000-row limit, so the same 7 miners were picked repeatedly. It was fixed and listed in the weekly update on 2026-10-16.</li>
+<li><span class="when">2026-10-08</span> <span class="muted">(#111-claims 2026-10-08; mainnet chain reads)</span> Team announced that extraction would move to a weekly pipeline competition with a fixed list of open-weight models, run on team compute, and that the burned share would go to a wallet that pays for compute. On-chain reads show about 90 percent of incentive on the owner hotkey on 2026-10-08, moving to the operator recipient UID 39 by 2026-10-10.</li>
+<li><span class="when">2026-10-02</span> <span class="muted">(#111-claims 2026-10-02 to 2026-10-03)</span> Team announced it would raise the miner burn to 90 percent from the following week and lower it again as capacity grows. Miners questioned whether costs can be covered; the team said throughput is still profitable even at 90 percent.</li>
+<li><span class="when">2026-09-27</span> <span class="muted">(#111-claims)</span> V1 went live: consensus review by miners, with review scores deciding extraction eligibility. The first two rounds were interrupted by a backend timeout and finished from saved submissions.</li>
+<li><span class="when">2026-09-19</span> <span class="muted">(#111-claims 2026-09-19 and 2026-09-24)</span> A mainnet run was cancelled because a code change broke the Silver stage for all papers; the team said a fix was deployed the same day.</li>
+<li><span class="when">2026-09-18</span> <span class="muted">(#111-claims)</span> Weekly update: the team traces funding lineage of hotkeys, caps newcomer priority at three hotkeys per funding source per 30 days, hides selected miners until a batch&#x27;s submissions close, and moves production eligibility judging to a cheaper, faster module. Miners reported flood attacks on their ports in the days around it; the team asked for connection-level evidence.</li>
+<li><span class="when">2026-08-28</span> <span class="muted">(#111-claims 2026-08-18 to 2026-08-28)</span> Team announced mainnet live after an earlier stretch of testnet runs; on 2026-08-18 it had announced a partnership deal that gives it the subnet&#x27;s owner emissions.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Read the repo README and the agent miner README, then decide whether to use the reference agent miner or a custom stack.</li>
+<li>Install per the README (Python 3.12, Bittensor SDK 10.5.0) and set up a hosted model provider key; no GPU is needed with hosted models.</li>
+<li>Make the axon reachable on a public TCP port and keep the miner on the latest repo version, because an outdated miner cannot answer review assignments.</li>
+<li>Expect review assignments first: respond to every one within 30 minutes and keep the average of your last three scores at or above 0.75; the new competition also asks for at least 0.75 in two or more rounds in the 7 days before a deadline.</li>
+<li>Watch the dashboard (consensus leaderboard and runs) and the channel&#x27;s weekly updates. The team plans to publish the rules file, a sample package and the build environment before testnet opens on 2 November; the first mainnet deadline is Monday 9 November, 12:00 UTC.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>The 90/10 operator routing was observed on chain (block 9354650, 2026-10-24), but the live validator settings and what the operator does with the allocation are inferred or stated by the team, not published or visible on chain.</li>
+<li>Live settings differ from repo defaults: the team said mainnet uses 10 claims per miner per paper and 1,000 adjudication cases per paper while the code default for the latter is 80 (2026-09-24).</li>
+<li>Throughput figures conflict: the team posted 119 papers per day on 2026-10-14 while its API shows about 195-202 per day for 2026-10-17 to 2026-10-23, and its /public/stats endpoint reports different totals than the production-quality series. The API series was used.</li>
+<li>Miners reported flood attacks and position bias in miner order; the team disputed the bias (2026-10-05) and said it saw no evidence for the attacks being aimed at newcomers (2026-09-18). Neither was verified here.</li>
+<li>The new competition dates and rules are the team&#x27;s stated starting values and may change; the rules file was not published as of 2026-10-24, and the payout wording differs between the weekly update and the team&#x27;s follow-up answer.</li>
+<li>The retry fix for backend 503 errors was committed on 2026-10-21 and listed as shipped on 2026-10-23, but no deployment signal on the team&#x27;s validators was seen; one validator (UID 145) puts 70 percent on a single miner with no operator share and changed its target between 2026-10-23 and 2026-10-24, which is unexplained.</li>
+<li>The team&#x27;s published operations guide describes the v0 system (snapshot 2026-08-29), which V1 on 2026-09-27 superseded; the white paper PDFs were not read.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://claims111.ai" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://claims111.ai/papers" rel="noopener noreferrer">Papers (white paper and operations guide)</a></li>
+<li><a href="https://github.com/DeSciClaims/Claims" rel="noopener noreferrer">GitHub</a></li>
+<li><a href="https://dashboard.claims111.ai/?network=mainnet" rel="noopener noreferrer">Dashboard</a></li>
+<li><a href="https://api.claims111.ai/docs" rel="noopener noreferrer">Validator and backend API docs</a></li>
+<li><a href="https://artifacts.claims111.ai/docs" rel="noopener noreferrer">Miner upload API docs</a></li>
+<li><a href="https://x.com/DeSciClaims" rel="noopener noreferrer">Team announcements on X</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 4 sources</summary>
+<ul>
+<li><strong>msg</strong> #111-claims, 2026-08-18 to 2026-10-23</li>
+<li><strong>repo</strong> github.com/DeSciClaims/Claims README.md, miner/agent_v1/README.md, docs/0017 and 0019, neurons/validator.py _set_weights and config defaults at commit 98dcfb1 (2026-10-21, default branch head on 2026-10-24)</li>
+<li><strong>web</strong> api.claims111.ai/public/production-quality, /public/stats, /public/releases, read 2026-10-24; claims111.ai and /papers</li>
+<li><strong>web</strong> Mainnet chain reads of netuid 111 (RPC): blocks 9354650 (2026-10-24), 9346946 (2026-10-23) and a daily grid 9237000 to 9273000 for the routing history</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/110.html"><small>← Previous</small>SN110 Green Compute</a><a rel="next" href="/bittensor-docs/subnets/114.html"><small>Next →</small>SN114 SOMA</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-24. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

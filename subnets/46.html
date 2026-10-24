@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Instant (SN46) | Bittensor Subnet Docs</title>
+<meta name="description" content="Miners host one open model, GLM-5.3-Flash uncensored, on their own GPUs; speed and verified proofs drive rewards.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h10">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>46</span><div>
+<h1>Instant <span class="muted">SN46</span></h1>
+<p class="tagline">Miners host one open model, GLM-5.3-Flash uncensored, on their own GPUs; speed and verified proofs drive rewards.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>19<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>30<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>16<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-24</b><span>last chat</span></li><li class="pw"><b>8,860</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>inference (single-model, speed-focused)</dd>
+<dt>Status</dt><dd>Chat was active through 2026-10-21 and miner 0.8.0 with verifier 0.5.0 has been current since 2026-10-19. On 2026-10-21 the chain showed 14 miner UIDs with incentive and the team&#x27;s public dashboard listed 16 miners for its latest epoch. The owner announced engine, hardware and miner-earnings updates for the following week, so rules can change from week to week.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-21</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>Instant is an inference subnet built around one open model that miners serve from their own GPU machines. Validators check speed and reliability and set weights, and an OpenAI-style API for customers sits on top; a team-run public dashboard at instantnetwork.ai lists each miner&#x27;s score. Since 2026-10-13 the model is an uncensored FP8 variant of GLM-5.3-Flash. The team chose speed and uncensored output over private execution: it uses proofs on the generated tokens and, per its statements, collateral slashing rather than trusted hardware.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>A miner runs the team&#x27;s signed binary on one host with a single qualified GPU class: four RTX PRO 6000 cards, two B300 cards or four H200 cards. It needs Ubuntu 24.04, NVIDIA driver 580 or newer, and about 360 GiB of free disk for the 306 GiB checkpoint. The miner serves customer and test requests and sends proof evidence for each one. An installer script needs only the hotkey, updates itself every 15 minutes with a health check and rollback, and sends a fault report when something breaks. The miner binary is distributed as releases only, not as source.</p></div><div><h3>Validators</h3><p>A validator needs no GPU. The public Rust code polls a platform-signed epoch summary from a team-run server, checks its signature and the chain state, scores it with a shared library that is not public (the repository&#x27;s test vectors show what that library computes, see the incentive entry), and writes weights with commit-reveal. The proof checking itself is done by team infrastructure that re-runs the same model; the team says this is expensive and is being reworked to run on CPUs.</p></div><div><h3>Incentive</h3><p>Each epoch a qualified miner gets a score made of 60 percent speed (median generation tokens per second against the best qualified miner), 25 percent verified tokens, 10 percent successful requests (both against the best qualified miner) and 5 percent success rate. The team dashboard states these weights and the validator repository&#x27;s test vectors reproduce them. A miner with at least two bad proofs (failed or timed out) that also exceed 0.5 percent of its checked proofs scores zero and does not set the reference maximum for the others. Weights are each score relative to the best one, scaled by one minus the burn, with the burn share sent to the owner UID. Paying customer traffic is routed first and idle miners are topped up to 10 verified requests per epoch. The team said on 2026-10-12 that burn was off, and the chain agreed on 2026-10-21: the owner UID, which is a validator, received 0 percent of incentive, and 14 UIDs shared it at roughly 4.6 to 8.3 percent each. Counted by owner coldkey, those 14 UIDs belong to six operators, the largest controlling four UIDs (about 31 percent of incentive). Before 2026-10-12 a share went to the owner UID so that miners received a set dollar target per epoch.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-21</span> <span class="muted">(instantnetwork.ai dashboard; #instant)</span> The public dashboard listed 16 miners for its latest epoch (blocks 9,334,142 to 9,334,501), with a mean of about 185 tokens per second and a 0.73 percent failure rate; miner scores ranged from about 90 to 52 percent. Earlier that day it had shown 0 tokens per second for every miner, which the team called a reporting bug and fixed.</li>
+<li><span class="when">2026-10-21</span> <span class="muted">(#instant)</span> The owner said updates are due the following week on the engine (higher speed), hardware (better miner profit) and miner earnings (income used to buy and burn), and that a revenue and buyback dashboard, new API key generation and Stripe payments were built locally and expected live within a day or two. The reward split between participants stays unchanged for now.</li>
+<li><span class="when">2026-10-20</span> <span class="muted">(#instant)</span> A team member explained that the slowest miner (about 118 tokens per second, against about 200 for the top ones) earns least because speed is 60 percent of the score; the owner pointed to the dashboard&#x27;s miner section for all miners and scores.</li>
+<li><span class="when">2026-10-19</span> <span class="muted">(#instant)</span> Miner 0.8.0 and verifier 0.5.0 added zero data retention: customer content is held encrypted in memory and erased minutes after the response, and hosts with active swap are refused. After switching, 0.7.1 receives no customer traffic. A move to a new inference engine and cheaper proof checking were listed as next.</li>
+<li><span class="when">2026-10-14</span> <span class="muted">(#instant)</span> Miner 0.7.1 added tool calling and the paying-traffic-first queue (paying traffic includes the Liquid exchange listing of 2026-10-13); only miners on 0.7.1 or later receive tool requests.</li>
+<li><span class="when">2026-10-13</span> <span class="muted">(#instant, 2026-10-12)</span> Miner 0.7.0 switched the model to the uncensored GLM-5.3-Flash FP8 checkpoint at 14:00 UTC, and the team said burn was off.</li>
+<li><span class="when">2026-10-07</span> <span class="muted">(instantnetwork.ai performance report)</span> The team published a performance report of three single-trial comparisons against other providers, with mixed output-quality scores.</li>
+<li><span class="when">2026-10-01</span> <span class="muted">(#instant, 2026-09-30 to 2026-10-01)</span> Miner 0.6.0 and validator 0.1.3 added auto-updates and made disqualification less harsh after miners reported that a single failed proof zeroed nearly everyone. API keys opened by request through a Discord queue.</li>
+<li><span class="when">2026-09-27</span> <span class="muted">(#instant)</span> The first miner release was published, and the team described the next steps as lowering the burn and letting miners optimise for speed.</li>
+<li><span class="when">2026-09-17</span> <span class="muted">(#instant)</span> The owner said the earlier mechanism would not be waited on any longer and released the first validator for serving GLM-5.3-Flash, with the owner burn still at 100 percent.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Read the miner README in the releases repo and check that your host matches one qualified GPU configuration, with swap disabled and at least 60 GiB spare for updates.</li>
+<li>Register a hotkey on subnet 46 and keep the unencrypted hotkey file on the machine; the coldkey is never needed.</li>
+<li>Run the installer from the miner releases repo; it asks for the UID and hotkey, downloads the checkpoint (about an hour), and starts the service.</li>
+<li>Run the miner&#x27;s status and doctor commands to confirm the platform accepted the worker and that you are on the current version.</li>
+<li>To validate, install the validator with its installer script on a registered hotkey; no GPU is needed.</li>
+<li>Look up your UID in the dashboard&#x27;s miner table to see its score components, speed first, once the miner has been routed requests.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>The scoring library the validator depends on (sn46-shared) is a private repository (anonymous clone refused on 2026-10-21). The weights on this page come from the team dashboard&#x27;s text and the validator repository&#x27;s public test vectors, which agree; rounding and edge cases inside the library were not read, and the owner&#x27;s remark of 2026-10-20 that scoring is public covers only the validator wrapper and those vectors.</li>
+<li>Validators trust a platform-signed summary from a team-run server, and proof checking runs on team infrastructure. The miner is closed source and distributed as signed binaries. The validator repository has no commit since 2026-10-12 (version 0.1.3) while the miner and verifier moved to 0.8.0 and 0.5.0 on 2026-10-19; whether validators must update was not found.</li>
+<li>Collateral slashing is described as the owner&#x27;s preferred answer to bad proofs (2026-10-03) and as part of the design, but no chat message up to 2026-10-21 says it is in place.</li>
+<li>Burn is off on chain as of 2026-10-21, but the validator code still contains a burn mode driven by a dollar target in the platform&#x27;s summary, so the team can switch it back on without a new validator release.</li>
+<li>At chain block 9,334,722 UID 182 was the top weight target in several validators&#x27; rows and appears on the dashboard, yet had no incentive yet; commit-reveal lag is a plausible cause but was not confirmed. The dashboard is team-run and its figures were not independently reproduced, apart from the miner ranking, which matches the chain.</li>
+<li>The performance report is the team&#x27;s own, uses single trials and reported rates that include overhead; it was not reproduced.</li>
+<li>The GitHub organisation also holds forks of TensorFold (an inference engine), flashinfer and vllm. The chat does not say whether any of them is the &#x27;new inference engine&#x27; the team announced on 2026-10-18.</li>
+<li>Old documentation links shared in chat in August (docs.instantsubnet.com) now redirect to a different project, DaniLabs. Two X accounts and several Discord invites have been named in chat in the last month, and the owner asked people to leave an earlier Discord, so confirm links before following them.</li>
+<li>Chat read: the latest 200 messages, team posts from 2026-08-25 on, and every message from 2026-10-20 to 2026-10-21; claims about miner profits and revenue in chat were left out.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://instantnetwork.ai" rel="noopener noreferrer">Network dashboard and try-it chat (team-run)</a></li>
+<li><a href="https://github.com/Subnet46/sn46-validator" rel="noopener noreferrer">GitHub: validator</a></li>
+<li><a href="https://github.com/Subnet46/sn46-miner-releases" rel="noopener noreferrer">GitHub: miner releases and installer</a></li>
+<li><a href="https://instantnetwork.ai/performance1" rel="noopener noreferrer">Performance report (team-published)</a></li>
+<li><a href="https://x.com/thinkinstant" rel="noopener noreferrer">X account named in the validator README</a></li>
+<li><a href="https://x.com/instantsubnet" rel="noopener noreferrer">X account named by the owner on 2026-10-13</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 5 sources</summary>
+<ul>
+<li><strong>repo</strong> Subnet46/sn46-validator @c85abd4 (2026-10-12): README.md, src/runtime.rs, src/burn.rs, src/scoring.rs, tests/golden/scoring_cases.json, tests/fixtures/epoch_summary_v2.json and v3.json</li>
+<li><strong>repo</strong> Subnet46/sn46-miner-releases @4599170 (2026-10-20): README.md, index.json (0.8.0, sequence 12)</li>
+<li><strong>web</strong> instantnetwork.ai front page and dashboard text (fetched 2026-10-21, epoch published 2026-10-21 21:20 UTC); instantnetwork.ai/performance1 (fetched 2026-10-20); github.com/Subnet46 organisation page (2026-10-21); docs.instantsubnet.com redirect to danilabs.ai (checked 2026-10-20)</li>
+<li><strong>web</strong> chain read, mainnet netuid 46: chain.py subnet 46 at block 9334694; chain_neurons.py params, uids and weights at blocks 9334694 to 9334722 (2026-10-21)</li>
+<li><strong>msg</strong> #instant, 2026-08-25 to 2026-10-21 (team posts, dev updates, owner answers)</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/45.html"><small>← Previous</small>SN45 AlphaRidge</a><a rel="next" href="/bittensor-docs/subnets/47.html"><small>Next →</small>SN47 GPUForge</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-21. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

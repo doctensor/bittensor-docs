@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VidAIO (SN85) | Bittensor Subnet Docs</title>
+<meta name="description" content="Video AI subnet run as code competitions: a result pays the top places for two weeks; the team&#x27;s authority scores.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h19">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>85</span><div>
+<h1>VidAIO <span class="muted">SN85</span></h1>
+<p class="tagline">Video AI subnet run as code competitions: a result pays the top places for two weeks; the team&#x27;s authority scores.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>8.3<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>8.9<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>9.2<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-24</b><span>last chat</span></li><li class="pw"><b>5,171</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>video processing (code competitions: compression, removal, interpolation, upscaling)</dd>
+<dt>Status</dt><dd>Live: the frame-interpolation result applied on 2026-10-20 (epoch 25839) is paying until 2026-11-03 14:56 UTC; epoch 25888 (closed 2026-10-23 02:00 UTC) and the chain&#x27;s incentive at block 9343305 both show it. Always-on compression and upscaling mining has paid nothing since 2026-09-27, although the README still describes it. Enrollment for competition 004 (video upscaling) opens 2026-10-23 14:00 UTC.</dd>
+<dt>Confidence</dt><dd>high</dd>
+<dt>Researched</dt><dd>2026-10-23</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>VidAIO (SN85) is a video-processing subnet from the team behind vidaio.io. Since 2026-09-27 miners are no longer paid for serving compression and upscaling jobs; they enter competitions by submitting private code that the team&#x27;s scoring authority builds and runs in a sealed sandbox on hidden clips, and the best results share the miner emissions. The team says winning solutions are run on the VidAIO website. Three competitions have run (compression, object removal, frame interpolation) and a fourth, video upscaling, has a published manifest with enrollment opening on 2026-10-23.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>A miner submits code, not outputs: a private GitHub repo at a pinned commit and tree with a Dockerfile that provides /app/run.sh, which reads a folder of clips and writes one output per clip. Enrollment is one request per hotkey, signed with the hotkey, and the hotkey must be registered on SN85 with at least 500 alpha staked (read from chain; the team says nothing is locked) and stay registered until the result is applied and through the payout window. The team&#x27;s read-only GitHub machine account must be invited to the repo. Each batch of clips runs in a fresh sandbox with no network and a pinned GPU (an L40S for frame interpolation and for competition 004, per the team); builds do have network. Everything shipped must allow commercial use (Apache-2.0, MIT, BSD and similar), your own code must be Apache-2.0 or MIT, third-party parts are listed in LICENSES.md and every download is pinned by hash or commit. Entries sharing a coldkey, IP, GitHub account, source tree or identical outputs count as one operator and only the lowest UID can be paid. Shipping the answers instead of computing them from the input gets an entry rejected and its operator barred from later competitions (rule posted for competition 004).</p></div><div><h3>Validators</h3><p>Scoring is central. A team-run scoring authority builds and runs the entries, measures them against hidden clips (committed by hash before enrollment, with the manifest digest anchored on chain per the team) and publishes one signed epoch log per epoch of 360 blocks to a public bucket on Hippius, anchoring the log&#x27;s hash on chain from its own hotkey. Other validators are thin: they check the log against that anchor and submit its weight vector unchanged; they do not recompute scores, and auditor launchers are not packaged in the public validator image. Scores are per-clip means: compression uses a size and VMAF formula with a quality gate; removal, interpolation and upscaling compare PSNR, SSIM and LPIPS gains over a free baseline; interpolation and the upscaling round multiply by a speed factor worth 30 percent. For upscaling the public scorer code matches the rules the team posted (weights 0.3, 0.3 and 0.4, a 6 dB PSNR span, a log-scale speed term). On chain (block 9343305, 2026-10-23) six hotkeys hold validator permits and three set weights recently: the owner&#x27;s hotkey at UID 0 and UID 91 submit the same three-target vector, while UID 230 sets an unrelated ten-target vector and earns no dividends. Weights are commit-reveal.</p></div><div><h3>Incentive</h3><p>Each competition anchors a crown bar and a podium bar before enrollment. If first place reaches the crown bar the result pays 90/4/3/2/1 to the top five; otherwise places at or above the podium bar share 50/24/13/8/5, with unfilled places redistributed in proportion. Since 2026-10 a result pays for two weeks. A licensing treasury (UID 111) keeps 0.5 percent during a window and, between windows, receives 50 percent while the other 50 percent goes to UID 0 as the team&#x27;s burn. The treasury is meant to pay winners whose solutions run on the website; the terms were not published and the site says no licensing payments have been made yet (2026-10-23). Live example: epoch 25888 on 2026-10-23 weights UID 50 at 67.23 percent, UID 130 at 32.27 percent and the treasury at 0.5 percent. Inference-track miners are still scored in the logs but receive zero weight. Chain read at block 9343305: incentive on UIDs 50, 130 and 111 equals the epoch log to two decimals; the subnet&#x27;s emission split is 18 percent owner, 41 percent validators and 41 percent miners; UID 0 receives 99.97 percent of dividends; the recycle-or-burn setting reads Burn. In the 2026-10-13 gap the chain showed half of the incentive on UID 0 and half on UID 111, matching the stated 50/50 rule. Competition 004 sets its crown bar at 0.20 and its podium bar at 0.12 on the speed-adjusted score.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-23</span> <span class="muted">(chain read, vidaio.io, #85-vidaio)</span> Chain read at block 9343305 agrees with the team&#x27;s epoch log (incentive 67.23, 32.27 and 0.50 percent on UIDs 50, 130 and 111). The site&#x27;s payouts page says no licensing payments have been made yet, and the competition 003 hidden clips promised after the result are still unpublished.</li>
+<li><span class="when">2026-10-21</span> <span class="muted">(GitHub)</span> The public miner and validator mirrors gained faithful-upscaling and streaming-compression scorers and an upscaling example entry (commits of 10-20 and 10-21).</li>
+<li><span class="when">2026-10-21</span> <span class="muted">(#85-vidaio, GitHub, vidaio.io)</span> Competition 004 (video upscaling) fully specified: manifest published with 16 hidden-clip commitments, crown bar 0.20 and podium bar 0.12 on the speed-adjusted score, a ten-clip practice pack released, enrollment 2026-10-23 14:00 UTC to 10-31, licence review to 11-01, result not before 11-03 14:30 UTC, paid for 14 days from the next epoch close.</li>
+<li><span class="when">2026-10-20</span> <span class="muted">(#85-vidaio, epoch log)</span> Result applied at epoch 25839. After miners asked why only two UIDs were paid, the team corrected its post: with the speed term only UID 50 (0.7811) and UID 130 (0.7251) reach the 0.72 podium bar, so they split the pot about 67.6 to 32.4 until 2026-11-03 14:56 UTC. The epoch log matches the correction.</li>
+<li><span class="when">2026-10-18</span> <span class="muted">(#85-vidaio)</span> Frame-interpolation results posted with quality-only scores, and competition 004 (video upscaling) announced: enrollment 10-23 to 10-31, evaluation 11-01, result 11-03, payouts unchanged.</li>
+<li><span class="when">2026-10-16</span> <span class="muted">(#85-vidaio)</span> Licence review of the 30 frame-interpolation entries first rejected 9 for non-commercial weights. Over 10-16 and 10-17 the team reinstated them, saying its published rule covers weights that authors publish with a commercially licensed repo unless they restrict them.</li>
+<li><span class="when">2026-10-15</span> <span class="muted">(#85-vidaio)</span> The competition server host went offline for about 40 minutes and came back on a new IP; the team said the 10 entries then recorded were safe and the old address was no longer theirs.</li>
+<li><span class="when">2026-10-05</span> <span class="muted">(#85-vidaio, GitHub)</span> New rules and payouts: one paid place per operator, commercial-use licences only for new entries, two-week result windows and the licensing treasury (tokenomics v4). Public evidence moved from AWS to Hippius; the team said only the last three competitions&#x27; media are kept.</li>
+<li><span class="when">2026-10-04</span> <span class="muted">(#85-vidaio)</span> Object removal 002 results: 30 entries evaluated, UID 202 crowned at 0.7894. A validator bug held back applying the result at the epoch close; the team said winners would get their full window from the fix.</li>
+<li><span class="when">2026-09-27</span> <span class="muted">(GitHub, epoch log, #85-vidaio)</span> Tokenomics v3: inference stops earning and a result pays all miner emissions. Compression 001c crowned UID 205 at 0.8699 with 14 entries; the epoch log of 2026-09-28 shows the 90/4/3/2/1 split.</li>
+<li><span class="when">2026-09-19</span> <span class="muted">(#85-vidaio)</span> Team announced the move from inference rounds to a fully competition-based subnet and opened the first competition on the new stack (compression, enrollment 09-21 to 09-24, stake floor 500 alpha).</li>
+<li><span class="when">2026-09-04</span> <span class="muted">(#85-vidaio, GitHub)</span> Mainnet moved to a rebuilt stack: one team-run scoring authority publishing signed epoch logs and evidence, thin validators copying its weights, and public release mirrors of the miner and validator code. Compression and upscaling tracks still paid by a top-five rank curve.</li>
+<li><span class="when">2025-04-17</span> <span class="muted">(#85-vidaio)</span> Mainnet go-live announced with the first public subnet repo; the product was video upscaling and compression served by miners and scored by validators.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Read docs/MINING.md in the miner repo, and the manifest of the competition you want (the dashboard lists the next one and its stake floor, bars, GPU and dates).</li>
+<li>Register a hotkey on netuid 85 and stake at least the floor (500 alpha) on that hotkey; keep it registered until the result is applied and through the payout window (the guide page and the team say so for competition 004).</li>
+<li>Create a private repo with a Dockerfile and /app/run.sh, starting from the matching folder in examples/competition_contenders; add LICENSE (Apache-2.0 or MIT), LICENSES.md, and pin every download by hash or commit.</li>
+<li>Invite the team&#x27;s read-only GitHub machine account named in the docs, and keep it invited until builds are announced as done.</li>
+<li>Run scripts/competition_precheck.py on the exact commit with --commercial, and test against the practice pack (practice-pack-004 has ten clips in the hidden-set format and score_practice.py, which runs the validator&#x27;s scorer).</li>
+<li>Enroll once with scripts/competition_enroll.py, signed by the hotkey, using the competition server address shown on the guide page (it changed once, on 2026-10-15). Enrollments cannot be edited, and the hotkey must stay registered until the result and through the payout window.</li>
+<li>Validators: use the thin-validator image from the validator repo; it needs a registered hotkey with a validator permit, an archive chain endpoint and S3 publication credentials supplied by the subnet team.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Chain was read on 2026-10-23 (block 9343305) and matches the team&#x27;s logs, but three things stay unread: who holds the stake behind UID 0 (the team&#x27;s census lists 96.0 percent of listed alpha on it at epoch 25888, down from 98.5 percent on 2026-10-21, and it takes 99.97 percent of dividends), what the burn does to alpha supply, and the on-chain anchor transactions. UID 230, a validator-permit hotkey with a different weight vector, is unidentified.</li>
+<li>Scoring, sandbox runs, enrollment and the on-chain anchor all sit with the team. Thin validators copy the authority&#x27;s weights and the validator README says this is not an independent audit. The sandbox orchestrator and competition server are private; the public repos hold the scoring formulas (checked for upscaling only).</li>
+<li>The public miner and validator repos are release mirrors of a private monorepo: each commit is a snapshot, so history does not show how code changed (no new commits since 2026-10-21). The validator README points to GitHub release notes for the image digest, but the validator repo had no releases on 2026-10-23. The chain identity of the subnet still names the legacy repo.</li>
+<li>Docs lag the mechanism. The README and the &#x27;How you earn&#x27; section of MINING.md still describe paid compression and upscaling tracks with 80/20 and 60/40 splits, and default.yaml still sets a seven-day window; later parts of MINING.md, the tokenomics code and the live logs show inference earning nothing and two-week windows. MINING.md still points to the AWS evidence bucket (403 on 2026-10-21), and the 2026-09-08 whitepaper (not read) predates tokenomics v3 and v4.</li>
+<li>Only a crown winner&#x27;s source is released and non-winning entries stay private, so most results cannot be re-run from public code. The team said it keeps media for only the last three competitions. It promised on 10-18 to publish the competition 003 hidden clips after the result; no link appeared in chat or on the competition 003 page by 2026-10-23.</li>
+<li>The licensing treasury and the website&#x27;s use of winning solutions are team-run: the share of website revenue paid to winners was not published, the site says licensing payments are none yet (2026-10-23), the treasury takes 50 percent of emissions between windows (0.5 percent during one), and the team said on 10-06 it had stopped selling owner alpha but gave no date for revenue buybacks.</li>
+<li>Announcements have needed correction: the 10-18 interpolation post listed scores before the speed term (fixed 10-20), the licence review was partly reversed, two entries scored 0 on 10-18 because the production input folder held an undocumented extra entry, and a validator bug delayed the removal result on 10-04.</li>
+<li>Competition 004&#x27;s dates, bars and rules are the team&#x27;s published plan; its manifest digest is said to be anchored on chain (not checked here). Enrollment had not opened when this page was written (2026-10-23 02:50 UTC), so there are no entry counts or results. The bars (0.20 and 0.12) are far below competition 003&#x27;s (0.85 and 0.72); scores count only gain over a free Lanczos upscale, which scores 0. A streaming-compression scorer is in the repo but no competition for it has been announced.</li>
+<li>The competition server is a bare IP over HTTPS that changed on 2026-10-15; use only the address on the team&#x27;s guide page. Miner-versus-miner accusations in chat on 10-16 were unverified.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://vidaio.io" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://vidaio.io/competitions" rel="noopener noreferrer">Competitions dashboard (current window, payouts)</a></li>
+<li><a href="https://vidaio.io/competitions/payouts" rel="noopener noreferrer">Payouts (current window, windows and gaps)</a></li>
+<li><a href="https://vidaio.io/competitions/sn85-upscaling-004" rel="noopener noreferrer">Competition 004: video upscaling</a></li>
+<li><a href="https://vidaio.io/competitions/guide" rel="noopener noreferrer">How to enter</a></li>
+<li><a href="https://vidaio.io/competitions/results" rel="noopener noreferrer">Past results</a></li>
+<li><a href="https://github.com/vidAio-subnet/miner-vidaio" rel="noopener noreferrer">Miner repo (rules in docs/MINING.md)</a></li>
+<li><a href="https://github.com/vidAio-subnet/validator-vidaio" rel="noopener noreferrer">Thin validator repo</a></li>
+<li><a href="https://github.com/vidAio-subnet/vidaio-subnet" rel="noopener noreferrer">Legacy subnet repo (before 2026-09)</a></li>
+<li><a href="https://s3.hippius.com/vidaio-sn85-evidence/finalized/epoch=25839/log.json" rel="noopener noreferrer">Example public epoch log (25839)</a></li>
+<li><a href="https://discord.gg/pZMJyJm8Vx" rel="noopener noreferrer">Project Discord (linked from vidaio.io)</a></li>
+<li><a href="https://github.com/vidAio-subnet/miner-vidaio/releases/tag/practice-pack-004" rel="noopener noreferrer">Upscaling practice pack (competition 004)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 6 sources</summary>
+<ul>
+<li><strong>repo</strong> vidAio-subnet/miner-vidaio@13a9aea (2026-10-21): README, docs/MINING.md, config/default.yaml, vidaio/tokenomics/{weights,config}.py, vidaio/scoring/upscaling_faithful_formula.py, vidaio/competition/economic_result.py; releases practice-pack-001 to 004</li>
+<li><strong>repo</strong> vidAio-subnet/validator-vidaio@b7fc939 (2026-10-21): README; vidAio-subnet/vidaio-subnet@fea3779 (2026-08-18, legacy)</li>
+<li><strong>web</strong> https://s3.hippius.com/vidaio-sn85-evidence/finalized/epoch=&lt;N&gt;/log.json for epochs 25400, 25560, 25700, 25839, 25854 (read 2026-10-21) and 25888 (read 2026-10-23)</li>
+<li><strong>web</strong> https://vidaio.io/competitions, /competitions/results, /guide, /payouts, /sn85-upscaling-004, /sn85-interpolation-003b and /api/hub/v1/competitions/sn85-upscaling-004/manifest (read 2026-10-21 and 2026-10-23)</li>
+<li><strong>web</strong> Chain reads at mainnet block 9343305 (2026-10-23): subnet identity and hyperparameters, incentive, dividends, validator permits and weights, SubnetEmissionWeights, RecycleOrBurn; history read at block 9276100 (2026-10-13)</li>
+<li><strong>msg</strong> #85-vidaio 2025-02-24 to 2026-10-22</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/83.html"><small>← Previous</small>SN83 CliqueAI</a><a rel="next" href="/bittensor-docs/subnets/87.html"><small>Next →</small>SN87 Provenonce (Proof of Assurance)</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-23. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bitsec (SN60) | Bittensor Subnet Docs</title>
+<meta name="description" content="AI agents hunt smart-contract bugs in weekly rounds; the top two agents are paid and half the miner share is burned.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h12">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>60</span><div>
+<h1>Bitsec <span class="muted">SN60</span></h1>
+<p class="tagline">AI agents hunt smart-contract bugs in weekly rounds; the top two agents are paid and half the miner share is burned.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>34<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>9.3<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>9.8<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-23</b><span>last chat</span></li><li class="pw"><b>6,117</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>AI security auditing</dd>
+<dt>Status</dt><dd>Round v3.1.15 closed submissions on 2026-10-19 and has finished evaluation; the next round had not opened by 10-23. Miners are still disputing spam and hard-steered winners, and on 10-21 the team said it would rotate the screener project and the evaluation projects from a larger set.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-23</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>Bitsec (SN60) rewards miners for building AI agents that find high and critical severity vulnerabilities in real software, currently Solidity smart contracts scored against findings from human audits. Contests run in rounds: miners submit private agents, validators run them in sandboxes on benchmark codebases, and the winner is published along with everyone&#x27;s code and logs. The team also sells a continuous-coverage product called Sentios and announced new clients in October. As of 2026-10-23 half of the miner emission is burned on chain and the other half is split 77/23 between the top two agents.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>A miner writes a single Python agent (an agent_main function that returns a list of vulnerabilities) in the sandbox repo, tests it locally and submits it to the team&#x27;s platform. Miners can submit several times per round and pay for their own inference through a Chutes or OpenRouter key. Submissions are screened for unsafe code, hardcoded answers, copies and steering toward known benchmark answers before they are evaluated.</p></div><div><h3>Validators</h3><p>After screening, validators run each agent in a Docker sandbox (30 minutes per run) on the round&#x27;s codebases, three runs each. A codebase counts as passed only if all of its critical and high findings were matched in at least two of three runs, with no partial credit. A validator&#x27;s score is the share of codebases passed; the final score averages the best three validator scores, and at least three validators are required. The public project set in the repo has four codebases, and a hidden private set is also used.</p></div><div><h3>Incentive</h3><p>Rounds are winner-takes-most and close on Mondays at 15:00 UTC (round v3.1.15 closed 2026-10-19). Weights do not come from validator scoring: each validator downloads a payload from the team&#x27;s platform that lists the top agents, a payout structure and a burn share, and sets weights to match. On 2026-10-23 that public payload said burn 50 percent and payout 77/23, and the chain agrees: three uids have incentive, the subnet owner&#x27;s hotkey with 50 percent, which the chain burns, and two miners with 38.5 and 11.5 percent. So the owner slot receives half of the miner emission but it is destroyed, not paid out, which answers the community&#x27;s worry on 10-21 and 10-22 that the owner had become a self-miner; the community figure of an owner share rising from 35 to 50 percent was not found in a team statement. Separately, 18 percent of subnet emission is set aside for the owner, 41 percent for validators and 41 percent for miners. Commit-reveal is on, ten validators have set weights, and one validator earns 60 percent of validator dividends.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-22</span> <span class="muted">(#60-bitsec, on-chain read)</span> Members claimed the owner had become a self-miner after the owner share of incentive rose to 50 percent; no evidence was given, and the chain shows that share is burned.</li>
+<li><span class="when">2026-10-21</span> <span class="muted">(#60-bitsec)</span> The team said hard steering was beating genuine progress and that the fix is hidden or rotating project sets: it would rotate the screener project and draw evaluation projects from a larger set. On 10-22 it said projects will change next round and that new public projects will probably be added.</li>
+<li><span class="when">2026-10-20</span> <span class="muted">(#60-bitsec)</span> After miners accused one operator of spamming dozens of agents across two hotkeys to slip past the steering check, the team said using several hotkeys is currently allowed, blamed an earlier fallback from Claude 5.5 to 4.8 for letting some agents pass, called the winning agent borderline and asked for concrete screener patches.</li>
+<li><span class="when">2026-10-19</span> <span class="muted">(bitsec.ai public round feed)</span> Submissions for round v3.1.15 closed at 15:00 UTC with 273 agents submitted, 160 of them that day; the leader scored 0.67 across three validators.</li>
+<li><span class="when">2026-10-17</span> <span class="muted">(#60-bitsec)</span> Miners reported the fallback to the older model and duplicate agents from one operator passing screening again; no team answer was seen.</li>
+<li><span class="when">2026-10-14</span> <span class="muted">(#60-bitsec)</span> The team said steering was mostly solved after adding the hidden project sets to the check.</li>
+<li><span class="when">2026-10-13</span> <span class="muted">(#60-bitsec)</span> The team said it compared the winner against private project solutions and saw a 0.92 steering score, said rules should not be applied retroactively, and asked for suggested changes for future rounds.</li>
+<li><span class="when">2026-10-12</span> <span class="muted">(#60-bitsec)</span> Miners alleged the previous round&#x27;s top agents were hard-steered and had gotten past screening by spamming submissions until a check that falls back to an older model let one through. The team confirmed the screener falls back to Opus 4.8 when a security trigger fires.</li>
+<li><span class="when">2026-10-06</span> <span class="muted">(#60-bitsec)</span> The team said the hard-steering check now runs the same prompt on Claude Opus 5.5, that only a couple of agents passed, and extended the submission window to Wednesday.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Clone Bitsec-AI/sandbox and install with uv; set INFERENCE_API_KEY to a Chutes or OpenRouter key.</li>
+<li>Edit miner/agent.py so agent_main returns a report with a vulnerabilities list, and run it with the repo&#x27;s execute-agent command.</li>
+<li>Register the miner with the bitsec.py miner create command, then test with run-no-docker and the Docker flow.</li>
+<li>Submit during an open round (submissions have closed on Mondays at 15:00 UTC; check bitsec.ai/leaderboard for the live round) and check the screener rules (no eval or exec, no hardcoded answers, no near-copies) before uploading.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Weights come from the team&#x27;s platform payload, so the winner and payout structure are set by the team; the chain read on 2026-10-23 (block 9,343,398) matches the platform&#x27;s public payload, but it is one snapshot, the burn share has changed before (no dated team statement found), and the sandbox and validator scoring code was not re-read in this pass.</li>
+<li>Disputes about hard steering, spam submissions and the screener&#x27;s model fallback were still open on 10-22. Miners&#x27; claims about specific agents and operators are unverified, and the team called the current winner borderline rather than invalid.</li>
+<li>The docs describe four codebases and the repo has four public projects, but the live round feed reports a current set of three public and four hidden projects, miners talk of 32 public projects, and the team plans to rotate them, so none of these counts is stable.</li>
+<li>The next round&#x27;s start, the new project set and any change to the burn or payout are not announced; Monday 15:00 UTC is the observed close time, not a published schedule.</li>
+<li>Questions about revenue and buybacks went unanswered in chat.</li>
+<li>docs.bitsec.ai may lag the code; the repo README says the code is the source of truth for local runs.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://docs.bitsec.ai/" rel="noopener noreferrer">Docs</a></li>
+<li><a href="https://github.com/Bitsec-AI/sandbox" rel="noopener noreferrer">GitHub (sandbox)</a></li>
+<li><a href="https://github.com/Bitsec-AI/scabench" rel="noopener noreferrer">GitHub (ScaBench benchmark)</a></li>
+<li><a href="https://bitsec.ai/" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://bitsec.ai/leaderboard" rel="noopener noreferrer">Leaderboard</a></li>
+<li><a href="https://sentios.io/" rel="noopener noreferrer">Sentios</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 5 sources</summary>
+<ul>
+<li><strong>repo</strong> Bitsec-AI/sandbox@f1dbce6 (2026-10-15, unchanged on 2026-10-23): validator/top_agents.py, platform_client.py</li>
+<li><strong>web</strong> https://docs.bitsec.ai/incentive-mechanism/, /miner/, /changelog/ (read 2026-10-20 and 2026-10-23)</li>
+<li><strong>web</strong> Public team feeds bitsec.ai/api/agents/top-with-burn/, /api/analytics, /api/jobs/leaderboard, /api/projects/sets (read 2026-10-23, hotkeys not used)</li>
+<li><strong>web</strong> On-chain reads of subnet 60 at block 9,343,398 (2026-10-23): incentive, weights, SubnetEmissionWeights, RecycleOrBurn, hyperparameters, owner-slot test</li>
+<li><strong>msg</strong> #60-bitsec 2026-08-28 to 2026-10-22</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/58.html"><small>← Previous</small>SN58 Attune</a><a rel="next" href="/bittensor-docs/subnets/61.html"><small>Next →</small>SN61 RedTeam</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-23. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

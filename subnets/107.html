@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Minos (SN107) | Bittensor Subnet Docs</title>
+<meta name="description" content="Miners tune variant-caller settings on fresh synthetic genome samples; validators re-run each config and score it.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h5">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>107</span><div>
+<h1>Minos <span class="muted">SN107</span></h1>
+<p class="tagline">Miners tune variant-caller settings on fresh synthetic genome samples; validators re-run each config and score it.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>21<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>15<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>48<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-24</b><span>last chat</span></li><li class="pw"><b>5,309</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>genomics (variant calling)</dd>
+<dt>Status</dt><dd>Chat was busy through 2026-10-21 and the code has not changed since 2026-10-08. The team was at a genetics conference in Montreal that week and said the release date of a second mining track (IM2) would come toward the end of the week. Miners were still in an open dispute with the team about transparency and possible copying.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-21</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>Minos rewards miners for tuning the settings of existing DNA variant-calling tools (GATK, DeepVariant and bcftools) so that they find the most real mutations with the fewest false calls. Every 72 minutes the platform builds a new genome sample with hidden synthetic mutations, and validators re-run submitted configurations and score them against the known answers. The team calls the first phase a search of the tools&#x27; parameter space, with custom algorithms and a second incentive mechanism (IM2) planned next.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Each round miners download a new alignment file, run a variant caller on a CPU machine and submit the tool configuration they used, limited to published parameter ranges. A hash of the config must be committed on chain first. Miners can try the scoring without registering using the demo and practice modes of the miner script. Top submissions use a different config each round according to the team, so there is no single winning setting, and several miners say the search is expensive in compute.</p></div><div><h3>Validators</h3><p>Validators fetch tasks and truth data from a team-run platform service, re-run miner configs in Docker and score the resulting variant file with the hap.py benchmarking tool through the project&#x27;s scoring code. They do not all score everyone: the platform gives each validator a primary range of miners by stake rank (neighbouring validators overlap by about a fifth as a cross-check) and a secondary list to work through until shortly before the deadline. After the window closes, each validator pulls its peers&#x27; scores for the miners it did not cover, then sets weights, and it skips weight-setting for the round if that fetch fails. The scoring version and reward shares are read from a public network-config endpoint that the team controls, and a validator will not set weights without it. The team also publishes a block-hash task selector and releases the truth files after each round so miners can check the draw and re-score locally. On chain on 2026-10-21 there were 8 validator permits, and the validator on the owner&#x27;s own coldkey held about two thirds of the stake counted across the subnet&#x27;s hotkeys, so its weights carry the most.</p></div><div><h3>Incentive</h3><p>The live network configuration on 2026-10-21 gives the top-scoring miner of the current round 80 percent of weight and shares the other 20 percent among the next 19 ranks with a 0.9 geometric decay, with no burn. The chain matched this: all 8 validators put 80 percent on their top miner, the next ranks received about 2.3, 2.1, 1.9 and 1.7 percent, and the owner&#x27;s slot received no weight. The winner changes from round to round: the top miner and the validators&#x27; top choice differed across three reads about 400 blocks apart. Only one hotkey per coldkey can be rewarded (the 20 paid uids sat on 20 different coldkeys), and a miner must have scored in at least 5 of the last 20 rounds. Equal scores are broken by earliest submission. Scoring is version 2: 70 percent core accuracy and 30 percent germline accuracy, with a plausibility gate. The small shares for ranks 2 to 20 were added in May and June 2026, according to the team, to keep good miners from being deregistered. The code defaults and the August notice still say 90 percent for the winner, but validators do not use them.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-21</span> <span class="muted">(#minos, 2026-10-20 and 2026-10-21)</span> The team was at the ASHG genetics conference in Montreal, with two Bittensor-based works listed for a talk slot on 2026-10-22. The owner said that preparing for IM2 only needs an AI assistant subscription or an API key plus the new app, and that the exact release date would come toward the end of the week.</li>
+<li><span class="when">2026-10-21</span> <span class="muted">(Bittensor chain read, block 9335135; #minos, 2026-10-21)</span> A chain read at block 9335135 showed 8 validators, an 80 percent winner share with a 0.9 decay over ranks 2 to 20, zero weight on the owner slot, and the winning miner changing between reads. Miners kept arguing about identical top scores; one miner who said he is not on the team reported no sign of cheating in about 200 recent rounds of public results.</li>
+<li><span class="when">2026-10-18</span> <span class="muted">(#minos, 2026-10-18)</span> The owner laid out the plan for the rest of the year: launch IM2 and raise its emission share gradually, finish config search over all 22 chromosomes in about a month, then move the main mechanism to custom algorithms with new scoring. Slow mode was switched on in the channel.</li>
+<li><span class="when">2026-10-16</span> <span class="muted">(#minos, 2026-10-16 and 2026-10-18)</span> A public dispute broke out. Some miners said they cannot audit self-mining and asked for validator logs and on-chain commitments, and alleged copied configs. The team said a group of miners uses several UIDs, declined to publish validator logs or top configs, and said miners can ask validators directly. The one-hotkey-per-coldkey rule was named as an early anti-sybil step.</li>
+<li><span class="when">2026-10-08</span> <span class="muted">(minos_subnet GitHub, 2026-10-07 and 2026-10-08)</span> A repository update bounded the scoring phase by the submission window. No later commits were found on 2026-10-21.</li>
+<li><span class="when">2026-09-22</span> <span class="muted">(#minos, 2026-09-22)</span> The team separated the second incentive mechanism (IM2) from phase 2 of the current mechanism: IM1 continues until all 22 chromosomes are covered, then adds custom algorithms, while IM2 is a new lower-barrier mining track.</li>
+<li><span class="when">2026-09-08</span> <span class="muted">(#minos (pinned), 2026-09-08; network-config endpoint and chain read, 2026-10-21)</span> The owner announced that emissions had been restored and that the remaining miner burn would be dropped the next day. The live configuration and the chain both showed no burn on 2026-10-21.</li>
+<li><span class="when">2026-09-02</span> <span class="muted">(#minos, 2026-09-02, 2026-09-03 and 2026-09-04)</span> Emissions to the subnet were paused after a network-level review asked for more visibility into how tasks and truth files are produced. The team said miner burn stayed at 100 percent meanwhile, open-sourced a block-hash task selector on 2026-09-03 and agreed to release truth files after every round.</li>
+<li><span class="when">2026-08-31</span> <span class="muted">(#minos (pinned), 2026-08-31; network-config endpoint 2026-10-21)</span> The team announced a staged upgrade: new version 2 scoring, required on-chain config hashes, one rewarded hotkey per coldkey, penalties for coordinated multi-account mining, limits on IP changes, and moving round files from open endpoints to storage buckets. A paid-resubmission fee was announced too but still showed as disabled on 2026-10-21.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Clone minos_subnet, run bash install.sh and read the README; a CPU machine with 4 or more cores and Docker is enough, and the repository pins Bittensor 10.3.1. The repository docs are newer than the Mintlify docs site, so prefer them.</li>
+<li>Try bash start-miner.sh --demo, which needs no wallet and prints the exact score a validator would give a fixed sample, then --practice to test configs on the answered chromosome 18 to 22 samples.</li>
+<li>Read the live network config and parameter-ranges endpoints before tuning, because scoring version, rewards and allowed ranges change there first.</li>
+<li>When ready, run bash start-miner.sh, create or select a wallet and register a hotkey on subnet 107; expect several rounds before you are eligible for rewards (5 scored rounds out of the last 20).</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Everything that sets rewards is controlled through a team-run platform and its network-config endpoint, and the tasks, truth data, assignments and the peer scores that fill each validator&#x27;s gaps come from the same platform. The team has added hashes, a block-hash task selector and post-round truth files so that miners can check parts of the process, but it will not publish validator logs.</li>
+<li>Share history: the August notice and the code defaults say 90 percent for the winner, while the live configuration and the chain on 2026-10-21 show 80 percent. No announcement of that change was found.</li>
+<li>Accusations of copying, multi-UID occupation and self-mining are unresolved. The team says about one round in three is a tie and that it has no evidence of copying; some miners disagree. On chain, 96 coldkeys held the 100 slots and only 3 held more than one, but one rewarded hotkey per coldkey would push any fleet onto separate coldkeys, so this settles nothing. Configs are committed as hashes on chain; the configs themselves stay on the platform.</li>
+<li>The repository&#x27;s architecture doc contradicts itself about when validators can see the truth file (held back while submissions are open in one place, available to validators while open in a table). The reference validator code only fetches truth for rounds already in the scoring phase, which fits the first reading. The platform&#x27;s own enforcement is closed code.</li>
+<li>The Mintlify docs site is out of date: it predates commit-reveal, subset scoring and scoring v2, and still has a FreeBayes guide although FreeBayes was retired in May 2026.</li>
+<li>Config search is compute-hungry and, per the team, leading entries use configs fitted to each round, so newcomers face a tuning and cost barrier.</li>
+<li>IM2, custom algorithms, the macOS app and the commercial pilots mentioned by the owner are chat statements only; no public IM2 code, release date or revenue figures were found. The paid-resubmission fee announced for September was still disabled on 2026-10-21.</li>
+<li>The chain&#x27;s weights version key is 20, which by the repository&#x27;s version-packing rule corresponds to release 0.2.0, while the repository is at 0.3.0; the minimum has not been raised to the current release.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://theminos.ai" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://docs.theminos.ai/overview" rel="noopener noreferrer">Docs</a></li>
+<li><a href="https://github.com/minos-protocol/minos_subnet" rel="noopener noreferrer">GitHub (subnet code)</a></li>
+<li><a href="https://github.com/minos-protocol/minos_round_selector" rel="noopener noreferrer">GitHub (round selector)</a></li>
+<li><a href="https://api.theminos.ai/scoring/network-config" rel="noopener noreferrer">Live network config</a></li>
+<li><a href="https://api.theminos.ai/scoring/parameter-ranges" rel="noopener noreferrer">Parameter ranges</a></li>
+<li><a href="https://x.com/theminos_ai" rel="noopener noreferrer">X account</a></li>
+<li><a href="https://api.theminos.ai/verification/task-window" rel="noopener noreferrer">Public task window (round draws and file hashes)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 11 sources</summary>
+<ul>
+<li><strong>repo</strong> minos-protocol/minos_subnet README.md, docs/scoring.md, utils/weight_tracking.py, min_compute.yml at 4b3c094 (2026-10-08)</li>
+<li><strong>repo</strong> minos-protocol/minos_round_selector README.md at ef7e722 (2026-09-02)</li>
+<li><strong>web</strong> https://api.theminos.ai/scoring/network-config and /scoring/parameter-ranges (fetched 2026-10-20)</li>
+<li><strong>web</strong> https://theminos.ai and https://docs.theminos.ai/overview (fetched 2026-10-20)</li>
+<li><strong>msg</strong> #minos pinned announcements 2026-03-15 to 2026-09-08</li>
+<li><strong>msg</strong> #minos, owner posts and miner discussion 2026-08-24 to 2026-10-20</li>
+<li><strong>repo</strong> minos-protocol/minos_subnet docs/architecture.md, neurons/validator.py (_score_round_submissions, _finalize_round_scores, _set_weights_after_round), utils/platform_client.py, neurons/__init__.py, LICENSE at 4b3c094 (re-read 2026-10-21)</li>
+<li><strong>web</strong> https://api.theminos.ai/scoring/network-config, /scoring/parameter-ranges and /verification/task-window (fetched 2026-10-21; the updated_at field there is the request time, not a change date)</li>
+<li><strong>web</strong> https://docs.theminos.ai/llms.txt, /architecture.md and /quickstart.md (read 2026-10-21)</li>
+<li><strong>web</strong> Bittensor mainnet chain reads for netuid 107 at blocks 9334722, 9335131 and 9335134/9335135 (params, uids, weights, owner slot, stake, coldkey grouping)</li>
+<li><strong>msg</strong> #minos 2026-10-20 to 2026-10-21 and archive search on dust/EMA history 2026-05 to 2026-07</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/106.html"><small>← Previous</small>SN106 Nodexo</a><a rel="next" href="/bittensor-docs/subnets/108.html"><small>Next →</small>SN108 ChipForge</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-21. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

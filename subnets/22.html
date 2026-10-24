@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Desearch (SN22) | Bittensor Subnet Docs</title>
+<meta name="description" content="Miners crawl web pages and compute embeddings for Desearch&#x27;s search index; validators spot-check uploads.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h10">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>22</span><div>
+<h1>Desearch <span class="muted">SN22</span></h1>
+<p class="tagline">Miners crawl web pages and compute embeddings for Desearch&#x27;s search index; validators spot-check uploads.</p>
+<span class="st s-transitioning">transitioning</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>12<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>7.4<small>/day</small></b><span>days 8-30</span></li><li class="pl3"><b>1.9<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-24</b><span>last chat</span></li><li class="pw"><b>6,412</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>web crawling and embeddings (search index)</dd>
+<dt>Status</dt><dd>Desearch 2.0 (crawl and embedding work) has run since early October 2026 and is still being changed: on 10-22 the team moved upload storage from Cloudflare R2 to an OVHcloud bucket (releases 0.0.239 and 0.0.240) after R2 problems, miners reported failed uploads again that evening, and a release that cuts the burn for GPU tasks is promised without a date. On 10-23 all nine validators setting weights on chain gave about half their weight to the burn UID, which is the owner hotkey.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-23</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>Desearch is a subnet run by the team behind the Desearch search product (an API at console.desearch.ai). Until late September 2026 miners answered search queries. Under the 2.0 design miners instead build a web index: they crawl batches of URLs and, since 10-19, compute text embeddings on GPUs, and the team builds its search index from the results that pass checks. A task API run by the team hands out the work, and validators re-check uploads and set weights from a public signed log.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Two kinds of task. A crawl task is a batch of about 1,000 URLs that a miner must claim and finish within 3 minutes, uploading the fetched pages as Parquet files straight to a temporary public storage bucket (Cloudflare R2 until 10-22, an OVHcloud bucket since). An embedding task needs a GPU (16 GB minimum, 24 GB recommended), has a 5-minute claim window, and asks for vectors from the team&#x27;s embedding model (desearch-4b-v1, 2560 dimensions, float16, published on Hugging Face as Desearch-Embedding-4B). Each miner has a task budget that grows when tasks pay out at 85 percent of their URLs or more (cap 100) and is halved on a failed check, an expired claim or a handback. Repeated failures bring lockouts of 1 hour, 12 hours and 48 hours.</p></div><div><h3>Validators</h3><p>The task API draws which uploads get checked from a block hash taken 10 blocks after completion, and signs a log of each round that anyone can verify with a tool in the repo. The docs say every validator checks every listed upload: every upload from a new hotkey until it has 10 passes (and for the next 10 after a fail), plus a share of other miners&#x27; uploads, at least about one an hour. The task API only accepts check results from a hotkey with a validator permit, at least 10,000 total stake and at least 20 alpha. For crawl tasks the validator fetches pages itself and falls back on a third-party scraping service (a working key is required) for pages its own address cannot load, and the submitted text has to match; a report covering under 85 percent of the task&#x27;s URLs fails. For embedding tasks the validator re-embeds 48 sampled texts, on its own model server or the team&#x27;s, and needs a cosine similarity of at least 0.999 with finite, unit-length vectors. Each validator keeps its own ledger of the public upload log plus its own check results and sets weights from that, not from the task API; it sets none while the scraping service refuses three tasks in a row, three tasks cannot be scored, or the task API refuses its reports. The validator script updates itself every 20 minutes.</p></div><div><h3>Incentive</h3><p>In the validator code (version 0.0.240) a miner&#x27;s amount over a 24-hour window is the rows credited by its passed checks, minus the URLs assigned in failed checks, plus its unchecked uploads at the rate its checks of the last 72 hours paid. Uploads inside a span that a failed check takes back count for nothing: everything since its last pass, and the day before a second fail among the last 10 checks. A crawl check credits pages in proportion to the sampled pages that matched plus confirmed errors, and nothing if the check fails or half or more of the samples cannot be verified; reporting more content rows than the check counted, beyond a 2 percent slack, counts as a fail. An embedding pass is credited the characters it was assigned. Weights then give crawl miners 20 percent and embedding miners 30 percent, each split by positive amounts, and whatever a pool did not pay goes to the burn UID: the burn is 50 percent when both pools pay, 70 percent when only embedding pays and 80 percent when only crawl pays. On chain the subnet&#x27;s emission split is 18 percent owner, 41 percent validators and 41 percent miners, and unpaid owner-hotkey incentive is burned. In the code history the burn share went 80 percent (09-30), 70 percent (10-05) and 50 percent (10-14). The team said on 10-21 that the burn will be reduced for GPU tasks in the next release with a goal of zero, and gave no date or figure. Fine-tuning competitions for retrieval and ranking models are only announced as a later program and were not open when read.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-23</span> <span class="muted">(public task API)</span> The public task API at about 03:45 UTC listed 222 crawl miners and 466,897 crawl tasks in the last 24 hours (459,667 passed, 17 failed, 13 void) and 22,563 embedding tasks in the same window (22,561 passed, none failed), with empty queues. Two validators (UIDs 58 and 113) were known to it, both active, with no disagreements over about 14,100 votes each.</li>
+<li><span class="when">2026-10-23</span> <span class="muted">(chain read (block 9343602))</span> On chain at block 9343602 all nine validators with weights gave 50.0 to 50.2 percent to UID 19, which is the owner hotkey; the burn setting is Burn. The other 239 UIDs with incentive sit under 19 coldkeys that each hold at least 2 of them; the largest holds 40 UIDs (26 percent of the non-burn incentive) and the top 10 hold 87.5 percent. UID 58, which holds 73.5 percent of validator dividends, shares the owner&#x27;s coldkey (the chain does not say who runs it).</li>
+<li><span class="when">2026-10-22</span> <span class="muted">(#22-desearch, GitHub)</span> The storage trouble returned: a miner reported many 403 errors in the morning and the team said R2 was still failing, that it was moving to another provider and that it would write about the release that day. Code that reads uploads from an OVHcloud bucket instead of R2 was merged at about 08:00 UTC (pull request 394, version 0.0.239) and a follow-up at about 09:26 UTC (pull request 395, version 0.0.240) counts a refused read of a closed task as a missing upload rather than a changed one. At 09:35 UTC the team said the fix was deployed and miners were restored. A critic asked for keys that took strikes during the outage to be reinstated; no team answer was seen.</li>
+<li><span class="when">2026-10-22</span> <span class="muted">(#22-desearch)</span> In the evening two miners reported failed uploads again, and at midday one had asked whether embedding tasks had stopped. No team reply was seen, and the release write-up promised for the day had not been posted in the channel by 03:50 UTC on 10-23.</li>
+<li><span class="when">2026-10-21</span> <span class="muted">(#22-desearch)</span> The team said the burn will be reduced for GPU tasks in the next release, with a goal of zero. It acknowledged that miners register extra UIDs to claim more of the scarce tasks and said it has no fix yet, said it runs the task API centrally to iterate quickly, and offered to publish task API logs. One team idea was to have all miners do the same task and reward the fastest correct result; a miner objected that this would slow overall throughput. A critic argued the API is a black box that decides who earns.</li>
+<li><span class="when">2026-10-21</span> <span class="muted">(#22-desearch)</span> Late in the day a miner reported intermittent 5xx errors on upload that left tasks abandoned, cut that miner&#x27;s budget and locked out one hotkey. The team answered that night that a Cloudflare R2 problem had been resolved.</li>
+<li><span class="when">2026-10-19</span> <span class="muted">(#22-desearch, GitHub)</span> The embedding release went out (code version 0.0.237, with 0.0.238 on 10-20). The team reported a few completion timeouts while monitoring. Miners and an outside critic argued about the low emission, the high burn and a shortage of tasks.</li>
+<li><span class="when">2026-10-15</span> <span class="muted">(#22-desearch)</span> Miners reported uploads failing after a storage change and on-time uploads being counted as expired. On 10-16 the team said the expired-count bug was fixed.</li>
+<li><span class="when">2026-10-14</span> <span class="muted">(#22-desearch, GitHub)</span> The team announced the embedding program: a 50 percent burn from the release with the rest split 20 percent crawl and 30 percent embedding, a release planned for 10-19 at 12:00 UTC, and the embedding model on Hugging Face. The burn share in the code dropped to 50 percent the same day.</li>
+<li><span class="when">2026-10-11</span> <span class="muted">(#22-desearch)</span> A miner posted that release 0.0.234 dropped the re-check of rendered pages, which caused content-mismatch failures and 48-hour lockouts for tens of the roughly 245 miners; release 0.0.235 restored it and the team said the issues were fixed the same day. The lockout numbers are the miner&#x27;s, not the team&#x27;s.</li>
+<li><span class="when">2026-10-05</span> <span class="muted">(#22-desearch, GitHub)</span> A fixes release (GitHub pull requests 381 to 383) sped up task claims, let validators keep up with uploads, accepted uploads that went unchecked in time instead of voiding them, and timed completion from when the upload reaches the task API. The burn share in the code went to 70 percent the same day, matching the team&#x27;s announcement. Earlier that day miners had reported validation-backlog refusals.</li>
+<li><span class="when">2026-10-01</span> <span class="muted">(#22-desearch)</span> The team said weights were now being set with less than a full burn, that validators were slow and that tasks were limited. Miners complained that slow confirmation of completed tasks used up the 3-minute claim window.</li>
+<li><span class="when">2026-09-25</span> <span class="muted">(#22-desearch)</span> The team announced Desearch 2.0: instead of answering search queries, miners would crawl web pages and later compute embeddings. Validators were set to put all weight on burn and stop querying miners until the release, which the team gave as 10-01.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Read docs/miner.md (crawl) and docs/embedding-tasks.md (GPU embedding) in the subnet repo; the team said in chat on 09-28 that local sandbox testing is documented there.</li>
+<li>Decide which task kind you can run: crawl needs reliable fetching and uploading within a 3-minute claim, embedding needs a GPU with at least 16 GB (24 GB recommended).</li>
+<li>Expect every upload from a new hotkey to be checked until it has 10 passes, and note that failed checks and expired claims shrink your task budget and can lock the hotkey out.</li>
+<li>Validators need a hotkey with a validator permit, at least 10,000 total stake and at least 20 alpha, plus a key for the scraping service; read docs/validator.md. The validator script updates itself every 20 minutes.</li>
+<li>Read the latest messages in the project&#x27;s channel before committing hardware: the burn, task supply and upload storage were all changing in October 2026 (storage moved on 10-22).</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>The chain was read at block 9343602 on 2026-10-23: validator weights, owner and coldkey tests, the emission split and the spread of incentive. Stake, emission amounts and prices were not read and the page gives no market figures. Weights are validators&#x27; opinions, not payouts.</li>
+<li>The task API is run centrally by the team and its running code cannot be audited from outside. The repo ships a signed log and a verification tool, and a critic alleged on 10-21 that the live API differs from GitHub and favours some keys; that claim is unproven and nothing found supports it. The repo&#x27;s commits of 10-22 change where uploads are stored and how a refused read is treated; the scoring files (weights, ledger, credit) did not change between 10-20 and 10-22.</li>
+<li>Only 2 of the 9 validators that set weights (UIDs 58 and 113) report their checks to the task API. The other 7, holding about 26 percent of validator dividends, set the same 50 percent burn weights without appearing there. The docs say a validator sets weights only while its checks are accepted, so the reason was not found (weight copying, a different build and refused reports are all unproven). UID 58 holds 73.5 percent of dividends.</li>
+<li>Task scarcity is acknowledged by the team (miners registering extra UIDs to claim more tasks) and has no fix yet. The chain shows every UID earning incentive under one of 19 coldkeys that each hold at least 2 of them (the largest 40), which fits those statements but does not show how tasks are allocated. Miners disagree in chat about whether more UIDs really bring more tasks.</li>
+<li>Reliability problems recur in the chat: the 10-06 outage, 10-11 mismatch lockouts, 10-15 upload and expiry bugs, 10-20 mismatches, and the R2 problems of 10-21 and 10-22 that led to the move to OVHcloud, with failed uploads reported again on the evening of 10-22. Most counts of lockouts or failed uploads are miners&#x27; own reports; the team confirmed fixes for some but not all, and whether keys struck during the R2 problems were reinstated was asked but not answered in the channel.</li>
+<li>Release dates moved: the team gave 10-01 for Desearch 2.0, but burn changes and the embedding release followed on 10-05, 10-14 and 10-19, and a write-up promised for 10-22 was not seen by 10-23. The burn level after the next release has no date or number. The 50 percent burn on chain follows from both the crawl and embedding pools being paid; if one stops paying, the code burns its share too (70 or 80 percent).</li>
+<li>Some documentation lags: docs/architecture.md still says embedding is switched off while the README says it is running and the task API shows embedding tasks passing. The on-chain identity description still reads &#x27;Decentralized search engine&#x27;; its repository link redirects to the current repo, which was renamed.</li>
+<li>Fine-tuning competitions are only announced as a later step, so the page does not describe how they would work.</li>
+<li>A pinned team post dated 2026-01-30 publishes a postmortem of an incident that began in July 2025, with a weights and VTrust investigation report and an improvement plan (three PDFs). They were not read, so this page does not assess that history or the earlier search-mining design.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/Desearch-ai/subnet-22" rel="noopener noreferrer">GitHub</a></li>
+<li><a href="https://desearch.ai" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://console.desearch.ai" rel="noopener noreferrer">Search API console</a></li>
+<li><a href="https://huggingface.co/desearch/Desearch-Embedding-4B" rel="noopener noreferrer">Embedding model (Hugging Face)</a></li>
+<li><a href="https://api-22.desearch.ai/v1/overview" rel="noopener noreferrer">Public task API overview (read only)</a></li>
+<li><a href="https://x.com/desearch_ai" rel="noopener noreferrer">X</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 6 sources</summary>
+<ul>
+<li><strong>repo</strong> Desearch-ai/subnet-22@2860168 (2026-10-22, version 0.0.240): README.md, docs/architecture.md, docs/miner.md, docs/validator.md, docs/emission.md, docs/embedding-tasks.md, neurons/validators/{weights,ledger,config,tasks,upload_log}.py, desearch/credit.py, task-api/README.md and the commit log since 8f3e0a9</li>
+<li><strong>web</strong> https://api-22.desearch.ai/v1/overview (also ?kind=embed), /v1/validators, /health, /miners and /room, read 2026-10-21 and 2026-10-23 (counts only)</li>
+<li><strong>web</strong> Upload store: validation/open.json on the OVHcloud bucket answered HTTP 200 and on r2.desearch.ai answered 403 on 2026-10-23</li>
+<li><strong>web</strong> github.com/datura-ai/desearch redirects to github.com/Desearch-ai/subnet-22 and both report the same HEAD (checked 2026-10-23); page links checked 2026-10-23</li>
+<li><strong>web</strong> Chain read at block 9343602 on 2026-10-23 (hyperparameters, validator permits, weights of all validators, emission split, burn setting, owner and coldkey tests) and earlier at block 9332044 on 2026-10-21</li>
+<li><strong>msg</strong> #22-desearch, 2026-09-25 to 2026-10-22 (messages through 19:48 UTC on 10-22), plus a pinned team post of 2026-01-30</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/21.html"><small>← Previous</small>SN21 AdTAO</a><a rel="next" href="/bittensor-docs/subnets/23.html"><small>Next →</small>SN23 Trishool</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-23. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

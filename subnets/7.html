@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Allways (SN7) | Bittensor Subnet Docs</title>
+<meta name="description" content="Native cross-chain swaps backed by miner collateral and verified by validators, settled on Solana.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h1">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>7</span><div>
+<h1>Allways <span class="muted">SN7</span></h1>
+<p class="tagline">Native cross-chain swaps backed by miner collateral and verified by validators, settled on Solana.</p>
+<span class="st s-transitioning">transitioning</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>17<small>/day</small></b><span>last 7 d</span></li><li class="pl4"><b>3.7<small>/day</small></b><span>days 8-30</span></li><li class="pl4"><b>2.4<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-24</b><span>last chat</span></li><li class="pw"><b>1,385</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>cross-chain swaps / settlement</dd>
+<dt>Status</dt><dd>On 2026-10-21 the team announced the network resumed (v3.7.3, 20:10 UTC) after two exploit-driven halts in a week, with a new fee-based reward rule shipped the same day. About 40 minutes later the chain still showed all incentive on the owner UID, so payouts after the resume were not yet visible.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-21</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>Allways is a swap network in which a user sends one asset from their own wallet and a miner delivers a different asset natively to the destination wallet, with no wrapped tokens or bridge. Miners post rates and back them with collateral (SOL held on Solana, or a TAO bond), and validators verify both legs on-chain and slash the miner if delivery fails. Swaps are coordinated by a Solana program; Bittensor is used for miner registration, scoring and emissions. Supported assets include SOL, TAO, BTC, ETH, several stablecoins and, since 2026-09-26, subnet alpha tokens.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Miners register a hotkey, post collateral (SOL on Solana, or a TAO bond in a Bittensor vault) and publish a rate per swap direction. When a taker reserves their quote they must deliver the destination asset from the exact address they committed, within the deadline (10 minutes by default, longer for slow chains). Each missed deadline slashes collateral to the user and adds a lifetime strike; the team&#x27;s reference miner is offered as reference software to be used at the operator&#x27;s own risk. The hotkey-to-Solana-key binding is permanent.</p></div><div><h3>Validators</h3><p>Validators must be whitelisted on the Solana program by its admin. They run the reservation draw, check both legs of each swap on the relevant chain, vote confirm, cancel or timeout by quorum, relay TAO bond state between chains, and score miners to set Bittensor weights. A validator that cannot see a delivery can wrongly time out an honest miner, which is why the docs insist on paid or self-run RPC endpoints.</p></div><div><h3>Incentive</h3><p>Per the code at 2026-10-21, a miner&#x27;s reward on a direction is its eligibility (0 or 1) times the direction&#x27;s pool times a blend: 65% for time spent holding the best executable rate (the crown, scaled by how much collateral backs it) and 35% for its share of fills that were reserved while it held the crown. Eligibility needs at most 2 lifetime timeouts and one completed fill per purse in the last 12 hours. Pools follow demand: a pair with no qualified fill in 24 hours is paid nothing. From v3.7.3 every pool is also scaled by min(1, 2 x 24-hour swap fees / miners&#x27; 24-hour emission); whatever is not paid, and everything during a halt, is recycled to the owner UID (UID 53). The chain confirms UID 53 is the owner hotkey slot.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-21</span> <span class="muted">(on-chain read)</span> Chain read at blocks 9334297 to 9334343 (about 20:35 to 20:48 UTC): one UID, the owner hotkey slot (UID 53), held 100% of incentive, and all 12 validators that had set weights put their top target on it. 14 validator permits, commit-reveal on with a 2-epoch reveal. This was 25 to 40 minutes after the resume announcement, so it shows the halted or full-recycle state, not post-resume payouts.</li>
+<li><span class="when">2026-10-21</span> <span class="muted">(#allways; GitHub entrius/allways commit d455a52)</span> Team announced v3.7.3: the network resumed, existing quotes carry over, posting a new miner wallet costs a one-time 0.02 SOL, a posted miner wallet can no longer be the source of a swap, and miners are paid up to 2x the swap fees collected over the last 24 hours with the rest burned. The repository commit and release tag from the same day match.</li>
+<li><span class="when">2026-10-20</span> <span class="muted">(#allways; GitHub entrius/allways commits)</span> Second incident: the team said one taker exploited a validator-side flaw in swap-event handling between 06:22 and 07:10 UTC, so swaps that miners had delivered were marked timed out and the slash went to that taker. The network was halted. The team said the first miner hit would be reimbursed (done the same day) and later ones would not, and that strikes cannot be cleared. Some miners disputed this in chat. Repository commits that day tighten event reading and deposit checks, which fits the team&#x27;s account but is not proof of which fix addressed which exploit.</li>
+<li><span class="when">2026-10-19</span> <span class="muted">(#allways)</span> Network resumed on v3.7.0 after the first halt, roughly two days after the team had said it expected to be live again within a day. The team asked miners to review the code and handle all cases before reactivating, and said miner emission would be back to 0% burn that day.</li>
+<li><span class="when">2026-10-18</span> <span class="muted">(#allways)</span> Team reimbursed five miners hit by the 2026-10-14 to 10-16 exploit, about 3.57 SOL and 19.24 TAO in total, calling it a one-time exception and the last. It said no users were affected (every user swap completed or was refunded) and that all three bugs were fixed in v3.7.0.</li>
+<li><span class="when">2026-10-14</span> <span class="muted">(#allways)</span> Team posted its own figures for the previous 24 hours: about USD 2,570 in protocol fees over 349 completed swaps, against about USD 1,610 in estimated miner emissions. These numbers are the team&#x27;s and were not independently checked.</li>
+<li><span class="when">2026-10-13</span> <span class="muted">(#allways)</span> Validator update: quotes with an unusable miner address earn nothing for up to 12 hours, the volume-based share of rewards rose from 25% to 35%, partial collateral is penalised less, and maximum swap sizes were raised to 5 TAO and 12 SOL.</li>
+<li><span class="when">2026-09-26</span> <span class="muted">(#allways)</span> v3.5.0 made subnet alpha tokens swappable against BTC, SOL, ETH, USDC and other listed assets. The team said one third of miner emission goes to alpha pairs and that alpha swaps are backed by TAO collateral.</li>
+<li><span class="when">2026-09-11</span> <span class="muted">(#allways)</span> v3.4.0 split each direction&#x27;s pool 75/25 between crown time and qualified volume, replaced the two-fill warm-up with a 12-hour activity window, stopped paying pairs with no recent fills, and added a guided miner setup command.</li>
+<li><span class="when">2026-09-04</span> <span class="muted">(#allways)</span> Allways Access launched: a browser swap app run by the Ventura Labs validator, using the network as its backend. The team said any SN7 validator can build a similar product.</li>
+<li><span class="when">2026-09-01</span> <span class="muted">(#allways)</span> v3.3.1 removed the miner burn (90% to 0%) at the time. Burn later returned in a different form with the fee-scaled rule of 2026-10-21.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Read the miner guide and the repository README first: the reference miner is offered at the operator&#x27;s own risk and the guide lists five ways a miner loses money.</li>
+<li>Prepare a Bittensor wallet, a funded Solana keypair, a keyed Solana RPC endpoint and a signing key for each asset you will deliver, on a hardened server (the docs ask for Docker, 2 CPUs and 4 GB RAM).</li>
+<li>Run the guided setup (alw miner init) and the preflight (alw doctor). The on-chain order is: deposit, bind hotkey to Solana key (permanent), register, bond if TAO-backed, start the miner, activate, then post quotes. The chain showed a 0.15 TAO registration burn on 2026-10-21.</li>
+<li>Check alw view config and alw miner status for live collateral minimums, swap size bounds and your strike counter before funding: the minimums quoted in chat changed between 2026-08-20 and 2026-09-04.</li>
+<li>Validators need a Bittensor validator permit, a Solana keypair whitelisted by the contract admin, paid RPC endpoints, and ideally their own Bittensor node.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Chat 2026-10-20 and 10-21 shows an active dispute: affected miners say the validator bug should not cost them collateral, while the team says mining is opt-in and only the first miner hit is reimbursed. Both are statements, and the transfer destination of the slashed collateral was not checked here.</li>
+<li>The root causes of the 2026-10-14 to 10-16 and 2026-10-20 incidents come from the team&#x27;s posts. Repository commits fit them but do not prove which change fixed which exploit.</li>
+<li>The fee-scaled reward rule shipped on 2026-10-21. The commit says old fee records read zero, so payouts may start low for the first day; this is an inference and was not observed. The chain still showed all weight on the owner UID about 40 minutes after the resume announcement.</li>
+<li>Docs lag code: the incentive docs do not mention the fee-scaled pool and describe the collateral ramp as convex while the code constant is linear. How emission is split between asset families in the live code was not read (the team says one third goes to alpha pairs).</li>
+<li>Validators are whitelisted by the contract admin (up to 16 in code). The vote threshold is an on-chain setting that was not read, and the stake split between validators was not checked.</li>
+<li>The chain shows netuid 7 registered on 2024-03-24, before this project&#x27;s repository (created 2026-03-09). The chain data read does not say when the current team took the netuid. The docs footer names Ventura Labs LLC while the repository is under the entrius organisation; ownership was not established.</li>
+<li>Swap volume, fee and buyback figures are the team&#x27;s. The dashboard is client-rendered and no public statistics API was found, so no live volume or payout totals are published here.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/entrius/allways" rel="noopener noreferrer">GitHub</a></li>
+<li><a href="https://docs.all-ways.io/" rel="noopener noreferrer">Docs</a></li>
+<li><a href="https://docs.all-ways.io/miner.html" rel="noopener noreferrer">Miner guide</a></li>
+<li><a href="https://docs.all-ways.io/validator.html" rel="noopener noreferrer">Validator guide</a></li>
+<li><a href="https://docs.all-ways.io/incentive.html" rel="noopener noreferrer">Incentive docs</a></li>
+<li><a href="https://all-ways.io/" rel="noopener noreferrer">Dashboard</a></li>
+<li><a href="https://allways.venturalabs.ai/" rel="noopener noreferrer">Allways Access (team-announced app)</a></li>
+<li><a href="https://x.com/allways_io" rel="noopener noreferrer">X</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 4 sources</summary>
+<ul>
+<li><strong>repo</strong> entrius/allways README.md, allways/constants.py, allways/validator/scoring.py, smart-contracts/solana/programs/allways_swap_manager/src/{constants,consensus,lib}.rs and git log @d455a52 (2026-10-21), tag release-20261021-195318</li>
+<li><strong>web</strong> docs.all-ways.io home, miner, validator, incentive and swap-guide pages (curl, 2026-10-21); all-ways.io and api.all-ways.io returned nothing readable</li>
+<li><strong>msg</strong> #allways 2026-07-30 to 2026-10-21 (team posts from 2026-08-15, including v3.3.0 to v3.7.3 changelogs and the 2026-10-17, 10-18 and 10-20 incident posts)</li>
+<li><strong>web</strong> On-chain read via public node 2026-10-21: subnet info at block 9334276, params 9334296, incentive and weight aggregates 9334297 to 9334343, owner-slot comparison at 9334301 (booleans only)</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/6.html"><small>← Previous</small>SN6 Numinous</a><a rel="next" href="/bittensor-docs/subnets/8.html"><small>Next →</small>SN8 Vanta</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-21. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

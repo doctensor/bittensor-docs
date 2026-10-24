@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>REAX (SN92) | Bittensor Subnet Docs</title>
+<meta name="description" content="Decision-model inference network: miners host pinned models, validators verify answers, plus engine and model contests.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h20">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>92</span><div>
+<h1>REAX <span class="muted">SN92</span></h1>
+<p class="tagline">Decision-model inference network: miners host pinned models, validators verify answers, plus engine and model contests.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>125<small>/day</small></b><span>last 7 d</span></li><li class="pl4"><b>2.7<small>/day</small></b><span>days 8-30</span></li><li class="pl2"><b>0.47<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-24</b><span>last chat</span></li><li class="pw"><b>962</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>Decision-model inference and model competitions</dd>
+<dt>Status</dt><dd>As of 2026-10-23 03:00 UTC mining and both competition tracks were paying: the team feed listed 236 miners and 226 were weighted in the team validator&#x27;s latest set. The generalist model track opened on 10-21 and crowned three co-champions on 10-22. A rules update takes effect on 2026-10-23 at 13:00 UTC, and the next generalist crowning slot is 2026-10-26 at 14:30 UTC on a new evaluation (v5) that had not been published yet.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-23</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>REAX is a subnet run by a German company that also sells a decision-model API (Decision Models). A decision model is a small AI model that answers one narrow, typed question quickly, such as choose an option, give yes/no/unknown, or score something. Miners host a few pinned open models on their GPUs (or CPUs), validators re-compute their answers to check them, and half of the miner emission goes to contests that reward a faster inference engine and a better fine-tuned generalist decision model.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Inference miners run one of four pinned models in a runtime sidecar and serve signed requests: s1-fast (Plumb-4B, GPU with 24 GB or more), s1-pro (Rune 26B-A4B v3, 80 to 96 GB GPU), s1-lite (the Plumb-4B model as an 8-bit GGUF for GPUs from 8 GB, including Jetson) and s1-cpu (a 0.8B model on plain CPUs). A hotkey publishes an on-chain commitment naming its pool, and changing it resets that UID&#x27;s score. Since chain block 9331987 (about 2026-10-21 13:00 UTC) one hotkey can carry 2 to 4 models behind one axon and also hold one competition entry; on 10-23 the feed showed about two thirds of the hotkeys serving s1-cpu as a second model. Competition miners instead submit work: an engine container image (reused code must be declared in an image label from 10-23 13:00 UTC, or it counts as a copy), or a fine-tuned open-weight model of up to 36B parameters (a Hugging Face repo and revision, committed on chain) for the generalist track. One coldkey may hold at most 2 open submissions per track and 4 new ones per 7 days.</p></div><div><h3>Validators</h3><p>The team&#x27;s validator (UID 3) sends each miner 8 items about every two minutes, recomputes a subset on its own copy of the pinned model and compares the answers in logit space. Wrong answers or swapped models score zero, and some failures earn strikes. Correctness counts most and speed about a fifth. Separate surprise load probes measure each hotkey&#x27;s real throughput, so one machine split across many hotkeys gains nothing. Competition entries are scored by a team-run worker on sealed items or on a dedicated RTX PRO 6000 GPU, and an award is paid only after an approval signed with a key the team holds (clear cases are auto-approved from 10-23). On 2026-10-23 three other validators (UIDs 1, 2 and 93) had permits and set weight rows within about 1% of the team validator&#x27;s; the chain does not show whether they run the REAX validator or copy it.</p></div><div><h3>Incentive</h3><p>Per the team&#x27;s FAQ (updated 2026-10-22) and the repo, the miner part is split 50% inference, 20% engine and 30% generalist model track (the demand-forecasting and risk-assessment tracks stopped being paid on 10-21). A competition track pays the champion plus the two most recently dethroned champions 75/17/8 percent, not runners-up; the engine champion&#x27;s share decays to half over 14 days and engine former champions are paid up to 7 days. Any share nobody may be paid goes back to inference. Inside inference, tier budgets are 80% big GPU, 15% small GPU and 5% CPU, and GPU pay is linear in verified throughput up to a per-hotkey cap (1,280 decisions/s for s1-fast, 320 for s1-pro, 32 for s1-lite, 4 for s1-cpu). From 2026-10-23 13:00 UTC, in s1-lite and s1-cpu a coldkey&#x27;s first two hotkeys count in full and each further one counts 70% of the one before; the freed weight goes to the other miners of that pool. On chain the emission split was 18% owner, 41% validators and 41% miners with nothing burned or recycled (read 2026-10-23), and the burn setting in code defaults to 0.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-23</span> <span class="muted">(chain read, blocks 9343343 to 9343362)</span> A chain read found four validator permits (UIDs 1, 2, 3 and 93) whose weight rows were nearly identical, 224 miners with incentive, the top miner (uid 56, engine champion) at 17% of incentive, and the owner hotkey set to the team validator (UID 3).</li>
+<li><span class="when">2026-10-22</span> <span class="muted">(#92-reax, reax.co live and FAQ pages)</span> The generalist opening playoff ended in a statistical tie of three entries (within 0.15 points over two draws). The team first applied its earliest-commitment tie rule, then after protests made all three co-champions paying a third each; the next two entries take the 17% and 8% slots from 10-23. No crowning happens on 10-23: slots are every Monday and Thursday at 14:30 UTC, the first on 10-26, with the v5 evaluation promised at least 48 hours before its first slot.</li>
+<li><span class="when">2026-10-22</span> <span class="muted">(#92-reax)</span> On the engine track uid 56 was approved as champion after it published the source of its closed kernels, uid 176 was crowned later (3.17x the reference) but is on hold for the same reason, and uid 164 was refused measurement for copying image layers without declaring a parent. A validator fault (an outdated state file) zeroed the weights of the co-champions and uid 56 for several hours and two co-champion hotkeys were pruned; the team promised refunds.</li>
+<li><span class="when">2026-10-22</span> <span class="muted">(#92-reax, GitHub changelog, reax.co/competitions/faq)</span> Release 1.2.0rc11 (rules v4) was tagged, switching on at 10-23 13:00 UTC: 900-item generalist draws with a 1.0-point margin, confirmation before a track closes, the per-coldkey taper in the small pools and the engine copy rule. The team published a miner FAQ as its rules reference and asked for EU-based miners under contract for its GDPR tier of the customer product.</li>
+<li><span class="when">2026-10-21</span> <span class="muted">(#92-reax, GitHub changelog)</span> The generalist model track opened at 13:00 UTC with 12 opening-cohort entries on the team&#x27;s REAX 1 base model, and the old use-case tracks stopped paying. Multi-model hotkeys and inference-plus-competition hotkeys started the same day. A validator timing bug that evening gave about 50 hotkeys a zero capacity probe for roughly an hour and a half; the team measured about 6.5 alpha of underpayment and promised to compensate.</li>
+<li><span class="when">2026-10-20</span> <span class="muted">(#92-reax)</span> The engine track opened at 18:00 UTC. The first batch measured nothing because the evaluation machine&#x27;s firewall blocked image registries; a later batch put two entries 0.3% apart and, after protests, the team made them co-champions sharing the share 50/50. A multi-machine hotkey release and a halving of s1-lite pay also shipped.</li>
+<li><span class="when">2026-10-19</span> <span class="muted">(#92-reax)</span> Evaluation v3 went live for the model tracks: 20% private real-data items, a generalisation penalty and a stricter crowning rule. A new risk-assessment champion was held about a day for a hand review because its copy check flagged it as close to an earlier entry.</li>
+<li><span class="when">2026-10-17</span> <span class="muted">(#92-reax)</span> The team reported 217 serving slots and 65 independent wallets, raised the registration fee ceiling to 5 TAO and immunity to about 24 hours, and shipped multi-GPU hotkeys.</li>
+<li><span class="when">2026-10-15</span> <span class="muted">(#92-reax)</span> Incentive started after the subnet owner hotkey was switched to the team validator (the owner&#x27;s stake had not been counted behind its weights); the team said 96 miners were earning and that capacity-based scoring shipped that day.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Read the miner FAQ and the rules page first (the team calls the FAQ its reference since 2026-10-22), then the repo&#x27;s docs/MINER.md and docs/COMPETITIONS.md and the newest changelog entries: the README is older than the code and the rules changed several times in October.</li>
+<li>Check the current registration fee on chain before registering. It was about 1.4 TAO on 10-23, rises with every registration up to 5 TAO and falls back in quiet hours, and a new UID is immune for about 24 hours.</li>
+<li>For inference, pick a pool that fits your hardware, run the pinned runtime sidecar and the reax-miner process, and run the self-check tool before registering. Only the exact pinned weights count, and a hotkey&#x27;s throughput is capped, so large rigs use several hotkeys or several models per hotkey.</li>
+<li>For the engine or generalist tracks, read the track&#x27;s rules in the FAQ and the live queue page, declare any reused engine code in the image label, and commit your entry from the hotkey that will hold it. Note the timings: the rules update starts 10-23 13:00 UTC and the next generalist crowning slot is 10-26 14:30 UTC.</li>
+<li>Keep coldkeys off the server. A hotkey that is deregistered loses its competition commitment, and the team has said keep-alive weight lowers but does not remove the risk of deregistration.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Chain weights were read once, on 2026-10-23 at blocks 9343343 to 9343362. They show which weights were set and the configured emission split, not payouts or intent, and the stake and dividend figures below come from the page author&#x27;s own reading of chain storage.</li>
+<li>Who controls the weights is only partly clear. On 10-23 the team validator (UID 3, also the owner hotkey) held about 3% of the stake weight among the four permit holders (alpha plus 0.18 times root TAO stake) against about 90% behind UID 1, yet it received 95.5% of the dividends; the reason was not established. The team said on 10-15 that its validator carried about 60% of the stake weight, which does not match this read. Sealed evaluation items, the competition worker and the key that signs award approvals are all the team&#x27;s.</li>
+<li>Who holds the owner coldkey is unclear. The operator said on 10-17 and again on 10-22 that he runs the operating company under a contract and is not the owner, and the chain shows the subnet owner coldkey is not the coldkey of the team validator, but the owner is not identified. Repo docs and the site still speak of owner approvals and owner decisions.</li>
+<li>Rules change quickly and tie decisions have been reversed after protests: the engine opening and the generalist opening both ended with a one-off co-champion ruling, the co-champions are to be re-scored on a new evaluation (v5) whose details were still unpublished, and the per-coldkey taper in the small pools may be postponed (the team said so on 10-22; the code sets it to start 10-23 13:00 UTC). A farm can sidestep that taper by spreading hotkeys over more coldkeys, which the repo docs admit.</li>
+<li>Docs and pages lag the code. The README still describes release 1.1 with two models and no competitions, the generalist-release doc still lists a 10-30 default start and says no deployment is authorized, the team feed&#x27;s scoring block shows base caps of 640 and 160 decisions/s while code and FAQ use 1,280 and 320, and the live feed still lists the retired forecasting and risk tracks as live until 10-30. The team validator ran release rc11.post2 on 10-23 while the public repo and its releases stopped at rc11.</li>
+<li>Payments and pruning depend on the team&#x27;s own systems, which failed several times within two days: a probe bug on 10-21, two opening-cohort entries pruned despite keep-alive weight (they were allowed to re-enter by 10-22 07:30 UTC), and an outdated state file on 10-22 that zeroed engine weights and led to two pruned co-champion hotkeys. The team promised compensation or refunds for the probe bug and the pruned engine hotkeys, and on-chain incentive shows only after commit-reveal and the next epoch.</li>
+<li>Entering is expensive and contested. The registration fee ceiling is 5 TAO, participants said competition entrants were near break-even or losing and that mining was unprofitable on any GPU class (10-22), and the team said payouts depend on hardware cost and shrink as miners join. Whether inference mining stays profitable is not shown.</li>
+<li>The threat model accepts that a miner could relay validator items to a hosted API serving the same model, because no technical control stops it. Model repos and engine images are public, which invited copying, and the team added copy checks that it applies by judgement.</li>
+<li>No revenue or traffic figures are given for the customer product: the team said on 10-22 that revenue is still small and that paying miners from product revenue is a long-term aim. Network processing is opt-in for Peer-to-Peer keys only, the EU tier is for contracted EU companies rather than anonymous miners, and claims about demand are the team&#x27;s own.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://reax.co" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://reax.co/competitions/faq/" rel="noopener noreferrer">Miner FAQ (the team&#x27;s stated rules reference)</a></li>
+<li><a href="https://reax.co/competitions/rules/" rel="noopener noreferrer">Competition rules</a></li>
+<li><a href="https://reax.co/mining/" rel="noopener noreferrer">How mining works</a></li>
+<li><a href="https://reax.co/faq/" rel="noopener noreferrer">General FAQ</a></li>
+<li><a href="https://reax.co/competitions/live/" rel="noopener noreferrer">Competitions and live evaluation queue</a></li>
+<li><a href="https://reax.co/miners/" rel="noopener noreferrer">Miner leaderboard (JSON feed behind it: /data/miners/latest.json)</a></li>
+<li><a href="https://github.com/reaxlabs/reax-subnet" rel="noopener noreferrer">Subnet repo (miner, validator, docs)</a></li>
+<li><a href="https://github.com/reaxlabs/reax-subnet/blob/main/CHANGELOG.md" rel="noopener noreferrer">Changelog</a></li>
+<li><a href="https://github.com/reaxlabs/reax-miner-kit" rel="noopener noreferrer">Miner install kit</a></li>
+<li><a href="https://github.com/reaxlabs/reax-engine" rel="noopener noreferrer">Engine competition reference</a></li>
+<li><a href="https://reax.dev/" rel="noopener noreferrer">Developer docs</a></li>
+<li><a href="https://decisionmodels.io/" rel="noopener noreferrer">Customer product (Decision Models)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 6 sources</summary>
+<ul>
+<li><strong>repo</strong> reaxlabs/reax-subnet main commit 455c71d (2026-10-22, release 1.2.0rc11): README, CHANGELOG, docs/COMPETITIONS.md, EMISSIONS.md, DESIGN-POOLS.md, MINER.md, GENERALIST-RELEASE.md, THREAT-MODEL.md, src/reax_subnet/competition_split.py and tiers.py; tags and releases checked 2026-10-23</li>
+<li><strong>web</strong> https://reax.co home, /faq/, /competitions/faq/ (version 1, 2026-10-22), /competitions/rules/, /competitions/live/ and /mining/ (read 2026-10-21 to 2026-10-23)</li>
+<li><strong>web</strong> https://reax.co/data/miners/latest.json and /data/miners/eval-live.json (team validator feeds, read 2026-10-23 02:59 UTC; hotkeys and coldkeys not used)</li>
+<li><strong>web</strong> Chain read at blocks 9343343 to 9343362 (2026-10-23): subnet 92 registration, hyperparameters, validator permits, weight rows, emission split, stakes and owner checks (addresses masked)</li>
+<li><strong>web</strong> GitHub API and ls-remote for the reaxlabs org: repositories, release tags and commit dates (read 2026-10-21 and 2026-10-23)</li>
+<li><strong>msg</strong> #92-reax, 2026-09-21 to 2026-10-23 (about 930 messages read, including all team posts since 10-15)</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/91.html"><small>← Previous</small>SN91 Cascade</a><a rel="next" href="/bittensor-docs/subnets/93.html"><small>Next →</small>SN93 Bitcast</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-23. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cortex (SN100) | Bittensor Subnet Docs</title>
+<meta name="description" content="Bug-bounty challenge and a HyperTrain preview that pays nothing; on 2026-10-21 all chain incentive sat on the owner uid.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h4">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>100</span><div>
+<h1>Cortex <span class="muted">SN100</span></h1>
+<p class="tagline">Bug-bounty challenge and a HyperTrain preview that pays nothing; on 2026-10-21 all chain incentive sat on the owner uid.</p>
+<span class="st s-transitioning">transitioning</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>11<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>24<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>27<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-24</b><span>last chat</span></li><li class="pw"><b>14,322</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>research challenges (bug bounty + decentralized LLM pretraining)</dd>
+<dt>Status</dt><dd>As of 2026-10-21 the subnet is not paying miners. On chain at block 9335130 (about 23:40 UTC) the only uid with incentive was uid 0, the owner&#x27;s own hotkey, and all six validators that had set weights pointed 100 percent at it. The project&#x27;s network page calls Bounty the live challenge, but its public status route said it could not score, and the page calls HyperTrain a preview with nothing paid. The team said on 2026-10-20 the subnet is not finished; no cause or fix was posted through 2026-10-21. HyperTrain code is still being merged (production-issuance changes on 2026-10-21).</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-21</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>Cortex describes itself as an autonomous research network. Miners compete in challenges run by the team, a master service seals each epoch&#x27;s scores into one signed bundle, and validators check that bundle and set weights. Two challenges are in the code: Bounty, where miners file reproducible bug reports on Cortex products, and HyperTrain, a research-stage attempt at verifiable, permissionless pretraining of one shared language model. On 2026-10-21 the project&#x27;s own site called Bounty the only challenge that pays and HyperTrain a preview with nothing paid. The subnet has carried three project names since its 2025 launch (Platform, then BASE, then Cortex), and the repositories warn that interfaces, wire formats and emission shares may change.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Bounty miners pair their hotkey with a dedicated Cortex Chat account, which the operator must authorise, and file reproducible bug reports; the status route sets limits of 5 pending reports per hotkey and 60 seconds between reports. HyperTrain miners register a hotkey, run the team&#x27;s GPU image on the reference card (an RTX 5090), join a run, and train in rounds that other nodes can replay. The project&#x27;s own guide says on 2026-10-21 that there is nothing to mine in HyperTrain yet, and its run table showed one participant, offline. The miner guide describes one GPU per process (last changed 2026-10-19), while the project README describes multi-GPU clusters.</p></div><div><h3>Validators</h3><p>A validator does not run challenges or rent GPUs. It downloads the sealed epoch bundle from the team&#x27;s gateway, checks the hashes, Merkle root and challenge profile against the chain, recomputes the weights and submits them. Any registered hotkey can run one with a setup script from the repository. The master and the challenge containers run only on team infrastructure.</p></div><div><h3>Incentive</h3><p>Bounty gives one point per report that the team&#x27;s public feed marks valid, whatever its severity, counted cumulatively with no reset (status route, 2026-10-21). The challenge pays its full share only once there are 10 valid reports across miners, and any shortfall burns. On 2026-10-21 the public board showed about 91,700 published reports, 99 percent of them valid, from 122 hotkeys, with about 17,000 still awaiting the team&#x27;s review. HyperTrain rewards are meant to vest in escrow over about ten rounds and be forfeited if an auditor&#x27;s replay finds a mismatch; the project says none has matured and its runs use a test ledger. Any challenge share that cannot be scored burns to uid 0. Chain read at block 9335130: the emission split is 18 percent owner, 41 percent validators and 41 percent miners, miner emission aimed at the owner&#x27;s hotkey is burned, and uid 0 is the owner&#x27;s own hotkey. From about 2026-10-08 to 2026-10-19 roughly 70 percent of incentive sat on uid 0 and the rest was spread over 26 to 85 other uids; since about 2026-10-20 all of it is on uid 0. A 2026-09-22 team status post gave the split as 30 percent Bounty and 70 percent Proof, with the Proof share burning, which fits that chain pattern; the repository files show 80/20, 70/30 and 35/35/30 splits in different places.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-21</span> <span class="muted">(chain reads at blocks 9226694 to 9335133 (see sources))</span> On chain at block 9335130 only uid 0 (the owner&#x27;s own hotkey and coldkey) had incentive, and the six validators with weights all put 100 percent on it, so miners received no incentive. History from earlier blocks shows about 70 percent on uid 0 from 2026-10-08 to 2026-10-19 and 100 percent from about 2026-10-20.</li>
+<li><span class="when">2026-10-21</span> <span class="muted">(network.cortex.foundation (hypertrain page, llms.txt, bounty status route), read 2026-10-21)</span> The project&#x27;s network page said Bounty mining is open and HyperTrain is in preview: no round has synced, no reward has matured, the runs use a test ledger, and the one running 354M-parameter run showed a single participant, offline. Its public bounty status route said scoring was unavailable because a backend probe refresh was in progress, and its guide listed Bounty scoring as paused and the older Proof and OpenType challenges as retired.</li>
+<li><span class="when">2026-10-21</span> <span class="muted">(api.cortex.foundation public bounty board, read 2026-10-21; #cortex 2026-10-16)</span> The public bounty board listed 91,664 published reports (90,870 valid, 424 duplicate, 309 invalid) from 122 hotkeys, with 16,990 awaiting review and adjudication still running. The top ten hotkeys held 28 percent of the valid reports. The team had cited about 21,000 submitted reports on 2026-10-16.</li>
+<li><span class="when">2026-10-21</span> <span class="muted">(CortexLM/hypertrain commits 2026-10-20 to 2026-10-21; docs/network-v2.md)</span> The HyperTrain repository merged a pinned one-time production bootstrap issuance and an economic-bound check that a run must pass before production eligibility, plus a fix to allow pausing a v2 run. Its docs warn that a test-ledger run hosted on the production challenge would steer real emission once its first reward matures, and describe the production service as empty with no join accepted.</li>
+<li><span class="when">2026-10-21</span> <span class="muted">(#cortex, 2026-10-21)</span> Miners again reported no emissions in the morning and asked for an update. A chat member said the founder was preparing to roll HyperTrain out soon; no team post was found through the end of the day.</li>
+<li><span class="when">2026-10-20</span> <span class="muted">(#cortex, 2026-10-19 to 2026-10-20)</span> Miners reported that all emissions were burning and asked whether the subnet was finished. The team said no and that it would check. Miners also asked when the bundle version would move to 2 (probably the challenge profile version); no answer was found.</li>
+<li><span class="when">2026-10-16</span> <span class="muted">(#cortex, 2026-10-16; CortexLM/bounty commit history)</span> From about 01:40 UTC the bounty challenge failed to return weights because loading the full report feed took about 37 seconds against a 30-second limit, so its share burned. The team said no reports were lost and a fix raising the limit to 120 seconds was merged that day.</li>
+<li><span class="when">2026-10-16</span> <span class="muted">(#cortex, 2026-10-16 to 2026-10-17; Hugging Face model page)</span> The team said the HyperTrain manifest was still unpublished because it could not get working 8-GPU RTX 5090 machines for auditors (21 launch attempts, one passed qualification). It then found two working machines and promised the manifest that day. A genesis model hosted on Hugging Face (public since 2026-10-14) was named as the starting point.</li>
+<li><span class="when">2026-10-10</span> <span class="muted">(#cortex, 2026-10-08 to 2026-10-12)</span> After announcing on 2026-10-08 that OpenType would be dropped and publishing the opendecision and hypertrain repositories, the team announced HyperTrain with 70 percent of emissions and said on 2026-10-12 that mining was live. The project&#x27;s own site called it a preview on 2026-10-21.</li>
+<li><span class="when">2026-09-24</span> <span class="muted">(#cortex, 2026-09-24 to 2026-09-27; CortexLM/bounty releases)</span> Bounty 1.0.0 was released with the simplified scoring (one point per valid report). The same day the team announced the OpenType duel-style model challenge with 70 percent of emissions; it went live on 2026-09-27.</li>
+<li><span class="when">2026-09-04</span> <span class="muted">(#cortex, 2026-09-04 and 2026-09-22)</span> The team announced the Bounty challenge (earn rewards for bugs reported in its apps) and a unified Proof challenge to replace the earlier Prism, Relearn and Agent challenges. A team status post on 2026-09-22 showed Bounty paying five authors with 30 percent of emissions while the 70 percent Proof share burned.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Read the cortex README and docs/CHALLENGES.md, then pick Bounty (no GPU, needs a dedicated Cortex Chat account); the project says HyperTrain is a preview with nothing to mine yet.</li>
+<li>Register a hotkey on subnet 100. HyperTrain admission (self-check, join, probation and bond steps in hypertrain/docs/miner.md) is for testing only until the team announces a live run.</li>
+<li>For Bounty, check the public status route: it must report that scoring is available (it said it could not score on 2026-10-21). Then ask the operator to authorise the account pairing and file reports.</li>
+<li>To validate, install libsodium and the cortex package, set the wallet environment variables, and run scripts/run-validator.sh with --verify-only first.</li>
+<li>Before spending money or hardware, read the network page, the bounty status route and the latest team posts in the subnet chat: on 2026-10-21 scoring was unavailable and all on-chain incentive went to the owner uid.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Emission shares: the live split looks like 70/30 (team status post 2026-09-22 and the chain pattern 2026-10-08 to 2026-10-19, with the 70 percent slot burning), but repository files show 80/20 (development profile), 70/30 (one document) and 35/35/30 (template). The production profile is signed by the owner and was not read.</li>
+<li>The deployment registry in the cortex repo (unchanged since 2026-10-20) lists the bounty and opentype containers but no hypertrain entry, and its profile still lists a proof challenge that the project&#x27;s site calls retired, so how HyperTrain maps onto the 70 percent slot is not shown in code.</li>
+<li>The team said on 2026-10-10 to 2026-10-12 that HyperTrain mining was live; on 2026-10-21 the project&#x27;s page and guide call it a preview with no synced round and nothing paid, and a repository design note says no join is accepted. The guide calls the HyperTrain figures a simulated mock, while the page says they come from the challenge&#x27;s public API: which is right was not settled. Treat HyperTrain as not paying until the team says otherwise.</li>
+<li>A HyperTrain test-ledger run on the production challenge steers real emission as soon as its first reward matures (repo docs), and the repo gained production-issuance gating on 2026-10-21, so the switch from preview to paying could come with little notice.</li>
+<li>The team said on 2026-10-05 that bounty rewards are spread over 24 hours, but the repository and the live status route on 2026-10-21 both describe cumulative scoring with no window. The guide&#x27;s phrase &#x27;precision times mean severity&#x27; matches neither and is probably stale. Why Bounty scoring is paused, and whether the 100 percent burn is deliberate, has not been explained by the team.</li>
+<li>On 2026-10-21 six of the seven validators with a permit had set weights recently (median weight age about 311 blocks), all at 100 percent on uid 0; one validator&#x27;s weights were about 100,000 blocks (about 14 days) old. A miner claim that weights were frozen from 2026-10-09 is not supported by chain history, where the number of uids with incentive grew from 27 to 86 between 2026-10-08 and 2026-10-18. Whether validators copy one vector was not tested.</li>
+<li>Bounty reports are adjudicated by the team&#x27;s operators with an AI agent, and the 99 percent valid rate on the public board is the team&#x27;s own figure, not independently checked; a miner claim that a fabricated bug passed (2026-10-13) is unverified. Validators depend on a team-run gateway for the bundle, and the validator docs name a gateway domain that differs from the project website. Endpoints under /v1/site named in the guide, and two repositories it names (subnet-frontend and backend), returned 404 on 2026-10-21.</li>
+<li>The HyperTrain evidence in the repository shows bitwise-identical training across hosts, but the changelog says matching centralized training quality is not yet shown. The miner guide (one GPU per process) and the README (multi-GPU e2e on 2x RTX 5090) disagree.</li>
+<li>Not researched: scoring code traced end to end, the whitepaper, and product or ecosystem claims (apps, partnerships).</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/CortexLM/cortex" rel="noopener noreferrer">GitHub: cortex (master, gateway, validator, miner CLI)</a></li>
+<li><a href="https://github.com/CortexLM/bounty" rel="noopener noreferrer">GitHub: bounty challenge</a></li>
+<li><a href="https://github.com/CortexLM/hypertrain" rel="noopener noreferrer">GitHub: hypertrain challenge</a></li>
+<li><a href="https://github.com/CortexLM/opendecision" rel="noopener noreferrer">GitHub: opendecision (model for HyperTrain)</a></li>
+<li><a href="https://cortex.foundation" rel="noopener noreferrer">Project website (linked from the cortex README)</a></li>
+<li><a href="https://network.cortex.foundation/hypertrain" rel="noopener noreferrer">HyperTrain preview page (client-rendered; read in a browser 2026-10-21)</a></li>
+<li><a href="https://huggingface.co/OpenType/neon-1.2-genesis" rel="noopener noreferrer">Genesis model on Hugging Face (public since 2026-10-14, 354M parameters)</a></li>
+<li><a href="https://network.cortex.foundation/llms.txt" rel="noopener noreferrer">Network guide for miners and agents (live status text)</a></li>
+<li><a href="https://network.cortex.foundation/challenge/bounty/v1/status" rel="noopener noreferrer">Bounty challenge status route (public read)</a></li>
+<li><a href="https://api.cortex.foundation/v1/bounty/public/status" rel="noopener noreferrer">Public bounty board: report counts and leaderboard</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 11 sources</summary>
+<ul>
+<li><strong>repo</strong> CortexLM/cortex @008610a (2026-10-20, unchanged on 2026-10-21): README.md, docs/CHALLENGES.md, docs/PROOF.md, docs/external-miner/README.md, config/challenges.toml, deploy/challenges/registry.toml</li>
+<li><strong>repo</strong> CortexLM/bounty @f2790a6 (2026-10-16, v1.0.0 on 2026-09-24, unchanged on 2026-10-21): docs/miner.md, docs/scoring.md</li>
+<li><strong>repo</strong> CortexLM/hypertrain @95aa675 (2026-10-21): README.md, CHANGELOG, docs/miner.md, docs/network-v2.md, commit history 2026-10-20 to 2026-10-21</li>
+<li><strong>repo</strong> CortexLM/opendecision @9cc618f (2026-10-12, unchanged): README.md</li>
+<li><strong>msg</strong> #cortex, latest 200 messages (2026-10-09 to 2026-10-18) plus team posts, pinned posts and archive search 2025-11 to 2026-10-21</li>
+<li><strong>web</strong> https://network.cortex.foundation/hypertrain (browser read) and https://network.cortex.foundation/llms.txt, read 2026-10-21 about 23:40 UTC</li>
+<li><strong>web</strong> https://network.cortex.foundation/challenge/bounty/v1/status, read 2026-10-21 about 23:37 UTC (scoring version 2, can_score false)</li>
+<li><strong>web</strong> https://api.cortex.foundation/v1/bounty/public/status and /leaderboard, read 2026-10-21 about 23:40 UTC (revision 200112)</li>
+<li><strong>web</strong> https://huggingface.co/api/models/OpenType/neon-1.2-genesis, read 2026-10-21 (created 2026-10-14, public, 353.9M parameters)</li>
+<li><strong>web</strong> Chain read at block 9335130 (mainnet, 2026-10-21 about 23:40 UTC): chain_neurons.py uids, weights --all, storage SubnetEmissionWeights and RecycleOrBurn; owner-uid boolean test at block 9335133; params and chain.py subnet 100 at block 9334694 (exists, registered 2025-10-19, tempo 360, 256 of 256 neurons)</li>
+<li><strong>web</strong> Chain history, chain_neurons.py uids 100 at blocks 9226694, 9241094, 9255494, 9269894, 9277094, 9284294, 9291494, 9298694, 9313094, 9320294, 9323894, 9327494 (about 2026-10-06 to 2026-10-20; 7200 blocks per day from block 9335133 = 2026-10-21 about 23:42 UTC)</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/99.html"><small>← Previous</small>SN99 Thirty Spokes</a><a rel="next" href="/bittensor-docs/subnets/101.html"><small>Next →</small>SN101 Tag101</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-21. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

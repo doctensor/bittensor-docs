@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SayGM (gm) (SN28) | Bittensor Subnet Docs</title>
+<meta name="description" content="AI gateway: miners resell frontier-model API capacity from TEE workers; the team&#x27;s finalizer decides what each earns.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h4">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>28</span><div>
+<h1>SayGM (gm) <span class="muted">SN28</span></h1>
+<p class="tagline">AI gateway: miners resell frontier-model API capacity from TEE workers; the team&#x27;s finalizer decides what each earns.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>15<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>8.0<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>15<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-24</b><span>last chat</span></li><li class="pw"><b>7,786</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>inference gateway (resold LLM API capacity)</dd>
+<dt>Status</dt><dd>Live product: epoch 25,880 was finalized on 2026-10-23 with 133 miners paid, and the miner repo shipped release 0.5.10 the same day (five releases in three days). The public validator repo has not changed since 2026-09-05 and no newer branch exists.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-23</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>SayGM is an inference gateway at api.saygm.com that is compatible with the OpenAI, Anthropic and Gemini SDKs and sells prepaid credit on saygm.com. Miners are capacity suppliers: they run a worker in a confidential VM on Phala Cloud, load their own provider API keys into it, and offer models at a discount to the gateway&#x27;s retail price. The team says the gateway runs inside an Intel TDX enclave. Before the 2026-06-23 mainnet launch, the channel was a place for &quot;gm&quot; greetings while the product was built.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>A miner installs the gmcli tool, registers a hotkey, logs in through Taostats, sets provider keys (Anthropic, OpenAI, Google, Z.ai, Moonshot, Chutes, DeepInfra, KubeTEE, Engy, Moonmath or NEAR, plus Bedrock, Azure and Foundry transports) and deploys the team-approved worker image to a Phala confidential VM. The CLI and registry check the image hashes before the worker is admitted. Since release 0.5.6 (2026-10-21) the Bedrock transport is an attested Mantle adapter that only serves models on a registry-published binding list for one AWS region (us-east-1) and needs a current approved image; the list is registry data, so which models it covers is not public. The miner then declares which models it offers and at what discount. The same model can be sourced from several upstreams, so the miner&#x27;s profit is the paid value minus what the upstream charges. Price increases are delayed by the registry while cuts apply at once, and the miner terms say the miner alone is responsible for whether its provider accounts allow resale.</p></div><div><h3>Validators</h3><p>The team runs the gateway, the registry and an epoch finalizer, none of which are public. The finalizer publishes, for each 361-block epoch, a usage file and a price and emissions snapshot to a public S3 bucket. The public gm-validator reads the newest closed epoch once it is finalized, turns each miner&#x27;s billed value into a share of the miner pool, and submits the weights at most once per chain epoch. It scores only that latest epoch, so each validator&#x27;s weight row on chain is a snapshot of one epoch. It does not re-derive cost or check the file&#x27;s hashes or signatures, so validators copy the team&#x27;s numbers.</p></div><div><h3>Incentive</h3><p>A miner&#x27;s weight is its billed value for the epoch (retail price less the miner&#x27;s discount) divided by the pool, which the code sets as the epoch&#x27;s alpha emission times 0.41 times the alpha price in the snapshot; if demand exceeds the pool, miners are scaled down pro rata. At chain block 9,343,166 (2026-10-23) the subnet&#x27;s emission split was 18 percent owner, 41 validators and 41 miners, with no burn or recycle share, and the weight on the top miner matched its billed value over the pool to within 0.01 point. In epoch 25,880 the pool was about $1,175 and traffic was about $1,092 from 133 miners; the top miner had 16 percent of that, and Anthropic models 67 percent and OpenAI models 16 percent. The unclaimed rest of the pool goes, since about 2026-10-06, to an affiliate pool miner (UID 157), which pays referrers in alpha under an on-chain contract, instead of to the owner UID as the public validator code does; on chain the owner UID gets only dust weight. That remainder swings from epoch to epoch (7 to 33 percent over the last seven epochs), and because validators submit snapshots of different epochs, UID 157 held 18.5 percent of incentive while the newest epoch gave it 7 percent. The incentive was spread over 131 UIDs on 102 coldkeys. The team also publishes monthly buyback burns: $104,372 against $514,686 of miner emissions for 2026-09-16 to 10-15. The contract and the burns were not read on chain.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-23</span> <span class="muted">(#28-gm, GitHub, public epoch files, saygm.com/miners)</span> Release 0.5.10 shipped to fix Bedrock streams that failed after about 3 to 4 minutes on long reasoning requests (the code now bounds in-stream frames separately from the preamble). Epoch 25,880 finalized: 26,279 requests, about $1,092 of billed value, 133 miners earning.</li>
+<li><span class="when">2026-10-22</span> <span class="muted">(#28-gm)</span> A miner asked for GPT bindings on Bedrock Mantle and an alternative to Mantle; the team added the request to its todo list. The team also posted a head-to-head scorecard against OpenRouter, claiming up to 43 percent lower prices on the same frontier models and conceding catalog and scale (the team&#x27;s own figures).</li>
+<li><span class="when">2026-10-21</span> <span class="muted">(GitHub, #28-gm)</span> Miner release 0.5.6 added a secure Amazon Bedrock route (Mantle) whose models come from a registry-managed binding list; pass-1 notes saying Bedrock inference was disabled no longer hold. Failure diagnostics and a registry-bound Opus route came with it.</li>
+<li><span class="when">2026-10-20</span> <span class="muted">(#28-gm, GitHub)</span> Miner release 0.5.5 shipped. The team answered a miner&#x27;s routing questions in chat: failures after a response starts count against a success rate taken over the last 50 requests, 5xx and 429 errors put a provider and model into a cooldown that doubles up to 15 minutes, and first-token waits are not normalised for prompt size. &#x27;Sign in with SayGM&#x27; for partner apps was announced the same day. Two members said some miners&#x27; reported tokens-per-second looked implausible; no reply was seen.</li>
+<li><span class="when">2026-10-17</span> <span class="muted">(#28-gm, buybacks page, GitHub)</span> Team announced a burn of about $104k of alpha, the second buyback cycle. A miner traced mid-stream failures to HTTP/2 connection sharing and suggested keepalives and stream caps; on 10-19 the team said it would add keepalives and reduce streams per connection, and commits that day capped upstream streams per connection and moved Engy to one request per connection.</li>
+<li><span class="when">2026-10-14</span> <span class="muted">(#28-gm, GitHub)</span> Phala disabled the OS image that every approved miner image pinned, so new deployments failed. The team pinned a newer image and released version 0.5.0 that evening; on 10-15 it said 19 workers on the new version were passing attestation.</li>
+<li><span class="when">2026-10-06</span> <span class="muted">(affiliate litepaper, public epoch files, #28-gm)</span> Affiliate pool contract deployed. Referrers earn alpha against qualifying customer payments, with a 7-day hold for crypto and a 120-day hold for card payments. The unclaimed part of the miner pool began flowing to it in the epoch files around 10-06 to 10-07.</li>
+<li><span class="when">2026-10-05</span> <span class="muted">(#28-gm, GitHub)</span> Team updates: routing becomes more price-focused by default, buyers get cheapest or fastest options, miners can no longer raise prices for an hour, and miners can subscribe to offline and attestation alerts (CLI support landed 10-06).</li>
+<li><span class="when">2026-08-12</span> <span class="muted">(#28-gm, GitHub)</span> Engy and Moonmath were added as upstreams and DeepInfra models expanded. The team also said it had rolled out a way to track and pay shortfalls in epochs where demand exceeded the pool; the mechanism is not in the public repos.</li>
+<li><span class="when">2026-06-23</span> <span class="muted">(#28-gm)</span> Mainnet go-live announced and the miner and validator repos were published. The owner validator was running and others were being onboarded.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Miners: open a funded Phala Cloud account, create an API key and install the Phala CLI.</li>
+<li>Have provider API keys you are allowed to resell, and read the miner terms in the repo first; provider account compliance is yours.</li>
+<li>Register a hotkey on netuid 28 (the CLI prints the btcli command if the hotkey is not registered).</li>
+<li>Install gmcli from the release installer, run gmcli doctor, then gmcli init, which walks through login, provider keys, deploy and product declaration.</li>
+<li>Declare a discount per model, then check gmcli status, gmcli pricing and gmcli earnings, and the public miner dashboard.</li>
+<li>For Bedrock supply, the worker needs a current approved image and a model on the registry&#x27;s binding list; check gmcli sources and the miner README first.</li>
+<li>Validators: register a hotkey on netuid 28, copy .env.mainnet to .env, set the hotkey seed, and run docker compose up -d --build; no S3 credentials are needed.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Chain weights were read at block 9,343,166 (2026-10-23): the owner UID has dust weight and UID 157 holds 18.5 percent of incentive. The stake behind UID 157 and the affiliate contract itself were not read; the validator set is 12 permits with the owner&#x27;s own validator holding about 75 percent of dividends.</li>
+<li>The gateway, registry and epoch finalizer are not public. Validators do not verify the finalizer&#x27;s files, there was one gateway in the latest epoch, and the TEE claim about the gateway was not independently checked.</li>
+<li>The validator README and code send the unclaimed pool to the owner UID, but the live epoch files since about 10-06 send it to the affiliate pool miner, and the chain agrees (owner UID weight is about 0.1 percent). The change was made on the finalizer side, which is not public.</li>
+<li>Privacy applies to the route, not the model host: for Claude, GPT and Gemini the provider still receives the prompt, and only models whose ids end in -TEE are served confidentially end to end, per the site&#x27;s own overview.</li>
+<li>Buyback figures and the miner-emission totals behind them are the team&#x27;s; revenue and margins are not published and the burns were not checked on chain.</li>
+<li>The affiliate contract&#x27;s admin can upgrade it without a delay, and revenue and attribution are reported by the team&#x27;s service and cannot be verified by the contract, per the litepaper. The team said conversions were still low on 10-10.</li>
+<li>Traffic is concentrated: Anthropic models were 76 percent of billed value in epoch 25,845 and Gemini 1 percent. On 10-02 several new miners reported no traffic.</li>
+<li>On 10-20 two members said some miners&#x27; reported tokens-per-second figures looked implausible and might point to an exploit. This is unverified and no team reply was seen.</li>
+<li>Routing is not in any public repo. The team described it in chat on 10-20 (rolling success rate over 50 requests, cooldown rules, no prompt-size adjustment) and said it is still being developed; how a worker&#x27;s capacity is learned was asked and not answered in what I read.</li>
+<li>Miners depend on Phala Cloud for confidential VMs; the 10-14 OS image change blocked new deployments for about a day.</li>
+<li>The shortfall-payout system mentioned on 08-12 has no public code or ledger that I could find.</li>
+<li>Validators&#x27; weight rows are snapshots of different epochs, so chain incentive for any one miner lags the newest epoch file by a few epochs and the affiliate pool share on chain (18.5 percent) differs from the latest epoch&#x27;s (7 percent).</li>
+<li>The chain shows netuid 28 registered on 2025-02-07, long before the 2026-06-23 launch. Who held the slot before the launch was not researched.</li>
+<li>Which models Bedrock Mantle serves is registry data and not public; GPT models on Mantle were requested on 10-22 and were only on the team&#x27;s todo list.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://saygm.com" rel="noopener noreferrer">Website and API</a></li>
+<li><a href="https://docs.saygm.com" rel="noopener noreferrer">Docs</a></li>
+<li><a href="https://saygm.com/llms.txt" rel="noopener noreferrer">Machine-readable overview (llms.txt)</a></li>
+<li><a href="https://saygm.com/miners" rel="noopener noreferrer">Miner dashboard (epochs, models, miners)</a></li>
+<li><a href="https://saygm.com/buybacks" rel="noopener noreferrer">Buybacks</a></li>
+<li><a href="https://saygm.com/affiliates/litepaper" rel="noopener noreferrer">Affiliate pool litepaper</a></li>
+<li><a href="https://github.com/taostat/gm-miner" rel="noopener noreferrer">Miner repo (gmcli and worker image)</a></li>
+<li><a href="https://github.com/taostat/gm-validator" rel="noopener noreferrer">Validator repo</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 6 sources</summary>
+<ul>
+<li><strong>repo</strong> taostat/gm-miner@616771d (2026-10-23): README, docs/sourcing.md, docs/provider-model-support.md, docs/miner-terms.md, docs/reproducibility.md, CLAUDE.md, commit log</li>
+<li><strong>repo</strong> taostat/gm-validator@6993bb2 (2026-09-05): README, CLAUDE.md, .env.mainnet, scoring.py, alpha_economics.py, validator.py; all 33 branches checked 2026-10-23</li>
+<li><strong>web</strong> https://gm-mainnet.s3.gra.io.cloud.ovh.net/v1/finalized/ (public epoch files for epochs 25300 to 25880, read 2026-10-21 and 2026-10-23)</li>
+<li><strong>web</strong> Chain read at block 9343166 (2026-10-23): subnet 28 parameters, emission split, incentive, dividends and validator weight rows (addresses masked)</li>
+<li><strong>web</strong> https://saygm.com/miners, /buybacks, /affiliates/litepaper and /llms.txt (read 2026-10-21; miners and buybacks re-read 2026-10-23)</li>
+<li><strong>msg</strong> #28-gm 2026-05-01 to 2026-10-23</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/26.html"><small>← Previous</small>SN26 Perturb</a><a rel="next" href="/bittensor-docs/subnets/29.html"><small>Next →</small>SN29 Hotfloat</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-23. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

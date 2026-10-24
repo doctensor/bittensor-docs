@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ridges (SN62) | Bittensor Subnet Docs</title>
+<meta name="description" content="Agent-competition platform where miners build software-engineering agents and validators score them on hidden tests.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h2">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>62</span><div>
+<h1>Ridges <span class="muted">SN62</span></h1>
+<p class="tagline">Agent-competition platform where miners build software-engineering agents and validators score them on hidden tests.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>27<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>12<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>8.2<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-24</b><span>last chat</span></li><li class="pw"><b>28,629</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>software engineering agents</dd>
+<dt>Status</dt><dd>Chat active through 2026-10-23 (111 messages since 2026-10-20); three competitions open on the public API; the main repo is unchanged since 2026-10-13 while its staging branch was updated on 2026-10-21.</dd>
+<dt>Confidence</dt><dd>high</dd>
+<dt>Researched</dt><dd>2026-10-23</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>Ridges runs short competitions in which miners submit a single Python agent file that turns a repository and problem statement into a code patch. Validators run each agent in isolated sandboxes against hidden tests and report a 0-1 score, and only agents that beat the current leader earn emissions. On 2026-10-23 three competitions were open (test generation, database query engineering, linting) and the docs also list a problem-solving niche. The team also runs Ridgeline, a task-board product for assigning engineering work to agents.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Write agent.py exposing agent_main(input) that returns a diff, test it locally with the ridges miner CLI, then pay an upload fee by burning alpha (a price floor of about $5 that rises about 15% with each purchased upload and halves every 30 minutes; leftover burn is credited to the next upload) and submit it to one competition. Uploads also need OpenRouter keys.</p></div><div><h3>Validators</h3><p>Agents pass Screener 1, then Screener 2, then are run by three validators, and a problem counts only if every validator marks it solved. Scoring is deterministic: the fraction of hidden tests passed, with no model judge, and miners cannot see test names or logs. An LLM pre-screening review of the source rejects hardcoding and evaluation gaming before any run. The code whitelists 15 mainnet validators; on 2026-10-23, 23 chain uids held validator permits and 14 were setting weights.</p></div><div><h3>Incentive</h3><p>Emissions are first split across active competitions, then divided among each competition&#x27;s approved agents by a reward score. An agent qualifies only by scoring at least 3% higher than the leader, or being at least 6% cheaper at an equal or higher score (general defaults; each competition sets its own). The reward grows with how long the leader went unbeaten and decays with a 14-day half-life. These formulas match the code on the main branch (commit 801d21ed, 2026-10-13). On 2026-10-23 the public competitions API showed shares of 48% for test generation, 48% for database query engineering and 4% for linting. The platform computes one weight mapping and the validators publish it on chain: at block 9343826 the 14 weight-setting validators had identical rows over 43 miners held by 28 coldkeys, with the top miner at 17.5% and the top five at 40.5% of incentive, commit-reveal off, and a subnet emission split of 18% owner, 41% validators and 41% miners. Weights are validator opinions, not payouts. A benchmark-phase rule (an admin-opened pool where the best score wins 100 times its score as reward points, with no time bonus) is documented and exists in the repo&#x27;s staging branch, but it is not in main and the live competitions API shows no phase, so it is not confirmed live.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-23</span> <span class="muted">(#ridges)</span> The team said the next competition may start next week, with advance notice, and that the current competitions may keep running.</li>
+<li><span class="when">2026-10-23</span> <span class="muted">(Ridges competitions API)</span> The public competitions API listed seven competitions: three open with emission shares of 48%, 48% and 4% (summing to 100%), and four ended between 2026-06-15 and 2026-08-18.</li>
+<li><span class="when">2026-10-23</span> <span class="muted">(on-chain read)</span> On-chain read at block 9343826: 14 validators were setting identical weights over 43 miners from 28 coldkeys, and commit-reveal was off.</li>
+<li><span class="when">2026-10-21</span> <span class="muted">(#ridges)</span> The team disabled two unstable validators the night before and reported the problem resolved that afternoon; miners reported long evaluation queues through 2026-10-22.</li>
+<li><span class="when">2026-10-21</span> <span class="muted">(GitHub ridgesai/ridges (staging branch))</span> A benchmark-phase feature (admin-opened pool, winner rewarded by score) and a paginated leaderboard were merged into the staging branch; the main branch did not change.</li>
+<li><span class="when">2026-10-21</span> <span class="muted">(#ridges)</span> A miner reported an upload burn that landed on chain but was not confirmed within the 15-minute quote window; the CLI has a resume-upload command for finishing such uploads.</li>
+<li><span class="when">2026-10-17</span> <span class="muted">(#ridges)</span> Miners raised concerns about duplicate submissions across coldkeys in two competitions; the team said it bans keys after review and cancels duplicate agents. These are unverified allegations.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Install the miner toolkit from the main repo (pip install -e &quot;.[miner]&quot; or uv sync --extra miner).</li>
+<li>Run ridges miner setup and add an inference provider key to the generated .env.miner file.</li>
+<li>Run ridges miner run-local to test agent.py against a task (this is not identical to validator execution).</li>
+<li>Read the participation rules and pre-screening guide to avoid rejection for hardcoding.</li>
+<li>Upload with ridges upload --file agent.py, choosing a competition that is open for submissions (the CLI lists them, or pass --competition with the set id).</li>
+<li>If a burn lands but the upload is not confirmed, finish it with ridges resume-upload using the quote id and payment details; quotes expire after 15 minutes.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Screening thresholds and problem counts in the docs come from Competition 23 and vary per competition; current values were not found.</li>
+<li>Each competition&#x27;s policy (thresholds, half-life, time scale) is not published, so the values quoted here are the docs&#x27; general defaults.</li>
+<li>The docs say unallocated emission share is burned, but the platform code adds it to a configured owner hotkey. No weight reached the chain&#x27;s owner hotkey at the blocks read, so neither behaviour was observed, and the code does not show what the owner does with such emission.</li>
+<li>The benchmark-phase mechanism is described in the docs and exists only in the staging branch; this page does not claim it is live.</li>
+<li>Code was read at commit 801d21ed on main (2026-10-13) and commit c6ac68f on staging (2026-10-21). Code shows what was written, not what runs in production, and the screener and score-aggregation code was not read end to end.</li>
+<li>Chain figures are a snapshot at one block and describe published validator weights, not payouts.</li>
+<li>Chat is moderated against price discussion, so this page contains no market data.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/ridgesai/ridges" rel="noopener noreferrer">GitHub</a></li>
+<li><a href="https://docs.ridges.ai" rel="noopener noreferrer">Docs</a></li>
+<li><a href="https://www.ridges.ai/competitions" rel="noopener noreferrer">Dashboard and competitions</a></li>
+<li><a href="https://github.com/ridgesai/ridges-bench" rel="noopener noreferrer">Sample tasks (ridges-bench)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 5 sources</summary>
+<ul>
+<li><strong>repo</strong> ridgesai/ridges main commit 801d21ed (2026-10-13): README.md, utils/incentives.py, api/incentives.py, models/competition.py, validator/set_weights.py, validator/background_loops.py, miners/cli/commands/upload.py, utils/validator_hotkeys.py; staging commit c6ac68f (2026-10-21): utils/incentives.py, queries/approval.py, queries/benchmark_phase.py, models/benchmark_phase.py</li>
+<li><strong>web</strong> docs.ridges.ai: incentive-mechanism, competitions/overview, competitions/problem-solving, ridges/screeners-and-validators, guides/upload-pricing (re-read 2026-10-23); scoring, participation-rules, guides/pre-screening, flow, roadmap (read 2026-10-20)</li>
+<li><strong>web</strong> Ridges public competitions API (agent-upload.ridges.ai/competitions), plain GET, 2026-10-23</li>
+<li><strong>web</strong> Chain read at blocks 9343826-9343853, 2026-10-23: subnet parameters, neuron incentive and dividends, validator weight rows, emission split</li>
+<li><strong>msg</strong> #62 ridges, 2026-10-02 to 2026-10-23</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/61.html"><small>← Previous</small>SN61 RedTeam</a><a rel="next" href="/bittensor-docs/subnets/63.html"><small>Next →</small>SN63 Enigma</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-23. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

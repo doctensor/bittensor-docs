@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Engram (SN450) | Bittensor Subnet Docs</title>
+<meta name="description" content="Testnet-only decentralized vector database for AI memory; netuid 450 does not exist on mainnet.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h6">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>450</span><div>
+<h1>Engram <span class="muted">SN450</span></h1>
+<p class="tagline">Testnet-only decentralized vector database for AI memory; netuid 450 does not exist on mainnet.</p>
+<span class="st s-transitioning">transitioning</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl2"><b>0.29<small>/day</small></b><span>last 7 d</span></li><li class="pl1"><b>0.13<small>/day</small></b><span>days 8-30</span></li><li class="pl1"><b>0.12<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-23</b><span>last chat</span></li><li class="pw"><b>54</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>vector storage (AI memory layer, testnet only)</dd>
+<dt>Status</dt><dd>Testnet only. A chain read on 2026-10-21 found no subnet 450 on mainnet; the team said in April that mainnet would come in Q3, its last channel post (2026-07-28) said only &#x27;soon&#x27;, and the repo has had no commit since 2026-07-13. On 2026-10-21 the project&#x27;s API returned 502 and its dashboard showed no data.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-21</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>Engram is a Bittensor subnet design for a decentralized vector database: text, PDFs and images are embedded, given a content-addressed ID derived from the embedding, replicated across miners, and checked with challenge-response storage proofs. Binary files are meant to be pinned to Arweave, and a mobile mining option runs managed Akash nodes. It is built mainly by one developer and ran only on the Bittensor testnet, where it uses netuid 450.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Miners run a node that stores vectors in a local Qdrant index, answers similarity queries and responds to storage-proof challenges. The design replicates each item across several miners (3 copies in the README, erasure coding in the roadmap), with optional private namespaces that use encryption, noise on stored embeddings and key shares split across miners. Requests are signed with a hotkey and writing to the network needs a minimum stake (default 0.001 TAO in the code). Setup on testnet is by pip package or Docker with the testnet netuid in the environment.</p></div><div><h3>Validators</h3><p>A validator sends challenges and queries to miners, measures recall of the true nearest items, response time and whether storage proofs verify, and sets weights from the combined score every few minutes (README says 120 seconds). The proofs are HMAC-based and bound to the validator&#x27;s key; the repo&#x27;s own funding document lists replacing the proof design as planned hardening work. The roadmap lists multi-validator agreement as done and a decentralized validator as not done, so one validator is the expected setup.</p></div><div><h3>Incentive</h3><p>Score is 0.50 recall at 10, plus 0.30 for latency (full marks at 100 ms or less, zero at 500 ms or more), plus 0.20 for the share of storage proofs passed, as set in the repo&#x27;s config. Miners below a 50 percent proof rate or flagged for slashing get zero weight. This describes testnet design only; there is no mainnet subnet, so no emission split, owner take or token economics apply, and none were found.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-21</span> <span class="muted">(chain read, project site)</span> Checked: no subnet 450 exists on mainnet, the project API returned 502 Bad Gateway, and the dashboard showed blank metrics and &#x27;no miners registered yet&#x27;.</li>
+<li><span class="when">2026-07-28</span> <span class="muted">(#engram-450)</span> Last team post in the channel: replied &#x27;soon&#x27; to a question about updates. A member asked again about announcements on 08-15 and about testnet faucets on 10-03; no replies appear in the archive.</li>
+<li><span class="when">2026-07-13</span> <span class="muted">(GitHub, PyPI)</span> Last repo commits: a fix so malformed storage-proof challenges fail closed, a mainnet registration dry-run script and runbook, and a commit describing a 1.0.0 release. No 1.0.0 package appears on PyPI.</li>
+<li><span class="when">2026-05-17</span> <span class="muted">(GitHub)</span> Most of the repo&#x27;s visible history lands from this date to 05-29, including mobile cloud mining on Akash and security hardening (signed requests, encrypted private namespaces, key-share recovery).</li>
+<li><span class="when">2026-04-10</span> <span class="muted">(#engram-450)</span> In answer to a miner, the team said mining could start once testnet was validated; on 04-18 it announced an easier miner setup.</li>
+<li><span class="when">2026-04-07</span> <span class="muted">(PyPI)</span> Python package engram-subnet released as versions 0.1.1 and 0.1.2; PyPI shows no later release as of 2026-10-21.</li>
+<li><span class="when">2026-04-06</span> <span class="muted">(#general, #engram-450)</span> The developer announced the subnet as deployed on testnet (netuid 450), asked the main server for a testnet channel, and said mainnet was planned for Q3 and early miners were wanted (minimum 4 GB RAM).</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Only the testnet is documented. Install the package with pip install engram-subnet, or clone the repo.</li>
+<li>Get testnet TAO yourself (a member asked on 2026-10-03 where faucets are and the archive shows no answer), then register a hotkey with btcli on netuid 450 using the test network.</li>
+<li>Set the wallet name, hotkey, NETUID=450 and SUBTENSOR_NETWORK=test in the environment file the README describes, then run the miner or validator from the repo&#x27;s Docker or Python instructions.</li>
+<li>Check the live dashboard and ask in the channel before spending time: on 2026-10-21 the API was down and the team had been silent since 2026-07-28.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Testnet only. A chain read on 2026-10-21 found no netuid 450 on mainnet; the number is the testnet netuid the team uses. A testnet read the same day (block 8273105) shows netuid 450 registered on 2026-04-06 with 29 neurons and no on-chain name set, which matches the first channel post of 2026-04-06. The metagraph activity, miners and weights were not read, so whether the subnet is running is unknown.</li>
+<li>The team&#x27;s Q3 mainnet target has passed with no sign of a mainnet subnet. The runbook says creating one cost about 1,050 TAO in July 2026, and the roadmap item for mainnet registration is unchecked; the team is also seeking grants to fund readiness work.</li>
+<li>The roadmap and README lag the repo: the last commit says version 1.0.0 was released but PyPI still has 0.1.2 and the roadmap still lists the stable release as open.</li>
+<li>Only one validator is expected, and the team&#x27;s own docs mark the storage-proof design and the single-validator trust assumption as unfinished. Scoring weights are as in the repo config; no live scores were seen.</li>
+<li>The README&#x27;s 355 passing tests and its description of erasure coding, Arweave pinning and private namespaces were not run or checked beyond reading the code layout.</li>
+<li>The project API (api.theengram.space) returned 502 and the dashboard was blank on 2026-10-21; this shows the backend is down, not that the network is empty.</li>
+<li>Other chat in the Gittensor channel in June and July asks about an &#x27;Engram&#x27; owner and a patent-focused team; its relation to this project is unclear and was not used.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/Dipraise1/-Engram-" rel="noopener noreferrer">GitHub repo</a></li>
+<li><a href="https://theengram.space" rel="noopener noreferrer">Website and dashboard</a></li>
+<li><a href="https://pypi.org/project/engram-subnet/" rel="noopener noreferrer">Python package</a></li>
+<li><a href="https://github.com/Dipraise1/-Engram-/blob/main/docs/mainnet.md" rel="noopener noreferrer">Mainnet registration runbook (repo)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 5 sources</summary>
+<ul>
+<li><strong>repo</strong> Dipraise1/-Engram-@649f699a (2026-07-13): README.md, ROADMAP.md, TASKS.md, docs/mainnet.md, docs/funding-and-collaboration.md, engram/config.py, engram/validator/scorer.py, reward.py, challenge.py</li>
+<li><strong>web</strong> Chain read at block 9334501 on 2026-10-21: subnet 450 exists on mainnet = False</li>
+<li><strong>web</strong> https://pypi.org/pypi/engram-subnet/json and https://theengram.space/dashboard, https://api.theengram.space (read 2026-10-21)</li>
+<li><strong>msg</strong> #engram-450 2026-04-06 to 2026-10-11 and #general 2026-04-06, 2026-04-08</li>
+<li><strong>web</strong> Testnet chain read (chain.py --net test subnet 450) at block 8273105 on 2026-10-21: exists, no name set, registered 2026-04-06, 29 neurons</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/444.html"><small>← Previous</small>SN444 Safeguard</a><a rel="next" href="/bittensor-docs/subnets/476.html"><small>Next →</small>SN476 Sluice</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-21. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

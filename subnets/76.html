@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ormas (SN76) | Bittensor Subnet Docs</title>
+<meta name="description" content="Marketplace where miners bid firm or capped prices on GitHub coding tasks and are paid only when the client tests pass.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h4">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>76</span><div>
+<h1>Ormas <span class="muted">SN76</span></h1>
+<p class="tagline">Marketplace where miners bid firm or capped prices on GitHub coding tasks and are paid only when the client tests pass.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl3"><b>1.9<small>/day</small></b><span>last 7 d</span></li><li class="pl4"><b>3.2<small>/day</small></b><span>days 8-30</span></li><li class="pl1"><b>0.12<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-24</b><span>last chat</span></li><li class="pw"><b>94</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>software engineering outcomes marketplace</dd>
+<dt>Status</dt><dd>Live in early alpha, US-only, with miners admitted by approval. Chat active through 2026-10-20 (77 messages in the last 30 days); the repo was last pushed 2026-10-21 and the gateway reported healthy on 2026-10-21.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-21</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>Ormas, run by Heron Cove LLC, sells verified coding outcomes. A client supplies a GitHub repository, a bounded task and an automated test that defines success. Miners offer a price before work starts, deliver a result branch, and are paid only if the delivery passes the client&#x27;s test; a failed delivery costs the client nothing. Miners keep their models and agent loops private.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>A miner runs the open ormas-subnet software against the Ormas gateway. It sees a privacy-safe envelope for each queued task, offers a firm price or a limit (an estimate plus a hard ceiling) or declines, then clones the repository, makes the change with its own tooling, runs the task&#x27;s tests and publishes the branch. Admission is by operator approval and a qualification task, and the beta is open to US-based miners only.</p></div><div><h3>Validators</h3><p>A validator (or, in the alpha, the Ormas-operated checker) re-runs the client&#x27;s test against the delivered branch in a pinned container, checks the diff stays inside the allowed paths, and signs accept or reject. The reference validator code is in the repo. Docs and the gateway&#x27;s own published statistics say verification is currently operated by Ormas and independent validator acceptance is not live.</p></div><div><h3>Incentive</h3><p>Per the repo docs, an accepted delivery freezes an emission target equal to its settled USD price times a published rate (2x since 2026-10-05 under rate version earned-bid-2x-v1). Weights are described as proportional to owed USD under a per-hotkey cap, with shortfalls carried forward and unearned emission sent to the owner UID. Selection among offers uses price, settlement history and delivery record. A treasury top-up in alpha is planned, not live.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-21</span> <span class="muted">(GitHub heroncovelabs/ormas-subnet)</span> Repository commit retaining the work packet across public-task recovery and preparing version 0.0.3.</li>
+<li><span class="when">2026-10-20</span> <span class="muted">(#ormas)</span> Miners asked whether KYC/W-8 is needed for ordinary emissions, whether non-US miners can be invited, and whether a failed-delivery record decays. No team answer appeared in the archive at research time.</li>
+<li><span class="when">2026-10-18</span> <span class="muted">(#ormas)</span> Team status: 20 miners online (19 independent plus the operator), Standard and Protected tiers live, about 15 benchmark tasks per day for miners, and a private miner dashboard plus published outcome statistics coming.</li>
+<li><span class="when">2026-10-15</span> <span class="muted">(#ormas, GitHub changelog 0.0.2)</span> Notice that since about 16:40 UTC on 2026-10-14 miners on older builds could not take new tasks after a verifier version change; miners were told to update to ormas-subnet commit e732c923a and keep their state directory. Qualification carries over.</li>
+<li><span class="when">2026-10-14</span> <span class="muted">(#ormas)</span> Miners reported medium-size bids ending in no_capacity while small ones were awarded; the team said the cause was its acceptance checker capacity and that it was adding capacity and clearer status messages.</li>
+<li><span class="when">2026-10-13</span> <span class="muted">(#ormas)</span> Intro post: Ormas is live in alpha for US clients, validators and early miners are run by the team, and Protected-tier inference using SayGM (SN28) and Engy (SN53) is the next rollout. Miners are approved one by one after a qualification task.</li>
+<li><span class="when">2026-10-12</span> <span class="muted">(#ormas)</span> The channel was claimed by the project team; the slot&#x27;s earlier project was a different one.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Check eligibility first: the beta is open to people in the United States only, and the operator approves each miner.</li>
+<li>Sign in at ormas.ai and mint a runner key from the miner page; it is shown once, expires after 30 days and can only register until your claim cap is raised.</li>
+<li>Install the miner (curl install.sh from ormas.ai, Python 3.10 or newer) or clone the repo, then run ormas-miner login.</li>
+<li>Register with a public miner name and the task cells your worker supports, then run ormas-miner doctor.</li>
+<li>Email ops@ormas.ai for slot approval; the team says to confirm your worker setup with them before paying for SN76 registration.</li>
+<li>Complete the proof/qualification job reserved for your miner, register your hotkey with ormas-miner register-hotkey, then start taking offers.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Chain weights were NOT read. The repo contains no weight-setting code, and its docs disagree: DECISIONS.md (2026-10-02 status) says chain weights are planned, while CONTRACT.md and economics.md say weights are live. The README says the weight service relays a vector computed by the gateway.</li>
+<li>Acceptance is operator-run: the site, README and the gateway&#x27;s public statistics say verification is run by Ormas, which also runs a miner, so independent validation is not yet in place.</li>
+<li>Docs say independent Protected-tier miner onboarding has not opened, while a 2026-10-18 chat post says the first independent Protected miner slot was approved. Both are team statements.</li>
+<li>The treasury top-up in alpha, and its KYC/W-8 gate, are planned only; several parameters are marked open in the docs.</li>
+<li>The gateway&#x27;s public network and provider statistics showed no data (insufficient data, empty provider list) as of 2026-10-19, so network activity figures are team statements only.</li>
+<li>A miner reported on 2026-10-14 that the gateway rejected a failure completion from the reference skeleton (unknown_field:error); no public confirmation of a fix was found.</li>
+<li>Nothing here is a price, earnings or return claim; the docs say the alpha received for a target varies with pool and TAO/USD prices.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://ormas.ai/" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://ormas.ai/docs/miners" rel="noopener noreferrer">Miner guide</a></li>
+<li><a href="https://ormas.ai/docs/first-task" rel="noopener noreferrer">First-task guide (clients)</a></li>
+<li><a href="https://github.com/heroncovelabs/ormas-subnet" rel="noopener noreferrer">GitHub (miner SDK, reference validator, docs)</a></li>
+<li><a href="https://ormas.ai/docs/network" rel="noopener noreferrer">Reading the network</a></li>
+<li><a href="https://ormas.ai/docs/service-levels" rel="noopener noreferrer">Standard and Protected service levels</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 4 sources</summary>
+<ul>
+<li><strong>msg</strong> #ormas 2026-10-12 to 2026-10-20</li>
+<li><strong>repo</strong> github.com/heroncovelabs/ormas-subnet @ b77a088 (README, docs/DECISIONS.md, docs/CONTRACT.md, docs/economics.md, MINER_TERMS.md, CHANGELOG.md)</li>
+<li><strong>web</strong> ormas.ai/docs/miners, /docs/service-levels, /docs/network, /docs/supported-tasks, /docs/production-case-study (read 2026-10-21)</li>
+<li><strong>web</strong> api.ormas.ai /health, /v1/public/network, /v1/public/providers (read 2026-10-21)</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/75.html"><small>← Previous</small>SN75 Hippius</a><a rel="next" href="/bittensor-docs/subnets/77.html"><small>Next →</small>SN77 Liquidity</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-21. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

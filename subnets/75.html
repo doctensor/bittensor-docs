@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hippius (SN75) | Bittensor Subnet Docs</title>
+<meta name="description" content="Distributed cloud: encrypted Drive, S3 storage, model Hub and confidential compute on erasure-coded miner storage.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h21">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>75</span><div>
+<h1>Hippius <span class="muted">SN75</span></h1>
+<p class="tagline">Distributed cloud: encrypted Drive, S3 storage, model Hub and confidential compute on erasure-coded miner storage.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl4"><b>3.9<small>/day</small></b><span>last 7 d</span></li><li class="pl4"><b>3.7<small>/day</small></b><span>days 8-30</span></li><li class="pl4"><b>4.2<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-23</b><span>last chat</span></li><li class="pw"><b>6,622</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>decentralized storage and cloud</dd>
+<dt>Status</dt><dd>Product launches were posted in chat through 2026-10-20, and the code repositories were updated on 2026-10-21. Chat had 112 messages in the last 30 days, the latest on 2026-10-21.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-21</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>SN75 is Hippius, a distributed cloud sold to customers as an account with encrypted file storage (Drive), S3-compatible object storage, a registry for AI models and container images (Hub), a CDN and confidential compute. Files are split into 30 erasure-coded pieces held by storage miners on a network called Arion, and a separate Hippius blockchain records who stores what and who gets paid. Miners are paid on that chain in a bridged token, hAlpha, and the subnet&#x27;s Bittensor weights are produced from the Hippius chain&#x27;s rankings.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Storage miners run a Hippius blockchain node and the Arion miner program, register on the Hippius chain with the team&#x27;s CLI and offer at least 2 TB of storage with a static public IP. They hold shards of encrypted user files, answer proof-of-storage audits and are expected to stay online. Miners must bridge Alpha to hAlpha and lock it as collateral. Several nodes can be run under one account as a family, and chat reports a cap of 600 families that was hit in early October and a new lock requirement for extra nodes from 2026-10-10.</p></div><div><h3>Validators</h3><p>Validators observe each node and write quality reports on chain (data stored, bandwidth served, uptime, strikes, integrity failures); miners cannot report on themselves. The Arion validator, gateway and proof-of-storage warden that miners connect to are run by the team. Bittensor validators run a weight-submitter that reads rankings from the Hippius chain and sets SN75 weights from them.</p></div><div><h3>Incentive</h3><p>Per the docs, a node&#x27;s score is 70% bandwidth served and 30% storage held, each with diminishing returns, multiplied by uptime, with fixed deductions for strikes and integrity failures. A family counts its top 10 nodes at 80% decay each and its weight is smoothed over time. Rewards are recalculated about every 6 hours on the Hippius chain. In the code, 1% of the Bittensor weight budget goes to miners directly and 99% to UID 238, and the team said on 2026-08-12 that miner emissions are bridged to the Hippius chain and paid as hAlpha. Where the UID 238 share ends up was not checked on chain.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-20</span> <span class="muted">(#75 chat)</span> Screen recording was added to the apps, with the first 25 recordings free. A miner&#x27;s report that its storage keeps falling was still unanswered in chat.</li>
+<li><span class="when">2026-10-19</span> <span class="muted">(#75 chat)</span> Confidential VMs, managed PostgreSQL, Kubernetes and GitHub Actions runners were opened to every Hippius account.</li>
+<li><span class="when">2026-10-15</span> <span class="muted">(GitHub thenervelab/arion; #75 chat)</span> Arion miner release v0.1.37 was published, and miners had reported validator connection refusals the day before; one said it cleared after about an hour.</li>
+<li><span class="when">2026-10-10</span> <span class="muted">(#75 chat)</span> Adding a second node stopped being free and now needs a lock. A miner objected to the lack of notice; the team said it would make the amount dynamic and asked miners not to lock yet. Confidential Computing was announced the same day.</li>
+<li><span class="when">2026-10-07</span> <span class="muted">(#75 chat)</span> Asked whether named customers were on free credits, the team said an overpayment bug in the chain calculation had led to credits being reissued and that no customer team was on free credits.</li>
+<li><span class="when">2026-10-06</span> <span class="muted">(#75 chat)</span> Miners reported that the chain&#x27;s 600-family limit blocked new miners from registering a child node. A team member said the limit had been held back on purpose and would be changed, and that families keep earning after losing their Bittensor UID.</li>
+<li><span class="when">2026-09-30</span> <span class="muted">(#75 chat)</span> Shared Drives launched for teams, families and clients, still end-to-end encrypted.</li>
+<li><span class="when">2026-09-29</span> <span class="muted">(#75 chat)</span> Payment options widened to card, TAO, Bitcoin and USDC.</li>
+<li><span class="when">2026-09-21</span> <span class="muted">(#75 chat)</span> The Hippius Android app went live; iOS was said to be next.</li>
+<li><span class="when">2026-08-12</span> <span class="muted">(#75 chat)</span> The team announced that all miner emissions are bridged onto the Hippius chain and paid as hAlpha, which lands unstaked in the console. Miners can bridge back to Alpha with no lockup or stake it on Hippius.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Check the hardware in the docs: at least 2 TB of usable storage, a static public IP, 1 Gbps and Ubuntu 22.04 or newer, with UDP ports open for the Arion network.</li>
+<li>Set up and sync a Hippius blockchain node (docs: Running Hippius Blockchain Node).</li>
+<li>Register your coldkey and node on the Hippius chain with the hippius CLI (version 0.2.49 or later); this needs Alpha for fees and staking.</li>
+<li>Build and run the Arion miner from the arion repo, giving it the team&#x27;s validator and warden node IDs and your family ID (your coldkey address). Without the warden ID, audits fail.</li>
+<li>Follow the node on the provider dashboard and keep the miner updated to the latest release.</li>
+<li>Read the lock and family-limit notes in the caveats before committing funds.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Chain weights and on-chain incentive were not read, so who holds UID 238 and where its 99% share goes was not verified. Chat questions about this on 2026-09-15 had no team answer in the data.</li>
+<li>The alphanomics page says miners receive 41% of emissions, while the code gives miners 1% of the weight budget directly. The two can both be true only if most miner-side emission lands on UID 238 and is paid out through the Hippius chain; this was not confirmed.</li>
+<li>Docs and code differ on whether new storage miners get a newcomer weight reduction (the docs mention an 80% cut for the first ~100 minutes and a 24-cycle grace period; the code notes say it is disabled for storage miners).</li>
+<li>The family cap (600) and the lock for extra nodes were in flux in early October. Check current docs and ask in the channel before committing funds.</li>
+<li>The docs state that there is no public earnings calculator and that Arion is in active development with storage formats that can change.</li>
+<li>Live network size, storage totals and miner counts are on Hipstats, which cannot be read without a browser, so none are given here. Customer, revenue and price-comparison claims come from the team&#x27;s posts and were not verified.</li>
+<li>The alphanomics page marks its supply charts &#x27;coming soon&#x27;; its tokenomics figures are the team&#x27;s statements.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://hippius.com/" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://docs.hippius.com/" rel="noopener noreferrer">Docs</a></li>
+<li><a href="https://docs.hippius.com/learn/weights" rel="noopener noreferrer">How weights and rewards work</a></li>
+<li><a href="https://docs.hippius.com/earn/storage-miner" rel="noopener noreferrer">Storage miner overview</a></li>
+<li><a href="https://hippius.com/alphanomics" rel="noopener noreferrer">Alphanomics</a></li>
+<li><a href="https://hipstats.com/" rel="noopener noreferrer">Hipstats network explorer</a></li>
+<li><a href="https://github.com/thenervelab" rel="noopener noreferrer">GitHub organisation</a></li>
+<li><a href="https://github.com/thenervelab/arion" rel="noopener noreferrer">Arion storage protocol</a></li>
+<li><a href="https://github.com/thenervelab/thebrain" rel="noopener noreferrer">Hippius chain and weights</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 6 sources</summary>
+<ul>
+<li><strong>msg</strong> #75 chat, 2026-08-04 to 2026-10-21</li>
+<li><strong>repo</strong> thenervelab/thebrain (readme_weights.md, pallets/execution-unit/src/weight_calculation.rs, vali-weights-submitter) @ a188784 (2026-10-21)</li>
+<li><strong>repo</strong> thenervelab/arion README.md and llms.txt @ cff29ff (2026-10-15)</li>
+<li><strong>web</strong> https://docs.hippius.com/ (learn/weights, earn/storage-miner, earn/register-in-blockchain, earn/arion/running-miner, llms.txt)</li>
+<li><strong>web</strong> https://hippius.com/alphanomics</li>
+<li><strong>web</strong> https://api.github.com/repos/thenervelab/arion/releases</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/74.html"><small>← Previous</small>SN74 Gittensor</a><a rel="next" href="/bittensor-docs/subnets/76.html"><small>Next →</small>SN76 Ormas</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-21. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

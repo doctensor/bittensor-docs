@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chutes (SN64) | Bittensor Subnet Docs</title>
+<meta name="description" content="Serverless inference for open-source AI models, run on confidential-compute GPUs that miners supply.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h16">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>64</span><div>
+<h1>Chutes <span class="muted">SN64</span></h1>
+<p class="tagline">Serverless inference for open-source AI models, run on confidential-compute GPUs that miners supply.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>6.7<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>15<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>17<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-23</b><span>last chat</span></li><li class="pw"><b>37,258</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>serverless inference and GPU compute</dd>
+<dt>Status</dt><dd>Team and community chat active through 2026-10-22. No repo has had a commit since 2026-10-15 (miner repo 2026-10-10, TEE tooling 2026-10-15); the validator/API repo&#x27;s latest public commit is 2026-09-03, so it may lag the running platform. A chain read on 2026-10-23 showed 18 paid miner UIDs and 14 validators setting weights.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-23</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>Chutes is a hosted inference service with an OpenAI-compatible API for open-source models, and lets developers deploy their own models and code as custom apps called chutes. Miners supply GPU servers that run these workloads inside confidential virtual machines; the Chutes validator sends real user traffic to them and sets weights from how much compute each miner provided. The subnet is operated by the company Chutes Global Corp (named in the subnet&#x27;s on-chain identity). On 2026-10-22 the team described a wider aim of building open models, trained with its Parallax research on distributed consumer GPUs, while saying the inference business continues and that it is adding company-run, off-network compute that is not paid from emissions.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Run one non-GPU control-plane server (miner API, the gepetto scheduler, postgres, redis, registry proxy) plus bare-metal, TDX-capable GPU hosts. Each GPU host runs a confidential VM built with the sek8s tooling, with no SSH access, and is registered with the chutes-miner CLI. Register a single UID; no axon is announced. Gepetto decides which chutes to deploy or scale and tries to claim bounties, and it is the main piece to optimize. Servers must be bare metal or VMs with static IPs, not rented marketplace GPUs, and need at least as much RAM per GPU as VRAM.</p></div><div><h3>Validators</h3><p>The validator is the Chutes API platform itself (API, database, Kubernetes, image registry), run by the team, which routes user requests to miner instances and records audit data. The team recommends delegating to its hotkey with a child hotkey rather than running a full validator, and the validator take is 0%. GPU nodes are verified through TEE hardware attestation; the legacy GraVal check is blocked for new nodes. A separate auditor tool lets others recompute incentives from committed audit reports and compare them to on-chain weights. On chain on 2026-10-23, 15 UIDs held validator permits and 14 had set weights; all 14 vectors were near-identical (same 18 targets, nothing to the owner slot), which fits validators relaying one team-computed result.</p></div><div><h3>Incentive</h3><p>In the public validator code, a miner&#x27;s weight is its share of total compute units over a trailing one-day window, recalculated and set at the top of each UTC hour. Compute units are instance running time multiplied by a multiplier from GPU type and count, with bonuses: TEE instances 2.25x, private instances 2x (1.3x if also TEE), integrated-subnet chutes 3x, an autoscaler demand boost on public chutes, and a bounty boost of 1.1x to 1.5x that ramps up with bounty age and decays after claiming. Code history shows this replaced a four-metric scheme on 2025-11-09, shortened the window from 7 days to 1 day on 2026-04-20, and dropped a one-hotkey-per-coldkey rule on 2026-04-24. Chain read at block 9342946 (2026-10-23): 18 of 256 UIDs were paid, the top miner held 20.3% of incentive and the top five 62.3%, and one coldkey held two paid UIDs. The chain&#x27;s emission split vector is the standard 18% owner, 41% validators, 41% miners, with nothing burned or recycled.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-22</span> <span class="muted">(#chutes and chutes.ai news)</span> A team member said the company is adding privately secured, off-network compute, including non-TEE inference, sold on its platform with a way to choose between the two. It will not use miner emissions or self-mining for these offerings and the network will not subsidize them; miner-provided compute on the network stays TEE. The announcement article was edited the same day to make this clearer.</li>
+<li><span class="when">2026-10-22</span> <span class="muted">(chutes.ai news article)</span> The team published an article on building an open-source AI lab on the network. It says the inference business continues and funds model work, and that Parallax trains models over the internet on consumer GPUs; the latest run it reports is an 8B-parameter model finished on 2026-10-10 on about 901 billion tokens. It says network incentives will shift gradually toward training, SFT, RL and data pipelines, and that existing miners are unaffected. All figures are team-reported.</li>
+<li><span class="when">2026-10-22</span> <span class="muted">(#chutes)</span> In answer to a community question, a team member said a lane for consumer hardware (DGX Spark, Apple silicon) to contribute to training, weighted separately from GPU compute, is on the roadmap for the near future. No rules, dates or code have been published.</li>
+<li><span class="when">2026-10-13</span> <span class="muted">(#chutes)</span> Team members explained privacy modes: in the normal API mode traffic is encrypted in transit but the operator could in theory read it, while the end-to-end encrypted mode encrypts on the client so only ciphertext reaches Chutes.</li>
+<li><span class="when">2026-10-11</span> <span class="muted">(#chutes)</span> TEE release v1.5.0 announced to miners (tagged the same day in the sek8s repo): AMD SEV-SNP guest support (SNP hosts are not yet accepted on the network), a maintenance flow that keeps the only running instance of a chute serving and posts a replacement bounty, and a fix for a reboot hang on TDX. Upgrade window runs through 2026-10-25, up to 2 servers per miner in maintenance at once. The maintenance flow is present in the miner repo.</li>
+<li><span class="when">2026-10-11</span> <span class="muted">(#chutes)</span> After users reported Pro subscriptions being downgraded since 2026-10-04, the team said the removed accounts were clustered accounts used for business purposes, that refunds are being handled, and that checkout now blocks duplicate subscriptions.</li>
+<li><span class="when">2026-10-07</span> <span class="muted">(#chutes)</span> In answer to questions about missing revenue figures, the team said some revenue now goes to the operating company outside the subnet, and promised more frequent updates within a few weeks.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Check hardware requirements in the miner README: bare-metal or VM servers with static unique IPs, TDX-capable GPU hosts, and RAM per GPU at least equal to VRAM.</li>
+<li>Provision one non-GPU control-plane server with the ansible playbooks and helm charts in the miner repo.</li>
+<li>Register one hotkey with btcli subnet register --netuid 64, and do not announce an axon.</li>
+<li>Set up each GPU host with the sek8s host tools: download the guest image, generate config.yaml with chutes-cvm config init, and launch the confidential VM with chutes-cvm guest launch.</li>
+<li>Register each worker once with chutes-miner add-node, giving the server name, validator hotkey, hourly cost per GPU, GPU short name, and the agent and miner API addresses.</li>
+<li>Tune the gepetto strategy. For upgrades use chutes-miner tee start-maintenance and wait for the maintenance state before rebooting; the docs-site maintenance guide still describes the older cordon-and-reboot flow and does not mention this command.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Three descriptions of scoring disagree, and code history shows which are stale. The validator code scores compute units only over a one-day window, set hourly. The public scoring docs page (four weighted metrics 55/25/15/5, 7-day default, one paid hotkey per coldkey) and the miner README (&#x27;7 day sum of compute&#x27;) describe rules the code dropped on 2025-11-09, 2026-04-20 and 2026-04-24; the docs page&#x27;s 55/25/15/5 split matches no version of the constants that was readable in history. The chain on 2026-10-23 fits the code (one coldkey held two paid UIDs). What the production validator actually runs is not confirmed: the API repo&#x27;s latest public commit is 2026-09-03.</li>
+<li>Comments in the code give different bonus values from the constants (for example TEE 1.5x in a comment versus 2.25x in the constant, and bounty boost up to 4x versus 1.1x to 1.5x). This page uses the constants.</li>
+<li>The validator repo&#x27;s README still describes GraVal-based verification and running a full validator, while the miner README says the network is TEE-exclusive and GraVal is blocked.</li>
+<li>Miner participation in Parallax is not documented. Its technical report (10 October 2026) is labelled AI-generated and not fully reviewed, and says the exercised run was one operator&#x27;s fleet. The team said on 2026-10-22 that a consumer-hardware training lane is on the roadmap; no rules, dates or code were found, and the article&#x27;s figures are team-reported.</li>
+<li>The company-run, off-network inference described on 2026-10-22 sits outside the subnet. How much user traffic is served by miners versus company compute is not published, and revenue and buyback statements in chat could not be verified.</li>
+<li>Chain figures are one snapshot (block 9342946, 2026-10-23). Weights are validator opinions, not payouts, and the chain does not show who controls a coldkey; the one owner-coldkey validator is consistent with the operator running a validator but the other 14 permit holders are not identified.</li>
+<li>SEV-SNP hosts are not accepted yet, and the v1.5.0 upgrade window closes on 2026-10-25.</li>
+<li>Chat: pass 1 read the latest 200 messages (2026-10-02 to 2026-10-18) and this refresh read every message from 2026-10-20 to 2026-10-22; older history was not read. Some statements attributed to the team come from members who speak for the team but are not role-labelled.</li>
+<li>The hosted model list and user pricing change often; the live catalog is at the API&#x27;s /v1/models endpoint. The chat is moderated against price discussion, so this page has no market data.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://chutes.ai" rel="noopener noreferrer">Website and API</a></li>
+<li><a href="https://chutes.ai/docs/miner-resources/overview" rel="noopener noreferrer">Miner documentation</a></li>
+<li><a href="https://chutes.ai/docs/miner-resources/miner-maintenance" rel="noopener noreferrer">Miner maintenance guide (older k3s flow)</a></li>
+<li><a href="https://chutes.ai/news/democratizing-intelligence-building-an-open-source-ai-lab-on-a-decentralized-network" rel="noopener noreferrer">Open model-lab article (2026-10-22)</a></li>
+<li><a href="https://github.com/chutesai" rel="noopener noreferrer">GitHub organization</a></li>
+<li><a href="https://github.com/chutesai/chutes-miner" rel="noopener noreferrer">Miner repo</a></li>
+<li><a href="https://github.com/chutesai/sek8s" rel="noopener noreferrer">TEE host and guest tooling</a></li>
+<li><a href="https://github.com/chutesai/chutes-api" rel="noopener noreferrer">Validator and API repo</a></li>
+<li><a href="https://github.com/chutesai/chutes-audit" rel="noopener noreferrer">Auditor</a></li>
+<li><a href="https://parallax.chutes.ai/" rel="noopener noreferrer">Parallax</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 7 sources</summary>
+<ul>
+<li><strong>repo</strong> chutesai/chutes-api main 3b5609f (2026-09-03), full history read back to 2024-10-29: metasync/shared.py, metasync/constants.py, metasync/set_weights_on_metagraph.py, docs/specs/scoring-window.md, commits aa31ae5 (2025-11-09), 2667275 (2026-01-08), 802ed30 (2026-04-20), e03b342 (2026-04-24); api/constants.py, api/chute/util.py, api/bounty/util.py</li>
+<li><strong>repo</strong> chutesai/chutes-miner main 44c6603 (2026-10-10): README.md, chutes-miner-cli tee_maintenance.py</li>
+<li><strong>repo</strong> chutesai/sek8s main 3a74f23 (2026-10-15): README.md, changelogs; release v1.5.0 (2026-10-11)</li>
+<li><strong>repo</strong> chutesai/chutes-audit main 3498917 (2026-09-14): README.md, audit.py (SCORING_INTERVAL)</li>
+<li><strong>web</strong> chutes.ai: llms.txt, docs/miner-resources/scoring and miner-maintenance (fetched 2026-10-23), news article of 2026-10-22, parallax.chutes.ai, Parallax technical report (10 October 2026)</li>
+<li><strong>web</strong> Bittensor chain public node, read at block 9342946 (2026-10-23 01:29 UTC): subnet record and identity, hyperparameters, incentive/dividend/weight aggregates, coldkey grouping (addresses masked), SubnetEmissionWeights</li>
+<li><strong>msg</strong> #64 chutes, 2026-10-02 to 2026-10-22</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/63.html"><small>← Previous</small>SN63 Enigma</a><a rel="next" href="/bittensor-docs/subnets/65.html"><small>Next →</small>SN65 TPN (True Performance Network)</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-23. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

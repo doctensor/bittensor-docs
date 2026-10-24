@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UR (SN25) | Bittensor Subnet Docs</title>
+<meta name="description" content="Privacy network on home connections: live on mainnet since 2026-10-08, no provider payout claimed yet (2026-10-23).">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h7">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>25</span><div>
+<h1>UR <span class="muted">SN25</span></h1>
+<p class="tagline">Privacy network on home connections: live on mainnet since 2026-10-08, no provider payout claimed yet (2026-10-23).</p>
+<span class="st s-transitioning">transitioning</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl4"><b>2.7<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>7.3<small>/day</small></b><span>days 8-30</span></li><li class="pl4"><b>5.7<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-24</b><span>last chat</span></li><li class="pw"><b>526</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>privacy network (VPN bandwidth)</dd>
+<dt>Status</dt><dd>Mainnet contracts went live on 2026-10-08 and the launch was announced in chat on 2026-10-16. On chain, incentive goes to the reserve multisig pair and the operator pool, but as of 2026-10-23 no provider payout has been claimed: the epoch-1 payout root was never committed and its 3,482 alpha was carried forward. Epoch 2 closes about 2026-10-23 and settlement v2 is planned from epoch 3. The repo had commits every day through 2026-10-22.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-23</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>UR (SN25) is a decentralized privacy network built from residential internet connections. Independent providers share their home bandwidth as entry and exit points, and user traffic is routed over several hops with layered encryption. The subnet pays providers for staying reachable and for carrying traffic for a network operator. The first and, at launch, only operator is BringYour, which runs the ur.io VPN apps and says it already has 100,000+ providers to move onto the subnet. The slot was previously used by Mainframe; UR took over the channel on 2026-08-18.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>A miner runs the &#x27;provider&#x27; program on a Linux or macOS machine with one stable public IP, joins an operator&#x27;s pool with that operator&#x27;s account, and registers a signed payout wallet (a Bittensor coldkey). Most providers need no subnet registration or burn: the operator holds one shared on-chain pool slot for all of them, and each provider claims a proof-backed share from a settlement contract on Bittensor&#x27;s EVM. Up to about 200 of the largest fleets, ranked by how many distinct routable exit address blocks they serve, can instead bind their own on-chain slot and be paid by the chain directly; at block 9,343,602 (2026-10-23) no such fleet slot earned incentive. Claiming needs an EVM key funded with gas, which can be a separate relayer.</p></div><div><h3>Validators</h3><p>A validator walks server-assigned chains of providers to show they can carry traffic live, turns the results into per-provider liveness and latency statistics, and submits weights each tempo under commit-reveal. A pool&#x27;s weight is the usage its operator reports times a quality score clamped to 0.75-1.0; a head-tier fleet is scored on how many distinct routable IPv4 /29 or IPv6 /48 blocks it served. At launch one validator does the measuring: the subnet owner&#x27;s own, scoring UR&#x27;s own pool, and the project&#x27;s validator document says this means nobody independent cross-checks the scoring. On chain at block 9,343,602, 17 slots held validator permits and 12 had set weights; 10 of those, including the team&#x27;s validator, set three-target weights with the same 45% top target, and the team&#x27;s validator took about half of validator dividends. Whether the others are independent of the team is unknown.</p></div><div><h3>Incentive</h3><p>The normal Bittensor split applies, and the chain confirms it at block 9,343,602: 18% owner, 41% miners, 41% validators, no burn. Of the miner share, the launch policy gives providers 10% (called momentum) and sends the other 90% to a 2-of-3 multisig branded the Network Capacity Reserve, which the team says will pay for provider capacity ahead of demand against verified commitments; on chain the incentive is 45% and 45% to two reserve slots and 10% to the operator&#x27;s pool slot, and the validator code accepts only this 1/10 and 9/10 split. A governance value (theta, 0.3 at launch) divides the providers&#x27; 10% between top fleets (30%) and the operator pool (70%). Operators are meant to deposit alpha in proportion to their usage, but every deposit rate is 0 in the initial period, so each pool counts as equal demand. Pools settle in 7-day epochs (50,400 blocks): the operator commits a payout list and providers claim from the vault with a proof roughly two days after the epoch closes. Version 1 settlement pays only providers the validator measured, about 1,500 per epoch; settlement v2, planned from epoch 3 (about 2026-10-23), pays by completed usage alone into one non-expiring account per payout wallet. So far epoch 1 captured about 3,482 alpha for the pool, but no payout root was committed, so the epoch was finalized at block 9,312,031 (about 2026-10-18) with that amount carried, and no claim event exists on the contracts through block 9,343,647.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-23</span> <span class="muted">(Bittensor chain read (block 9,343,602))</span> Chain read at block 9,343,602: only three slots earn incentive (45%, 45% and 10%: the two reserve slots and the operator pool), 17 slots hold validator permits and 12 had set weights, and the emission split is 18/41/41 with no burn. Emission to miners and validators was 295 alpha in the last tempo.</li>
+<li><span class="when">2026-10-22</span> <span class="muted">(GitHub (urfoundation/sn))</span> Repo main gained a guided &#x27;provider setup&#x27; flow (sign in, register, set payout address, start a background service), status, doctor and update commands, and Windows custody and service support from outside contributors. A repo document records that the owner waived full release qualification for Bittensor runtime 482 compatibility; the chain was already on runtime 483 on 2026-10-23.</li>
+<li><span class="when">2026-10-22</span> <span class="muted">(GitHub (urnetwork/build))</span> Provider release v2026.10.22 was published (releases now appear daily).</li>
+<li><span class="when">2026-10-21</span> <span class="muted">(GitHub (urfoundation/sn), ur.xyz/mainnet)</span> The subnet repo added an MPL-2.0 LICENSE file. The team&#x27;s launch timeline still listed the &#x27;modern provider&#x27; gate and the v2 pool registration window for this day as scheduled when read on 2026-10-23; the page had last been changed on 2026-10-15.</li>
+<li><span class="when">2026-10-20</span> <span class="muted">(#25-ur)</span> Team&#x27;s weekly plan: roll out the v2 contracts, ship new app builds, talk to potential network operators, expand crypto payments on ur.io beyond USDC, and move some repos from the URnetwork GitHub org to URfoundation.</li>
+<li><span class="when">2026-10-18</span> <span class="muted">(Bittensor EVM chain read (blocks 9,297,628 to 9,343,647))</span> On chain, epoch 1 was finalized at block 9,312,031 with no operator payout root; the pool&#x27;s 3,482 alpha for that epoch was recorded as carried, and no provider claim has appeared since.</li>
+<li><span class="when">2026-10-17</span> <span class="muted">(#25-ur)</span> A community member said the epoch-1 payout root was still empty after its stated deadline. The team replied that the published timeline holds, pool stats are sealed every 7 days, and an upgrade the following week would fix payouts. The chain later confirmed that no root was committed.</li>
+<li><span class="when">2026-10-16</span> <span class="muted">(#25-ur)</span> Mainnet-live announcement: the team&#x27;s validator is active and setting weights, existing providers must set a Bittensor wallet in the app to earn, miner burn is 0%, and the reserve launches. Answers the same day: BringYour will be the first paying customer after a grace period, the subnet earned no revenue yet, and the 256-UID limit is handled by pools.</li>
+<li><span class="when">2026-10-15</span> <span class="muted">(ur.xyz/investors, ur.xyz/reserve)</span> Team published a letter introducing the Network Capacity Reserve: excess miner emissions are held as working capital and released against defined, verified commitments, with a dashboard promised. The reserve page still showed no programs funded on 2026-10-23.</li>
+<li><span class="when">2026-10-14</span> <span class="muted">(ur.xyz/mainnet, urfoundation/sn mainnet/MAINNET.md)</span> The subnet owner moved the start of settlement v2 from epoch 2 to epoch 3. The repo notes that fleet binding was blocked until a commitment-oracle service was built the same day.</li>
+<li><span class="when">2026-10-13</span> <span class="muted">(#25-ur, ur.xyz/mainnet)</span> Community members criticised the repeated mainnet delays and the team apologised for a missed ETA. The team also said a v2 contract was now live for further testing; the public timeline (updated 2026-10-15) listed the v2 contracts as planned for about 2026-10-17.</li>
+<li><span class="when">2026-10-08</span> <span class="muted">(ur.xyz/mainnet launch timeline, urfoundation/sn mainnet/MAINNET.md, #25-ur)</span> Version 1 settlement contracts were deployed on Bittensor&#x27;s EVM (chain 964), UR&#x27;s operator was registered as pool UID 169, and the sole validator activated for the first payout epoch. Chat the same day said the weighting was not fully set up and that validators and miners would be told when to go online.</li>
+<li><span class="when">2026-10-05</span> <span class="muted">(#25-ur)</span> In a design discussion the team pointed to its published threat model and said an audit of the core cryptography and threat model by Cure53 was scheduled for November.</li>
+<li><span class="when">2026-08-18</span> <span class="muted">(#25-ur)</span> The UR team claimed the channel and described the project: a peer-to-peer privacy network that the team says already served 350,000 people a month across 80,000+ residential IPs, with ur.io as the first network operator. Team statements, not verified.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Read the miner guide first (it was last updated 2026-10-14 and covers Linux or macOS). Today ur.xyz/operators.yml lists a single operator, BringYour (api.bringyour.com), so that is the pool a new provider joins.</li>
+<li>Install the newest provider release from the urnetwork/build releases page (releases appear daily; v2026.10.22 was the newest on 2026-10-23), with one stable public exit IP per provider. The timeline says the old miner is deprioritised from 2026-10-21.</li>
+<li>Authenticate with the operator account (provider auth), then start the provider once with --allow-client-registration. Note the printed client id and back up the state directory (~/.urnetwork). The repo&#x27;s main branch (2026-10-22) also has a guided &#x27;provider setup&#x27; command and &#x27;provider status&#x27; / &#x27;provider doctor&#x27;; the guide did not describe them yet, so check the help of the release you installed.</li>
+<li>Register a payout wallet: request a statement with provider wallet challenge &lt;coldkey&gt;, sign it with the coldkey and submit it with provider wallet set. Do this before the epoch in which you want to earn; default consent covers 65,536 epochs.</li>
+<li>Keep the provider running (the guide has a systemd example). After an epoch closes and its payout root finalizes, claim with provider claim --epoch N --rpc &lt;EVM RPC&gt;; a funded EVM key pays gas. No claim had happened on chain by 2026-10-23, and the timeline lists the first settlement v2 claims for no earlier than 2026-11-01.</li>
+<li>Validators: the guide says the current mainnet validator needs a provisioned production configuration and approvals, not a self-service setup, so ask the team in the channel before registering a hotkey.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Chain state was read at block 9,343,602 (about 2026-10-23 03:40 UTC) and the settlement contracts up to block 9,343,647; both change quickly. Weights are validator opinions, not payouts, and the read did not map slots to people.</li>
+<li>No provider payout has happened on chain yet: epoch 1 had no payout root and was finalized with its 3,482 alpha carried (block 9,312,031), and the contracts show no claims. Epoch 2 closes about 2026-10-23 18:09 UTC; its outcome was not known when this was written.</li>
+<li>The 3,482 alpha captured for epoch 1 was not reconciled with the 10% provider share (about 295 alpha a day by the team&#x27;s own figures); the cause was not checked.</li>
+<li>Launch runs one operator and one measuring validator, both UR&#x27;s. The validator document states that the independence assumption behind its scoring is not met at launch. Other validator slots set similarly shaped weights on chain; whether they are independent of the team was not checked.</li>
+<li>The team and litepaper call mining and validating permissionless, but the validator guide (updated 2026-10-07) says mainnet bootstrap is provisioned by the deployment rather than self-service, and a validator steers only if it holds more than half of validator stake.</li>
+<li>Dates are in flux. The team&#x27;s launch timeline was last changed on 2026-10-15 and still lists steps from 2026-10-17 to 2026-10-21 as planned when read on 2026-10-23. Chat on 2026-10-13 said the v2 contract was live while the timeline listed it as planned; the v2 contracts were not located on chain.</li>
+<li>No head-tier fleet slot earns incentive as of block 9,343,602; fleet binding only became possible after the commitment oracle was built on 2026-10-14.</li>
+<li>Privacy claims are the team&#x27;s. UR&#x27;s own threat model says there is no independent audit of the protocol, connect engine or operator server code and that no cover traffic or padding is shipped; it was written against code of 2026-09-17. The Cure53 audit is only described as scheduled for November.</li>
+<li>The routing check measures reachability to one known destination and cannot prove providers relay real user traffic honestly (validator document section 1).</li>
+<li>All operator deposit rates are 0 and the team said on 2026-10-16 that the subnet was not yet earning revenue, so the usage-to-alpha demand loop described in the design is not running yet.</li>
+<li>90% of the miner share goes to the reserve multisig. The team says it is not used for team or operating costs and that allocations will be published; the reserve page showed none committed on 2026-10-21 and 2026-10-23.</li>
+<li>The validator&#x27;s runtime compatibility check admits specific reviewed runtime versions (481 and 482 in a repo document of 2026-10-22, which also says the owner waived full qualification of 482), while the chain reported runtime 483 on 2026-10-23. Whether the team&#x27;s validator is affected was not checked.</li>
+<li>The repo README describes the steady-state design (deposits, 41% to miners) and itself notes that launch differs. The repo has had an MPL-2.0 LICENSE file since 2026-10-21.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/urfoundation/sn" rel="noopener noreferrer">GitHub (subnet)</a></li>
+<li><a href="https://ur.xyz/" rel="noopener noreferrer">Protocol site</a></li>
+<li><a href="https://ur.xyz/mainnet" rel="noopener noreferrer">Mainnet launch timeline</a></li>
+<li><a href="https://ur.xyz/docs/miner" rel="noopener noreferrer">Miner guide</a></li>
+<li><a href="https://ur.xyz/docs/validator" rel="noopener noreferrer">Validator guide</a></li>
+<li><a href="https://ur.xyz/docs/litepaper" rel="noopener noreferrer">Litepaper</a></li>
+<li><a href="https://ur.xyz/reserve" rel="noopener noreferrer">Network Capacity Reserve</a></li>
+<li><a href="https://ur.xyz/operators.yml" rel="noopener noreferrer">Published operator list</a></li>
+<li><a href="https://ur.io/docs/threat-model" rel="noopener noreferrer">Threat model (URnetwork docs)</a></li>
+<li><a href="https://github.com/urnetwork/build/releases" rel="noopener noreferrer">Provider releases</a></li>
+<li><a href="https://ur.io/" rel="noopener noreferrer">VPN app and operator</a></li>
+<li><a href="https://t.me/ursn25" rel="noopener noreferrer">Telegram</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 9 sources</summary>
+<ul>
+<li><strong>repo</strong> urfoundation/sn commit c9d96068 (2026-10-22): README.md, VALIDATOR.md, LICENSE, mainnet/MAINNET.md, docs/spec/runtime-v482-api-review.md, miner/cli_front.go, evm/src (contract events), deploy/mainnet/policy-v1.yml, validator/treasury_policy.go, validator/release.yml</li>
+<li><strong>web</strong> https://ur.xyz/mainnet (timeline last updated 2026-10-15, read 2026-10-21 and 2026-10-23)</li>
+<li><strong>web</strong> https://ur.xyz/docs/miner (updated 2026-10-14) and https://ur.xyz/docs/validator (updated 2026-10-07), read 2026-10-21 and 2026-10-23</li>
+<li><strong>web</strong> https://ur.xyz/litepaper.md, https://ur.xyz/operators.yml, https://ur.xyz/price.yml, https://ur.xyz/reserve, https://ur.xyz/investors/funding-network-capacity (dated 2026-10-15), read 2026-10-21 and 2026-10-23</li>
+<li><strong>web</strong> https://ur.io/docs/threat-model (written against code of 2026-09-17), read 2026-10-21</li>
+<li><strong>web</strong> api.github.com urnetwork/build releases (v2026.10.21 and v2026.10.22) and urfoundation/sn commits, read 2026-10-21 and 2026-10-23</li>
+<li><strong>web</strong> Chain read at block 9,343,602 (2026-10-23): chain.py subnet 25, chain_neurons.py params, uids, weights and storage reads (SubnetEmissionWeights, Dividends, Incentive)</li>
+<li><strong>web</strong> Bittensor EVM archive RPC (chain 964), eth_getLogs on the v1 coordinator and settlement vault, blocks 9,297,628 to 9,343,647 (2026-10-23)</li>
+<li><strong>msg</strong> #25-ur 2026-08-18 to 2026-10-22</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/23.html"><small>← Previous</small>SN23 Trishool</a><a rel="next" href="/bittensor-docs/subnets/26.html"><small>Next →</small>SN26 Perturb</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-23. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

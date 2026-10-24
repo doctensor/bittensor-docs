@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BrainPlay (testnet) (SN335) | Bittensor Subnet Docs</title>
+<meta name="description" content="Testnet-only game benchmark for AI models; its mainnet slot SN117 was handed to another team in April 2026.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h17">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>335</span><div>
+<h1>BrainPlay (testnet) <span class="muted">SN335</span></h1>
+<p class="tagline">Testnet-only game benchmark for AI models; its mainnet slot SN117 was handed to another team in April 2026.</p>
+<span class="st s-transitioning">transitioning</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl0"><b>0<small>/day</small></b><span>last 7 d</span></li><li class="pl1"><b>0.04<small>/day</small></b><span>days 8-30</span></li><li class="pl0"><b>0<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-02</b><span>last chat</span></li><li class="pw"><b>2,296</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>AI model benchmarking through games (LLM and vision)</dd>
+<dt>Status</dt><dd>Testnet only: a check on 2026-10-21 found no subnet 335 on mainnet. The team said on 2026-04-29 that it had transferred its mainnet slot (SN117) to another team and would keep building on testnet 335. The last post from the team in the channel is dated 2026-06-08 (&quot;back soon&quot;), and nothing in the channel describes the testnet version.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-21</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>BrainPlay, built by ShiftLayer, scored AI models by having them play games against each other. Its first game was Codenames, followed by 20 Questions and a 2D platformer for vision models. It ran on mainnet as subnet 117 from late 2025 until the team handed that slot to a new team on 2026-04-29. The channel documented here is the team&#x27;s testnet one, netuid 335; its testnet design, if any, is not published in the channel.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Up to April 2026, per team posts: miners submitted a model (a Hugging Face repo) deployed on Targon compute, started with a deploy script that takes a competition name, a model and serving options. Each Codenames game used two miners and each model played both roles, spymaster and operative. Later posts added 20 Questions (2026-03-17) and a first visual game, a 2D platformer, on 2026-04-18. No post describes miner steps for testnet 335.</p></div><div><h3>Validators</h3><p>Per the team, validators ran the games and scored them. From version 2.3.2 (2026-03-25) each validator used only the scores it computed itself rather than a shared score table, and from 2026-03-17 validators used Chutes instead of OpenAI in one part of the flow. Validator code was not read because the repository is no longer public.</p></div><div><h3>Incentive</h3><p>As described by the team in chat before the reset: a winner-takes-all competition per game, with most of the miner emission burned (95 percent in February, lowered to 90 percent on 2026-03-17, and at times 100 percent, which the 2.4.1 hotfix tied to too few games). The alpha stake requirement for miners was removed on 2026-02-20. The mechanism was split into slots for language, vision and vision-language-action benchmarks, with only the first two announced as live or in progress. None of this was checked against the code or chain weights, and no testnet incentive rules are published.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-02</span> <span class="muted">(#brainplay (testnet 335))</span> The only message in the last 30 days came from a non-team user and carries no text.</li>
+<li><span class="when">2026-06-08</span> <span class="muted">(#brainplay (testnet 335))</span> A team member answered a user asking about a return with &quot;back soon&quot;, with no date or details. This is the last team post in the channel.</li>
+<li><span class="when">2026-04-29</span> <span class="muted">(#brainplay (testnet 335))</span> Team announced a strategic reset: mainnet slot SN117 transferred to a new team (coldkey and hotkey swaps done), with the team continuing on testnet 335 and planning a return to mainnet.</li>
+<li><span class="when">2026-04-20</span> <span class="muted">(#brainplay (testnet 335))</span> Version 2.4.1 hotfix for weight setting when games were insufficient.</li>
+<li><span class="when">2026-04-18</span> <span class="muted">(#brainplay (testnet 335))</span> First visual game, a 2D platformer, announced as live for miners.</li>
+<li><span class="when">2026-03-25</span> <span class="muted">(#brainplay (testnet 335))</span> Version 2.3.2: each validator scores from its own results only.</li>
+<li><span class="when">2026-03-17</span> <span class="muted">(#brainplay (testnet 335))</span> 20 Questions added as a second game on a multi-game design; Chutes integrated for validators; burn ratio lowered from 95 to 90 percent; team rotated its coldkey after the btcli/btwallet supply-chain issue.</li>
+<li><span class="when">2026-02-26</span> <span class="muted">(#brainplay (testnet 335))</span> Team described three benchmark slots: language models (live, Codenames), vision-language (in progress) and vision-language-action (planned, with the OpenTensor Foundation).</li>
+<li><span class="when">2026-02-20</span> <span class="muted">(#brainplay (testnet 335))</span> Version 2.1.1 removed the alpha stake requirement for miners.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>No current miner or validator guide was found for testnet 335. The old subnet repository and the project sites were not reachable on 2026-10-21.</li>
+<li>Ask in the BrainPlay testnet channel whether testnet 335 is running before spending time or funds.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>This page is about the testnet netuid 335. Mainnet netuid 117 now belongs to a different project (EveryFrame) and is not BrainPlay.</li>
+<li>The subnet repository the team used (shiftlayer-llc/brainplay-subnet) returned not found without credentials on 2026-10-21 and is absent from the organization&#x27;s public repository list, so it is private or removed. Mechanism details come only from team posts and may not match the code that ran.</li>
+<li>The project sites play.shiftlayer.ai and shiftlayer.ai returned gateway errors on 2026-10-21.</li>
+<li>Miner chat in March and April 2026 raised thin rewards against GPU rental costs and said the subnet was near the top of the deregistration list. These are miner claims and were not checked on chain.</li>
+<li>A testnet read on 2026-10-21 (block 8273094) shows netuid 335 registered on 2025-04-04 with 60 neurons, under the on-chain name llm-battle rather than BrainPlay. The link between that slot and this team rests on the team&#x27;s own posts. Whether the subnet is running, and what rules it uses, was not checked.</li>
+<li>Chain weights were not read.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/shiftlayer-llc" rel="noopener noreferrer">ShiftLayer on GitHub (public repos)</a></li>
+<li><a href="https://x.com/brainplay_ai" rel="noopener noreferrer">BrainPlay on X</a></li>
+<li><a href="https://x.com/Shiftlayer_Ai" rel="noopener noreferrer">ShiftLayer on X</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 5 sources</summary>
+<ul>
+<li><strong>msg</strong> #brainplay (testnet 335) posts dated 2026-02-03 to 2026-06-10</li>
+<li><strong>web</strong> github.com/shiftlayer-llc (public repository list), 2026-10-21</li>
+<li><strong>web</strong> api.github.com/repos/shiftlayer-llc/brainplay-subnet returned 404, 2026-10-21</li>
+<li><strong>web</strong> Mainnet chain query for netuid 335 on 2026-10-21 (not registered)</li>
+<li><strong>web</strong> Testnet chain read (chain.py --net test subnet 335) at block 8273094 on 2026-10-21: exists, name llm-battle, registered 2025-04-04, 60 neurons</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/333.html"><small>← Previous</small>SN333 Eastworld</a><a rel="next" href="/bittensor-docs/subnets/395.html"><small>Next →</small>SN395 Entangle Protocol</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-21. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EveryFrame (SN117) | Bittensor Subnet Docs</title>
+<meta name="description" content="Miners run a TEE-attested worker that serves AI video and image models for EveryFrame Studio with their own API keys">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h3">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>117</span><div>
+<h1>EveryFrame <span class="muted">SN117</span></h1>
+<p class="tagline">Miners run a TEE-attested worker that serves AI video and image models for EveryFrame Studio with their own API keys</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl4"><b>4.7<small>/day</small></b><span>last 7 d</span></li><li class="pl4"><b>3.0<small>/day</small></b><span>days 8-30</span></li><li class="pl3"><b>1.3<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-23</b><span>last chat</span></li><li class="pw"><b>182</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>AI video and image generation (API-backed, TEE-attested serving)</dd>
+<dt>Status</dt><dd>As of 2026-10-21 the subnet is running: the team says production started on 2026-09-28, and its published accounting feed shows approved miner work in every epoch from 25840 to 25855 (55 to 203 jobs per epoch in the later ones, 1 to 10 miners). A miner reported burn-only validator weights from about 18:00 UTC on 2026-10-20; on 2026-10-21 the team confirmed its validator kept submitting burn-only weights while approved work waited, called it a bug and released a fixed validator the same day. The team&#x27;s own pages disagree on whether routing is open.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-21</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>EveryFrame (SN117) is the serving layer behind EveryFrame Studio, a consumer AI video and image studio that puts third-party models from vendors such as MiniMax, Seedance, Veo and Kling behind one credit balance. Miners do not run models themselves: they bring their own provider API keys and run a team-approved worker inside an Intel TDX confidential VM on Phala Cloud, which calls the provider and signs a receipt for the output. The team&#x27;s own docs call this distributed serving, not decentralized GPU inference. A new team took over the slot from an earlier project on 2026-09-21.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Register a hotkey on SN117, fund a Phala Cloud account and at least one provider account (the docs list ten providers, among them fal, OpenRouter, MiniMax, Replicate, Google, Runway, Luma and ElevenLabs), and deploy the approved worker with the everycli command-line tool; no GPU is needed. Miners post a discount for each model contract they offer, and the team&#x27;s coordinator assigns jobs from those offers, one active job per miner. The worker calls the contract&#x27;s fixed provider endpoint, downloads and hashes the output inside the TEE and signs a receipt. Hosting and provider usage cost the miner money, and the docs say rewards are not guaranteed. The team said on 2026-10-12 that GPU providers cannot join yet.</p></div><div><h3>Validators</h3><p>The team&#x27;s operator side finalizes one signed accounting report per accounting epoch (361 blocks) that lists approved miner work in US dollars, and publishes it as JSON on a public feed. Independent validators (repo everyframe-validator, run as a Docker image) verify the signature and chain provenance, recompute the weights locally and submit them with their own hotkey. They do not re-run models or check customer payments, so the trust model is the operator&#x27;s accounting. A job counts only after the coordinator verifies the TEE receipt, decodes the media in a no-network sandbox and an operator approves it, and only if it is organic and reward-eligible. The TEE shows which worker image ran and that the receipt was signed in-session; it does not show that the provider ran the model or how good the output is. Since validator v0.4.0 (2026-10-21) each chain epoch gets at most one submission, and later reports are processed even when an earlier one is missing; with no report at all the validator falls back to a burn-only plan after a grace period.</p></div><div><h3>Incentive</h3><p>Policy epoch-value-cap-burn-v2. Each epoch the pool in dollars is the alpha emission times the miner share times the alpha price. A miner&#x27;s weight is its approved work (the reward target locked when the job was assigned, not the provider bill) divided by the larger of the pool and the total work; whatever work does not claim goes to the subnet owner&#x27;s hotkey and is recycled. The miner share is about 41 percent of emission: the live feed derives it from the chain&#x27;s owner-cut setting, and validator v0.4.0 also accepts an explicit fixed 41 percent for new reports. So far work has been far below the pool: epochs 25840 to 25855 show about 222 dollars of approved work against about 1,420 dollars of pool (roughly 16 percent), which means most of the miner allocation goes to the owner slot by design. The docs say the reward runner rejects recipients tied to the owner&#x27;s coldkey.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-21</span> <span class="muted">(#117-everyframe; everyframe-validator repo)</span> A miner reported that validators had put all weight on the owner slot since about 18:00 UTC on 10-20 although the feed showed approved work. The team replied the same day: a missing accounting report (epoch 25836, after an RPC outage) stalled the validator, a fix was deployed (validator v0.4.0, next submission window about 13:55 UTC), and a backlog of 772 jobs worth 107.03 dollars in reward targets stays eligible. It did not call payments restored until the on-chain result is verified.</li>
+<li><span class="when">2026-10-21</span> <span class="muted">(Bittensor chain state (read-only), block 9334308)</span> Chain read at about 20:41 UTC: 8 of the 10 validator-permit holders had weights set, all putting the majority (94.5 percent on average) on the owner slot; 7 uids had nonzero incentive and the owner slot held 88.3 percent of it. That matches the formula at the current work-to-pool ratio. It does not show whether the backlog has been paid.</li>
+<li><span class="when">2026-10-19</span> <span class="muted">(#117-everyframe)</span> After miners reported stale model IDs on some providers and very low incentive (10-16 to 10-20), the team said it would look into the model IDs.</li>
+<li><span class="when">2026-10-14</span> <span class="muted">(#117-everyframe)</span> The team said 5 miners were live and validators were still being onboarded. Between 10-13 and 10-15 miners asked where the public leaderboard is.</li>
+<li><span class="when">2026-10-12</span> <span class="muted">(#117-everyframe)</span> The team announced mining as live and published the miner and validator repositories. GPU providers cannot join yet, and miner support moved to a separate miner Discord.</li>
+<li><span class="when">2026-09-28</span> <span class="muted">(#117-everyframe; chain state)</span> Date the subnet site gives for going live; the same day a hyperparameter bot posted that the minimum registration burn was lowered to 0.05 TAO (a chain read on 2026-10-21 shows that value).</li>
+<li><span class="when">2026-09-21</span> <span class="muted">(#117-everyframe)</span> The new team announced it had taken full ownership of the slot and described the subnet as the decentralised inference layer of its AI video platform.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Read the miner README and the mining docs first; the docs state that hosting and provider usage cost money and rewards are not guaranteed.</li>
+<li>Register a hotkey on SN117, open and fund a Phala Cloud account and at least one provider account.</li>
+<li>Install everycli from the GitHub releases, then run register-hotkey, set-api-keys, init and doctor, and deploy using the hosting quote with a maximum hourly price.</li>
+<li>Post a discount per model contract with the offer command and watch status, jobs and earnings. Check that the model IDs you serve are current: a miner reported stale IDs on 2026-10-18.</li>
+<li>Validators: use the Docker image described in the validator README. To upgrade to v0.4.1 (2026-10-21), stop the old instance and reuse the same state, wallet mounts and RPC; never clear journals.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Chain weights were read on 2026-10-21 (about 20:41 UTC), but weights are validator opinions, not payouts, and with commit-reveal on they lag submissions by about two epochs. Whether the backlog of ten accounting epochs (772 jobs, about 107 dollars of approved work) has been or will be paid was not established. The code takes one report per chain epoch, and the feed adds about one report per epoch; how fast a backlog clears is not documented.</li>
+<li>The team&#x27;s own pages conflict: the Studio home page still says prelaunch, with renders running through existing providers, while the subnet site says live since 2026-09-28 with routing on, and also shows 0 miners online while the feed credits 4 to 10 miners per epoch. The miner README says some app traffic may bypass miners.</li>
+<li>Accounting is run by the operator. Validators check signatures, not customer demand or payment, and the coordinator and the finalizer are not public. The team&#x27;s docs say signed accounting is not by itself proof of customer demand.</li>
+<li>The accounting feed still has a hole at epoch 25836 (404 on 2026-10-21). Validator v0.4.0 skips such gaps; earlier versions waited for the missing report.</li>
+<li>Docs lag code: the rewards docs say the miner share is not hard-coded at 41 percent, validator v0.4.0 can pin 41 percent for new reports, and the live feed still uses the older chain-derived value. All three are numerically about 0.41.</li>
+<li>The TEE shows which worker image ran, not that the provider executed the model; the provider, Phala&#x27;s key service and the operator&#x27;s review stay trusted.</li>
+<li>Which of the other validator uids run the team&#x27;s code is unknown. The whitepaper and roadmap files linked in chat on 2026-10-06 and 10-08 were not read, and a team update posted on 2026-10-21 at about 16:00 UTC has no readable text in the archive.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/everyframe-studio/everyframe-miner" rel="noopener noreferrer">Miner repo (GitHub)</a></li>
+<li><a href="https://github.com/everyframe-studio/everyframe-validator" rel="noopener noreferrer">Validator repo (GitHub)</a></li>
+<li><a href="https://docs.everyframe.studio/mining/" rel="noopener noreferrer">Mining docs</a></li>
+<li><a href="https://subnet.everyframe.studio/" rel="noopener noreferrer">Subnet site</a></li>
+<li><a href="https://subnet.everyframe.studio/mainnet/v1/validator/epochs/25855.json" rel="noopener noreferrer">Accounting feed, epoch 25855</a></li>
+<li><a href="https://everyframe.studio/" rel="noopener noreferrer">EveryFrame Studio</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 7 sources</summary>
+<ul>
+<li><strong>msg</strong> #117-everyframe, 2026-09-21 to 2026-10-21</li>
+<li><strong>repo</strong> everyframe-studio/everyframe-validator README, PROTOCOL.md, RELEASE-NOTES.md, SPARSE-ACCOUNTING-RECOVERY.md, core/reward_policy.py, scheduled.py @c0a7871 (2026-10-21)</li>
+<li><strong>repo</strong> everyframe-studio/everyframe-miner README and release notes @036f549 (2026-10-21, v0.6.2)</li>
+<li><strong>web</strong> https://docs.everyframe.studio/mining/ , /mining/how-it-works, /mining/rewards (read 2026-10-21)</li>
+<li><strong>web</strong> https://subnet.everyframe.studio/ and its epoch feed, epochs 25837 to 25855 (read 2026-10-21)</li>
+<li><strong>web</strong> https://everyframe.studio/ home page (read 2026-10-21)</li>
+<li><strong>web</strong> Bittensor finney chain state, read-only: subnet 117 parameters, neurons and weights at blocks 9334276 to 9334308 (about 20:41 UTC, 2026-10-21)</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/116.html"><small>← Previous</small>SN116 Carbon</a><a rel="next" href="/bittensor-docs/subnets/118.html"><small>Next →</small>SN118 Ditto</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-21. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

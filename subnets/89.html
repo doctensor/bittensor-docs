@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>InfiniteQuant (SN89) | Bittensor Subnet Docs</title>
+<meta name="description" content="Trade-signal subnet: miners commit encrypted long/short calls graded on public ticks, plus Up/Down Markets.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h23">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>89</span><div>
+<h1>InfiniteQuant <span class="muted">SN89</span></h1>
+<p class="tagline">Trade-signal subnet: miners commit encrypted long/short calls graded on public ticks, plus Up/Down Markets.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl3"><b>0.86<small>/day</small></b><span>last 7 d</span></li><li class="pl4"><b>2.8<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>11<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-22</b><span>last chat</span></li><li class="pw"><b>1,350</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>trading signals / prediction markets</dd>
+<dt>Status</dt><dd>Chat active through 2026-10-20 (71 messages in the last 30 days); the main repo&#x27;s latest commit is 2026-10-19 and the code changed almost daily in the weeks before.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-21</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>SN89 pays miners who show statistically real skill at calling market direction. Miners submit directional calls (pair plus long or short) with fixed take-profit and stop-loss bands, and validators grade them against public price ticks. Since 2026-10-09 the subnet also runs on-chain Up/Down prediction markets. The operating team (IQ / Delta Compute) says it uses the signals in its own trading and sells them through an API.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Low-frequency (LF) miners pick a pair and direction, encrypt the call under a 15-minute drand timelock and put its hash on chain; at most 3 calls per UTC day and 1 hour apart. High-frequency (HF) miners send signed calls over a WebSocket to the team ingest and keep the countersigned receipts, up to 30 a day. Both use the same hotkey. Anyone can also join the Markets competition with sub-accounts that bet Up or Down on 15-minute and 1-hour windows. Referrers (recruiting new miners) are a fourth pool.</p></div><div><h3>Validators</h3><p>Validators read the on-chain commitments, wait for the timelock to open, check the plaintext against the hash and grade each call on a public, Merkle-anchored tick series: take-profit touched first is a win, stop-loss first is a loss, neither by the horizon is a wash. Grading is meant to be deterministic so anyone can recompute the weights. The repo&#x27;s single-validator document describes one authoritative validator with others delegating to it, so how many independent validators actually set weights is not established here.</p></div><div><h3>Incentive</h3><p>Per the code, a miner is qualified once it has at least 8 decisive results and a hit rate that beats a coin flip with about 90% confidence. Weight follows qualified wins times a tier multiplier (1.0x from 55%, 1.2x from 60%, 2.0x from 70%), with each win fading linearly over 30 days and a cap of 20 counted wins on LF (200 on HF). New hotkeys spend 8 days at a dust weight, and a lifetime hit rate confidently below 45% (at least 40 decisive calls) removes a hotkey for good. Copying another hotkey&#x27;s trades is penalised. Since 2026-10-14 the miner emission is split LF 30%, HF 30%, Markets 20% and referrers 20%. Markets pays entities that post positive net profit on real-stake bets backed by alpha collateral in a vault.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-20</span> <span class="muted">(#89 chat)</span> A miner asked why incentive did not appear to be updating on chain; no reply was in the archive when checked.</li>
+<li><span class="when">2026-10-19</span> <span class="muted">(GitHub commit)</span> The emission decay window for wins was lengthened from 7 to 30 days on both mechanisms; the commit says a miner with a good record had lost all emission after a quiet week and been pruned.</li>
+<li><span class="when">2026-10-15</span> <span class="muted">(GitHub commits and #89 chat)</span> A code change holds new HF miners at dust weight for their 8-day warmup after miners reported being pruned before warmup ended; on 2026-10-16 a miner said eliminations still hit when immunity ends.</li>
+<li><span class="when">2026-10-14</span> <span class="muted">(GitHub README and config)</span> Markets doubled to 20% of miner emission (LF and HF 30% each) and a collateral vault became required for Markets entities.</li>
+<li><span class="when">2026-10-09</span> <span class="muted">(GitHub README and config)</span> Closers (an exit-timing vote competition) was retired and its 10% share moved to Markets, the on-chain Up/Down prediction markets; bets can be placed during a window as well as before it.</li>
+<li><span class="when">2026-10-06</span> <span class="muted">(#89 chat)</span> Several miners alleged that top HF miners were scoring wins on the same pair every minute or two with very few washes and asked whether it was a grading bug. The team added pairs and promised README updates; no verdict on the allegation was found. Treat it as unverified.</li>
+<li><span class="when">2026-09-22</span> <span class="muted">(#89 chat)</span> 21 more crypto pairs were added to the HF and LF boards; the team said existing bands and the HF daily limit of 30 were unchanged.</li>
+<li><span class="when">2026-08-28</span> <span class="muted">(#89 chat and README)</span> The team announced a testnet pool where miners choose their own stop-loss and take-profit size and wash window, with points gained or lost by size, intended to replace the HF pool later. No later mention of it reaching mainnet was found; the current README still shows fixed HF bands.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Use Python 3.10 (the timelock dependency has no wheels for newer versions), clone the repo and install requirements.txt.</li>
+<li>Register a hotkey on netuid 89 with btcli (the README quotes about 0.05 TAO burn).</li>
+<li>Get a feed token by sending /token to the team&#x27;s Telegram signals bot and export it as SN89_FEED_TOKEN.</li>
+<li>Run neurons/miner.py in follow, serve or submit mode for LF calls, or submit-hf for HF calls.</li>
+<li>Expect an 8-day warmup before wins pay; HF also needs 50 accepted submissions on 8 distinct days.</li>
+<li>To practise first, use testnet netuid 496 with the faucet as described in the README.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Chain weights, miner counts and actual emission amounts were not read for this page.</li>
+<li>The README&#x27;s emission table still mentions trailing 7-day wins; the code and the Scoring section use 30 days, which this page follows.</li>
+<li>Chat on 2026-10-19 asked whether the program page&#x27;s 55% floor and cap of 20 apply to HF; the code uses a tier ramp and an HF cap of 200.</li>
+<li>The README links a live board at partner.infinitequant.app/sn89/mechanisms, which returned 404 when checked on 2026-10-21.</li>
+<li>The Markets money flows (deposits, fees, withdrawals, credits) are taken from the README and were not checked in code or on the live site.</li>
+<li>Some miners in chat criticise the scoring as paper trading and note the subnet&#x27;s team trading book had losses in September; these are opinions and team claims, not verified.</li>
+<li>Rules changed frequently in the last month, so check the README and commit log before relying on any number.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/DeltaCompute24/InfiniteQuant-Subnet" rel="noopener noreferrer">GitHub</a></li>
+<li><a href="https://infinitequant.app/signals-program" rel="noopener noreferrer">Signals program</a></li>
+<li><a href="https://infinitequant.app/markets" rel="noopener noreferrer">IQ Markets</a></li>
+<li><a href="https://infinitequant.app/signals-hf-spec" rel="noopener noreferrer">HF design spec</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 3 sources</summary>
+<ul>
+<li><strong>repo</strong> DeltaCompute24/InfiniteQuant-Subnet @9ec1950 (2026-10-19): README.md, docs/SN89-overview.md, docs/single-validator-model.md, sn89_signals/config.py, sn89_signals/hf.py</li>
+<li><strong>web</strong> infinitequant.app/signals-program (text only, 2026-10-21)</li>
+<li><strong>msg</strong> #89 chat 2026-08-16 to 2026-10-20 and pinned posts</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/88.html"><small>← Previous</small>SN88 Investing88</a><a rel="next" href="/bittensor-docs/subnets/90.html"><small>Next →</small>SN90 KubeTEE</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-21. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

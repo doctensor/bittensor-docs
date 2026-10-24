@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Safe Scan (SN163) | Bittensor Subnet Docs</title>
+<meta name="description" content="Testnet-only continuation of the former mainnet SN76 cancer-detection contest; team delayed its comeback in April 2026.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h13">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>163</span><div>
+<h1>Safe Scan <span class="muted">SN163</span></h1>
+<p class="tagline">Testnet-only continuation of the former mainnet SN76 cancer-detection contest; team delayed its comeback in April 2026.</p>
+<span class="st s-quiet">quiet</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl0"><b>0<small>/day</small></b><span>last 7 d</span></li><li class="pl2"><b>0.17<small>/day</small></b><span>days 8-30</span></li><li class="pl2"><b>0.32<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-16</b><span>last chat</span></li><li class="pw"><b>4,575</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>medical imaging (cancer-detection model competitions)</dd>
+<dt>Status</dt><dd>Testnet only and dormant. The team said the project was deregistered from mainnet (chat, 2026-02-19) and on 2026-04-10 said it was delaying its comeback; no team post followed in the channel archive through 2026-10-16. On the testnet on 2026-10-21 no validator had set weights for at least about 171 days. Netuid 163 does not exist on mainnet.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-21</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>Safe Scan (repo name cancer-ai) ran model competitions in which miners submit medical-imaging classifiers, such as skin-lesion models, that validators score on data batches supplied by medical institutions. Until early 2026 it held mainnet subnet 76; after being deregistered, the team said it would keep developing and testing on testnet, where the project is discussed under netuid 163. The team&#x27;s last channel post (2026-04-10) says it is delaying its comeback, and the testnet shows no recent validator activity. The repo and docs still describe the mainnet SN76 setup.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Per the docs written for mainnet SN76: miners train a model for the current competition (the documented one is Tricorder-3, 11 skin-lesion classes aligned with ISIC-2025, with an image and demographic data as inputs). Models are ONNX files under an MIT licence, with training code expected, hosted on Hugging Face, with the repo link committed on chain at least 120 minutes before the competition starts. The miner command line has four actions: evaluate, self-check, upload and submit.</p></div><div><h3>Validators</h3><p>A competition starts when medical institutions add a new data batch to a central Hugging Face dataset repo. Validators detect it, download it and evaluate every eligible model themselves. For Tricorder-3 the docs give the final score as 0.9 times a prediction score plus 0.1 times an efficiency score. Prediction is half accuracy and half weighted F1, with malignant classes weighted 3, medium 2 and benign 1. Efficiency is 1.0 for models up to 50 MB and falls linearly to 0 at 150 MB. The scoring code was not audited beyond finding the efficiency function.</p></div><div><h3>Incentive</h3><p>The competition doc splits rewards among the top 10 models as 50, 17, 10, 7, 5, 4, 3, 2, 1 and 0.5 percent, with a minimal share for the rest. These figures come from the docs for mainnet; how they apply on testnet, where tokens have no market value (moderator, 2026-03-19), was not verified. Chain weights were not read.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-21</span> <span class="muted">(Bittensor testnet chain read)</span> Testnet read: netuid 163 exists with 97 registered neurons and 43 validator permits. No neuron has non-zero incentive or dividends, and every permitted validator&#x27;s last weight update is at least 1.23 million blocks old (about 171 days at 12-second blocks).</li>
+<li><span class="when">2026-10-16</span> <span class="muted">(#safe-scan)</span> The most recent channel message is a ping to another user; the 4 messages in the last 30 days are pings or greetings.</li>
+<li><span class="when">2026-09-07</span> <span class="muted">(#safe-scan)</span> A member asked when the testnet would be released again. Replies came from other members, not the team.</li>
+<li><span class="when">2026-04-10</span> <span class="muted">(#safe-scan)</span> The team said it was delaying its comeback to watch how things develop, and that it was now building a dermatology company. This is the last team post in the channel.</li>
+<li><span class="when">2026-04-06</span> <span class="muted">(#safe-scan)</span> A would-be miner asked whether testnet 163 is still the right path and whether the public miner guide is current. No reply appears in the archive.</li>
+<li><span class="when">2026-03-19</span> <span class="muted">(#safe-scan)</span> After a member said on 2026-03-12 that you could mine on testnet uid 163, a moderator confirmed it is the testnet and that incentives there are test alpha.</li>
+<li><span class="when">2026-02-19</span> <span class="muted">(#safe-scan)</span> A moderator said Safe Scan had been deregistered from mainnet but intended to keep developing and testing on testnet. The channel moved to the Testnet section at the owner&#x27;s request, and mainnet SN76 now belongs to a different, unclaimed project.</li>
+<li><span class="when">2026-02-17</span> <span class="muted">(#safe-scan)</span> After weeks of miner complaints about evaluation outages, immunity periods and deregistrations, the team said it was looking at options, would be back if deregistered, and wanted to keep building an open-medicine effort.</li>
+<li><span class="when">2026-02-11</span> <span class="muted">(GitHub)</span> Last push to the public repo (last commit: coroutine protection and logging). Nothing newer was found.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Before investing time, ask in the channel whether anyone still runs a validator: the testnet chain shows no validator weights for roughly 171 days or more, and the team&#x27;s last post says it is delaying its comeback.</li>
+<li>Read DOCS/miner.md and DOCS/COMPETITIONS.md in the repo. Both are written for mainnet SN76 (miner.md uses netuid 76 on finney), and netuid 163 and testnet appear only in chat.</li>
+<li>Build an ONNX model for the documented competition (Tricorder-3), publish it with its training code under an MIT licence on Hugging Face, and commit the repo link on chain at least 120 minutes before the competition starts.</li>
+<li>Use the miner command line (evaluate, self-check, upload, submit). The network flag accepts finney or test; pairing it with netuid 163 is what chat suggests, not what the docs say.</li>
+<li>Validator setup was not read in detail and is not summarized here.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Testnet only. Netuid 163 does not exist on mainnet at the latest block read (2026-10-21) or at five earlier points back about 300 days; mainnet holds only netuids 0 to 128. Chat from before 2026-02 is mostly about the old mainnet SN76, and mainnet SN76 is now a different project.</li>
+<li>Nothing on chain names Safe Scan for testnet 163: the slot was registered on 2024-05-24 (before the repo was created) and has no subnet identity set. The link to Safe Scan rests on chat (a member on 2026-03-12, a moderator on 2026-03-19) and on the channel&#x27;s placement. No team post read names the testnet netuid.</li>
+<li>All repo documentation targets mainnet SN76. A testnet competition config exists (one competition, tricorder-3, evaluation at 14:38 daily with no time zone stated, and a testnet dataset repo on Hugging Face), but whether any competition or dataset is live on testnet was not verified.</li>
+<li>The project&#x27;s sites could not be checked: safe-scan.ai returned 403 and dashboard.safe-scan.ai did not respond from the research machine on 2026-10-21, and the melanoma test page linked from the repo returned 404. The skin-scan.ai site loads and describes a patient and clinic skin-health platform with no mention of Bittensor, subnet or TAO.</li>
+<li>The &#x27;no weights for 171 days&#x27; figure comes from chain reads of validator permits and last-update ages only; it does not show that nobody mines or runs software. Scoring formulas above come from the docs, not from an audit of the code.</li>
+<li>Whether the team will return is unknown; the only statement is the 2026-04-10 delay. Testnet tokens carry no market value, and no price, emission or market figure is given on this page.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/safe-scan-ai/cancer-ai" rel="noopener noreferrer">GitHub (safe-scan-ai/cancer-ai)</a></li>
+<li><a href="https://github.com/safe-scan-ai/cancer-ai/blob/99ea548/DOCS/miner.md" rel="noopener noreferrer">Miner guide (written for mainnet SN76)</a></li>
+<li><a href="https://github.com/safe-scan-ai/cancer-ai/blob/99ea548/DOCS/COMPETITIONS.md" rel="noopener noreferrer">Competitions overview</a></li>
+<li><a href="https://github.com/safe-scan-ai/cancer-ai/blob/99ea548/DOCS/competitions/TRICORDER-3.md" rel="noopener noreferrer">Tricorder-3 competition</a></li>
+<li><a href="https://skin-scan.ai" rel="noopener noreferrer">skin-scan.ai (team&#x27;s dermatology company, linked from the README)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 6 sources</summary>
+<ul>
+<li><strong>repo</strong> safe-scan-ai/cancer-ai@99ea548 (pushed 2026-02-11): README.md, DOCS/COMPETITIONS.md, DOCS/competitions/TRICORDER-3.md, DOCS/miner.md, CHANGELOG.md, config/competition_config_testnet.json</li>
+<li><strong>repo</strong> safe-scan-ai/cancer-ai@99ea548: tricorder_3_handler.py (efficiency function only)</li>
+<li><strong>msg</strong> #safe-scan 2024-10 to 2026-10-16 (read via the chat archive; 2026-02-10 to 2026-04-10 and the team&#x27;s own posts read in full)</li>
+<li><strong>web</strong> Bittensor mainnet chain reads, netuid 163 and the active-subnet list, 2026-10-21 (blocks about 9334347 to 9334361); absent at the latest block and at five earlier points</li>
+<li><strong>web</strong> Bittensor testnet chain reads, netuid 163 parameters, neuron permits and weight ages, 2026-10-21 (testnet blocks about 8272838 to 8273051)</li>
+<li><strong>web</strong> https://skin-scan.ai (read 2026-10-21)</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/128.html"><small>← Previous</small>SN128 ByteLeap</a><a rel="next" href="/bittensor-docs/subnets/234.html"><small>Next →</small>SN234 TuneForge</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-21. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

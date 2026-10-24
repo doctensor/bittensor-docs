@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Refinery (SN125) | Bittensor Subnet Docs</title>
+<meta name="description" content="Miners submit LLM training optimizers and data refiners; only confirmed gains over the frontier earn rewards.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h11">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>125</span><div>
+<h1>Refinery <span class="muted">SN125</span></h1>
+<p class="tagline">Miners submit LLM training optimizers and data refiners; only confirmed gains over the frontier earn rewards.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>18<small>/day</small></b><span>last 7 d</span></li><li class="pl4"><b>4.9<small>/day</small></b><span>days 8-30</span></li><li class="pl4"><b>4.2<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-24</b><span>last chat</span></li><li class="pw"><b>491</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>AI training research</dd>
+<dt>Status</dt><dd>Daily rounds have run since 2026-09-08 and the chain pays confirmed frontier holders, but the 2026-10-22 round accepted no submissions and the round opened on 2026-10-23 shows only rejected commits so far. The team said on 2026-10-19 that it will cut optimizer emissions over three weeks without new improvements.</dd>
+<dt>Confidence</dt><dd>high</dd>
+<dt>Researched</dt><dd>2026-10-23</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>Refinery (SN125) pays for research that improves how open language models are trained. Challenge 1 asks for optimizers that reach lower validation loss than the current best under a fixed compute budget; Challenge 2, open since 2026-10-19, asks for a refiner that decides what a fixed student model reads and which tokens get gradient. One team-run validator trains every submission itself and publishes the winning source and per-round records. On 2026-10-23 the chain pays three miner UIDs, one per confirmed improvement holder, and routes the unearned share to the owner slot, which is set to burn it.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Miners write an optimizer (or, for Challenge 2, a refiner) in Python using the repo&#x27;s interface, test it on their own compute, serve the source from a registered hotkey and prepay evaluation credits in TAO. They commit to the source hash first and reveal the code when asked; a commit with no credit behind it is rejected. One hotkey carries one submission at a time. A GPU is not needed just to serve code, but real experiments need one.</p></div><div><h3>Validators</h3><p>One validator, pinned in the repo config (UID 203), trains each submission on a fixed task: a roughly 360M-parameter Llama-style model on FineWeb-Edu for at most 20 hours on one B200 (188,000 steps), on rented GPUs (the dashboard lists RunPod). Miners refuse queries from any other hotkey. Optimizers are scored on held-out validation loss and refiners on a benchmark suite. A candidate must clear a bar and then pass a second, validator-funded confirmation run before it counts. Rounds are scheduled on a daily 00:00 UTC grid, although overruns shift the start. On chain, all 11 validators that set weights on 2026-10-23 carried exactly the same vector as that validator, which holds about 1 percent of validator stake. Anyone can recompute weights from the published round records, but the training run itself cannot be replayed bit for bit.</p></div><div><h3>Incentive</h3><p>Miners get 41 percent of subnet emission on chain (owner 18, validators 41), and half of that backs each challenge pool. A pool pays only as far as recent confirmed progress covers a reference level: each confirmed improvement counts with a 14-day half-life, and the reference ramps up over 56 days from the first confirmed event (optimizer 0.03 to 0.10 nats, refiner 0.02 to 0.07 suite points). A new event must beat the best by 0.03 nats (optimizer) or 0.02 suite points (refiner) and by an adaptive amount that halves each stagnant week. The unearned share is weighted to UID 0, the owner slot, and the subnet&#x27;s RecycleOrBurn setting is Burn. On 2026-10-23 the optimizer pool was 48 percent payable (confirmed events on 2026-09-11 and 2026-10-06, split 64 to 36) and the refiner pool 100 percent payable (one event on 2026-10-21), so the chain vector read 50.0 percent to the refiner leader, 15.4 and 8.6 percent to the two optimizer holders and 26.0 percent to the owner slot. With no new optimizer event the same formula pays out less each day: about 19 percent of that pool by 2026-11-06, by my calculation from the published constants.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-23</span> <span class="muted">(Refinery dashboard feed)</span> The latest round opened at 00:00 UTC with four commits, all rejected for having no evaluation credit. The previous round (2026-10-22) accepted none either, after 5, 3 and 2 accepted in the three rounds before it. Payments continue to earlier frontier holders.</li>
+<li><span class="when">2026-10-21</span> <span class="muted">(Refinery dashboard feed, chain read)</span> First confirmed refiner improvement (+0.059 suite points over the baseline). That miner now receives the whole refiner pool on chain.</li>
+<li><span class="when">2026-10-19</span> <span class="muted">(#125-refinery, GitHub)</span> The team said emissions to the optimizer challenge will be reduced over the next three weeks if improvements do not continue. The repo shows no schedule for this, but its payout formula already shrinks the optimizer share as old improvements decay.</li>
+<li><span class="when">2026-10-19</span> <span class="muted">(#125-refinery)</span> Challenge 2 opened to submissions in the round at 00:00 UTC; the team said it was live that morning and the dashboard now carries the refiner data.</li>
+<li><span class="when">2026-10-17</span> <span class="muted">(#125-refinery, GitHub)</span> Challenge 2 launch delayed to Monday 2026-10-19 after the team found and patched potential exploits; the code was merged to main on 2026-10-18.</li>
+<li><span class="when">2026-10-10</span> <span class="muted">(#125-refinery)</span> Second challenge announced: dataset curation through a refiner, with 50 percent of miner emission allocated to it and possibly more if the optimizer search stagnates.</li>
+<li><span class="when">2026-10-06</span> <span class="muted">(Refinery dashboard feed)</span> Second confirmed optimizer improvement (+0.032 nats), the latest on record.</li>
+<li><span class="when">2026-09-11</span> <span class="muted">(Refinery dashboard feed)</span> First confirmed optimizer improvement (+0.19 nats over the genesis AdamW baseline); it starts the 56-day payout ramp.</li>
+<li><span class="when">2026-09-08</span> <span class="muted">(#125-refinery)</span> Launch: mining opened with an evaluation fee of about 0.72 TAO per submission, which several miners asked to reduce; the team explained that runs below this model size gave unstable rankings.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Use Linux and Python 3.12, install the repo requirements and read MINING.md (and MINING_AGENTS.MD if you use research agents).</li>
+<li>Start from the optimizer template or the refiner template (docs/REFINER_MINING.md) and check your candidate locally without executing untrusted code.</li>
+<li>Run isolated experiments against the published baseline before paying anything.</li>
+<li>Check the dashboard and the signed round announcement for the current fee (0.85 TAO on 2026-10-23), the treasury address and the validator identity, then register a hotkey and fund evaluation credits.</li>
+<li>Serve your source, commit its hash and reveal it when the round asks.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Dashboard figures (alpha paid, rental spend, submission counts) are published by the team and were not checked independently; the weight vector in it matches the chain to 0.01 point. The repo itself warns that a source release is not proof of an active deployment and tells miners to check identity, treasury and fee against a signed round announcement before paying.</li>
+<li>All 11 validators that set weights on 2026-10-23 carry the same vector as the team&#x27;s validator, which holds about 1 percent of validator stake. The public repo has no code for the other validators (a config comment mentions a lite attestation validator), so how they obtain the vector is not documented here.</li>
+<li>Challenge 2 is scored on a benchmark suite that its own spec calls a placeholder, and the held-out loss gate is switched off: all seven refiner results so far have a worse held-out loss than the baseline (2.86 to 3.24 against 2.59 nats) while scoring 0.04 to 0.06 higher on the suite, and the LAMBADA sub-score fell below the baseline in the two results inspected.</li>
+<li>Fees are prepaid in TAO (0.85 TAO on 2026-10-23, up from about 0.72 at launch). TAO is never refunded, but an evaluation credit is refunded when the evaluation fails on the validator&#x27;s side; a credit is lost on miner fault or an unrevealed commit.</li>
+<li>Participation is thin and falling: accepted submissions per round went 5, 3, 2, 0 after Challenge 2 opened. Only three miner UIDs are paid on chain, on three different coldkeys, none shared with the owner slot or the treasury address; that fits the team&#x27;s statement that it has no miner of its own, though the chain cannot rule out other wallets. Most of the chat is GIF spam.</li>
+<li>The team&#x27;s planned six-week review (about 2026-10-20) has no recorded outcome beyond the 2026-10-19 announcement, and the code has no scheduled pause. The announced cut is not a code change: the payout formula already shrinks the optimizer share as old improvements decay.</li>
+<li>One README paragraph still calls data selection a future direction while another describes Challenge 2 as open since 2026-10-19. The repo has no LICENSE file and has not changed since 2026-10-17.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/Barbariandev/Refinery" rel="noopener noreferrer">GitHub</a></li>
+<li><a href="https://github.com/Barbariandev/Refinery/blob/main/MINING.md" rel="noopener noreferrer">Mining guide</a></li>
+<li><a href="https://github.com/Barbariandev/Refinery/blob/main/docs/REFINER_TASK.md" rel="noopener noreferrer">Refiner task spec</a></li>
+<li><a href="https://refinery125.com/" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://refinery125.com/dashboard.html" rel="noopener noreferrer">Dashboard</a></li>
+<li><a href="https://refinery125.com/dashboard.json" rel="noopener noreferrer">Dashboard data (JSON)</a></li>
+<li><a href="https://refinery125.com/schedule.html" rel="noopener noreferrer">Schedule</a></li>
+<li><a href="https://huggingface.co/datasets/125datasets/sn125-genesis-baseline" rel="noopener noreferrer">Genesis baseline dataset</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 5 sources</summary>
+<ul>
+<li><strong>repo</strong> Barbariandev/Refinery@212d736 (2026-10-17), README.md, MINING.md, DEPLOYMENT.md, docs/REFINER_TASK.md, sn125/config.py, sn125/verify.py, sn125/neuron.py</li>
+<li><strong>web</strong> https://refinery125.com/dashboard.json (read 2026-10-23, generated 03:45 UTC) and https://refinery125.com/schedule.html</li>
+<li><strong>web</strong> Chain read at block 9343602: uids, weights, SubnetEmissionWeights and RecycleOrBurn for netuid 125; block 9343627: owner, coldkey, stake and weight-row checks (booleans and percentages only)</li>
+<li><strong>web</strong> https://refinery125.com/ (read 2026-10-23)</li>
+<li><strong>msg</strong> #125-refinery 2026-09-07 to 2026-10-22</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/124.html"><small>← Previous</small>SN124 Swarm</a><a rel="next" href="/bittensor-docs/subnets/126.html"><small>Next →</small>SN126 Attelier</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-23. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

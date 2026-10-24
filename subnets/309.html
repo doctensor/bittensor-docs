@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EchoIC (testnet) (SN309) | Bittensor Subnet Docs</title>
+<meta name="description" content="Testnet-only voice-cloning subnet where the fastest miner that clears a quality bar takes each round.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h3">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>309</span><div>
+<h1>EchoIC (testnet) <span class="muted">SN309</span></h1>
+<p class="tagline">Testnet-only voice-cloning subnet where the fastest miner that clears a quality bar takes each round.</p>
+<span class="st s-transitioning">transitioning</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl0"><b>0<small>/day</small></b><span>last 7 d</span></li><li class="pl0"><b>0<small>/day</small></b><span>days 8-30</span></li><li class="pl0"><b>0<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-02-12</b><span>last chat</span></li><li class="pw"><b>11</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>voice cloning (text-to-speech)</dd>
+<dt>Status</dt><dd>Testnet only: a check on 2026-10-21 found no subnet 309 on mainnet. The channel sits in the testnet section, the last team post is dated 2026-02-12 and the public repository has no commit after 2026-01-15. The team site did not respond on 2026-10-21.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-21</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>EchoIC is a voice-cloning subnet. A miner receives a short voice sample and a transcript, produces speech in that voice with a cloning model, and returns an audio file. Validators score the audio for text accuracy, voice similarity, intonation and sound quality. Everything found describes testnet use only, and the channel has been nearly silent since February 2026.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Miners run one of four cloning methods in the repository (XTTS by default, Bark, Tortoise or RVC), upload each result to their own storage bucket (Backblaze, Amazon S3 or Cloudflare R2) and return the file&#x27;s address. The README requires Python 3.10 or older for miners and suggests a GPU with 4 GB or more of memory. In a 2026-02-12 post the team said it was adding ElevenLabs and Chatterbox as methods; neither appears in the public code.</p></div><div><h3>Validators</h3><p>Validators fetch voice-cloning tasks (a voice sample, a transcript and a time limit) from the team&#x27;s own server, which requires an API key from the team&#x27;s website, so the task source is closed. They query up to 50 responsive miners per task by default, download each result and compute an overall score: 30 percent text accuracy (speech recognition compared with the transcript), 30 percent voice similarity (speaker embedding, with spectral and pitch checks), 30 percent intonation and 10 percent audio quality.</p></div><div><h3>Incentive</h3><p>In the code, a miner whose overall score is below 0.7 is treated as having failed. Among sampled miners, the one with the shortest response time wins the round and gets a score of 1; everyone else gets 0. Round results feed a moving average (weight 0.1 on the newest round) and the averages become the validator&#x27;s weights. The README lists stricter thresholds per metric (0.8 overall, for example) than the code enforces; the code is the source used here. Chain weights were not read.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-02-12</span> <span class="muted">(#echo-ic (testnet 309))</span> Team said version 1.0.0 had launched and passed full testnet validation, listed XTTS, Bark, Tortoise and RVC as live, and said ElevenLabs and Chatterbox were being added. This is the last team post in the channel.</li>
+<li><span class="when">2026-02-06</span> <span class="muted">(#echo-ic (testnet 309))</span> A user posted suggestions for stricter version checks between validators and miners, versioning for clone tasks and tighter reward thresholds. No team reply appears in the channel.</li>
+<li><span class="when">2026-02-05</span> <span class="muted">(#echo-ic (testnet 309))</span> Team introduced the subnet in the channel with links to the repository, the website and its X account.</li>
+<li><span class="when">2026-01-15</span> <span class="muted">(GitHub echo-ic/echo-bittensor-subnet)</span> Last commits to the public repository: a reward correction for failed responses and a change that moves model loading to the miner side.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Clone the repository (the README names a different GitHub organization than the one the team links in chat), create a Python 3.10 or older environment for miners, and install requirements.txt plus miner_additional_requirements.txt.</li>
+<li>Copy .env.example to .env and set a storage provider, endpoint, bucket and credentials for the result uploads.</li>
+<li>Register a hotkey on the testnet netuid the team uses for EchoIC, which was not stated in the channel, then run neurons/miner.py with your wallet and --voice_cloning.method xtts.</li>
+<li>Validators install ffmpeg and need an API key from the team&#x27;s website; that site was unreachable on 2026-10-21, so check with the team before planning a validator.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Testnet only. Nothing here describes mainnet emissions or economics, and 309 was not found on mainnet on 2026-10-21.</li>
+<li>The team&#x27;s own site timed out on 2026-10-21, and validators depend on its task server, so the subnet may not be running.</li>
+<li>No commits to the public repository since 2026-01-15 and no team post since 2026-02-12.</li>
+<li>The README and the code disagree on minimum score thresholds; this page follows the code.</li>
+<li>A testnet read on 2026-10-21 (block 8273084) shows netuid 309 registered on 2025-12-22 under the on-chain name EchoIC, with 6 neurons, so the slot still carries the project&#x27;s name. Whether miners and validators are actually running was not checked.</li>
+<li>Chain weights were not read.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/echo-ic/echo-bittensor-subnet" rel="noopener noreferrer">GitHub (echo-ic/echo-bittensor-subnet)</a></li>
+<li><a href="https://echo-ic.com" rel="noopener noreferrer">Website (did not respond 2026-10-21)</a></li>
+<li><a href="https://x.com/echoic_lab" rel="noopener noreferrer">X (EchoIC)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 4 sources</summary>
+<ul>
+<li><strong>repo</strong> echo-ic/echo-bittensor-subnet @ 7fb1069 (2026-01-15): README.md, echo/validator/{forward,reward,evaluator}.py, echo/base/validator.py, echo/protocol.py</li>
+<li><strong>msg</strong> #echo-ic (testnet 309) posts dated 2026-02-05, 2026-02-06 and 2026-02-12</li>
+<li><strong>web</strong> Mainnet chain query for netuid 309 on 2026-10-21 (not registered); echo-ic.com timed out</li>
+<li><strong>web</strong> Testnet chain read (chain.py --net test subnet 309) at block 8273084 on 2026-10-21: exists, name EchoIC, registered 2025-12-22, 6 neurons</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/305.html"><small>← Previous</small>SN305 Blockchain Insights (testnet 305)</a><a rel="next" href="/bittensor-docs/subnets/310.html"><small>Next →</small>SN310 AuditPal</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-21. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

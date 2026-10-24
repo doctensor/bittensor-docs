@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Recall (SN31) | Bittensor Subnet Docs</title>
+<meta name="description" content="A RAG-as-a-service subnet still in testing: no miner has earned on mainnet and no release date is set.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h1">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>31</span><div>
+<h1>Recall <span class="muted">SN31</span></h1>
+<p class="tagline">A RAG-as-a-service subnet still in testing: no miner has earned on mainnet and no release date is set.</p>
+<span class="st s-transitioning">transitioning</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl4"><b>3.7<small>/day</small></b><span>last 7 d</span></li><li class="pl4"><b>5.7<small>/day</small></b><span>days 8-30</span></li><li class="pl4"><b>4.1<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-23</b><span>last chat</span></li><li class="pw"><b>719</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>retrieval-augmented generation (RAG) as a service</dd>
+<dt>Status</dt><dd>As of 2026-10-24 the team is active and says mainnet is coming, but on 2026-10-23 it said live testnet validation and generation qualification must pass before it can give a release date. The public explorer still reads testnet subnet 353, and on mainnet all 16 validators put 100% of their weight on the owner&#x27;s own UID 0 at every block sampled since 2026-09-10, so no miner UID has earned.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-24</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>Recall is a hosted memory and retrieval-augmented generation (RAG) API: a developer creates a vector database, stores text, queries it and asks for generated answers, with a remote MCP endpoint for AI agents. The team&#x27;s pitch (2026-06-02) is one API call that returns a grounded answer with citations, chained through the best miner for each step (embed, retrieve, rerank, generate), with validators scoring miners on retrieval accuracy and answer quality. The netuid was registered on 2025-12-25 (the previous project there was Candles), and the current owner said in May 2026 that they had recently bought it. The miner, validator and web repositories were private at the time of research, so the mechanism below is what the team said, not what code does.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Per the team and the site: miners run storage and embedding and serve user requests to create databases, store text, embed, rerank, generate answers and query. The public explorer lists a capability tag per miner (database, embedding, rerank, generate). Miners declare which embedding models they serve, from one catalog that includes a CPU default and several larger open models, and requests for a database go only to miners that declared its model. On 2026-10-24 the explorer&#x27;s data (testnet subnet 353) listed 17 UIDs but only 4 with hardware and capability details; all four report the same region and GPU model, about 12 to 20 hours of uptime and almost no processed requests. The team said miners need CPU, GPU and storage, but no hardware requirements document was found.</p></div><div><h3>Validators</h3><p>Per the team (2026-09 to 2026-10): one master validator computes per-miner scores and publishes a signed bundle to IPFS; the other validators fetch it by content hash, verify the signature and fields, and apply a one-hotkey-per-coldkey rule. On 2026-10-05 the team said validators run only this newer path, committing the allocation on chain and setting weights from it. Validators also check that a miner&#x27;s self-signed TLS certificate is the one tied to its hotkey at registration. On 2026-10-23 the team said it had built a probe system that checks generated answers against independently calculated results across several task types, and that it had found miner-exploitable paths in the generation tier that it was fixing. The explorer data shows four per-miner tier scores (score version 10) that were last recorded on 2026-10-10; what each tier measures is not published.</p></div><div><h3>Incentive</h3><p>The reward split and score formula were not found in any public source. The team says only the latest registered hotkey per coldkey earns. On chain, UID 0 is the subnet owner&#x27;s own hotkey (hotkey and coldkey both owner-linked), and at block 9355046 (2026-10-24) every one of the 16 validators with permits put 100% of its weight on it. UID 0 holds 100% of incentive and about 74% of last-epoch emission, the recycle-or-burn setting is Burn, and the chain&#x27;s own accounting treats the whole miner side (41% of subnet emission) as withheld because its recipient is owner-owned. The same pattern appeared at all 11 blocks sampled between 2026-09-10 and 2026-10-24, so no miner UID has had incentive since emission was enabled on 2026-09-09. Weights are validator opinions rather than payouts, and whether this is the intended launch state is not known.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-24</span> <span class="muted">(rec4ll.com; Bittensor chain read)</span> The public explorer data (the project&#x27;s own API) still reported testnet subnet 353: 17 UIDs, 4 of them with miner details, tier scores last recorded 2026-10-10 and no probes in the previous hour. The site build dated 2026-10-12 had not been redeployed.</li>
+<li><span class="when">2026-10-23</span> <span class="muted">(#recall)</span> The team said core ingestion, retrieval and backup/restore had passed end-to-end tests, that generation was the main remaining work (validation issues and miner-exploitable paths were being fixed), that the integrated candidate was packaged for controlled testnet validation, and that it could not commit to a release date yet.</li>
+<li><span class="when">2026-10-13</span> <span class="muted">(#recall; Bittensor chain read)</span> Commit-reveal for weights was switched from on to off on this subnet at block 9272168 (05:17 UTC). No reason was given in chat, and it was still off on 2026-10-24.</li>
+<li><span class="when">2026-10-12</span> <span class="muted">(#recall; rec4ll.com)</span> The team said final testing had passed and production rollout would follow on the Monday afternoon; the site was last built that evening, and on 2026-10-13 the team said the website needed a few more hours. No go-live announcement was found afterwards.</li>
+<li><span class="when">2026-10-09</span> <span class="muted">(#recall)</span> The team said a free tier launch was targeted for that weekend, reported a 45-hour GPU soak test on an isolated network with no errors, and said the release was not live yet.</li>
+<li><span class="when">2026-10-05</span> <span class="muted">(#recall)</span> The team described an external security review (95 findings, of which 37 judged real) with some fixes already on main, and said the validator had moved to a signed allocation bundle committed on chain with the older weight loop removed.</li>
+<li><span class="when">2026-09-10</span> <span class="muted">(#recall)</span> The team posted release candidates for its web, miner and validator components with master/slave validator hardening, one-hotkey-per-coldkey anti-sybil and TLS pinning for miners; the repositories were stated to be private while soak testing finished.</li>
+<li><span class="when">2026-09-09</span> <span class="muted">(Bittensor chain read)</span> Emission was enabled for this subnet on chain at block 9029889 (12:16 UTC).</li>
+<li><span class="when">2026-06-02</span> <span class="muted">(#recall)</span> The team described the product as a full RAG stack in one marketplace, said end-to-end testing had found issues needing a partial rewrite, targeted a beta for the end of June, and said it would be a paid service with a free tier, with net revenue used for subnet support and alpha buybacks with burning.</li>
+<li><span class="when">2026-05-24</span> <span class="muted">(#recall; Bittensor chain read)</span> The person who then claimed the channel said they had recently bought the subnet and would launch a project there; the channel ownership claim was confirmed the next day. The chain shows no change of owner key between 2025-12-25 and 2026-10-24.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>For users: the site (client-rendered) offers sign-in with Google or GitHub, then creating a vector database, storing text, querying it and generating answers; the docs list default free and builder allowances of 20 databases, 50 GiB, 1,000 embeddings per hour and 10,000 queries per hour, which they call deployment-configurable (unchanged on 2026-10-24).</li>
+<li>For agents: the docs describe a remote MCP endpoint using OAuth. Individual items can be deleted through the REST API, and whole accounts from Settings.</li>
+<li>Do not store secrets or sensitive data: the site states that miners are not in trusted execution environments and may see plain text while embedding or generating. A confidential-compute phase is planned later.</li>
+<li>For miners and validators: no public repository, setup guide or hardware requirements were found, and the site links to no code. The team has said repositories would be opened, and on 2026-10-23 said testnet validation comes before a release date; follow the #recall channel announcements.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>No public code: nothing about scoring, rewards or miner onboarding could be checked, and searches for the team&#x27;s repositories on 2026-10-24 found nothing. Every mechanism statement above is a team post, and the test results (soak runs, audit findings) are team-reported on a private network. The team said in May 2026 that code was published and later described the repositories as private.</li>
+<li>Mainnet launch has not happened as far as can be shown. The team has not announced that mining or the service is live on subnet 31, the chain shows zero incentive on every miner UID at every block sampled, and the explorer still reads testnet subnet 353. Whether the hosted service is backed by subnet 31 miners could not be established.</li>
+<li>Several team-announced dates passed without confirmation (a beta at the end of June, a 2026-07-07 release, &#x27;live in 48 to 72 hours&#x27; on 2026-09-28, a 2026-10-12 production rollout); on 2026-10-23 the team gave no date.</li>
+<li>Commit-reveal weights were switched off on 2026-10-13 without an explanation found. Whether the weight on the owner&#x27;s UID 0 is the intended launch state or a placeholder is not known, since the code is private.</li>
+<li>Chain facts are dated snapshots: block 9355046 (2026-10-24) for the current state and 11 sampled blocks from 2026-09-10 for the history; changes between samples were not observed. The explorer&#x27;s figures come from the project&#x27;s own API and describe testnet.</li>
+<li>The new owner&#x27;s statements that they bought the subnet and locked their owner alpha could not be checked on chain (the owner key shows no change since registration), and the site&#x27;s product claims were not independently tested.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://rec4ll.com" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://rec4ll.com/docs" rel="noopener noreferrer">Docs</a></li>
+<li><a href="https://rec4ll.com/faq" rel="noopener noreferrer">FAQ</a></li>
+<li><a href="https://rec4ll.com/miners" rel="noopener noreferrer">Network explorer (testnet data)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 3 sources</summary>
+<ul>
+<li><strong>msg</strong> #recall (channel 31), 2025-12-25 to 2026-10-23, including team posts of 2026-05-24, 2026-06-02, 2026-09-10, 2026-09-28, 2026-10-05, 2026-10-09, 2026-10-12, 2026-10-13 and 2026-10-23 (the archive lags about a day)</li>
+<li><strong>web</strong> rec4ll.com home, /docs, /faq and /miners (site bundle built 2026-10-12, read 2026-10-21 and 2026-10-24) and the public explorer API behind /miners, read 2026-10-24</li>
+<li><strong>web</strong> Bittensor chain read-only: dossier, owner-linked UID 0 check and refresh for netuid 31 at block 9355046 (2026-10-24), incentive and weight samples at 11 blocks from 2026-09-10 to 2026-10-24, and owner, emission and commit-reveal history</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/30.html"><small>← Previous</small>SN30 Endure</a><a rel="next" href="/bittensor-docs/subnets/32.html"><small>Next →</small>SN32 It&#x27;s AI</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-24. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Provenonce (Proof of Assurance) (SN87) | Bittensor Subnet Docs</title>
+<meta name="description" content="Proof-of-Assurance subnet: miners judge evidence of agentic work. Scored on testnet 582; no miners paid on mainnet.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h9">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>87</span><div>
+<h1>Provenonce (Proof of Assurance) <span class="muted">SN87</span></h1>
+<p class="tagline">Proof-of-Assurance subnet: miners judge evidence of agentic work. Scored on testnet 582; no miners paid on mainnet.</p>
+<span class="st s-transitioning">transitioning</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl3"><b>1.1<small>/day</small></b><span>last 7 d</span></li><li class="pl3"><b>1.9<small>/day</small></b><span>days 8-30</span></li><li class="pl3"><b>1.8<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-21</b><span>last chat</span></li><li class="pw"><b>243</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>verification of agentic work (assurance of structured workflows)</dd>
+<dt>Status</dt><dd>Running on testnet, not on mainnet, as of 2026-10-21. The team&#x27;s validator on public testnet netuid 582 first set weights on 2026-09-28 and was still setting them on 2026-10-21, and the team&#x27;s FAQ says plainly that the subnet is not on mainnet. Mainnet netuid 87 exists, but every validator with a permit puts all of its weight on one uid that matches the owner&#x27;s keys, so no miner is rewarded there. The last commit on the repository&#x27;s main branch is from 2026-10-09; the team&#x27;s shadow-cohort windows were still being scheduled through 2026-10-24.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-21</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>Subnet 87, run by Provenonce with Bitstarter.ai as partner, is built around what the team calls Proof of Assurance: checking how autonomous (AI agent) work was done against a declared contract for how it was supposed to be done. A miner receives a case with permitted evidence and returns one verdict: findings, no material deviation, or an abstention for lack of evidence. Validators keep hidden cases whose truth comes from private reference executors and score the answers. The public runs so far are on testnet with team-operated miners and are described by the team as conformance checks, not a competition between outside miners.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Per the repo, each assignment is one of two classes: an approval-applicability check (was an approval carried past a changed governing condition?) or a release-workflow check (does a release trace break its grammar?). The miner returns one Differential: either a list of findings (each with a code, severity, evidence references and optional confidence), a no-material-deviation answer, or an insufficient-evidence abstention. Release v0.1.0 (2026-10-09) ships a miner launcher called sn87-miner, a miner guide and a public verifier. Native Windows is unsupported; WSL2 works.</p></div><div><h3>Validators</h3><p>Validators issue hidden cases and score each response with one scorer. A failed integrity check or schema failure gives zero and counts the response as invalid. Otherwise the score is a weighted geometric mean of detection (weight 0.60: severity-weighted precision and recall, abstention scores 0), evidence (0.25: full credit only if every required reference is cited) and calibration (0.15: Brier-style on stated confidence). A window counts only if the miner was assigned enough cases (12 for the approval profile, 40 for the release profile) and at most 10 percent of responses were invalid or missing. Truth for hidden cases comes from private reference executors. Public parts are the scorer, wire contract, evidence bundle, signed transport, a staging validator, and truth for 75 public fixture cases.</p></div><div><h3>Incentive</h3><p>Per method, a preference value is the square of how far the window estimate exceeds 0.60 (zero if it does not), normalised into weights; if every value is zero, no weights are submitted. The whitepaper also defines rule score, utility, robustness and efficiency terms, which are inactive in the code. Two alternative scoring profiles (one pays a correct abstention) are committed but not on any weight path. On testnet, weights are submitted in plain mode with commit-reveal off; commit-reveal exists only as code tested against a fake chain. On testnet 582 (read 2026-10-21) the single validator permit holder had set weights about 41 minutes earlier, to two uids, and incentive was split equally between those two. The repo says every miner in the attested runs is operated by Provenonce and every evidence bundle is marked conformance-only.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-21</span> <span class="muted">(provenonce.ai/sn87/shadow and #87-provenonce)</span> Shadow-results page lists 14 daily windows (2026-10-10 to 2026-10-24), all committed, with no outside uid on the allowlist. In the channel on 2026-10-18 and 2026-10-21, community members asked whether mainnet is live and about testnet timing; no team reply appears in the archive through 2026-10-21.</li>
+<li><span class="when">2026-10-14</span> <span class="muted">(#87-provenonce)</span> New provenonce.ai site launched with product pages, partners, a reading room and the SN87 pages.</li>
+<li><span class="when">2026-10-09</span> <span class="muted">(GitHub release and docs)</span> Release v0.1.0: miner launcher, miner guide, admission and shadow-cohort documents, verifier, and published truth for public fixtures. Shadow-cohort criteria (for example 7 consecutive windows with at least 24 valid responses each and no integrity failure) are proposed and still need approval.</li>
+<li><span class="when">2026-10-06</span> <span class="muted">(#87-provenonce and GitHub)</span> Repository made public. An outside reviewer posted a list of setup frictions (no native Windows, demo path versus weight path, skipped tests) and asked whether a correct abstention can ever earn credit; the repo lists that as open. The team promised to collect feedback each Wednesday and answer each Friday, and opened a Telegram group. An attested series of 21 testnet runs had been recorded on 2026-10-05 and 2026-10-06, following 8 earlier runs.</li>
+<li><span class="when">2026-09-28</span> <span class="muted">(#87-provenonce and GitHub README)</span> First Light on testnet 582: the validator graded two Provenonce-operated miners and set weights. The team described it on 2026-09-29 as one synthetic testnet cycle (16 sealed cases, 32 signed responses), not recurring validation or independent miner participation.</li>
+<li><span class="when">2026-09-21</span> <span class="muted">(#87-provenonce and provenonce.ai/sn87/whitepaper)</span> Whitepaper v0.7.2 (Final Candidate) dated and shared. It describes the Assurance Capsule and Differential design and calls its economic parameters uncalibrated hypotheses, not a forecast.</li>
+<li><span class="when">2026-07-20</span> <span class="muted">(#87-provenonce and chain read 2026-10-21)</span> Team said the on-chain identity was updated to Provenonce; the mainnet identity read on 2026-10-21 shows that name and the provenonce.ai site.</li>
+<li><span class="when">2026-07-13</span> <span class="muted">(#87-provenonce)</span> Team intro posts: Provenonce is an off-chain orchestrator for enterprise AI work, and SN87 is meant to verify execution of structured workflows, with an open marketplace for oracles planned later. Code and testnet were planned for July; nothing in the repo implements the marketplace.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Clone provenonce-ai/sn87-provenonce-public and read the README and miner guide (use Linux or WSL2; native Windows is unsupported).</li>
+<li>Run the public verifier. The team says it needs no wallet or account; expect an overall UNVERIFIED because scoring truth is private. This page did not re-run it.</li>
+<li>Run the sn87-miner launcher locally first; the FAQ asks people to report where it breaks.</li>
+<li>Outside miners enter through the shadow cohort on testnet 582: results are published but never enter a weight row. The criteria are proposed and the allowlist was empty on 2026-10-21.</li>
+<li>Questions go to the team Telegram group; the team says it collects them on Wednesdays and posts answers on Fridays. No path to register as a rewarded miner on mainnet 87 is documented.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>The mechanism runs on testnet. Mainnet netuid 87 is registered (about 295 days before 2026-10-21, identity name Provenonce) with 256 of 256 uids filled, but all 11 validator permit holders put 100 percent of their weight on uid 0, which matches the owner hotkey and coldkey (own check, mainnet blocks 9334320 to 9334331). Four of those validators had not set weights for more than two tempos. No miner is rewarded on mainnet.</li>
+<li>Testnet rows show weights to two uids only. Which scoring method sits behind each uid is a private record that cannot be verified; the repo says all miners are team-operated and every bundle is marked conformance-only. A matched baseline ties the reference methods, and the repo keeps that null result.</li>
+<li>Scoring truth comes from private reference executors, so the verifier reports scoring as UNVERIFIED by design. Chain and integrity checks pass per the README, but this page did not re-run the verifier.</li>
+<li>Sources disagree on First Light: chat says 16 sealed cases, while the repo&#x27;s limitations file says 12 assignments per method (the profile minimum). The difference was not reconciled.</li>
+<li>The whitepaper&#x27;s own economics section calls its parameters hypotheses to be tested. Only the HTML v0.7.2 was skimmed; the PDF was not read. Several defined terms (rule score, utility, robustness, efficiency) are inactive in code.</li>
+<li>Plan statements in chat (re-routing Provenonce&#x27;s enterprise workflow through SN87, an open oracle marketplace) have no code in the repo. The July plan for repo and testnet slipped: First Light was 2026-09-28 and the repo went public on 2026-10-06.</li>
+<li>Shadow-cohort criteria are marked as proposed and awaiting approval. One outside application issue opened on 2026-10-09 had no comments on 2026-10-21. Whether any outside miner has ever been scored on testnet 582 is not shown.</li>
+<li>Who operates the mainnet validator now is unknown. The channel also discusses funding and token stakes; this page makes no price, emission or funding claims, and the team&#x27;s FAQ says its materials make no financial claims.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/provenonce-ai/sn87-provenonce-public" rel="noopener noreferrer">GitHub (provenonce-ai/sn87-provenonce-public)</a></li>
+<li><a href="https://provenonce.ai/sn87/" rel="noopener noreferrer">SN87 site</a></li>
+<li><a href="https://provenonce.ai/sn87/faq" rel="noopener noreferrer">FAQ</a></li>
+<li><a href="https://provenonce.ai/sn87/testnet/" rel="noopener noreferrer">Testnet page</a></li>
+<li><a href="https://provenonce.ai/sn87/shadow" rel="noopener noreferrer">Shadow cohort results</a></li>
+<li><a href="https://provenonce.ai/sn87/whitepaper/" rel="noopener noreferrer">Whitepaper (HTML)</a></li>
+<li><a href="https://t.me/sn87provenonce" rel="noopener noreferrer">Team Telegram</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 4 sources</summary>
+<ul>
+<li><strong>repo</strong> provenonce-ai/sn87-provenonce-public@e36ae55 (2026-10-09): README.md, LIMITATIONS.md, CHANGELOG.md, docs/guides/shadow-cohort.md, shadow/, src/sn87_provenonce/scoring.py, profiles/IC-FIRST-LIGHT-MIN-1.json</li>
+<li><strong>msg</strong> #87-provenonce 2026-06-29 to 2026-10-21 (read via the chat archive)</li>
+<li><strong>web</strong> provenonce.ai/sn87/faq, /testnet/, /shadow and /whitepaper/ (HTML v0.7.2, skimmed), read 2026-10-21</li>
+<li><strong>web</strong> Chain reads 2026-10-21: mainnet blocks 9334320 to 9334331 (netuid 87 subnet info, uids, weights, owner-key check); public testnet blocks 8273026 to 8273029 (netuid 582 subnet info, uids, weights)</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/85.html"><small>← Previous</small>SN85 VidAIO</a><a rel="next" href="/bittensor-docs/subnets/88.html"><small>Next →</small>SN88 Investing88</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-21. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

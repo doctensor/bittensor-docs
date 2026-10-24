@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gradients (SN56) | Bittensor Subnet Docs</title>
+<meta name="description" content="Tournament subnet where miners submit open-source AutoML training code that validators run on GPUs to fine-tune models.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h8">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>56</span><div>
+<h1>Gradients <span class="muted">SN56</span></h1>
+<p class="tagline">Tournament subnet where miners submit open-source AutoML training code that validators run on GPUs to fine-tune models.</p>
+<span class="st s-transitioning">transitioning</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl4"><b>6.1<small>/day</small></b><span>last 7 d</span></li><li class="pl4"><b>3.9<small>/day</small></b><span>days 8-30</span></li><li class="pl4"><b>3.8<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-24</b><span>last chat</span></li><li class="pw"><b>6,895</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>model training / AutoML</dd>
+<dt>Status</dt><dd>Chat active through 2026-10-17 (105 messages in the last 30 days, mostly DM requests late in the period). On 2026-10-08 the team announced the end of environment tournaments (last emissions 2026-10-23) and a text-tournament revamp expected in about four weeks.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-21</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>Gradients (repo name G.O.D, Gradients on Demand) runs weekly tournaments in which miners submit open-source training repositories. Validators build the code, train models on validator-managed GPUs, evaluate the results and set weights from tournament standings. The text and image tournaments serve the team&#x27;s gradients.io training customers; the environment tournament was the research arm and is being shut down.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Run a miner endpoint that tells validators which GitHub repository and exact 40-character commit to enter for each tournament type. The repo must contain the required Dockerfiles and licence files, readable source and no bundled datasets or pretrained models, and must write its final model to the expected checkpoint path. Miners do not supply GPUs. Winning repos are republished publicly, so only submit code you are willing to open-source.</p></div><div><h3>Validators</h3><p>Validators clone the repo at the submitted commit, build its Docker image, train on managed GPUs, upload and evaluate the model. Text and image tournaments use group, knockout and boss rounds; the current champion (boss) is replaced only if beaten by a margin (1% in code). Dedup and cheat checks run in round 2, and entries have been disqualified for duplicated code, a game solver hidden in a chat template, and undeclared training data. Image evaluation uses L2 loss in latent space since late September. Tournaments are set to finish by Friday 14:00 UTC.</p></div><div><h3>Incentive</h3><p>Per the repo docs (as of 2026-10-19) nothing is burned: text, image and environment pools have anchor weights of 0.35, 0.25 and 0.25, adjusted by a participation balancer and rescaled to sum to 1. Within a tournament the top three ranks are paid by exponential decay (roughly 76/19/5); active participants get a token 0.0001 each; a champion&#x27;s weight does not decay over time. The team removed a previous 75% miner-emission burn on 2026-09-05 and said environment emissions will move to text and image after 2026-10-23.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-19</span> <span class="muted">(GitHub commits, #gradients)</span> Repo commit restarted the continuous text fine-tuning task from Qwen3-8B-Base. The team said on 2026-10-14 that the Qwen3-14B run had used up its data.</li>
+<li><span class="when">2026-10-16</span> <span class="muted">(GitHub commits)</span> Repo paused scheduling of new environment tournaments while keeping the emission endpoints until a full sunset.</li>
+<li><span class="when">2026-10-12</span> <span class="muted">(#gradients)</span> Evaluation backend errors on text and image tournaments, plus cloud GPU capacity limits; the team said it was fixed and some tasks were evaluated locally.</li>
+<li><span class="when">2026-10-09</span> <span class="muted">(#gradients)</span> Duplicate-code and cheat checks both moved to round 2. Disqualified miners are replaced by the next best.</li>
+<li><span class="when">2026-10-08</span> <span class="muted">(#gradients)</span> Team announced: environment tournaments end after the 2026-10-23 payout, their emissions move to image and text, and a text revamp (quantization-aware training, compression and distillation tasks) is expected in about four weeks.</li>
+<li><span class="when">2026-09-17</span> <span class="muted">(#gradients, GitHub commits)</span> Image evaluation switched to latent-space denoising loss, and text tournaments changed to three tasks per group in round 1 with a 30b to 72b boss model.</li>
+<li><span class="when">2026-09-07</span> <span class="muted">(#gradients)</span> One entry per coldkey per tournament took effect.</li>
+<li><span class="when">2026-09-05</span> <span class="muted">(#gradients)</span> Miner emission burn removed; third place now paid; participation fees doubled to 0.7 TAO (text), 0.4 (image), 0.6 (environment).</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Read docs/miner.md in the repo: it is the team&#x27;s single guide to entry, the repo contract and scoring.</li>
+<li>Build a training repo with the required Dockerfiles and licence files, pin a commit, and expose it from your miner endpoint.</li>
+<li>Hold enough TAO on your coldkey for the fee (text 0.7, image 0.4). Fees are burned and only one entry per coldkey is allowed.</li>
+<li>Check the chat announcements before each tournament: task formats are changing, including a text revamp expected in about four weeks from 2026-10-08.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Environment tournaments are being discontinued; the repo still contains their code and weights until the sunset, so treat environment details as ending.</li>
+<li>The text revamp (new task types and structure) was announced without a date beyond &#x27;about four weeks&#x27;, so fees, margins and weights may change.</li>
+<li>Numbers come from code constants as of 2026-10-19; actual chain weights were not read.</li>
+<li>A question on removing the 1% boss margin for text and image went unanswered in the chat read.</li>
+<li>No revenue figures found; the team said it plans buybacks from enterprise revenue once it materialises.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/gradients-ai/G.O.D" rel="noopener noreferrer">GitHub</a></li>
+<li><a href="https://github.com/gradients-ai/G.O.D/blob/main/docs/miner.md" rel="noopener noreferrer">Miner guide</a></li>
+<li><a href="https://gradients.io" rel="noopener noreferrer">Gradients.io</a></li>
+<li><a href="https://github.com/gradients-opensource" rel="noopener noreferrer">Winning repos</a></li>
+<li><a href="https://api.gradients.io/tournament/fees" rel="noopener noreferrer">Tournament fees API</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 3 sources</summary>
+<ul>
+<li><strong>repo</strong> gradients-ai/G.O.D README, docs/miner.md, validator/scoring and tournament constants at 8bc8ed3 (2026-10-19)</li>
+<li><strong>msg</strong> #gradients 2026-08-13 to 2026-10-21</li>
+<li><strong>web</strong> api.gradients.io/tournament/fees, fetched 2026-10-21</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/55.html"><small>← Previous</small>SN55 NIOME</a><a rel="next" href="/bittensor-docs/subnets/58.html"><small>Next →</small>SN58 Attune</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-21. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

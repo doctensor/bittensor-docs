@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Teutonic (SN3) | Bittensor Subnet Docs</title>
+<meta name="description" content="King-of-the-hill pretraining of one shared 110B MoE: seven competitions, and each current king shares emission.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h21">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>3</span><div>
+<h1>Teutonic <span class="muted">SN3</span></h1>
+<p class="tagline">King-of-the-hill pretraining of one shared 110B MoE: seven competitions, and each current king shares emission.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>18<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>7.3<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>17<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-22</b><span>last chat</span></li><li class="pw"><b>9,068</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>model pretraining competition</dd>
+<dt>Status</dt><dd>Teutonic-II-110B has run since 2026-08-24 and the repo changed almost daily through 2026-10-22. On 2026-10-21 the specialist competitions were replaced by six dataset mixes; MAIN reign 49 was crowned on 2026-10-23.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-23</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>Teutonic is a competition to improve one shared language model. Miners train and submit complete checkpoints of a custom mixture-of-experts model (Teutonic-II-110B-A7B, about 110B parameters in total and about 7B active per token). Each submission is tested head to head against a king on next-token loss, and a challenger that wins by a large enough margin is crowned. Since 2026-10-21 there are seven competitions: MAIN and six dataset mixes (MIX01 to MIX06), each with its own king and a share of the subnet&#x27;s emission.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Miners train a full checkpoint of the Teutonic-II architecture and submit it through the repo&#x27;s miner CLI. The hotkey must use the Ed25519 key type, because upload credentials are encrypted to it. Each hotkey gets exactly one submission, shared across all competitions, and it is irreversible once marked ready. When marking a submission ready, the miner picks MAIN or one of MIX01 to MIX06 (MAIN if left out). The team said in chat on 2026-10-15 that at least eight B300-class GPUs are needed to mine, and on 2026-10-21 told miners to update their CLI for the new competitions.</p></div><div><h3>Validators</h3><p>The team&#x27;s validator checks each submitted checkpoint byte for byte against what was committed on chain, then sends the challenger and the king to a remote GPU evaluator. All seven competitions use the same sampler: 20,000 text windows of 2,048 tokens plus about 30 million tokens of whole documents of 2,049 to 8,192 tokens, drawn with explicit per-category weights that differ by competition. The evaluator compares paired next-token cross-entropy, weights it by scored tokens, masks document boundaries and bootstraps a confidence interval over the windows. A challenger wins if the lower confidence bound of its improvement is strictly above 0.0015, the same threshold for all seven. A MIX that has no king yet duels a fixed starting MAIN king, pinned once and not moved by later MAIN crownings; after its first win it duels its own king. Code defaults are 10,000 resamples and a 0.001 quantile, but the live settings sit in the team&#x27;s database and were not read. Evaluation, queueing and crowning run on team infrastructure.</p></div><div><h3>Incentive</h3><p>The announced end state is 25 percent of the reward weight for the MAIN king and 12.5 percent for each of the six MIX kings, paid in the subnet&#x27;s own alpha token. During the transition from the old specialist system, each MIX&#x27;s first winner takes 12.5 percent and removes the oldest remaining legacy payout position; what is left is shared among MAIN and the surviving legacy positions in proportion to their earlier shares, and a new MAIN king replaces the MAIN position at once. A kingless MIX leaves its 12.5 percent with MAIN. On 2026-10-23 the team dashboard showed five MIX kings seated, MIX03 still kingless and a MAIN payout weight of 0.375. Weights are published about every 101 blocks, recipients that are no longer registered are dropped and the rest normalized, with a burn fallback if none remain. On chain (read at block 9343166 to 9343176) commit-reveal is on and the subnet&#x27;s emission is split 18 percent owner, 41 percent validators and 41 percent miners, with the recycle-or-burn setting on Burn. Three validators set weights, all with the same top target and share, and the validator holding about 98 percent of dividends uses the owner&#x27;s hotkey. The weight row on chain showed 45.45, 17.05 and three times 12.5 percent, which is what the repo&#x27;s reward formula gives for the earlier state of three MIX kings and one legacy position; the dashboard showed the newer state, which fits the commit-reveal delay.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-23</span> <span class="muted">(team dashboard)</span> MAIN reign 49 crowned at block 9342632 with a lower confidence bound of 0.00165 against the 0.0015 margin. MIX02, MIX04 and MIX06 got new kings the same day, leaving only MIX03 without a king.</li>
+<li><span class="when">2026-10-22</span> <span class="muted">(GitHub, team dashboard)</span> A repo commit pinned every kingless MIX to a fixed starting MAIN king (the reign-48 model) so later MAIN crownings do not move its baseline. MIX01 had crowned its first king just after midnight and MIX05 its third king around midday UTC.</li>
+<li><span class="when">2026-10-21</span> <span class="muted">(#3-teutonic, GitHub, team dashboard)</span> The team replaced the MATH, CODE and TEXT competitions with MIX01 to MIX06, added DCLM data, and gave all seven competitions the same evaluation setup with a win threshold of 0.0015 (MAIN had been 0.003). Rewards move to 25 percent MAIN and 12.5 percent per MIX as each MIX crowns its first king. MAIN reign 48 was crowned that afternoon.</li>
+<li><span class="when">2026-10-17</span> <span class="muted">(team dashboard, #3-teutonic)</span> MAIN reign 47 crowned at block 9305841 (lower bound 0.0051 against the then 0.003 margin). Miners debated whether more splits help or compute should stay on MAIN.</li>
+<li><span class="when">2026-10-15</span> <span class="muted">(#3-teutonic)</span> Validator and evaluator stalled for hours because of a dependency problem in the evaluator environment; the team fixed it and evaluation got faster.</li>
+<li><span class="when">2026-10-07</span> <span class="muted">(#3-teutonic, GitHub)</span> Math, code and text specialist competitions opened beside MAIN, with a 15 percent reward share per specialist king. They were retired on 2026-10-21.</li>
+<li><span class="when">2026-09-21</span> <span class="muted">(#3-teutonic)</span> Win margin lowered to 0.003 and the planned evaluation sample raised to 30,000 after a run of lucky wins; the team said a suspicious model checked on 09-22 was not malicious.</li>
+<li><span class="when">2026-08-24</span> <span class="muted">(#3-teutonic, GitHub)</span> Teutonic-II-110B competition launched at chain block 8914379 with the submission system used today; earlier Teutonic phases are historical.</li>
+<li><span class="when">2026-08-14</span> <span class="muted">(#3-teutonic, chain read)</span> A team member said in chat that the subnet owner changed through a conviction lock. Chain history shows the owner key pair changed once between 2026-08-14 03:05 UTC and 2026-08-15 12:26 UTC, so the change is real; who holds the new key is not verifiable from chain.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Check the hardware first: the team said at least eight B300-class GPUs are needed to mine.</li>
+<li>Clone the repo, create a Python 3.11+ virtual environment and install the miner extras. Keep the CLI up to date, the team asked for this on 2026-10-21.</li>
+<li>Create an Ed25519 hotkey with btcli and save the wallet path with the miner CLI configure command.</li>
+<li>Run the CLI register command, which registers the hotkey on subnet 3 if needed (this can spend TAO; check-only mode refuses to pay).</li>
+<li>Before choosing a competition, read the competitions JSON: it shows which are active, which have a king, the thresholds and the pinned starting king of kingless MIXes.</li>
+<li>Upload a full checkpoint directory with the CLI upload command, then mark it ready, or run the single submit command, adding the competition option (MAIN or MIX01 to MIX06; MAIN if left out).</li>
+<li>A submission cannot be undone and each hotkey has only one, shared across all competitions.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>The rules are changing quickly: competitions were restructured on 2026-10-21 and the starting-king rule changed on 10-22. The README introduction still describes MAIN, MATH, CODE and TEXT with about 6M long-document tokens, and the mining guide&#x27;s section on the live chain still says &#x27;as of 2026-08-24&#x27;. Treat the competitions and dashboard JSON as the reference.</li>
+<li>Chain weights were read as aggregates at block 9343166 to 9343176, and they lag the dashboard because commit-reveal is on (a 4-epoch reveal period, about 4.8 hours). The exact delay was not measured. The reward formula was read in code; whether production behaves exactly like it was checked only through that one weight row.</li>
+<li>Evaluation, queue order and crowning all run on team infrastructure, thresholds and sample settings live in the team&#x27;s database, and challenger models stay private until crowned. A miner asked on 2026-09-04 for on-chain hash commitments to make this checkable.</li>
+<li>Three validators set weights with the same top target and share. One uses the owner&#x27;s hotkey and holds about 98 percent of dividends, the other two sit on separate coldkeys whose operators are not established. A fourth permit holder, the earlier MAIN king, has not set weights recently.</li>
+<li>Chain proves the owner key pair changed once around 2026-08-14 to 08-15, but not who holds it. Day-to-day operation by the Dendrite team, which also runs SN97, is documented only in chat.</li>
+<li>The team has declined for now to share the full tokenization scripts for the pretokenized dataset (asked 09-24, 10-02, 10-04); no newer request was found.</li>
+<li>The relationship to Teutonic I and to the SFT work on Teutonic I announced by the Reliquary subnet (SN81) is unclear; no reply from the Teutonic team was found in its channel.</li>
+<li>The repo has no LICENSE file in its root, although the project metadata says MIT.</li>
+<li>Claims in chat that kings improved benchmark scores are miner statements.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://teutonic.ai/" rel="noopener noreferrer">Website and dashboard</a></li>
+<li><a href="https://github.com/unarbos/teutonic" rel="noopener noreferrer">GitHub</a></li>
+<li><a href="https://teutonic.ai/llms.txt" rel="noopener noreferrer">Mining guide for agents (llms.txt)</a></li>
+<li><a href="https://teutonic.ai/dashboard.json" rel="noopener noreferrer">Dashboard data (JSON)</a></li>
+<li><a href="https://teutonic.ai/competitions.json" rel="noopener noreferrer">Competitions, thresholds and kings (JSON)</a></li>
+<li><a href="https://huggingface.co/dendriteholdings/teutonic-II-110B-genesis" rel="noopener noreferrer">Genesis model</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 5 sources</summary>
+<ul>
+<li><strong>repo</strong> unarbos/teutonic at commit 3c690f6 (2026-10-22): README, DEPLOY.md, chain.toml, teutonic/weights/policy.py, teutonic/evaluation/policy.py, teutonic/competitions.py</li>
+<li><strong>web</strong> https://teutonic.ai/dashboard.json, /competitions.json and /competitions/mix01 to mix06/dashboard.json (read 2026-10-23)</li>
+<li><strong>web</strong> Chain read at blocks 9343166 to 9343176 (2026-10-23): subnet info, hyperparameters, emission weights, incentive and weight rows, permit and owner-slot checks; owner key history at ten archive blocks from 7000000 to 9000000</li>
+<li><strong>msg</strong> #3-teutonic 2026-04-13 to 2026-10-22</li>
+<li><strong>msg</strong> #81-reliquary 2026-10-20 (related)</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/2.html"><small>← Previous</small>SN2 DaniLabs</a><a rel="next" href="/bittensor-docs/subnets/4.html"><small>Next →</small>SN4 Targon</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-23. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

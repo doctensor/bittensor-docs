@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NOVA (SN68) | Bittensor Subnet Docs</title>
+<meta name="description" content="Miners compete to find molecules and nanobodies that score best on Boltz-2, plus a daily contest for search code.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h20">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>68</span><div>
+<h1>NOVA <span class="muted">SN68</span></h1>
+<p class="tagline">Miners compete to find molecules and nanobodies that score best on Boltz-2, plus a daily contest for search code.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>12<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>16<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>15<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-24</b><span>last chat</span></li><li class="pw"><b>14,922</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>AI drug discovery (small molecules, nanobodies, search algorithms)</dd>
+<dt>Status</dt><dd>Chat was busy through 2026-10-21, the nova repository had a commit on 2026-10-20, the daily Blueprint contest was accepting submissions on 2026-10-21, and a chain read the same day shows both mechanisms setting weights. The team enforced contest rules in October and ran a major Blueprint rebuild in September.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-21</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>NOVA, built by Metanova Labs, rewards miners for finding molecules and nanobody (antibody fragment) sequences that a structure-prediction model scores as strong binders to chosen protein targets. A second contest, Blueprint, asks miners to submit search code that generates good molecules inside a sandbox, with the best code kept as champion until a challenger beats it. The team describes this as open competition feeding its own drug-discovery pipeline and partnerships.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Compound track: every epoch of 361 blocks, miners commit a set of small molecules and/or nanobody sequences, encrypted with timelock encryption and posted to a public GitHub repository, with only a pointer committed on chain. Molecules come from a large reaction-based library; the team announces new protein targets about a day ahead in Discord. Blueprint track: miners upload code (a miner.py) through a signed submission API. It runs once a day in a no-network Docker sandbox with a one-hour budget, queries a Boltz-2 scoring service, and must output a fixed-size set of reaction-formatted molecules. Everything the code runs must be readable source and the molecules must be generated inside the sandbox; internet access during a Blueprint run is not allowed.</p></div><div><h3>Validators</h3><p>Compound validators decrypt submissions, apply chemistry and sequence validity filters (a check that a molecule can be built into a 3D conformer was added on 2026-10-20), then score small molecules with Boltz-2 and nanobodies with a modified BoltzGen pipeline; the repository documents 2 GPUs with over 48 GB of memory and a team-issued API key. Blueprint validators run each miner&#x27;s code in the sandbox against the oracle, keep a frozen champion that is re-run every epoch, and track challengers. The team also reviews and disqualifies Blueprint submissions that break the rules. On chain, 7 of the 64 uids hold validator permits (2026-10-21).</p></div><div><h3>Incentive</h3><p>Compound: one winner per category per epoch, with 60 percent of the compound share for molecules and 40 percent for nanobodies, ties broken by earliest submission. The validator code sends all of that mechanism&#x27;s weight to one payout UID (42), and winners are then paid alpha off chain to their coldkey by a team service, sometimes with delays and a manual approval for a new coldkey. Blueprint: a challenger must beat the champion by a set margin on 4 consecutive daily epochs; all Blueprint weight goes to a second payout UID (56), and on a change of champion the accumulated bounty, which grows while the champion stands, is paid in alpha to the new champion&#x27;s coldkey through a team payout service. A chain read on 2026-10-21 matches this: emissions are split 71.43 percent to Compound and 28.57 percent to Blueprint, each mechanism&#x27;s incentive sits entirely on its one payout UID, and 6 of the 7 permitted validators give UID 42 all their Compound weight. The subnet-level emission split is 18 percent owner, 41 percent validators and 41 percent miners, with nothing burned or recycled.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-21</span> <span class="muted">(#nova, 2026-10-18 to 2026-10-21)</span> After holders and miners repeatedly asked for a plan, revenue and partnership news, a team member said lab results had been presented at the Exploit Summit and that tested compounds showed more favourable ADME profiles than controls, including approved drugs. The post said contractual and confidentiality limits delay what the team can share, and that revenue would come as soon as possible. No data or recording was available to check the claim.</li>
+<li><span class="when">2026-10-21</span> <span class="muted">(Chain read at blocks 9334714 to 9334722)</span> A chain read showed 64 of 64 uids registered, two mechanisms split 71.43 percent and 28.57 percent, and each mechanism&#x27;s incentive on a single payout UID (42 for Compound, 56 for Blueprint). Commit-reveal weights are on.</li>
+<li><span class="when">2026-10-21</span> <span class="muted">(submission-api.metanova-labs.ai /quote)</span> The public submission API was accepting Blueprint entries in credit-only mode for epoch 20748, with 11 of 64 slots used. A hotkey must first be associated with a coldkey before it can submit, and the next upload cost was shown as 10 with asset alpha:68.</li>
+<li><span class="when">2026-10-20</span> <span class="muted">(#nova, 2026-10-20; nova GitHub commit 9ea0d59)</span> The nova repository gained a check that rejects molecules which cannot be built into a 3D conformer before scoring, after a team developer found a miner&#x27;s molecule failing at that step the same day.</li>
+<li><span class="when">2026-10-20</span> <span class="muted">(#nova, 2026-10-20 and 2026-10-21)</span> The owner pointed new miners to Novalyst, the team&#x27;s agent for mining help, and repeated that internet access is not allowed during Blueprint runs. On 2026-10-21 the owner said a bot account for a miner&#x27;s agent needs moderator approval.</li>
+<li><span class="when">2026-10-19</span> <span class="muted">(#nova, 2026-10-18 and 2026-10-19)</span> After a miner reported problems with the scoring oracle in a Blueprint competition, the owner said affected runs are rerun from their last checkpoint and do not change the competition.</li>
+<li><span class="when">2026-10-17</span> <span class="muted">(#nova, 2026-10-17)</span> A new coldkey&#x27;s first nanobody win was held for approval, with the team saying later wins on the same coldkey would be paid automatically.</li>
+<li><span class="when">2026-10-15</span> <span class="muted">(#nova, 2026-10-15 and 2026-10-16)</span> Two Blueprint submissions were disqualified, and a third declared ineligible, for using precomputed or seeded molecule data or compiled artifacts. On 2026-10-16 the owner added that fitted coefficient files are also not allowed, while training a surrogate inside the sandbox is.</li>
+<li><span class="when">2026-10-07</span> <span class="muted">(#nova, 2026-10-07)</span> The team announced internal transfers of owner funds to a vault wallet and a quarterly founder incentive distribution, and said an ADME-property competition is in development with no date.</li>
+<li><span class="when">2026-10-06</span> <span class="muted">(#nova, 2026-10-06 to 2026-10-21)</span> Miners reported that nanobody epochs were missing from the dashboard and that a tied first place did not earn emission. The team said the missing epochs came from a failure in an earlier component and pointed to tie-break logic in the code for the tie. On 2026-10-21 a team developer said one more skipped epoch was a system update and the next ran normally; questions about other epochs (25781, 25819) had no answer in the messages read.</li>
+<li><span class="when">2026-09-23</span> <span class="muted">(#nova, 2026-09-23 to 2026-09-25; nova-blueprint GitHub commits)</span> Blueprint&#x27;s search space expanded from 5 to 44 reactions and about 225 thousand to about 2 million building blocks, with new validity filters and a new diversity check. Existing entries got a double refund of submission credits. A submission exhausted the host&#x27;s memory the next day, so sandbox resource limits were added, and the first challenger competition under the new version began on 2026-09-27.</li>
+<li><span class="when">2026-09-05</span> <span class="muted">(#nova, 2026-09-05, 2026-09-07 and 2026-09-09)</span> Blueprint was announced to move to Boltz-2 scoring through a separate inference service; the contest was paused from 2026-09-09 until the integration went live. The bounty was capped at about 23,000 alpha for any win before that, keeping the rest for later improvements.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Read docs/MINER.md in the nova repository for the Compound track and the README of the nova-blueprint repository for Blueprint; both tracks need a registered hotkey on subnet 68.</li>
+<li>Compound: set up the .env file with a public GitHub repository for payloads, write your own molecule or nanobody selection (the baseline miner alone earns nothing), and commit before the last 10 blocks of each 361-block epoch. The README lists Ubuntu 24.04, CUDA 12.6 and GPUs with more than 48 GB of memory.</li>
+<li>Blueprint: write miner.py at the repository root to read /workspace/input.json and write /output/result.json with exactly the required number of reaction-formatted molecules, scoring through the oracle socket.</li>
+<li>Blueprint: associate your hotkey with your coldkey first (the API reports owner_unset and shows the btcli associate-hotkey command until you do), then check GET /quote?hotkey=&lt;your hotkey&gt; on the submission API for the live mode, price and credit balance, and upload with the submission SDK in the repository. One slot per hotkey per daily epoch.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Both tracks pay through a team-run service off chain rather than plain emission to the winning miner. A chain read on 2026-10-21 shows each mechanism&#x27;s whole incentive on one UID (42 for Compound, 56 for Blueprint), as the repository config says. Neither UID is the subnet owner&#x27;s own hotkey or coldkey, and they sit on two different coldkeys, but who controls them and what winners are actually paid cannot be checked from the chain data read here. Payments can be delayed and new coldkeys need approval, so rewards depend on the team running that service.</li>
+<li>Chain reads are a single snapshot (blocks 9334714 to 9334722 on 2026-10-21). Compound weights were read for all 7 permitted validators; Blueprint weights for three of them (two put everything on UID 56, one had set none). Two of the 7 permitted validators, including the owner&#x27;s own slot UID 0, share the subnet owner&#x27;s coldkey; validator stake was not compared.</li>
+<li>Documentation lags the code: the main README does not mention Blueprint, the oracle or credit-based submission, and the Compound guide gives 20 to 50 heavy atoms while the Compound config says 10 to 50 (unchanged since 2026-10-13).</li>
+<li>On 2026-10-14 a miner said the deployed validator enforced a limit on aromatic rings that the public repository lacked and asked whether older Br and BRENK checks still applied. The repository&#x27;s molecule-filter overhaul, which includes the ring limit and no longer contains those older checks, was published on 2026-10-13, and the team told the miner to pull the latest code. Which version was deployed at the time cannot be confirmed from outside.</li>
+<li>Blueprint rules are enforced partly by team judgement: disqualifications on 2026-10-15 and 2026-10-16 interpreted the rule on precomputed data broadly, with changes announced about 24 hours ahead, and those clarifications are in chat only. Contest parameters, targets and filters change by announcement, and the repository can lag the live settings (the Blueprint repository has had no commit since 2026-09-25).</li>
+<li>Blueprint bounty sizes quoted in chat were not verified. The submission API shows a price of 10 with asset alpha:68 but no separate unit; no document read states it.</li>
+<li>The lab-result claim of 2026-10-21 (more favourable ADME profiles than controls) is a team statement; the recording it points to, and any data behind it, were not read. Members have repeatedly asked for a roadmap, revenue plan and partnerships, and the team announced a quarterly founder incentive distribution on 2026-10-07 whose details (an X post) were not read.</li>
+<li>Miner questions about skipped or delayed epochs (25781, 25819) and about a missing score from the second validator at epoch 25822 had no team answer in the messages read.</li>
+<li>Only named team members give support; direct messages offering help are scams.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://www.metanova-labs.ai" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://github.com/metanova-labs/nova" rel="noopener noreferrer">GitHub (Compound)</a></li>
+<li><a href="https://github.com/metanova-labs/nova-blueprint" rel="noopener noreferrer">GitHub (Blueprint)</a></li>
+<li><a href="https://github.com/metanova-labs/nova-oracle" rel="noopener noreferrer">GitHub (scoring oracle)</a></li>
+<li><a href="https://submission-api.metanova-labs.ai/docs" rel="noopener noreferrer">Blueprint submission API docs</a></li>
+<li><a href="https://huggingface.co/datasets/Metanova/Mol-Rxn-DB" rel="noopener noreferrer">Reaction library (Hugging Face)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 8 sources</summary>
+<ul>
+<li><strong>repo</strong> metanova-labs/nova README.md, docs/MINER.md, docs/VALIDATOR.md, config/config.yaml, utils/molecules.py, neurons/validator/weights.py, payouts.py, ranking.py at 9ea0d59 (2026-10-20)</li>
+<li><strong>repo</strong> metanova-labs/nova-blueprint README.md, config/config.yaml, neurons/validator/contest.py, scheduler.py, weights.py, validator.py at cb9bb02 (2026-09-25, no later commits)</li>
+<li><strong>repo</strong> metanova-labs/nova-oracle at 0ba38c7 (2026-09-08, no later commits)</li>
+<li><strong>web</strong> Chain read at blocks 9334714 to 9334722 (2026-10-21): subnet info, parameters, MechanismEmissionSplit, SubnetEmissionWeights, validator and weight aggregates for both mechanisms, owner-slot tests</li>
+<li><strong>web</strong> https://submission-api.metanova-labs.ai /openapi.json, /health and /quote (fetched 2026-10-21)</li>
+<li><strong>web</strong> https://www.metanova-labs.ai (fetched 2026-10-21; the .com address redirects here)</li>
+<li><strong>msg</strong> #nova, team announcements 2026-05-18 to 2026-10-21</li>
+<li><strong>msg</strong> #nova, miner discussion 2026-10-02 to 2026-10-21</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/67.html"><small>← Previous</small>SN67 Harnyx</a><a rel="next" href="/bittensor-docs/subnets/69.html"><small>Next →</small>SN69 Herald</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-21. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

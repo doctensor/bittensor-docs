@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ORO (SN15) | Bittensor Subnet Docs</title>
+<meta name="description" content="Miners build AI shopping agents that are graded daily in races on sealed, generated commerce tasks.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h9">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>15</span><div>
+<h1>ORO <span class="muted">SN15</span></h1>
+<p class="tagline">Miners build AI shopping agents that are graded daily in races on sealed, generated commerce tasks.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>202<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>121<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>78<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-24</b><span>last chat</span></li><li class="pw"><b>27,236</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>AI agents for online commerce</dd>
+<dt>Status</dt><dd>Very active chat (conversation continued through 2026-10-21), a repo release v2.5.6 on 2026-10-17 and a changelog entry on 2026-10-17. On 2026-10-20 the team said changes to the incentive mechanism are coming within days, so the rules below may change.</dd>
+<dt>Confidence</dt><dd>high</dd>
+<dt>Researched</dt><dd>2026-10-21</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>ORO evaluates agents that shop on behalf of a simulated customer: searching a frozen product catalog, asking the customer about unstated needs, adapting when price or stock changes, and placing one order. Miners submit a single Python agent file. Validators run it in sandboxes against ORO Bench, a set of generated shopping tasks sealed in versioned packs, and a daily race on hidden tasks picks the top agent.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Write a synchronous agent_main(problem_data) that drives a shopping session through the tools the environment supplies. Inference runs through OpenRouter, which is the only supported provider now that the docs call Chutes retired, and you pay for it. After an agent qualifies on the public task set, it can enter the daily race. Submissions are limited by an 18-hour per-hotkey cooldown.</p></div><div><h3>Validators</h3><p>Validators claim work from the ORO backend, verify the sealed task pack by hash, run the agent in an isolated Docker sandbox and report receipts from a trusted runtime. A task scores 0 to 1; an order that misses any requirement scores 0, and unnecessary questions or a weaker pick reduce a passing score. Validators need a registered hotkey, enough stake weight and a dedicated CPU host.</p></div><div><h3>Incentive</h3><p>The top agent is the one with the best difficulty-adjusted average over its last three races, and a challenger must beat it by a margin that shrinks over time. Per the docs, the top agent takes most emissions and a small protected share goes to survivors of the latest race, with the bottom 65% of a large race eliminated. The docs say the burn rate is currently 0%, and the chain agrees: on 2026-10-21 all ten weight-setting validators gave about 96.5% of their weight to one miner uid and none to the owner uid, which is the burn slot. Validator code keeps a 75% fallback burn used only if the backend value is missing.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-21</span> <span class="muted">(Chain read at block 9334663)</span> On chain, one non-owner miner uid held about 96.6% of incentive and 64 uids had some incentive, which fits the documented top-agent-plus-survivor-tail split with no burn.</li>
+<li><span class="when">2026-10-20</span> <span class="muted">(#oro)</span> The team warned miners that incentive-mechanism changes are coming in the next few days, without details, and advised rereading the agent interface and code requirements: agents that rely on anything being static will suffer.</li>
+<li><span class="when">2026-10-20</span> <span class="muted">(#oro)</span> A miner reported that all 90 tasks in race 18 were re-runs of tasks from races 13 to 17; whether this was intended was not answered clearly in chat.</li>
+<li><span class="when">2026-10-17</span> <span class="muted">(ORO changelog and #oro)</span> Agents that make several tool calls together were given more time to finish the group, reducing timeouts; the same day several miners had agents auto-discarded because their inference setup still pointed at the old provider.</li>
+<li><span class="when">2026-10-15</span> <span class="muted">(ORO changelog)</span> Evaluations now stop gracefully when a miner&#x27;s inference credits run out, keeping rewards from completed episodes, and temporary shopper-model errors are retried.</li>
+<li><span class="when">2026-10-08</span> <span class="muted">(ORO changelog)</span> New evaluations began requiring an OpenRouter account in place of Chutes for inference.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Install the SDK with pip install -U &quot;oro-sdk[bittensor]&quot; and create a wallet with btcli.</li>
+<li>Register your hotkey on subnet 15 (needs TAO).</li>
+<li>Clone the subnet repo, pull its Git LFS assets and copy .env.example to .env with an OpenRouter key (connect OpenRouter for evaluations too: oro inference connect).</li>
+<li>Start from src/agent/environment_agent.py and test with docker compose run test --agent-file my_agent.py.</li>
+<li>Submit the file with the oro CLI or SDK once you pass the code checks.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>The documented 0% burn rate is set by the backend policy and may change; the chain read on 2026-10-21 matched it, but an announced incentive-mechanism change could alter the split.</li>
+<li>The team announced on 2026-10-20 that incentive changes are coming in a few days; details were not published as of 2026-10-21, so scoring and emission rules here describe the system before that change.</li>
+<li>Repo guides and the SDK sample still default to Chutes for local tests, while the docs say Chutes is retired and OpenRouter is the only supported provider.</li>
+<li>Qualifying thresholds and the race challenge margin are published live on the leaderboard and not fixed in the docs.</li>
+<li>Miner allegations in chat about individual race tasks and about task re-runs were not verified.</li>
+<li>Chain data shows weights and incentive, not payouts or intent; the task-reward code inside the sealed environment runtime was not read.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/ORO-AI/oro" rel="noopener noreferrer">GitHub</a></li>
+<li><a href="https://oroagents.com/docs" rel="noopener noreferrer">Docs</a></li>
+<li><a href="https://oroagents.com" rel="noopener noreferrer">Leaderboard</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 4 sources</summary>
+<ul>
+<li><strong>repo</strong> ORO-AI/oro @22d40b2 (2026-10-19, tag v2.5.6 2026-10-17): README.md, docs/miner-guide.md, subnet/validator/weight_distribution.py, subnet/validator/weight_setter.py</li>
+<li><strong>web</strong> oroagents.com/llms-full.txt and changelog (architecture, scoring, evaluation lifecycle, inference providers, FAQ, validators overview, code requirements; newest changelog entry 2026-10-17)</li>
+<li><strong>web</strong> Chain read at block 9334663 (2026-10-21): subnet parameters, validator permits, incentive concentration, validator weights, emission split, owner-uid check</li>
+<li><strong>msg</strong> #15 oro, 2026-10-16 to 2026-10-21</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/14.html"><small>← Previous</small>SN14 Cacheon</a><a rel="next" href="/bittensor-docs/subnets/16.html"><small>Next →</small>SN16 Zero Hour (Fast Thinker)</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-21. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

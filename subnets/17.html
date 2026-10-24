@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>404-GEN (SN17) | Bittensor Subnet Docs</title>
+<meta name="description" content="Miners turn images into Three.js code; VLM duels pick one leader who gets all miner incentive; GPT phase planned.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h23">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>17</span><div>
+<h1>404-GEN <span class="muted">SN17</span></h1>
+<p class="tagline">Miners turn images into Three.js code; VLM duels pick one leader who gets all miner incentive; GPT phase planned.</p>
+<span class="st s-transitioning">transitioning</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl4"><b>5.7<small>/day</small></b><span>last 7 d</span></li><li class="pl4"><b>6.3<small>/day</small></b><span>days 8-30</span></li><li class="pl4"><b>2.0<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-23</b><span>last chat</span></li><li class="pw"><b>7,726</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>3D generation (procedural Three.js)</dd>
+<dt>Status</dt><dd>Round 57 of the open-source Three.js competition was in its duels stage on 2026-10-24. The team said on 2026-10-23 that the last round of this competition starts on Sunday 2026-10-25, and had targeted 2026-10-26 for a closed-source (GPT) phase. Chat had 157 messages in the 30 days before this refresh.</dd>
+<dt>Confidence</dt><dd>high</dd>
+<dt>Researched</dt><dd>2026-10-24</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>404-GEN is a 3D-generation subnet run by the 404 team. Its current competition, called threejs, asks miners to build a pipeline that reads a prompt image and writes a JavaScript module that constructs the object from Three.js primitives and procedural textures. Rounds run about every three days, and every decision is written to a public git repository. The team is preparing a new phase in which miners submit Python code that may call closed-source OpenAI models through a recording witness, so the operator can replay the work instead of paying for new calls.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>In the current phase miners publish a public repository with a Docker image that serves an HTTP API on port 10006, built only from open-source, commercially licensed models and pinned dependencies. Each round they reveal a submission on-chain, then generate one Three.js module per published prompt (128 prompts per round) and upload the files to their own CDN. They must lock 100 alpha per hotkey, locked from the coldkey, to take part. In the planned closed-source phase (Competition 3, documented on an unmerged branch) miners instead submit a Python repository with a main.py entry point and a fixed commit, with no Docker image. Each prompt gets a nominal budget of 60 OpenAI calls and 5 US dollars at Standard prices, shared by every attempt.</p></div><div><h3>Validators</h3><p>Validators download and render each module, then a vision-language model judges pairwise duels per prompt. The margin of a duel is the net score divided by the number of prompts. In the code on the main branch, every miner must first beat the previous round&#x27;s winner by the win margin to qualify. Qualified miners then face the current leader in reveal order, and a win needs the same margin. A winner is only crowned after audits: the miner&#x27;s own Docker image is rerun on serverless GPUs, and its regenerated outputs must not be clearly worse than what it submitted. A failed or rejected result is dropped and the next miner takes its place. All round state, matches and audit reports are public in the competition state repository. The planned phase replaces regeneration with replay of recorded model responses plus a separate source audit.</p></div><div><h3>Incentive</h3><p>Winner stays in: a challenger becomes leader only by beating the sitting leader by the win margin (0.07 in the live config). The weights service gives the current leader the whole miner weight and the remainder, if any, to the subnet owner&#x27;s uid. The team announced a 0% burn design on 2026-07-28 and removed leader weight decay in code on 2026-07-31. On chain at block 9354737 (2026-10-24 16:47Z), exactly one uid held incentive, 100%, and it was the uid of the leader named in the latest leader entry. That leader took effect on 2026-10-22 after winning round 56; the entry before it dated from 2026-10-07. The subnet&#x27;s emission split is the chain default (owner 18%, validators 41%, miners 41%, no burn or recycle).</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-24</span> <span class="muted">(GitHub 404-active-competition; GitHub 404-gen-subnet (branch))</span> Round 57 had 47 submissions and was in duels. On the unmerged witness branch the team moved witnessed generation and rendering onto per-miner RunPod Pods and updated the Competition 3 miner guide, which still says the sandbox runner, automatic recording and replay, and receipt submission need implementation.</li>
+<li><span class="when">2026-10-23</span> <span class="muted">(#404-gen)</span> The team said the final round of the current 3JS competition starts on Sunday and advised miners not to submit closed-source solutions too early, because final tests may require last-minute changes.</li>
+<li><span class="when">2026-10-22</span> <span class="muted">(GitHub 404-active-competition; chain read; #404-gen)</span> A challenger that won round 56 became the leader on chain (block 9337700, 07:59 UTC), replacing a leader in place since 2026-10-07. The same day the team posted about a public game-creation platform with a revenue share that feeds alpha buybacks; it is not a mining-rule change.</li>
+<li><span class="when">2026-10-19</span> <span class="muted">(#404-gen; GitHub 404-gen-subnet)</span> In a Q&amp;A the team said the generation window would probably be 24 to 48 hours, a replay mismatch voids the whole submission, the leader list will be reset, the 100-alpha lock stays, and several limits are still undecided. A fix to the order of same-block reveals was opened as a pull request; by 2026-10-24 it was on branches but not on main.</li>
+<li><span class="when">2026-10-15</span> <span class="muted">(#404-gen)</span> The team set a target launch date of 2026-10-26 for the closed-source phase; exact time to follow. Current rounds continue until the switch.</li>
+<li><span class="when">2026-10-12</span> <span class="muted">(#404-gen)</span> A public test witness and example miner were released for the closed-source phase, with a per-model limit of 60 OpenAI calls and under US$5.</li>
+<li><span class="when">2026-10-01</span> <span class="muted">(#404-gen)</span> Design post for GPT mining: a subnet-run witness records each miner&#x27;s requests and responses so validators can replay the code without paying for new GPT calls.</li>
+<li><span class="when">2026-07-31</span> <span class="muted">(GitHub 404-gen-subnet; #404-gen)</span> Leader weight decay was removed in code, after the 2026-07-28 announcement of a 0% burn design.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Read the miner reference in the main repository: task, output rules, runtime and API specification.</li>
+<li>Register a hotkey on subnet 17 and lock 100 alpha from the coldkey for each hotkey you will submit with.</li>
+<li>Until the switch: build a Dockerised generator from open-source, commercially licensed models with every dependency pinned, and check it with the reference validator.</li>
+<li>Watch the round schedule in the state repository or the round dashboard; reveal your submission on-chain, generate the prompts with the published seed and upload the modules to your CDN.</li>
+<li>For the closed-source phase, read the Competition 3 document and miner guide on the witness branch and try the public test witness with a registered hotkey; the team asks miners to wait for the final tests before submitting.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>The main README and the live config file still describe weight decay, but the code removed it in July 2026 and the team announced a 0% burn design; this page follows the code and the announcement. The judge README also quotes a 5% qualification margin while the live config uses 0.07.</li>
+<li>Everything about the closed-source phase is provisional: 2026-10-26 was a target and was not repeated in later chat, and the miner guide of 2026-10-24 lists the generation window, penalties for overruns, render tolerances, receipt format and sandbox limits as undecided or not yet implemented.</li>
+<li>The witness client, Pod gateway and the same-block tie-break fix live on unmerged branches; the main branch has not changed since 2026-09-04, so it may not match what miners will run.</li>
+<li>The chain read is one block (9354737, 2026-10-24 16:47Z). Weights are validator opinions, not payouts. Nine of 11 validators with weight rows pointed at the leader&#x27;s uid; one points at the owner&#x27;s uid, and the owner&#x27;s own validator last set weights about 44 hours before the read, beyond the subnet&#x27;s activity cutoff of 5,000 blocks.</li>
+<li>The witness gateway, worker and verifier were read as documentation only, not audited as code, and the round dashboard mirrors the state repository without extra data.</li>
+<li>Payout and support questions are directed by the team to their own Discord server and are not visible in this channel.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/404-Repo/404-gen-subnet" rel="noopener noreferrer">GitHub (subnet code)</a></li>
+<li><a href="https://github.com/404-Repo/404-active-competition" rel="noopener noreferrer">GitHub (live competition state)</a></li>
+<li><a href="https://github.com/404-Repo/404-gen-subnet/tree/main/miner-reference" rel="noopener noreferrer">Miner reference</a></li>
+<li><a href="https://competitions-viewer.subnet404.xyz/" rel="noopener noreferrer">Round dashboard (shared by team)</a></li>
+<li><a href="https://www.404.xyz" rel="noopener noreferrer">404 website</a></li>
+<li><a href="https://game.404.xyz/" rel="noopener noreferrer">Game platform and game jam</a></li>
+<li><a href="https://discord.gg/404gen" rel="noopener noreferrer">404 community Discord</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 5 sources</summary>
+<ul>
+<li><strong>repo</strong> 404-Repo/404-gen-subnet main at commit c4dc226 (2026-09-04): README.md, Competitions/competition2.md, miner-reference/README.md, weights-setter, round-manager, judge-service (timeline.py, README)</li>
+<li><strong>repo</strong> 404-Repo/404-gen-subnet branch feat/witness-public-release at commit 44d2a64 (2026-10-24): Competitions/competition3.md, miner-reference/README.md and pricing, witness-client, witness-gateway, witness-server, docs/witness-server-release-plan.md; branch codex/seed-based-reveal-ties</li>
+<li><strong>repo</strong> 404-Repo/404-active-competition (2026-10-24): config.json, state.json, leader.json, rounds/54-57</li>
+<li><strong>web</strong> Mainnet chain read of netuid 17 at block 9354737 (2026-10-24 16:47Z): subnet, parameters, uids, emission split, validator weights, block dates of leader changes; competitions-viewer.subnet404.xyz opened 2026-10-24</li>
+<li><strong>msg</strong> #17 404-gen, 2026-05-27 to 2026-10-23</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/16.html"><small>← Previous</small>SN16 Zero Hour (Fast Thinker)</a><a rel="next" href="/bittensor-docs/subnets/18.html"><small>Next →</small>SN18 Zeus</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-24. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

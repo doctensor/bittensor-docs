@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sluice (SN476) | Bittensor Subnet Docs</title>
+<meta name="description" content="Testnet-only subnet pitched as a market where miners propose AI request routes and validators benchmark them.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h20">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>476</span><div>
+<h1>Sluice <span class="muted">SN476</span></h1>
+<p class="tagline">Testnet-only subnet pitched as a market where miners propose AI request routes and validators benchmark them.</p>
+<span class="st s-transitioning">transitioning</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl0"><b>0<small>/day</small></b><span>last 7 d</span></li><li class="pl1"><b>0.04<small>/day</small></b><span>days 8-30</span></li><li class="pl0"><b>0.02<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-02</b><span>last chat</span></li><li class="pw"><b>31</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>AI inference routing (decision layer across model APIs and subnets)</dd>
+<dt>Status</dt><dd>Testnet only and quiet. On 2026-10-21 netuid 476 existed on the Bittensor testnet (registered 2026-05-16) but not on mainnet. The team&#x27;s last post in the channel was 2026-06-16, its last public code push was 2026-06-14, and a request for updates on 2026-07-29 has no reply in the archive. On the testnet read, none of the five registered neurons was active and no validator had set weights for at least about 77 days.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-21</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>Sluice describes itself as a decentralized market for routing policies: an application sends an AI request with constraints such as budget, latency, quality floor and privacy, miners propose which provider and model should serve it, and validators benchmark the proposals so the best route wins. It says it does not run models itself and would route to providers such as Chutes, Targon and direct model APIs. Everything about the mechanism comes from the team&#x27;s website and chat; no miner, validator or subnet code is public, and the public repository is only the website.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>As documented by the team (not verifiable in code): miners are routing agents, not compute nodes, so an ordinary server is said to be enough. For each request they receive task metadata and propose a destination (provider and model) together with a predicted score for cost, latency, quality, reliability and privacy. The team says only the winning proposal is rewarded and losing proposals earn nothing. The website&#x27;s demo app imitates a miner with a single call to a Google Gemini model; that is a front-end simulation, not the network.</p></div><div><h3>Validators</h3><p>As documented by the team: validators run the proposed routes, measure latency, quality, cost and privacy compliance, and compute a regret-weighted score against reference alternatives, which then feeds Bittensor consensus. Quality is to be judged by comparing outputs with reference responses (similarity, ground-truth accuracy or a preference proxy). The site shows score weights of 50 percent quality, 25 percent cost, 15 percent latency and 10 percent reliability; the FAQ also treats privacy as a component and as a hard constraint for flagged requests. No validator code is published, so none of this was checked against an implementation.</p></div><div><h3>Incentive</h3><p>The team&#x27;s stated rule is that the miner whose route earns the best validator score on a request is rewarded, with regret weighting meant to stop miners from copying safe defaults, and no participation reward for losing proposals. Developers would pay providers normally and TAO would only be the reward and staking currency. On the testnet read (block 8273009) no neuron had incentive or dividends, and the owner-hotkey slot received about 44 percent of the last epoch&#x27;s testnet emission. Weights on the testnet were not examined beyond their age.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-21</span> <span class="muted">(on-chain read of mainnet and testnet)</span> Chain check: netuid 476 is absent on mainnet. On the testnet it has 5 registered neurons, all holding validator permits, none flagged active, with no incentive or dividends, and validator weights last set at least about 77 days earlier. One neuron is the subnet owner&#x27;s; the other four belong to other owners (three distinct owners among the five).</li>
+<li><span class="when">2026-07-29</span> <span class="muted">(#sluice)</span> A user asked whether there were any updates. No reply appears in the channel archive through 2026-10-21.</li>
+<li><span class="when">2026-06-16</span> <span class="muted">(#sluice)</span> Last team post: a team section was added to the website and bugs fixed; app integration with multiple providers was said to be coming soon.</li>
+<li><span class="when">2026-06-14</span> <span class="muted">(GitHub sluice-ai/frontend)</span> Last commit in the only public repository (website: team section and link fixes).</li>
+<li><span class="when">2026-06-05</span> <span class="muted">(#sluice)</span> SDK documentation went live; the team said the package itself was still being built and could not yet be installed. Asked again about mainnet, the team said it would come in the coming weeks.</li>
+<li><span class="when">2026-06-03</span> <span class="muted">(#sluice)</span> Team announced a redesigned website and said validator and miner workflows were being tested on its Sluice testnet subnet.</li>
+<li><span class="when">2026-06-01</span> <span class="muted">(#sluice)</span> On prompt privacy the team said version 1 may use the prompt text for routing, with no permanent storage and no public exposure, and that sensitive routing and execution would later move into trusted execution environments.</li>
+<li><span class="when">2026-05-27</span> <span class="muted">(#sluice)</span> Asked when mainnet would launch, the team said more details would come soon.</li>
+<li><span class="when">2026-05-26</span> <span class="muted">(#sluice)</span> Welcome post: Sluice is described as a routing layer for decentralized AI where miners compete on routing decisions and validators score them on benchmarks, live execution, cost, latency and quality. The post lists the team&#x27;s roles and says the team never asks for keys or funds in direct messages.</li>
+<li><span class="when">2026-05-16</span> <span class="muted">(on-chain read of the testnet)</span> Netuid 476 was registered on the Bittensor testnet under the name Sluice (chain registration time).</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<p class="muted">No getting-started steps found in the sources.</p>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Testnet only. Nothing here describes mainnet emissions or economics, and no mainnet netuid has been announced; the roadmap on the site is in relative weeks (mainnet at weeks 7-8) with no calendar dates, and the team&#x27;s answer that mainnet would come in the coming weeks dates from 2026-06-05.</li>
+<li>No subnet code is public. The only public repository is the website; the FAQ promises public reference miner and validator code, which the organization&#x27;s public repositories did not show on 2026-10-21. The scoring, regret weighting and privacy attestation described above are team statements that could not be checked against an implementation.</li>
+<li>Docs are largely unfinished: Quick Start, Scoring Engine, Run a Miner, Run a Validator, Route API and Changelog are still &#x27;Drafting&#x27; placeholders. Only the overview, vision, core concept, SDK reference and FAQ pages have content, so there is no usable miner or validator setup guide.</li>
+<li>The website&#x27;s numbers are not live. The Subnet page (1 miner, 1 validator, 44.64k alpha stake, 3.15 TAO pool, 296.02 alpha daily emission) and the Dashboard (128,420 requests routed, $3,842 savings, 94.3 percent pass rate) are constants in the site code, although the FAQ says the Subnet page shows live on-chain data. The testnet shows five neurons, not one miner and one validator.</li>
+<li>The in-browser app is a simulation: the &#x27;miner decision&#x27; is one Google Gemini call, provider cost and quality figures are hard-coded samples, and the answer text is canned. It does not show that routing between real providers works.</li>
+<li>On the testnet read every neuron held a validator permit, none was active, and all five validators&#x27; last weight-sets were at least 557,806 blocks old (about 77 days at 12-second blocks). That suggests no live scoring at the time, but it is a snapshot of testnet state, not a statement about the team&#x27;s plans, and who operates the other four neurons is unknown.</li>
+<li>The scoring weights on the website (50/25/15/10 for quality, cost, latency, reliability) leave out privacy, while the FAQ lists privacy compliance as part of the composite score. Which description is current was not verifiable.</li>
+<li>Privacy statements differ: the team said in chat that version 1 may use the prompt for routing, while the FAQ says miners receive task metadata and the prompt goes straight to the winning provider. What miners and validators would actually see is not documented.</li>
+<li>The SDK page shows &#x27;pip install sluice&#x27; and &#x27;npm install sluice&#x27;, but the team said on 2026-06-05 that the package could not yet be installed. The package registries were not checked, so a package with that name may be unrelated.</li>
+<li>The chain identity points to github.com/sluice-ai/sluice, which now resolves to the website repository, so it is probably the same repository under an earlier name. Private repositories, if any, were not visible.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://www.thesluice.xyz/" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://www.thesluice.xyz/docs/core/sluice" rel="noopener noreferrer">Docs (core concepts)</a></li>
+<li><a href="https://github.com/sluice-ai/frontend" rel="noopener noreferrer">GitHub (sluice-ai/frontend, website source only)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 4 sources</summary>
+<ul>
+<li><strong>msg</strong> #sluice 2026-05-26 to 2026-07-29, plus an empty post on 2026-10-02 (read via the chat archive; nothing newer)</li>
+<li><strong>repo</strong> sluice-ai/frontend@6267913 (2026-06-14): README.md, src/features/docs/{SluiceCorePage,VisionPage,FaqPage,SdkReferencePage,SubnetDocsPage}.tsx, src/features/marketing/content.ts, src/features/dashboard/data.ts, src/features/routing-workbench/*, src/entities/routing/*, src/app/AppRouter.tsx</li>
+<li><strong>web</strong> https://www.thesluice.xyz/ (client-rendered; deployed bundle checked against the repo, read 2026-10-21) and https://github.com/sluice-ai (one public repository, 2026-10-21)</li>
+<li><strong>web</strong> On-chain reads 2026-10-21: mainnet block 9334546 (netuid 476 absent); testnet blocks 8273003-8273013 (registration, neuron counts, weight age, owner checks, identity)</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/450.html"><small>← Previous</small>SN450 Engram</a><a rel="next" href="/bittensor-docs/subnets/498.html"><small>Next →</small>SN498 Data Annotation (CanopyMRV)</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-21. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

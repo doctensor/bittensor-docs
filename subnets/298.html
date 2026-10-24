@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ChronoSeek (SN298) | Bittensor Subnet Docs</title>
+<meta name="description" content="Video moment search: miners return the timestamps that match a text query. Testnet only and quiet since September.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h22">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>298</span><div>
+<h1>ChronoSeek <span class="muted">SN298</span></h1>
+<p class="tagline">Video moment search: miners return the timestamps that match a text query. Testnet only and quiet since September.</p>
+<span class="st s-quiet">quiet</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl0"><b>0<small>/day</small></b><span>last 7 d</span></li><li class="pl1"><b>0.13<small>/day</small></b><span>days 8-30</span></li><li class="pl2"><b>0.52<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-14</b><span>last chat</span></li><li class="pw"><b>96</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>video understanding (semantic video moment retrieval)</dd>
+<dt>Status</dt><dd>Testnet only and dormant as of 2026-10-21. The last team post is dated 2026-09-25 and the last repo commit 2026-09-02. In chat on 2026-09-23 the team said it had made a hard decision to step back, was still committed, and was waiting for the right timing. Mainnet netuid 298 does not exist; testnet 298 has no incentive and its validators last set weights 56 to 91 days before the read.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-21</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>ChronoSeek is a subnet idea for searching inside videos by meaning: given a video and a plain-language description, miners return the time interval where that moment happens. The team ran it on testnet from spring 2026, said in July 2026 that it had bought the mainnet slot SN20, and by late September said it was stepping back. Today the project exists as testnet netuid 298 only, and the chain lists SN20 under a different project (Witness).</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>In the 1.0 design (main branch, testnet) a miner runs a search service that takes a video link and a query and returns timestamp intervals, using a CLIP-style visual model plus a speech-transcript signal that can only boost the score. In the unmerged 2.0 design (dev branch) a miner instead deploys a private retrieval runtime to Chutes, a hosted compute platform, and commits its metadata on chain. Validators accept one permanent valid submission per hotkey.</p></div><div><h3>Validators</h3><p>Validators build synthetic search tasks from ActivityNet Captions annotations and score each answer by how well its interval overlaps the true one (intersection over union). In the 2.0 code, tasks are hardened: a private clip is cut from the source video, compressed through Vidaio (another subnet) or local ffmpeg, stored on Hippius, and miners see only that clip link plus the query. The default score is 0.75 overlap plus small terms for matching centre, boundaries and length (zero overlap stays zero). Scores are smoothed with a moving average that puts weight 0.1 on the newest result. Requests to miners time out after 150 seconds. Organic API traffic is designed to be served by owner-run copies of the best Chutes runtimes, not by validators forwarding requests to miners.</p></div><div><h3>Incentive</h3><p>On the main branch, normalized moving-average scores become weights. On the dev branch, weights are rank-based: 75, 20 and 5 percent to the top three miners with a positive score, with ties splitting the slots they span. An optional fixed burn share (default 0 percent) and the fallback when no miner scores above zero both go to UID 0, which is hard-coded. Chain weights were not read, and no mainnet emission claim is made.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-09-25</span> <span class="muted">(#298)</span> Last team post in the channel (a role ping). One user reply on 2026-10-14 got no team response in the archive.</li>
+<li><span class="when">2026-09-23</span> <span class="muted">(#298)</span> Team replied that stepping back had been a hard decision, that it had no regrets and was as committed as on day one, and that it was now waiting for the right timing while continuing to build. The decision itself is not described in the archive.</li>
+<li><span class="when">2026-09-09</span> <span class="muted">(chain read)</span> The on-chain name of SN20 changed from ChronoSeek to Witness (date read from archive blocks, about plus or minus one day). The owner account did not change at that time.</li>
+<li><span class="when">2026-09-02</span> <span class="muted">(GitHub)</span> Last commit in the public repo (dev branch, cookie-refresh change for miner runtimes). The v2.0 pull request is still open and unmerged.</li>
+<li><span class="when">2026-08-28</span> <span class="muted">(#298)</span> An outside assessment bot rated the subnet &#x27;out&#x27; (6 of 10): mainnet emission off, no recently updating miners, one serving axon, and the site and MCP endpoint down. This is a third-party view, not team policy.</li>
+<li><span class="when">2026-08-19</span> <span class="muted">(#298 and chain read)</span> Team said that, with ownership now held through conviction, it would burn against UID 240 instead of its old burn UID. On chain on 2026-10-21, UID 240 on SN20 is the owner hotkey.</li>
+<li><span class="when">2026-08-11</span> <span class="muted">(#298)</span> Team asked volunteers to test the v2.0 branch (GitHub pull request 29), saying some integrations such as Chutes needed a mainnet UID and that the official launch had not been announced.</li>
+<li><span class="when">2026-07-22</span> <span class="muted">(#298)</span> The team was welcomed as the new holder of mainnet SN20. On 2026-08-03 it said it had bought SN20 but was re-evaluating whether that slot was the right long-term home after the Bittensor v440 release.</li>
+<li><span class="when">2026-07-01</span> <span class="muted">(#298)</span> Team announced Hippius storage and (on 2026-07-02) Vidaio compression in the validator task pipeline, so miners receive only a transformed copy of each clip and cannot trace it to the source benchmark.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Clone the repo and check out the dev branch, which holds the v2.0 miner and validator guides (main is the older 1.0 code from 2026-04-22). Python 3.12 or newer and Poetry are required; run poetry install.</li>
+<li>Copy .env.example to .env and set your wallet and hotkey names. The guides default to the finney network and netuid 20, so set NETWORK=test and NETUID=298 explicitly for testnet.</li>
+<li>Create a Chutes account and API key, copy chronoseek_chute.example.py to chronoseek_chute.py, and deploy the runtime with scripts/deploy_chutes_runtime.py (the miner guide has the exact flags).</li>
+<li>Commit the printed Chutes runtime slug on chain using the command the deploy helper suggests. Each hotkey gets one permanent submission, so check the slug first.</li>
+<li>Before spending effort, check whether any validator is active: on 2026-10-21 none had set weights for at least 56 days.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Testnet only. Mainnet netuid 298 does not exist; 298 is the testnet netuid. The test network has 20 neurons and 8 validator permits, no UID has incentive, and every validator&#x27;s last weight update was 56 to 91 days before 2026-10-21. Nothing here describes mainnet emissions, and test tokens carry no value.</li>
+<li>The mainnet slot is unclear. The team said it bought SN20 (2026-08-03) and held ownership through conviction (2026-08-19). On chain, the SN20 owner account changed once, around 2026-08-14, and has not changed since, while the identity name changed to Witness around 2026-09-09. The archive does not say whether the team sold, handed over or released the slot, so none of those is claimed.</li>
+<li>Mainnet SN20 is a different project (Witness, see the SN20 page). Its on-chain identity still lists this project&#x27;s Discord invite, so people following that link land in the ChronoSeek server.</li>
+<li>Code is not proof of what ran. The 2.0 design lives on an unmerged dev branch, while main (2026-04-22) describes 1.0. Code and guides default to netuid 20. Whether any validator ran the dev code was not verifiable, and the 2.0 pull request had been open since 2026-07-20 when read.</li>
+<li>The burn target conflicts: the dev code hard-codes UID 0, while the team said on 2026-08-19 that it burned to UID 240. Which one a live validator used is unknown.</li>
+<li>Miners in the 2.0 design depend on a Chutes account and credits, and public API traffic is meant to run on owner-controlled Chutes copies, so serving rests on the owner and one outside platform.</li>
+<li>The project website chronoseek.org gave no response and the MCP endpoint returned HTTP 526 on 2026-10-21 (an origin certificate error), and the site named in the testnet chain identity does not resolve. Claims about the API, demo and MCP are team statements from chat that were not tested.</li>
+<li>Market-size and commercial claims in docs/BUSINESS_LOGIC.md were not checked.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/chronoseek/bittensor-subnet" rel="noopener noreferrer">GitHub (chronoseek/bittensor-subnet)</a></li>
+<li><a href="https://github.com/chronoseek/bittensor-subnet/pull/29" rel="noopener noreferrer">v2.0 pull request (open, dev branch)</a></li>
+<li><a href="https://github.com/chronoseek/bittensor-subnet/blob/dev/docs/CHRONOSEEK_V2_DESA.md" rel="noopener noreferrer">v2.0 design note (dev branch)</a></li>
+<li><a href="https://discord.gg/P2Y93BRYyC" rel="noopener noreferrer">ChronoSeek Discord (invite from the 2026-04-16 launch post)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 6 sources</summary>
+<ul>
+<li><strong>repo</strong> chronoseek/bittensor-subnet@04c999c (main, 2026-04-22): README.md, docs/DESIGN.md, validator.py</li>
+<li><strong>repo</strong> chronoseek/bittensor-subnet@1905a67 (dev, 2026-09-02): README.md, docs/CHRONOSEEK_V2_DESA.md, docs/validator.md, docs/miner.md, chronoseek/scoring.py, chronoseek/constants.py, chronoseek/validator/aggregation.py, validator.py</li>
+<li><strong>msg</strong> #298 (channel is now named as testnet 298) 2026-04-16 to 2026-10-14, read via the chat archive</li>
+<li><strong>web</strong> GitHub API for chronoseek/bittensor-subnet: PR 29, branches, pushed_at (read 2026-10-21)</li>
+<li><strong>web</strong> Chain reads 2026-10-21: mainnet netuid 298 absent; SN20 name and owner history at archive blocks; testnet netuid 298 parameters and validator weight age (test block 8273071)</li>
+<li><strong>web</strong> discord.com invite API for P2Y93BRYyC and HTTP checks of chronoseek.org and mcp.chronoseek.org (2026-10-21)</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/292.html"><small>← Previous</small>SN292 Polaris</a><a rel="next" href="/bittensor-docs/subnets/305.html"><small>Next →</small>SN305 Blockchain Insights (testnet 305)</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-21. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

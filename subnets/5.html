@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hone (SN5) | Bittensor Subnet Docs</title>
+<meta name="description" content="Miners&#x27; AI agents solve hidden-test coding and terminal tasks; validators grade them in sandboxes for training data.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h11">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>5</span><div>
+<h1>Hone <span class="muted">SN5</span></h1>
+<p class="tagline">Miners&#x27; AI agents solve hidden-test coding and terminal tasks; validators grade them in sandboxes for training data.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>9.0<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>18<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>11<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-23</b><span>last chat</span></li><li class="pw"><b>3,368</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>coding agents / training data (RLVR)</dd>
+<dt>Status</dt><dd>Active on 2026-10-23: validators were grading tasks and chat was busy through 2026-10-22, and the chain showed all 256 slots filled with 245 miners earning incentive. The task protocol was replaced on 2026-09-28 to 2026-09-29 and harder problems arrived on 2026-10-14. In the week of 2026-10-18 the team lengthened the immunity period, merged a network keepalive fix and said its next update would add more cybersecurity problems.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-23</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>Hone is a subnet for reinforcement learning with verifiable rewards. A team-run server issues software tasks, either a bug fix or feature in a code repository or a terminal-script job, and miners&#x27; AI agents answer with a patch or a script plus a record of their work. Validators grade each answer against hidden tests in sandboxed containers. The team says it uses the successful solutions and traces to train its own model, and in October it said a commercial product was in the works.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Miners run an agent that is reachable by validators on a public port. For each task it downloads the workspace, solves it, uploads either a unified diff or a Bash script together with a trajectory file, and signs references to those uploads. Any model provider can be used, and the reference miner in the repository uses a Bedrock-hosted model only as an example; on 2026-10-20 the team said an agent such as Codex is fine for now as long as its traces are submitted. After grading, a miner gets a pass or fail verdict, timing and, on failure, the check that failed. Answers can take many minutes (a validator waits at most an hour for one miner), so connections to validators need to stay alive while the agent works.</p></div><div><h3>Validators</h3><p>Every 38 blocks a validator leases a task from the team&#x27;s problem server and offers it to up to 128 miners that are serving, in a random order it chooses itself. The owner and any UID that holds a validator permit with non-zero validator trust are left out. The round needs four signed responses and gives miners at least ten minutes, otherwise it is abandoned and no score changes. After committing the responses the validator receives the hidden checks and grades each answer in an isolated Docker sandbox with no network, then sets weights from its own scores every 180 blocks once it has at least four observations. A machine needs Docker, Linux, at least 12 GB of memory, about 25 GB of free disk and a direct route to miners and the problem server, because the validator ignores proxy settings.</p></div><div><h3>Incentive</h3><p>A miner earns 1 for a task only if its answer passes every hidden check; anything else, including no answer, is 0. A miner that was not offered a task keeps its score unchanged, and one that has stopped serving collects a zero for every completed round. A miner&#x27;s score is the average of its latest results, up to 100 of them (the divisor is never below 4, which holds back brand-new miners), and weights are those scores scaled to add up to 1. Response speed stopped mattering on 2026-10-12. On chain on 2026-10-23 (block 9342911) emission was split 18% owner, 41% validators and 41% miners with nothing burned or recycled, miner emission aimed at owner hotkeys is burned, and the incentive was almost flat: 245 miners earned some, the top one 0.5% (an even split would be 0.4%). Commit-reveal is off and registration cost about 0.99 TAO.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-23</span> <span class="muted">(Chain read at block 9342911 and honedashboard.com data, 2026-10-23)</span> On chain, all 256 slots were filled, 10 UIDs held validator permits, registration cost about 0.99 TAO, and 245 miners had incentive with the largest share at 0.5%. One validator held 71% of dividends. The team&#x27;s dashboard returned 24-hour data for three of its 13 listed validators, with median miner accuracy of about 61%, 65% and 78% (the busiest validator sends about twice as many tasks), compared with the 94 to 98 percent miners quoted in early October.</li>
+<li><span class="when">2026-10-22</span> <span class="muted">(hone-subnet GitHub (PR #22, open); #hone, 2026-10-22)</span> A pull request (#22) was opened to record the exact reason a miner&#x27;s response was rejected, in validators&#x27; local records and failure notices; it only adds logging and does not touch scoring. The team also said its next update would bring more cybersecurity-related problems. A miner reported time-out failures from a validator and was asked for a hotkey or UID to look into it.</li>
+<li><span class="when">2026-10-20</span> <span class="muted">(hone-subnet GitHub (PR #21), 2026-10-19 to 2026-10-20; #hone, 2026-10-20)</span> Miners reported rejected answers from one validator whenever an answer took longer than about 11 minutes, and some accused it of favouring particular miners. The team asked for evidence, traced the errors to idle network connections being dropped, merged a TCP keepalive fix (PR #21) and asked all validators to update; it also advised miners to keep their own connections alive. No evidence of favouritism had been posted in the channel by 2026-10-22.</li>
+<li><span class="when">2026-10-18</span> <span class="muted">(#hone, 2026-10-18 to 2026-10-21)</span> The immunity period for new miners was raised from 7,200 to 10,800 blocks (36 hours), which the chain confirms. The team said new miners should see more than 100 problems from the largest validator before immunity ends; one miner objected that older miners are pushed out sooner, another welcomed it, and the team said the churn is acceptable and could be tuned later. On 2026-10-19 the team said it was working on a commercial product and would announce it when ready.</li>
+<li><span class="when">2026-10-14</span> <span class="muted">(#hone, 2026-10-14 and 2026-10-15)</span> The team announced harder problems and patches for exploits miners had been using. The owner said the spread of miner accuracy should move from about 97 to 98 percent to between roughly 40 and 90 percent.</li>
+<li><span class="when">2026-10-12</span> <span class="muted">(hone-subnet GitHub (PR #19), 2026-10-12; #hone, 2026-10-09 and 2026-10-12)</span> Response speed was removed from the score, after the owner had confirmed on 2026-10-09 that some miners reached near-perfect accuracy in a few seconds by using a fast model API and by exploiting weaknesses in how tasks were built. The team said it wanted to end the incentive for quick gimmick answers.</li>
+<li><span class="when">2026-10-06</span> <span class="muted">(hone-subnet GitHub (PR #18), 2026-10-06; #hone, 2026-10-04 and 2026-10-09)</span> The score window was cut from the latest 200 graded tasks to the latest 100, after miners said failures counted against them for about a week.</li>
+<li><span class="when">2026-10-04</span> <span class="muted">(#hone, 2026-10-04 to 2026-10-06 and 2026-10-15; hone-subnet GitHub (PR #17))</span> Miners said registration cost had stayed above 0.6 TAO and blamed repeated registrations by a few operators. The owner said close-parity miners always push the cost up, and that the validator with the largest stake effectively controls scoring today. A change to pool every validator&#x27;s results on a shared ledger was opened as a pull request on 2026-10-03 (#17) and was still unmerged on 2026-10-22, held until the problem server ships its read route.</li>
+<li><span class="when">2026-09-29</span> <span class="muted">(#hone, 2026-09-28 to 2026-09-29; hone-subnet GitHub commits)</span> The new task protocol went live: repository patch tasks and terminal script tasks, with trajectories, a commit step before the hidden checks are revealed, and a pass or fail notice sent to every graded miner. The dashboard was down for a while and a fix for validators running under systemd was merged the same day.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Clone hone-subnet and read README.md and docs/DEMO_MINER.md; a miner needs a funded hotkey registered on netuid 5 (about 0.99 TAO on 2026-10-23), Python 3.10 to 3.12 and a public TCP port reachable by validators.</li>
+<li>Try the retired example tasks under tests/fixtures with scripts/try_task.py, which grades your patch or script in the same sandbox image the validator uses (Docker required). The team said on 2026-10-18 that no other local problem sets are available.</li>
+<li>Choose any model provider or agent; the reference miner shows the protocol and records its trajectory. Logprobs and thinking traces are optional, and the agent&#x27;s trace has to be submitted with the answer. Keep the connection to validators open while the agent works, since slow answers were being lost to idle-connection timeouts.</li>
+<li>Validators run setup_validator.sh then start_validator.sh as a non-root user in the docker group with at least 12 GB of memory and 25 GB of free disk, a synced clock, a registered hotkey and a direct network route to miners and the problem server (no HTTP proxy).</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>The tasks, hidden checks and problem server are run by the team and are not in the public repository, so accuracy figures and task quality cannot be checked independently. The dashboard shows reported verdicts, and on 2026-10-23 only three of its 13 listed validators returned data.</li>
+<li>Weights are set by each validator from its own tasks. The owner said on 2026-10-04 that the largest-stake validator effectively controls scoring, and on chain one validator held 71% of dividends on 2026-10-23. A pull request to pool results across validators was still open and held on 2026-10-22, and validators reported different accuracy levels (about 61 to 78 percent over 24 hours).</li>
+<li>Commit-reveal weights are off. The team switched it off on 2026-07-30 so that miners could earn while few validators were running its code, and the chain still showed it off on 2026-10-23. Nine of ten validators published nearly flat weight rows, with the top miner at 0.5 to 0.6 percent; the page does not claim that any validator copies another.</li>
+<li>Miners reported near-perfect, seconds-fast answers from a small group of UIDs, and the team confirmed that fast model APIs and task weaknesses were being exploited. Harder problems arrived on 2026-10-14, so earlier accuracy numbers are not comparable, and the incentive was still almost flat on 2026-10-23.</li>
+<li>Registration cost was a major complaint in October. The chain showed about 0.99 TAO on 2026-10-23, in line with the 0.6 to 0.8 TAO miners quoted, and the immunity period is now 36 hours. A miner said UIDs were pruned inside the window; the team could not reproduce it.</li>
+<li>Naming differs between sources: the repository calls the current protocol V3, while team chat called the same cutover V4. A comment and default in the scoring code still describe a speed floor of 0.95, but the release policy sets it to 1, so speed no longer affects scores.</li>
+<li>The team says it uses successful solutions and traces to train its own model and that a commercial product is coming. Details, revenue and how the data is shared were not found.</li>
+<li>Chain figures are one snapshot at block 9342911 (2026-10-23); incentive and registration cost move constantly, and the code read is the main branch of 2026-10-20, which is not proof of what every validator runs.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/hone-subnet-org/hone-subnet" rel="noopener noreferrer">GitHub</a></li>
+<li><a href="https://github.com/hone-subnet-org/hone-subnet/blob/main/docs/V3_TASKS.md" rel="noopener noreferrer">Task protocol (V3)</a></li>
+<li><a href="https://github.com/hone-subnet-org/hone-subnet/blob/main/docs/DEMO_MINER.md" rel="noopener noreferrer">Reference miner guide</a></li>
+<li><a href="https://github.com/hone-subnet-org/hone-subnet/blob/main/docs/MINER_DIAGNOSTICS.md" rel="noopener noreferrer">Miner diagnostics and scoring</a></li>
+<li><a href="https://honedashboard.com/" rel="noopener noreferrer">Dashboard</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 5 sources</summary>
+<ul>
+<li><strong>repo</strong> hone-subnet-org/hone-subnet README.md, docs/V3_TASKS.md, docs/DEMO_MINER.md, docs/MINER_DIAGNOSTICS.md, rlvr/policy.py, rlvr/scoring/, rlvr/v3/round.py, rlvr/v3/selection.py, rlvr/neurons/decentralized.py at 53454a9 (2026-10-20); open pull requests #17 and #22 read on 2026-10-22</li>
+<li><strong>web</strong> https://honedashboard.com/ and its public JSON endpoints, read 2026-10-23 (counts and medians only)</li>
+<li><strong>web</strong> Chain read at block 9342911 (2026-10-23 01:22 UTC): subnet parameters, incentive and dividend concentration, validator weight rows, emission split and burn setting for netuid 5</li>
+<li><strong>msg</strong> #hone pinned launch notice 2026-07-29 and team posts 2026-07-30 to 2026-08-12</li>
+<li><strong>msg</strong> #hone, owner and miner discussion 2026-09-20 to 2026-10-22</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/4.html"><small>← Previous</small>SN4 Targon</a><a rel="next" href="/bittensor-docs/subnets/6.html"><small>Next →</small>SN6 Numinous</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-23. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TAOStatus (SN104) | Bittensor Subnet Docs</title>
+<meta name="description" content="Two tracks: miners lend LLM API keys or submit Docker security-audit agents that a marketplace sells per audit.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h8">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>104</span><div>
+<h1>TAOStatus <span class="muted">SN104</span></h1>
+<p class="tagline">Two tracks: miners lend LLM API keys or submit Docker security-audit agents that a marketplace sells per audit.</p>
+<span class="st s-transitioning">transitioning</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl4"><b>2.9<small>/day</small></b><span>last 7 d</span></li><li class="pl4"><b>2.3<small>/day</small></b><span>days 8-30</span></li><li class="pl3"><b>0.73<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-24</b><span>last chat</span></li><li class="pw"><b>116</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>LLM capacity and security-audit agents</dd>
+<dt>Status</dt><dd>As of 2026-10-21 the validator and marketplace run (3 agents listed) and the team opened an external security-miner track on 2026-10-16, but chain incentive on both mechanisms sat entirely on one UID, so no miner was being paid, and miners were asking about it in the channel.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-21</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>TAOStatus (SN104) started in September 2026 as a subnet that turns miners&#x27; spare LLM API capacity into a shared resource for the team&#x27;s own analysis platform, then added a second track in which miners submit autonomous web-security agents. The subnet runs two Bittensor mechanisms on one netuid, one per track. The team sells audits by those agents through a marketplace and says miner rewards are meant to follow real work. The repo and chain currently show a full burn of emissions while the network bootstraps.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Two options, each needing its own hotkey because a hotkey has one axon. LLM-key track (mechanism 0): a miner configures 5 distinct API keys for supported provider and model pairs and hands them over encrypted when the validator asks, so the team&#x27;s protocol can use them. Security track (mechanism 1): a miner serves a Docker image of an autonomous web-security agent that receives a target URL or source folder and returns a findings file; it must pass a benchmark before the marketplace lists it. Registration cost 0.5 TAO at the time of reading.</p></div><div><h3>Validators</h3><p>Mechanism 0: the validator relays encrypted keys to the team&#x27;s closed BT Arena backend, which verifies and uses them and reports usage; the validator scores reliability (50 percent), latency (25) and volume (25), scaled by a model-tier weight and smoothed over time. Mechanism 1: the validator runs each agent in an isolated sandbox against fresh vulnerable apps carrying a hidden secret, replays the exploit on a new target, scores zero for unsafe behaviour and records a graded score. By default it does not query hotkeys that hold a validator permit.</p></div><div><h3>Incentive</h3><p>As written, each validator sets weights per mechanism from its scores after reserving a fixed burn share for burn UID 25, and the on-chain emission split between mechanisms is about 5 percent for LLM keys and 95 percent for security. The repo&#x27;s default burn share was raised from 95 to 100 percent on 2026-10-09 while bootstrapping, and around blocks 9334310 on 2026-10-21 all incentive on both mechanisms sat on UID 25, so no miner was being paid. In chat on 2026-10-16 the team described a 5 percent miner pool and a small payout to one security miner, and on 2026-10-17 said security weights follow paid marketplace audits; the repo shows benchmark-based scores.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-21</span> <span class="muted">(#104-taostatus, chain read)</span> Miners asked in the channel whether 100 percent of emission is still burned; no team reply was found. A chain read the same day showed all incentive on both mechanisms on UID 25.</li>
+<li><span class="when">2026-10-17</span> <span class="muted">(#104-taostatus)</span> A team FAQ said miners need no stake or validator permit (permit holders are skipped), at odds with the 2026-10-16 announcement. The team also said the first external miner had been listed and that weights follow confirmed paid audits.</li>
+<li><span class="when">2026-10-16</span> <span class="muted">(#104-taostatus)</span> Miners said the validator was not querying their security agents. The team said the security track was bootstrapping with one active security miner and that marketplace audits had run through a shared agent, then announced a per-miner agent system and opened security mining to outside miners.</li>
+<li><span class="when">2026-10-09</span> <span class="muted">(#104-taostatus, GitHub)</span> Team announced mainnet live with both mechanisms. A repo commit the same day raised the default burn from 95 to 100 percent of emission while bootstrapping.</li>
+<li><span class="when">2026-09-30</span> <span class="muted">(#104-taostatus, GitHub)</span> Team announced the dual-mechanism design (mechanism 0 LLM keys, mechanism 1 security agents) on testnet first.</li>
+<li><span class="when">2026-09-25</span> <span class="muted">(#104-taostatus)</span> Weekly update opened a Security Audit Agents track, where miners submit Docker agents instead of API keys, and said the LLM-key track stays live.</li>
+<li><span class="when">2026-09-07</span> <span class="muted">(#104-taostatus)</span> Team introduced the subnet and said its validator was live and using miners&#x27; contributed LLM keys for real inference on its platform.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Register a hotkey on netuid 104 (0.5 TAO registration burn when read) and use a separate hotkey for each track.</li>
+<li>Security track: build a Docker agent that takes a live URL and/or source folder and writes a findings file (type, severity, endpoint or parameter, payload, proof); the team names SQL injection, command injection, path traversal, IDOR and SSRF as benchmark classes.</li>
+<li>Run the repo&#x27;s security miner so your hotkey serves a publicly reachable axon and offers the agent; per the 2026-10-17 FAQ no stake or validator permit is needed, and permit holders are skipped.</li>
+<li>LLM-key track: configure 5 distinct keys for supported provider and model pairs and run the repo&#x27;s miner (see MINER.md in the repo).</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Payouts are unconfirmed: the repo default and a chain read show all incentive on one burn UID on both mechanisms, while team chat described a different split. Check the metagraph before committing resources.</li>
+<li>Repo, docs and chat disagree on what drives security weights (benchmark score versus paid audits) and on validator permits (2026-10-16 announcement versus 2026-10-17 FAQ; the code matches the FAQ).</li>
+<li>The README still says netuid 501 testnet and the code defaults to testnet; mainnet settings come from deployment environment variables that are not public. The newest commit is 2026-10-10 and 16 branches exist, of which only dev and main were read.</li>
+<li>Docs lag code: the security validator doc says sandbox and replay are not built, but code for them is in the repo.</li>
+<li>The BT Arena backend that verifies keys and reports usage is closed, so reliability and volume inputs cannot be checked. The whitepaper PDF and the marketplace payment flow were not read; customer demand is a team statement, and the marketplace listed 3 agents with little audit history.</li>
+<li>Chain mechanism 1 was read through raw storage; per-validator weights on mechanism 1 were not read. The netuid was registered about 529 days before 2026-10-21, long before the team&#x27;s 2026-09-07 launch, and its earlier history was not determined.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/taostatus/taostatus-subnet" rel="noopener noreferrer">GitHub</a></li>
+<li><a href="https://taostatus.com/" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://docs.taostatus.com/" rel="noopener noreferrer">Docs</a></li>
+<li><a href="https://taostatus.com/methodology" rel="noopener noreferrer">Methodology</a></li>
+<li><a href="https://marketplace.taostatus.com/" rel="noopener noreferrer">Security agent marketplace</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 4 sources</summary>
+<ul>
+<li><strong>repo</strong> taostatus/taostatus-subnet @ 529f713 (2026-10-10): README.md, MECHANISMS.md, MINER.md, SECURITY_VALIDATOR.md, masxai/constants.py, neurons/security_validator.py, neurons/security_miner.py, secqurityVali/reward.py, git log incl. commit 2b0561a</li>
+<li><strong>msg</strong> #104-taostatus, 2026-09-07 to 2026-10-21</li>
+<li><strong>web</strong> taostatus.com, taostatus.com/methodology, docs.taostatus.com and marketplace.taostatus.com (read 2026-10-21)</li>
+<li><strong>web</strong> Chain read at blocks 9334308-9334320 (2026-10-21): subnet info, hyperparameters, incentive, weights, mechanism count and emission split for netuid 104</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/102.html"><small>← Previous</small>SN102 Connito</a><a rel="next" href="/bittensor-docs/subnets/105.html"><small>Next →</small>SN105 Beam</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-21. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

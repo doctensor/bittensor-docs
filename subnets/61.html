@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RedTeam (SN61) | Bittensor Subnet Docs</title>
+<meta name="description" content="Miners submit Docker images of browser-side detection code; a daily cutoff turns accepted scores into rewards.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h19">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>61</span><div>
+<h1>RedTeam <span class="muted">SN61</span></h1>
+<p class="tagline">Miners submit Docker images of browser-side detection code; a daily cutoff turns accepted scores into rewards.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>87<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>41<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>35<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-24</b><span>last chat</span></li><li class="pw"><b>8,620</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>security challenges (browser fingerprinting and detection)</dd>
+<dt>Status</dt><dd>Two challenges are live in the repo config (BEX Tracer and ADA v3, last changed 2026-10-13) and chat stayed busy through 2026-10-22. On chain on 2026-10-22 one BEX submission holds about 60 percent of incentive and all ten validators that set weights agree. Miners dispute that submission as a bypass; the team said it gets full BEX emission and announced no rule change. The 2026-10-05 plan to replace ADA v3 has no visible follow-up.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-22</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>RedTeam is a competition subnet in which miners write detection code for security problems and ship it as Docker images. The code is meant to be usable in real products. Challenges are published by the team, each with its own scoring server and rules. Two challenges are active as of 2026-10-22: one classifies which Chrome extensions are running (BEX Tracer v1), the other detects which anti-detect browser drives a web session (ADA v3).</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>A miner writes JavaScript for the active challenge, packages it in a Docker image, and commits the image digest. BEX Tracer wants one file per extension group that returns which of 89 named extensions are present. ADA v3 wants one file per target (AdsPower, Dolphin Anty, GoLogin, Multilogin, Octo Browser and a headless detector) that must stay silent on human sessions. Each miner may commit once per challenge per 24 hours; the newest commit replaces the earlier one.</p></div><div><h3>Validators</h3><p>Submissions go through a 24-hour cooldown with an encrypted commit and later reveal, then lint and obfuscation checks, then a comparison against other submissions for copying. Scoring runs on team-operated infrastructure, and validators pull accepted results once a day at 14:00 UTC and set weights. A submission must be scored and accepted before that time to count that day. The team states this is the mechanism; only the pull behaviour was checked against the docs, not independently in validator code.</p></div><div><h3>Incentive</h3><p>A submission is accepted if its score reaches the challenge&#x27;s minimum (0.8 for BEX Tracer and 0.9 for ADA v3 in the repo config) and its similarity to others stays within limits. An accepted score holds for 10 days, decays to zero by day 15, and is passed through a softmax with temperature 0.2 over each miner&#x27;s best commit. Each challenge&#x27;s result is multiplied by its weight (0.6 for BEX Tracer and 0.4 for ADA v3 in the repo config). If a challenge has no scores, its weight goes to the other. Miners sharing an IP, Docker Hub account or coldkey are counted as one entity, with only the best score kept. On chain at block 9338192 (2026-10-22), ten of eleven validator permit holders set weights and all ten put the same single miner first at about 60 percent, which fits one accepted BEX entry taking the whole 0.6 share; roughly 124 other miners share the remaining 38 percent or so.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-22</span> <span class="muted">(chain read at block 9338192; #red-team)</span> A chain read showed one miner with about 61 percent of incentive, and all ten validators that set weights ranked that miner first at about 60 percent, in line with the 0.6 BEX weight. Chat that day was miners arguing about the BEX bypass; no team announcement appeared after 2026-10-21.</li>
+<li><span class="when">2026-10-21</span> <span class="muted">(#red-team)</span> Miners reported a second BEX entry accepted with a score near 0.82 and confirmed that the BEX minimum had moved from 0.85 to 0.8. Team staff gave a one-line yes to a miner who asked whether the disputed entry keeps most emission until its credit decays and ADA entries then take over. Miners were still asking for the real rejection reason behind BEX digests with no result on the dashboard.</li>
+<li><span class="when">2026-10-20</span> <span class="muted">(#red-team)</span> Miners said one BEX submission reached a score of 1.0 with a technique that bypasses real extension detection and asked for re-validation. Team staff replied that it would get full BEX emission. An account posing as the subnet owner said BEX would end soon; team staff asked moderators to act on it the same day, so that claim is not the team&#x27;s.</li>
+<li><span class="when">2026-10-19</span> <span class="muted">(#red-team)</span> Chat was mostly miners comparing BEX Tracer scores and asking when the next challenge arrives.</li>
+<li><span class="when">2026-10-16</span> <span class="muted">(#red-team, 2026-10-16 to 2026-10-17)</span> Team staff said 60 percent of emissions go to BEX Tracer. On 2026-10-17 they added that the reason text on the dashboard can be wrong and that the failed-at step should be trusted instead.</li>
+<li><span class="when">2026-10-13</span> <span class="muted">(RedTeam changelog (GitHub))</span> RedTeam v4.10.10 was released, adjusting challenge weights and the cap on unique commits for BEX Tracer and ADA v3.</li>
+<li><span class="when">2026-10-12</span> <span class="muted">(#red-team, 2026-10-12 to 2026-10-16)</span> Several miners began reporting that two of the four Multilogin runs were missing from ADA results, capping raw scores at 0.9. The team restarted Multilogin on 2026-10-13 and said on 2026-10-16 that misses come from slow-browser timeouts on its side; no resolution appeared in the chat window.</li>
+<li><span class="when">2026-10-05</span> <span class="muted">(#red-team)</span> From 2026-10-01 the team restarted browsers daily to stop ADA timeouts. On 2026-10-05 it said each ADA submission runs 23 sessions and failed ones cannot be excluded, so the fix would be a replacement challenge in preparation. It also raised the compared-submissions limit to 15.</li>
+<li><span class="when">2026-09-27</span> <span class="muted">(#red-team)</span> BEX Tracer went live and replaced the retired Bot Virus challenge. The ADA minimum score rose to 0.9, and accepted ADA submissions kept earning until decay.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Read the docs page for the active challenge and the lifecycle and reveal-interval pages for the 24-hour commit rule.</li>
+<li>Clone the challenge repo and run its local test harness against your detection code.</li>
+<li>Package the code as a Docker image and push it to a Docker Hub account; one account is used for all your images.</li>
+<li>Use the miner repo (version 3.0.5 or later for the cooldown) to commit the digest, then reveal after the interval.</li>
+<li>Watch the dashboard for the status and logs of your submission and check that it is accepted before 14:00 UTC.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>The weights (0.6 and 0.4) and minimum scores come from the repo config (main and dev agree, last changed 2026-10-13). The chain on 2026-10-22 fits 0.6 for BEX Tracer but cannot show minimum scores. The BEX minimum is 0.85 in launch material and 0.8 in the repo; miners confirmed the change on 2026-10-21 and no explanation was found.</li>
+<li>Chain figures are one snapshot (block 9338192, about 2026-10-22 09:41 UTC). The top miner holds about 0.5 points more than 60 percent, which is not explained, and one validator permit holder&#x27;s weights are millions of blocks old. Numbers move with the daily 14:00 UTC pull and the decay.</li>
+<li>The BEX bypass dispute that began on 2026-10-20 is mostly miners&#x27; claims. The team said the disputed entry gets full BEX emission; no re-scoring or rule change was announced through 2026-10-22. One miner says the bypass is now blocked, and no team post confirms that.</li>
+<li>Statements that BEX or the subnet will end soon came from an account impersonating the owner on 2026-10-20 and are not team statements.</li>
+<li>ADA v3&#x27;s own guide contradicts itself on the split between browser and headless scoring. The code applies gates (a human or headless misjudgement scores zero) and then weights five browsers equally; the page follows the code.</li>
+<li>ADA session counts per submission come from team statements (23) and were not checked in production. The Multilogin score cap is reported by miners and attributed to timeouts by the team.</li>
+<li>Scoring uses a team-operated scoring server, so results depend on the team&#x27;s infrastructure; the dashboard&#x27;s validation reason text may be wrong. The team&#x27;s 2026-10-05 plan to replace ADA v3 has no visible follow-up, and no date for the next challenge was given. Hotkey swaps have broken commit tracking, and the team advises against them.</li>
+<li>Owner statements about token buyback and exchange accounts exist in chat; they were not verified and are not covered here.</li>
+<li>Chat read: roughly 2026-09-20 to 2026-10-22. Older history was not read. The docs still list retired challenges, and one example command uses a stale challenge name.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/RedTeamSubnet/RedTeam" rel="noopener noreferrer">GitHub (main repo)</a></li>
+<li><a href="https://docs.theredteam.io/" rel="noopener noreferrer">Docs</a></li>
+<li><a href="https://dashboard.theredteam.io/" rel="noopener noreferrer">Dashboard</a></li>
+<li><a href="https://github.com/RedTeamSubnet/miner" rel="noopener noreferrer">Miner repo</a></li>
+<li><a href="https://github.com/RedTeamSubnet/validator" rel="noopener noreferrer">Validator repo</a></li>
+<li><a href="https://github.com/RedTeamSubnet/bex-tracer-challenge" rel="noopener noreferrer">BEX Tracer challenge repo</a></li>
+<li><a href="https://github.com/RedTeamSubnet/ada-detection-challenge" rel="noopener noreferrer">ADA detection challenge repo</a></li>
+<li><a href="https://x.com/_redteam_" rel="noopener noreferrer">X account (per docs)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 7 sources</summary>
+<ul>
+<li><strong>repo</strong> RedTeamSubnet/RedTeam @1277ac5 (2026-10-13, v4.10.10; heads re-checked 2026-10-22, dev and ada-v3 branches are contained in main): README, docs/miner/concepts, active_challenges.yaml, challenge_manager.py, miner_manager.py, CHANGELOG</li>
+<li><strong>repo</strong> RedTeamSubnet/bex-tracer-challenge @8dfa689 (2026-09-29): docs/README.md, docs/design.md</li>
+<li><strong>repo</strong> RedTeamSubnet/ada-detection-challenge @5689cd9 (2026-09-27): AGENTS.md, scoring code, challenge.yml</li>
+<li><strong>repo</strong> RedTeamSubnet/validator @f0b4a36 (2026-10-13) and RedTeamSubnet/miner @11317f1 (2026-09-27)</li>
+<li><strong>web</strong> docs.theredteam.io (challenges, bex_tracer and ada_detection pages, fetched 2026-10-20)</li>
+<li><strong>web</strong> Chain read at block 9338192 (about 2026-10-22 09:41 UTC): subnet params, validator permits, incentive and weights; subnet record and identity read about 14:50 UTC</li>
+<li><strong>msg</strong> #red-team, 2026-09-20 to 2026-10-22</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/60.html"><small>← Previous</small>SN60 Bitsec</a><a rel="next" href="/bittensor-docs/subnets/62.html"><small>Next →</small>SN62 Ridges</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-22. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

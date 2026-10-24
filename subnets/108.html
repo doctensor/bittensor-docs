@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ChipForge (SN108) | Bittensor Subnet Docs</title>
+<meta name="description" content="Miners design AI-accelerator chips in Verilog; validators score them with open EDA tools and pay each new record.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h12">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>108</span><div>
+<h1>ChipForge <span class="muted">SN108</span></h1>
+<p class="tagline">Miners design AI-accelerator chips in Verilog; validators score them with open EDA tools and pay each new record.</p>
+<span class="st s-transitioning">transitioning</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl4"><b>2.4<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>19<small>/day</small></b><span>days 8-30</span></li><li class="pl0"><b>0.02<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-24</b><span>last chat</span></li><li class="pw"><b>1,129</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>hardware design (chip design)</dd>
+<dt>Status</dt><dd>Between contests. Quest 001 (an NPU design contest) closed on 2026-10-15 and, as of 2026-10-23, no challenge is active. The last winner&#x27;s 24-hour reward window ended on 2026-10-16, and since then the team&#x27;s API and the chain both show everything burned: on 2026-10-23 all five permit-holding validators still put 100 percent of their weight on UID 0. The team said on 2026-10-21 that Quest 2 should open over the weekend or on Monday (2026-10-24 to 2026-10-26); that is an estimate, not a launch, and no newer team post was found.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-23</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>ChipForge asks miners to design real digital hardware, written in Verilog or SystemVerilog, and rewards designs that beat the best score so far. The first mainnet contest, Quest 001 (2026-10-06 to 2026-10-15), asked for a small neural processing unit (NPU) plus software kernels that run four edge-AI models exactly, scored on silicon area and speed (power was not scored). The team behind it is Tatsu. It says it plans to publish winning designs as open source and move toward fabricated chips, and its site lists an open RISC-V microcontroller from earlier competitions. The subnet was registered on mainnet on 2026-09-20 as netuid 108.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Miners download a challenge package with the specification and evaluator through the project&#x27;s command-line tool, design and test locally, and submit a zip of Verilog or SystemVerilog files signed with their hotkey. Each hotkey gets a limited number of submissions per challenge (5 by default) and can see its own full evaluation logs after each batch closes. Winning designs are revealed to registered hotkeys after a delay, 18 hours on the live setting, or when a newer winner overtakes them.</p></div><div><h3>Validators</h3><p>Validators run a ChipForge evaluation server on their own machine (at least 16 physical CPU cores and 32 GB of memory) that simulates and synthesizes each design and returns results for function, area and speed. They need a secret key from the team and a validator permit on the subnet. A team-run challenge server groups submissions into batches, collects every validator&#x27;s scores when a batch closes and decides the winner. Validators then compute payout places themselves from the schedule that server sends. On 2026-10-21 and again on 2026-10-23 the chain showed five validators with permits, all setting weights; on 2026-10-21 they sat on five separate coldkeys. Quest 001 scoring, read from its public package on 2026-10-23: a design must reproduce all four models&#x27; outputs bit for bit and make the system at least 2 times faster than a no-accelerator baseline (a clock above the baseline&#x27;s 62.89 MHz does not count). It is then scored as throughput gained, to the power 0.7, divided by the NPU&#x27;s synthesized area, to the power 0.3, with area floored at 1 square millimetre. Power is not scored. Each quest&#x27;s package carries its own scoring settings, so Quest 2 may differ.</p></div><div><h3>Incentive</h3><p>On the live rules (checked 2026-10-23, unchanged since 2026-10-20) a submission becomes a winner record if it passes the correctness gates and beats the score to beat by more than a margin, now 5 percent after starting at 20 percent. A record waits out a 24-hour probation, then is paid for 24 hours; up to three records share the payout in a 1 to 0.35 to 0.12 ratio. Only 10 percent of each validator&#x27;s weight is meant for miners. The other 90 percent goes to UID 0, which the team calls the burn UID (on chain it is the subnet owner&#x27;s own slot), and everything goes there while no record is being paid. This ladder reached the public validator code on 2026-10-17, after Quest 001 closed: the team&#x27;s API shows Quest 001&#x27;s last winner was paid from the moment it qualified, for a flat 24 hours, with no probation. The team&#x27;s challenge server also sends every validator the miner percentage, the ladder and any emission ban, and the validator code uses the server&#x27;s miner percentage instead of its own setting, so one team-run server decides what all validators pay. The chain&#x27;s own emission split was still the default on 2026-10-23 (owner 18, validators 41, miners 41 percent); the chain showed no sign that the new owner-set split was in use.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-23</span> <span class="muted">(#chipforge, 2026-10-21 to 2026-10-22; api.chipforge.io public snapshot, GitHub commits and a chain read at block 9342911, 2026-10-23)</span> Still no active challenge and no new team post since 2026-10-21. The team&#x27;s API showed no challenge and 100 percent burn for nearly seven days; the chain showed the same five validators all weighting UID 0, with the default emission split. A miner asked on 2026-10-22 whether a repository for the new challenge existed; no answer was found in the archive. Quest 2&#x27;s date is still the team&#x27;s weekend-or-Monday estimate, and the public repositories had no new commits.</li>
+<li><span class="when">2026-10-21</span> <span class="muted">(#chipforge, 2026-10-21; api.chipforge.io public snapshot and a chain read at block 9335249, 2026-10-21)</span> The team said Quest 2 should open over the weekend or on Monday. The team&#x27;s API still showed no active challenge, and the chain showed all five permit-holding validators sending 100 percent of weight to UID 0, so nothing was being paid to miners.</li>
+<li><span class="when">2026-10-19</span> <span class="muted">(#chipforge, 2026-10-19)</span> The team said Quest 2 was being finalised with no start date set, and that the date and specification would be announced in the channel.</li>
+<li><span class="when">2026-10-17</span> <span class="muted">(ChipForge_SN108 GitHub commits, 2026-10-11 to 2026-10-17)</span> The record-ladder payout code (probation, paid windows, shared places, handling of banned records) was merged into the main branch of the public subnet repository. It had been developed on a branch since 2026-10-11, so it reached the public code two days after Quest 001 closed.</li>
+<li><span class="when">2026-10-16</span> <span class="muted">(#chipforge, 2026-10-16; api.chipforge.io public snapshot, 2026-10-20 and 2026-10-21)</span> The team said Quest 2 should be live in 7 to 10 days: a larger system-on-chip where miners choose memory ports and also submit their own compiler for edge-AI models. The last winner&#x27;s paid window ended the same morning and the on-chain pick became the burn address.</li>
+<li><span class="when">2026-10-15</span> <span class="muted">(#chipforge, 2026-10-15; api.chipforge.io public challenges, 2026-10-21)</span> Quest 001 closed. The team&#x27;s public API later listed 129 submissions from 52 miners and 21 winner records, with a final score to beat of about 2294 on a scale that began below 50.</li>
+<li><span class="when">2026-10-14</span> <span class="muted">(#chipforge, 2026-10-14 and 2026-10-15)</span> Miners hit evaluation timeouts. The team raised time limits, hardened the evaluator, and re-ran timed-out submissions, and a new best score was set. The team also said validators charge every cell its full library area, including hand-placed ones, so local scores can read lower than validator scores, and it declined miners&#x27; requests to remove the 24-hour reward window.</li>
+<li><span class="when">2026-10-07</span> <span class="muted">(#chipforge, 2026-10-06 to 2026-10-14)</span> The team cut the required improvement margin from 20 to 10 percent and said it was considering lowering the burn and paying the top 3 or 4 miners on a decaying curve. By 2026-10-14 the margin in use was 5 percent.</li>
+<li><span class="when">2026-10-06</span> <span class="muted">(#chipforge (pinned), 2026-10-05 and 2026-10-06)</span> Quest 001 went live: design an NPU and the kernels that drive it, judged on four edge-AI models with bit-exact results and scored on area and speed. Winners were required to beat the previous best by 20 percent at first, and miners quickly argued that was too high.</li>
+<li><span class="when">2026-09-25</span> <span class="muted">(#chipforge (pinned), 2026-09-25; ChipForge_SN108 GitHub commits, 2026-09-24)</span> The team&#x27;s mainnet welcome post presented the move from RISC-V processor cores to AI hardware, with a common NPU specification and validation that runs real machine-learning models. It also said the designs produced would be open source. The code repository had been renamed from its old SN84 name to SN108 the day before.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Register a hotkey on subnet 108 (the registration burn was at the 0.05 TAO minimum at block 9342911, 2026-10-23) and clone the ChipForge_SN108 repository; the README covers installation, with Docker recommended and Bittensor 10.x pinned.</li>
+<li>Check the public snapshot endpoint to see whether a challenge is active. On 2026-10-23 none was; the team expects Quest 2 between 2026-10-24 and 2026-10-26. When one is active, run the miner command-line tool&#x27;s download command to get the specification and evaluator. The archived Quest 001 package, with its evaluator and scoring settings, can be downloaded without signing to see what a quest involves.</li>
+<li>Design in Verilog or SystemVerilog, score locally with the evaluator in the package, and use the tool&#x27;s dry-run option to check your zip.</li>
+<li>Submit with the miner tool (zip up to 50 MB) and follow results on the leaderboard; full logs for your own submission arrive once its batch closes. For payout rules use the live rules endpoint, not the white paper.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Between contests nothing is paid: the team&#x27;s snapshot and chain reads on 2026-10-21 and 2026-10-23 both show 100 percent burn since 2026-10-16. The date for Quest 2 is a team estimate (7 to 10 days on 2026-10-16, weekend or Monday on 2026-10-21).</li>
+<li>Only 10 percent of weight is meant for miners, with the rest sent to UID 0 according to the live rules and repository defaults. On chain UID 0 is the subnet owner&#x27;s own hotkey; whether the protocol itself destroys alpha earned by the owner&#x27;s hotkey was not checked. On 2026-10-23 UID 0 received about 80 percent of the subnet&#x27;s last-epoch alpha emission.</li>
+<li>Documentation and live values differ. The README example uses a 0.6 decay between payout places while live rules show 0.35, and the example environment file defaults to a 20 percent margin while live rules show 5 percent. The white paper on docs.chipforge.io still describes real-time winner-takes-all emissions with no probation, window or burn, and a 2025 roadmap (NPU by February 2026, tape-out files by November 2026); treat the live rules endpoint as current. The README&#x27;s scoring section (function, area, performance and power weights) describes a generic mode; Quest 001&#x27;s own package gives power no weight.</li>
+<li>The record-ladder payout reached the public main branch on 2026-10-17, after Quest 001 closed, and the last Quest 001 winner record shows payment from the qualifying moment for 24 hours. Only that one record is visible on the team&#x27;s endpoint; the other 20 were not checked, and code on a branch does not prove what validators ran.</li>
+<li>The challenge server that sets challenges, batches, margins and winners is run by the team. The live rules list one expected validator, and the leaderboard&#x27;s validator agreement figures come from the team&#x27;s own API. A chain read on 2026-10-21 found five validators on five separate coldkeys all pointing at UID 0, Tempo (360), commit-reveal (on, one epoch) and the weight rate limit (100 blocks) were read from the chain on 2026-10-23 and match the team&#x27;s snapshot.</li>
+<li>Quest 001 scoring settings (gates, exponents, the 1 square millimetre area floor, the 62.89 MHz clock ceiling) come from the archived public package read on 2026-10-23; its checksums were not verified and the team server runs its own copy. Evaluator internals beyond the settings files, and an audit set of four smaller models named in the configuration, were not read.</li>
+<li>Miners disputed the short reward window, the margin and the 90 percent burn during October, and the team kept the window for Quest 001.</li>
+<li>Plans for open-source designs, fabricated chips and reinvested revenue are statements by the team; no revenue figures were found, and no evidence of tape-out preparation turned up in the chat, repository or API. The NPU phase, targeted for February 2026 in the white paper, reached a mainnet contest in October 2026. The technical architecture PDF in the repository was not read.</li>
+<li>The public chipforge-challenges repository only holds one 2025 RISC-V challenge (last commit 2025-11-28); Quest 001 files are not there and come through the miner tool&#x27;s download.</li>
+<li>Earlier posts and the old repository name call this subnet SN84 and mention test network UID 440. The repository was renamed to SN108 on 2026-09-24 and the subnet was registered on mainnet on 2026-09-20 (block 9111253, read from the chain). The reason it is 108 rather than 84 was not found; netuid 84 is another project&#x27;s slot.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/TatsuProject/ChipForge_SN108" rel="noopener noreferrer">GitHub (subnet code)</a></li>
+<li><a href="https://github.com/TatsuProject/chipforge_eda_server" rel="noopener noreferrer">GitHub (EDA server)</a></li>
+<li><a href="https://github.com/TatsuProject/chipforge-challenges" rel="noopener noreferrer">GitHub (2025 RISC-V challenge archive)</a></li>
+<li><a href="https://github.com/TatsuProject/chipforge-mcu" rel="noopener noreferrer">GitHub (open microcontroller from earlier competitions)</a></li>
+<li><a href="https://www.chipforge.io/" rel="noopener noreferrer">Project site</a></li>
+<li><a href="https://www.chipforge.io/leaderboard" rel="noopener noreferrer">Leaderboard</a></li>
+<li><a href="https://docs.chipforge.io/" rel="noopener noreferrer">Docs and white paper (older than the live rules)</a></li>
+<li><a href="https://api.chipforge.io/api/v1/public/rules" rel="noopener noreferrer">Live rules</a></li>
+<li><a href="https://api.chipforge.io/api/v1/challenges/quest_001_npu/download" rel="noopener noreferrer">Quest 001 package (archived; specification and evaluator, public download)</a></li>
+<li><a href="https://api.chipforge.io/api/v1/public/snapshot" rel="noopener noreferrer">Live status snapshot</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 8 sources</summary>
+<ul>
+<li><strong>repo</strong> TatsuProject/ChipForge_SN108 README.md, docs/validator_requirements.md, .env.example, neurons/validator.py and neurons/validator_utils/{reward_ladder,weight_manager,batch_processor}.py, git log and branch history at d68c22f (2026-10-17, unchanged on 2026-10-23); chipforge_eda_server gateway/main.py at 1d8d564 (2026-10-14, unchanged on 2026-10-23); chipforge-challenges at 9168dcc (2025-11-28)</li>
+<li><strong>web</strong> https://api.chipforge.io/api/v1/public/rules, /snapshot, /challenges, /reveals and /health (fetched 2026-10-20, 2026-10-21 and 2026-10-23)</li>
+<li><strong>web</strong> Chain read at finalized blocks 9335231 to 9335256 (2026-10-21): neuron and permit counts, incentive and weight concentration, emission split, owner-slot and registration-block checks</li>
+<li><strong>web</strong> Chain reads at block 9342911 (2026-10-23): subnet parameters, neuron and permit counts, weights of all five validators, emission split, registration block</li>
+<li><strong>web</strong> https://api.chipforge.io/api/v1/challenges/quest_001_npu/download (read 2026-10-23): evaluator gateway/weights.json and openlane/fom_config.json</li>
+<li><strong>web</strong> https://www.chipforge.io/ and https://docs.chipforge.io/ (fetched 2026-10-21: home page, blog post dated 2026-01-20, white paper incentive and roadmap pages)</li>
+<li><strong>msg</strong> #chipforge pinned announcements 2025-08-22 to 2026-10-06</li>
+<li><strong>msg</strong> #chipforge, team and miner discussion 2026-10-06 to 2026-10-21</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/107.html"><small>← Previous</small>SN107 Minos</a><a rel="next" href="/bittensor-docs/subnets/110.html"><small>Next →</small>SN110 Green Compute</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-23. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

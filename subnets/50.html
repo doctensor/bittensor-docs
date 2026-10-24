@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Synth (SN50) | Bittensor Subnet Docs</title>
+<meta name="description" content="Miners forecast price distributions for crypto, stocks and commodities; a 10-second, 5 ms Ultra contest runs alongside.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h14">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>50</span><div>
+<h1>Synth <span class="muted">SN50</span></h1>
+<p class="tagline">Miners forecast price distributions for crypto, stocks and commodities; a 10-second, 5 ms Ultra contest runs alongside.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl4"><b>5.3<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>8.0<small>/day</small></b><span>days 8-30</span></li><li class="pl4"><b>5.5<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-24</b><span>last chat</span></li><li class="pw"><b>7,028</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>price forecasting</dd>
+<dt>Status</dt><dd>Active on 2026-10-23: the three classic competitions and the Ultra contest are all running, the repos were committed to as late as 2026-10-22, and the rules (owner share, Ultra assets, slots) changed several times in October.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-23</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>Synth (SN50) asks miners to forecast the full distribution of an asset&#x27;s future price rather than a single number: each miner returns many simulated price paths, and validators score them against what the market actually did. The operator, Synth, says the data feeds its own trading and market-making work. Three classic competitions cover crypto and equity or commodity assets over one-hour and 24-hour horizons. Since 2026-08-24 a fourth contest, Synth Ultra, asks for 10-second forecasts of BTC, ETH, SOL and XRP from models that must answer in a few milliseconds.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>In the three classic competitions a miner answers validator prompts with 1000 simulated price paths for the named asset, at 1-minute steps over one hour or 5-minute steps over 24 hours. The competitions are Crypto 1h and Crypto 24h (BTC, ETH, SOL, XRP, HYPE) and Commodities/Equities 24h (XAU, SP500, NVDAX, GOOGLX, TSLAX, AAPLX, WTIOIL, SPCX). In Synth Ultra a miner instead submits a Docker image, built on a base image from Synth, that exposes a function returning 100 percentiles of the asset&#x27;s price 10 seconds ahead. It runs in Synth&#x27;s sandbox on CPU only with no network, and receives a payload of Binance spot and futures order-book, trade, candle and liquidation data. The target is under 5 ms per call.</p></div><div><h3>Validators</h3><p>For the classic competitions validators score each answer with CRPS on price changes over several time increments (the 1h score also has a realized-volatility term since 2026-09-22) and make each prompt&#x27;s score relative to the best miner. Each miner&#x27;s scores are then averaged over a rolling window of 5 days (1h) or 10 days (24h), with a fixed weight per asset: the S&amp;P 500 index has the largest and SPCX the smallest. Miners who joined mid-window are given the worst score for the earlier prompts, so fewer data points do not help. Missing or invalid answers are charged the 95th percentile of the answering miners. Ultra is scored outside the validator: Synth&#x27;s own scorer computes pinball-loss CRPS against the spot microprice 10 seconds later. Validators that have a score feed configured pull the per-miner scores for each Ultra asset they are set to reward and skip Ultra for a cycle if fewer than 3 or more than 64 miners come back.</p></div><div><h3>Incentive</h3><p>Each competition runs its own softmax over the averaged scores, with lower CRPS paying more (a sharper curve for 1h than for 24h, and a much steeper one for Ultra, set separately for each Ultra asset). A miner&#x27;s rows are summed across competitions. Since 2026-10-21 the validator code gives the four competitions an equal quarter each and splits the Ultra quarter equally among the Ultra assets that validator is configured to reward; the default is BTC only, while the team says all four assets have been paid since 2026-10-20. On top of that, the validator code reserves a fixed 22 percent of its weights for the owner&#x27;s uid (merged 2026-10-19). The team calls this a burn and says the rate will be reset every Monday based on how far the field beats a reference model, but only the fixed 22 percent is in the code. On chain at block 9343460 (2026-10-23) all seven validators with weight rows gave exactly 22.0 percent to that uid, which is held by the subnet owner&#x27;s keys, and the subnet&#x27;s recycle-or-burn setting reads Burn. The other 78 percent is spread across the whole field: in the one validator row inspected, the largest miner target was about 1.7 percent. Earlier owner share: about 50 percent from 2025-10-17, removed on 2026-07-22, none until 2026-10-18.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-23</span> <span class="muted">(synthdata.co/miners/ultra, chain read at block 9343460)</span> The Ultra dashboard showed 24 miners ranked on BTC and 23 each on ETH, SOL and XRP, up from 23 and 22 two days earlier. A chain read the same day found all seven validators with weight rows giving 22.0 percent to the owner&#x27;s uid, and the registration burn at 0.8 TAO.</li>
+<li><span class="when">2026-10-22</span> <span class="muted">(#50-synth)</span> The team said it had streamlined the Ultra application process and that applicants wait in a queue with one new slot per day. Several applicants asked in chat why their applications were still pending review after two to three days.</li>
+<li><span class="when">2026-10-21</span> <span class="muted">(synth-subnet GitHub, #50-synth)</span> A validator change made each Ultra asset its own competition with its own softmax steepness, and set the four competition shares to a quarter each. The changelog was also brought up to date to 2026-10-19, and the team confirmed in chat that rewards were live on the new Ultra assets.</li>
+<li><span class="when">2026-10-20</span> <span class="muted">(#50-synth)</span> Team said ETH, SOL and XRP are live in Ultra with separate rankings and rewards. A community member said the 20-slot waiting list was already full.</li>
+<li><span class="when">2026-10-19</span> <span class="muted">(#50-synth, synth-subnet GitHub)</span> Ultra applications reopened with one new slot per day for 20 days, assigned in order of application. The miner burn was set to 22 percent for the week of 2026-10-19, up from 0, and a validator change adding a fixed 22 percent owner share was merged the same day.</li>
+<li><span class="when">2026-10-16</span> <span class="muted">(#50-synth, synth-ultra GitHub)</span> Team announced that ETH, SOL and XRP join BTC in Ultra as separate competitions (shadow scoring from 2026-10-16, rewards from 2026-10-20), an automated registration system with a daily cap, and weekly dynamic miner rewards.</li>
+<li><span class="when">2026-10-10</span> <span class="muted">(#50-synth)</span> Team said the public Synth API has been sunset and is not available for public use; on 2026-10-11 it gave the reason as trading revenue exceeding API sales and a growing cost of serving the API.</li>
+<li><span class="when">2026-09-22</span> <span class="muted">(#50-synth, synth-subnet GitHub)</span> Team answered miner questions: the 5 ms Ultra latency target is not enforced and the real limit is a 1-second round trip; a slow or invalid answer is charged the 95th percentile of the field; one model may run under one hotkey only. The same day, the volatility term was added to the Crypto 1h score.</li>
+<li><span class="when">2026-08-24</span> <span class="muted">(#50-synth)</span> Team announced that Synth Ultra is part of mainnet validator scoring, with an even 25/25/25/25 split across the four competitions, and published a v2 base image for miners.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Register a hotkey on subnet 50 first: both the classic competitions and the Ultra application require a registered uid. The registration burn read 0.8 TAO on chain on 2026-10-23.</li>
+<li>For the classic competitions, follow the miner tutorial in the synth-subnet README; the repo ships a reference miner, and the separate synth-lib backtester replays the scoring so you can test before running live.</li>
+<li>For Ultra, read ONBOARDING.md and FAQ.md in synth-ultra, test your model against the sample payloads with client/validate.py, then apply with client/submit.py (hotkey-signed, with handle, email and Discord name). Applications queue at one new slot per day, so expect to wait.</li>
+<li>Once approved, collect your push key (only two retrievals are allowed), build a linux/amd64 image on the v2 base image, push it to your registry repo and submit the image digest; resubmitting is limited to once every 4 hours.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>The chain read shows what validators set, not where Ultra money goes: which validators run the Ultra score feed and which Ultra assets they reward (BTC only by default) is not visible from the code or the chain, so the Ultra share of emissions rests on team posts and repo constants.</li>
+<li>The owner share is called a burn by the team. What was read: the validator code sends a fixed 22 percent of its weights to a uid held by the subnet owner&#x27;s keys, and the subnet&#x27;s recycle-or-burn setting reads Burn. In 2025 community members disputed whether a share routed this way is a burn or an owner take; this page reports the mechanism, not a verdict.</li>
+<li>The weekly burn formula (compared with a reference model, reset each Monday) appears only in chat; the next update was due on Monday 2026-10-26. The team also promised to open-source the reference models; none had appeared in the repos by 2026-10-22. The 2026-10-16 post gives the launch day as Monday the 16th, but 16 October 2026 is a Friday, so 2026-10-19 is read as intended.</li>
+<li>The subnet README (last edited 2026-09-14) still describes three equal competitions and a 90th-percentile rule for missing answers, while the code and changelog use the 95th percentile and Ultra as a fourth competition with a quarter share. The changelog itself is current to 2026-10-19.</li>
+<li>Ultra&#x27;s SPECIFICATION.md still says submissions are not open yet, while ONBOARDING.md describes self-service applications.</li>
+<li>Whether the 5 ms Ultra limit is enforced yet is unclear: the latest team statements found (2026-10-11 and 2026-10-14) said not yet, then that it will be measured as model time per call; nothing newer was found by 2026-10-23.</li>
+<li>The team says one operator gets one Ultra slot and removes duplicates, but on 2026-09-28 it described several slots per hotkey as intended, and miners were still disputing how well duplicates are caught on 2026-10-22.</li>
+<li>Miners repeatedly asked for a Q3 report on revenue and buybacks. A social post on 2026-10-22 thanked Q3 miners, but no such report had been published in the sources read. No revenue or price claims are used on this page.</li>
+<li>The public API documentation (docs.synthdata.co, linked from the README) was still online on 2026-10-23 and described paid plans, with no notice that the team says the API is not available publicly.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/synthdataco/synth-subnet" rel="noopener noreferrer">GitHub (subnet)</a></li>
+<li><a href="https://github.com/synthdataco/synth-ultra" rel="noopener noreferrer">GitHub (Synth Ultra docs and client)</a></li>
+<li><a href="https://github.com/synthdataco/synth-lib" rel="noopener noreferrer">GitHub (synth-lib backtester)</a></li>
+<li><a href="https://synthdata.co/miners/ultra" rel="noopener noreferrer">Synth Ultra live rankings</a></li>
+<li><a href="https://synthdata.co/" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://github.com/synthdataco/synth-subnet/blob/main/Synth%20Whitepaper%20v1.pdf" rel="noopener noreferrer">Whitepaper (PDF)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 6 sources</summary>
+<ul>
+<li><strong>repo</strong> synthdataco/synth-subnet@82f6b4e (2026-10-22): README.md, CHANGELOG.md, synth/validator/competition_config.py, reward.py, moving_average.py, vhft_score_provider.py, forward.py, neurons/validator.py; tag v1.14.0</li>
+<li><strong>repo</strong> synthdataco/synth-ultra@9a5e000 (2026-10-19): README.md, SPECIFICATION.md, ONBOARDING.md, FAQ.md</li>
+<li><strong>web</strong> https://synthdata.co/miners/ultra (read 2026-10-21 and 2026-10-23 with a browser)</li>
+<li><strong>web</strong> https://docs.synthdata.co/ and https://api.synthdata.co/ (checked 2026-10-23)</li>
+<li><strong>web</strong> On-chain reads of subnet 50 at block 9343460 (2026-10-23): parameters, weights, incentive, owner keys, registration burn</li>
+<li><strong>msg</strong> #50-synth 2025-10-17 to 2026-10-23</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/49.html"><small>← Previous</small>SN49 Nepher Robotics</a><a rel="next" href="/bittensor-docs/subnets/51.html"><small>Next →</small>SN51 Lium</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-23. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lium (SN51) | Bittensor Subnet Docs</title>
+<meta name="description" content="GPU rental marketplace: a team-run validator checks provider nodes; most miner emission goes to a team burner key.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h21">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>51</span><div>
+<h1>Lium <span class="muted">SN51</span></h1>
+<p class="tagline">GPU rental marketplace: a team-run validator checks provider nodes; most miner emission goes to a team burner key.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>17<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>11<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>9.6<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-24</b><span>last chat</span></li><li class="pw"><b>17,659</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>GPU compute marketplace</dd>
+<dt>Status</dt><dd>About 80 repo commits between 2026-10-20 and 2026-10-23, steady support chat through 2026-10-22, and 1,585 of 1,734 listed GPUs rented per the team&#x27;s own stats feed on 2026-10-23. One provider&#x27;s hosts have been offline since the evening of 2026-10-21.</dd>
+<dt>Confidence</dt><dd>high</dd>
+<dt>Researched</dt><dd>2026-10-23</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>Lium is a GPU rental marketplace on Subnet 51. Providers list NVIDIA GPU hosts, renters (people, teams and AI agents) rent them by the hour through the website, CLI, Python SDK or API, and one team-run validator checks that listed nodes are real and reachable. Providers earn 95% of rental fees plus a share of subnet emission; on 2026-10-23 about 77% of the miner-side incentive on chain went to a single team-controlled key that the code calls a burner.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Providers run a node agent on each GPU host and either their own coordinator or the Lium-run Central Provider Server (the default, per the repo&#x27;s miner README of 2026-10-22), which holds the hotkey and lists nodes. They set a price per GPU-hour in the provider portal. Hosts need Ubuntu 24.04 (or 22.04 with the HWE kernel), Docker, the Sysbox runtime, a public IP, at least 100 Mbps, 8 GB of RAM and 150 GB of disk; the provider also needs a connected Discord account and a confirmed e-mail address to be paid emission.</p></div><div><h3>Validators</h3><p>Lium runs a single validator, operated by the team: the docs page, the key built into the node image and chain uid 3 all agree. It checks each node every 15 minutes over SSH (hardware and GPU model, network speed, port reachability, container runtime), and only passing nodes are listed. Nodes accept checks only from the key in their image. Eight other validator permits on chain also set weights, with near-identical vectors (77 to 78.5% on the burner uid); the project points anyone who wants to run a validator to its community auditor script, which sets weights from the platform&#x27;s public results.</p></div><div><h3>Incentive</h3><p>Each validator cycle sorts nodes into pools. Rented nodes share a mining pool equal to 1 minus the burn ceiling in the platform&#x27;s shared config (10% of miner emission at the live value of 0.9), weighted by GPU-model rate and GPU count with Sysbox and driver-version multipliers. Idle nodes of eligible GPU models that are priced at or below a soft limit (1.5 times the model&#x27;s 90th-percentile price), have enough disk and can set a power limit are paid from an idle pool sized by the dollar value of their listed rates against the dollar value of the subnet&#x27;s emission, capped at the ceiling. Whatever remains under the ceiling is called burn, but all ten burner slots in the code point at one uid that a code comment calls the Datura payout key. On 2026-10-23 that uid held 77.3% of incentive on chain, which leaves about 23% of the miner side (roughly 9% of total subnet emission, by arithmetic from the emission split) for all other paid miners. The docs say emission lands as stake on the provider&#x27;s hotkey about 24 hours after scoring. Separately, providers receive 95% of rental fees, paid daily at 17:00 UTC as alpha (or USDT) for the day two days earlier, and a rental that ends while a node is inactive costs the provider 48 hours of that rental&#x27;s price.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-23</span> <span class="muted">(Chain read at blocks 9343147 to 9343282)</span> Chain read: subnet has 256 of 256 neurons, emission split is 18% owner, 41% validators, 41% miners, 70 uids earn incentive and one burner uid takes 77.3% of it. Eleven validator permits exist and nine set weights; the Lium validator holds about 66% of validator dividends.</li>
+<li><span class="when">2026-10-23</span> <span class="muted">(GitHub commits and tags)</span> About 80 commits in three days to the subnet repo, many making validator checks always-on (rental probe, post-rental GPU recheck, TDX), plus backup fixes; always-on GPU identity enforcement was reverted to shadow mode on 10-22. Releases executor-v1.151 (10-22) and miner-v1.009 (10-21).</li>
+<li><span class="when">2026-10-22</span> <span class="muted">(#51-lium-io)</span> Hosts from one provider have been offline since the evening of 10-21 and pods on them show node offline with billing paused. The team contacted the provider twice and had no fix time as of the last message read (19:47 UTC).</li>
+<li><span class="when">2026-10-22</span> <span class="muted">(#51-lium-io)</span> After a renter posted a pod page showing a Jupyter login token, the pod page was changed to hide that token by default.</li>
+<li><span class="when">2026-10-21</span> <span class="muted">(#51-lium-io and lium.io stats feed)</span> The team said the platform fee is 5% of rental volume (about $1.71M paid by renters in 30 days at the time) and that it does not publish what funds the community&#x27;s buyback question; the stats feed read on 2026-10-23 shows $1.80M over 30 days.</li>
+<li><span class="when">2026-10-16</span> <span class="muted">(#51-lium-io)</span> The 17:00 UTC payout run did not go out because of an error on the team&#x27;s side; held payouts were to be re-sent after a fix. No public message read confirms completion.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Register a hotkey on subnet 51 from your own machine, not the GPU host.</li>
+<li>Sign in to the provider portal with that hotkey, use the Lium central provider server, connect Discord and confirm an e-mail address.</li>
+<li>On the GPU host (Ubuntu 24.04 or 22.04 with the HWE kernel, NVIDIA driver, Docker) open ports 8080 and 2200 and install Sysbox and the NVIDIA container toolkit with the repo&#x27;s setup script.</li>
+<li>Run the node install command from the Node Quickstart (the lium CLI mine command), then add the node in the portal and set a price at or below the soft limit for your GPU model.</li>
+<li>Check the node shows as available in the portal; open a ticket in the project Discord if stuck.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Chain weights are validator opinions, not payouts. The main chain read is at block 9343147 (about 2026-10-23 02:19 UTC) and the burner&#x27;s stake at block 9343282; the chain does not show what the burner key does with its alpha beyond holding about 47,170 alpha (1.03% of alpha outstanding).</li>
+<li>The word burn is the code&#x27;s name for emission routed to one uid that a code comment calls a team payout key; it is not shown to be destroyed. The team has not published how its buyback is funded.</li>
+<li>Three figures for one setting: the docs say a 13% rented pool and 87% ceiling, the live shared config reads 0.9 (10%), and the code default is 0.91. The live config is the current value; the docs lag.</li>
+<li>The code has a delayed-settlement mode that defaults to off, while the docs describe a roughly 24-hour delay before emission arrives. Which mode the production validator runs is not visible from code or chain.</li>
+<li>Only one validator can check nodes. Two of the 11 validator permits (one is the burner uid) have not set weights for about 163 and 614 days.</li>
+<li>Chat answers in the channel often come from the project&#x27;s support assistant and are not team policy. Repo commits show what was written, not what is deployed. Fleet figures come from the team&#x27;s own stats feed.</li>
+<li>Whether held payouts from 2026-10-16 were re-sent is unknown (confirmations were promised in private tickets), and the status of the offline provider&#x27;s hosts after 2026-10-22 is unknown.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://lium.io" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://lium.io/stats" rel="noopener noreferrer">Live stats</a></li>
+<li><a href="https://docs.lium.io" rel="noopener noreferrer">Docs</a></li>
+<li><a href="https://docs.lium.io/providers/quickstart" rel="noopener noreferrer">Provider quickstart</a></li>
+<li><a href="https://docs.lium.io/providers/rewards" rel="noopener noreferrer">Provider rewards docs</a></li>
+<li><a href="https://provider.lium.io" rel="noopener noreferrer">Provider portal</a></li>
+<li><a href="https://github.com/Datura-ai/lium-io" rel="noopener noreferrer">GitHub (subnet code)</a></li>
+<li><a href="https://github.com/Datura-ai/lium" rel="noopener noreferrer">CLI and SDK</a></li>
+<li><a href="https://github.com/Datura-ai/sn51-auditor" rel="noopener noreferrer">Community auditor</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 6 sources</summary>
+<ul>
+<li><strong>repo</strong> Datura-ai/lium-io@f374162 (2026-10-23), MIT</li>
+<li><strong>repo</strong> Datura-ai/sn51-auditor and Datura-ai/celium-collateral-contracts (links checked 2026-10-23, code not re-read)</li>
+<li><strong>web</strong> https://lium.io/api/v1/shared-config and https://lium.io/api/public/v1/stats (read 2026-10-23)</li>
+<li><strong>web</strong> docs.lium.io providers rewards, emission, payouts, node quickstart and validators pages (read 2026-10-23)</li>
+<li><strong>web</strong> Chain read at blocks 9343147 to 9343282 (2026-10-23): subnet, parameters, incentive and weight aggregates, emission split, burner stake</li>
+<li><strong>msg</strong> #51-lium-io 2026-10-01 to 2026-10-22</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/50.html"><small>← Previous</small>SN50 Synth</a><a rel="next" href="/bittensor-docs/subnets/53.html"><small>Next →</small>SN53 engy</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-23. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

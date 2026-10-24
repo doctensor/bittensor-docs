@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TPN (True Performance Network) (SN65) | Bittensor Subnet Docs</title>
+<meta name="description" content="Miners shrink a language model to fit a RAM cap while keeping benchmark scores; one winner per round since 2026-10-15">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h23">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>65</span><div>
+<h1>TPN (True Performance Network) <span class="muted">SN65</span></h1>
+<p class="tagline">Miners shrink a language model to fit a RAM cap while keeping benchmark scores; one winner per round since 2026-10-15</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl4"><b>2.9<small>/day</small></b><span>last 7 d</span></li><li class="pl4"><b>4.2<small>/day</small></b><span>days 8-30</span></li><li class="pl4"><b>6.2<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-23</b><span>last chat</span></li><li class="pw"><b>2,982</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>language model compression (quantized GGUF competitions)</dd>
+<dt>Status</dt><dd>On 2026-10-21 the team&#x27;s leader validator API listed six competitions, the sixth (TPN-006) launched on 2026-10-15 and already had a finalized ranking with one winner, the benchmark service homepage had been updated the day before, and the team was answering miners in the channel through 2026-10-21. The public repository itself had last changed on 2026-10-08. Chain weights were not read.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-21</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>TPN, built by the team Taofu Labs, runs timed competitions in which miners turn a given base language model into a quantized GGUF file that fits under a fixed memory ceiling and scores as high as possible on a benchmark. Each competition names its base model, memory cap, benchmark and prize split. Miners now run the benchmarks themselves on the team&#x27;s paid benchmark service and submit the run ids with a timelocked on-chain commit; the leader validator then checks everything, ranks the entries and pays the top places. The subnet was a VPN subnet before it pivoted to this design.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>A miner registers a hotkey, uploads one GGUF file to a private Hugging Face repo (one repo per submission, exactly one GGUF in it), and runs the competition&#x27;s benchmark on the team&#x27;s benchmark service, paying for each run in credits. Then the miner commits the repo, file, file hash, an immutable revision, the self-reported maximum memory and the benchmark run ids as a timelocked on-chain payload that nobody can read until the chain decrypts it around the commit deadline, which prevents copying. The repo must be made public before scoring starts, every benchmark run must have completed by then, and the reported memory must be within 1% of what the validators measure. Competitions pick the base model, the memory ceiling and the context length; the latest two use Ministral-3-8B Uncensored at a 32,768-token context.</p></div><div><h3>Validators</h3><p>One leader validator does the real work: it reads the revealed commitments, drops duplicates (the earliest reveal of a file hash wins), verifies each run id against the benchmark service, ranks candidates, and prechecks them one at a time in rank order inside a public Docker container. The precheck confirms the model derives from the base model (matching tokenizer and an embedding-similarity score of at least 0.80), measures memory with a CPU build of llama.cpp, and checks the file hash; a hash mismatch permanently bans the hotkey. Follower validators download nothing: they read the leader&#x27;s finalized results and set the same weights. When no competition is paying out, validators copy stake-weighted consensus weights from the chain.</p></div><div><h3>Incentive</h3><p>In the ram-ceiling format used by the recent competitions, a model passes if its measured memory is under the cap and its score is the lowest of its benchmark results, so ranking is by score. Every competition so far has a fixed 25% share of validator weight, split among the top places: five places in competitions 1 to 4, the top three (60/25/15) in TPN-005 and the winner alone in TPN-006. Weights are set only from the end of the scoring phase and run for about seven days of blocks; winners who are no longer registered lose their share and any unallocated weight is burned to uid 0, so while one competition pays out about 75% of validator weight burns. Collateral was removed after competition 4 and the registration burn was cut from 0.5 to 0.2 TAO on 2026-10-01.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-21</span> <span class="muted">(TPN leader validator API)</span> The leader&#x27;s public state listed TPN-005 and TPN-006 as finalized (3 of 11 and 1 of 6 candidates scored). The TPN-006 winner scored 0.7493 at about 7.7 GiB of measured memory. Its scoring phase ends around 2026-10-21 and payouts run to about 2026-10-28 by block arithmetic.</li>
+<li><span class="when">2026-10-19</span> <span class="muted">(#tpn)</span> Miners kept reporting benchmark runs failing on the service side, with credits held until released; the team said it was looking into them. The team also announced a quantization service on its benchmark site.</li>
+<li><span class="when">2026-10-15</span> <span class="muted">(#tpn, TPN leader validator API)</span> TPN-006 launched: the same base model under an 8 GiB cap at 32k context, scored only on Fluid Bench, with a single winner taking the whole competition share.</li>
+<li><span class="when">2026-10-14</span> <span class="muted">(#tpn, TPN leader validator API)</span> After miner feedback on TPN-005 (a closed benchmark, unreliable reads, tiny score gaps, and three paid places going to what a miner said were the same weights in different quantizations), the team said the multi-winner split is intentional, the benchmark stays closed to prevent overfitting, and a second scoring method based on KL divergence is in development. The leader&#x27;s data shows the three winning scores differing by about 0.0014 and 0.0021.</li>
+<li><span class="when">2026-10-05</span> <span class="muted">(#tpn, TPN leader validator API)</span> TPN-005 went live as the first round under Fluid Bench: an 11 GiB cap on Ministral-3-8B Uncensored, miners running the benchmarks themselves and submitting run ids, no collateral, and a 60/25/15 split among the top three.</li>
+<li><span class="when">2026-10-01</span> <span class="muted">(#tpn)</span> The team released &#x27;TPN v0.2: Fluid Bench&#x27;, a private knowledge benchmark meant to resist overfitting, and a hyperparameter change cut the registration burn from 0.5 to 0.2 TAO. The team later said the benchmark scores across 800 knowledge domains and declined to say how answers are graded.</li>
+<li><span class="when">2026-09-21</span> <span class="muted">(#tpn)</span> The team said competitions were halted because of overfitting and that a new validation mechanism had shipped but was not a long-term fix.</li>
+<li><span class="when">2026-09-15</span> <span class="muted">(#tpn)</span> After competition 4, miners complained that near-identical models from one operator could fill several top-five places. The team said it had seen miners overfit the reward formula, that the results were not a useful product, and that it preferred sticking to the code over banning entries by hand.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>List the live competitions with the tpn CLI (tpn competitions) or the leader&#x27;s public competitions endpoint and note the block-based deadlines, the memory cap, the context length and the required benchmark epoch (TPN-005 and TPN-006 both use epoch-000001-r7).</li>
+<li>Install the CLI with the repository&#x27;s install script and register your hotkey on netuid 65 (tpn register). As of 2026-10-01 the registration burn is 0.2 TAO and there is no collateral lock.</li>
+<li>Build or quantize your GGUF from the competition&#x27;s base model, then measure memory with the public precheck container&#x27;s local check at the competition&#x27;s context length. Commit that figure; a claim more than 1% off the measured value fails precheck.</li>
+<li>Upload the file to a private Hugging Face repo with exactly one GGUF (tpn upload), then create an account on the benchmark service, add credits and create an API key.</li>
+<li>Run the competition&#x27;s benchmark with tpn benchmark well before the commit deadline: each run is paid, runs have been failing on capacity and worker errors, and a run still in progress when scoring starts counts as zero.</li>
+<li>Commit with tpn commit, then make the repo public with tpn publish before scoring starts, and follow your entry with tpn status or the leader&#x27;s state endpoint.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Chain weights were not read. Per the docs, payouts begin only at the end of the scoring phase, so TPN-006 winnings had not yet reached the chain when this was researched; the 25% share, the burn of the remainder to uid 0 and the top-place splits come from the leader API and the code.</li>
+<li>Competition specs and results live on the team&#x27;s leader validator API, not in the git history, and the repository was last updated on 2026-10-08. Followers rely on the leader&#x27;s published results, so the leader is a single trust point.</li>
+<li>The benchmark is closed by design, runs only on the team&#x27;s paid service, and the team has declined to say how answers are graded. Miners reported many failed or stuck runs (capacity errors, worker failures, credits held), with refunds and retries handled case by case, and the team said GPU availability on its providers was low in early October.</li>
+<li>Rankings can be very close: in TPN-005 the top three scores were within about 0.002 of each other, and a miner reported that retraining the same recipe moved its score by about 0.016. The claim that the three winning files held identical weights was not verified (the leader data shows three different file hashes, two with identical measured memory).</li>
+<li>A hash mismatch at precheck permanently bans a hotkey. A miner reported being banned wrongly on 2026-09-03 because of a faulty precheck container, and the team later unbanned one hotkey after fixing the container, so keep the committed revision and file untouched.</li>
+<li>The team has said a KL-divergence scoring method is being built and that Lium GPU support is being added; neither had shipped as far as the chat read. Prices, token economics and emission amounts are not covered because the server bans price discussion.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/taofu-labs/true-performance-network" rel="noopener noreferrer">GitHub (taofu-labs, main last changed 2026-10-08)</a></li>
+<li><a href="https://github.com/taofu-labs/true-performance-network/blob/main/docs/Overview.md" rel="noopener noreferrer">Subnet overview for miners</a></li>
+<li><a href="https://github.com/taofu-labs/true-performance-network/blob/main/docs/Miner.md" rel="noopener noreferrer">Miner operations guide</a></li>
+<li><a href="https://github.com/taofu-labs/true-performance-network/blob/main/docs/Validator.md" rel="noopener noreferrer">Validator guide</a></li>
+<li><a href="https://val0.trueperformancenetwork.com/v1/competitions" rel="noopener noreferrer">Leader validator: competition specs (public API)</a></li>
+<li><a href="https://bench.trueperformancenetwork.com/" rel="noopener noreferrer">TPN Bench (benchmark service)</a></li>
+<li><a href="https://stats.trueperformancenetwork.com/" rel="noopener noreferrer">Public competition dashboard</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 3 sources</summary>
+<ul>
+<li><strong>repo</strong> taofu-labs/true-performance-network @2994eb0 (2026-10-08): README.md, docs/Overview.md, docs/Miner.md, src/validator/src/validator/validator.py, shared/competition/src/competition/scoring.py, shared/common/src/common/models/competition.py, commit a9a0196 (2026-09-21)</li>
+<li><strong>web</strong> https://val0.trueperformancenetwork.com/v1/competitions and /v1/state/competitions/tpn-005 and tpn-006 (public API, aggregates only, read 2026-10-21); https://bench.trueperformancenetwork.com/ and https://stats.trueperformancenetwork.com/ (client-rendered)</li>
+<li><strong>msg</strong> #tpn 2026-09-03 to 2026-10-21</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/64.html"><small>← Previous</small>SN64 Chutes</a><a rel="next" href="/bittensor-docs/subnets/66.html"><small>Next →</small>SN66 Conjectures.io</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-21. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

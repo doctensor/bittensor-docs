@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VoiceGuard (SN253) | Bittensor Subnet Docs</title>
+<meta name="description" content="Testnet-only audio-AI subnet for voice deepfake detection, cloning and speech-to-text; team silent since April 2025.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h19">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>253</span><div>
+<h1>VoiceGuard <span class="muted">SN253</span></h1>
+<p class="tagline">Testnet-only audio-AI subnet for voice deepfake detection, cloning and speech-to-text; team silent since April 2025.</p>
+<span class="st s-quiet">quiet</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl0"><b>0<small>/day</small></b><span>last 7 d</span></li><li class="pl1"><b>0.04<small>/day</small></b><span>days 8-30</span></li><li class="pl1"><b>0.03<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-02</b><span>last chat</span></li><li class="pw"><b>2,554</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>audio AI (voice deepfake detection, voice cloning, speech-to-text)</dd>
+<dt>Status</dt><dd>Quiet and testnet only on 2026-10-21. Mainnet has no netuid 253; a testnet netuid 253 exists (registered 2024-12-02) with no incentive or dividends. The last team message in the channel archive is from 2025-04-23, the last repository commit is from 2025-01-24, and the only messages since are newcomers asking about testnet tokens, answered by moderators.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-21</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>VoiceGuard is a Bittensor subnet project by the Cazure team that aimed to detect AI-generated voices, clone voices to build training data for detectors, and offer speech-to-text. The repository describes three kinds of miner work (transcription, voice cloning, deepfake detection) scored by validators with Whisper, speaker-similarity and audio-quality models. The project had an earlier mainnet slot (SN44) that its investor dissolved in August 2024; this page covers the 2024-2025 rebuild, whose netuid 253 is a testnet slot. Nothing indicates it ran on mainnet.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Per the README, miners answer three request types: transcribe a segment of a YouTube video (with a Whisper large model), clone a voice from a reference clip and a text, and say whether an audio clip is real or AI-generated. The repository ships a Whisper transcription path, a YourTTS-based cloning path and a detection path that runs an audio-classification model and returns a probability. The detection model folder is not in the repo; the download script fetches it, together with datasets, partly from a team-run server whose address is hard-coded in the script. The README asks for Python 3.10 or newer, a dedicated GPU with 16 GB or more and a fast network link.</p></div><div><h3>Validators</h3><p>For cloning, the validator picks a sentence and a reference clip from a Common Voice dataset, transcribes the miner&#x27;s audio with Whisper, gives zero if the text match is below 0.8, and otherwise scores 0.5 speaker-embedding similarity, 0.25 mean-pitch similarity and 0.25 a MOSNet quality score. For detection it asks about real or fake audio from a team-run server and multiplies correctness, the miner&#x27;s confidence, and batch accuracy and F1. For transcription it scores 0.7 text correctness (word overlap, semantic similarity, edit distance, BLEU) and 0.3 speed. Each type is kept as a moving average (default weight 0.1 on the newest result).</p></div><div><h3>Incentive</h3><p>Validators combine the three scores as 20 percent transcription, 40 percent cloning and 40 percent detection, and set any miner&#x27;s score to zero when its transcription score is zero. As committed on 2025-01-23, the validator loop queries only one hard-coded UID, its transcription branch can never run and its detection branch is never reached, so only cloning is queried and the combine step would zero every miner. That looks like a debug state and was not run. On the testnet, no UID holds incentive or dividends as of 2026-10-21. Chain weights beyond that count were not read.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-08-07</span> <span class="muted">(#voiceguard)</span> Between January and August 2026 the channel only holds newcomers asking how to get testnet tokens; a moderator pointed them to the faucet operator for help and warned that anyone offering support by direct message is a scam.</li>
+<li><span class="when">2025-04-23</span> <span class="muted">(#voiceguard)</span> A user asked when mainnet would start; the team only said it would take a separate approach for the functions and to stay tuned. This is the last team message in the archive.</li>
+<li><span class="when">2025-03-31</span> <span class="muted">(#voiceguard)</span> Team announced Miner Hubs, a site for comparing miners across Bittensor subnets, on its own domain.</li>
+<li><span class="when">2025-01-24</span> <span class="muted">(GitHub (Cazure8/voiceguard-subnet))</span> Last commit in the repository: a pitch-similarity term added to the cloning reward and the Common Voice dataset merged.</li>
+<li><span class="when">2025-01-14</span> <span class="muted">(#voiceguard)</span> Whitepaper announced as a Google Drive PDF (not read for this page), with registration said to be in preparation.</li>
+<li><span class="when">2025-01-07</span> <span class="muted">(#voiceguard)</span> Team said the code was ready and it wanted to go to mainnet; a Bittensor core-team member asked testnet teams about readiness for the Dynamic TAO upgrade, which was announced for testnet on 2025-01-09.</li>
+<li><span class="when">2024-12-15</span> <span class="muted">(#voiceguard)</span> Asked what differs from earlier attempts, the team said it has new members, a new codebase and app, and a mechanism that compares miners on work results instead of an uploaded model.</li>
+<li><span class="when">2024-12-02</span> <span class="muted">(#voiceguard and chain read on the public testnet)</span> Team post introducing VoiceGuard: voice deepfake detection, voice cloning for dataset building and a speech-to-text API, with a request for investors to cover mainnet registration. The same day, a testnet subnet 253 was registered on chain.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Install Bittensor, clone Cazure8/voiceguard-subnet, then run pip install -r requirements.txt and pip install -e . (use Python 3.10.x and pip install TTS if you want the bundled cloning model).</li>
+<li>Run python3 voiceguard/utils/download.py to fetch datasets and the detection model. Part of the data comes from a team-run server hard-coded in the script; whether it is still up was not tested.</li>
+<li>Optionally set a proxy URL in a .env file to avoid YouTube rate limits on transcription tasks.</li>
+<li>Create a testnet wallet, get test TAO and register a hotkey on testnet netuid 253 (the registration burn was 0.0005 test TAO when read on 2026-10-21).</li>
+<li>Start the miner with neurons/miner.py, passing --netuid 253 --subtensor.network test and your wallet, axon IP and port. The README&#x27;s miner example omits the network flag and its validator example still uses netuid 44, so set both yourself.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Testnet only. Nothing here describes mainnet participation, emissions or token economics; mainnet has no netuid 253 (chain read 2026-10-21) and no mainnet registration plan has been stated since 2025-04-23.</li>
+<li>On the testnet (read 2026-10-21), the subnet has 14 neurons, 7 validator permits, no UID with incentive or dividends, and the freshest weight-setting among its validators was more than 1.5 million blocks old, roughly 215 days at about 12 seconds per block. No evidence of a working miner or validator was found.</li>
+<li>Who owns testnet 253 was not checked and the subnet has no on-chain name. The link to the VoiceGuard team rests on the README roadmap (testnet UID 253), the channel name and the registration date matching the team&#x27;s launch post.</li>
+<li>README and code disagree: the README says validators send three request types and pay 20/40/40, while the last committed validator loop only queries cloning, on a single UID. The detection reward function is also called with a parameter name it does not accept, and a code comment and the reward disagree on whether a probability above 0.5 means fake or real. None of this was run.</li>
+<li>The README&#x27;s status link and validator example point at netuid 44, the team&#x27;s earlier mainnet slot that was dissolved in August 2024.</li>
+<li>The datasets, detection model and test audio depend on a team-run server addressed by a hard-coded IP in the code. The team&#x27;s Miner Hubs site (taoscribe.ai) did not resolve from the research machine on 2026-10-21.</li>
+<li>The whitepaper and the Q2-Q3 2025 roadmap items (more audio hours, Chrome extension, iOS app, film industry partner, real-time API) were not verified.</li>
+<li>The channel archive also holds older discussion of the team&#x27;s earlier subnets; treat anything dated before December 2024 as history of a different codebase.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/Cazure8/voiceguard-subnet" rel="noopener noreferrer">GitHub (Cazure8/voiceguard-subnet)</a></li>
+<li><a href="https://drive.google.com/file/d/1v7_8DA7WE8f1vvkcVqQBFrAAYhoTJ4Cv/view?usp=sharing" rel="noopener noreferrer">Whitepaper (Google Drive PDF, not read)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 5 sources</summary>
+<ul>
+<li><strong>repo</strong> Cazure8/voiceguard-subnet@84aca43 (2025-01-24): README.md, min_compute.yml, neurons/*.py, voiceguard/protocol.py</li>
+<li><strong>repo</strong> Cazure8/voiceguard-subnet@84aca43: voiceguard/validator/{forward,clone_reward,detection_reward,stt_reward}.py, voiceguard/base/validator.py (set_weights), voiceguard/utils/{download,helper,config}.py, voiceguard/miner/*.py</li>
+<li><strong>msg</strong> #voiceguard 2024-08-05 to 2026-10-02 (read via the chat archive; one empty post on 2026-10-02)</li>
+<li><strong>web</strong> Chain reads 2026-10-21: mainnet block 9334501 (netuid 253 does not exist); public testnet blocks 8272982 to 8272993 (subnet info, hyperparameters, neuron aggregates for netuid 253)</li>
+<li><strong>web</strong> taoscribe.ai: DNS lookup returned no such domain on 2026-10-21</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/234.html"><small>← Previous</small>SN234 TuneForge</a><a rel="next" href="/bittensor-docs/subnets/272.html"><small>Next →</small>SN272 Nobi</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-21. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

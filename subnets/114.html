@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SOMA (SN114) | Bittensor Subnet Docs</title>
+<meta name="description" content="Miners build compressors that cut coding-agent token costs, scored against uncompressed baselines on SWE tasks.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h6">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>114</span><div>
+<h1>SOMA <span class="muted">SN114</span></h1>
+<p class="tagline">Miners build compressors that cut coding-agent token costs, scored against uncompressed baselines on SWE tasks.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>32<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>21<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>36<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-23</b><span>last chat</span></li><li class="pw"><b>8,380</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>context and chain-of-thought compression for AI agents</dd>
+<dt>Status</dt><dd>Round 11 results were announced on 2026-10-20 and round 12 (agent model openai/gpt-6-luna on the Copilot harness) opened the same day: uploads close 2026-10-27 14:30 UTC and evaluation runs to 2026-11-03 14:30 UTC. On 2026-10-23 the dashboard showed 29 uploads, 8 of them qualified, and the chain was paying the round 11 winners. Chat was busy through 2026-10-22 with disputes about cheating, self-mining and the stage 1 screen.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-23</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>SOMA, built by the company Dendrite, rewards miners for writing compressors that shrink the context and reasoning a coding agent re-sends to its language model, without making the agent fail its tasks. Submissions are run on software-engineering tasks and compared with an uncompressed baseline on both task success and weighted token use, in two-week rounds (an upload week, then an evaluation week). The team says it adapts winning code for its own paid compression product, which is also a source of friction with miners because winning algorithms stay private.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>A miner writes a compressor as a Python solution, uploads it to the SOMA platform with a script that signs the request with the registered hotkey, and supplies their own OpenRouter key, which pays for the evaluation runs. Code must not be obfuscated and submissions stay private. Each round has an upload week and an evaluation week. Round 12 uses openai/gpt-6-luna through a pinned openai provider on the Copilot harness, with medium model effort for stage 2 and the evaluation but no effort setting in stage 1. Compressors may call Jev, a decision model offered through the benchmark proxy, at a token cost counted against them.</p></div><div><h3>Validators</h3><p>Validators run grading in Docker containers: the SWE-bench harness for the public screening tasks and the task&#x27;s own test image for SOMA tasks, with no network. They do not compute weights themselves: they fetch the weights from the SOMA platform and set them, and if the platform is unreachable and no cached weights exist they send everything to the burn UID 0. The team reviews top-ranked code by hand. Each winner row on the platform carries an approved flag set by the team, and only approved rows inside their window feed the weights. Full evaluation starts only when an operator flag is switched on (the flag was added to the code on 2026-10-21 and defaults to off). On chain on 2026-10-23, 10 UIDs held validator permits and 9 had set weights, all with the same vector; the owner&#x27;s own validator held 55 percent of the dividends.</p></div><div><h3>Incentive</h3><p>Each task is scored from quality relative to the baseline (80 percent of baseline success counts as keeping quality) and the log of the weighted-token reduction, where input counts 1.0, cached input 0.1, output 3.0 and Jev input 0.2. Rewards are split across contests for task complexity groups: 0.25 for the all-groups contest, 0.15 for each of three pairs and 0.10 for each of three single groups, with ties split. Round 10 paid three miners 75, 15 and 10 percent and round 11 paid two miners 75 and 25 percent. Two screens come first. In stage 1 (public tasks, during the upload week) an entry&#x27;s pooled success rate may not fall more than 0.05 below the baseline and it may not use more weighted tokens than the baseline; these are the code defaults, and the 10 percent saving rule of July seems to be gone, but the live setting is not visible. Stage 2 (hidden tasks) has no pass or fail: entries are ranked on the same score and the top 20 percent of stage 1 passers, at least 60, go on to full evaluation. On chain the emission is split 18 percent owner, 41 percent validators and 41 percent miners, and unallocated miner share is burned. The dashboard&#x27;s round pool of 41,328 alpha equals two weeks of the 41 percent miner share, so it looks like a fixed sum per round. A round&#x27;s winners are paid during the next round: at block 9343147 (2026-10-23) the two round 11 winners held 75 and 25 percent of the miner incentive and the eight round 12 stage 1 qualifiers held the smallest non-zero weight each.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-23</span> <span class="muted">(thesoma.ai/dashboard and /compression; mainnet reads, block 9343147)</span> Round 12 dashboard: 29 uploads, 8 qualified and 21 not qualified for stage 1, and no stage 2 scores yet. Chain at block 9343147: the two round 11 winners hold 75 and 25 percent of the miner incentive, nine of ten permitted validators set identical weights, and the eight qualifiers hold the smallest non-zero weight. The website&#x27;s compression page says its published saving figure of about 15 percent is an estimate and that the measured figure on Copilot CLI traffic is far lower.</li>
+<li><span class="when">2026-10-22</span> <span class="muted">(#soma, 2026-10-21 to 2026-10-22)</span> Miners disputed the stage 1 screen, saying most entries failed the rule that an entry may not use more weighted tokens than the baseline because one extra agent turn re-sends the whole history. The team answered that stage 1 exists to drop entries that cost more or lose quality, that reasons for failed reviews are always posted, that round 12 qualifiers had no emission yet because the round was two days old, and that pull requests are welcome. A community moderator asked miners to stop accusing each other. The team had earlier cleared a miner&#x27;s plan to delete low-value lines from new search output, with markers.</li>
+<li><span class="when">2026-10-21</span> <span class="muted">(#soma, 2026-10-21; GitHub commit c83b8ca)</span> The team replied to a list of fairness proposals: entries that fail review are normally replaced by the next best stage 2 entries (not possible this time because the DeepSeek model was retired), only potential winners are reviewed, review should end at least 24 hours before weights are set, and several submissions per miner are allowed. Baseline runs for round 12 started on openai/gpt-6-luna. A code commit the same day added an operator flag that gates the start of full evaluation.</li>
+<li><span class="when">2026-10-20</span> <span class="muted">(#soma, 2026-10-20)</span> Code review ended with 14 hotkeys failing: 8 for loop-string abuse and 6 for prompt injection. Round 11 paid two miners, 75 and 25 percent. Miners then accused the team of self-mining. The team said Dendrite has never taken part in the competition, that winning code stays private because it is the core of a revenue-generating product, that every run is public on the dashboard, and that a more detailed evaluation log was being built for the next round.</li>
+<li><span class="when">2026-10-19</span> <span class="muted">(#soma, 2026-10-19 to 2026-10-20)</span> After all round 11 submissions were scored, the team flagged 8 entries for appending a disallowed injected line. It said the DeepSeek model used in the round had been retired, so entries that fail review would not be re-run, and announced the next round would use a closed-source model, openai/gpt-6-luna, on the same Copilot harness.</li>
+<li><span class="when">2026-10-14</span> <span class="muted">(#soma, 2026-10-14 to 2026-10-15)</span> Evaluation hiccups: the team restarted 441 runs hit by sandbox errors on 2026-10-14 and restarted runs that failed on 2026-10-15 when the DeepSeek model had an outage. It did not restart runs failing with HTTP 401 from OpenRouter, calling them miner-side.</li>
+<li><span class="when">2026-10-09</span> <span class="muted">(#soma, 2026-10-09 to 2026-10-11; thesoma.ai)</span> A team member said the product is live and that SOMA keeps 30 percent of a user&#x27;s savings. The company website says its app passes the model&#x27;s cost through without a margin. On 2026-10-11 a question about token buybacks went unanswered in chat.</li>
+<li><span class="when">2026-10-06</span> <span class="muted">(#soma, 2026-10-06 and 2026-10-08; GitHub commit 790376f)</span> Round 10 results: three winners with 75, 15 and 10 percent of miner weight and no burn. Jev support was merged into the three repositories and round 11 opened. On 2026-10-08 the weight of Jev input tokens was lowered from 0.3 to 0.2.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Register a hotkey on netuid 114 with btcli and read the miner docs and especially the prompting rules, since entries that break them fail review and earn nothing.</li>
+<li>Start from the base miner in SOMA-benchmark (src/compression_service/app/base_miner.py) and follow that repository&#x27;s README to run tasks locally. Do not copy the OpenClaw compressor unchanged: the team said its loop guard is not compliant on the Copilot harness.</li>
+<li>Create an OpenRouter account and key. The current round uses openai/gpt-6-luna through a pinned openai provider, but the OpenRouter guide in the docs still describes DeepSeek V4 Pro, so follow the round announcement in Discord for provider settings.</li>
+<li>Upload with miner/upload_miner_with_openrouter_key.py before the upload window closes (round 12: 2026-10-27 14:30 UTC), then watch the dashboard through stage 1, stage 2 and the evaluation week.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Weights come from the team&#x27;s platform, review of winning code is done by hand off chain, winners need a team-set approval flag, and winning code is not published. Miners repeatedly accuse the team of self-mining; these claims are unproven and the team says Dendrite has never competed. On chain the owner&#x27;s coldkey holds only the owner validator and neither round 11 winner shares a coldkey with it, but a coldkey cannot show who is behind a miner.</li>
+<li>Documents lag the live rules. The OpenRouter guide still names DeepSeek V4 Pro while round 12 uses openai/gpt-6-luna, one guide describes an older text-compression task, and the July screening description (10 percent saving, three benchmark types) differs from the current code (no saving required at stage 1, one benchmark type). Live platform settings are not public, so figures here are code defaults plus team statements.</li>
+<li>Round 12 stage 1 is contested: miners say most entries fail the no-extra-tokens rule and some allege the qualified entries do nothing; the team says the rule only drops entries that cost more or lose quality. Eight uids currently qualify on six coldkeys, three of them on one, which fits the team&#x27;s statement that several submissions per miner are allowed.</li>
+<li>The website says the app passes model cost through without a margin and a team member said the team keeps 30 percent of savings. The site also says measured savings on Copilot CLI traffic are far below its 15 percent estimate. Revenue and the promised buyback were not verified.</li>
+<li>Rules are interpreted by the team during rounds. Prompt-injection and loop-string abuse definitions were tightened on 2026-10-20 and 14 entries failed review in round 11. Miners pay for evaluation runs with their own OpenRouter credits, and entries that fail review are not re-run when the evaluation model is retired.</li>
+<li>Chain reads are from 2026-10-23 only (blocks 9342911 and 9343147): one validator permit holder has not set weights for about 43 days, and emission, alpha price and stake figures change daily. The X posts, the platform&#x27;s signed API and the Docker Hub task images were not read.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://thesoma.ai" rel="noopener noreferrer">Website and product (SOMA app, Somarizer)</a></li>
+<li><a href="https://thesoma.ai/dashboard" rel="noopener noreferrer">Public dashboard and leaderboard</a></li>
+<li><a href="https://thesoma.ai/docs" rel="noopener noreferrer">Documentation site (mirrors the repository docs)</a></li>
+<li><a href="https://github.com/DendriteHQ/SOMA" rel="noopener noreferrer">GitHub: SOMA (platform, validator, miner docs)</a></li>
+<li><a href="https://github.com/DendriteHQ/SOMA/blob/main/miner/README_prompting.md" rel="noopener noreferrer">Miner prompting rules</a></li>
+<li><a href="https://github.com/DendriteHQ/SOMA/blob/main/docs/miner/INCENTIVE_MECHANISM.md" rel="noopener noreferrer">Incentive mechanism</a></li>
+<li><a href="https://github.com/DendriteHQ/SOMA/blob/main/docs/miner/scoring.md" rel="noopener noreferrer">Scoring</a></li>
+<li><a href="https://github.com/DendriteHQ/SOMA-benchmark" rel="noopener noreferrer">GitHub: SOMA-benchmark (harness and base miner)</a></li>
+<li><a href="https://github.com/DendriteHQ/SOMA-OpenClaw-compressor" rel="noopener noreferrer">GitHub: SOMA-OpenClaw-compressor (open-source product compressor, MIT)</a></li>
+<li><a href="https://hub.docker.com/r/dendritexhq/soma-competition-tasks-dind" rel="noopener noreferrer">Previous rounds&#x27; tasks (Docker Hub)</a></li>
+<li><a href="https://x.com/SomaSubnet" rel="noopener noreferrer">X account linked by the team in chat</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 4 sources</summary>
+<ul>
+<li><strong>repo</strong> DendriteHQ/SOMA @c83b8ca (2026-10-21), SOMA-benchmark @a0c6556 (2026-10-13), SOMA-shared @961216e (2026-10-06), SOMA-OpenClaw-compressor @1417ae5 (2026-08-05): README, docs/miner, docs/validator, miner/README_prompting.md, swebench_screening.py, swebench_orchestrator.py, incentive_calculator.py, top_miner_approval.py, validator.py</li>
+<li><strong>web</strong> thesoma.ai home, about, compression, docs and dashboard, fetched 2026-10-20 and 2026-10-23</li>
+<li><strong>web</strong> Bittensor mainnet reads for netuid 114 at blocks 9342911 and 9343147 (2026-10-23): parameters, emission split, incentive, dividends, weights, owner and coldkey check</li>
+<li><strong>msg</strong> #soma, 2026-10-05 to 2026-10-22 19:02 UTC, plus pinned posts</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/111.html"><small>← Previous</small>SN111 Claims</a><a rel="next" href="/bittensor-docs/subnets/115.html"><small>Next →</small>SN115 MoirAI</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-23. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

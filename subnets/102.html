@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Connito (SN102) | Bittensor Subnet Docs</title>
+<meta name="description" content="Miners train residual experts beside a frozen Qwen3.6 MoE model; validators rank them against the base model.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h18">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>102</span><div>
+<h1>Connito <span class="muted">SN102</span></h1>
+<p class="tagline">Miners train residual experts beside a frozen Qwen3.6 MoE model; validators rank them against the base model.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>53<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>12<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>7.1<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-24</b><span>last chat</span></li><li class="pw"><b>3,619</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>decentralized model training</dd>
+<dt>Status</dt><dd>Task switched to Qwen3.6 residual experts on 2026-10-15 (v0.7.0). The owner validator was reported down on 10-20 and 10-21 and was setting weights again when read on chain (block 9335285, about 2026-10-22 00:00 UTC); miners still reported the 3x0.25 fallback on 10-21 and the team said it was escalated. A new incentive (dataless expert fine-tuning with a model role and a prompt role) was described on 10-20; no code for it is public yet.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-21</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>Connito (SN102) is a subnet for collaborative training of a Mixture-of-Experts language model. The base model, Qwen3.6-35B-A3B, stays frozen; miners train only a small added residual expert and gate per MoE layer. Validators score each submission against the pretrained base, publish the round&#x27;s best residual as the starting point for the next round, and set weights. The team describes the longer goal as cheaper training of very large models, and has floated a training-as-a-service product. Its next incentive, announced on 2026-10-15 for 2026-10-30, is described by the team as &quot;dataless expert fine-tuning&quot;: a customer gives a task description, and a second miner role writes the evaluation prompts.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Each cycle a miner fetches the latest published winner, trains a residual (about 250 MB) on the round&#x27;s data (PubMed full text 80 percent, C4 20 percent, per the team), uploads it to Hugging Face and posts two on-chain commits (a signed hash and a hash commit with repo and revision) inside the commit windows. Team hardware guidance of 2026-10-14: one 48 GB GPU (L40S or A6000 class), about 64 GB RAM, about 100 GB disk, driver 570 or newer. Malformed shards, NaNs and untrained experts are refused.</p></div><div><h3>Validators</h3><p>Validators load each miner&#x27;s residual onto the frozen base and measure gain on the task data, loss rise on C4 replay data, and how often the gate fires (target about 20 percent of task tokens, quiet on C4). A C4 loss rise above 0.02 scores zero. Phases and their lengths come from a cycle API run by the subnet owner, not from the repo; a cycle is 524 blocks, about 1.75 hours. Not every miner is checked every cycle: cohort groups A and B are checked most, group C rotates, and the rest are checked about every third cycle (team, 2026-10-05). On chain (block 9335301) six UIDs hold validator permits on six different coldkeys; five had set weights, including the owner&#x27;s own validator on UID 0, and one permit holder had not set weights for about 2.8 days. The public dashboard API listed the owner validator and one other as online.</p></div><div><h3>Incentive</h3><p>Per the repo, each round only the top three miners with a positive score earn rank points (2.25, 1.5, 1.0); a rolling 8-round average then sets weights. Each validator reserves 25 percent for UID 0 (the owner), then gives 98 percent of the rest to the top three of the consistently scoring miners and 2 percent to the next five. If nobody qualifies, that share goes to UID 0. Chain check at block 9335285: four of the five validators that had set weights submitted the identical vector this formula predicts (25.0 percent to UID 0, 73.5 percent across three miners, 1.5 percent across three more); the fifth put about 73 percent on a single miner. Seven UIDs received incentive. The subnet&#x27;s emission split is 18 percent owner, 41 percent validators, 41 percent miners, commit-reveal is off, and the recycle-or-burn setting reads Burn, so miner emission aimed at the owner UID is burned rather than paid. The team said the owner validator carries most of the stake; on chain it held about 47 percent of dividends and a second validator about 42 percent in the last epoch, so the owner&#x27;s is the largest but not the only one that matters.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-21</span> <span class="muted">(chain read at block 9335285, dashboard API, #102-connito-ai)</span> Chain and dashboard check about midnight UTC: the owner validator (UID 0) was setting weights again and the dashboard API listed it online, after miners and a dashboard reading showed it down from about 10-20 18:40 UTC. The dashboard gateway still flagged its own data as stale because it polled only 2 of 5 configured validators.</li>
+<li><span class="when">2026-10-21</span> <span class="muted">(#102-connito-ai)</span> Miners reported the 3x0.25 fallback and a stuck dashboard again, a UID shown as top miner with zero score, and a third-party weights page summing above 1. The team said these were escalated to the developers and repeated that accusations of one operator running several UIDs need on-chain evidence, to be sent privately; it also warned that the team never asks for seed phrases or keys.</li>
+<li><span class="when">2026-10-20</span> <span class="muted">(#102-connito-ai)</span> Team described its next incentive as dataless expert fine-tuning: a customer supplies a task description rather than data; one miner role sources data and trains the model, another writes evaluation prompts, rewarded by how close the models&#x27; score on them is to a target such as 0.6. An LLM judge would score answers and prompt relevance; numbers were called preliminary. The 2026-10-30 date comes from the 10-15 announcement, not from this post.</li>
+<li><span class="when">2026-10-20</span> <span class="muted">(#102-connito-ai)</span> Miners reported the owner validator down on the dashboard gateway and the dashboard and cycle API unresponsive; some miners said they had gone unevaluated for 8 cycles. A public dispute among miners about spam model repos and scam accusations began the same day.</li>
+<li><span class="when">2026-10-16</span> <span class="muted">(GitHub, #102-connito-ai)</span> v0.7.1 tagged: reads chain data at a fixed block, fails over to the public Finney endpoint, and skips a round instead of crashing. A miner reported the fallback again in cycle 17751 on 10-17; the code on master has not changed since.</li>
+<li><span class="when">2026-10-16</span> <span class="muted">(#102-connito-ai)</span> Chain-event bot posted a coldkey swap, announced on 10-09 and executed on 10-16, for the key that is both subnet owner and a validator; no reason was given.</li>
+<li><span class="when">2026-10-15</span> <span class="muted">(#102-connito-ai, GitHub)</span> Switch from DeepSeek expert groups to Qwen3.6 with residual experts (group 9) from cycle 17728; old-format submissions are no longer scored. v0.7.0 released. Around the switch the owner validator restarted and fell back to three equal weights of 0.25, which the team described as a built-in fallback that mirrors other validators&#x27; weights.</li>
+<li><span class="when">2026-09-25</span> <span class="muted">(#102-connito-ai, GitHub)</span> Expert Hunter opened: anyone can propose the next training task as a pull request, and the owner picks. The team calls it market research for a planned training-as-a-service product.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Read the miner prerequisites and the docs/miner-faq folder in the repo (hardware, config, scoring, troubleshooting).</li>
+<li>Use a 48 GB GPU, a recent NVIDIA driver and the Python stack pinned by the release; download the pinned Qwen3.6-35B-A3B revision (about 72 GB).</li>
+<li>Run the current release tag (v0.7.1 at last check, 2026-10-21) so your residual matches the active task.</li>
+<li>Check the phase API, then post both on-chain commits before the commit phases end; a late or half-posted commit is skipped.</li>
+<li>Watch the #102 channel and repo tags for the announced incentive change before investing in long runs.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Chain figures are one snapshot (block 9335285 to 9335301, about 2026-10-22 00:00 UTC). The owner validator had been down for part of 10-20 and 10-21, so weights move with validator availability.</li>
+<li>The next incentive (model role plus prompt role, LLM-judged, preliminary numbers) was described on 2026-10-20 and announced on 10-15 for 10-30. No code for it exists on any of the repo&#x27;s 213 branches (newest commit 2026-10-16), so the scoring above applies until it ships.</li>
+<li>Validator and dashboard stability: miners reported the 3x0.25 fallback again on 10-21 after v0.7.1 and the team said it was escalated with no fix announced; the chain vector at the time of the check followed the normal formula. The dashboard gateway flagged its data as stale (polled 2 of 5 configured validators).</li>
+<li>One permit holder (UID 103) had not set weights for about 2.8 days; the dashboard shows three of five configured validator slots as offline or unconfigured.</li>
+<li>Miners dispute each other repeatedly. On chain, the 7 paid UIDs sit on 6 coldkeys (two share one), which is not evidence of a rule breach by itself; a report of UID 155 as top miner with zero score was not reproduced on chain (no incentive at block 9335285).</li>
+<li>The repo README links to connito.ai/docs pages that still returned 404 on 2026-10-21; the working docs site is doc.connito.ai.</li>
+<li>The cycle API, phase lengths and validator whitelist are run by the owner and are not in the repo.</li>
+<li>The subnet previously hosted another project (Vocence) before Connito; older chat refers to it.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/Connito-AI/Connito" rel="noopener noreferrer">GitHub (subnet)</a></li>
+<li><a href="https://github.com/Connito-AI/expert-hunter" rel="noopener noreferrer">GitHub (Expert Hunter proposals)</a></li>
+<li><a href="https://connito.ai/" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://doc.connito.ai/miner/prerequisites/" rel="noopener noreferrer">Miner docs</a></li>
+<li><a href="https://dashboard.connito.ai/" rel="noopener noreferrer">Dashboard</a></li>
+<li><a href="https://cycle-api.connito.ai/get_phase" rel="noopener noreferrer">Phase API</a></li>
+<li><a href="https://x.com/ConnitoAI" rel="noopener noreferrer">X (project announcements)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 6 sources</summary>
+<ul>
+<li><strong>repo</strong> Connito-AI/Connito@6fa4ac3 (2026-10-16), tags v0.7.0 and v0.7.1; all 213 branch heads dated 2026-10-16 or earlier (checked 2026-10-21)</li>
+<li><strong>repo</strong> Connito-AI/expert-hunter@3b26095 (2026-09-23)</li>
+<li><strong>web</strong> Chain read at block 9335285 to 9335301 (about 2026-10-22 00:00 UTC): subnet params, validator permits, weights, incentive, emission split</li>
+<li><strong>web</strong> https://dashboard-api-v2.connito.ai/api/v2/validator-status and /api/v3/leaderboard (public dashboard API, read 2026-10-22 00:00 UTC)</li>
+<li><strong>web</strong> https://cycle-api.connito.ai/get_phase (read 2026-10-22 00:00 UTC)</li>
+<li><strong>msg</strong> #102-connito-ai 2026-03-30 to 2026-10-21</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/101.html"><small>← Previous</small>SN101 Tag101</a><a rel="next" href="/bittensor-docs/subnets/104.html"><small>Next →</small>SN104 TAOStatus</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-21. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

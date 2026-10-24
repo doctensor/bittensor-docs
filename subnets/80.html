@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OpenRoboto (SN80) | Bittensor Subnet Docs</title>
+<meta name="description" content="Miners fine-tune open robot-control (VLA) models; simulation, physical xArm trials and data collection share rewards.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h8">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>80</span><div>
+<h1>OpenRoboto <span class="muted">SN80</span></h1>
+<p class="tagline">Miners fine-tune open robot-control (VLA) models; simulation, physical xArm trials and data collection share rewards.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>15<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>24<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>49<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-24</b><span>last chat</span></li><li class="pw"><b>3,618</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>robotics (vision-language-action models + data collection)</dd>
+<dt>Status</dt><dd>Chat was active through 2026-10-21. The AXIS v2.4 simulation season opened on 2026-10-19 and had a new champion on 2026-10-21; the physical-robot Season 2 is under evaluation until 2026-10-27. Rules, seasons and the emission split change often, and the documentation lags the live seasons in places.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-21</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>OpenRoboto rewards miners who fine-tune open vision-language-action models, the kind that turn camera images and a text instruction into robot arm movements. It runs three kinds of competition: a simulation benchmark, tournament-style seasons judged on a physical xArm 6 robot run by the team, and a weekly track that pays for first-person video data collected with the team&#x27;s devices. Scoring, the queue and the weights come from a team-run backend; the validator reads the weights from it and sets them on chain.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>A simulation or physical-robot miner fine-tunes the season&#x27;s base model (a π0.5 variant in the two seasons open on 2026-10-21), exports a full merged checkpoint, uploads it to Hugging Face, pays the season&#x27;s entry fee and announces the exact repository commit on chain, all through the openroboto command-line package. A bare LoRA adapter is rejected. Since CLI 1.4.0 the submit command makes the repository gated for the official evaluation account, and an entry that is paid out must be made public again. Data-track miners instead contribute egocentric recordings, apparently collected with the team&#x27;s OR-S1 devices.</p></div><div><h3>Validators</h3><p>The validator is a thin client: it reads the settled weights from the team&#x27;s backend API and sets them on chain. That endpoint sits behind a key (an anonymous request was refused on 2026-10-21, and the older validator code sends a key the team publishes). A small function in the public openroboto-protocol package turns the backend&#x27;s shares into chain weights, so the team&#x27;s own writer and an external validator compute the same vector from the same shares. The backend scans the chain, checks payments and model fingerprints, derives each evaluation&#x27;s random seed from a block hash and a drand beacon value, and runs the benchmark on its own GPU workers. The backend, the held-out task data and the physical workcell are not public, so validators cannot recompute scores themselves.</p></div><div><h3>Incentive</h3><p>Simulation is king-of-the-hill: a challenger must beat the champion&#x27;s mean score by more than 0.01 (a tie loses), and the top three on the board share weights 70/20/10. Each physical-robot season pays once: 95 percent of its pool to one champion over 120 days and 5 percent shared by all qualified entries over 30 days, with anything withheld burned. Data miners are paid weekly by a formula over accepted minutes, task rate, quality and novelty. On chain on 2026-10-21, the owner&#x27;s validator put 25 percent of its weight on UID 2 (the real-robot prize pool), 15 percent on the three simulation board entries (10.5, 3.0 and 1.5, which is exactly 70/20/10 of 15) and the remaining 60 percent on seven other UIDs; none went to the owner slot or a burn target. Eleven of the 13 validator permits set weights and all 11 agree on the top target. That is 15 / 25 / 60, which fits the subnet repository&#x27;s 15 / 25 / 25 / 35 only if the LingBot and data shares are both paid through those seven UIDs; neither the repositories nor the chat explain this. Three different splits appear in the sources over about three weeks (2026-09-28, 2026-10-05 and the 2026-10-21 chain read), so date any figure.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-21</span> <span class="muted">(api.openroboto.ai leaderboard (fetched 2026-10-21); Bittensor chain read of subnet 80 weights, block 9335130)</span> A new simulation champion took the AXIS v2.4 board with a mean score of 0.8879 (66 of 70 tasks passed), above the previous champion&#x27;s 0.86 plus the 0.01 margin; the earlier champion is now second and a third entry holds 0.8379. The same day an on-chain read of the owner validator&#x27;s weights showed 25 percent on the real-robot prize-pool UID, 15 percent on the three simulation entries and 60 percent on seven other UIDs.</li>
+<li><span class="when">2026-10-21</span> <span class="muted">(#openroboto, 2026-10-21; api.openroboto.ai competitions (fetched 2026-10-21))</span> The physical-robot π0.5 Season 2 was still in its evaluation window (2026-10-12 to 2026-10-27) with no champion announced; its entry fee is 1.5 TAO paid by transfer, not burned. In chat the team said the prize pool shown on third-party explorers is the real-robot pool, that real-robot competitions repeat monthly, and that champion snapshots are published automatically 24 hours after the crown.</li>
+<li><span class="when">2026-10-20</span> <span class="muted">(#openroboto, 2026-10-20)</span> The team posted that OpenRoboto is the first subnet on Base and on Robinhood Chain and hinted at further ecosystem expansion. This is a team statement; nothing about it was found in the repositories and it was not checked.</li>
+<li><span class="when">2026-10-19</span> <span class="muted">(api.openroboto.ai competitions (fetched 2026-10-21); openroboto-cli docs, commit of 2026-10-19)</span> A new simulation season, AXIS v2.4 on π0.5, opened with a 0.2 TAO burn fee and no closing date. The same day the CLI documentation changed the physical-robot trial rule: each task starts with 3 trials, and if none succeeds the task stops and its remaining trials count as failures; the score stays out of 70.</li>
+<li><span class="when">2026-10-17</span> <span class="muted">(#openroboto)</span> The team&#x27;s weekly summary reported 30 OR-S1 data-collection devices running peaqOS machine identities anchored on Solana. This is a team statement that was not checked here.</li>
+<li><span class="when">2026-10-15</span> <span class="muted">(#openroboto, 2026-10-15 to 2026-10-16)</span> Miners said the simulation benchmark rewards overfitting. The team pointed to the Open Axis Benchmark and its large task library, said tasks must stay public so scores are reproducible, and said it is working on rewarding generalisation. On 2026-10-16 it said simulation task switching had become automatic.</li>
+<li><span class="when">2026-10-13</span> <span class="muted">(#openroboto, 2026-10-13 to 2026-10-15; openroboto-cli CHANGELOG 1.4.0)</span> The top simulation model was found to be non-downloadable. The team said it was testing gated submissions to stop weight copying and, on 2026-10-14, that champion snapshots are published to a Hugging Face repository 24 hours after the crown (one repository per season) while miners&#x27; own repositories stay gated.</li>
+<li><span class="when">2026-10-12</span> <span class="muted">(#openroboto)</span> Evaluations stalled again on a few specific tasks, showing as interrupted. The team paused evaluation for about an hour, fixed the problem and re-ran the interrupted submissions. Some miners alleged self-mining; the team denied it.</li>
+<li><span class="when">2026-10-07</span> <span class="muted">(#openroboto)</span> One evaluation episode crashed the physics simulator and the run kept retrying. The team scored that episode as a failure and said a fix for the retry loop was being released.</li>
+<li><span class="when">2026-10-03</span> <span class="muted">(#openroboto, 2026-10-03 to 2026-10-05)</span> The team asked miners to pause simulation submissions ahead of a task rotation. Over the next days miners questioned the transparency of off-chain physical-robot evaluation and self-mining risk. The team said every scored rollout video is published, denied self-mining, and said it was looking at tamper-proof verification and at making simulation submissions private.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Read the openroboto-cli docs: SUBNET_OVERVIEW, MINER and, for the physical track, REAL_TRACK and MINER_REAL. Call the public competitions API to see which seasons are open and what their fees are.</li>
+<li>Register a hotkey on subnet 80 and install the package with pip install -U openroboto.</li>
+<li>Run openroboto init for the season you pick, then openroboto doctor to check your setup, and train the season&#x27;s base model.</li>
+<li>Run openroboto check on the exported checkpoint; it applies the same format rules as the evaluator and costs nothing.</li>
+<li>Submit with openroboto submit, which uploads and gates your Hugging Face repository, checks the layout, pays the fee and announces the commit back to back, then confirm it with openroboto status. Fees differ per season and are not refunded if the submission is rejected.</li>
+<li>For data collection, the repository gives only the scoring formula and weekly settlement; ask the team in chat how to qualify and what hardware is required.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>The emission split is documented inconsistently and moves often. A team post on 2026-09-28 gave 20/15/32.5/32.5 (data, simulation, two real tracks), the subnet repository of 2026-10-05 gives 15/25/25/35, September CLI documents give 15/42.5/42.5, and the chain on 2026-10-21 shows 15 / 25 / 60 as described above. Where the LingBot real-track share goes is not explained anywhere: no pool UID for it is visible and the old second pool UID has no weight.</li>
+<li>Only about 15 percent of the weight follows the public simulation board. The rest sits on the real-robot prize-pool UID (25 percent, paid out only at season end) and seven other UIDs held by seven different coldkeys that the owner does not hold. Chat complaints in late September and early October that most emission is opaque match this. The weights were read from one validator row (the owner&#x27;s) and the other ten matched its top target and target count; three of the 13 permits had not set weights for over two tempos.</li>
+<li>The simulation board&#x27;s first two places on 2026-10-21 are two UIDs on one coldkey, and their model repositories sit under one Hugging Face account. No rule limiting entries per coldkey was found in the repositories; the documented anti-plagiarism check only rejects the same model hash from a different hotkey. This is a fact about the board, not a claim of wrongdoing.</li>
+<li>The openroboto-protocol package still lists simulation shares of 7, 2 and 1 percent of total emissions with 90 percent burned (constants last edited 2026-09-02, measured 2026-08-17). The chain on 2026-10-21 shows no burn target and a 15 percent simulation share, so do not read those constants as the current split; runtime values live in a private backend config.</li>
+<li>Some headline notes in the repositories say the simulation track runs LingBot-VLA 2.0 since 2026-09-01. The competitions API on 2026-10-21 shows only the AXIS v2.4 π0.5 simulation season and the π0.5 real season, so check the API before reading the older guides.</li>
+<li>Physical-robot evaluation happens on team hardware off chain. Videos are published, but nobody outside the team was seen reproducing results, and the team has said it is exploring tamper-proof verification. Self-mining accusations in chat are unproven claims that the team denied.</li>
+<li>The physical Season 2 record sets a champion line of 9 successful trials, out of 70 according to the rules document, and its fee goes to an address on the season record rather than being burned. Check the season record before paying.</li>
+<li>Validators depend on the team&#x27;s backend for scores and weights, and the scoring service, ranking code and held-out data are private. The leaderboard&#x27;s tasks-passed count (66 of 70 for a mean of 0.8879) is defined nowhere in the public code.</li>
+<li>The team says its AXIS library has over 6,000 tasks, while the public task-selector repository describes a pool of 1,233; the two may count different things. Public tasks leave room for overfitting, as the team itself says.</li>
+<li>The data-collection track is documented only by a formula and a weekly schedule. Rates, quality and novelty values and the review process are not public, and requests about buying OR-S1 devices were unanswered in the chat read.</li>
+<li>Partnership and event claims (peaq, Solana, Base, Robinhood Chain, press coverage) are team statements that were not verified. Chat from 2026-10-03 to 2026-10-21 was read; older history only through targeted archive searches. The website dashboard and the benchmark worker code were not read.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://www.openroboto.ai" rel="noopener noreferrer">Website (live leaderboard, queue, docs)</a></li>
+<li><a href="https://github.com/openroboto-ai/openroboto-cli" rel="noopener noreferrer">GitHub: openroboto-cli (miner package and docs)</a></li>
+<li><a href="https://pypi.org/project/openroboto/" rel="noopener noreferrer">PyPI: openroboto (miner package)</a></li>
+<li><a href="https://github.com/openroboto-ai/openroboto-subnet" rel="noopener noreferrer">GitHub: openroboto-subnet (early miner, validator and protocol record)</a></li>
+<li><a href="https://github.com/openroboto-ai/openroboto-protocol" rel="noopener noreferrer">GitHub: openroboto-protocol (shared contract: seed, commitment, model format, weights)</a></li>
+<li><a href="https://github.com/openroboto-ai/openroboto-evaluation" rel="noopener noreferrer">GitHub: openroboto-evaluation (benchmark harness)</a></li>
+<li><a href="https://github.com/openroboto-ai/axis-task-selector" rel="noopener noreferrer">GitHub: axis-task-selector</a></li>
+<li><a href="https://huggingface.co/openroboto-ai/champion-sim-8" rel="noopener noreferrer">Champion snapshots for the current simulation season (Hugging Face)</a></li>
+<li><a href="https://api.openroboto.ai/api/v1/competitions" rel="noopener noreferrer">Public API</a></li>
+<li><a href="https://x.com/openroboto" rel="noopener noreferrer">X account linked by the team in chat</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 8 sources</summary>
+<ul>
+<li><strong>repo</strong> openroboto-ai/openroboto-cli @8ed5e49 (2026-10-19): CHANGELOG.md, docs/MINER.md, SUBNET_OVERVIEW.md, REAL_TRACK.md, REAL_TASKS.md</li>
+<li><strong>repo</strong> openroboto-ai/openroboto-subnet @822e3b6 (2026-10-05): README.md, docs/SUBNET_OVERVIEW.md, docs/REAL_ROBOT.md, validator code</li>
+<li><strong>repo</strong> openroboto-ai/openroboto-protocol @443fdbb (2026-09-24): README.md, constants.py, weights.py</li>
+<li><strong>repo</strong> openroboto-ai/openroboto-evaluation @3966a93 (2026-09-30) and axis-task-selector @98fb5b2 (2026-09-26): READMEs and docs</li>
+<li><strong>web</strong> api.openroboto.ai /api/v1/competitions and /api/v1/leaderboard (fetched 2026-10-21 about 23:37 UTC)</li>
+<li><strong>web</strong> Bittensor chain reads of subnet 80 (params, uids, owner validator weights, emission weights) at blocks 9334694 to 9335130, 2026-10-21</li>
+<li><strong>web</strong> huggingface.co/openroboto-ai (organization listing and champion-sim-8 commits, 2026-10-21); pypi.org/project/openroboto</li>
+<li><strong>msg</strong> #openroboto, 2026-10-03 to 2026-10-21 (read in full), plus archive searches for 2026-08-31 to 2026-09-28</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/79.html"><small>← Previous</small>SN79 MVTRX</a><a rel="next" href="/bittensor-docs/subnets/81.html"><small>Next →</small>SN81 Reliquary</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-21. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

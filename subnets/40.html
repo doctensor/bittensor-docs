@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ralph (SN40) | Bittensor Subnet Docs</title>
+<meta name="description" content="Miners compress one open model (Qwen3-8B) into low-bit GGUFs; validators score how closely each keeps its behaviour.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h16">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>40</span><div>
+<h1>Ralph <span class="muted">SN40</span></h1>
+<p class="tagline">Miners compress one open model (Qwen3-8B) into low-bit GGUFs; validators score how closely each keeps its behaviour.</p>
+<span class="st s-unclear">unclear</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl2"><b>0.29<small>/day</small></b><span>last 7 d</span></li><li class="pl2"><b>0.35<small>/day</small></b><span>days 8-30</span></li><li class="pl4"><b>2.7<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-21</b><span>last chat</span></li><li class="pw"><b>4,046</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>model compression (low-bit quantised open models)</dd>
+<dt>Status</dt><dd>Live on mainnet, but as of 2026-10-21 the evidence is mixed. A team member said on 2026-10-12 that mining is live while evaluation is stuck, the newest published round record is from 2026-09-11, and the repository&#x27;s last commit is 2026-09-16. On chain, all six weight-setting validators point at one neuron that is not one of the four crowned miners, so the crowns are not being paid.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-21</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>Ralph (Ralph Labs) is a subnet in which miners compress a single fixed open model, Qwen3-8B, into very small GGUF files at set bit-width tiers (binary, ternary, around 2-bit and around 4-bit), so that a model of the same architecture fits on a phone. Validators measure how closely each compressed model reproduces the original&#x27;s behaviour as seen by judge models, and the best entry in each tier is crowned and published for download. The current design (v2) replaced an earlier autonomous-research design (v1) in August 2026, and the subnet occupies a slot that belonged to a different project, Chunk, until 2025.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Per the repository README and the team&#x27;s machine-readable subnet description: a miner compresses the one pinned parent model into a tier with a hard cap on bits per weight (the README lists 1.15, 1.75, 2.3 and 4.0 code bits per weight for the binary, ternary, sub-2 and sub-4 tiers; an earlier chat message from 2026-08-05 gave about 2.0 for sub-2, so that cap has moved). The result is served as a downloadable GGUF file. A miner first commits a hash of the exact served bytes on chain before the round&#x27;s random value exists, then reveals after the round opens; a command-line pre-check for the bit budget is included. If the same bytes are committed twice, the earlier commit wins. GGUF quantisation types need a mainline llama.cpp path to be accepted (two ternary types were rejected). One entry per coldkey per tier per round.</p></div><div><h3>Validators</h3><p>Per the README: a validator recomputes a round and sets weights only after its own audit accepts the signed round record. Entries pass gates in order: registration and the one-entry rule, a safety check, tier fit, the bit budget (read from the tensor data or GGUF type names), the pinned parent, and commit-reveal. Scoring is an &#x27;observer KL&#x27; retention: judge models read the parent&#x27;s reasoning step and the miner&#x27;s step, and the score reflects how closely the miner moved the judge to where the parent did, on a scale where 1 means identical to the parent and about 0.135 means no contribution. The aggregate is the mean over judges of each judge&#x27;s worst slice across language and reasoning depth. Test items are drawn from a value that only exists once the commit window closes. Round records are signed, hash-chained and anchored on chain by the validator hotkey, with tools to re-run a round and audit it. The team says retention measures fidelity to the parent, not capability.</p></div><div><h3>Incentive</h3><p>Per the team&#x27;s documents (not yet seen applied on chain): within a tier, the current king would take 80 percent of the tier&#x27;s allocation and the best strictly improving challenger 20 percent. A challenger dethrones the king with a single-round lead of 0.02 or a lead of 0.01 in two consecutive rounds; these margins halve after three holds, and a floor rule applies to the worst slice. The team reports crown retention of about 0.24 (ternary), 0.26 (binary), 0.28 (sub-2) and 0.32 (sub-4). Chain-level split on 2026-10-21 (block about 9.33 million): subnet emission shares are 18 percent owner, 41 percent validators, 41 percent miners. Incentive was non-zero on exactly one neuron (100 percent), and that neuron was none of the four crowned miners&#x27; hotkeys named by the team, which each held 0.0 percent.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-21</span> <span class="muted">(on-chain read of mainnet)</span> Chain check: 256 of 256 neurons registered, 7 with validator permits (6 with weights set), all six pointing at the same single neuron, which holds 100 percent of miner incentive. That neuron is not any of the four crowned miners, is not the owner&#x27;s key and does not share the owner&#x27;s coldkey; it registered at about the end of September. Weight commit-reveal is off.</li>
+<li><span class="when">2026-10-12</span> <span class="muted">(#ralph)</span> A team member said mining is live but evaluation is stuck at the moment, and pointed to the team&#x27;s models page for the crowned models. The channel has no newer team message through 2026-10-21.</li>
+<li><span class="when">2026-09-16</span> <span class="muted">(GitHub RalphLabsAI/ralph)</span> Last commit in the RalphLabsAI/ralph repository (documentation and README edits).</li>
+<li><span class="when">2026-09-14</span> <span class="muted">(team subnet.json and llms.txt)</span> The team published device tests: the 2.9 GB sub-2 crown loaded and ran on four BrowserStack physical iPhones at roughly 10 to 18 tokens per second in normal chat, with memory-tight warnings. The team labels this its own run, not independent validation, and the other three crowns were not tested.</li>
+<li><span class="when">2026-09-11</span> <span class="muted">(Hugging Face ralph-v2-rounds)</span> Round 7 record uploaded to the team&#x27;s Hugging Face dataset; this is the newest round record found.</li>
+<li><span class="when">2026-09-03</span> <span class="muted">(#ralph)</span> The owner rejected accusations of self-mining made by several members since mid-August and asked critics to leave the channel; moderators reminded members that owners may moderate their own channels and that moderators do not vet subnets.</li>
+<li><span class="when">2026-09-02</span> <span class="muted">(#ralph)</span> The owner said weight setting had been stale and that a fix for scoring parity and incentives was being finished.</li>
+<li><span class="when">2026-08-18</span> <span class="muted">(#ralph)</span> Live rounds announced.</li>
+<li><span class="when">2026-08-05</span> <span class="muted">(#ralph)</span> v2 (model compression) opened to submissions as a shakedown with weights not set. Miners found a reveal bug and a commit-before-nonce bug, both fixed on 2026-08-05 and 2026-08-06; a dashboard followed on 2026-08-06 and a shakedown round completed on 2026-08-11.</li>
+<li><span class="when">2026-07-23</span> <span class="muted">(#ralph)</span> Community members began asking the owner to burn miner emission while no mining was running; chat that month and in early August describes emission pausing for weeks, with all miner incentive on one neuron, and the owner saying a new concept was being built.</li>
+<li><span class="when">2026-06-18</span> <span class="muted">(#ralph (pinned post))</span> Team launch post: Ralph (formerly named Karpa) was live on mainnet, in its first (v1) design where miners submit patches to improve training recipes through autonomous research, run in attested execution.</li>
+<li><span class="when">2026-06-15</span> <span class="muted">(on-chain read)</span> Netuid 40 was registered on mainnet under its current identity (chain registration block 8409860), with first emission a few blocks later.</li>
+<li><span class="when">2025-05-14</span> <span class="muted">(#ralph (pinned posts))</span> Moderators in the channel warned about impersonators of the previous occupant of this slot, Chunk, whose support had been suspended; nobody had claimed that project&#x27;s owner key at that point.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Read the README in RalphLabsAI/ralph for the pinned parent model, the four bit-width tiers and their caps.</li>
+<li>Compress the pinned Qwen3-8B into one tier and check it with the repository&#x27;s bit-rate checker before submitting.</li>
+<li>Serve the file at a fixed revision (a hash must cover exactly the bytes the validator will fetch), then run the miner submit command to commit the hash on chain before the round&#x27;s nonce exists.</li>
+<li>After the round opens, run the reveal step; one entry per coldkey per tier per round.</li>
+<li>Validators and auditors: the README has a section on running as an auditor validator, plus tools to re-run a round; it was only skimmed here, so read it directly.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>The chain does not currently pay the crowned miners. On 2026-10-21 one neuron held all incentive and every weight-setting validator pointed at it. It is none of the four crown hotkeys the team names, and it is not the owner&#x27;s coldkey; who operates it is unknown. Weights are opinions, not payouts, and these checks cannot rule out a relationship through other keys.</li>
+<li>The team&#x27;s own subnet description listed a gap, last checked 2026-09-13, that no v2 round allocation had been applied on chain (rounds signed and anchored, allocations held back until an operator sets weights from a published round). That page was not refreshed afterwards, and the on-chain read above is consistent with it still holding. The other two gaps listed there changed or stand: the stale on-chain description has since been updated, and iPhone testing still covers only the sub-2 crown.</li>
+<li>Evaluation was described as stuck by a team member on 2026-10-12, and the newest round record found is Round 7 (2026-09-11). No team statement after 2026-10-12 was found in the channel.</li>
+<li>The subnet has been in a public dispute. Since late July 2026 several members alleged that the subnet was self-mining (one neuron holding all incentive for weeks), and one said they lost TAO. The owner replied that the neuron was the old v1 winner and that weight setting had been stale, and rejected the accusation. No evidence either way is published in the channel. This page does not take a side.</li>
+<li>Retention scores are fidelity to the parent model, not a capability benchmark, and the team says so. The retention figures above are the team&#x27;s own and were not independently reproduced; the crown files on Hugging Face were not tested here.</li>
+<li>Device evidence is the team&#x27;s own run on one tier, with the file hash not verified on the device.</li>
+<li>Bit-per-weight caps for the sub-2 tier differ between sources (about 2.0 in chat on 2026-08-05, 2.3 in the README at the last commit). The repository README is the more recent source.</li>
+<li>A second repository name, ralph-v2, appears in chat and is described as the same protocol; the repository named on chain is RalphLabsAI/ralph and was the one read.</li>
+<li>This slot belonged to a different project, Chunk, until 2025 and the channel holds that older history. Messages from before mid-2026 do not describe Ralph.</li>
+<li>The benchmark results file, the Hugging Face round records, and validator hardware requirements were not opened; no answer was found to a miner&#x27;s August question about validator hardware and API costs.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://www.ralphlabs.ai/" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://www.ralphlabs.ai/models" rel="noopener noreferrer">Crowned models (team page)</a></li>
+<li><a href="https://github.com/RalphLabsAI/ralph" rel="noopener noreferrer">GitHub (RalphLabsAI/ralph)</a></li>
+<li><a href="https://huggingface.co/RalphLabsAI/ralph-crowns" rel="noopener noreferrer">Crown files on Hugging Face</a></li>
+<li><a href="https://huggingface.co/datasets/RalphLabsAI/ralph-v2-rounds" rel="noopener noreferrer">Round records (Hugging Face dataset)</a></li>
+<li><a href="https://www.ralphlabs.ai/.well-known/subnet.json" rel="noopener noreferrer">Team&#x27;s machine-readable subnet description</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 5 sources</summary>
+<ul>
+<li><strong>msg</strong> #ralph 2025-05-12 to 2026-10-21 (newest team message 2026-10-12), including pinned posts of 2025-05 and 2026-06-18</li>
+<li><strong>repo</strong> RalphLabsAI/ralph@6500e1b (2026-09-16): README.md and docs</li>
+<li><strong>web</strong> https://www.ralphlabs.ai/.well-known/subnet.json (read 2026-10-21), plus llms.txt and the models page</li>
+<li><strong>web</strong> Hugging Face RalphLabsAI datasets (ralph-v2-rounds, ralph-v2-status) and the ralph-crowns model repository, commit dates read 2026-10-21</li>
+<li><strong>web</strong> On-chain reads 2026-10-21: mainnet blocks 9334355-9334360 (registration, parameters, emission split, neuron permits, incentive and weights, boolean owner checks; no addresses recorded)</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/39.html"><small>← Previous</small>SN39 Pending (former Basilica slot)</a><a rel="next" href="/bittensor-docs/subnets/41.html"><small>Next →</small>SN41 Almanac</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-21. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

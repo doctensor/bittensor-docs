@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quantum Compute (SN48) | Bittensor Subnet Docs</title>
+<meta name="description" content="Marketplace for real quantum hardware: miners run circuits submitted through the Open Quantum platform and earn alpha">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h0">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>48</span><div>
+<h1>Quantum Compute <span class="muted">SN48</span></h1>
+<p class="tagline">Marketplace for real quantum hardware: miners run circuits submitted through the Open Quantum platform and earn alpha</p>
+<span class="st s-transitioning">transitioning</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl2"><b>0.29<small>/day</small></b><span>last 7 d</span></li><li class="pl3"><b>2.0<small>/day</small></b><span>days 8-30</span></li><li class="pl2"><b>0.48<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-22</b><span>last chat</span></li><li class="pw"><b>431</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>quantum computing access (QPU job marketplace)</dd>
+<dt>Status</dt><dd>As of 2026-10-21 the subnet pays incentive: four miner hotkeys under one coldkey hold all of it, and the team keeps adding quantum backends to its Open Quantum platform. On 2026-10-09 the team announced a move from a closed set of QPU operators to open mining through provider API keys, and released version 2.0 of the code the same day. The miner guide still says coming soon and chain incentive had not widened yet. Emission was cut off from about 2026-09-02 to 2026-09-09 for a reason that was not established.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-21</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>Quantum Compute (SN48, run by qBitTensor Labs, which also runs SN63 Enigma) is the execution side of Open Quantum, a platform where users run quantum circuits on real processors from vendors such as Rigetti, IonQ, IQM and AQT. Users pay in dollars on the platform, jobs are routed to subnet miners who submit them to the hardware, and miners earn alpha for completed work. The team describes the aim as making scarce quantum machines accessible and cheaper than renting direct from vendors; usage and price figures on the team&#x27;s pages are its own and were not checked.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Version 1 miners had to own or operate a QPU, and the team said it ran miner instances on behalf of some hardware providers. The 2.0 code (released 2026-10-09) instead has miners submit each circuit through a provider adapter; the only real adapter is Open Quantum, whose organization account pays for the job. A miner needs a hotkey on netuid 48, at least 5,000 alpha staked on it (a validator setting that defaults to 5,000), a public axon address and a list of accepted backend classes. The team announced that this lets anyone with a provider API key mine, but the miner guide in the repo is still marked coming soon.</p></div><div><h3>Validators</h3><p>A validator pulls quantum jobs from the Open Quantum job API, which authenticates it by hotkey, and the team onboards validators by hotkey. It picks the next eligible miner (stake-weighted, only miners above the stake floor), sends the circuit, collects results and records metrics. Miners that let a lease expire or fail proof checks are banned for a period. Validators do not compute scores from chain data: they take a frozen weight-epoch snapshot from the platform and turn it into weights.</p></div><div><h3>Incentive</h3><p>Per the 2.0 code, each epoch snapshot from the Open Quantum platform lists every miner&#x27;s completed and failed jobs, its job cost in credits, and the prices used to convert cost to alpha. A miner is owed its cost times a markup (code fallback 1.2) in alpha. If total owed fits inside the miner emission, weights simply follow each miner&#x27;s share of total cost, so miners receive the whole miner emission rather than only what they are owed. If total owed exceeds emission, miners are paid in rank order (reliability times stake) until it runs out. Any unclaimed share goes to the owner hotkey, which in practice happens only when there is no priced work. Cost, prices and markup come from the team&#x27;s platform and cannot be recomputed from public data.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-21</span> <span class="muted">(Bittensor chain state (read-only), block 9334346)</span> Chain read: 4 uids hold all incentive and all four hotkeys belong to one coldkey that is not the subnet owner&#x27;s; 13 of 20 validators have weights, and 11 of them put 44 to 47 percent on the same largest miner. No new open-mining hotkeys show incentive yet.</li>
+<li><span class="when">2026-10-20</span> <span class="muted">(#48-quantum-c)</span> Support for the Qrisp framework went live in beta on Open Quantum.</li>
+<li><span class="when">2026-10-10</span> <span class="muted">(#48-quantum-c)</span> The team&#x27;s owner said the October buybacks had not started and that the amount would depend on actual dollars paid for public quantum compute.</li>
+<li><span class="when">2026-10-09</span> <span class="muted">(#48-quantum-c; quantum-compute repo)</span> Version 2.0 landed in the repository (about 150 files changed after three months without commits), and the team announced open mining through trusted quantum cloud providers.</li>
+<li><span class="when">2026-10-01</span> <span class="muted">(qBitTensor Labs broadcast page)</span> In its broadcast the team said over 90 percent of Open Quantum traffic runs through SN48 and that the first revenue buybacks would arrive in October (team statements, not checked).</li>
+<li><span class="when">2026-09-09</span> <span class="muted">(#48-quantum-c)</span> The team said emission appeared to be back on and that it was still investigating what happened. No explanation was found in public chat or chain news.</li>
+<li><span class="when">2026-09-02</span> <span class="muted">(#48-quantum-c)</span> Emission to the subnet stopped. A member alleged that unspent alpha was accumulating on the miner coldkey; the team&#x27;s owner replied that the alpha builds up because the team pays real dollars for quantum compute and holds the alpha, and that emission had been stopped without explanation.</li>
+<li><span class="when">2026-07-09</span> <span class="muted">(#48-quantum-c)</span> The team announced that Open Quantum backends are available on the qBraid platform.</li>
+<li><span class="when">2026-07-03</span> <span class="muted">(#48-quantum-c)</span> Commit-reveal for weights was switched on (a chain read on 2026-10-21 shows it enabled), and the team posted a roadmap: PennyLane support, a distribution partnership, and a quantum processor available only on Open Quantum.</li>
+<li><span class="when">2026-02-24</span> <span class="muted">(#48-quantum-c)</span> Validator v1.1.0 introduced a cost-based incentive: miner incentive follows the miners&#x27; cost.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Read the miner and validator guides in the repo. The miner guide is marked coming soon and the team&#x27;s site says mining still needs a QPU or a documented partnership with a hardware holder, so confirm the current rules with the team in the channel first.</li>
+<li>Miner prerequisites in the 2.0 code: Python 3.12, Bittensor SDK v11, a hotkey registered on netuid 48 (registration burn was 0.0005 TAO on 2026-10-21), at least 5,000 alpha staked on that hotkey, and a public axon address validators can reach.</li>
+<li>Set PROVIDER=openquantum with an Open Quantum organization id and SDK key (the organization pays for jobs) and list the backend classes you accept; keep the organization balance above the configured minimum or the miner rate-limits jobs.</li>
+<li>Validators must be onboarded by the team first (send the validator hotkey), then run neurons/validator.py with the axon switched off as the README shows.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>All incentive on 2026-10-21 sits on four hotkeys under one coldkey, which differs from the subnet owner&#x27;s coldkey. Chain data does not show who controls it. The team said in chat (2026-02-26 and 2026-09-02) that it runs miners for QPU providers and holds the alpha, which could not be verified, and whether the alpha is spent on quantum compute costs was not established.</li>
+<li>Weights come from a snapshot produced by the team&#x27;s own platform behind an authenticated API, so cost, prices and markup are not publicly checkable. The code gives miners the whole miner emission whenever priced work exists, even if it exceeds their cost times markup.</li>
+<li>Chain weights were read (2026-10-21) but are validator opinions, not payouts. Nine validator rows were older than two tempos, and which validators run the 2.0 code is unknown.</li>
+<li>Docs lag the announcement: the miner guide says coming soon and the team site still describes hardware-owner mining, while the 2026-10-09 post says API-key mining is rolling out. Whether open mining is live was not confirmed.</li>
+<li>The cause of the emission stop from about 2026-09-02 to 2026-09-09 was not established.</li>
+<li>Usage, price and growth figures, the 90 percent traffic share and the planned October buybacks are team statements; no buyback was seen in sources and the team said none had started by 2026-10-10.</li>
+<li>A chat thread on 2026-10-09 about wallets buying alpha before the announcement is not covered here: it was speculation, and the owner denied the wallets were his.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/qbittensor-labs/quantum-compute" rel="noopener noreferrer">GitHub</a></li>
+<li><a href="https://www.qbittensorlabs.com/quantum" rel="noopener noreferrer">Subnet page (qBitTensor Labs)</a></li>
+<li><a href="https://www.qbittensorlabs.com/next" rel="noopener noreferrer">Next-era announcement</a></li>
+<li><a href="https://www.openquantum.com/" rel="noopener noreferrer">Open Quantum platform</a></li>
+<li><a href="https://www.qbittensorlabs.com/news/qbtll-live-2026-10-01" rel="noopener noreferrer">Team broadcast, 2026-10-01</a></li>
+<li><a href="https://github.com/qbittensor-labs/quantum-compute/blob/main/qbittensor/miner/README.md" rel="noopener noreferrer">Miner guide (repo)</a></li>
+<li><a href="https://github.com/qbittensor-labs/quantum-compute/blob/main/qbittensor/validator/README.md" rel="noopener noreferrer">Validator guide (repo)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 5 sources</summary>
+<ul>
+<li><strong>msg</strong> #48-quantum-c, 2026-02-12 to 2026-10-20</li>
+<li><strong>repo</strong> qbittensor-labs/quantum-compute README, miner and validator guides, weights/epoch.py, neurons/validator.py, utils/env.py @01f5528 (2026-10-20)</li>
+<li><strong>web</strong> https://www.qbittensorlabs.com/quantum and /next (read 2026-10-21)</li>
+<li><strong>web</strong> https://www.qbittensorlabs.com/news/qbtll-live-2026-10-01 (read 2026-10-21)</li>
+<li><strong>web</strong> Bittensor finney chain state, read-only: subnet 48 parameters, neurons, weights and incentive at blocks 9334344 to 9334346 (about 20:50 UTC, 2026-10-21)</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/47.html"><small>← Previous</small>SN47 GPUForge</a><a rel="next" href="/bittensor-docs/subnets/49.html"><small>Next →</small>SN49 Nepher Robotics</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-21. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

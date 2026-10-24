@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cathedral (SN94) | Bittensor Subnet Docs</title>
+<meta name="description" content="CPU sandboxes for RL and evals on attested confidential-compute machines; miner access still being sequenced.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h10">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>94</span><div>
+<h1>Cathedral <span class="muted">SN94</span></h1>
+<p class="tagline">CPU sandboxes for RL and evals on attested confidential-compute machines; miner access still being sequenced.</p>
+<span class="st s-transitioning">transitioning</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl4"><b>2.0<small>/day</small></b><span>last 7 d</span></li><li class="pl4"><b>4.0<small>/day</small></b><span>days 8-30</span></li><li class="pl3"><b>1.9<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-24</b><span>last chat</span></li><li class="pw"><b>281</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>compute (sandboxes for RL training and evaluation)</dd>
+<dt>Status</dt><dd>New team and new focus since 2026-09-27: the subnet slot changed hands in August and Cathedral moved here from SN39 on 2026-09-28. The product is in beta and both public repos were updated on 2026-10-18 to 2026-10-21, but on 2026-10-03 the team said miner registration was not open yet and that it would seed the first compute itself. No final miner model had been announced by 2026-10-21.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-21</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>Cathedral sells sealed CPU sandboxes for teams that train, evaluate and generate data for AI agents. Each sandbox is a full Linux machine on Intel TDX or AMD SEV-SNP hardware, and the service signs a receipt for every command run so customers can check it offline. The subnet&#x27;s role is to supply a verifiable pool of such machines: miners run confidential VMs, and validators check their hardware evidence, reject duplicates and test them with a bounded task. The subnet slot was bought in August 2026 for a different (inference) project that fell through before this team took it over.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Per the miner repo, a miner runs a worker inside an Intel TDX confidential VM (or an AMD SEV-SNP guest) with Docker and a public IPv4 address with TCP port 8081 open, announces that endpoint as the hotkey&#x27;s axon, and keeps a control host that refreshes signed validator-access snapshots. Several machines can share one hotkey, but each must pass verification on its own and duplicate hardware scores zero. GPU machines are not a qualified path. The team said on 2026-10-03 that it was still choosing how to admit outside miners and would first seed supply with its own marked machines.</p></div><div><h3>Validators</h3><p>A validator finds serving miners without validator permits and checks fresh TDX or SEV-SNP evidence along with the live TLS key. It zeroes every claimant involved in a duplicate endpoint, hardware identity or TLS key, sends each remaining machine one bounded SAT task, and writes weights from the verified work with zero burn. SEV-SNP machines count only if the validator&#x27;s own reviewed measurement and TCB policy admits them, and by default a TDX machine needs only a genuine fresh quote, not a specific image.</p></div><div><h3>Incentive</h3><p>Weight is based on the number of distinct verified machines per hotkey. The repos say that registration, uptime, a quote or a self-reported machine count earns nothing on its own, and that weight does not guarantee TAO because the subnet needs positive emission. A quote does not prove which container image runs or that the machine stays intact after boot. Customer payment and its link to miner rewards are not documented.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-20</span> <span class="muted">(GitHub cathedral-sandbox, #94-cathedral)</span> The miner repo merged its live room-broker stack and receipt changes (last commit 2026-10-21), and the team offered a sandbox pool of 500 to 2,000 to an ecosystem member for testing.</li>
+<li><span class="when">2026-10-18</span> <span class="muted">(GitHub cathedral-validator)</span> The validator repo documented opt-in commit-reveal for SN94 operators; on 2026-10-17 it added export of a signed SEV-SNP roster to the Cathedral join API.</li>
+<li><span class="when">2026-10-14</span> <span class="muted">(#94-cathedral)</span> Update said agents were running in sealed hardware with signed proof, the website, docs and console were being rebuilt, and the first compute set would be seeded by the team and verifiable on chain.</li>
+<li><span class="when">2026-10-07</span> <span class="muted">(#94-cathedral)</span> The team reported results against the public sandbox spec published by Affine (SN120): 0.20 s to ready, 1,000 sandboxes started in 18.7 s, and under a cent per sandbox-hour at raw hardware cost. The numbers are from its standard lane, with sealed-hardware runs still to come.</li>
+<li><span class="when">2026-10-03</span> <span class="muted">(#94-cathedral)</span> Weekly update said registration was not yet open and initial nodes would be seeded from the team&#x27;s own compute. The team also laid out four options for admitting miners (seed, data-centres only, open with track record, split by workload) and asked miners for feedback.</li>
+<li><span class="when">2026-09-28</span> <span class="muted">(GitHub cathedral-sandbox and cathedral-validator)</span> The miner and validator repos record the move from SN39 to SN94.</li>
+<li><span class="when">2026-09-27</span> <span class="muted">(#94-cathedral)</span> Cathedral announced itself as the new project on this subnet, with a live beta of CPU sandboxes for RL, data generation and evaluation, and said mining would resume in the following weeks.</li>
+<li><span class="when">2026-08-07</span> <span class="muted">(#94-cathedral)</span> The slot was claimed by Beyond Finance for an instant-inference launch that fell through, and the owner said it would run due diligence on a new team rather than rush one in.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Check the latest team post in the subnet channel first: the team said on 2026-10-03 that registration was not yet open and that the admission model for outside miners was undecided.</li>
+<li>If you plan to mine, read docs/MINING.md in the miner repo and run its local rehearsal three times before renting hardware or registering a hotkey.</li>
+<li>You need an Intel TDX confidential VM or an AMD SEV-SNP guest with Python 3.12, Docker, nft and a public IPv4 address with TCP 8081 open. Ask the validators you expect to score you whether they admit your SNP measurement.</li>
+<li>Keep the coldkey off the worker, register the hotkey only after the worker&#x27;s local startup check passes, then announce the endpoint and confirm the weight row on chain.</li>
+<li>Validator operators need a validator permit on SN94 and should follow the validator repo&#x27;s operator runbook, including the commit-reveal opt-in.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Chain weights, emissions, the validator set and the number of miners were not read, and it is not verified whether anyone outside the team is currently being weighted.</li>
+<li>The team said registration was not open on 2026-10-03, while the miner repo&#x27;s guide describes Intel TDX mining as &#x27;mainnet live testing&#x27;. The sources have not been reconciled.</li>
+<li>Benchmark numbers (0.20 s, 1,000 sandboxes in 18.7 s, cost per sandbox-hour) are the team&#x27;s own and were not independently run; the sealed TDX and SEV-SNP runs had not been published.</li>
+<li>The validator README says Finney SN94 has commit-reveal enabled and operators must opt in, while a constants file in the same repo pins it as disabled for its older composer path.</li>
+<li>Several repo descriptions still say SN39. The reason for the move to SN94 was not given, and a miner&#x27;s question about it on 2026-10-08 has no answer in the channel data.</li>
+<li>No pricing, customer or revenue figures were sourced. The sandbox service is described on the site as invite-by-email beta, and the AMD SEV-SNP admission on SN94 is listed as unverified.</li>
+<li>A TDX quote does not remotely prove the container image or continuous runtime integrity after boot, per the repo&#x27;s own support table.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://cathedral.computer/" rel="noopener noreferrer">Cathedral website</a></li>
+<li><a href="https://cathedral.computer/docs" rel="noopener noreferrer">Docs and quickstart</a></li>
+<li><a href="https://github.com/cathedralai/cathedral-sandbox" rel="noopener noreferrer">Miner repo (Cathedral Sandbox)</a></li>
+<li><a href="https://github.com/cathedralai/cathedral-sandbox/blob/main/docs/MINING.md" rel="noopener noreferrer">Mining guide</a></li>
+<li><a href="https://github.com/cathedralai/cathedral-validator" rel="noopener noreferrer">Validator repo</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 4 sources</summary>
+<ul>
+<li><strong>repo</strong> cathedralai/cathedral-sandbox@94d01b9 (2026-10-21): README, docs/MINING.md, docs list</li>
+<li><strong>repo</strong> cathedralai/cathedral-validator@45d5dd2 (2026-10-18): README, cathedral_thin/independent/constants.py</li>
+<li><strong>web</strong> https://cathedral.computer/ and https://cathedral.computer/docs (read 2026-10-21); GitHub API for github.com/cathedralai repos</li>
+<li><strong>msg</strong> #94-cathedral, 2026-07-13 to 2026-10-20, including the owner and team updates of 2026-08-07, 09-27, 10-03, 10-07, 10-14</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/93.html"><small>← Previous</small>SN93 Bitcast</a><a rel="next" href="/bittensor-docs/subnets/95.html"><small>Next →</small>SN95 Actual</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-21. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

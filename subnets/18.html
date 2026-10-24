@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Zeus (SN18) | Bittensor Subnet Docs</title>
+<meta name="description" content="Miners forecast hourly wind, solar and temperature up to 15 days ahead and earn by beating rivals against ERA5 data.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h6">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>18</span><div>
+<h1>Zeus <span class="muted">SN18</span></h1>
+<p class="tagline">Miners forecast hourly wind, solar and temperature up to 15 days ahead and earn by beating rivals against ERA5 data.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl4"><b>2.3<small>/day</small></b><span>last 7 d</span></li><li class="pl3"><b>1.2<small>/day</small></b><span>days 8-30</span></li><li class="pl4"><b>5.0<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-23</b><span>last chat</span></li><li class="pw"><b>4,171</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>weather and environmental forecasting</dd>
+<dt>Status</dt><dd>A scoring change was committed on 2026-10-15 and announced on 2026-10-16, the team replied to miner feedback on 2026-10-20, and the chain showed 26 UIDs with non-zero incentive on 2026-10-21.</dd>
+<dt>Confidence</dt><dd>high</dd>
+<dt>Researched</dt><dd>2026-10-21</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>Zeus, built by the company Ørpheus AI, is a forecasting subnet. Miners produce global hourly weather forecasts for four surface variables, validators score them against ERA5 reanalysis data once the real values are known, and emissions go mostly to the miners that win the most head-to-head comparisons. The company sells the resulting forecasts to energy traders and, since August 2026, steers miner effort toward Germany and Europe through geographic weighting.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Miners run their own forecasting models, typically trained on public ERA5 history, and answer challenges for four ERA5 variables (2 m temperature, 100 m eastward and northward wind, surface solar radiation) on a 0.25 degree global grid. There are two horizons: 48 hours and 15 days. Before the forecast is requested, the miner commits a hash of its compressed forecast on chain, so it cannot copy another miner&#x27;s answer; the validator later requests the full forecast and checks it against the hash. A GPU is needed to train a model but the docs say inference runs on a modest CPU machine.</p></div><div><h3>Validators</h3><p>Validators wait until the real ERA5 values exist, then compute each miner&#x27;s error (the average of RMSE and MAE, weighted by latitude and geographic scalars) and rank miners per variable and horizon. Since 2026-08-25 the scalars give 40% of the weight to Germany, 40% to the rest of Europe and 20% to the rest of the world, with grid weights based on wind capacity, solar capacity and population. Forecasts with the wrong shape, non-finite values or (since 2026-09-02) negative solar radiation are penalised, and collusion checks run on near-identical forecasts.</p></div><div><h3>Incentive</h3><p>Per the code at 2026-10-15, there are eight challenges (four variables times two horizons) with fixed weights (variables 0.2, 0.3, 0.3 and 0.2; horizons 0.2 and 0.8). In each, the miner with the best win rate over its last 4 (short) or 8 (long) scored challenges takes 95% of that challenge&#x27;s weight, and the rest is spread on a falling scale. Until 2026-10-16 the average rank over the same window decided instead. Validators then fetch a burn share per epoch from a team-run API and put it on a burn UID; the team said in May 2026 that this averaged 50%, and the current level could not be verified.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-20</span> <span class="muted">(#zeus)</span> After miners said the new rule disadvantages newcomers, a team member said old and new miners are treated the same and asked for more feedback in case another update is needed.</li>
+<li><span class="when">2026-10-16</span> <span class="muted">(#zeus; GitHub)</span> Weights switched from average rank to win rate (how often a miner finished first); the dashboard was expected to show a mix of old and new data for some hours.</li>
+<li><span class="when">2026-09-07</span> <span class="muted">(#zeus; GitHub)</span> Miners registered more than four weeks ago that were penalised eight times in a row stopped receiving emissions.</li>
+<li><span class="when">2026-09-02</span> <span class="muted">(#zeus; GitHub)</span> Miners whose solar radiation forecasts contain negative values began to be penalised; a hotfix on 2026-09-03 limited this to newer challenges after a miner raised a concern.</li>
+<li><span class="when">2026-08-25</span> <span class="muted">(#zeus)</span> New geographic scalars went live on mainnet: 40% of the incentive to Germany, 40% to the rest of Europe, 20% elsewhere, applied to scoring after a delay of 7 days (48 h challenges) or 20 days (15 day challenges).</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Read the mining guide in the repo, which covers wallet, registration on subnet 18 and the commit-then-reveal flow.</li>
+<li>Check the compute notes: the default miner runs on about 4 CPU cores and 16 GB of RAM, but training a competitive model needs a GPU (chat mentions H100 and H200 cards).</li>
+<li>Train on public ERA5 data and start from the default miner in the repo, which already implements the on-chain commitment and the later reveal.</li>
+<li>Make the forecast tensor match the required shape and keep the exact compressed bytes you committed, since a hash mismatch counts as a penalty.</li>
+<li>Watch the miner dashboard and the Discord channel: scoring windows and weights have changed several times since August 2026.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>The burn share comes from a closed, team-run API that only validators it considers credible can read, so the actual burn level on 2026-10-21 is unknown. The code&#x27;s burn UID also holds a validator permit, and validator weights on it ranged from about 2% to 9% in the three vectors checked.</li>
+<li>On 2026-10-21 six of nine validators with weights put their largest share on one UID (about 45% in most of them) and three on another, so a few miners hold most of the incentive.</li>
+<li>The README and parts of the docs still describe weights as rolling averages of ranks, which was replaced by win rate on 2026-10-16; old geography constants also remain in the code next to the new scalars.</li>
+<li>Benchmark claims against ECMWF models and company revenue figures are the team&#x27;s own statements; they were not independently checked, and how the sold forecasts relate to miner output is not stated in the sources read.</li>
+<li>Several miners questioned fairness in chat, including self-mining and anonymous top miners; the team points to the on-chain hashes and a public forecast dataset, which were not audited here.</li>
+<li>The page describes code at 2026-10-15 (version 2.1.4); validators may run other versions.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/Orpheus-AI/Zeus" rel="noopener noreferrer">GitHub</a></li>
+<li><a href="https://www.zeussubnet.com/" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://github.com/Orpheus-AI/Zeus/blob/main/docs/Mining.md" rel="noopener noreferrer">Mining guide</a></li>
+<li><a href="https://github.com/Orpheus-AI/Zeus/blob/main/docs/Validating.md" rel="noopener noreferrer">Validator guide</a></li>
+<li><a href="https://huggingface.co/orpheus-zeus" rel="noopener noreferrer">Public forecast dataset (Hugging Face)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 4 sources</summary>
+<ul>
+<li><strong>repo</strong> Orpheus-AI/Zeus @76a79dd (2026-10-15): README.md, docs/Mining.md, docs/Validating.md, min_compute.yml, zeus/validator/{constants,reward,weight_setter,challenge_spec,burn_manager}.py, zeus/utils/config.py</li>
+<li><strong>web</strong> zeussubnet.com home page (read 2026-10-21); performance API OpenAPI listing (not called)</li>
+<li><strong>web</strong> Bittensor chain read-only: subnet info, parameters, validator weights and incentive aggregates for netuid 18 at blocks 9334344 to 9334350 (2026-10-21)</li>
+<li><strong>msg</strong> #zeus (channel 18), 2026-05-20 to 2026-10-21, including team posts of 2026-08-21, 2026-08-25, 2026-09-02, 2026-09-07, 2026-10-16 and 2026-10-20</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/17.html"><small>← Previous</small>SN17 404-GEN</a><a rel="next" href="/bittensor-docs/subnets/19.html"><small>Next →</small>SN19 blockmachine</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-21. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

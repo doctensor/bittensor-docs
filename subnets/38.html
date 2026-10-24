@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ChronoLLM (SN38) | Bittensor Subnet Docs</title>
+<meta name="description" content="Miners train small LLMs that know only events up to a cutoff year, to remove lookahead bias in financial backtests.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h2">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>38</span><div>
+<h1>ChronoLLM <span class="muted">SN38</span></h1>
+<p class="tagline">Miners train small LLMs that know only events up to a cutoff year, to remove lookahead bias in financial backtests.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>7.4<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>14<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>15<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-24</b><span>last chat</span></li><li class="pw"><b>2,782</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>language models (time-consistent training)</dd>
+<dt>Status</dt><dd>Weekly rounds are running: round 17 (vintage 2012) is open with 44 submissions on 2026-10-23 and a deadline of Monday 2026-10-26 12:00 UTC; round 16 was scored on 2026-10-19, and chat was busy through 2026-10-22. A public dispute with miners over the private leak test continued on 2026-10-21.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-23</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>ChronoLLM rewards miners for training language models that only know what was publicly known up to a chosen year, so that finance and research teams can backtest without the model already knowing the future. Each weekly round covers one vintage year: the team has finished 2013 to 2025, and round 17 is vintage 2012, with years then walking back toward 1999. CrunchDAO announced on 2026-06-10 that it was taking over the subnet. Its website offers API access and self-hosted point-in-time models, and the team said on 2026-10-21 that first paid enterprise pilots are targeted for the fourth quarter of 2026 or the first of 2027.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Miners train a model of up to 2.2 billion parameters for the round&#x27;s vintage year, upload it to HuggingFace, and commit a file on chain that points to the repository pinned to an exact commit. Any architecture that loads as a standard causal language model is accepted, and custom architectures can be added through a pull request. Everything is cleared each round, so miners resubmit every week before Monday 12:00 UTC. A rate-limited self-test inside a secure enclave gives pass or fail on a separate sample dataset.</p></div><div><h3>Validators</h3><p>The evaluation runs inside a Phala Cloud secure enclave on an H200 GPU. It downloads the models, fetches a private evaluation dataset from the team&#x27;s backend, rejects copies, tests whether each model knows its own period but not later ones (the leak test), keeps the best 30 by leak score, and ranks those by head-to-head duels on fresh prompts judged by an OpenAI model. On chain, twelve UIDs hold validator permits and six set weights, all six with the same ten targets. In rounds 13 to 16 the results on the public leaderboard API were posted by the hotkey of UID 0, which is the subnet owner&#x27;s own slot. All five of the others update their weights far more often than a weekly evaluation could produce new results, and the sources do not say what they run.</p></div><div><h3>Incentive</h3><p>Final score is 30 percent normalised leak score plus 70 percent duel win rate (a raw leak score of -11 maps to 0 and -25 to 1), per the code and live config on 2026-10-23. The published results for rounds 15 and 16 match that formula to four decimals, while rounds 13 and 14 matched win rate alone, because leak was only a pass or fail gate until Round 14. The top 10 share emissions on a decaying curve, roughly 52, 23, 12, 6, 3.2 and 1.7 percent for the first six places, and the on-chain incentive on 2026-10-23 matches it. A model that fails a check or is skipped (duplicate weights, too large, would not load) scores zero. Separately, the chain splits subnet emission 18 percent to the owner, 41 percent to validators and 41 percent to miners, and the owner&#x27;s UID 0 holds about 86 percent of validator dividends.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-21</span> <span class="muted">(#chronos, 2026-10-21)</span> The team said it is in talks with financial institutions and research labs and targets first paid enterprise pilots in the fourth quarter of 2026 or the first of 2027, with an announcement the day the first contract is signed. The same day a miner repeated the self-mining accusation about one model, and the team answered that nobody has access to the evaluation data and that submitted models are public and can be inspected.</li>
+<li><span class="when">2026-10-19</span> <span class="muted">(#chronos, 2026-10-19 to 2026-10-20; on-chain weight update 2026-10-19; public leaderboard API)</span> Round 16 (vintage 2025) was evaluated in the enclave and the validator set weights on chain at about 17:09 UTC: 72 models were submitted, 13 passed the leak test and 10 were paid. Round 17 (vintage 2012) opened, the team confirmed no evaluation changes and a submission deadline of Monday 2026-10-26 12:00 UTC, and a miner&#x27;s zero score was explained as duplicate weights. A miner reported the self-test authorization error again, and on 2026-10-20 the team said the test was available.</li>
+<li><span class="when">2026-10-14</span> <span class="muted">(#chronos (pinned), 2026-10-14; #chronos, 2026-10-14)</span> The team said Round 16 would be vintage 2025, the last year of the forward sequence, and that from Round 17 vintages walk backward from 2012 to 1999. It also said the first public product would launch in the first week of November. The same day the secure-enclave host updated its image, and some miners then got an authorization error from the self-test.</li>
+<li><span class="when">2026-10-12</span> <span class="muted">(#chronos, 2026-10-12 to 2026-10-14; public leaderboard API)</span> During the Round 15 evaluation miners reported that nearly all models failed the leak test for year 2024, including models that had passed the self-test. The team said the models were leaking and that the self-test intentionally uses a different dataset. Miners asked for per-model leak results and accused the team of self-mining, and the team denied owning winning miners. The leaderboard API later showed 87 models submitted, 4 passing the leak test and 4 paid, scored with the 30/70 split.</li>
+<li><span class="when">2026-10-06</span> <span class="muted">(#chronos (pinned), 2026-10-06; GitHub commit 2026-10-07)</span> After Round 14 the team announced that leak scoring would count for 30 percent of the final score from Round 15, normalised between raw scores of -11 and -25. It reported that the best Round 14 model won 87 percent of duels against a larger Llama model, a figure from the team itself.</li>
+<li><span class="when">2026-07-23</span> <span class="muted">(#chronos (pinned), 2026-07-23)</span> Round 4 rules opened submissions to any model architecture, raised the size limit to 2.2 billion parameters and moved to evaluating a single year per round, starting with 2013.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Read docs/miner.md in the GitHub repository and check the live config and current round endpoints to see which vintage year is being evaluated.</li>
+<li>Train a model of at most 2.2 billion parameters on data available only up to that year, and upload it to HuggingFace in safetensors format.</li>
+<li>Try your model with the self-test described in the miner guide (pass or fail, 12 calls per day per hotkey) and with the repository&#x27;s architecture test script.</li>
+<li>Register a hotkey on subnet 38, list your model pinned to a commit SHA, and submit with the miner script before Monday 12:00 UTC; make the model repository public within an hour of the deadline.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Documentation lags the code: the README still describes leak as a pass or fail gate with ranking by duels only, and states the qualifying condition the opposite way round from the code, where a lower leak score is better and must be below -3.0. The miner guide and a constants file describe one model per year for 2013 to 2024, but each round now evaluates a single vintage year.</li>
+<li>The evaluation data, per-year known and unknown scores and the backend are private and run by the team. The public leaderboard API does show each round&#x27;s leak score per UID, the qualifiers, duel win rates, final scores and paid weights, but a zero cannot say why: failing the leak test, duplicate weights, an oversize model and a load error all score zero.</li>
+<li>The config endpoint is controlled by the team and has no change log; on 2026-10-12 it briefly showed zero leak weight. The published Round 15 results match the 30/70 split. It also lists leak settings the validator code does not read, so the repository cannot prove which thresholds run in production.</li>
+<li>In practice one evaluator runs this subnet: the results for rounds 13 to 16 were posted by the owner&#x27;s UID 0, and five other validators carry identical weights. The team says anyone can run a validator, but no other validator&#x27;s evaluation results were found.</li>
+<li>Fairness accusations from 2026-10-12 to 2026-10-21 are unresolved. The team denies self-mining, says nobody has access to the data and that models are public. On chain on 2026-10-23, no paid UID shared the owner&#x27;s coldkey; the ten paid UIDs sat under five coldkeys, with the two largest payouts under one. That neither proves nor rules out anything, because other keys are not visible.</li>
+<li>The self-test uses a separate dataset by design, so passing it does not guarantee passing the real test. An authorization error on the newer enclave image was reported on 2026-10-19, and the team said on 2026-10-20 that the test was available, without naming a fix.</li>
+<li>The website markets API access, self-hosted weights and point-in-time models back to 1999, and shows a 72 billion parameter model, while subnet models are capped at 2.2 billion parameters. How subnet output feeds the product is not documented in what was read. The first public product (first week of November) and the first paid pilots (fourth quarter of 2026 or first of 2027) are chat statements only, and no answer to holders asking about buybacks was found.</li>
+<li>Validators need an H200 GPU in a secure enclave and an OpenAI key. The docs say a validator needs enough stake, while the team said in chat that no minimum stake is required.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/chronollm/sn38" rel="noopener noreferrer">GitHub</a></li>
+<li><a href="https://github.com/chronollm/sn38/blob/main/docs/miner.md" rel="noopener noreferrer">Miner guide</a></li>
+<li><a href="https://github.com/chronollm/sn38/blob/main/docs/validator.md" rel="noopener noreferrer">Validator guide</a></li>
+<li><a href="https://chronollm.com/" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://leaderboard.chronollm.com/" rel="noopener noreferrer">Leaderboard</a></li>
+<li><a href="https://api.chronollm.com/config" rel="noopener noreferrer">Live evaluation config</a></li>
+<li><a href="https://api.chronollm.com/rounds/current" rel="noopener noreferrer">Current round</a></li>
+<li><a href="https://arxiv.org/abs/2502.21206" rel="noopener noreferrer">Paper: Chronologically Consistent Large Language Models (arXiv)</a></li>
+<li><a href="https://arxiv.org/abs/2510.11677" rel="noopener noreferrer">Paper: Instruction Tuning Chronologically Consistent Language Models (arXiv)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 7 sources</summary>
+<ul>
+<li><strong>repo</strong> chronollm/sn38 README.md, docs/miner.md, docs/validator.md, sn38/neurons/validator.py, sn38/template/leak.py, sn38/template/constants.py at 25e2460 (2026-10-12, unchanged on 2026-10-23)</li>
+<li><strong>web</strong> https://api.chronollm.com/config and /rounds/current (fetched 2026-10-23)</li>
+<li><strong>web</strong> https://leaderboard.chronollm.com and its public API: /rounds/current, /years, /submissions and /eval/results for rounds 1 to 17 (read 2026-10-23)</li>
+<li><strong>web</strong> https://chronollm.com home page (read 2026-10-23; pricing, FAQ and methodology pages not read)</li>
+<li><strong>web</strong> Bittensor mainnet reads for subnet 38 at blocks 9343273 to 9343282 (2026-10-23): parameters, incentive, dividends, validator weights, emission split, key-ownership test</li>
+<li><strong>msg</strong> #chronos pinned announcements 2026-06-10 to 2026-10-14</li>
+<li><strong>msg</strong> #chronos, miner and team discussion 2026-10-04 to 2026-10-22</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/37.html"><small>← Previous</small>SN37 Aurelius</a><a rel="next" href="/bittensor-docs/subnets/39.html"><small>Next →</small>SN39 Pending (former Basilica slot)</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-23. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

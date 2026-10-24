@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ditto (SN118) | Bittensor Subnet Docs</title>
+<meta name="description" content="Miners compete to build the best agent-memory harness, scored on DittoBench in a king-of-the-hill contest.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h10">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>118</span><div>
+<h1>Ditto <span class="muted">SN118</span></h1>
+<p class="tagline">Miners compete to build the best agent-memory harness, scored on DittoBench in a king-of-the-hill contest.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>37<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>46<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>143<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-24</b><span>last chat</span></li><li class="pw"><b>14,568</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>AI agent memory</dd>
+<dt>Status</dt><dd>Active: team chat through 2026-10-21 (members still posting on 2026-10-22), a live leaderboard with 38 entries (36 emission-eligible) on 2026-10-22 and repository releases through v0.381.2 on 2026-10-22. Submission screening and validation still had stalls in October (the validator queue was empty on 2026-10-22), and the owner kept 70% of miner emission burned.</dd>
+<dt>Confidence</dt><dd>high</dd>
+<dt>Researched</dt><dd>2026-10-22</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>Ditto is a subnet that rewards the best harness for giving AI agents persistent memory and tool use. Miners submit a Docker build context that serves a standard HTTP contract, in any language. Validators run each screened image in an isolated sandbox against DittoBench, which tests tool calling and memory recall. The subnet team also sells Ditto, an AI assistant with persistent memory.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Build and practice a memory harness locally (the supported reference is a Rust starter kit, but any language works), package its whole Docker build context and upload it with the ditto CLI. Uploading costs an evaluation fee, quoted at 0.1 TAO as of 2026-09-14, and needs a hotkey registered on subnet 118; registering recycles TAO separately from that fee (the docs call it usually larger, but the chain&#x27;s registration burn read only 0.0005 TAO on 2026-10-22). A Dockerfile RUN instruction must not request an insecure build entitlement (--network=host or --security=insecure): screening rejects it and ditto verify now fails it before the fee. You are rewarded for improving the best artifact, not for serving live inference. A king&#x27;s source is published 24 hours after its winner emission is confirmed on chain (all 35 listed agents were downloadable on 2026-10-22). On 2026-10-21 the team proposed lengthening that window to 48 hours; the live feed still showed 24 hours. The docs say near-duplicates of another miner&#x27;s agent are held for human review, while the team said on 2026-10-19 that building on a released king&#x27;s code is allowed. The repository also carries shadow-only starter kits for coding and router contracts and a unified kit that serves the coding endpoints beside the normal ones; they do not affect the active score or weights.</p></div><div><h3>Validators</h3><p>A team-operated screener first builds the image, health-checks it and reviews its source under a published policy (v13, rejection conditions I1 to I8: bypassing the model&#x27;s authority, suppressing its output, tailoring answers to the benchmark and similar). Rulings are tied to exact agent builds, not to miners. Validators then lease scoring jobs from the central platform, run the agent in a sandbox with no outside network, and score it on freshly generated cases whose seed comes from a chain block fixed after the miner commits. Grading is deterministic and judge-free: tool calls are scored on tool name, arguments and order, memory answers by a public per-answer-kind grader, the two halves count equally, and penalty gates scale the composite down for wasteful tool use, inconsistent answers, memory over-calling, cross-user leaks and answers that only work on the original wording (read from the older scorer files; the v13 rules were not read in detail). Every run uses one locked model (openai/gpt-oss-20b through a platform-controlled proxy). Validators then set weights on chain from the shared score ledger. The weight function is a pure fold over the platform&#x27;s score ledger (one best entry per paying wallet, full-length benchmark runs only), so every validator computes the same vector. A release on 2026-10-22 stopped counting outages of the scorer image or the private dataset against miners. On chain at block 9339641 (2026-10-22), 12 uids held validator permits and 11 of them had set weights; all 11 weight rows put 70% on the owner&#x27;s uid 0.</p></div><div><h3>Incentive</h3><p>King of the hill: a challenger takes the crown only after beating the incumbent by the larger of a fixed 0.007 composite margin and a statistical error band, with near misses settled by re-scoring on shared seeds. Entries are compared on an aggregate score (an average over the signed quorum runs plus any accepted confirmation seeds), and the incumbent keeps the crown until the bar is cleared, so the champion is not always the top-ranked entry: at 14:40 UTC on 2026-10-22 the champion was 2nd on the leaderboard (aggregate 0.814) behind a top entry at 0.819. Both carried the same 18-sample aggregate, so the check was run on 15 shared seeds, where the top entry&#x27;s lead was slightly negative (-0.002) against a required lead of 0.009, and the champion kept the crown. Earlier that day the top entry had only its three quorum runs and the check was unpaired. The champion and the next four miners share the competitive pool by a payout curve that the operator sets on the platform ledger, which validators from version 31 use. The live leaderboard on 2026-10-22 reported 50/20/13/10/7 percent, while the docs and the code&#x27;s frozen default list 65/14/10/7/4. The subnet owner can set a burn share that scales the whole miner payout down; the public allocation endpoint showed 70% burned on 2026-10-22 (the same revision as on 2026-10-20), and with no eligible miners everything is burned. A token-efficiency adjustment (factor 0.85 to 1.10) exists, but the leaderboard showed it inactive on 2026-10-22 (its cohort listed 6 entries against a minimum setting of 8, and no entry was adjusted). On chain at block 9339641 (2026-10-22) the owner&#x27;s own uid 0 still held 70.0% of incentive, six uids had incentive and the top five held 97.9%, the same shape as on 2026-10-21 when the five paid miners shared the other 30% in that 50/20/13/10/7 pattern. The subnet&#x27;s RecycleOrBurn setting reads Burn, and the validator code relies on Subtensor burning miner incentive sent to an owner-associated hotkey, so that 70% is destroyed rather than paid to the owner; the burned amount itself was not measured. Chain weights trail the leaderboard by a tempo or two, so lower ranks on chain can differ briefly from the live board. Dividends were also concentrated: the owner&#x27;s uid, which holds a validator permit, took 57.4% of them.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-22</span> <span class="muted">(#ditto, 2026-10-22; public leaderboard and activity API, 2026-10-22)</span> No team posts appeared after the evening of 2026-10-21. Members kept asking for agents parked as &quot;screening inconclusive, manual retry required&quot; to be retried. The public activity feed showed no submissions waiting for a validator (21 had been waiting at 00:05 UTC), and the leaderboard held 38 entries; the top entry was re-scored on the same 15 shared seeds as the champion, which kept the crown.</li>
+<li><span class="when">2026-10-22</span> <span class="muted">(GitHub changelog and docs, 2026-10-22)</span> Repository releases v0.378 to v0.381.2 shipped over 2026-10-21 and 2026-10-22: build-bounty operator controls and pilot evaluation records, screener changes that keep incomplete reviews parked for manual review, a loader for a protected case bank plus operator-control docs for a planned private-replay check under policy v13, published receipts for a manual treasury transfer, and in v0.381.2 validators no longer count scorer-image or private-dataset outages against miners, embedding declines after an agent&#x27;s chat token wall are charged to the agent instead of the relay, ditto verify rejects insecure Dockerfile build entitlements before the fee, and treasury custody was recovered on the audited Finney runtime v482.</li>
+<li><span class="when">2026-10-21</span> <span class="muted">(#ditto, 2026-10-21)</span> Late in the day the team said it was running a one-time trial with 12 GB of RAM in the scoring sandbox (after the earlier out-of-memory reports) and that source disclosures were working well, and proposed lengthening the source-release window to 48 hours. No reply to the proposal had appeared by the end of the day&#x27;s messages.</li>
+<li><span class="when">2026-10-21</span> <span class="muted">(#ditto, 2026-10-21)</span> The team said the build-bounty system is merged and testing starts soon; the payout part is still to be built and Ditto accounts still have to be linked to miner hotkeys. It also floated open-sourcing the Ditto UI kit as the basis for a possible competition (brainstorming only).</li>
+<li><span class="when">2026-10-21</span> <span class="muted">(public treasury-activity feed (dittobench.ai), 2026-10-21)</span> A manual transfer of 500 alpha from the subnet&#x27;s collector wallet to a holding wallet for GM inference credits finalized on chain. The public treasury feed marks its source attribution as incomplete.</li>
+<li><span class="when">2026-10-20</span> <span class="muted">(#ditto, 2026-10-20 and 2026-10-21)</span> The team said some stuck submissions had run out of memory in the sandbox and that it was raising the limit. Miners kept asking for stuck or screening-incomplete agents to be reviewed through 2026-10-21.</li>
+<li><span class="when">2026-10-19</span> <span class="muted">(#ditto, 2026-10-19; GitHub (policy v13 text))</span> The team rejected ten agents, including the then champion, for removing an operator instruction in a draft stage, then reversed all ten the same evening and narrowed the rule so a rejection must name the exact instruction that was lost. Rejections of older versions of one line for suppressing model output stood.</li>
+<li><span class="when">2026-10-19</span> <span class="muted">(#ditto, 2026-10-19; public activity API, 2026-10-22)</span> The source-release collector caught up after a backlog and 30 king agents were listed as downloadable (34 released and one under embargo by 2026-10-22). The team said a new incentive mechanism is a few weeks away and gave no date for benchmark 14.</li>
+<li><span class="when">2026-10-18</span> <span class="muted">(#ditto)</span> The team reported clearing a roughly 38-hour scoring stall caused by one submission whose dataset seed was not tied to a chain block. It also shipped a screener fix for agents that bundle large third-party files and said validators will soon report basic host specs.</li>
+<li><span class="when">2026-10-14</span> <span class="muted">(#ditto, 2026-10-14 and 2026-10-15)</span> The owner set the burn share to 70% and the gamma share to 0 to reduce sell pressure, after burn had briefly reached 100%. Miners objected and asked about the plan for product funding.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Clone the monorepo and work in miners/dittobench-starter-kit; copy .env.example to .env and run the seed-user and evaluate commands to practice locally.</li>
+<li>Package your build context with the submit command, or run uv run ditto practice for a production-shaped local run.</li>
+<li>Check it with ditto verify (no chain calls), then register a hotkey on subnet 118 if needed.</li>
+<li>Upload with ditto upload and track it with ditto status; allow a few hours between your first score and visible incentive.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>The docs call Bench v12 the current contract (docs/MINER.md, still saying so in v0.381.2 on 2026-10-22, and adding that v13 will be scored in shadow once scheduled), but the live API on 2026-10-22 reported Bench v13 as active for scoring and emissions. Treat the docs as stale on this point.</li>
+<li>The burn share is controlled by the owner and changed several times in October (70% since 2026-10-14, and still 70% when last read on 2026-10-22). Check the live allocation view before relying on any payout figure.</li>
+<li>The docs and the code&#x27;s frozen default give a 65/14/10/7/4 payout curve, while the live curve on 2026-10-22 was 50/20/13/10/7. The operator sets the live curve on the platform ledger, so it can change without a code release.</li>
+<li>On the leaderboard API, the composite column is not the figure used for ranking or for the crown decision (the aggregate, called official composite, is). An entry can show a higher composite than the champion and still rank below it.</li>
+<li>The platform and screener are centrally operated by the team. Miners reported repeated manual-retry and stuck-screening cases in October, and the repository&#x27;s fail-once policy means a failed screening or scoring attempt waits for an operator to authorise one retry.</li>
+<li>The screening policy document says v13 is published with activation pending, while live submission records and the team&#x27;s rulings already refer to policy v13. New repo docs (2026-10-21) describe the private-replay part of v13 as preparation: its results stay report-only until a full verification profile is activated, so the rulings seen in chat rest on the written rules (I1 to I8) and the private-replay check is not yet enforcing.</li>
+<li>A treasury and service-share mechanism (gamma) is described in the repo as prepared but not activated; the live view showed a 0% service share and no sweep on 2026-10-21. One manual 500-alpha wallet transfer to a GM-credits holding wallet did finalize on chain that day, published with incomplete source attribution; the repo says such a receipt is not an approved source distribution.</li>
+<li>The chain read covers one block (9339641, 2026-10-22), with an earlier read on 2026-10-21 showing the same shape. It shows who holds incentive and which weights were set, not intent, and the burned amount was not measured.</li>
+<li>The docs say registering a hotkey recycles more TAO than the 0.1 TAO evaluation fee, but the chain&#x27;s registration burn read 0.0005 TAO on 2026-10-22; check the live quote that ditto upload shows before budgeting.</li>
+<li>The team said on 2026-10-19 that a new incentive mechanism is a few weeks away; contest rules may change. The older ditto-platform repository is archived; use the ditto-subnet monorepo.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/ditto-assistant/ditto-subnet" rel="noopener noreferrer">GitHub (subnet monorepo)</a></li>
+<li><a href="https://github.com/ditto-assistant/ditto-subnet/blob/main/docs/MINER.md" rel="noopener noreferrer">Miner guide</a></li>
+<li><a href="https://github.com/ditto-assistant/ditto-subnet/blob/main/docs/VALIDATOR.md" rel="noopener noreferrer">Validator guide</a></li>
+<li><a href="https://dittobench.ai" rel="noopener noreferrer">Leaderboard (DittoBench)</a></li>
+<li><a href="https://heyditto.ai/" rel="noopener noreferrer">Ditto website</a></li>
+<li><a href="https://discord.gg/qNKYZEMpkD" rel="noopener noreferrer">Discord (Bittensor server, listed in the subnet&#x27;s chain identity)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 6 sources</summary>
+<ul>
+<li><strong>repo</strong> ditto-assistant/ditto-subnet @27cd188 (v0.381.2, 2026-10-22): README.md, docs/MINER.md, docs/VALIDATOR.md, docs/no-automatic-retries.md, docs/sn273-finalized-manual-receipts.md, docs/v13-official-controls.md, workers/screener/docs/policy-v13.md, workers/screener/docs/v13-private-bank.md, ditto/validator/weights.py, ditto/validator/build_info.py, miners/dittobench-starter-kit, coding, router and unified kit READMEs, services/dittobench-api scorer (scorer.go, v7.go), CHANGELOG.md</li>
+<li><strong>repo</strong> ditto-assistant/ditto-platform README (archived, 2026-08-11)</li>
+<li><strong>web</strong> dittobench.ai public API: bench/config, leaderboard, treasury-allocation, treasury-activity manual-movements, and api.dittobench.ai activity, fetched 2026-10-21 and 2026-10-22 (last read 14:40 UTC)</li>
+<li><strong>web</strong> Chain reads (mainnet): subnet parameters, uid incentive and dividends, validator weights, RecycleOrBurn and SubnetEmissionWeights storage at block 9339641 (2026-10-22); earlier reads at blocks 9334663 to 9335301 (2026-10-21)</li>
+<li><strong>web</strong> heyditto.ai (organisation and product description)</li>
+<li><strong>msg</strong> #ditto, 2026-10-06 to 2026-10-22</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/117.html"><small>← Previous</small>SN117 EveryFrame</a><a rel="next" href="/bittensor-docs/subnets/119.html"><small>Next →</small>SN119 CapabilityForge Next</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-22. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

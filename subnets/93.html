@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bitcast (SN93) | Bittensor Subnet Docs</title>
+<meta name="description" content="Content-marketing subnet: creators post on X or YouTube to meet brand briefs and earn emissions for verified engagement.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h3">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>93</span><div>
+<h1>Bitcast <span class="muted">SN93</span></h1>
+<p class="tagline">Content-marketing subnet: creators post on X or YouTube to meet brand briefs and earn emissions for verified engagement.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl4"><b>2.3<small>/day</small></b><span>last 7 d</span></li><li class="pl4"><b>2.8<small>/day</small></b><span>days 8-30</span></li><li class="pl4"><b>3.6<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-24</b><span>last chat</span></li><li class="pw"><b>2,850</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>creator marketing (X and YouTube)</dd>
+<dt>Status</dt><dd>Active; chat live through 2026-10-21 (74 messages in the last 30 days, mostly creator support). The bitcast repo was last committed 2026-10-21 and bitcast-x main on 2026-10-13.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-21</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>Bitcast pays creators for content that satisfies brand briefs. The subnet runs two mechanisms: mechanism 1 for X posts, which both repos put at about 98% of emission, and mechanism 0 for YouTube videos at about 2%. Brands set campaign briefs, miners (usually creator-facing platforms such as Stitch3) bring creators and commit their posts, and validators check each submission and turn the scores into weights. Creators are paid by the miner platform, not directly by the chain.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>On X, a miner runs a node (or a creator product on top of one) that records claims and tweet submissions for creators and commits them on chain; the platform owns onboarding and creator payouts. A miner must qualify by locking conviction to the owner hotkey or by staking alpha to its own hotkey (the team said 15,000 alpha on 2026-09-15). On YouTube, a miner serves OAuth access tokens for the channels it operates.</p></div><div><h3>Validators</h3><p>On X, validators fetch each tweet themselves and check the campaign window, required terms, tag or quoted tweet, language, that it is an original post, and that the author ranks in the campaign&#x27;s influence map. Brief fit is judged by an LLM service (JEV through OpenRouter in the 3.1.0 code on main). A tweet&#x27;s score starts at twice the author&#x27;s influence and adds retweets and quotes from influential accounts. On YouTube, validators read each channel through the YouTube Analytics API, match videos to briefs with an LLM and score in USD.</p></div><div><h3>Incentive</h3><p>On X, each campaign&#x27;s USD pool is spread over seven days and a tweet&#x27;s share follows its score to the power 0.65, with bonuses of up to 5% each for views and engagement measures and a 1.05 multiplier for one featured tweet. Weights are then set so each miner&#x27;s emission covers what it owes creators, with any surplus split by score (floor-first, in the code on main since 2026-10-13; the default from 2026-09-16 was pure score share). On YouTube, weights track earned USD value and unallocated emission goes to the burn UID. Creators are paid by the miner platform, which gets a recommended amount from the subnet.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-21</span> <span class="muted">(GitHub bitcast-network/bitcast)</span> The YouTube repo (bitcast) got a fix so a creator&#x27;s day is never zeroed when a price lookup fails.</li>
+<li><span class="when">2026-10-16</span> <span class="muted">(#bitcast)</span> The team said expanding to TikTok and Kick is not on the roadmap for now; a gaming-creator platform was likewise not on the roadmap on 2026-10-13. Current focus stays on X and YouTube.</li>
+<li><span class="when">2026-10-13</span> <span class="muted">(GitHub bitcast-network/bitcast-x)</span> bitcast-x main was prepared for 3.1.0 (still marked unreleased in the changelog): JEV brief checks via OpenRouter, floor-first weights, an optional surplus beneficiary for miners, and validator reliability changes. Validators must upgrade before miners use the beneficiary feature.</li>
+<li><span class="when">2026-10-04</span> <span class="muted">(#bitcast)</span> The team confirmed content in any language is accepted by validators.</li>
+<li><span class="when">2026-09-30</span> <span class="muted">(#bitcast)</span> Asked about the 98/2 split, the team said more activity is currently incentivised on X than on YouTube, and that YouTube emissions are expected to be raised once planned YouTube upgrades land.</li>
+<li><span class="when">2026-09-16</span> <span class="muted">(GitHub bitcast-network/bitcast-x)</span> bitcast-x main switched its default weighting to pure tweet-score share; 3.1.0 later returns to floor-first because score share could leave a miner&#x27;s emission below what it owed creators.</li>
+<li><span class="when">2026-09-15</span> <span class="muted">(#bitcast)</span> The team said anyone can build a platform that submits tweets through the bitcast-x protocol and receive emissions, pointed to a reference template, and said it may stake the required alpha for good ideas.</li>
+<li><span class="when">2026-09-08</span> <span class="muted">(#bitcast; GitHub bitcast-network/bitcast-x)</span> The team said buyback alpha is permanently locked through perpetual conviction (a public on-chain unlock is needed, 30 days ahead), not burned, and that it would consider burning instead. The same day bitcast-x main began reporting version 3.0.0, which retired the legacy X execution path.</li>
+<li><span class="when">2026-09-02</span> <span class="muted">(#bitcast)</span> After a community question about miner emission concentrating in one UID, the team said that UID is Stitch3, earning in open competition after the burn was set to 0%, and that a second platform, TestDrive, was starting to earn.</li>
+<li><span class="when">2026-08-31</span> <span class="muted">(GitHub bitcast-network/bitcast-x)</span> bitcast-x v2.2.0 was released; it is the latest tagged GitHub release as of 2026-10-21.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Creators on X: sign up on a miner platform such as Stitch3 and link your wallet; your X account must rank inside a mapped ecosystem to be eligible, and the platform&#x27;s dashboard shows which campaigns you can join.</li>
+<li>Run an X miner yourself: follow the bitcast-x README (uv sync, copy config/miner.env.example, uv run bitcast-x run-miner) with a hotkey registered on netuid 93 that meets the qualification rule.</li>
+<li>Build a creator product: start from the x-miner-template repo, which wraps the bitcast-x miner application API; the platform handles creator login and payouts.</li>
+<li>YouTube miners: follow the bitcast repo README, one OAuth credential file per channel, then run python -m neurons.miner --netuid 93; the code requires channels at least 21 days old with 100 to 500,000 subscribers.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Chain weights and the live emission split were not read. The 98% X / 2% YouTube figure comes from both READMEs and a team statement on 2026-09-30; the code reads the real split from chain at runtime.</li>
+<li>Version gap: the latest tagged release is v2.2.0 (2026-08-31), while the changelog describes 3.0.0 (untagged, on main since 2026-09-08) and 3.1.0 (unreleased, prepared 2026-10-13). No validator upgrade notice was found, so which weighting rules validators run is not confirmed.</li>
+<li>Revenue, buyback and reward totals on bitcast.network are team-reported and were not checked on chain; revenue is booked at value received. As of 2026-10-21 the dashboard showed about $453K revenue, $355K of SN93 buybacks and $569K of creator rewards paid to date.</li>
+<li>The buyback policy changed: a 2025 pinned post says bought alpha is periodically burned, while the team said on 2026-09-08 that it is locked.</li>
+<li>Creator payouts depend on the miner platform. The subnet only recommends an amount, and as of 2026-09-17 creators could not see it unless the platform shared it.</li>
+<li>In September 2026 the team said one UID (Stitch3) took about 89% of miner emission; how it is spread across platforms now was not checked.</li>
+<li>The pinned FAQ posts date from 2025 and predate the current protocol (influence-map cutoffs, YouTube channel rules, a Telegram link the team said in October 2026 does not exist), so treat them as historical.</li>
+<li>Bitcast does not require creators to disclose paid promotion on X; the team called it the creators&#x27; responsibility on 2026-09-03.</li>
+<li>Campaign publishing, the JEV brief-checking model and the qualification schedule are not fully open, and the closed creator products were not examined.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://www.bitcast.network/" rel="noopener noreferrer">Website and live dashboard</a></li>
+<li><a href="https://bitcast.network/revenue" rel="noopener noreferrer">Revenue and buybacks (team dashboard)</a></li>
+<li><a href="https://github.com/bitcast-network/bitcast-x" rel="noopener noreferrer">GitHub: X mechanism (bitcast-x)</a></li>
+<li><a href="https://github.com/bitcast-network/bitcast" rel="noopener noreferrer">GitHub: YouTube mechanism (bitcast)</a></li>
+<li><a href="https://github.com/bitcast-network/x-miner-template" rel="noopener noreferrer">GitHub: X reference miner product</a></li>
+<li><a href="https://www.stitch3.ai/" rel="noopener noreferrer">Stitch3 (X creator platform)</a></li>
+<li><a href="https://testdrive.so/" rel="noopener noreferrer">TestDrive (second X platform)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 6 sources</summary>
+<ul>
+<li><strong>repo</strong> bitcast-network/bitcast README.md, bitcast/config.py @193ebc6 (2026-10-21)</li>
+<li><strong>repo</strong> bitcast-network/bitcast-x README.md, CHANGELOG.md, docs/protocol.md, src/bitcast_x/rewards.py, src/bitcast_x/chain.py @f77b24e (2026-10-13)</li>
+<li><strong>repo</strong> bitcast-network/x-miner-template README.md @ee8dc09 (2026-08-24)</li>
+<li><strong>web</strong> https://www.bitcast.network/ and https://bitcast.network/revenue (fetched 2026-10-21)</li>
+<li><strong>web</strong> api.github.com releases and org repo list for bitcast-network (2026-10-21)</li>
+<li><strong>msg</strong> #bitcast 2026-08-15, 2026-08-23, 2026-09-02, 2026-09-03, 2026-09-08, 2026-09-14, 2026-09-15, 2026-09-17, 2026-09-30, 2026-10-04, 2026-10-10, 2026-10-13, 2026-10-15, 2026-10-16; pinned posts 2025-09-12 and 2025-11-16</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/92.html"><small>← Previous</small>SN92 REAX</a><a rel="next" href="/bittensor-docs/subnets/94.html"><small>Next →</small>SN94 Cathedral</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-21. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

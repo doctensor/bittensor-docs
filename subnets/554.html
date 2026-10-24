@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sentinel (SN554) | Bittensor Subnet Docs</title>
+<meta name="description" content="Testnet-only subnet where miners answer agent database queries from AMD SEV-SNP enclaves with chip-signed proofs.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h14">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>554</span><div>
+<h1>Sentinel <span class="muted">SN554</span></h1>
+<p class="tagline">Testnet-only subnet where miners answer agent database queries from AMD SEV-SNP enclaves with chip-signed proofs.</p>
+<span class="st s-transitioning">transitioning</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl0"><b>0<small>/day</small></b><span>last 7 d</span></li><li class="pl0"><b>0<small>/day</small></b><span>days 8-30</span></li><li class="pl2"><b>0.17<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-09-10</b><span>last chat</span></li><li class="pw"><b>10</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>confidential compute (attested AI-agent access to databases)</dd>
+<dt>Status</dt><dd>Testnet only: netuid 554 does not exist on mainnet (checked 2026-10-21). The team said on 2026-09-10 that it has no mainnet slot and is focused on testnet. The channel has had no messages since that day, but the public repo had 30 commits from 2026-09-21 to its last commit on 2026-10-17, and a validator submitted weights on the testnet about 20 minutes before the 2026-10-21 read.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-21</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>Sentinel is a testnet subnet whose miners run database-query tools (over the Model Context Protocol) inside AMD SEV-SNP confidential VMs, so that an AI agent can use a database credential it is never shown. Each miner reply carries a signature from the AMD chip, which validators check offline against AMD&#x27;s certificate chain, and validators also compare answers across miners. It runs only on the Bittensor testnet, and the team says there are no emissions. The project&#x27;s own documents state that the proof covers the image that booted but not the application running on top of it.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Per the docs, a miner runs an MCP server inside an AMD SEV-SNP confidential VM (a Google Cloud n2d-standard-2 at roughly $30 a month on spot pricing; the team said in chat that testnet miners can be subsidised). A Key Broker releases the customer database credential only to an enclave that has proved it booted an approved image, and the one documented tool is a Postgres query tool that is read-only by default. Each reply is signed by the chip and bound to a fresh nonce chosen by the validator. No wallet key goes on the VM, and the miner by default answers only validators that hold a permit on the subnet. There is no model to train; the team says uptime and response time separate miners.</p></div><div><h3>Validators</h3><p>A validator finds miners through the metagraph, sends each one the same query with a fresh nonce, verifies each attestation offline against a pinned AMD root, and refuses firmware below a fixed AMD-published floor. It scores five axes, and the weights below are confirmed in the scoring code: attestation 40 percent, latency 30, correctness 20, cache-header hygiene 5 and nonce discipline 5. Attestation, cache hygiene and nonce discipline are gates, so failing one gives a weight of zero. Correctness means agreeing with the majority of other miners, and it only acts as a gate when a round has at least three verified miners. Validators can pin several approved launch measurements, because honest miners on different hosts can measure differently. The validator&#x27;s default round interval in code is 22 minutes.</p></div><div><h3>Incentive</h3><p>Weights are set through Yuma Consensus using a timelock commit. Per the docs there are no emissions on this testnet, so nothing here earns and the stated reason to run a node is to evaluate the design and report what breaks. The README also describes slashable TAO collateral for miners, but no collateral or slashing code was found in the repo (see caveats). Individual on-chain weight vectors were not read; only aggregates were.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-21</span> <span class="muted">(Bittensor testnet chain read)</span> Testnet read: 5 neurons, 2 with validator permits, 3 with non-zero incentive. One validator&#x27;s last weight update was about 102 blocks old (roughly 20 minutes); another permitted validator&#x27;s was about 22,900 blocks old (roughly 3 days).</li>
+<li><span class="when">2026-10-09</span> <span class="muted">(GitHub (docs/results.md, last commit 2026-10-17))</span> The production miner&#x27;s chip stopped answering and a watchdog rebooted the host, the second such incident after 2026-09-24. A kernel upgrade picked up in the reboot left the launch measurement unchanged, which the project recorded on 2026-10-17 as evidence that the kernel is not covered by the measurement.</li>
+<li><span class="when">2026-10-05</span> <span class="muted">(GitHub (commits and docs/results.md))</span> New docs say Intel TDX measures more of the boot chain than AMD SEV-SNP does on Google Cloud, and that TDX measurements were reproducible across hosts and regions. This is a feasibility finding for a possible port, not a shipped change.</li>
+<li><span class="when">2026-10-04</span> <span class="muted">(GitHub (docs/results.md))</span> Three real-hardware miner processes ran on netuid 554, all operated by the project. One with edited query code passed attestation but was zeroed by cross-miner agreement, the first time the correctness gate fired on the live subnet. The docs say this shows the gate working, not independent verification.</li>
+<li><span class="when">2026-09-24</span> <span class="muted">(GitHub (TESTNET.md, measurements.json))</span> Testnet docs updated: after a miner VM was rebuilt in another zone its launch measurement changed, so validators now accept a set of approved measurements, and the repo lists two.</li>
+<li><span class="when">2026-09-10</span> <span class="muted">(#sentinel)</span> Launch posts in the channel: what the subnet does, miner and validator requirements, a stated limitation (the launch measurement does not cover the application), and that there are no emissions. Asked about mainnet, the team said there is no slot yet, testnet is the focus, and the testnet phase decides the next steps.</li>
+<li><span class="when">2026-08-30</span> <span class="muted">(Bittensor testnet chain read and GitHub)</span> Subnet registered on the Bittensor testnet as netuid 554 (the docs say 2026-08-29; the chain read gives 2026-08-30).</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Read the known-limitation section of docs/mining.md first. A miner needs an AMD SEV-SNP confidential VM, which the docs price at roughly $30 a month on Google Cloud spot, and the team said testnet miners can be subsidised, so ask in the channel before paying.</li>
+<li>Clone the repo, make a Python virtual environment, run pip install -r requirements.txt, and create a hotkey and register it on netuid 554 with btcli on --network test. Registration burn is about 0.0005 testnet TAO.</li>
+<li>Miner: run deploy/provision-gcp.sh to create the confidential VM, read its launch measurement with scripts/run_miner.py --print-measurement, and compare it with the values in TESTNET.md. Measurements depend on host firmware, so report a mismatch in the channel rather than treating it as a failure.</li>
+<li>Miner: put the hotkey address and the measurement in /etc/sentinel/miner.env on the VM and start the sentinel-miner service. No wallet key belongs on that machine.</li>
+<li>Validator: no special hardware is needed. Register a hotkey, take the approved measurement list from TESTNET.md (not from a miner), do a dry run with scripts/run_validator.py --once --dry-run, then run it continuously with one --measurement flag per approved value.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Testnet only. Netuid 554 does not exist on mainnet at the latest block read (2026-10-21). The team says there are no emissions and testnet tokens have no market value; no price, emission or market figures are given here. The chain&#x27;s emission flag reads false while a last-epoch alpha emission figure was non-zero, and neither was interpreted.</li>
+<li>The proof does not cover the application. The project says so and tested it: on 2026-10-04 a miner with edited code passed attestation on real hardware and was caught only by cross-miner agreement, and the 2026-10-09 kernel upgrade did not change the measurement. The docs also say a miner that runs approved code but leaks what it reads, while returning correct rows, would score full marks (the project&#x27;s own benchmark includes one, labeled undetectable by design).</li>
+<li>The correctness check is majority-based and needs at least three verified miners. The 2026-10-04 test used three miners on one chip, all run by the project, so it shows the gate firing, not resistance to a coordinated majority. Whether anyone outside the team runs a node on testnet 554 was not established.</li>
+<li>The headline benchmark (100 rounds against simulated miners in one process, 100 percent of defended attacks caught, no honest miner rejected) is the project&#x27;s own and excludes that undetectable miner. The site and README say 900 challenges across nine miners while the results doc says 1000 challenges; the difference was not resolved.</li>
+<li>Docs conflict on real hardware: TESTNET.md (last changed 2026-09-24) says testnet miners still run a mock attestation, while the results doc from 2026-10-04 onward and the README say real-silicon enclaves run on 554. The later documents are treated as current, but no hardware was checked here. The ROADMAP file (2026-09-04) is also behind the README.</li>
+<li>The README describes slashable TAO collateral and on-chain slashing for failed attestation. A search of the repo&#x27;s code (outside tests and docs) for collateral and slashing found nothing, and the roadmap places slashing in a later mainnet phase, so treat it as planned, not implemented.</li>
+<li>The README says validators challenge every 360 blocks (about 72 minutes), while the validator code and validator guide use a 22-minute default round. The code is treated as the reference.</li>
+<li>The repo also carries an inherited payment gateway (x402 payments and routing of paid inference to another subnet&#x27;s API) that the README calls live. It was not examined and is not part of how this subnet&#x27;s miners are scored. The README states there are no design partners yet.</li>
+<li>The repository sits under an individual&#x27;s GitHub account. The site could be reached on 2026-10-21 but its claims were not independently tested, and the chat archive for the channel contains only the 2026-09-10 messages.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/Ayoshiss/sentinel-subnet" rel="noopener noreferrer">GitHub (sentinel-subnet)</a></li>
+<li><a href="https://sentinelsubnet.com" rel="noopener noreferrer">Project site</a></li>
+<li><a href="https://github.com/Ayoshiss/sentinel-subnet/blob/0b876b2/TESTNET.md" rel="noopener noreferrer">Testnet facts and approved measurements (TESTNET.md)</a></li>
+<li><a href="https://github.com/Ayoshiss/sentinel-subnet/blob/0b876b2/docs/mining.md" rel="noopener noreferrer">Miner guide</a></li>
+<li><a href="https://github.com/Ayoshiss/sentinel-subnet/blob/0b876b2/docs/validating.md" rel="noopener noreferrer">Validator guide</a></li>
+<li><a href="https://github.com/Ayoshiss/sentinel-subnet/blob/0b876b2/docs/results.md" rel="noopener noreferrer">Validator results and hardware tests</a></li>
+<li><a href="https://x.com/sentinelsubnet" rel="noopener noreferrer">X (sentinelsubnet)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 6 sources</summary>
+<ul>
+<li><strong>repo</strong> sentinel-subnet repository @0b876b2 (last commit 2026-10-17, MIT): README.md, TESTNET.md, ROADMAP.md, measurements.json, docs/mining.md, docs/validating.md, docs/results.md</li>
+<li><strong>repo</strong> sentinel-subnet @0b876b2: sentinel/validating/scoring.py (axis weights and gates), sentinel/validating/evaluator.py (three-miner threshold for the correctness gate), scripts/run_validator.py (22-minute default); a search for collateral and slash in code outside tests and docs found none</li>
+<li><strong>msg</strong> #sentinel 2026-09-10 (the only messages in the archive for this channel; nothing newer)</li>
+<li><strong>web</strong> https://sentinelsubnet.com (read 2026-10-21, HTTP 200)</li>
+<li><strong>web</strong> Bittensor mainnet chain read, netuid 554 absent, 2026-10-21 (block about 9334621)</li>
+<li><strong>web</strong> Bittensor testnet chain reads, netuid 554 parameters, identity and neuron aggregates, 2026-10-21 (testnet blocks about 8273082 to 8273088)</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/498.html"><small>← Previous</small>SN498 Data Annotation (CanopyMRV)</a><a rel="next" href="/bittensor-docs/subnets/576.html"><small>Next →</small>SN576 Microtensor</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-21. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Leadpoet (SN71) | Bittensor Subnet Docs</title>
+<meta name="description" content="Daily contest where miners submit sales-research agents; a champion that beats the baseline earns reward slots.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h17">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>71</span><div>
+<h1>Leadpoet <span class="muted">SN71</span></h1>
+<p class="tagline">Daily contest where miners submit sales-research agents; a champion that beats the baseline earns reward slots.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>25<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>13<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>9.4<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-24</b><span>last chat</span></li><li class="pw"><b>6,298</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>AI sales agents</dd>
+<dt>Status</dt><dd>Daily rounds running on 2026-10-23 (arena-2026-10-24 open, 10-23 in scoring, 10-22 published); the repo gets dozens of commits a day and the reward pot changed on 2026-10-21.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-23</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>Leadpoet (SN71) positions itself as an open research lab for sales-reasoning AI. Miners improve an open sales-research agent: given a buyer description, the agent returns up to five companies with evidence that they fit and show buying intent. A daily competition called Arena scores the submitted agents against a baseline, and the winning code becomes the next baseline. The team sells a sales-intelligence product built on this work and launched a V2 on 2026-10-20 that adds personalised email and LinkedIn outreach; its website does not mention Bittensor.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>A miner forks the public baseline agent, edits its harness (a function that takes a buyer request and returns at most five companies with intent evidence) and submits it once per hotkey per daily round, before 00:00 UTC (replacement allowed until 23:00 UTC). Code must carry the AGPL-3.0 licence, runs in a sandbox with brokered API calls, and passes an AI full-code review paid with the miner&#x27;s own OpenRouter key. Miners also supply their own OpenRouter and Deepline keys, with a 4 dollar sourcing limit per request.</p></div><div><h3>Validators</h3><p>The gateway, run by the team, assigns scoring work. Validators with a permit and at least 75,000 effective stake run submitted agents on hidden benchmark requests (10 in the live round data) and report scores; judges check company fit, intent signals and evidence. Smaller permitted validators only fetch the signed weight state. The highest eligible agent becomes champion only if it beats the day&#x27;s baseline by at least 0.5 points on a 0 to 100 scale. On chain (2026-10-23) 8 uids hold validator permits, and every permitted uid that had a weight row set the same one, consistent with weights copied from the gateway; the owner&#x27;s own validator earns about 70 percent of the validator dividends.</p></div><div><h3>Incentive</h3><p>Per the repo, for rounds dated 2026-10-22 and later a champion earns up to three stacking reward slots by margin over the baseline: +1 point earns 15 percent, +5 earns 15 percent more (30 total) and +10 earns 20 percent more (50 total) of total emissions. The rest of the 50 percent miner pot, and everything else, goes to a burn hotkey. Earlier rounds used a 30 percent pot with 6, 9 and 15 percent slots. Each slot&#x27;s reward halves every reward week (140 settlement epochs) down to 6.25 percent, and a newer qualifying winner replaces a slot holder; a slot has no other expiry. Chain read 2026-10-23: three uids had incentive, the owner uid (burn target) 50 percent, one miner 30 percent (the 10-22 winner&#x27;s two slots) and one 20 percent (the 10-18 +10 slot), which matches that arithmetic.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-22</span> <span class="muted">(#71-leadpoet, gateway API)</span> Round 10-22 published with a winner 6 points above the baseline, so it took the +5 and +1 slots; the chain showed it paid by the next morning. A miner whose evaluations all failed learned that models without an OpenRouter zero-data-retention route fail by design, and the README now says so.</li>
+<li><span class="when">2026-10-21</span> <span class="muted">(#71-leadpoet, GitHub, gateway API)</span> Team raised the miner pot from 30 to 50 percent of emissions with new slot shares of 20, 15 and 15 percent for evaluation dates from 10-22. The same evening the round was reported cancelled while miners had finished scoring; the team restored the recorded results, crowned the top scorer and showed three provider-blocked entries as not evaluated.</li>
+<li><span class="when">2026-10-20</span> <span class="muted">(#71-leadpoet, gateway API)</span> V2 of the Leadpoet product launched on Product Hunt and X, adding personalised email and LinkedIn outreach. The 10-20 Arena round was cancelled as scoring incomplete and has no published result.</li>
+<li><span class="when">2026-10-19</span> <span class="muted">(#71-leadpoet)</span> A miner posted an analysis of inconsistent judging of identical company rows; the team said it already caches scoring per submission and will reuse results for identical evidence within a round. Complaints about public self-mining by the team&#x27;s allied wallets continued; the team says it competes like any miner.</li>
+<li><span class="when">2026-10-12</span> <span class="muted">(#71-leadpoet)</span> Team moderated critical messages in the channel and said the code, not chat, defines the competition; a dispute about alleged multi-account spamming was not resolved in chat.</li>
+<li><span class="when">2026-10-08</span> <span class="muted">(#71-leadpoet, GitHub)</span> Tiered reward slots over the previous champion were announced (later changed on 10-21); weekly halving of each slot was added to the code the same day.</li>
+<li><span class="when">2026-10-07</span> <span class="muted">(#71-leadpoet)</span> The team said it enters the competition with its own hotkey to speed up agent quality; some miners objected and the team called the contest open and auditable.</li>
+<li><span class="when">2026-10-03</span> <span class="muted">(#71-leadpoet, GitHub)</span> Miners reported one operator filling all 20 submission slots seconds after a round opened; the repo now allows up to 256 challengers per round.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Clone the repo, use Python 3.11, install requirements and register a hotkey on subnet 71 with a funded coldkey.</li>
+<li>Fork the baseline agent from the lab branch and keep the AGPL-3.0 LICENSE next to harness.py.</li>
+<li>Implement run_icp so it returns at most five companies in the round&#x27;s current output schema, and read the round&#x27;s policy markers from /arena/v1/current.</li>
+<li>Choose OpenRouter models that have a zero-data-retention route (calls to others fail), then submit with scripts/lab_arena_miner.py (interactive mode), supplying OpenRouter, OpenRouter management and Deepline keys, before 00:00 UTC.</li>
+<li>Follow admission, scoring and champion status on the subnet71.com dashboard.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Scoring code was not traced end to end, and chain weights are validator opinions: the chain read (block 9343151, 2026-10-23) matches the repo&#x27;s reward arithmetic but proves configuration, not intent.</li>
+<li>The README is long and changes daily; its schedule paragraph still says 20 requests while its scoring text and the live API say 10.</li>
+<li>The team says it competes with its own hotkey and also runs the gateway that coordinates the competition. No entry in rounds 10-18 to 10-22 sits on the subnet owner&#x27;s coldkey, but team-operated entries on other keys cannot be ruled out, and the effect on baselines or slots was not examined.</li>
+<li>Reward rules changed on 2026-10-08 and 2026-10-21, one round was cancelled and another restored by operator action; the repo&#x27;s agent-instruction files describe AI coding agents making production fixes. Expect further changes.</li>
+<li>Miners pay their own provider costs and the AI review, which favors funded miners.</li>
+<li>The tokenomics FAQ on the website now returns a not-found page, and buyback and annual revenue questions from chat were unanswered.</li>
+<li>Miner claims in chat (for example about spam or copying) are unverified allegations.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/leadpoet/leadpoet" rel="noopener noreferrer">GitHub (subnet)</a></li>
+<li><a href="https://github.com/leadpoet/leadpoet-sales-agent" rel="noopener noreferrer">Baseline agent</a></li>
+<li><a href="https://subnet71.com/" rel="noopener noreferrer">Leaderboard and dashboard</a></li>
+<li><a href="https://leadpoet.com/" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://gateway.subnet71.com/arena/v1/current" rel="noopener noreferrer">Gateway API (current round)</a></li>
+<li><a href="https://leadpoet.com/pricing" rel="noopener noreferrer">Pricing (product)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 5 sources</summary>
+<ul>
+<li><strong>repo</strong> leadpoet/leadpoet at commit 118bce8 (2026-10-22): README.md, docs/arena_reward_slots.md, lab_arena/rewards.py, lab_arena/contracts.py, AGENTS.md</li>
+<li><strong>web</strong> https://gateway.subnet71.com/arena/v1/current and /arena/v1/rounds/&lt;id&gt; for 10-18 to 10-22 (read 2026-10-23)</li>
+<li><strong>web</strong> Chain read at block 9343151 (2026-10-23 about 02:09Z): subnet parameters, incentive, weights, emission split, validator permits; addresses masked</li>
+<li><strong>web</strong> https://leadpoet.com/ home, pricing and faq pages (read 2026-10-23)</li>
+<li><strong>msg</strong> #71-leadpoet 2025-07-22 to 2026-10-22</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/70.html"><small>← Previous</small>SN70 Consted 2.0 (unlabelled slot, no project published)</a><a rel="next" href="/bittensor-docs/subnets/72.html"><small>Next →</small>SN72 StreetVision (NATIX) / chillyshort</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-23. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

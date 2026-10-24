@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ingot (SN97) | Bittensor Subnet Docs</title>
+<meta name="description" content="Quantize a fixed Qwen3.8-27B teacher to FP8; the closest copy is crowned king, and the newest five kings share emission.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h7">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>97</span><div>
+<h1>Ingot <span class="muted">SN97</span></h1>
+<p class="tagline">Quantize a fixed Qwen3.8-27B teacher to FP8; the closest copy is crowned king, and the newest five kings share emission.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>20<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>12<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>14<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-23</b><span>last chat</span></li><li class="pw"><b>28,778</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>model quantization competition</dd>
+<dt>Status</dt><dd>Mechanism switched from Albedo (distillation) to Ingot (quantization) on 2026-10-16; five kings were crowned by 2026-10-19 and none since. By 2026-10-21 the first two reigns had lapsed, so 40 percent of the weights go to uid 0 (the owner slot, burned).</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-21</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>Ingot (formerly Albedo) is a competition to quantize one fixed open model. A BF16 teacher is the reference; miners submit an FP8 copy with the same architecture and no larger than the genesis model, and the copy that stays closest to the teacher is crowned king. The subnet switched to this design on 2026-10-16; the same netuid ran a distillation contest (Distil) until late May 2026 and then the Albedo duel contest, with the Dendrite team joining development on 2026-05-27.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Miners quantize the teacher (Qwen3.8-27B) to FP8 and submit the weights. The upload goes to a private bucket through a commit-upload-ready flow on chain and is only published if it wins. A submission is exactly a config file, a weight index and the weight shards; the repo CLI can check a model locally. Each hotkey gets one evaluated submission.</p></div><div><h3>Validators</h3><p>The validator has the teacher answer prompts from a public dataset (60 prompts per domain, 1,080 prompts per eval in the team feed), then has the king and the challenger read the same answer and measures how far each drifts from the teacher: KL divergence at the output and hidden-state distance across layers. Weights are fingerprinted to reject copies of genesis or other miners&#x27; models, with the hotkey spent on a duplicate; validation also rejects malformed models (for example vision layers marked FP8 but stored as BF16, a strike rather than a ban). The repo&#x27;s weight setter recomputes the payout from the kings table about every 20 minutes (101 blocks). On chain (block 9335223, 2026-10-21) three validator permits exist, held by three different coldkeys, one of them the owner&#x27;s hotkey on uid 0; all three set the same four-target weights, so whether the other two run the evaluator or copy weights cannot be told from chain data.</p></div><div><h3>Incentive</h3><p>A challenger becomes king immediately if it beats the king on both KL (by 1.5 percent of the king&#x27;s score) and hidden-state distance (by 0.84 percent) in the same eval; one challenger beat the king by 3.2 percent on KL on 2026-10-20 and still lost on distance. Each of the five newest kings gets 20 percent of the weights for five days after crowning, and the rest goes to uid 0, which is the owner&#x27;s slot; the subnet is set to burn emission directed there. Chain and team feed agreed on 2026-10-21: three kings at 20 percent each and 40 percent on uid 0, because kings I and II had passed five days and no king has been crowned since 2026-10-19. If that continues, king III&#x27;s share lapses on 2026-10-22 about 00:34 UTC, king IV&#x27;s about 19:57 UTC and king V&#x27;s on 2026-10-24 about 22:40 UTC. The chain&#x27;s emission split on that date gave 41 percent to miners, 41 percent to validators and 18 percent to the owner; the king weights divide the miner part.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-21</span> <span class="muted">(team dashboard feed, chain read)</span> The first two kings&#x27; five-day reigns ended; with no new king since 2026-10-19 the team feed and the chain both show three kings at 20 percent each and 40 percent of weights on uid 0 (burn). The last recorded challenger duel finished the same day and lost.</li>
+<li><span class="when">2026-10-21</span> <span class="muted">(GitHub)</span> Evaluator change: the next-token scores are now computed with the logits kept in float32 (code fix and a test added; margins and payout rules unchanged).</li>
+<li><span class="when">2026-10-20</span> <span class="muted">(#97-ingot)</span> Validation now rejects a model whose config marks vision layers as FP8 while the weights are BF16 (vLLM could not load it); it counts as a strike, not a ban.</li>
+<li><span class="when">2026-10-20</span> <span class="muted">(team dashboard feed)</span> A challenger came out 3.2 percent closer than the king on KL but farther on hidden-state distance and lost, which shows both measures decide a duel.</li>
+<li><span class="when">2026-10-19</span> <span class="muted">(#97-ingot, GitHub)</span> Win margins changed from fixed values to a share of the king&#x27;s own score (1.5 percent KL, 0.84 percent distance), described by the team as easier to beat; the fifth king was crowned later that day.</li>
+<li><span class="when">2026-10-17</span> <span class="muted">(team dashboard feed)</span> Four kings were crowned in the first day and a half (I to IV), each closer to the teacher than the last.</li>
+<li><span class="when">2026-10-16</span> <span class="muted">(#97-ingot, GitHub)</span> Albedo became Ingot: quantization of a fixed teacher replaced distillation; repo, dataset and genesis model made public; chain reading restarted from a new block.</li>
+<li><span class="when">2026-05-27</span> <span class="muted">(#97-ingot)</span> The Dendrite team introduced itself as a company active on Bittensor since 2022 and now helping with development of the subnet, a day after the Albedo repo appeared (before that the netuid ran the Distil distillation contest).</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Clone the repo, copy the miners env template and fill in wallet and hotkey names.</li>
+<li>Register a hotkey on subnet 97 with the repo CLI.</li>
+<li>Quantize the teacher to FP8 and run the CLI check-model command on the folder.</li>
+<li>Run submit-private to commit, upload and mark the model ready; the status file shows any rejection reason.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>The mechanism is days old (since 2026-10-16); the margins changed once on 2026-10-19 and no king has been crowned since, so the paid share is shrinking until one is.</li>
+<li>Payout figures were checked against the chain on 2026-10-21 (block 9335223) and agree with the team&#x27;s dashboard feed, but both change within hours: check the dashboard for the live kings and burn share.</li>
+<li>Weights sent to uid 0 (the owner&#x27;s slot) are burned according to the chain setting read that day, so that share reaches no miner.</li>
+<li>Each hotkey gets one evaluated submission; a loss or a duplicate spends it.</li>
+<li>The validator is the team&#x27;s code. Three validators hold permits on chain with the same weights; whether two of them run the evaluator was not verified. Commit-reveal and rate-limit parameters were not read.</li>
+<li>An outside post shared in the channel on 2026-10-21 says 2-bit and larger GLM models come next; no team statement or repo support was found, and the repo defines only one model pair (Qwen3.8-27B to FP8).</li>
+<li>Distil-era and Albedo-era details (coding-agent evals, the 2026-10-02 king dispute) are historical and no longer apply.</li>
+<li>The repo declares the MIT licence in pyproject.toml but has no LICENSE file in its root.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://www.theingot.ai/" rel="noopener noreferrer">Website and dashboard</a></li>
+<li><a href="https://github.com/DendriteLabs/ingot" rel="noopener noreferrer">GitHub</a></li>
+<li><a href="https://huggingface.co/dendriteholdings/Ingot-genesis-27B-FP8" rel="noopener noreferrer">Genesis model</a></li>
+<li><a href="https://huggingface.co/datasets/dendriteholdings/ingot_corpus" rel="noopener noreferrer">Dataset</a></li>
+<li><a href="https://huggingface.co/dendriteholdings" rel="noopener noreferrer">Hugging Face organisation (kings are mirrored here)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 5 sources</summary>
+<ul>
+<li><strong>repo</strong> DendriteLabs/ingot@54dce8d (2026-10-21)</li>
+<li><strong>web</strong> https://www.theingot.ai/api/state.json (read 2026-10-20 and 2026-10-21 23:46Z)</li>
+<li><strong>web</strong> Chain read at block 9335223-9335241 (2026-10-21): subnet identity, neurons, weights of the 3 validators, SubnetEmissionWeights 0/0/.18/.41/.41, RecycleOrBurn = Burn, owner-slot test</li>
+<li><strong>web</strong> https://huggingface.co/api/models/dendriteholdings/Ingot-V-27B-FP8 (read 2026-10-21)</li>
+<li><strong>msg</strong> #97-ingot 2026-10-01 to 2026-10-21, plus archive search 2026-05 for the earlier designs</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/96.html"><small>← Previous</small>SN96 Verathos</a><a rel="next" href="/bittensor-docs/subnets/98.html"><small>Next →</small>SN98 NeverPlayAlone</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-21. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

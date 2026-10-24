@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IOTA (SN9) | Bittensor Subnet Docs</title>
+<meta name="description" content="Distributed LLM pretraining across pooled, unreliable machines; Mac owners can join through the Train at Home app.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h15">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>9</span><div>
+<h1>IOTA <span class="muted">SN9</span></h1>
+<p class="tagline">Distributed LLM pretraining across pooled, unreliable machines; Mac owners can join through the Train at Home app.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl4"><b>4.3<small>/day</small></b><span>last 7 d</span></li><li class="pl4"><b>5.0<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>10<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-23</b><span>last chat</span></li><li class="pw"><b>21,130</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>distributed training</dd>
+<dt>Status</dt><dd>Chat active through 2026-10-23; the public repo&#x27;s latest release, v4.13.7, was published 2026-10-15 and no newer commit or release was found on 2026-10-24. Train at Home users still report stalled runs and queues.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-24</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>IOTA (Incentivized Orchestrated Training Architecture), run by Macrocosmos, pretrains LLMs by splitting a model into layers across many mismatched, unreliable machines that earn emissions for verified work instead of competing to hold a whole model. A central orchestrator assigns layers, streams activations between miners and collects scores. Most small participants join through the Train at Home app, which currently supports Apple Silicon Macs. On chain, almost all miner incentive sits on two UIDs rather than on individual miners. The team&#x27;s stated direction is shifting toward an SDK and managed compute offering for customers.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Each miner is assigned one layer of a training run by the orchestrator. It computes forward and backward passes on activations passed in from neighbouring layers, uploads its weights and optimizer state at set points, and downloads the merged weights before training resumes. Activations travel mostly peer to peer, with cloud storage as a fallback. Train at Home wraps this in a desktop app; no manual hotkey registration is needed, and a coldkey address is only needed to receive rewards.</p></div><div><h3>Validators</h3><p>The validator code is a thin client. It downloads scoring code from the orchestrator, runs the tasks it is given, submits results, and publishes the orchestrator&#x27;s global miner scores as on-chain weights. If the orchestrator is unreachable it copies the chain&#x27;s existing weights instead. The docs say scores combine several checks on forward-pass activations (consistency over time, agreement with peers, signal shape, anti-gaming), averaged over a rolling window of about a day.</p></div><div><h3>Incentive</h3><p>Per the docs, a miner&#x27;s weight is its share of the total score in its run, scaled by the run&#x27;s burn factor and its share of subnet emissions. Anything not earned by miners is burned, with a cap on the miner share. Kicking is set per run (none, lowest N by score, or below a score threshold). For Train at Home payouts, the team said in June 2026 that pay is proportional to activations done, requires a successful weight upload, runs on a 24-hour clock, and is forfeited if a run&#x27;s loss breaks. What the chain shows (block 9354845, 2026-10-24): the emission split is 18 percent owner, 41 percent validators and 41 percent miners, with RecycleOrBurn set to Burn, and the owner hotkey&#x27;s UID 209 holds no incentive. Incentive is nonzero on only 2 of 256 UIDs: UID 171 (about 60 percent) and UID 128 (about 40 percent), and all 11 validators that have weight rows point at exactly those two. That fits the team&#x27;s description of a payout wallet that passes rewards on to many miners, but the chain cannot show who holds those UIDs or how pay reaches individual miners. In the validator code, the owner UID (hard-coded as 209) is where the burn share goes; it currently receives none.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-24</span> <span class="muted">(GitHub issue #223, macrocosm-os/IOTA)</span> A GitHub issue filed 2026-10-22 and updated through 2026-10-24 reports three Iron-tier Train at Home runs on v4.13.7 stuck in the same epoch for 61 to 79 hours while a fourth run kept advancing; the reporter says forward-pass counters rise but backward-pass counters stay flat. The report is from a user and shows no team reply.</li>
+<li><span class="when">2026-10-23</span> <span class="muted">(#iota)</span> A community helper pointed a new miner to the official docs and to a community-built Train at Home guide, and advised 24 GB of RAM and at least 200 Mbit/s of upload bandwidth (500 recommended), saying the slowest uploaders and mergers are dropped each epoch. The docs state no upload figure. The helper also said NVIDIA GPU support is coming soon; the team has not confirmed this.</li>
+<li><span class="when">2026-10-19</span> <span class="muted">(#iota)</span> The team said this quarter&#x27;s focus is a major SDK release backed by three customer pilots in October, and that it will not announce a token-economics design or buybacks until the way value is captured is clearer. A post from the subnet&#x27;s X account the same day claimed merging is about 5x faster and training about 20% cheaper (team claim).</li>
+<li><span class="when">2026-10-12</span> <span class="muted">(#iota, GitHub)</span> New training runs were launched, and repo release v4.13.6 landed the same day; v4.13.7 followed on 2026-10-15. Users kept reporting stalled or queued Train at Home miners in the repo issue tracker through 2026-10-19.</li>
+<li><span class="when">2026-10-04</span> <span class="muted">(#iota)</span> After Redis-related outages on 2026-10-03, the team upgraded the backend&#x27;s Redis client, saying this fixed peer-discovery problems between miners. On 2026-10-05 it said the orchestrator was more resilient but not yet fully reliable.</li>
+<li><span class="when">2026-09-29</span> <span class="muted">(#iota)</span> The IOTA SDK and a compute platform called Liquid Compute were announced at a conference in Montreal (post relayed in chat). A team member also said the Train at Home runs have shown poor loss but produced useful ablations.</li>
+<li><span class="when">2026-09-24</span> <span class="muted">(#iota)</span> A post from the subnet&#x27;s X account, relayed in chat, claimed a 100B-parameter model was trained across five data centres on single A100 GPUs at about 30.8% average MFU. This is a team claim and was not checked.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Check the Train at Home hardware page first: Apple Silicon Mac, at least 16 GB RAM, 10 to 30 GB free disk, wired or fast stable internet. A community helper advises 24 GB RAM and at least 200 Mbit/s upload (500 recommended); the docs give no upload figure.</li>
+<li>Download the Train at Home app from the IOTA website and click Start training; no account is needed.</li>
+<li>To receive rewards, paste your public Bittensor coldkey address into the app (it never asks for private keys).</li>
+<li>Expect to wait in a registration queue; the app&#x27;s CLI log shows queue position.</li>
+<li>Validators: the repo&#x27;s docs/VALIDATOR_README.md covers running the validator service.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>The orchestrator and the validators&#x27; scoring functions are not in the public repo, so how individual miners are scored comes from the docs, not from code. Chain weights were read on 2026-10-24 (block 9354845); they show only where the validators point, not how pay reaches miners.</li>
+<li>On chain, miner incentive is held by 1 to 3 UIDs in every sample from June to October 2026, and the UID holding most of it changed at least five times (209 on 2026-06-01, 21 on 2026-08-01, 210 on 2026-08-27, 128 on 2026-09-01, 171 from the 2026-09-17 sample onward). The chain does not say who holds them, and the reason for the rotations was not found. UID 209, which the validator code treats as the owner and burn slot, held about 83 to 95 percent of incentive in June and early July; whether that was burned depends on settings not read at those blocks.</li>
+<li>The repo README still describes a 1.5B model with 3 layers and recommends a CUDA GPU, which conflicts with the Train at Home docs (macOS only) and with current run names in chat. The README may be stale.</li>
+<li>The site&#x27;s SDK page still says the SDK is coming soon (re-read 2026-10-24), while chat reports it was announced on 2026-09-29. The performance numbers from team posts (100B, 16B, merge speed) are team claims and were not verified.</li>
+<li>The docs&#x27; Auditor Payout System page covers how compute is provisioned for runs, not miner payouts; Train at Home payout rules come from a pinned team post dated 2026-06-23.</li>
+<li>The repo&#x27;s open issues and chat show unresolved queueing, stalled-run and payout-timing problems for Train at Home miners, including three Iron-tier runs reported stuck for 61 to 79 hours as of 2026-10-24; a community member also said the dashboard has been inaccurate for months (unverified).</li>
+<li>Tokenomics and any buyback plans are not documented; the team says a design will come later.</li>
+<li>The macrocosmos.ai technical-primer PDF that the repo README and the docs page link to returned 404 on 2026-10-24; the arXiv copy works. The docs page&#x27;s mining-setup and validating links point to app.gitbook.com change-request URLs rather than public docs pages (not tested).</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://iota.macrocosmos.ai/" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://github.com/macrocosm-os/IOTA" rel="noopener noreferrer">GitHub</a></li>
+<li><a href="https://docs.macrocosmos.ai/subnets/subnet-9-iota" rel="noopener noreferrer">Subnet docs</a></li>
+<li><a href="https://docs.macrocosmos.ai/subnets/subnet-9-iota/scoring-rewards-and-kicking" rel="noopener noreferrer">Scoring, rewards and kicking</a></li>
+<li><a href="https://docs.macrocosmos.ai/product-and-services/tah" rel="noopener noreferrer">Train at Home docs</a></li>
+<li><a href="https://arxiv.org/abs/2507.17766" rel="noopener noreferrer">Technical primer (arXiv 2507.17766)</a></li>
+<li><a href="https://www.trainathome.ai/en/guide" rel="noopener noreferrer">Community Train at Home guide (unofficial)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 9 sources</summary>
+<ul>
+<li><strong>repo</strong> macrocosm-os/IOTA at commit ed0fecb (2026-10-15, v4.13.7): README, docs/, src/miner, src/validator, shared/common</li>
+<li><strong>web</strong> docs.macrocosmos.ai/subnets/subnet-9-iota and subpages (scoring-rewards-and-kicking, auditor-payout-system), fetched 2026-10-21</li>
+<li><strong>web</strong> docs.macrocosmos.ai/product-and-services/tah (user guide, hardware requirements, FAQs), fetched 2026-10-21</li>
+<li><strong>web</strong> iota.macrocosmos.ai home, /how-iota-works and /sdk, fetched 2026-10-21</li>
+<li><strong>web</strong> api.github.com/repos/macrocosm-os/IOTA issues list, 2026-10-21</li>
+<li><strong>msg</strong> #iota 2026-09-09 to 2026-10-19, plus pinned posts of 2025-05-27 and 2026-06-23</li>
+<li><strong>repo</strong> macrocosm-os/IOTA re-checked 2026-10-24: no commit or tag after ed0fecb (v4.13.7); OWNER_UID in shared/common settings and validator weight_setting.py</li>
+<li><strong>web</strong> api.github.com/repos/macrocosm-os/IOTA issues list and issue #223 with comments, read 2026-10-24; link status checks 2026-10-24</li>
+<li><strong>web</strong> Mainnet chain reads of netuid 9 (RPC): block 9354845 (2026-10-24) and ten sampled blocks from 8310845 (2026-06-01) to 9354845</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/8.html"><small>← Previous</small>SN8 Vanta</a><a rel="next" href="/bittensor-docs/subnets/10.html"><small>Next →</small>SN10 Pareton</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-24. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

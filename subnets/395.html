@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Entangle Protocol (SN395) | Bittensor Subnet Docs</title>
+<meta name="description" content="Testnet-only cross-chain messaging subnet with scanner and relay miners; no team post since 2026-06-27.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h5">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>395</span><div>
+<h1>Entangle Protocol <span class="muted">SN395</span></h1>
+<p class="tagline">Testnet-only cross-chain messaging subnet with scanner and relay miners; no team post since 2026-06-27.</p>
+<span class="st s-transitioning">transitioning</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl0"><b>0<small>/day</small></b><span>last 7 d</span></li><li class="pl1"><b>0.04<small>/day</small></b><span>days 8-30</span></li><li class="pl0"><b>0.02<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-02</b><span>last chat</span></li><li class="pw"><b>97</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>cross-chain messaging (relay network)</dd>
+<dt>Status</dt><dd>Testnet only, and quiet. Netuid 395 does not exist on mainnet (checked 2026-10-21); it exists on the public testnet under the name Entangle Protocol. The team&#x27;s last post in the channel is 2026-06-27, its mainnet date slipped from May to mid-July with no launch, and on the testnet no validator has set weights since about 2026-07-25 and no miner has incentive.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-21</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>Entangle Protocol describes itself as a decentralized cross-chain message relay network built on Bittensor. Scanner miners watch source chains for message events, relay miners compete to deliver those messages on the destination chain, and validators verify, run auctions and score both. The team pitches it as the messaging layer for apps such as buying subnet alpha from other chains and paying for subnet services cross-chain. Everything described here is team documentation; the code could not be read.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Two roles on one subnet. Scanner miners monitor chains and report cross-chain events as fast as possible; they need private, low-latency RPC endpoints. Relay miners bid in sealed auctions and, if they win, execute the delivery on the destination chain from their own funded wallets on each supported chain. Both declare their role in a health check that validators send about every 10 minutes; a miner that does not answer within 60 seconds is left out of scoring until the next successful check. The team&#x27;s docs name EVM chains, Solana, Sui, Cosmos and Stellar as supported ecosystems; chat said 7 chains on 2026-05-14 and 9 on testnet on 2026-06-05.</p></div><div><h3>Validators</h3><p>Validators ask scanner miners for events and record the arrival time themselves, spot-check about 20 percent of reported events, maintain a shared gas-price estimate, sign verified messages, run the relay auctions and independently confirm that each relay landed on the destination chain. Scores are smoothed with a moving average and set as weights every epoch. The docs say the epoch is 100 blocks; the testnet&#x27;s tempo on chain is 360, so the docs and the chain differ on this point. The docs list separate signing keys per destination ecosystem, while a 2026-05-16 team update said validators were moving to hotkey-based signing.</p></div><div><h3>Incentive</h3><p>Scanner score per event comes from the validator&#x27;s own receipt-time ranking (values 0, 0.2, 0.5, 0.7 or 1) averaged over the window. Relay score blends five parts: delivery success 50 percent, speed 25, proof correctness 15, fee efficiency 5, reliability 5. A winning relay miner gets 0.8 times its execution score plus 0.2 times a bid-quality score; a bidder that loses gets only bid quality; no bid gets zero. The emission split is 30 percent scanners and 70 percent relays: the docs say it is an owner-set parameter, and on the testnet the chain holds two mechanisms split 30/70 (which one is which was not checked). Chain weights are validator opinions and were not traced to payouts.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-21</span> <span class="muted">(Chain read, testnet block 8273002)</span> Chain read on the public testnet: 28 neurons, 8 validator permits, no neuron with incentive, and the most recent validator weight update about 88 days old (around 2026-07-25).</li>
+<li><span class="when">2026-06-27</span> <span class="muted">(#entangle)</span> Last team post in the channel (a link to an X post, after a weekly X Space announcement on 2026-06-22). A 2026-08-08 question asking for a website has no reply in the archive, and nothing from the team follows through 2026-10-21.</li>
+<li><span class="when">2026-06-19</span> <span class="muted">(#entangle)</span> After a user reported the miner guide did not work, the team said broken docs links were fixed.</li>
+<li><span class="when">2026-06-13</span> <span class="muted">(#entangle)</span> Asked about mainnet, the team said it was in talks with investors and targeting mid-July, not fixed. Earlier (2026-05-11) it had said launch depended on securing the registration cost.</li>
+<li><span class="when">2026-06-05</span> <span class="muted">(#entangle)</span> Team said the network was live on 9 chains in testnet and that it was building an application layer where any chain can purchase subnet alpha.</li>
+<li><span class="when">2026-05-28</span> <span class="muted">(#entangle)</span> Start of a run of near-daily dev updates (through 2026-06-04) about the testnet Alpha Bridge V2: a vault, relay recovery, dynamic subnet lookup and delivery-hash tracking.</li>
+<li><span class="when">2026-05-27</span> <span class="muted">(#entangle)</span> Team announced the subnet open on testnet for miners and validators, with a live-stats page.</li>
+<li><span class="when">2026-05-16</span> <span class="muted">(#entangle)</span> Dev update: wider message verification with a delivery-acknowledgment step, upgradeable contracts on all chains, and a move to hotkey-based validator signing.</li>
+<li><span class="when">2026-05-14</span> <span class="muted">(#entangle)</span> Team said the bridge was live on testnet on 7 chains, internal audits were being finalized and mainnet was likely within the month. A builder said they were then testing against the team&#x27;s own centralized relay server.</li>
+<li><span class="when">2026-05-07</span> <span class="muted">(#entangle)</span> Channel opened with the project&#x27;s links and a status post: miner and validator logic built, contracts deployed on 7 chains across 5 ecosystems, an end-to-end demo on testnet, and fixes from a May 2026 audit review under way.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Read the team&#x27;s miner guide at docs.entangleprotocol.com (Running a Miner) for the role, environment and flag settings; it says scanners need private RPC endpoints and relay miners need funded wallets on every destination chain.</li>
+<li>Create a testnet wallet and register on testnet netuid 395 (btcli with --network test); netuid 395 is not registered on mainnet.</li>
+<li>The miner and validator code (neurons/miner.py in the docs) is in a GitHub repository that returned 404 on 2026-10-21, so there is no public source to run today. Ask the team in the channel where the code is before investing time.</li>
+<li>Check the validator weight age on the testnet first: if validators are not setting weights, a new miner cannot earn incentive.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Testnet only. Nothing on this page describes mainnet emissions or economics; the testnet&#x27;s token and pool numbers are not real value and are left out.</li>
+<li>No code was read. The repository the team links (in the chain identity and the channel&#x27;s first post) returned 404 and its organization shows no public repositories on 2026-10-21; whether it is private or removed was not determined. Every mechanism detail above comes from the team&#x27;s docs and litepaper, not from code.</li>
+<li>The demo and stats site (test.entangleprotocol.com) resolves but did not respond from our network on 2026-10-21, so the live dashboard could not be checked. The whitepaper PDF was not read.</li>
+<li>The testnet looks idle: no neuron had incentive or dividends and every validator&#x27;s last weight update was at least about 88 days old at block 8273002. The testnet also showed a large emission share going to one uid (about 54 percent) and to uid 0 (about 35 percent); who holds those was not traced.</li>
+<li>Mainnet timing has slipped: the docs roadmap says Q1 2026, the litepaper says Q2 2026, the team said May and then mid-July in chat, and the subnet is still not on mainnet on 2026-10-21.</li>
+<li>Fee flow is described three ways. The docs say 70 percent of a per-message fee goes to the winning relay miner and 30 percent to a treasury, of which 20 percent funds weekly alpha buybacks. The litepaper and a 2026-05-10 team answer say 100 percent of fees fund buybacks, with relay miners reimbursed in alpha. Revenue, message-volume and burn figures in the docs and roadmap are targets, not observed numbers.</li>
+<li>Docs and chain differ on the epoch length (100 blocks in docs, tempo 360 on the testnet) and the docs still list separate per-ecosystem signing keys after a May update about hotkey-based signing.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://entangleprotocol.com" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://docs.entangleprotocol.com" rel="noopener noreferrer">Docs</a></li>
+<li><a href="https://litepaper.entangleprotocol.com" rel="noopener noreferrer">Litepaper (May 2026)</a></li>
+<li><a href="https://x.com/webuildentangle" rel="noopener noreferrer">X</a></li>
+<li><a href="https://github.com/Entangle-Foundation/entangle-subnet" rel="noopener noreferrer">GitHub (linked by the team; returned 404 on 2026-10-21)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 7 sources</summary>
+<ul>
+<li><strong>msg</strong> #entangle 2026-05-07 to 2026-10-02 (read via the chat archive; no newer messages through 2026-10-21)</li>
+<li><strong>web</strong> https://entangleprotocol.com (read 2026-10-21)</li>
+<li><strong>web</strong> https://docs.entangleprotocol.com pages: running-a-miner, validators, scoring-incentives, tokenomics-economics, roadmap (rendered in a browser 2026-10-21)</li>
+<li><strong>web</strong> https://litepaper.entangleprotocol.com, v2.0 May 2026 (read 2026-10-21)</li>
+<li><strong>web</strong> Chain read at mainnet block 9334505: netuid 395 does not exist</li>
+<li><strong>web</strong> Chain read on testnet blocks 8273000 to 8273010: subnet info, hyperparameters, neuron aggregates, mechanism emission split</li>
+<li><strong>web</strong> https://github.com/Entangle-Foundation/entangle-subnet and the Entangle-Foundation org page returned 404 / no public repositories (2026-10-21)</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/335.html"><small>← Previous</small>SN335 BrainPlay (testnet)</a><a rel="next" href="/bittensor-docs/subnets/405.html"><small>Next →</small>SN405 ACORE AI</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-21. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

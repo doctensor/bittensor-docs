@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KubeTEE (SN90) | Bittensor Subnet Docs</title>
+<meta name="description" content="Miners run confidential-computing GPU Kubernetes clusters; the validator pays them by GPU type, count and uptime.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h6">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>90</span><div>
+<h1>KubeTEE <span class="muted">SN90</span></h1>
+<p class="tagline">Miners run confidential-computing GPU Kubernetes clusters; the validator pays them by GPU type, count and uptime.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl4"><b>6.4<small>/day</small></b><span>last 7 d</span></li><li class="pl4"><b>2.7<small>/day</small></b><span>days 8-30</span></li><li class="pl4"><b>6.5<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-24</b><span>last chat</span></li><li class="pw"><b>561</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>confidential computing GPU clusters (AI infrastructure)</dd>
+<dt>Status</dt><dd>Chat active through 2026-10-21 (91 messages in the last 30 days); main repo last pushed 2026-10-19. Still in Early Access with two scored clusters, moving to a Phase 1 rule set announced 2026-10-19.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-21</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>KubeTEE describes itself as a decentralized AI factory: miners operate Kubernetes clusters of GPUs with hardware confidential computing (Intel TDX, NVIDIA confidential-computing GPUs, Kata and Confidential Containers) that are meant to serve AI workloads such as inference, batch jobs and agents. The README says it is not itself an inference subnet; models are exposed through a gateway run by the team and through an idle-capacity channel on SN28. Today the validator checks that a miner&#x27;s cluster is ready and pays by hardware, not by the quality of work served.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Operate a Rancher-managed RKE2 cluster of GPU nodes. During Early Access (Phase 0) registration is reviewed by hand: the team labels the cluster with the miner&#x27;s hotkey and deploys the software stack through GitOps. A team post on 2026-10-19 set the Phase 1 rules: a minimum of 3 nodes of one GPU type (previously 7), 3 extra nodes for each additional GPU type in a mixed cluster, and Blackwell-class GPUs only for new clusters, with Hopper to be phased out as Blackwell comes online (target November 2026). A 10 TAO per node collateral was announced; it is not enforced during Early Access.</p></div><div><h3>Validators</h3><p>Validator v1 reads the Rancher inventory with GET-only calls (authenticated by signing a challenge with the validator hotkey) and gives each miner a binary readiness verdict: hotkey binding, Rancher readiness, high-availability topology, capacity, 8-GPU passthrough and a confidential runtime handler. It sets weights once per epoch. Per the README status table, TEE attestation, job metrics and health checks are not yet part of the weights. The validator runs on the operator&#x27;s own machine, not inside a TEE.</p></div><div><h3>Incentive</h3><p>Per the code, a ready miner&#x27;s earnings in USD equal a price-card rate per GPU, times GPU count, times a tenure factor, times the window length. Weight is earnings divided by the epoch&#x27;s emission pool. If total earnings exceed the pool, weights are scaled down pro rata; any unused part of the pool goes to the owner UID, which the README says is recycled rather than credited to the owner. Price-card values may move only within 0.8x to 1.25x of compiled-in defaults, and a Targon (SN4) payout feed can only pull them down. On-chain at block 9334298, all 8 validators with weights point at the same two UIDs and none at UID 0.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-21</span> <span class="muted">(validator dashboard; Bittensor chain read)</span> The validator dashboard showed two scored clusters (the owner&#x27;s staging cluster and one external miner). Computed miner earnings slightly exceeded the hourly pool, so weights were normalized and nothing was recycled. The chain agreed that only two UIDs earn incentive.</li>
+<li><span class="when">2026-10-19</span> <span class="muted">(#90 kubetee; GitHub repo KubeTEE-AI/kubetee-subnet)</span> The team announced the Phase 1 miner rules (smaller minimum cluster, Blackwell-only for new clusters, collateral enforcement to start in Phase 1) and updated the docs the same day. The README lists validator v1 as live.</li>
+<li><span class="when">2026-10-17</span> <span class="muted">(#90 kubetee)</span> The team fixed a MiMo tool-call looping issue and moved DeepSeek V4.1 Flash to a dated snapshot alias, deprecating the undated one.</li>
+<li><span class="when">2026-10-06</span> <span class="muted">(#90 kubetee)</span> The team said the go-to-market plan targets TEE-focused enterprises and gateways first, ahead of large model marketplaces.</li>
+<li><span class="when">2026-10-03</span> <span class="muted">(#90 kubetee)</span> The team posted gateway performance figures (team-reported, not verified) and a fix for a cross-request data leak in a speculative-decoding path.</li>
+<li><span class="when">2026-09-24</span> <span class="muted">(#90 kubetee)</span> The team confirmed two active miner clusters. It also announced that KubeTEE became the sole provider of the MiMo V2.6 Pro model on the SN28 sayGM channel.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Read the README roadmap and docs/MINER-DEPOSIT.md in the subnet repo; they separate what ships today from what is planned.</li>
+<li>Early Access is by hand-review: contact the team in the subnet&#x27;s channel, since self-service onboarding is a Phase 1 item and the team calls the pace demand-driven.</li>
+<li>Plan hardware to the 2026-10-19 rules: at least 3 nodes of one GPU type, with new clusters on Blackwell-class GPUs.</li>
+<li>After approval, the team binds the cluster to your hotkey with a label and deploys the stack with Rancher Fleet.</li>
+<li>To run a validator, use the ghcr.io/kubetee-ai/kubetee-validator:v1 image and follow validator/README.md in the repo.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>The README contradicts itself: the scoring and incentive sections say TEE attestation is mandatory, but its own status table says scoring today reads only Rancher inventory and readiness. This page follows the status table.</li>
+<li>Paid jobs, the Jobs MCP server and attestation-based scoring are Phase 1 to 3 items and are not built. No revenue or buyback plan was found; a chat question on this on 2026-10-01 had no answer in the data read.</li>
+<li>README price-card figures differ from those on the live dashboard, so this page quotes no prices. Throughput numbers are the team&#x27;s own claims.</li>
+<li>Dashboard and chain were read once, on 2026-10-21. Chain weights are validator opinions, not payouts, and it was not checked whether all 8 validators run the owner&#x27;s code.</li>
+<li>The README describes the owner&#x27;s staging cluster (UID 56) as part of a split company structure in which the owner-side miner operator competes under the same rules. The validator config hardcodes that UID as the owner miner.</li>
+<li>Not read: kubetee.ai, the llm.kubetee.ai gateway, saygm.com and any market data. Chat is moderated against price discussion, so none is included.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/KubeTEE-AI/kubetee-subnet" rel="noopener noreferrer">GitHub (subnet and validator)</a></li>
+<li><a href="https://kubetee.ai" rel="noopener noreferrer">Project site</a></li>
+<li><a href="https://s3.hippius.com/kubetee-validator/index.html" rel="noopener noreferrer">Validator dashboard</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 4 sources</summary>
+<ul>
+<li><strong>repo</strong> KubeTEE-AI/kubetee-subnet @fa976a3 (2026-10-19): README.md, docs/MINER-DEPOSIT.md, validator/{README.md,miner_scoring.py,config.py,price_card.py}; commit 202d481</li>
+<li><strong>web</strong> Validator dashboard s3.hippius.com/kubetee-validator/index.html (rendered text read 2026-10-21 11:57 UTC); api.github.com/orgs/KubeTEE-AI/repos</li>
+<li><strong>web</strong> Bittensor chain read, read-only: subnet info at block 9334275, hyperparameters 9334295, UID and incentive aggregates 9334297, validator weights 9334298 (2026-10-21)</li>
+<li><strong>msg</strong> #90 kubetee, 2026-08-27 to 2026-10-21</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/89.html"><small>← Previous</small>SN89 InfiniteQuant</a><a rel="next" href="/bittensor-docs/subnets/91.html"><small>Next →</small>SN91 Cascade</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-21. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Herald (SN69) | Bittensor Subnet Docs</title>
+<meta name="description" content="Verified media placement: PR firms earn emissions for press articles an oracle confirms are live and editorial.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h3">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>69</span><div>
+<h1>Herald <span class="muted">SN69</span></h1>
+<p class="tagline">Verified media placement: PR firms earn emissions for press articles an oracle confirms are live and editorial.</p>
+<span class="st s-transitioning">transitioning</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl2"><b>0.57<small>/day</small></b><span>last 7 d</span></li><li class="pl3"><b>0.83<small>/day</small></b><span>days 8-30</span></li><li class="pl2"><b>0.62<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-20</b><span>last chat</span></li><li class="pw"><b>1,005</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>verified media placement (PR)</dd>
+<dt>Status</dt><dd>Built and running but not yet paying on 2026-10-21: the site says payouts are not live, and on chain all eight weight-setting validators put 100% of weight on UID 0, which the code treats as the burn recipient. The latest release (0.2.2) is from 2026-09-29, and the channel shows no public team replies to community questions between 2026-09-14 and 2026-10-14.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-21</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>Herald is a subnet for earned media. PR firms and PR professionals upload the text of an article before it is published, get it placed in a real news outlet, and submit the link through the Herald website. Validators run a code-only oracle that checks the outlet, date, text match, topic and that the piece is editorial rather than paid, then weight each contributor by the verified value of their articles. There is no model and no GPU: the work is placing coverage. The subnet owner is DSV Fund, which revealed the project on 2026-07-06.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Contributors are PR firms or PR professionals. They sign in to the Herald website, request to become a miner and, once approved, register their own hotkey from the website with a wallet extension (no server is needed; the old miner neuron is deprecated and earns nothing). They pick a brief, upload the text they will publish and sign it with the wallet that owns the hotkey, then add the link once the article is live. When several contributors submit the same article, the earliest upload that passes the checks is credited.</p></div><div><h3>Validators</h3><p>Once per daily epoch each validator reads new submissions from the team&#x27;s backend and checks them in order: the signature and hotkey ownership, that the brief is open, that the outlet is in the signed registry (215 outlets on 2026-10-21: 50 tier 1, 87 tier 2, 78 tier 3), that the page is live and shows a publication date inside the brief window and after the upload, that at least 60% of the uploaded text appears, that it is editorial rather than paid, and that it matches the brief&#x27;s topic. Validators need no GPU but need paid fetch and search provider keys, a CoinGecko price source and a credential supplied by the operator, and their settings must match across the fleet.</p></div><div><h3>Incentive</h3><p>An article&#x27;s value is 500 USD times a tier multiplier (1.0, 0.6 or 0.2) times a search multiplier (1.0 if indexed, 0.5 if not), released over 30 daily installments while the article stays live; confirmed removal or a switch to paid content forfeits the rest. Each day a contributor&#x27;s weight is its payable USD divided by the USD value of that day&#x27;s miner emission, and everything not earned goes to UID 0 and is burned. The code treats 41% of subnet emission as the miner share, and the chain showed an 18% owner, 41% validator and 41% miner split on 2026-10-21. The operator sets these parameters and says they can change.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-21</span> <span class="muted">(on-chain read, heraldmedia.ai)</span> On chain, 9 validators held permits and 8 had set weights, all putting 100% on UID 0; incentive was non-zero on that one UID only. The team site showed a &#x27;live network data unavailable&#x27; banner, zero counters for placements and outlets, and the sentence that payouts are not live yet.</li>
+<li><span class="when">2026-10-20</span> <span class="muted">(#herald)</span> Posts relayed in chat said Herald placed coverage for another subnet (SN26 Perturb) in a trade outlet, and that DSV Fund is looking forward to the next campaigns going live. These are team-reported and the placement was not checked.</li>
+<li><span class="when">2026-10-07</span> <span class="muted">(#herald)</span> Several community members said their requests to become a miner had been under review for a day or more and asked whether the team had stopped working. No public reply was found.</li>
+<li><span class="when">2026-10-02</span> <span class="muted">(#herald)</span> The team announced v0.2.2: contributors now mine with their own hotkeys registered from the website, the share of emission not earned by verified articles is burned, and the TAO/USD price read became more reliable. It listed the steps for PR firms: request to be a miner, register a miner key, upload a draft before publication, then add the link.</li>
+<li><span class="when">2026-09-29</span> <span class="muted">(GitHub HeraldMedia/herald)</span> Release 0.2.2 merged. Earlier that week the repo added mainnet defaults to the release (2026-09-24) and per-contributor hotkey payment in 0.2.1 (2026-09-25).</li>
+<li><span class="when">2026-07-06</span> <span class="muted">(#herald (pinned))</span> DSV Fund publicly revealed Herald as its first subnet incubation and posted the pitch: businesses pay for briefs, PR firms mine by placing coverage, and rewards come once the piece stays up for 30 days. The fund said it would keep funding briefs related to Bittensor if paid briefs were scarce. That promise is a statement, not enforced by code.</li>
+<li><span class="when">2026-07-02</span> <span class="muted">(#herald, on-chain registration data)</span> The subnet owner&#x27;s claim of the channel was announced. The slot itself was registered on 2026-05-08 after an earlier owner was deregistered.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>PR firms and professionals: sign in at the Herald console with Google and request to become a miner; approval is by the team.</li>
+<li>After approval, connect a Talisman, SubWallet or Polkadot.js wallet on the site and register your own miner hotkey on netuid 69 (the registration fee is not refunded; the chain showed 0.0005 TAO on 2026-10-21).</li>
+<li>Pick an open brief, upload your draft before publishing (300 to 40,000 characters) and sign it, publish in a listed outlet, then add the link on the brief page.</li>
+<li>Check the outlet list and the paid-content rules in docs/miner.md first: undisclosed paid placements are not rewarded.</li>
+<li>Validators: see docs/validator.md. Register on netuid 69 with enough stake for a permit, get fetch and search provider keys, and use the release&#x27;s mainnet settings. Stake is locked capital; the guide estimates about 20 to 40 USD a month for the server plus the provider keys.</li>
+<li>Before investing effort, check whether payouts are live: on 2026-10-21 the site said they were not.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Payouts: the site said they are not live yet and the chain showed all weight on UID 0 on 2026-10-21. Whether any article has verified or vested is not publicly visible; the site&#x27;s live counters were unavailable.</li>
+<li>The backend that stores briefs, approvals and verified results is separate from the open repo, and the outlet registry and briefs feed are signed by the operator. Contributor approval is also manual. The public code cannot show how many briefs or approved contributors exist.</li>
+<li>UID 0 is called the burn recipient in the repo and README, not in chain data. Weights are validator opinions, not payouts.</li>
+<li>The Payout status docs page was not located, so its exact wording is not recorded here.</li>
+<li>The site lists known gaps in paid-content screening, including posts self-published on open platforms and outlets without specific paid-content rules.</li>
+<li>Chat claims about the owner, funding of future briefs and the SN26 placement are team statements and were not verified in code or on chain.</li>
+<li>The channel was largely unanswered from 2026-09-14 to 2026-10-14; the project&#x27;s X account may carry more recent news that was not read.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://www.heraldmedia.ai" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://github.com/HeraldMedia/herald" rel="noopener noreferrer">GitHub</a></li>
+<li><a href="https://github.com/HeraldMedia/herald/blob/main/docs/miner.md" rel="noopener noreferrer">Miner guide</a></li>
+<li><a href="https://github.com/HeraldMedia/herald/blob/main/docs/validator.md" rel="noopener noreferrer">Validator guide</a></li>
+<li><a href="https://www.heraldmedia.ai/console" rel="noopener noreferrer">Contributor console</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 4 sources</summary>
+<ul>
+<li><strong>repo</strong> HeraldMedia/herald README.md, docs/miner.md, docs/validator.md, herald/validator/news/pricing.py @a336b04 (2026-09-29)</li>
+<li><strong>web</strong> heraldmedia.ai home and /docs hub (2026-10-21); api.heraldmedia.ai/registry/outlets.json (signed registry, version 4, 215 outlets) and /health</li>
+<li><strong>web</strong> On-chain read via public node: subnet info at block 9334347, params 9334346, uids 9334345, weights 9334346, SubnetEmissionWeights storage (2026-10-21)</li>
+<li><strong>msg</strong> #herald, 2026-05-08 to 2026-10-20, including pinned posts of 2026-07-06 and the 2026-10-02 release announcement</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/68.html"><small>← Previous</small>SN68 NOVA</a><a rel="next" href="/bittensor-docs/subnets/70.html"><small>Next →</small>SN70 Consted 2.0 (unlabelled slot, no project published)</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-21. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AlphaRidge (SN45) | Bittensor Subnet Docs</title>
+<meta name="description" content="Miners turn financial news into structured market analysis; pay follows verified volume and quality, the rest burns.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h3">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>45</span><div>
+<h1>AlphaRidge <span class="muted">SN45</span></h1>
+<p class="tagline">Miners turn financial news into structured market analysis; pay follows verified volume and quality, the rest burns.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl4"><b>2.4<small>/day</small></b><span>last 7 d</span></li><li class="pl4"><b>3.5<small>/day</small></b><span>days 8-30</span></li><li class="pl4"><b>6.0<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-24</b><span>last chat</span></li><li class="pw"><b>5,583</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>financial news analysis (structured market data)</dd>
+<dt>Status</dt><dd>On 2026-10-21 (about 12:00 UTC) the team&#x27;s public API showed analysis running that day (latest analysis at 12:00 UTC, about 120,000 articles analyzed so far) and two validators reporting. The team shipped a relevance-check change on 2026-10-14 and the repo&#x27;s last commit is 2026-10-15 (version 3.9.14).</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-21</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>SN45 reads a large stream of financial news and has miners produce a structured analysis of each article: sentiment per asset, entities linked to tickers, numeric claims with confidence, exact quotes, an event fingerprint and narrative tags. Validators dispatch batches, audit samples and set weights. The output feeds AlphaRidge, the team&#x27;s trading-analytics product (charts, screener, alerts, AI assistant, API), which the team says is free to use for now.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>A miner receives leased batches of articles over Bittensor. Under the current triage scheme it first labels each article relevant, borderline or irrelevant against a published rubric (a tradeable asset is involved, or a macro event tied to an economy) and returns a proof of reading for every article, then deep-analyzes only the relevant ones. The default miner runs spaCy, GLiNER, Flair and ReFinED entity extraction plus FinBERT sentiment on the machine, and two LLM calls through the miner&#x27;s own OpenRouter key (the default model is DeepSeek V4 Flash), then embeddings. The README gives 8 GB VRAM, 16 GB RAM, 60 GB disk and 8 CPU cores as the minimum and about 44 GB of models to download. Analysis takes roughly 12 to 18 seconds per article, and CPU core count is said to set throughput.</p></div><div><h3>Validators</h3><p>Validators fetch articles from the team&#x27;s coordination API, lease them to miners, and check a sample of each batch by re-running the pipeline themselves. The code grades each sampled article with a continuous score that is the lower of two things: how closely it matches the validator&#x27;s own analysis (grounding of numbers and quotes, enum fields, extracted fields, semantics) and a reference-free faithfulness check against the article. Relevance claims are judged against the published definition, and a miner whose claims keep being found not relevant can lose whole batches. Validators keep their own points and penalties and pool them with signed epoch snapshots from the other validators before setting weights.</p></div><div><h3>Incentive</h3><p>Per the README and code, pay is verified volume times a reputation multiplier. Reputation is a slow moving average of graded scores; below a midpoint the multiplier collapses toward zero. Points are priced in USD, converted to a percentage of miner emission, and whatever share no verified work claims goes as weight to burn UID 189 (if total claims exceed 100 percent, shares are scaled and nothing burns). Running more UIDs does not add pay: work allocation is meant to follow verified capacity. The team announced a quality bonus on 2026-09-16, and the public miner dashboard on 2026-10-21 showed multipliers up to about 2 for the best miners, so a bonus is live even though the code default for it is off. The live curve values come from served configuration and a signed profile that were not read.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-20</span> <span class="muted">(#alpharidge)</span> A miner reported both validators taking over 30 seconds to acknowledge returned batches for about half an hour; the team saw healthy validators and put it down to a brief network issue.</li>
+<li><span class="when">2026-10-18</span> <span class="muted">(#alpharidge)</span> Team advised miners to exclude three OpenRouter providers from their account settings or requests after seeing a problem with them.</li>
+<li><span class="when">2026-10-14</span> <span class="muted">(#alpharidge)</span> The relevance fix went live early, after miners who had updated were penalized before validators moved; the team said it could not pause registrations because that is a root permission.</li>
+<li><span class="when">2026-10-13</span> <span class="muted">(#alpharidge)</span> After a community report that off-topic pages were earning the relevance premium, the team said this was unintended and announced a fix that checks every relevance claim and cuts rewards for repeated wrong claims.</li>
+<li><span class="when">2026-09-29</span> <span class="muted">(#alpharidge)</span> Validator update 3.9.5: honest analyses that differ from the validator&#x27;s on wording are no longer failed, and validator-side errors no longer cost miners. Earlier on 2026-09-28 low incentives were blamed on a degraded model endpoint at OpenRouter.</li>
+<li><span class="when">2026-09-16</span> <span class="muted">(#alpharidge)</span> Quality bonus announced as live with the 3.7.0 validator update; scores are built from relevance labels, accuracy of numbers and quotes, and spot checks. The team told miners to be on at least 3.6.7.</li>
+<li><span class="when">2026-09-15</span> <span class="muted">(#alpharidge)</span> The final V3 stage went live at block 9,074,900; burn ran high for a day while capacity numbers were recalibrated.</li>
+<li><span class="when">2026-09-09</span> <span class="muted">(#alpharidge)</span> Team published the V3 plan: a mandatory new schema with per-claim confidence and quote offsets, exact quote matching, and pay that follows verified work and capacity rather than UID count, rolled out in five stages.</li>
+<li><span class="when">2026-08-26</span> <span class="muted">(#alpharidge)</span> A validator bug from a refactor broke reward reporting to miners and the API but not weight setting; the team fixed it in a validator update (3.5.2).</li>
+<li><span class="when">2026-08-20</span> <span class="muted">(#alpharidge)</span> Team announced the AlphaRidge product live, with all 256 UIDs registered, and said subscriptions were free for now.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Check the hardware in the README (8 GB VRAM and 8 CPU cores minimum) and get an OpenRouter API key, since miners pay for their own LLM calls.</li>
+<li>Clone the repo, create a Python 3.12 virtual environment and run install.sh; the first run downloads about 44 GB of models.</li>
+<li>Copy miner_env.example to .miner_env and set API_KEY; the other values are pre-filled.</li>
+<li>Register with btcli subnet register --netuid 45, then start python -m neurons.miner --netuid 45 with your wallet names.</li>
+<li>If the axon sits behind nginx, set underscores_in_headers on, or no batches will arrive.</li>
+<li>Stay on the latest miner release from the repo and watch the #alpharidge channel, because the team has asked miners to update several times since September.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Chain weights were not read; pay claims here come from the repo, the team&#x27;s public dashboard and chat.</li>
+<li>The README is dated 2026-08-29 and still describes a V2 rule where a failed sample voids a whole batch; the code and chat since September show per-article graded scoring, triage and a quality bonus, and the 2026-09-29 update softened batch failures. Which rule applies in detail was not resolved.</li>
+<li>Live economic values (bonus size, reputation midpoint, capacity) come from served configuration and a signed mechanism profile that require authentication and were not read; the public dashboard only shows their effects.</li>
+<li>Dashboard and API figures are team-run and were read on 2026-10-21 only. The README throughput and source counts are a 2026-08-29 snapshot.</li>
+<li>Chat has repeated miner complaints about registration churn and low pay for many miners; these are community statements, and the team has said it would change subnet parameters only if mining updates do not help.</li>
+<li>Allegations of cheating by named miners in chat were not verified and are not repeated here.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/Team-Rizzo/alpharidge-ai" rel="noopener noreferrer">GitHub (miner and validator)</a></li>
+<li><a href="https://alpharidge.ai" rel="noopener noreferrer">AlphaRidge product</a></li>
+<li><a href="https://sn45.rizzo.network/" rel="noopener noreferrer">Miner dashboard</a></li>
+<li><a href="https://api.alpharidge.ai/dashboard/stats" rel="noopener noreferrer">Team API (public dashboard reads)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 3 sources</summary>
+<ul>
+<li><strong>repo</strong> Team-Rizzo/alpharidge-ai README.md, triage.py, validator/{quality,reputation,triage_grader,capacity_controller}.py, utils/burn.py, config.py @ a0ab38a (3.9.14, 2026-10-14)</li>
+<li><strong>web</strong> api.alpharidge.ai /dashboard/stats, /dashboard/validators, /dashboard/miners (read 2026-10-21)</li>
+<li><strong>msg</strong> #alpharidge 2026-08-20, 2026-08-26, 2026-09-04, 2026-09-09, 2026-09-15, 2026-09-16, 2026-09-29, 2026-10-13, 2026-10-14, 2026-10-18, 2026-10-20</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/44.html"><small>← Previous</small>SN44 Score</a><a rel="next" href="/bittensor-docs/subnets/46.html"><small>Next →</small>SN46 Instant</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-21. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

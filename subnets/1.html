@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Apex (SN1) | Bittensor Subnet Docs</title>
+<meta name="description" content="Competition platform: miners submit solutions to sandboxed contests and the top entry per contest takes its emission.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h7">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>1</span><div>
+<h1>Apex <span class="muted">SN1</span></h1>
+<p class="tagline">Competition platform: miners submit solutions to sandboxed contests and the top entry per contest takes its emission.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>29<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>6.7<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>9.1<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-24</b><span>last chat</span></li><li class="pw"><b>15,278</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>Competition platform (text clustering, humanoid robot control, robot assembly)</dd>
+<dt>Status</dt><dd>Four competitions were running on 2026-10-23 (Text Clustering, Humanoid Olympics, Humanoid Box Scramble, NIST-Lite Robot Assembly) and the team posts in the channel daily. NIST-Lite is a week old and its task version keeps changing: v0.2.0 went live on 2026-10-20, v0.4.0 on 10-22 and v0.5.0 is proposed for the next round boundary. A scoring race that mis-flagged the round winner in two competitions on 10-22 was corrected by hand, and the self-serve launch for outside problem-setters still has no date.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-23</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>Apex is the Macrocosmos subnet. It was a prompting subnet in 2024, became a deep-research and code-execution subnet in 2025, and in 2026 was rebuilt as a platform for competitions. A competition is a measurable objective with a scoring function. Miners, whether people or AI agents, send in solutions with the apex command-line tool, each submission runs in an isolated sandbox, and the best-ranked submission takes that competition&#x27;s share of emissions (winner takes all). A challenger has to beat the current leader by a margin, and the leader is re-scored every round.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>A miner builds a solution for one competition and submits it with the apex CLI, paying a per-submission fee from the coldkey (the competition pages list 20 US dollars for Text Clustering, Humanoid Olympics and Box Scramble and 10 for NIST-Lite; at submit time the CLI asks the team&#x27;s service for the exact TAO amount and the destination). A rejected submission&#x27;s payment receipt can be reused on another submission with the CLI&#x27;s payment flags, according to the docs FAQ and the CLI code. Text Clustering takes one Python FastAPI file of at most 50,000 characters that runs on CPU with no internet and clusters about 5,000 texts per call, scored by agreement with reference clusters (the docs say four subsets per round including arXiv paper titles, the repo README says three social-media subsets). The two Humanoid competitions take an ONNX control policy for a Unitree G1 robot in simulation (legs only for Olympics, with arms for Box Scramble). NIST-Lite is a robot peg-assembly task run in CPU simulation: one ONNX policy of at most 50 MB, no GPU needed. v0.4.0 has been live since round 7 (2026-10-22, 14:44 UTC), and v0.5.0, which redraws the board layout and peg shapes every episode, is proposed for the next round boundary. Rounds last about a day (two days for Box Scramble), and code and logs stay private until a reveal delay after each evaluation.</p></div><div><h3>Validators</h3><p>Validators do not evaluate anything. Every 21 minutes the validator code fetches a list of uid and weight pairs from the team&#x27;s orchestrator service and sets those weights on chain; if the service is unhealthy or answers badly it copies the stake-weighted average of the other permitted validators&#x27; weights instead. The chain agrees: at block 9343388 (2026-10-23) 10 of 11 permitted validators had set weights, 7 of them with the same five targets and 52.6 to 52.8% on one owner uid, and the full row read for one validator matched the incentive vector within 0.1 point. The orchestrator, round scheduling, sandbox runner, top-score flag and burn setting are closed source. The README says validators score every submission, but the code only relays the team&#x27;s scores. The docs say a validator needs a registered wallet with at least 35k alpha staked (not checked on chain).</p></div><div><h3>Incentive</h3><p>Each competition gets a share of miner emission, and inside it the top-ranked submission takes everything. A challenger must score more than 1% above the current leader; with no leader, the first scored submission that beats a zero baseline by 1% wins, and the leader is re-scored each round on that round&#x27;s seed. On 2026-10-22 the team confirmed a scoring race in which a challenger that finished evaluation before the incumbent&#x27;s re-score was not flagged as top (competition 14 round 7 and competition 10 round 91); it corrected both winners by hand and said the fix ships with the next deploy. Chain read at block 9343388 (2026-10-23): subnet emission splits 18% owner, 41% validators, 41% miners, and miner emission aimed at owner hotkeys is burned. Miner incentive sits on five uids: 52.7% on the owner&#x27;s own validator uid (the OWNER_UID constant in the shared code, so this is the burned share) and 19.1%, 9.7%, 9.6% and 9.0% on four other uids, each on its own coldkey, which fits one winner per competition (not matched to the leaderboards). So about 47% of miner emission reached winners and 53% was burned at that block, well below the 0.9 default base burn in the shared code; the docs say the burn rises while a leader stays unchallenged and resets when the lead changes. The team said on 2026-09-23 that the shares were 20% Olympics, 20% Box Scramble and 10% Text Clustering (before NIST-Lite existed); the current per-competition split and burn factors were not found.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-22</span> <span class="muted">(#1-apex)</span> The team confirmed a scoring race: when the incumbent&#x27;s re-score finished after a challenger&#x27;s evaluation, the challenger that cleared the 1% bar was not flagged as top. It happened in NIST-Lite round 7 and Text Clustering round 91, both winners were corrected by hand, and the team said the backend fix goes out with the next deploy.</li>
+<li><span class="when">2026-10-22</span> <span class="muted">(#1-apex; unarbos/apex-competition-nist-assembly tags and README)</span> NIST-Lite v0.4.0 went live from round 7 (14:44 UTC; the incumbent was re-scored on it). The author tagged v0.5.0 the same day (board layout, slot yaw and peg cross-sections drawn fresh each episode, so policies tuned to v0.4.0 score lower) and proposed it for the round 7 to 8 boundary pending the team&#x27;s validation; no schedule was confirmed in the archive.</li>
+<li><span class="when">2026-10-21</span> <span class="muted">(#1-apex; unarbos/apex-competition-nist-assembly commits)</span> v0.3.0 (observation noise hardening) and v0.4.0 (records-only change so the website replay viewer works) were tagged; v0.4.0 replaced v0.3.0 before it went live. The author told miners NIST-Lite needs no GPU and accepts any method that exports to one ONNX file, and said its best scripted controller scored about 0.12 against about 0.9 at the top of the board. The team also posted part 3 of 3 of its newcomer series on building and publishing a competition.</li>
+<li><span class="when">2026-10-20</span> <span class="muted">(#1-apex)</span> NIST-Lite v0.2.0 became active from round 5. The author said round-5 top scores were well above its privileged reference solver and ran an audit. That evening a miner reported 504 timeouts on Text Clustering round 89 submissions with fees already paid; no team reply was found in the archive.</li>
+<li><span class="when">2026-10-19</span> <span class="muted">(#1-apex; unarbos/apex-competition-nist-assembly commits)</span> After v0.1.5 went live at the start of round 4, ten submissions reached 639 of 640 within minutes. Because a tie cannot beat the leader by 1%, the first one kept the lead, so the flat 1% rule had stopped separating entries. The author moved to v0.2.0 (several pegs, clutter, noisy partial observations) and the team said all new competitions will use a one-day reveal.</li>
+<li><span class="when">2026-10-17</span> <span class="muted">(#1-apex; unarbos/apex-competition-nist-assembly commits)</span> A miner found 4 mm pegs lying flat could not be grasped (32 of 640 episodes were unsolvable). The author confirmed the bug and released v0.1.5 the same day.</li>
+<li><span class="when">2026-10-16</span> <span class="muted">(#1-apex)</span> NIST-Lite Robot Assembly launched, with the team saying it went from request to live in about six hours. The task was written by an outside party&#x27;s AI agent, which the team asked people to treat as an authority on that competition only.</li>
+<li><span class="when">2026-10-15</span> <span class="muted">(#1-apex)</span> A miner reported a Text Clustering submission scored 0.0 with no detail while the identical file scored 0.46 on resubmission, similar to earlier sandbox start-up zeros in rounds 74 and 76. The team said on 10-16 it would look; no follow-up was seen.</li>
+<li><span class="when">2026-10-14</span> <span class="muted">(#1-apex)</span> The team ran a backend migration with a short outage of submissions, the leaderboard and the API, and announced an Apex Accelerator programme with Bitstarter (AMA on 10-16). On 10-15 it said the self-serve toolkit exists, with a Builder page that an AI agent can drive.</li>
+<li><span class="when">2026-10-07</span> <span class="muted">(#1-apex)</span> The owner said a self-serve launch, where outside parties set their own problems without team sign-off, has no date, that product-market fit work continues and that how sponsors would pay is undecided. The owner also said work had slowed for a few weeks because of an incident referred to as a hack; no detail was given.</li>
+<li><span class="when">2026-09-23</span> <span class="muted">(#1-apex)</span> The team gave emission shares for the three competitions then running: 20% Olympics, 20% Box Scramble, 10% Text Clustering.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Pick one competition on the website and read its page, its repository and its docs together, because the docs lag: Olympics shows six events against seven in the repo, and the NIST-Lite docs page still describes the first version.</li>
+<li>Install the apex CLI from the apex repository and read its AGENTS.md and README for registration, the submit command and the per-submission fee before you pay anything.</li>
+<li>Start with Text Clustering if you have no robotics setup: it needs a single Python file that runs on CPU and answers /health and /cluster, and it has run since July with many submissions.</li>
+<li>For the robot competitions, build and test an ONNX policy against the competition repository&#x27;s published spec. NIST-Lite policies written before v0.2 do not load, and v0.5.0 changes what some observation features mean, so check which version the round you enter is running.</li>
+<li>Plan around the margin rule: a challenger has to beat the leader by more than 1%, so near-perfect scores are hard to dislodge, and watch each competition&#x27;s round length and reveal delay.</li>
+<li>If a submission is rejected or never lands, keep the payment receipt: the CLI can reuse it with the payment block hash and extrinsic index flags. Check the channel before submitting, because rounds have opened late and by hand and scoring errors and timeouts have been reported there.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Chain weights were read once, at block 9343388 (2026-10-23). The split of emission across the four competitions and each competition&#x27;s burn factor are not published (the orchestrator is closed), and the four winner uids were not matched to the leaderboards. Weights are validators&#x27; opinions on chain, not proof of what was paid.</li>
+<li>Submission fees go to an account that is not the owner&#x27;s keys, not a registered hotkey on this subnet and not the coldkey of any validator or winner uid (chain checks, 2026-10-23); who controls it is not documented. Fees are not refunded, only reusable through the receipt flags, and whether a receipt is consumed after a failed evaluation is not documented.</li>
+<li>Validators relay the team&#x27;s scores rather than evaluating submissions, which contradicts the README wording. If the orchestrator is down or unhealthy they copy the other validators&#x27; weights, so an outage freezes the previous vector.</li>
+<li>The 1% takeover rule can freeze a competition once many entries reach the top score, as NIST-Lite showed on 2026-10-19, and its top-score flag raced on 2026-10-22 (see recent activity). The backend fix is announced, not yet confirmed deployed.</li>
+<li>The NIST-Lite all-rounds top score of 0.998 on the website comes from v0.1.5 and is not comparable with later versions. The website&#x27;s round-scoped top scores for rounds 6 and 7 (0.318 and 0.385 when read) do not match the 0.915 and 0.9225 the team gave in chat for rounds 5 and 7 and were not reconciled. v0.5.0 had not been confirmed live by the end of the archive.</li>
+<li>Docs and site lag the code: the docs incentive page still uses the first competition (Matrix Compression) as its example; Olympics shows six events and 24 attempts where the repo spec says seven; the NIST docs page describes v0.1 with a four-day reveal against the one-day spec; the FAQ fee list names only Text Clustering and Olympics; the Text Clustering docs page says four subsets per round in three places and three in another, and the repo README says three.</li>
+<li>The GitHub releases list for the apex repository stops at v3.0.6 (2025-09-11) while release commits continue (v4.4.15 on 2026-10-22, a version bump with no code change), so there is no release to pin.</li>
+<li>Miners asked on 2026-09-07 and 10-04 about the high burn and received no answer in the channel; the chain figures above are the only public data point. The owner&#x27;s 2026-10-07 reference to a hack was not explained anywhere in public chat. Reports of zero scores and submission timeouts on 10-15 and 10-20 had no follow-up.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://apex.macrocosmos.ai" rel="noopener noreferrer">Apex website and competitions</a></li>
+<li><a href="https://apex.macrocosmos.ai/agents" rel="noopener noreferrer">Agents page</a></li>
+<li><a href="https://apex.macrocosmos.ai/builder" rel="noopener noreferrer">Builder (self-serve toolkit page)</a></li>
+<li><a href="https://docs.macrocosmos.ai/subnets/subnet-1-apex" rel="noopener noreferrer">Docs</a></li>
+<li><a href="https://docs.macrocosmos.ai/subnets/subnet-1-apex/subnet-1-current-competitions" rel="noopener noreferrer">Current competitions (docs index)</a></li>
+<li><a href="https://github.com/macrocosm-os/apex" rel="noopener noreferrer">Apex repository (MIT)</a></li>
+<li><a href="https://github.com/macrocosm-os/apex-competitions-builder" rel="noopener noreferrer">Competitions builder toolkit</a></li>
+<li><a href="https://github.com/macrocosm-os/apex-competition-hello-world" rel="noopener noreferrer">Hello-world competition example</a></li>
+<li><a href="https://github.com/macrocosm-os/apex-competition-humanoid-olympics" rel="noopener noreferrer">Humanoid Olympics repository</a></li>
+<li><a href="https://github.com/macrocosm-os/apex-competition-humanoid-scramble" rel="noopener noreferrer">Humanoid Box Scramble repository</a></li>
+<li><a href="https://github.com/unarbos/apex-competition-nist-assembly" rel="noopener noreferrer">NIST-Lite assembly repository</a></li>
+<li><a href="https://discord.gg/vdyz4JZ9Ww" rel="noopener noreferrer">Macrocosmos Discord (invite from the repo README)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 6 sources</summary>
+<ul>
+<li><strong>repo</strong> macrocosm-os/apex@69eb91c (2026-10-22, Release v4.4.15, version bump over c986166): README, AGENTS.md, shared/common settings, validator weight loop, SubnetScores model, CLI submit and competition screens, text_clustering README</li>
+<li><strong>repo</strong> macrocosm-os/apex-competitions-builder (last commit 2026-10-19), apex-competition-humanoid-olympics (v0.7.1, 2026-09-22), apex-competition-humanoid-scramble (v0.1.7, 2026-09-14) and unarbos/apex-competition-nist-assembly (v0.5.0, 2026-10-22)</li>
+<li><strong>web</strong> https://apex.macrocosmos.ai competition pages 10, 12, 13 and 14, read 2026-10-23 with a browser</li>
+<li><strong>web</strong> https://docs.macrocosmos.ai/subnets/subnet-1-apex incentive mechanism, validating, FAQ and the four competition pages, read 2026-10-23 as markdown; GitHub releases API for macrocosm-os/apex</li>
+<li><strong>web</strong> Chain read at block 9343388 (2026-10-23): subnet parameters, incentive and validator weights, SubnetEmissionWeights, RecycleOrBurn and owner-key and fee-address checks (booleans only, no keys printed)</li>
+<li><strong>msg</strong> #1-apex, 2026-09-02 to 2026-10-22 (pinned posts are 2024 release notes only)</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/0.html"><small>← Previous</small>SN0 Root network</a><a rel="next" href="/bittensor-docs/subnets/2.html"><small>Next →</small>SN2 DaniLabs</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-23. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nepher Robotics (SN49) | Bittensor Subnet Docs</title>
+<meta name="description" content="Tournaments for robot control policies trained in NVIDIA Isaac Lab and scored by validators in GPU sandboxes">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h7">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>49</span><div>
+<h1>Nepher Robotics <span class="muted">SN49</span></h1>
+<p class="tagline">Tournaments for robot control policies trained in NVIDIA Isaac Lab and scored by validators in GPU sandboxes</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl4"><b>5.4<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>16<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>17<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-23</b><span>last chat</span></li><li class="pw"><b>4,628</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>robotics policy tournaments (simulation)</dd>
+<dt>Status</dt><dd>The Go2 LiDAR Maze Challenge Phase 1 entered its reward stage on 2026-10-21 according to the team&#x27;s public API, and the chain agrees: at block 9335223 (2026-10-21, about 23:50 UTC) incentive sat on three miner uids at 70, 20 and 10 percent. Chat stayed active through 2026-10-21 and the team said Phase 2 is coming soon.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-21</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>Nepher Robotics runs discrete tournaments in which each round fixes one robot and one NVIDIA Isaac Lab task, such as a Unitree Go2 quadruped solving mazes from LiDAR. Miners train a control policy locally and upload it as an agent; validators score every agent in isolated GPU sandboxes on hidden benchmark scenes. After a manual review by the Nepher team, a podium of up to three miners receives the subnet&#x27;s miner weight during a reward window. The team positions the winning policies as assets that companies could later buy, test on real robots or sponsor.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Miners register a hotkey on subnet 49 (the registration cost on chain was the 0.05 TAO minimum on 2026-10-21), get an account and API key on the Nepher platform, clone the task repository published for each tournament and train a policy in Isaac Sim 6.1 and Isaac Lab 3.0.0 (a GPU with 24 GB or more is advised for training). They check and submit an agent archive with the nepher-cli tool; the archive is signed with the hotkey and must include the training and play scripts. Only the latest upload per hotkey counts, and each upload costs a fee from a TAO platform balance. The team allows tuning of the whole training project, but not changes to termination logic or the shared environment components that affect scoring. Both nepher-cli and the nepher package were upgraded on 2026-10-21 and the team asked miners to update both.</p></div><div><h3>Validators</h3><p>Validators download each eligible agent, start a throwaway Docker container with Isaac Sim, run the eval-nav evaluation inside it and send the score to the Tournament API. The container has no wallet or Docker socket, limited memory, a 30-minute timeout and an outbound firewall with a domain whitelist. During the contest period a public benchmark gives a live preview leaderboard; a short warm-up window before the evaluation period stops public evaluation, and the final ranking comes from a private benchmark. The backend combines validator scores by stake weight, with ties going to the earlier upload. A lighter validator mode that only sets weights, without evaluating, is also offered. On chain, 15 uids held a validator permit on 2026-10-21 and 10 of them had set weights; the API reported 5 validators scoring the Go2 tournament on 2026-10-20.</p></div><div><h3>Incentive</h3><p>Each tournament has five stages: contest, submit, evaluation, review and reward. During the review stage the team checks the top entries for cheating and approves a podium of up to three, or declares no winner. In the reward window, validators give the whole remaining weight to the approved podium, by default split 7:2:1 (the docs site says 70, 20 and 10 percent). Outside a tournament&#x27;s reward window, the preliminary leader gets a fixed 1 percent and unallocated weight goes to UID 0, which the docs call a burn. Weights are reset about every 30 minutes. The team said on 2026-10-19 that rewards are split by unique account and submission, so one person with several accounts gets a single share. Chain check at block 9335223 (2026-10-21): incentive sits on exactly three miner uids at 70, 20 and 10 percent, matching the API podium, and all 10 validators that had set weights name the same top uid at 70 percent and give UID 0 nothing. UID 0 is the owner&#x27;s hotkey and also a validator that earns most of the validator dividends (74.5 percent), so its 37 percent share of last-epoch emission is validator dividend, not miner incentive and not a burn. The chain&#x27;s emission split is the default 18 percent owner, 41 percent validators and 41 percent miners, and miner emission aimed at owner hotkeys is burned. Weights are validator opinions, and the podium itself comes from the team&#x27;s backend and manual review, which cannot be checked in code.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-21</span> <span class="muted">(Nepher Tournament API and chain read, 2026-10-21; #nepher, 2026-10-21; PyPI release dates)</span> The Go2 LiDAR Maze tournament entered its reward stage (window 2026-10-21 08:37 to 2026-10-23 08:37 UTC per the API) and the chain showed incentive on three miner uids at 70, 20 and 10 percent. The team asked miners to upgrade both nepher-cli and the nepher Python package, released the same day, and said an EnvHub backend URL mismatch, caused by merging its sub-platforms into one website, was being fixed.</li>
+<li><span class="when">2026-10-20</span> <span class="muted">(#nepher, 2026-10-20; Nepher Tournament API (public read), 2026-10-20 and 2026-10-21)</span> The team approved the podium. According to its post, places one and two went to the first two leaderboard entries and third place went to the entry ranked seventh, because the entries in between belonged to the same participants. Scores were about 0.927, 0.922 and 0.907, and downloads of the winning agents are paid (0.5, 0.4 and 0.3 TAO). The team said Phase 2 is coming soon, in the same repository with harder environments, and posted from NVIDIA GTC Berlin (20 to 22 October).</li>
+<li><span class="when">2026-10-19</span> <span class="muted">(#nepher, 2026-10-19)</span> A miner asked to return to winner-takes-all. The team replied that it wants more miners to compete and that rewards are split by unique accounts and submissions, not just hotkeys, so multiple accounts of one person only get one share.</li>
+<li><span class="when">2026-10-06</span> <span class="muted">(#nepher, 2026-10-06)</span> The team proposed a Task-Generation Tournament limited to robot development companies, who would submit real robot projects with videos for a reward; tasks supplied by the team would be registered under the owner&#x27;s UID. The same day a long dispute broke out in chat in which the owner asked moderators to remove two critics; claims on both sides could not be checked.</li>
+<li><span class="when">2026-10-05</span> <span class="muted">(#nepher, 2026-10-05; nepher-subnet GitHub)</span> The Unitree Go2 LiDAR Maze Challenge Phase 1 opened, and miners were told to upgrade to Isaac Sim 6.1 and Isaac Lab 3.0.0, which the validator sandbox had moved to in repository commits dated 2026-09-30 to 2026-10-05.</li>
+<li><span class="when">2026-09-18</span> <span class="muted">(#nepher (pinned), 2026-09-18; nepher-subnet commits; docs.nepher.ai)</span> The team announced a dynamic submission fee (0.1 TAO normally, up to 0.5 TAO for repeat uploads within about 6 hours) paid from a platform balance that cannot be withdrawn, and a podium reward split (7:2:1) became available. The team said fees are used for buybacks.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Register a hotkey on subnet 49 with btcli, as described in the miner guide in the subnet repository (the on-chain registration cost was the 0.05 TAO minimum on 2026-10-21).</li>
+<li>Create a Nepher account and API key, then register your coldkey and send TAO to the platform balance to pay submission fees; the balance cannot be withdrawn.</li>
+<li>Install Isaac Sim 6.1 and Isaac Lab 3.0.0, clone the task repository linked on the tournament page and follow its README to train a policy.</li>
+<li>Optionally run the eval-nav harness locally to preview your score using the same configuration validators use.</li>
+<li>Install or upgrade nepher-cli and the nepher package (both were upgraded on 2026-10-21 and the team asked miners to update), log in with your API key, run the tournament check command on your agent folder and then submit it with your wallet name and hotkey.</li>
+<li>Validators need Docker, the NVIDIA container toolkit and a GPU (A6000 24 GB minimum, A100 recommended) following the validator guide; a CPU-only variant exists that only sets weights.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>The README and miner guide on the main branch still describe a winner-takes-all design, while the incentive document, the code and the live API use an approved podium (default 7:2:1) added around 2026-09-18. A miner asked on 2026-10-19 to go back to winner-takes-all; the team said it wants more miners to compete.</li>
+<li>The docs site tournament page still lists Isaac Sim 5.1 and Isaac Lab 2.3.2 (checked 2026-10-21), while the repository, API and chat use 6.1 and 3.0.0 since 2026-10-05. Chat said the preliminary leader would get 0.5 to 1 percent in March; the code uses a fixed 1 percent.</li>
+<li>Scoring across validators, the preliminary leaderboard, podium approval and the submission scanner run in a team-operated backend whose code was not found in the 17 public repositories of the organization. Winners are chosen after a manual team review; the rule that alternate accounts of one person share one reward, and the choice of the seventh-ranked entry for third place, are known only from the team&#x27;s chat posts.</li>
+<li>Three distinct coldkeys hold the paid uids on chain, which does not show whether the participants are independent. Public criticism in chat (2026-10-06, 2026-10-16 and 2026-10-19), including claims about miner independence, was disputed and could not be verified.</li>
+<li>Two unmerged branches of the subnet repository (main has not changed since 2026-10-05, release tag v1.0.0) show where the code may go, but it is unknown whether validators run them. The branch feat/fix, committed on 2026-10-21, makes a failed API or chain lookup skip the weight update instead of burning on UID 0, retries validator-side evaluation failures instead of scoring them zero, runs miner code as an unprivileged user, and states in its docs that the sandbox does not prevent a miner from tampering with the score inside the simulator process (cross-validator aggregation is the defence).</li>
+<li>The branch feat/brain-runtime (last commit 2026-10-13) is a draft specification for large-model tournaments in which miners keep weights in their own private Hugging Face repository and upload code plus a signed seal; validator code withholds payout until the winner&#x27;s weights are archived by Nepher. The team teased a new tournament type on 2026-10-12 but has not said that this is it, and the Go2 tournament keeps the zip upload.</li>
+<li>Chain reads are from the public node at blocks 9335223 to 9335252 (2026-10-21, about 23:50 UTC) and show validator opinions, not payouts. Five of the 15 validator-permit holders had not set weights for over two tempos. The reward window ends on 2026-10-23 08:37 UTC, after which the weight vector should change; this was not yet observed.</li>
+<li>Scam warnings were posted on 2026-10-02 and 2026-10-05: moderators said unsolicited messages or friend requests claiming to be subnet support, including ones using moderators&#x27; names, are scams.</li>
+<li>The incentive page on the docs site did not render for the researcher, so the repository copy was used.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://nepher.ai" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://docs.nepher.ai" rel="noopener noreferrer">Docs</a></li>
+<li><a href="https://docs.nepher.ai/tournaments" rel="noopener noreferrer">Tournament docs</a></li>
+<li><a href="https://docs.nepher.ai/platform-balance" rel="noopener noreferrer">Platform balance and fees</a></li>
+<li><a href="https://nepher.ai/tournament/tournaments/997ea97f-4371-4ca0-b700-f117c8f2e2f5/leaderboard" rel="noopener noreferrer">Go2 LiDAR Maze leaderboard</a></li>
+<li><a href="https://github.com/nepher-ai" rel="noopener noreferrer">GitHub (organization)</a></li>
+<li><a href="https://github.com/nepher-ai/nepher-subnet" rel="noopener noreferrer">GitHub (subnet code)</a></li>
+<li><a href="https://github.com/nepher-ai/eval-nav" rel="noopener noreferrer">GitHub (evaluation harness)</a></li>
+<li><a href="https://github.com/nepher-ai/task-go2-lidar-maze" rel="noopener noreferrer">GitHub (Go2 LiDAR Maze task)</a></li>
+<li><a href="https://github.com/nepher-ai/envhub" rel="noopener noreferrer">GitHub (EnvHub)</a></li>
+<li><a href="https://pypi.org/project/nepher-cli/" rel="noopener noreferrer">Nepher CLI on PyPI</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 9 sources</summary>
+<ul>
+<li><strong>repo</strong> nepher-ai/nepher-subnet README.md, docs/ (incentive_mechanism, miner-guide, sandbox-evaluation, validator-guide), validator/reward at main dfbd06a (2026-10-05, MIT, unchanged on 2026-10-21)</li>
+<li><strong>repo</strong> nepher-ai/nepher-subnet unmerged branches feat/fix 0a4ddc8 (2026-10-21) and feat/brain-runtime 75fe32e (2026-10-13), including docs/huggingface-weight-custody.md; nepher-ai/nepher-brain-comm 3bfc5b1 (2026-10-14)</li>
+<li><strong>repo</strong> nepher-ai organization repository list and recent commits of nepher-cli, envhub, task-go2-lidar-maze and eval-nav via the GitHub API, read 2026-10-21</li>
+<li><strong>web</strong> https://docs.nepher.ai/tournaments (read 2026-10-20 and 2026-10-21) and https://docs.nepher.ai/platform-balance (read 2026-10-20)</li>
+<li><strong>web</strong> Nepher Tournament API, public tournament read for the Go2 LiDAR Maze Challenge (read 2026-10-20 and 2026-10-21)</li>
+<li><strong>web</strong> Chain read at blocks 9335223 to 9335252 (2026-10-21): neuron incentive and dividends, validator weights, owner-slot test, SubnetEmissionWeights, RecycleOrBurn and subnet parameters; block 9330771 = 2026-10-21 08:54 UTC</li>
+<li><strong>web</strong> PyPI release dates for nepher-cli 0.2.7 and nepher 0.2.0 and 0.2.1 (all 2026-10-21)</li>
+<li><strong>msg</strong> #nepher pinned announcements 2025-11-12 to 2026-10-06</li>
+<li><strong>msg</strong> #nepher, team and miner discussion 2026-10-02 to 2026-10-21</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/48.html"><small>← Previous</small>SN48 Quantum Compute</a><a rel="next" href="/bittensor-docs/subnets/50.html"><small>Next →</small>SN50 Synth</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-21. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Astrid (SN127) | Bittensor Subnet Docs</title>
+<meta name="description" content="AI trading-agent showdowns: the top three miners of each finished contest are paid; weight is all burn in between.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h1">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>127</span><div>
+<h1>Astrid <span class="muted">SN127</span></h1>
+<p class="tagline">AI trading-agent showdowns: the top three miners of each finished contest are paid; weight is all burn in between.</p>
+<span class="st s-transitioning">transitioning</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl3"><b>1.4<small>/day</small></b><span>last 7 d</span></li><li class="pl3"><b>1.9<small>/day</small></b><span>days 8-30</span></li><li class="pl4"><b>4.0<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-23</b><span>last chat</span></li><li class="pw"><b>1,291</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>AI trading agents (live trading competitions)</dd>
+<dt>Status</dt><dd>As of 2026-10-21 no competition is active or in a payout window and the team has not announced the next one; it said on 2026-10-09 that rewards will be reworked first, and the validator update that pays the MS6 and MS7 results was still in final testing on 2026-10-19.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-21</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>Astrid Arena runs month-long competitions (called Miners Showdowns) in which AI trading agents trade live against each other, and the subnet pays the top three miners of a finished competition. Miners run their own agents and report each decision to the Arena platform; validators later replay the public trade record, check eligibility and rank miners by the competition&#x27;s scoring metric. Between payouts, all validator weight goes to the burn UID.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Miners are traders: each registers a coldkey as a miner on subnet 127, verifies wallet ownership on the Arena platform, creates one agent and joins a competition. The miner runs the agent on their own infrastructure, which reads market data from the platform API, places orders and posts an execution run for each decision cycle. Competitions that require code submission also take a strategy container (capped at 30 versions); the platform runs it only for build, smoke test and replay checks, never to trade live.</p></div><div><h3>Validators</h3><p>A lightweight validator process (Node.js in Docker, 1 vCPU and 1 to 2 GB of RAM at minimum) polls the Arena API every hour for competitions inside their payout window. It drops disqualified participants, requires at least one trade and an execution run within two hours of each trade made in the miner&#x27;s last 12 hours of activity, replays trades from the public record, ranks miners by the competition&#x27;s metric and resolves their UIDs from the coldkey. The metric is replayed PnL, or the Astrid Score (a blend of return, Calmar, Sortino, Ulcer index, maximum drawdown and execution activity) from MS6 onward.</p></div><div><h3>Incentive</h3><p>Only the top three eligible miners of a finished competition are paid, split 60, 30 and 10 percent (70 and 30 with two eligible miners, 100 with one). The validator code sets each competition&#x27;s share of total weight to a hardcoded 30 percent and sends the rest to UID 0, which the repo calls burn; with no competition in a payout window, all weight goes to UID 0. The team said payouts run for about four weeks after validation. On 2026-10-21 all 12 validators with permits had set weights and every one put 100% on UID 0, matching the no-payout state.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-21</span> <span class="muted">(#astrid; Arena public API)</span> A member reported that the public trade endpoint for MS7 returns trades without a ticker identifier, which the validator treats as unscorable. A check the same day on the first 500 of 979 MS7 trades found none with the field. No team reply was seen. The same day the platform API showed no active competition and an empty payout list.</li>
+<li><span class="when">2026-10-19</span> <span class="muted">(#astrid)</span> The team said the validator updates were in final testing before Astrid Score emissions could start.</li>
+<li><span class="when">2026-10-15</span> <span class="muted">(GitHub (astridintelligence/sn-127))</span> A validator change was committed to rank competitions by the Astrid Score; it was merged on 2026-10-20.</li>
+<li><span class="when">2026-10-09</span> <span class="muted">(#astrid)</span> The team said MS5 would finish paying on 2026-10-15, that MS6 and MS7 would then pay on the Astrid Score starting by 2026-10-20 for about four weeks, and that no new competition would start straight away while it reviews submitted archives and reworks rewards (a buy-and-hold benchmark and longer windows were mentioned as likely). Sign-ups stay closed until the next competition is announced.</li>
+<li><span class="when">2026-09-17</span> <span class="muted">(#astrid)</span> The team confirmed the MS5 top three on the 60/30/10 split using live results and enabled emissions. It said replays of the winners&#x27; code did not match their live trades trade for trade, after a long dispute over replay fidelity in which many archives placed no trades in replay.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Create a wallet and register a hotkey on subnet 127 (the burn registration cost was at its 0.0005 TAO minimum on 2026-10-21).</li>
+<li>Create an Arena account and an agent through the platform API, set your coldkey on the profile and prove ownership by signing a challenge.</li>
+<li>Practise in the Strategy Testing Playground, and use the local test runner in the example agent repo before submitting any container.</li>
+<li>Wait for the next miner competition to be announced in the channel (none was open on 2026-10-21), then join and get approved before it starts.</li>
+<li>Run your agent yourself for the whole competition and post an execution run for every decision cycle; if code submission is required, upload your strategy container and test it with the self-serve replay.</li>
+<li>To run a validator, use the installer script in the sn-127-install repo, which starts the Docker validator and an auto-updater.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>The share of total weight per competition is 30 percent in the validator code but 25 percent in the platform API and in the docs&#x27; examples, and chat never states it; the live figure is unconfirmed.</li>
+<li>The promised start of MS6 and MS7 payouts by 2026-10-20 had not happened by 2026-10-21: no competition was in a payout window and the chain showed all weight on UID 0. Whether MS6 results were ever announced was not found in chat.</li>
+<li>The missing ticker identifier on public MS7 trades could stall Astrid Score payouts if validators read the same data, because the code keeps its previous weights when it cannot replay. This was verified only on a sample, and how the team&#x27;s own validators read the data was not tested.</li>
+<li>The miner guide and the repo README still describe ranking by PnL; the ranking document and code were updated for the Astrid Score in October 2026.</li>
+<li>Chat and the platform pages disagree on whether the arena is spot-only or margin and perpetual style, so no leverage terms are stated here.</li>
+<li>Dates, scoring and sign-up rules have changed often (replay rules, heartbeats, registration windows) and the team has said rewards will be reworked, so check the channel before joining.</li>
+<li>Miners repeatedly complained of slow communication on results and of replay results that did not match live trading; these claims were not independently verified.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://arena.astrid.global" rel="noopener noreferrer">Arena platform</a></li>
+<li><a href="https://arena.astrid.global/skill.md" rel="noopener noreferrer">Agent skill guide</a></li>
+<li><a href="https://github.com/astridintelligence/sn-127" rel="noopener noreferrer">Validator and docs (GitHub)</a></li>
+<li><a href="https://github.com/astridintelligence/sn-127-install" rel="noopener noreferrer">Validator installer (GitHub)</a></li>
+<li><a href="https://github.com/astridintelligence/astrid-arena-agent" rel="noopener noreferrer">Example agent and test runner (GitHub)</a></li>
+<li><a href="https://www.astrid.global/" rel="noopener noreferrer">Website</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 5 sources</summary>
+<ul>
+<li><strong>repo</strong> astridintelligence/sn-127 @a6aee74 (2026-10-20): README.md, docs/overview.md, docs/ranking-algorithm.md, docs/miner-guide.md, docs/arena-api.md, src/core/arena/{constants,weights,index,eligibility,astrid}.ts</li>
+<li><strong>repo</strong> astridintelligence/sn-127-install @def3ddb (2026-07-16): README.md; astridintelligence/astrid-arena-agent @a02aeab (2026-09-07): README.md</li>
+<li><strong>web</strong> arena.astrid.global skill.md (last modified 2026-09-09) and rules_skill.md; Arena public API reads on 2026-10-21 (completed competitions, active competition, MS7 trade records)</li>
+<li><strong>web</strong> Bittensor chain read-only: subnet info, hyperparameters, incentive and validator weights for netuid 127 at blocks 9334296 to 9334310 (2026-10-21)</li>
+<li><strong>msg</strong> #astrid (channel 127), 2026-06-22 to 2026-10-21, including team posts of 2026-07-16, 2026-08-10, 2026-09-17, 2026-09-28, 2026-10-09, 2026-10-12 and 2026-10-19</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/126.html"><small>← Previous</small>SN126 Attelier</a><a rel="next" href="/bittensor-docs/subnets/128.html"><small>Next →</small>SN128 ByteLeap</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-21. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

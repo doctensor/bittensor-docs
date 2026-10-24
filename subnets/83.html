@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CliqueAI (SN83) | Bittensor Subnet Docs</title>
+<meta name="description" content="Maximum-clique solver contest where miners return cliques for team-supplied graphs, scored on size and uniqueness.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h5">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>83</span><div>
+<h1>CliqueAI <span class="muted">SN83</span></h1>
+<p class="tagline">Maximum-clique solver contest where miners return cliques for team-supplied graphs, scored on size and uniqueness.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl4"><b>2.0<small>/day</small></b><span>last 7 d</span></li><li class="pl4"><b>3.3<small>/day</small></b><span>days 8-30</span></li><li class="pl4"><b>2.0<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-23</b><span>last chat</span></li><li class="pw"><b>3,113</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>combinatorial optimization (maximum clique)</dd>
+<dt>Status</dt><dd>On 2026-10-21 all 8 validator permit holders had set weights within the last 353 blocks and 243 of 256 UIDs had non-zero incentive. The team last posted in the channel on 2026-10-07, and the v0.0.18 pull request (opened 2026-10-05) was still unmerged on 2026-10-21. Miner chat in the last 30 days is dominated by complaints about reward concentration.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-21</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>CliqueAI asks miners to find large cliques in random graphs of roughly 300 to 900 vertices. Validators fetch each graph from a team-run service, send it to a random subset of miners under a 6 to 30 second limit, and score each answer on whether it is a valid maximal clique, how large it is compared with other answers, and how unique it is. Scores feed a slow moving average that is reshaped into on-chain weights. The code is open on GitHub, but the graph supply is a closed team service.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Run a server that receives a graph and returns a set of vertices forming a clique. The reference miner uses a standard NetworkX solver, with an optional graph-neural-network solver included. The repo lists 4 CPU cores as the minimum and no required GPU. Miners do not choose problems; validators decide who is queried.</p></div><div><h3>Validators</h3><p>Each round a validator picks one of four graph sizes at random (about 300, 500, 700 or 900 vertices, difficulty 0.7 to 1.0), requests a graph from the team&#x27;s endpoint, relabels its vertices, and queries each eligible miner independently with the same probability. An answer counts only if it is a clique that cannot be extended. The score is normalised optimality times (1 plus difficulty) plus normalised uniqueness, where uniqueness is one divided by the number of miners that returned exactly the same vertex set. Each miner&#x27;s rating is a debiased moving average with alpha 0.01, updated only when it was queried.</p></div><div><h3>Incentive</h3><p>Validators normalise ratings, apply a sigmoid centred on the median non-zero rating, then a power transform tuned so the top half of miners hold about 80 percent of the weight. Nothing is routed to UID 0 by validator code. The docs describe the scoring but not this reshaping step. Miner selection was stake-weighted until about 2026-04-25 to 2026-04-29 and has been equal-probability since.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-21</span> <span class="muted">(Chain reads for netuid 83 at blocks 9334284 to 9334299)</span> Chain read: 256 of 256 UIDs registered, 8 validator permits, incentive non-zero on 243 UIDs with the largest single UID at 1.7 percent. Grouped by coldkey there are 24 distinct coldkeys; the six largest hold 232 UIDs and 99.9 percent of last-epoch incentive (about 50 percent of total emission). None of the 8 validator permits sits under those six. The owner&#x27;s own UID is a validator that received about 21 percent of last-epoch emission.</li>
+<li><span class="when">2026-10-20</span> <span class="muted">(#cliqueai)</span> Miners reported receiving no rewards for months and ranking below 135, and said six coldkey groups hold 232 UIDs. Other messages that day called the subnet a scam; these are opinions, not findings.</li>
+<li><span class="when">2026-10-07</span> <span class="muted">(#cliqueai)</span> The team posted that the pull request had been uploaded. Several members asked what it changes and some replied that it does not address key concentration. No team message followed in the channel through 2026-10-21.</li>
+<li><span class="when">2026-10-05</span> <span class="muted">(GitHub toptensor/CliqueAI PR 20 and branch v0.0.18)</span> Pull request 20 (v0.0.18) was opened on GitHub: commit-reveal delivery of graphs so the time limit covers search rather than transfer, a validator-permit blacklist default, signed miner requests and a one-time score reset. It had not been merged as of 2026-10-21. It does not change the scoring code.</li>
+<li><span class="when">2026-10-04</span> <span class="muted">(#cliqueai)</span> The team said a new mechanism would be released within 72 hours and that all scores would be reset.</li>
+<li><span class="when">2026-09-26</span> <span class="muted">(#cliqueai)</span> The team called the self-mining accusation a complete fabrication, said rules had been adjusted, and said it had seen the collision pattern between miners and would add a mechanism to address it the following week.</li>
+<li><span class="when">2026-09-23</span> <span class="muted">(#cliqueai)</span> Members posted analyses alleging that a single operator controls most of the subnet through several coldkeys (shared funding, shared hosting, uniform withdrawals). These are unverified claims; the team did not respond to them in detail.</li>
+<li><span class="when">2026-09-18</span> <span class="muted">(#cliqueai)</span> Several miners reported getting no validator requests for hours; others said the last validator had stopped writing to the team&#x27;s Weights &amp; Biases project (reported again on 2026-09-21). No team reply was found.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Clone the GitHub repo and read docs/mechanism.md, keeping in mind that it lags the code (it lists three problem sizes and omits the weight reshaping).</li>
+<li>Start a miner with ./start_miner.sh, passing your wallet name and hotkey, --netuid 83, --subtensor.network finney and your public axon IP and port.</li>
+<li>Replace the default NetworkX solver with your own; the file miner.py shows where, and test_algorithm.py is a local check.</li>
+<li>Validators use ./start_validator.sh with the same style of flags and need to reach the team&#x27;s graph service.</li>
+<li>If v0.0.18 is merged, miners must serve the new sealed-graph request type to receive scored challenges; check the repo before registering.</li>
+<li>Before spending registration fees, compare the current on-chain incentive distribution with your expected rank (see caveats).</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Chain data on 2026-10-21 matches the concentration figures quoted in chat: six coldkeys hold 232 of 256 UIDs and about all incentive. The chain does not show who controls those coldkeys, so the self-mining and single-operator claims made by miners are not verified here, and the team has denied them.</li>
+<li>Chain weights are validator opinions, not payouts, and the emission shares above are last-epoch values from one snapshot.</li>
+<li>Every validator draws its graphs from the same team-run HTTP service (closed backend), and validators serve an endpoint that returns their saved ratings to the subnet owner&#x27;s signature. The repo does not show how, or whether, either is used beyond that.</li>
+<li>Seven of the eight permit holders share the same top target UID. Whether that reflects independent scoring is untested.</li>
+<li>The docs lag the code in at least two places: problem tiers (docs 3 tiers, code 4) and the weight reshaping step.</li>
+<li>Whether any validator runs the unmerged v0.0.18 branch, and whether scores were reset, is unknown.</li>
+<li>The Weights &amp; Biases project redirected to another host on 2026-10-21 and its contents were not read; miners reported it stale in September. The frontend dashboard promised in 2025 was not found and miners still ask for one.</li>
+<li>Moderators told miners not to ping them about subnet-specific problems, so chat is the team and miners talking, not neutral review.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/toptensor/CliqueAI" rel="noopener noreferrer">GitHub</a></li>
+<li><a href="https://github.com/toptensor/CliqueAI/blob/main/docs/mechanism.md" rel="noopener noreferrer">Mechanism doc (main branch)</a></li>
+<li><a href="https://github.com/toptensor/CliqueAI/pull/20" rel="noopener noreferrer">Pending v0.0.18 pull request</a></li>
+<li><a href="https://wandb.ai/toptensor-ai/CliqueAI" rel="noopener noreferrer">Weights &amp; Biases project (announced in chat)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 5 sources</summary>
+<ul>
+<li><strong>repo</strong> toptensor/CliqueAI main at 0d3488a (v0.0.17, 2026-07-22): README, docs/mechanism.md, selection/, scoring/, graph/client.py, common/base/validator.py, common/utils/config.py</li>
+<li><strong>repo</strong> toptensor/CliqueAI branch v0.0.18 at efc4e6e (2026-10-05) and pull request 20, compared with main</li>
+<li><strong>repo</strong> toptensor/CliqueAI git history of selection/miner_selector.py (v0.0.14 and v0.0.15, 2026-04-25 and 2026-04-29)</li>
+<li><strong>msg</strong> #cliqueai 2025-08-25 to 2026-10-21, including pinned posts</li>
+<li><strong>web</strong> Chain reads for netuid 83 at blocks 9334284 to 9334299 (2026-10-21): parameters, incentive and weight aggregates, coldkey grouping (counts and shares only)</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/81.html"><small>← Previous</small>SN81 Reliquary</a><a rel="next" href="/bittensor-docs/subnets/85.html"><small>Next →</small>SN85 VidAIO</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-21. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

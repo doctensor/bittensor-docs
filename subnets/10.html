@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pareton (SN10) | Bittensor Subnet Docs</title>
+<meta name="description" content="Miners patch vLLM or SGLang for a given model and GPU setup; the fastest verified patch holds the crown and earns.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h22">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>10</span><div>
+<h1>Pareton <span class="muted">SN10</span></h1>
+<p class="tagline">Miners patch vLLM or SGLang for a given model and GPU setup; the fastest verified patch holds the crown and earns.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>8.3<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>9.7<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>16<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-24</b><span>last chat</span></li><li class="pw"><b>1,476</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>inference optimization</dd>
+<dt>Status</dt><dd>As of 2026-10-23 one campaign (a revised Kimi K3 campaign on 8x B300 GPUs) is open and its seated leader receives about 48 percent of the published weight vector; the rest goes to the burn UID. Three newer submissions were still waiting for a round and the team had given no confirmed start time.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-23</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>Pareton (SN10) runs inference-optimization campaigns. For each campaign the team pins a model, a GPU setup and an open-source serving engine (vLLM or SGLang) at a fixed commit. Miners submit code patches, the validator builds and benchmarks them against the baseline and the current leader, and the winning patch becomes the leader that later challengers must beat. The team says campaigns are built around real customer workloads; at launch it said it had no paying clients yet, and on 2026-10-22 it announced a pilot with Leadpoet (SN71) to find customers.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Write a git patch against the campaign&#x27;s pinned engine commit, limited to the allowed paths (for the Kimi K3 campaign, the SGLang Python and Rust code). Upload it through a presigned upload and commit its hash on chain with the repo&#x27;s CLI, which also pays a per-campaign submission fee in TAO from the coldkey. Fees ranged from 0.1 to 0.35 TAO across the six open or closed campaigns and were stated not to be refunded on a failed gate, failed correctness or a lost round. Patches stay private unless a campaign opts into a delayed reveal. Real testing needs the campaign&#x27;s GPU class (H200, RTX 5090, RTX PRO 6000 or 8x B300 so far). When a campaign is replaced, the team can copy eligible earlier submissions into the new one, as it did on 2026-10-21.</p></div><div><h3>Validators</h3><p>The team&#x27;s watcher and worker run four gates (campaign eligibility, patch hash, clean apply against the baseline, allowed paths and suspicious diff shapes), build each patch in a pinned container image and benchmark it. A round starts when 5 challengers are queued or the oldest has waited 6 hours (code defaults), then runs baseline, leader and challengers on one rented pod, checks correctness with likelihood and repetition tests, and finishes with a second baseline run. A challenger must beat the leader by 1 percent and the leader must stay above baseline speed. The three newest campaigns score each prompt-length tier by how much sooner the whole tier finishes than on the baseline, average the tiers equally, and subtract 0.1 times the share of failed prompts; earlier campaigns used the median per-prompt speedup. The newest campaign uses long agent-trace prompts of 16k to 128k tokens at 32 concurrent requests. Other validators run a script that fetches the team&#x27;s weight vector from its API and submits it unchanged, so scoring is effectively computed by the team.</p></div><div><h3>Incentive</h3><p>Only the seated leader of each open campaign is paid. Pay starts at a per-campaign share of subnet weight (0.1, 0.2 or 0.5 so far) and falls linearly to a floor (0 in the newest campaigns) over 201,600 blocks, about 28 days, counted from the block at which the round that crowned the leader was created, which can be hours before the round ends. Whatever is not claimed goes to the burn UID (201). On 2026-10-23 the Kimi K3 leader held weight 0.479 and the burn UID 0.521. Chain read at block 9343169 matched this: 13 validators were setting the same split, only two UIDs had incentive (about 52 percent on the burn UID and 48 percent on the leader), the burn UID is the subnet owner&#x27;s hotkey, and the subnet&#x27;s recycle-or-burn setting reads Burn.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-22</span> <span class="muted">(#10-pareton, Pareton API)</span> Three submissions committed on 2026-10-22 were queued with no round running. The team said rounds on B300 hardware with the revised dataset are slow, that it was awaiting enough submissions, and later gave a start roughly 8 to 12 hours out; the code default would have started a round after 6 hours, so the live settings differ or a GPU pod was not available.</li>
+<li><span class="when">2026-10-22</span> <span class="muted">(#10-pareton)</span> Team announced a pilot with Leadpoet (SN71) to find AI companies facing GPU costs and inference bottlenecks and run outreach to turn them into customers; no results were stated.</li>
+<li><span class="when">2026-10-22</span> <span class="muted">(#10-pareton, Pareton API)</span> Team announced the revised Kimi K3 campaign, with 10 earlier submissions including the leaders carried over; the API lists 11 carried rows and 3 new ones. Three rounds had already run on 2026-10-21 and 2026-10-22 and seated a leader whose last score was 0.30.</li>
+<li><span class="when">2026-10-21</span> <span class="muted">(GitHub, Pareton API)</span> Campaign created at 16:04 UTC with a new long-context workload (agent traces of 16k to 128k tokens, 32 prompts, concurrency 32). The repository gained the workload, a tool to carry submissions between campaigns, and a scoring fix that charges short answers for decode time only; its message reports the unmodified baseline scoring below zero against itself in a trial round before the fix.</li>
+<li><span class="when">2026-10-19</span> <span class="muted">(#10-pareton)</span> Team closed the first Kimi K3 campaign after reporting its own measurement of 20 to 40 percent faster serving up to batch 32, and said a revised campaign with qualification tests would follow.</li>
+<li><span class="when">2026-10-14</span> <span class="muted">(#10-pareton, GitHub)</span> First Kimi K3 campaign launched on 8x B300 GPUs. Emission burned fully until a leader was seated, then up to half was claimable; a miner disputed that 28 days of emission had been promised and the team said it never promised that. Over the next days rounds timed out and were fixed, scoring was changed for short answers, and the campaign moved to concurrency 32 after miners were seen disabling a setting to overfit smaller batches.</li>
+<li><span class="when">2026-09-04</span> <span class="muted">(#10-pareton)</span> Team said it would not overpay miners without paying customers and would revisit rewards when the business can absorb the selling pressure.</li>
+<li><span class="when">2026-09-01</span> <span class="muted">(#10-pareton)</span> Mining opened with a vLLM campaign on Qwen3.8-27B-FP8 and one H200; the first scored round seated a leader at a 0.53 median speedup after round 1 was voided for a baseline prompt problem.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Check the dashboard or campaign API for an open campaign; on 2026-10-23 one was open (Kimi K3 on 8x B300, fee 0.35 TAO), so watch the channel for the next launch after it.</li>
+<li>Read the campaign manifest: pinned baseline commit, allowed paths, model, GPU class, scoring rule, prompt tiers and the submission fee.</li>
+<li>Build and benchmark your patch on matching hardware against the exact baseline commit; it must apply cleanly and touch only allowed paths.</li>
+<li>Hash your patch locally, then use the miner CLI to review the fee, upload and commit it; avoid resubmitting identical bytes.</li>
+<li>Expect to wait: a round needs a free pod of the campaign&#x27;s GPU class and can sit pending for hours.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Scoring is controlled by the team: the chain rows read on 2026-10-23 (block 9343169) equal the vector the team&#x27;s API publishes, and other validators submit that vector unchanged. Weights are validator opinions, and only the seated leader earns; the remaining share (about 52 percent that day) goes to the owner&#x27;s burn UID.</li>
+<li>The docs and README say the subnet uses commit-reveal for weights, but the chain flag for it read false at block 9343169, and the validator&#x27;s chain row matched the API directly.</li>
+<li>The docs lag the code in places: they describe the median per-prompt speedup as the score although the three newest campaigns use the tier-completion rule, and they say Pareton runs one validator while 13 validators were setting weights (copying the team&#x27;s vector).</li>
+<li>Round timing is not predictable from the code: defaults start a round after 6 hours of waiting, yet the oldest of three queued submissions had waited about 19 hours on 2026-10-23. An unmerged repository branch adds a switch that pauses round creation; whether any pause is active is not visible.</li>
+<li>Scores are comparable only inside one round. The team&#x27;s own trial round scored the unmodified baseline below zero against itself before a 2026-10-21 fix, so small score differences may be noise.</li>
+<li>Submission fees are paid up front and not refunded; the two Kimi K3 campaigns charge 0.35 TAO, more than earlier ones. The launch post described decay to 2 percent over about two weeks, while live campaigns decay over about 28 days with floors from 0 to 0.02.</li>
+<li>Customer, partner and speedup claims (the Engy partnership, the 54 percent and 20 to 40 percent figures, the Leadpoet pilot) are statements by the team or partners and were not verified; the manifest&#x27;s sign-off field names the project&#x27;s own admin account, and the team said on 2026-09-04 it had no paying clients yet. The docs also describe a tokenised version of SN10 on Base and Robinhood Chain via a partner, which was not checked.</li>
+<li>Not read: the docs pages for the validator guide, pipeline stages, public API and policies, two archived campaigns, and the team&#x27;s posts on X.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/Pareton-ai/pareton" rel="noopener noreferrer">GitHub</a></li>
+<li><a href="https://pareton.ai" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://www.pareton.ai/docs" rel="noopener noreferrer">Docs</a></li>
+<li><a href="https://www.pareton.ai/dashboard" rel="noopener noreferrer">Dashboard</a></li>
+<li><a href="https://www.pareton.ai/dashboard/campaigns/c47c4f50-a0b7-424c-baff-e017e42bc8be" rel="noopener noreferrer">Open campaign page</a></li>
+<li><a href="https://api.pareton.ai/v1/campaigns" rel="noopener noreferrer">Campaign API</a></li>
+<li><a href="https://api.pareton.ai/v1/weights" rel="noopener noreferrer">Published weight vector</a></li>
+<li><a href="https://www.pareton.ai/docs/platform/validators-and-emissions" rel="noopener noreferrer">Emissions doc</a></li>
+<li><a href="https://github.com/Pareton-ai/pareton/blob/main/docs/auditor.md" rel="noopener noreferrer">Weight setter guide</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 5 sources</summary>
+<ul>
+<li><strong>repo</strong> Pareton-ai/pareton main commit b9460d9 (2026-10-21): README.md, config.py, bench/score.py, weights/build.py, round/rank.py, campaign/carryover.py, docs/auditor.md, docs/technical-decisions.md; unmerged branch claude/project-thread-01wl64 commit 93cfe8e</li>
+<li><strong>web</strong> https://api.pareton.ai/v1/campaigns (open and closed), /v1/campaigns/&lt;open id&gt;/rounds, /submissions, /leader, /v1/weights and /v1/stats, read 2026-10-23</li>
+<li><strong>web</strong> Chain read at blocks 9343166 to 9343176 (2026-10-23): subnet 10 params, uids, weights of all validators, RecycleOrBurn, SubnetEmissionWeights, CommitRevealWeightsEnabled, owner-hotkey test (booleans only)</li>
+<li><strong>web</strong> https://www.pareton.ai/docs, /docs/platform/validators-and-emissions, /docs/platform/rounds-and-leaders, /docs/base-and-robinhood, read 2026-10-23</li>
+<li><strong>msg</strong> #10-pareton 2026-08-31 to 2026-10-22</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/9.html"><small>← Previous</small>SN9 IOTA</a><a rel="next" href="/bittensor-docs/subnets/11.html"><small>Next →</small>SN11 TrajectoryRL</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-23. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

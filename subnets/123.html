@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MANTIS (SN123) | Bittensor Subnet Docs</title>
+<meta name="description" content="Market-prediction subnet: miners submit encrypted signals and BTC bracket trades, scored by validators on price data.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h21">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>123</span><div>
+<h1>MANTIS <span class="muted">SN123</span></h1>
+<p class="tagline">Market-prediction subnet: miners submit encrypted signals and BTC bracket trades, scored by validators on price data.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl2"><b>0.57<small>/day</small></b><span>last 7 d</span></li><li class="pl3"><b>0.74<small>/day</small></b><span>days 8-30</span></li><li class="pl3"><b>1.0<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-24</b><span>last chat</span></li><li class="pw"><b>3,791</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>market prediction / trading signals</dd>
+<dt>Status</dt><dd>Chat active through 2026-10-20 and the main repo was last pushed 2026-10-17; the team-run price feed froze twice (2026-09-01 and 2026-10-12) and the team reports the first as temporary.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-21</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>MANTIS pays miners for signals that help predict market moves. Miners submit encrypted prediction vectors about once a minute across a set of crypto, forex, metals and cross-asset challenges, and validators decrypt them after a delay and score each miner by how much independent predictive value the vector adds. A newer challenge, FLOW, has miners submit full Bitcoin trades (direction, size fraction, stop, two targets, horizon) and optionally post their own collateral on chain through a contract on Bittensor&#x27;s EVM.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Each miner builds prediction vectors for every challenge, encrypts them (an owner-key path plus a public Drand timelock path) and uploads one file per hotkey to its own Cloudflare R2 bucket, whose URL is committed on chain. The file is replaced about every 60 seconds. For FLOW, a miner also submits four trade tuples, one per time regime (1 hour to 336 hours), and may post a bet on chain before each trade opens.</p></div><div><h3>Validators</h3><p>Validators sample every 5 blocks, download the payloads, and decrypt them after a maturation delay (code default one week; the owner can read them immediately). They store embedding and price rows, run walk-forward regression scoring per challenge (logistic and ElasticNet meta-models, with clone-suppression through L2 regularisation and a uniqueness penalty on the LBFGS challenges), weight challenges by fixed factors, smooth with an EMA (alpha 0.15) and set weights every 360 blocks. The price data comes from a feed published by the team to an R2 bucket.</p></div><div><h3>Incentive</h3><p>Per-challenge scores are combined by challenge weight (eleven prediction challenges, with breakout 5.0, funding rank 4.0, ETH 1h LBFGS 3.5 and cross-sectional rank 3.0 the largest). FLOW pays on path-adjusted, Kelly-weighted trade returns; its significance gate was removed in code on 2026-09-17, so every scoring miner shares the main FLOW pool, with a small dust share kept in the split. The code sets 45% of weight to UID 0 (burn). The settlement of FLOW collateral is run by a team-operated process that is not in the public repo.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-17</span> <span class="muted">(GitHub)</span> Latest commit on the main repo (a change to ledger.py; commit messages do not describe changes).</li>
+<li><span class="when">2026-10-12</span> <span class="muted">(#mantis)</span> Team reported a brief server outage as resolved; the same day a miner reported the public price feed timestamp stuck for over four hours.</li>
+<li><span class="when">2026-09-30</span> <span class="muted">(#mantis)</span> Team told a miner a reward-concentration error in the LBFGS scoring path, introduced during the FLOW rollout, had been fixed.</li>
+<li><span class="when">2026-09-18</span> <span class="muted">(#mantis; GitHub commits 2026-09-17)</span> Team said the FLOW significance gate was removed and the burn raised from 0.35 to 0.45. The repo changes carry the same date as the 2026-09-17 commits.</li>
+<li><span class="when">2026-09-04</span> <span class="muted">(#mantis)</span> After miners reported the public price feed frozen since 2026-09-01, the team updated it and said the non-FLOW challenges remain; Binance is the main source with other exchanges as fallbacks.</li>
+<li><span class="when">2026-08-17</span> <span class="muted">(#mantis)</span> FLOW went live with four regimes and a default one-week payload timelock; the team said FLOW emissions would stay at zero until 2026-09-14 and then take 25% of the subnet.</li>
+<li><span class="when">2026-08-12</span> <span class="muted">(#mantis)</span> Team announced FLOW for 2026-08-17 and the retirement of the TRADE-MIX challenge, with weekly collateral settlement and an evidence gate on payment.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Register a hotkey on subnet 123 (the registration cost was 0.15 TAO on 2026-10-21).</li>
+<li>Install the dependencies in MINER_GUIDE.md, including the pinned timelock wasm wrapper (the PyPI timelock package does not match live payloads).</li>
+<li>Create a Cloudflare R2 bucket and commit its public URL on chain; the object key must equal your hotkey.</li>
+<li>Generate prediction vectors for every challenge, encrypt them with generate_and_encrypt.py and upload about once a minute.</li>
+<li>To enter FLOW, follow the repo&#x27;s flow_post.py steps: open a collateral slot with your hotkey and post bets before each trade opens.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>FLOW emission weight: the team said 25% from 2026-09-14, but the code default is 0.0 and no commit changes it. Validators could set it by environment variable, so the deployed value is not verifiable from public data.</li>
+<li>The README is out of date on two points: it lists a 0.35 burn (code and chat say 0.45) and still describes the FLOW significance gate as active.</li>
+<li>On chain on 2026-10-21, five validators sent about 46% of weight to UID 0 and one sent 35%, which may be a validator on the older setting. Weights are validator opinions, not payouts.</li>
+<li>The price feed is team-run and has frozen twice; every challenge depends on it.</li>
+<li>Detailed per-challenge scoring output is not public. Miners asking for it in chat were answered by DM.</li>
+<li>Miners reported deregistration about 20 hours after registering in August; chain immunity is 5000 blocks (about 16 hours), against some miners&#x27; expectation of five days. The chat data holds no clear resolution.</li>
+<li>The FLOW release paper, the on-chain contract source and the team&#x27;s settlement process were not read.</li>
+<li>Chat says what the team said; code at the repo says what is published, not necessarily what the team&#x27;s own validator runs.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/Barbariandev/MANTIS" rel="noopener noreferrer">GitHub (validator and miner code)</a></li>
+<li><a href="https://github.com/Barbariandev/MANTIS/blob/main/MINER_GUIDE.md" rel="noopener noreferrer">Miner guide</a></li>
+<li><a href="https://mantis123.com/" rel="noopener noreferrer">Network console</a></li>
+<li><a href="https://github.com/BarbarianDev/mantis_model_iteration_tool" rel="noopener noreferrer">Model iteration tool for miners</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 3 sources</summary>
+<ul>
+<li><strong>repo</strong> Barbariandev/MANTIS @2e8fe50 (2026-10-17): README.md, MINER_GUIDE.md, config.py, validator.py, flow.py and git history of config.py and flow.py</li>
+<li><strong>msg</strong> #mantis, 2026-04-26 to 2026-10-20</li>
+<li><strong>web</strong> Bittensor chain read: subnet hyperparameters at block 9331955 and validator weights at block 9331956 (2026-10-21), read-only; mantis123.com home page (client-rendered, no data read)</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/122.html"><small>← Previous</small>SN122 CookingTAO</a><a rel="next" href="/bittensor-docs/subnets/124.html"><small>Next →</small>SN124 Swarm</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-21. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NIOME (SN55) | Bittensor Subnet Docs</title>
+<meta name="description" content="Genomic data subnet: HBB CRISPR design task on mainnet (~200 miners scored), pharmacogenomic V4 still on testnet.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h1">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>55</span><div>
+<h1>NIOME <span class="muted">SN55</span></h1>
+<p class="tagline">Genomic data subnet: HBB CRISPR design task on mainnet (~200 miners scored), pharmacogenomic V4 still on testnet.</p>
+<span class="st s-transitioning">transitioning</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>18<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>6.9<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>33<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-24</b><span>last chat</span></li><li class="pw"><b>5,446</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>synthetic genomic data and pharmacogenomic benchmarks</dd>
+<dt>Status</dt><dd>On 2026-10-23 the mainnet task (called V3, CRISPR experiment designs) is running: the team&#x27;s public results feed shows a round every 2.4 hours, 24 h of rounds since the 10-21 evening scoring 199 to 214 miners each. From 10-18 to 10-21 only the same 100 miners were scored; miners reported accepted uploads that were never scored, the team blamed a storage limit, and the cap was lifted on the evening of 10-21 with no new commit in the repo. The pharmacogenomic phase (V4) is announced for mainnet only after testnet checks; no date was given when miners asked on 10-22.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-23</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>NIOME is built by Genomes.io, which describes the subnet as a source of privacy-safe synthetic genomic data for drug-response and precision-medicine research. The task live on mainnet since 2026-08-14 asks miners for synthetic CRISPR experiment designs for the HBB gene (the sickle-cell locus), which validators simulate and score. A second code line, V4, turns the subnet into a pharmacogenomic benchmark where miners infer star-allele diplotypes and prescribing actions for synthetic patient cases, and it has run on testnet since 2026-10-06. Netuid 55 was used by an earlier project (Precog) before NIOME.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>V3 (mainnet): the validator sends every miner the same task and a short-lived upload link (300 seconds). The miner returns a list of CRISPR experiments for the HBB locus: guide RNA, target position, strand, a mutation from an allowed set, Cas9 or Cas12a, and a cell type. Miners must not include predicted outcomes, because validators compute those. V4 (testnet): each miner gets its own bundle of synthetic patient cases, calls the star-allele diplotype for each gene, derives the phenotype and the CPIC prescribing action, and reports a confidence.</p></div><div><h3>Validators</h3><p>V3: a validator fetches the task from the team&#x27;s backend, then contacts miners one at a time, giving each a presigned upload link on S3 or Google Drive. About 450 blocks into each 720-block round (roughly 2.4 hours) it downloads the submissions and scores them in five stages: structure and plausibility checks, a simulated cut and repair outcome, a consistency score, and a distribution-fidelity score. The consistency stage trains a random forest with five-fold cross-validation on the validator&#x27;s own features of each miner&#x27;s designs (GC content, distance, energy and similar) to predict the simulated outcomes (cut or not, repair path, indel length); the better the outcomes can be predicted, the higher the factor, so it is usually around 0.1 to 0.3. The final score is the weighted score times the consistency factor times the fidelity factor, averaged over three seeds drawn in the validation stage (values from 0 to 1000). Weights are set before block 700. V4 scores diplotype accuracy weighted by rarity, CPIC phenotype and prescribing concordance, a calibration score on confidence, and integrity checks; its docs say the answers, seed and probe map of a round are published after the round closes, and the scoring constants stay private.</p></div><div><h3>Incentive</h3><p>In the V3 code only the ten best scores get weight, in a fixed split from 30 percent for first place down to 1 percent for tenth. A configured share, called the burn rate, is put as weight on the owner hotkey&#x27;s uid: the code set it to 99 percent until 2026-10-18 and to 1 percent from then. On chain that hotkey is uid 119, which is the subnet owner&#x27;s hotkey and also the validator that posts the team&#x27;s results feed. On 2026-10-23 the chain agreed with the team&#x27;s feed: eight of nine validators put 29.7 percent on the same top uid, the ten weights equal the top ten of the latest published task times 0.99, and eleven uids had incentive. The subnet-level emission split read on chain is 18 percent to the owner, 41 percent to validators and 41 percent to miners, and the owner-hotkey incentive setting reads Burn. The V4 code uses the same top-ten split with a 2 percent owner share.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-23</span> <span class="muted">(team results feed, #55-niome)</span> The results feed showed V3 rounds continuing every 2.4 hours (latest 01:48 UTC) with 214 miners scored, and about 200 per round since 10-21 evening. Median consistency factor fell from about 0.3 (100-miner rounds) to about 0.1, top values stay near 0.4 to 0.5. A miner asked in chat whether CRISPR was still being scored; no reply was seen.</li>
+<li><span class="when">2026-10-22</span> <span class="muted">(#55-niome)</span> Miners thanked the team for lifting the 100-miner cap. One argued that a round on 10-22 where the whole top ten scored 0.65 to 0.71 implied knowledge of the seeds; the team said seeds are drawn at the start of validation and that submission times can be checked on its W&amp;B logs. Another asked when V4 would reach mainnet, and whether the post-round data promised in the V4 docs is published; no answers were seen. The team AMA posted that day repeated the token migration start on 10-28.</li>
+<li><span class="when">2026-10-21</span> <span class="muted">(#55-niome, team results feed)</span> Several miners reported accepted Google Drive uploads that were never scored, and one reported upload-link creation failing with server errors from about 14:00 UTC. The team said it was a storage limitation and the feed had no round between 13:00 and 20:57 UTC, after which about 200 miners were scored per round.</li>
+<li><span class="when">2026-10-20</span> <span class="muted">(#55-niome)</span> Miners that got HTTP 401 on the task call were told to set require_receiver=False in their miner auth check, because validators now sign requests with a receiver address.</li>
+<li><span class="when">2026-10-19</span> <span class="muted">(#55-niome)</span> The team said a validator-side change (submission compression and a local backup) broke uploads, so the validator scored older uploads under different seeds, and that it reverted the change. A participant had argued from public logs that the running code differed from the repo. Team posts relayed in chat said the sickle-cell CRISPR challenge was complete, drug response was next, and a token migration would start on 10-28.</li>
+<li><span class="when">2026-10-18</span> <span class="muted">(GitHub genomesio/subnet-niome, team results feed)</span> The code&#x27;s owner share was lowered from 99 to 1 percent, and the team&#x27;s public results feed began showing a V3 round every 2.4 hours with 100 scored miners each time.</li>
+<li><span class="when">2026-10-17</span> <span class="muted">(#55-niome)</span> The owner validator came back after a platform update, now storing submissions in Google Drive, with the burn share said to be 99 percent while the workflow was checked and to drop later.</li>
+<li><span class="when">2026-10-06</span> <span class="muted">(#55-niome)</span> The team announced the V4 pharmacogenomic network live on testnet (netuid 289) and said it would go to mainnet after the new workflow is validated.</li>
+<li><span class="when">2026-09-29</span> <span class="muted">(#55-niome)</span> A miner posted an analysis arguing that the consistency multiplier mostly rewards guessing the hidden seeds, so top scores swing between rounds. The team replied that seeds are generated in the validation stage and that multi-seed averaging was added to reduce luck. This is a participant claim that was not reproduced here.</li>
+<li><span class="when">2026-09-23</span> <span class="muted">(#55-niome, and GitHub commit history)</span> Validators were switched to seeds derived from block hashes. After miner complaints about scores and coverage the team reverted to random seeds on 09-25, and the current code draws three random seeds in the range 0 to 1000.</li>
+<li><span class="when">2026-08-14</span> <span class="muted">(#55-niome (pinned post))</span> The team announced V3 (HBB CRISPR dataset generation) live on mainnet after testnet runs that began in July.</li>
+<li><span class="when">2026-08-13</span> <span class="muted">(#55-niome, and GitHub commit history of genomesio/subnet-niome)</span> The team said submissions would be filtered by axon IP and coldkey so one operator could not take all the rewards. The code added that filter on 08-14 and removed it on 08-26 when multi-seed scoring came in, and the current code no longer applies it. Miners complained on 09-25 that it was not enforced.</li>
+<li><span class="when">2026-03-11</span> <span class="muted">(#55-niome (pinned posts))</span> The team announced NIOME live on mainnet with simple workflow tests, and on 03-30 opened a test period in which it said all emission goes to miners.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Read the pinned posts in the subnet channel first: the website says miner and validator documentation is coming soon, and the repo docs describe V3 only.</li>
+<li>Miner (V3 guide): Ubuntu 22.04 or similar, Python 3.12, a 16-vCPU machine (the guide also lists a GPU), a reachable axon port. Clone genomesio/subnet-niome, install the requirements, and create a coldkey and hotkey.</li>
+<li>Register the hotkey on netuid 55 with btcli (the registration burn was at its minimum of 0.0005 TAO on 2026-10-21) and start neurons/miner.py with --netuid 55 --subtensor.network finney and your axon port.</li>
+<li>If your miner never receives tasks, check the miner log for 401 responses and ask in the channel about the receiver check; on 10-19 and 10-20 the team told miners to set require_receiver=False.</li>
+<li>Upload each task result to the link in the task within 300 seconds, then check the results feed or the team&#x27;s W&amp;B project to see whether you were scored.</li>
+<li>Validator (V3 guide): about 32 vCPU and 64 GB RAM, Docker, and either S3 or a Google Drive shared drive with a service account for miner uploads. Start it with entrypoint.sh, which also auto-updates from the main branch.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Chain weights and aggregate incentive were read at blocks around 9,334,100 to 9,334,300 on 2026-10-21 and again at block 9,343,415 (2026-10-23) and match the code and the team feed. Weights are validator opinions, not payouts, and stakes, coldkeys and what the owner uid does with its share were not examined; the incentive setting for the owner hotkey reads Burn.</li>
+<li>From 10-18 to the evening of 10-21 the feed scored the same 100 miners every round while 256 uids were registered; the cap went away without a code change, and the team&#x27;s explanation (a storage limit) was not independently tested. Rounds since then score about 200 miners, and typical consistency factors dropped to about 0.1, so scores from the 100-miner period are not comparable.</li>
+<li>The team&#x27;s results feed mixes V3 results from one validator (uid 119) and V4-style results from another (uid 35) with no network label. The V4 rows stop at uid 140, and uid 35 sets no weights on mainnet, so they are probably testnet; that is an inference.</li>
+<li>Claims by participants that scores are a seed-guessing lottery, that the running validator code differs from the repo, and that one operator controls many top uids were not verified here. Checkable facts: the three seeds come from a 1,001-value range, no V3 row in the feed since 10-18 has a consistency factor above about 0.5 (none near 1.0), and the one-per-IP/coldkey rule is not applied in the current code.</li>
+<li>The consistency factor comes from a random forest fitted to the validator&#x27;s own features of a miner&#x27;s designs, then cross-validated; participants argue it rewards seed luck or is fragile (for example a single failing row when every design cuts). The code and the feed were read, but those arguments, including a 10-22 claim about seed knowledge, were not reproduced here.</li>
+<li>Submissions and weights are keyed by uid, not hotkey. A miner reported on 10-02 that a uid taken over mid-round inherits the previous holder&#x27;s result, and the team said it would look into it. No fix was seen in the code.</li>
+<li>Tasks and the leaderboard come from the team&#x27;s own closed backend, which validators call for the task and report scores to. A single validator publishes the feed; whether the other validators run the same code is unknown.</li>
+<li>The owner share has appeared as 99 percent, 1 percent and a promised 2 percent in different places: the commit message for the change says 0.1 percent, the value in code is 1 percent, and chain weights show 1 percent. The share is weight on the owner&#x27;s own validator uid, so it is called a burn only by the team&#x27;s naming; whether the chain destroys incentive paid to the owner hotkey was not checked.</li>
+<li>Sources disagree on the current challenge: the website roadmap still lists the HBB CRISPR challenge as active, while team posts relayed on 10-19 say it is complete. The V3 validator guide still tells validators to install Docker for PharmCAT, which the V3 code does not use. The token migration date comes only from team posts.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://niome.genomes.io" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://github.com/genomesio/subnet-niome" rel="noopener noreferrer">GitHub (mainnet V3 code)</a></li>
+<li><a href="https://github.com/genomesio/subnet-niome-v4" rel="noopener noreferrer">GitHub (V4 pharmacogenomic code, testnet)</a></li>
+<li><a href="https://niome-leaderboard.genomes.io/api/v3/miners/scores" rel="noopener noreferrer">Team results feed (public read, large JSON)</a></li>
+<li><a href="https://x.com/niomeai" rel="noopener noreferrer">X</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 5 sources</summary>
+<ul>
+<li><strong>repo</strong> genomesio/subnet-niome @c5a5197 (2026-10-21, unchanged on 2026-10-23): README, docs, utils/settings.py, validator/forward.py, base/validator.py, utils/weight_utils.py, genomics/validation/*, git history</li>
+<li><strong>repo</strong> genomesio/subnet-niome-v4 @99ff6bf (2026-10-19): README, docs/validation.md, utils/settings.py, git history</li>
+<li><strong>web</strong> https://niome-leaderboard.genomes.io/api/v3/miners/scores (public feed, hotkeys not read, fetched 2026-10-21 and 2026-10-23) and https://niome.genomes.io (read 2026-10-21)</li>
+<li><strong>web</strong> Chain reads 2026-10-21 and 2026-10-23: chain.py subnet 55; chain_neurons.py params, uids, weights and storage (SubnetEmissionWeights, RecycleOrBurn) for netuid 55 at blocks 9334110 to 9334298 and 9343415</li>
+<li><strong>msg</strong> #55-niome, 2026-08-13 to 2026-10-23 00:08 UTC, plus pinned posts from 2026-03-11 to 2026-10-17</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/54.html"><small>← Previous</small>SN54 Yanez</a><a rel="next" href="/bittensor-docs/subnets/56.html"><small>Next →</small>SN56 Gradients</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-23. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

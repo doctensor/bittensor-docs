@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TrajectoryRL (SN11) | Bittensor Subnet Docs</title>
+<meta name="description" content="Miners write fusion policies that route agent requests across eight open models; one winner takes all miner alpha.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h5">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>11</span><div>
+<h1>TrajectoryRL <span class="muted">SN11</span></h1>
+<p class="tagline">Miners write fusion policies that route agent requests across eight open models; one winner takes all miner alpha.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>8.9<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>9.9<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>39<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-22</b><span>last chat</span></li><li class="pw"><b>11,109</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>agent skills and model routing (winner-take-all competition)</dd>
+<dt>Status</dt><dd>Season 2 has run since 2026-09-20 and the repositories have not changed since 2026-10-04 (v0.7.4, scoring spec 27). On 2026-10-23 the chain and the team&#x27;s own read API show one miner holding the seat at 19.9375 of 20 (since 2026-10-22) and 115 packs waiting for evaluation, about six days at the recent pace. On 2026-10-22 the team announced dual evaluation for seat takeovers from epoch 4420 (about 2026-10-23 16:00 to 19:00 UTC); it was not live at this writing and no code or text for it is public yet.</dd>
+<dt>Confidence</dt><dd>high</dd>
+<dt>Researched</dt><dd>2026-10-23</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>TrajectoryRL runs a continuous competition in which miners submit packs that are tested by validators in sandboxed tasks with tests the agent cannot see. Since 2026-09-20 (Season 2, a transition season) a pack carries a fusion policy next to its SKILL.md: a program that decides which of eight open-weight models on the Engy platform answers each agent request and how their outputs are combined. One miner at a time holds the seat and receives all miner emission. The team says the seated policy will be served on Engy as an auto mode, and that it plans to turn the subnet into a host for verifiable environments later.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>A miner builds a pack containing a SKILL.md and a fusion policy. The policy can be a JSON file with no code (pin a model, escalate, ask advisers), a Python file on a small SDK, or a server speaking the OpenAI chat protocol. No GPU or server is needed because validators run everything. Packs are sent with the miner CLI, which first burns a submission fee in alpha (default 50) on chain; a hotkey can submit about once every 20 minutes and can have only one pack waiting in the queue at a time. The platform keeps pack contents hidden for 24 hours. The README says a pack that earns any reward passes its copyright to trajrl.com, and all evaluation data belongs to trajrl.com.</p></div><div><h3>Validators</h3><p>The platform first runs pre-evaluation checks on each pack (download, format, hash, uniqueness, similarity, and an integrity judge that rejects packs whose SKILL.md carries hints matching many of the benchmark scenarios; 14 of the 131 latest listed submissions had failed a check on 2026-10-23, 13 of them at the integrity judge). A first-in-first-out queue then feeds one challenger per epoch (recently about 1.3 hours on average, at most 600 blocks). The evaluating validator runs the agent harness (Hermes) with the policy in a sidecar next to the task; a meter allows only the eight listed models, records cost and refuses a call that cannot fit in the episode&#x27;s remaining 0.30 USD; a fresh verifier container then runs the scenario tests. There are 20 scenarios (terminal tasks in system administration, security, databases, scientific computing, ML systems and more, 211 tests in total); the benchmark repo publishes their tests and reference solutions, so &#x27;hidden&#x27; means the agent never sees the verifier during a run, not that the tests are secret. Since the 2026-10-03 spec 27 change only the team&#x27;s validator (UID 74, the owner&#x27;s own hotkey) evaluates: the team&#x27;s public API shows a single validator vote per epoch, and the other validators follow the published winner and set weights. The docs still describe stake-weighted consensus across several validators. From epoch 4420 the team says a first winning run only triggers a confirmation: two more epochs re-evaluate the seated pack and the challenger, and the takeover stands only if the challenger&#x27;s 2-run average clears the usual margin and age decay; seat scores then become the 2-run average. The team puts the cost at about 10 percent more evaluation and says validators need no change.</p></div><div><h3>Incentive</h3><p>The score is the sum over 20 scenarios of tests passed divided by tests total, so the maximum is 20; cost is shown but not scored. A challenger takes the seat only by beating the winner by a margin of about 3 percent at low scores, shrinking to zero near the maximum, and the bar falls as the seat ages (recent takeovers cleared margins of 0.3 to 1.4 percent, and two aged seats were taken at scores 1 to 2 percent below the previous winner). The top of the scale has flattened: four different packs have scored exactly 19.9375, which is 20 minus 1/16 and fits one failed test in the one scenario that has 16 tests (an inference; the team publishes no per-test results). The seated winner gets all miner alpha: on 2026-10-23 all 8 weight-setting validators put 100 percent of their weight on the seat holder&#x27;s UID (59), which received 100 percent of incentive and about 148 alpha in the last 360-block tempo (about 2,950 alpha a day at that rate). The chain&#x27;s emission split was 0 percent burn, 18 percent owner, 41 percent validators and 41 percent miners (read 2026-10-21). With no valid winner, validators fall back to the owner&#x27;s UID (hard-coded as UID 74 in the validator code) and miner emission aimed at it is burned.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-23</span> <span class="muted">(team public API and chain read at block 9342797)</span> UID 59 still holds the seat (19.9375 of 20, 16 epochs, roughly 20 hours); the last finalized epoch (4408) was held against a challenger scoring 18.67. 115 packs were waiting and none had been submitted since 2026-10-21 20:34 UTC. On chain, all 8 weight-setting validators put 100 percent of their weight on UID 59.</li>
+<li><span class="when">2026-10-22</span> <span class="muted">(#trajectory-rl)</span> The team announced dual evaluation for seat takeovers from epoch 4420 (about 2026-10-23 16:00 to 19:00 UTC): a first win triggers a confirmation, two further epochs re-run the seated pack and the challenger, the 2-run averages decide, and seat scores become the 2-run average. No new fee or submission is needed, and the team estimates about 10 percent extra evaluation time. It was the team&#x27;s first post since 2026-10-12.</li>
+<li><span class="when">2026-10-22</span> <span class="muted">(team public API (winners endpoint))</span> UID 59 took the seat at epoch 4393 (03:39 UTC) with 19.9375, 0.73 percent above the bar, from UID 162 (19.7939), which had held it for 11 epochs. It was the 90th takeover recorded since 2026-05-09.</li>
+<li><span class="when">2026-10-21</span> <span class="muted">(team public API (submissions and queue endpoints))</span> 134 packs from 134 different miners were waiting for evaluation, submitted between 2026-10-17 and 2026-10-21. New submissions fell from about 56 a day on 2026-10-18 and 2026-10-19 to a handful a day, and none have been listed since 2026-10-21 20:34 UTC.</li>
+<li><span class="when">2026-10-20</span> <span class="muted">(#trajectory-rl)</span> Miners asked the team to shorten evaluation (one said a pack takes about an hour) and to rethink the competition; the dual-evaluation notice of 2026-10-22 is the first team post since.</li>
+<li><span class="when">2026-10-12</span> <span class="muted">(#trajectory-rl and team public API)</span> Miners reported many packs stuck in pre-evaluation; the team replied that it was working on it. The pre-evaluation backlog has since cleared: every pending pack has passed the checks.</li>
+<li><span class="when">2026-10-09</span> <span class="muted">(#trajectory-rl)</span> The team said bulk submissions are a legitimate strategy under the subnet&#x27;s permissionless principles, and that it was re-evaluating the system for ways to limit one miner dominating.</li>
+<li><span class="when">2026-10-03</span> <span class="muted">(#trajectory-rl)</span> Validator v0.7.4 and spec 27 were announced for epoch 4005: spend cap per scenario cut from 1.00 to 0.30 USD, and evaluation moved to a single validator (UID 74), with the seated winner re-evaluated at cutover.</li>
+<li><span class="when">2026-09-20</span> <span class="muted">(#trajectory-rl, 2026-09-19 to 2026-09-20)</span> Season 2 opened to submissions at 00:00 UTC, with fusion policies and eight Engy models. The team called it a transitional version that would change often over the next two weeks.</li>
+<li><span class="when">2026-09-04</span> <span class="muted">(#trajectory-rl)</span> The team announced model fusion as the next change and closed new submissions from 2026-09-05 because the pending queue had grown past a week. A backlog of this size has therefore happened before.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Read the miner guide, the fusion policy guide and the benchmark page (it lists the 20 scenarios and their test counts), and install the miner CLI from the repo with pip.</li>
+<li>Write a SKILL.md and a policy (start from the examples in the repo&#x27;s policy folder). Keep the SKILL.md general: the integrity check rejects packs that carry hints matching many scenarios.</li>
+<li>Build and validate the pack with the CLI, then test it with the repo&#x27;s local evaluation script (scripts/eval_pack.py), which needs Docker and your own Engy API key.</li>
+<li>Check the queue on the website and the seat holder&#x27;s score before paying: on 2026-10-23 about 115 packs were waiting (roughly six days) and the seat score was 19.9375 of 20. From epoch 4420 a first win also needs a two-epoch confirmation, so a takeover takes longer and needs a consistent score.</li>
+<li>Hold enough alpha for the submission fee (default 50, burned with recycle_alpha, receipt valid 24 hours and used up only when the pack enters the queue), then submit with the CLI&#x27;s web-submit command and watch the status.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Docs lag the platform. The website&#x27;s Overview, Architecture, Consensus Score and Validator Guide pages still describe Season 1: a Qwen3.6-35B-A3B test model, several validators scoring every pack into a stake-weighted average, 150-block epochs and a winner derived locally by each validator (the Consensus Score page even gives 14 scenarios in one place and 12 in another). The Benchmark page has the 20 scenarios right but also still names the Qwen model, and the README and miner guide say 26 scenarios. Code, chat and the team API agree on spec 27, 20 scenarios, a 0.30 USD cap, 600-block epochs and one evaluating validator.</li>
+<li>The dual-evaluation rule is a team announcement (2026-10-22), not yet in force at this writing. No text or code for it is in the public repo (no commit after 2026-10-04, no branch newer than 2026-09-21), although the team API already carries confirmation fields. Because validators need no change, the extra runs presumably come from the same evaluator (an inference). How the confirmation epochs interact with the queue is not published; check the winners page after epoch 4420.</li>
+<li>The only evaluating validator is the owner&#x27;s own hotkey, so the seat depends on one party&#x27;s infrastructure; other validators copy its published winner. The scores themselves cannot be checked from the chain.</li>
+<li>Spam and single-operator claims come from miners. A chain check on 2026-10-21 did not support a single operator holding the seat: 30 takeovers since 2026-10-03 went to 24 different coldkeys (none more than 3), and the first 100 queued packs came from 47 coldkeys, though the largest coldkey holds 25 of the 256 UIDs. A coldkey is not proof of one operator, and the team&#x27;s own stance is that bulk submission is allowed. The team&#x27;s similarity check flagged only one of 131 recently listed packs; its threshold and reference set are server-side, so it neither confirms nor refutes a miner&#x27;s claim that many queued packs copy earlier winners.</li>
+<li>Queue size, wait time, seat score and holder are snapshots from the team&#x27;s public API on 2026-10-23 and change every epoch. The wait estimate assumes one challenger per epoch in submission order, which the API does not let anyone confirm. The queue endpoint lists only the first 100 rows; the 115 comes from the submissions endpoint.</li>
+<li>The fee (default 50 alpha) is confirmed by team posts of 2026-06-23 and 2026-09-15 and by the website guide; the value the server enforces today is not public.</li>
+<li>The team posted only once since 2026-10-12 (the dual-evaluation notice) and announced no change to evaluation speed, queue limits or the fee. Statements about a verifiable-environment protocol and bring-your-own-agent are plans, not built.</li>
+<li>The scenario tests and reference solutions are public in the benchmark repo (last commit 2026-08-24), but the 2,800-line sandbox harness was not read line by line, nothing shows that production images carry exactly the repo&#x27;s tests, and per-test results are not published, so the explanation of the 19.9375 plateau is an inference.</li>
+<li>Policies run only on the eight listed models with a frozen price table; both could change between seasons.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/trajectoryRL/trajectoryRL" rel="noopener noreferrer">GitHub (main repo)</a></li>
+<li><a href="https://trajrl.com/" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://trajrl.com/docs" rel="noopener noreferrer">Docs site (overview, miner and validator guides)</a></li>
+<li><a href="https://trajrl.com/docs/miner-guide" rel="noopener noreferrer">Miner guide</a></li>
+<li><a href="https://github.com/trajectoryRL/trajectoryRL/blob/main/docs/FUSION_POLICY.md" rel="noopener noreferrer">Fusion policy guide (repo)</a></li>
+<li><a href="https://github.com/trajectoryRL/trajectoryRL/blob/main/docs/ROADMAP.md" rel="noopener noreferrer">Roadmap (repo)</a></li>
+<li><a href="https://github.com/trajectoryRL/trajectoryRL/blob/main/docs/API.md" rel="noopener noreferrer">Platform API reference (repo)</a></li>
+<li><a href="https://trajrl.com/submissions" rel="noopener noreferrer">Submission queue</a></li>
+<li><a href="https://trajrl.com/winners" rel="noopener noreferrer">Winners page</a></li>
+<li><a href="https://github.com/trajectoryRL/trajrl-bench" rel="noopener noreferrer">Scenario images and verifiers (repo)</a></li>
+<li><a href="https://github.com/trajectoryRL/trajrl" rel="noopener noreferrer">Status CLI (repo)</a></li>
+<li><a href="https://trajrl.com/docs/benchmark" rel="noopener noreferrer">Benchmark (20 scenarios and test counts)</a></li>
+<li><a href="https://github.com/trajectoryRL/trajectoryRL/blob/main/docs/INCENTIVE_MECHANISM.md" rel="noopener noreferrer">Incentive mechanism (repo)</a></li>
+<li><a href="https://github.com/trajectoryRL/trajectoryRL/blob/main/scripts/eval_pack.py" rel="noopener noreferrer">Local evaluation script (repo)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 5 sources</summary>
+<ul>
+<li><strong>repo</strong> trajectoryRL/trajectoryRL @e1399fd (2026-10-04, v0.7.4, unchanged on 2026-10-23, all 138 branch heads checked): README.md, docs/FUSION_POLICY.md, docs/INCENTIVE_MECHANISM.md, docs/MINER_OPERATIONS.md, docs/API.md, docs/ROADMAP.md, neurons/miner.py, trajectoryrl/base/validator.py, trajectoryrl/policy/meter.py, trajectoryrl/utils/{winner_state,config,sandbox_harness}.py</li>
+<li><strong>repo</strong> trajectoryRL/trajrl-bench @0c905b3 (2026-08-24): README and the scenarios/ folder (tests and reference solutions of the 20 active scenarios); trajectoryRL/trajrl @09a25fc (2026-05-21): commit date only</li>
+<li><strong>web</strong> trajrl.com public read API fetched 2026-10-23 (stats, winner/current, epoch/current, queue, submissions, winners, validators/progress) and docs pages /docs, /docs/architecture, /docs/benchmark, /docs/consensus-score, /docs/miner-guide, /docs/validator-guide, /docs/roadmap</li>
+<li><strong>web</strong> Chain reads: block 9335130 to 9335241 (2026-10-21; emission split, owner-UID and coldkey tests) and block 9342797 (2026-10-23; subnet parameters, UIDs, validator weights; booleans and counts only)</li>
+<li><strong>msg</strong> #trajectory-rl, 2026-03-16 to 2026-10-22 (team posts and the latest messages)</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/10.html"><small>← Previous</small>SN10 Pareton</a><a rel="next" href="/bittensor-docs/subnets/12.html"><small>Next →</small>SN12 ComputeHorde</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-23. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

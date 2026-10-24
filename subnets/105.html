@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Beam (SN105) | Bittensor Subnet Docs</title>
+<meta name="description" content="Bandwidth network: orchestrators and their workers move clients&#x27; data and are scored and paid on verified delivery.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h15">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>105</span><div>
+<h1>Beam <span class="muted">SN105</span></h1>
+<p class="tagline">Bandwidth network: orchestrators and their workers move clients&#x27; data and are scored and paid on verified delivery.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>50<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>59<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>38<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-24</b><span>last chat</span></li><li class="pw"><b>15,375</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>bandwidth and data transfer</dd>
+<dt>Status</dt><dd>Very active chat (96 messages in #beam on 2026-10-20 and 2026-10-21 alone) and commits to the public beam repo on 2026-10-20. On chain on 2026-10-21 all 256 slots are filled, 7 validators hold permits and every one of them had set weights within the last hour. Reward and assignment rules changed several times in October, so treat details as current for 2026-10-21 only.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-21</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>Beam is a coordination layer for moving data. Clients create transfers through an SDK, a CLI or the Beam Studio workflow builder; BeamCore, run by the Beam team, splits each transfer into chunks and assigns them to orchestrators, whose worker pools move the bytes between storage backends such as S3, R2 and Google Cloud Storage. Subnet miners are the orchestrators, and rewards follow the bytes they verifiably deliver. A newer Rooms feature carries live traffic between participants, including end-to-end encrypted agent-to-agent transfers.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>A miner runs a Go orchestrator that is registered on subnet 105 and with BeamCore, plus a pool of workers connected to it over BeamLink/WCP. Workers upload chunk ranges to destinations, compute source digests and, for rooms, carry room transfer lanes; the orchestrator relays offers and results over NATS. Orchestrators are judged on their whole pool, so a few weak workers lower the score. Room work is optional: an orchestrator advertises a room capability once its workers can run room transfers end to end, and the team says room tasks go to eligible orchestrators in PRISM order, capped by the source member&#x27;s advertised connection limit.</p></div><div><h3>Validators</h3><p>Validators do not check individual transfers. BeamCore scores orchestrators and builds a weight vector from verified production uploads; a validator fetches the latest vector, calls set_weights on chain and posts a weight proof back. The team publishes reference copies of the assignment, scoring and weight code in a separate repo, which is not a runnable service. On chain at block 9334670 (2026-10-21), 7 of 256 uids hold validator permits and all 7 had set weights within about 230 blocks (under an hour). Each spreads weight over roughly 225 to 233 uids, none gives weight to uid 0, and all 7 have the same top target at about 2.4 percent. Commit-reveal is on with a one-epoch reveal period. That fits validators relaying the BeamCore vector; chain data cannot show how BeamCore derived it.</p></div><div><h3>Incentive</h3><p>Routing uses PRISM, a per-workload score (standard transfers and room transfers are scored separately) built from 24 hours of head-to-head duels between neighbouring orchestrators: reliability decides first, then verified duration. A workload needs a confidence of at least 0.9 to qualify (120 verified tasks for standard, 40 for room). The team said on 2026-10-20 that a newly qualified hotkey starts at a PRISM of 0.5 and that a re-registered hotkey keeps its earlier PRISM history. Since 2026-10-19 each transfer is also reviewed for self-dealing before it earns PRISM credit; the team says an excluded transfer affects nobody&#x27;s PRISM and keeps the eligibility conditions and review signals private. Emissions come from raw weight, the verified MiB uploaded in the 24-hour evidence window. Orchestrators are ranked into five tiers of 30 (the last tier takes everyone else) with per-MiB multipliers of 1, 0.8, 0.2, 0.08 and 0.0075. Fraud-report bonuses (up to x2, 7 days), a sell-pressure adjustment tied to alpha sales and penalties are then applied. The public core code applies a supplied sell multiplier and hands the removed weight to other holders, but how the multiplier itself is calculated is described only in the team guide. On chain, 218 of 256 uids had nonzero incentive on 2026-10-21, the largest single share was 2.4 percent and the top five held 11.2 percent. The chain emission split for the subnet reads 0 burn, 0 recycle, 18 percent owner, 41 percent validator and 41 percent miner. Uid 0 is the subnet owner&#x27;s own slot and also one of the 7 validators; it held about 90 percent of validator dividends and received about 45 percent of the alpha emission paid in the last epoch read, a total this page did not break down further.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-21</span> <span class="muted">(#beam)</span> The team said Beam itself is not launching qualified room transfers, only qualifying ones, although on 2026-10-20 it had said a stress-test campaign of qualified room transfers would follow. Two miners reported that room results from their orchestrators were being rejected as stale attempts; to the first the team replied that the four attempts it checked were accepted and credited, and that an attempt goes stale once its lane is closed (terminal result accepted, lease expired or transfer ended).</li>
+<li><span class="when">2026-10-20</span> <span class="muted">(#beam; docs.b1m.ai/docs/billing)</span> Standard and room transfers were repriced to 10 cents per transfer plus 10 dollars per TB.</li>
+<li><span class="when">2026-10-20</span> <span class="muted">(#beam; GitHub commit log)</span> Room media sessions now issue separate publisher and viewer tokens, so a viewer can no longer replace the publisher&#x27;s stream; the bug was reported by a miner, who received the low fraud-report bonus (+5 percent) until 2026-10-27. The same day the repo also stopped retrying room results that are rejected as stale or malformed and set assignment expiry to the BeamCore deadline.</li>
+<li><span class="when">2026-10-20</span> <span class="muted">(#beam)</span> The team announced a shift toward geographically distributed orchestrators and workers, with metrics and verification meant to tell independent workers from groups of VPS instances; details were promised for the following week. VPS participation is not being restricted.</li>
+<li><span class="when">2026-10-20</span> <span class="muted">(#beam; GitHub commit log)</span> Miners argued that room transfers all come from one client and that some UIDs jumped in rank because of them. The team said room work goes to eligible orchestrators sorted by PRISM, capped by the source member&#x27;s connection limit, that assignment logic is in the public repo, and that confirmed cheating on actual work is penalised and removed. The audit API&#x27;s assignment-plan endpoint now exposes the source and recipient connection limits, and the repo&#x27;s rooms guide gained a line describing the rule. One miner said they had stopped their servers over the dispute.</li>
+<li><span class="when">2026-10-19</span> <span class="muted">(#beam)</span> The team said PRISM now reviews every transfer for self-dealing and excludes cheating transfers one by one rather than blocking whole client organizations; transfers can be checked through a prismExcluded flag and reason in the audit API. It also said all current room transfers come from one client organization and that an assignment bug sending every recovery task to the top orchestrator was fixed on 2026-10-17.</li>
+<li><span class="when">2026-10-19</span> <span class="muted">(GitHub commit log)</span> Both public repos replaced fixed tier emission buckets with per-MiB tier multipliers (formula version v8 to v9).</li>
+<li><span class="when">2026-10-18</span> <span class="muted">(#beam; GitHub commit log)</span> After miners reported room-transfer recovery work landing on a single UID, the team said the recovery issue was fixed and the public repos were updated. On 2026-10-17 it had also said unused sell allowance no longer expires after 7 days; the guide now says unused allowance carries forward until spent.</li>
+<li><span class="when">2026-10-07</span> <span class="muted">(#beam, 2026-10-07 to 2026-10-08)</span> A release changed PRISM to per-wave duels with 24-hour scores, added a telemetry API that needs an API key and lags one epoch, and replaced the miner dashboard. Miners disputed how the sell and holding change treated past sales and objected to paid telemetry; on 2026-10-08 the team said the audit API is free and the dashboard lists every miner.</li>
+<li><span class="when">2026-10-04</span> <span class="muted">(#beam, 2026-10-04 to 2026-10-05)</span> A bug and exploit report desk opened, with fraud-report bonuses for confirmed findings. Advisories that week covered PRISM no longer penalising transfers that fail on IP-restricted customer buckets and chunk size being set by Beam only.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Build the orchestrator and worker from the beam repo (Go 1.24 or newer).</li>
+<li>Register a hotkey on subnet 105 with btcli.</li>
+<li>Register the orchestrator with BeamCore by signing the hotkey and fee percentage; store the returned orchestrator id and API key.</li>
+<li>Set the BeamCore, NATS, gateway and WCP TLS settings from the orchestrator guide and run it under a supervisor that restarts it.</li>
+<li>Register workers as members, start them with the capabilities you want to serve, and keep their room ports reachable if you enable room transfers.</li>
+<li>For room transfers, set BEAM_ROOM_TUNNEL_COORDINATOR_URL as shown in the orchestrator guide (the team says the coordinator is public, needs no separate provisioning and has no devnet), and advertise the room capability only once your worker runs it end to end.</li>
+<li>Complete calibration work until each workload qualifies; check your state with the telemetry, audit and sell-allowance endpoints.</li>
+<li>To validate instead, run the Python validator from actors/validator with a validator hotkey.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>The reward formula changed on 2026-10-19. Chat from 2026-10-15 to 2026-10-18 about tier A paying less per MiB than tier B describes the earlier fixed-bucket scheme.</li>
+<li>The public core code contains the tier maths, the fraud-report bonus, the step that applies a sell multiplier and redistributes the removed weight, and the final encoding of weights. It does not contain the calculation of the sell multiplier or holding score; the 80 percent allowance, the 0.60 and 0.10 floors and the frequency penalty come from the team guide and were not checked in code.</li>
+<li>The self-dealing review went live on 2026-10-19 according to the team. Its eligibility conditions and signals are deliberately unpublished and are not in either repo, so how it decides could not be verified.</li>
+<li>The core repo describes itself as reference copies, not a runnable service, so it cannot prove production runs identical code.</li>
+<li>Chain weights are validators&#x27; opinions at one block, not payouts, and they cannot show how BeamCore produces the vector. Uid 0 being the owner&#x27;s slot and a validator was tested on chain; what share of its emission is owner cut versus validator dividends was not.</li>
+<li>Miners and the team disagree about room-transfer concentration, rank jumps and whether max-connection settings can be gamed. Neither side&#x27;s claims were independently verified here; the team says all room transfers come from one client organization and that confirmed cheating will be removed.</li>
+<li>How much transfer volume comes from real clients rather than team-scheduled transfers is unknown; the team called its own scheduled standard transfers temporary on 2026-10-03.</li>
+<li>The team&#x27;s data.b1m.ai mirror gave no response on 2026-10-21; the same guide is in the GitHub repo. Headline network statistics on the website were not used because they could not be dated.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/Beam-Network/beam" rel="noopener noreferrer">GitHub (beam)</a></li>
+<li><a href="https://github.com/Beam-Network/beam-core-public" rel="noopener noreferrer">GitHub (beam-core-public)</a></li>
+<li><a href="https://docs.b1m.ai" rel="noopener noreferrer">Documentation</a></li>
+<li><a href="https://docs.b1m.ai/docs/api" rel="noopener noreferrer">API reference</a></li>
+<li><a href="https://docs.b1m.ai/docs/agent" rel="noopener noreferrer">Beam for agents</a></li>
+<li><a href="https://docs.b1m.ai/docs/billing" rel="noopener noreferrer">Billing and prices</a></li>
+<li><a href="https://miner.b1m.ai/guide/intro" rel="noopener noreferrer">Miner guide</a></li>
+<li><a href="https://miner.b1m.ai/" rel="noopener noreferrer">Miner dashboard</a></li>
+<li><a href="https://b1m.ai" rel="noopener noreferrer">Website</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 5 sources</summary>
+<ul>
+<li><strong>repo</strong> Beam-Network/beam @feb6d03 (2026-10-20): README.md, docs/orchestrator.md, docs/validator.md, docs/worker.md, guide/intro.md, guide/prism.md, guide/weights.md, guide/rooms.md, guide/workers.md, actors/orchestrator/README.md</li>
+<li><strong>repo</strong> Beam-Network/beam-core-public @aa2bbde (2026-10-19): packages/ops-scheduler/src/jobs/epoch-summary-math.ts and prism/scoring.ts</li>
+<li><strong>web</strong> Chain read at block 9334663 to 9334670 (2026-10-21): subnet identity and parameters, uid, weight and emission-split aggregates, and a keys-only test of whether uid 0 is the owner slot</li>
+<li><strong>web</strong> b1m.ai, docs.b1m.ai and miner.b1m.ai (all links in this page returned 200 on 2026-10-21)</li>
+<li><strong>msg</strong> #beam, 2026-09-19 to 2026-10-21</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/104.html"><small>← Previous</small>SN104 TAOStatus</a><a rel="next" href="/bittensor-docs/subnets/106.html"><small>Next →</small>SN106 Nodexo</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-21. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

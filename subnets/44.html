@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Score (SN44) | Bittensor Subnet Docs</title>
+<meta name="description" content="Computer-vision subnet: miners compete on sports-event and object-detection tasks; the best model per task is paid.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h20">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>44</span><div>
+<h1>Score <span class="muted">SN44</span></h1>
+<p class="tagline">Computer-vision subnet: miners compete on sports-event and object-detection tasks; the best model per task is paid.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>105<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>53<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>77<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-24</b><span>last chat</span></li><li class="pw"><b>27,488</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>computer vision (video and imagery)</dd>
+<dt>Status</dt><dd>Very active: about 440 chat messages between 2026-10-19 and 2026-10-21, repository commits through 2026-10-20, a team-published manifest re-issued on 2026-10-21, and chain emission flowing to miners on 2026-10-21. Several elements stalled for hours between 2026-10-16 and 2026-10-21.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-21</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>Score runs TurboVision, a subnet that rewards computer-vision models. Each task type is an Element in a manifest published by the Score team. On 2026-10-21 the manifest listed eight: six public object-detection Elements (beverage, person, vehicle, petrol station, worksite PPE, fallen or crouching person) and two private ones (football events, cricket deliveries). Miners compete per Element, and a central validator operated by the team scores them against ground truth supplied by Score and its data partners.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Public track: train an open-source model, publish it on Hugging Face, deploy it as a Chute on Chutes, and commit it on chain for one Element. Private track: serve a Docker image that answers POST /challenge on port 8000, push it to a private GitHub container registry, and commit the exact Element id on chain. One deployment serves one private Element.</p></div><div><h3>Validators</h3><p>A central validator run by Score fetches challenges, calls the committed miners, scores the answers against ground truth, and publishes results. The repo documents a validator stack others can run (Docker, Cloudflare R2, Chutes and Hugging Face credentials), but the chat treats the central validator as the one that matters. On 2026-10-21, 14 uids held validator permits and 9 of them had set weights on the paying mechanism, with near-identical rows. A public detection Element is scored as 0.6 x mAP50 plus 0.4 x a false-positive score (1 minus the average number of false positives per image divided by 10, never below 0); the overlap bar for a match depends on box size and runs from 0.3 to 0.7. Public models also face an automated latency check (p95 of 100 ms per frame or better on 2 vCPUs). Private images are spot-checked by pulling the committed image and comparing its output with the live endpoint; a mismatch scores zero and gets the hotkey blacklisted.</p></div><div><h3>Incentive</h3><p>Each Element has a weight in the manifest. The manifest of 2026-10-21 (re-issued with the same weights as 2026-10-01) gave football 50%, cricket 20% and each of the six public Elements 5%. Cricket was 30% before 2026-10-01, when two public Elements were added; the team said on 2026-10-21 that it cut cricket first because cricket is less contested and the football client is pushing for a better model. On a public Element the miner with the best average score over the recent window (default 3 days) takes the whole Element share, subject to a copy tie-break: if two miners score within about 0.05 per challenge on both recent and sampled historical challenges, the earlier on-chain commit wins. On a private Element the top three miners share it 80/15/5. The chain agrees with this: the subnet has two mechanisms, all emission goes to mechanism 1 (mechanism 0 gets none), and on 2026-10-21 the 12 paid uids on mechanism 1 matched the manifest shares (football 40/7.5/2.5% of the miner pool, cricket 16/3/1%, six public winners about 5% each). The chain&#x27;s own emission split on that date was 18% owner, 41% validators, 41% miners.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-21</span> <span class="muted">(#score)</span> The team removed three more worksite-PPE challenges and one petrol-station challenge as wrongly annotated, and said it will harden the fallen-person dataset once more and close that Element if all miners keep scoring full marks.</li>
+<li><span class="when">2026-10-21</span> <span class="muted">(#score)</span> The team explained that private-track miners who are deregistered must manage their hotkey lifetime: commit recovery is meant for the public track, because on private tracks missing a few high-variance challenges could make a re-registered miner eligible for weights unfairly. It also said cricket was cut first in the weight rebalance because it is less contested and the football client is pushing for a better model.</li>
+<li><span class="when">2026-10-20</span> <span class="muted">(#score and GitHub commit log)</span> A further tie-break hotfix kept zero scores in the last-10 comparison, and the team removed three PPE challenges as mis-annotated while keeping the petrol ones.</li>
+<li><span class="when">2026-10-19</span> <span class="muted">(#score)</span> The team announced a review process for football challenges: miners send block number, task id and concrete evidence of an annotation-rule breach (a bad score alone does not count). It also fixed an archive read issue that let some miners avoid challenges and changed the recent-batch tie-break to compare the last 10 challenges two miners have in common.</li>
+<li><span class="when">2026-10-17</span> <span class="muted">(#score, 2026-10-16 to 2026-10-17)</span> The historical part of the copy tie-break was loosened: the number of failed challenges needed to count as different dropped from 4 to 3. Miners had argued that converged scores let older commits win too often.</li>
+<li><span class="when">2026-10-14</span> <span class="muted">(#score)</span> The team published ground-truth training data for the cricket private track and blacklisted a hotkey whose results it could not reproduce.</li>
+<li><span class="when">2026-10-01</span> <span class="muted">(#score and the Score manifest)</span> Two public Elements went live: worksite PPE detection and fallen-person detection. Their 10% combined emission was taken from the cricket private track (cricket 30% to 20% in the manifest). The cricket scoring weights were rebalanced the same day.</li>
+<li><span class="when">2026-09-20</span> <span class="muted">(#score and the Score manifest)</span> The public petrol-station detection Element went live, with annotation rules for roof canopies, price boards and hoses.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Follow the shared setup in the repo README: wallet, Chutes developer account, Hugging Face token, and the sv command-line tool.</li>
+<li>Register a hotkey on subnet 44 with btcli.</li>
+<li>Public track: build a model for the Element you choose, benchmark it under the 2 vCPU latency limit, then deploy and commit with sv deploy-os-miner.</li>
+<li>Private track: implement the /challenge endpoint, push the image to a private registry, give Score read access, then deploy and commit with sv deploy-pt-miner.</li>
+<li>Check the Element list and current rules in the console and the announcements channel before you start, because Elements and weights change.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Element weights come from a manifest the team publishes and re-issues; this page read the version of 2026-10-21 (block 9329471). The console and announcements channel show the current list, and weights can change without a code change.</li>
+<li>The README points to a MINER.md at the repository root that does not exist; the two miner guides are under scorevision/miner. The README and the guides also use different variable names for the Hugging Face credentials.</li>
+<li>Element ids are spelled manak0/... for public Elements and manako/... for private ones in the live manifest. Some docs and announcements use one spelling for both.</li>
+<li>Miners reported many suspect ground-truth boxes in October, and the team removes challenge blocks it agrees are wrong. Challenges also stalled for hours several times between 2026-10-16 and 2026-10-21 (beverage, football, PPE).</li>
+<li>The copy tie-break is contested. Miners say it can hand the reward to an older, near-identical model when scores converge; the team says it protects against copying and works as designed, and on 2026-10-21 said it rarely triggers except on fallen person and petrol station. Three of the nine validators with weights listed a different winner on one or two public Elements on 2026-10-21.</li>
+<li>Chain concentration on 2026-10-21: the three paid football uids share one coldkey and the three paid cricket uids share another, and neither is the owner&#x27;s. This page cannot say whether each is one operator running several hotkeys, or whether the rules allow that. A few chat participants accused the team of self-mining on 2026-10-19; the team denied it, and no paid uid shares the owner&#x27;s coldkey.</li>
+<li>How the baseline and difficulty settings in the manifest enter the final weight was not traced; the code gives the whole public Element share to the winner. The cricket and football scoring formulas were not re-derived, and the TCG-grading Element in the repo docs was not in the live manifest.</li>
+<li>Chain figures are a read at block 9334663 to 9334675 (2026-10-21). Chain weights are validator opinions, not payouts.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/score-technologies/turbovision" rel="noopener noreferrer">GitHub (turbovision)</a></li>
+<li><a href="https://github.com/score-technologies/turbovision/blob/main/scorevision/miner/open_source/MINER.md" rel="noopener noreferrer">Public-track miner guide</a></li>
+<li><a href="https://github.com/score-technologies/turbovision/blob/main/scorevision/miner/private_track/MINER.md" rel="noopener noreferrer">Private-track miner guide</a></li>
+<li><a href="https://github.com/score-technologies/turbovision/blob/main/VALIDATOR.md" rel="noopener noreferrer">Validator guide</a></li>
+<li><a href="https://wearescore.com" rel="noopener noreferrer">Score website</a></li>
+<li><a href="https://console.scorestudio.ai" rel="noopener noreferrer">Score console (Elements)</a></li>
+<li><a href="https://turbo.scoredata.me/manako/winners/index.json" rel="noopener noreferrer">Published winners index</a></li>
+<li><a href="https://manako.scoredata.me/train/index.json" rel="noopener noreferrer">Cricket training data index</a></li>
+<li><a href="https://turbo.scoredata.me/manifest/index.json" rel="noopener noreferrer">Manifest index (Element list and weights)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 4 sources</summary>
+<ul>
+<li><strong>repo</strong> score-technologies/turbovision @bb51733 (2026-10-20): README.md, VALIDATOR.md, scorevision/miner/open_source/MINER.md, scorevision/miner/private_track/MINER.md and SCORED_ACTIONS.md, scorevision/validator/core/weights.py, scorevision/validator/scoring.py, scorevision/validator/winner.py, scorevision/utils/settings.py, scorevision/utils/manifest.py, scorevision/utils/evaluate.py, scorevision/vlm_pipeline/non_vlm_scoring/polygons.py, scorevision/spotcheck/README.md</li>
+<li><strong>web</strong> turbo.scoredata.me/manifest/index.json and the manifests issued 2026-09-20, 2026-10-01 and 2026-10-21 (block 9329471); wearescore.com, console.scorestudio.ai and manako.scoredata.me (all reachable 2026-10-21)</li>
+<li><strong>web</strong> Chain read at block 9334663 to 9334675 (2026-10-21): subnet facts, mechanism emission split, mechanism-1 incentive and validator weight rows, emission split, owner and coldkey checks (no addresses published)</li>
+<li><strong>msg</strong> #score, 2026-09-20 to 2026-10-21</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/43.html"><small>← Previous</small>SN43 Graphite</a><a rel="next" href="/bittensor-docs/subnets/45.html"><small>Next →</small>SN45 AlphaRidge</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-21. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

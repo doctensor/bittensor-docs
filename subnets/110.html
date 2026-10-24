@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Green Compute (SN110) | Bittensor Subnet Docs</title>
+<meta name="description" content="GPU rental and inference marketplace where providers must prove renewable power; one miner uid earns all incentive">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h2">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>110</span><div>
+<h1>Green Compute <span class="muted">SN110</span></h1>
+<p class="tagline">GPU rental and inference marketplace where providers must prove renewable power; one miner uid earns all incentive</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl3"><b>1.9<small>/day</small></b><span>last 7 d</span></li><li class="pl3"><b>0.74<small>/day</small></b><span>days 8-30</span></li><li class="pl4"><b>4.4<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-23</b><span>last chat</span></li><li class="pw"><b>646</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>GPU rental and inference (renewable-powered compute)</dd>
+<dt>Status</dt><dd>As of 2026-10-21 the team&#x27;s repos have fresh commits (the API repo on 2026-10-21), the team validator publishes a signed audit report every epoch and emission is on. But on chain only one uid receives incentive and the latest audit report scores one miner hotkey (chain read at blocks 9334350-9334356).</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-21</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>Green Compute (SN110) sells RTX 4090-class GPU rentals and OpenAI-compatible inference, and says the hardware sits at providers whose power is certified renewable (biogas farms in the UK first). Providers have to be approved with energy certificates before they can earn, so it is not a permissionless subnet. The operating team presents it as a business that sells to enterprise customers in ordinary money and uses part of the revenue to buy back subnet alpha. In practice the miner side is very thin: one miner hotkey carries all incentive, and the team has said payouts to individual farms go through a central distribution wallet.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>A provider applies with proof of renewable power and node specs, and an approved hotkey is whitelisted. Per the repo&#x27;s review policy the proof must be a REGO, GoO, REC or I-TRACK certificate in the applicant&#x27;s business name, issued in the last 12 months, showing on-site generation, and the hardware must be owned rather than leased; the declared node spec is 8x RTX 4090 or 8x RTX 5090 with at least 512 GB RAM and 8 TB storage. Whitelisted miners run one Docker-based node daemon that registers with the validator&#x27;s control plane, receives leases, serves vLLM catalog models and private model endpoints, and hosts SSH GPU pods that users rent by the hour.</p></div><div><h3>Validators</h3><p>The team runs the validator stack (gateway, control plane, validator). It sends nonce-echo canary prompts, which a model must answer by repeating a random token, about every 5 minutes by code default, and records latency, throughput, readiness failures and signs of proxying. Each epoch (360 blocks, about 72 minutes) it computes scores, sets weights, and publishes a signed audit report whose SHA-256 hash is anchored on chain. A separate open-source auditor can replay the final-score arithmetic from the published report.</p></div><div><h3>Incentive</h3><p>By code default the score is capacity x security^1.0 x reliability^1.3 x performance^1.1 x fraud penalty x utilization^0.8 x (1 + rental bonus capped at 0.1). Capacity is the node&#x27;s reported GPU count times VRAM, and the security term is fixed at 1.0, so green energy is checked at onboarding and not in the score. Weights are only set for whitelisted hotkeys. The chain-level emission split on 2026-10-21 was 18% owner, 41% validators, 41% miners, with nothing burned or recycled. Sales revenue and buybacks are team-reported and not visible on chain.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-21</span> <span class="muted">(chain read and validator audit endpoint, 2026-10-21)</span> Chain read: all 256 uids are taken, 13 validators set weights and all of them give 100% to the same single uid. The newest public audit report (epoch ending block 9334080) scores one miner hotkey and its 16 probe results all succeeded.</li>
+<li><span class="when">2026-10-19</span> <span class="muted">(#110-greencompute; GitHub greencompute-api)</span> Team said buybacks come from any revenue, both rentals and inference. The API repo the same day added hourly billing for private models and a billing monitor for them.</li>
+<li><span class="when">2026-10-15</span> <span class="muted">(#110-greencompute)</span> A user reported the validator had not pushed weights for about 3,300 blocks; a team member said it was back to normal the same day.</li>
+<li><span class="when">2026-10-13</span> <span class="muted">(GitHub greencompute and greencompute-api commits, 2026-10-13 to 2026-10-14)</span> Protocol and API repos gained per-key rental and spend limits, a deployment runtime cap and verified wallets for crypto payments.</li>
+<li><span class="when">2026-09-11</span> <span class="muted">(#110-greencompute)</span> Team re-shared the four public repos in answer to a member who thought there was no code, and said a miner performance dashboard did not exist yet and was planned for a later update.</li>
+<li><span class="when">2026-09-09</span> <span class="muted">(#110-greencompute)</span> Team said emissions were back on after the September pause.</li>
+<li><span class="when">2026-09-08</span> <span class="muted">(GitHub greencompute-api)</span> Code docs in the API repo describe a platform-managed provider wallet feature meant to give every provider its own hotkey and uid, and say emissions were concentrated because the whitelist held exactly one hotkey. The feature ships behind an off-by-default switch.</li>
+<li><span class="when">2026-09-02</span> <span class="muted">(#110-greencompute)</span> Community members challenged the subnet&#x27;s economics and asked whether it was self-mining, and said emissions had been removed. The team replied that the confusion came from a central distribution wallet used to pay miners, and said it would change that setup and talk to the chain-level party.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Check you can meet the onboarding bar: 100% renewable power proven by an accepted certificate in your business name, owned hardware, and 8x RTX 4090 or 8x RTX 5090 nodes with the listed RAM, storage and network; then apply through the Apply link on the website.</li>
+<li>Wait for approval and whitelisting of your registered hotkey (self-custody path); the code also has a platform-held wallet path but it is off by default and its live status is unknown.</li>
+<li>Prepare a Linux host with an NVIDIA driver of 545 or newer, Docker and the NVIDIA Container Toolkit.</li>
+<li>Clone the protocol and node repos, copy .env.example to .env, set the validator address and ports, your hotkey, wallet names and real hardware figures, then run docker compose up -d.</li>
+<li>Check http://localhost:8007/readyz and open port 8007 and the 30000-31000 range so the control plane and renters can reach the node.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Chain weights were read (block 9334350 on 2026-10-21): only one uid has incentive and every validator that sets weights puts 100% on it. Whether that uid is a distribution wallet or a single farm cannot be told from chain; it does not hold the subnet-owner hotkey or coldkey, and the chain cannot show how alpha reaches individual providers.</li>
+<li>The validator that sets weights and signs audit reports (uid 0) shares the subnet-owner coldkey, and the validator operator controls the miner whitelist. The About page says nobody inside Green Compute controls who gets paid; both statements are reported here and not reconciled.</li>
+<li>Per-provider payouts were promised in chat on 2026-09-04 and a managed-wallet feature exists in code, but it is off by default and the shipped production files do not enable it. Seven weeks later the chain still shows one incentive uid. Whether it is on in production is unknown.</li>
+<li>Revenue, buyback sizes and the buyback share are team-reported only. The home page says 10% of contract revenue, the About page says a portion of inference revenue and chat on 2026-10-19 says revenue from any rental or inference. A member asked on 2026-10-01 for a public revenue and buyback page and no reply appeared in the channel through 2026-10-21; no readable ledger was found.</li>
+<li>The website yield calculator mentions a 1.5x green multiplier and emission priority for verified nodes; no such term exists in the four repos and the scoring code fixes the security term at 1.0. The website&#x27;s named testimonials (including a 64x H100 cluster, which the repo&#x27;s spec check does not accept) could not be corroborated.</li>
+<li>Live capacity looks small: the public catalog shows two models with one serving miner each at roughly 0.1 to 0.2 requests per minute (2026-10-21), and only RTX 4090 rentals are listed as available. The site says RTX 5090 rentals are paused although its home page still shows a 5090 price.</li>
+<li>The audit tool recomputes the final score from the scorecard&#x27;s own sub-scores, not from raw probes, although its README says it replays raw probe data. I recomputed the newest report&#x27;s score by hand and it matched. Its last commit is from 2026-06-02.</li>
+<li>Green-energy checks happen at onboarding by document review; the automated vision-model review is off by default in code and its live setting is unknown. Nothing on chain proves how a node is powered.</li>
+<li>The September emission pause and restart is known only from chat; no chain announcement was found.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/greencompute110" rel="noopener noreferrer">GitHub organisation</a></li>
+<li><a href="https://github.com/greencompute110/greencompute" rel="noopener noreferrer">Protocol and SDK repo</a></li>
+<li><a href="https://github.com/greencompute110/greencompute-node" rel="noopener noreferrer">Miner node repo</a></li>
+<li><a href="https://github.com/greencompute110/greencompute-api" rel="noopener noreferrer">Validator and API repo</a></li>
+<li><a href="https://github.com/greencompute110/greencompute-audit" rel="noopener noreferrer">Independent audit tool repo</a></li>
+<li><a href="https://green-compute.com" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://green-compute.com/docs" rel="noopener noreferrer">Docs</a></li>
+<li><a href="https://green-compute.com/llms.txt" rel="noopener noreferrer">Machine-readable summary (llms.txt)</a></li>
+<li><a href="https://api.green-compute.com/platform/pricing" rel="noopener noreferrer">Public pricing JSON</a></li>
+<li><a href="https://validator.green-compute.com/validator/v1/audit/reports" rel="noopener noreferrer">Public audit report index</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 7 sources</summary>
+<ul>
+<li><strong>msg</strong> #110-greencompute, 2026-08-28 to 2026-10-21, plus pinned posts</li>
+<li><strong>repo</strong> github.com/greencompute110/greencompute-api README.md, services/validator (config.py, domain/scoring.py, domain/chain.py, domain/application_review.py, domain/spec_check.py, domain/managed_wallet.py) @751d826 (2026-10-21)</li>
+<li><strong>repo</strong> github.com/greencompute110/greencompute-node README.md @a827b2d (2026-10-17); greencompute README.md @0bced39 (2026-10-14)</li>
+<li><strong>repo</strong> github.com/greencompute110/greencompute-audit README.md, audit/replay.py @d005fe4 (2026-06-02)</li>
+<li><strong>web</strong> validator.green-compute.com/validator/v1/catalog-status and audit report for epoch 110-9334080, read 2026-10-21</li>
+<li><strong>web</strong> green-compute.com home, /about and /llms.txt; api.green-compute.com/platform/pricing and /platform/nodes/supported, read 2026-10-21</li>
+<li><strong>web</strong> Chain read at blocks 9334350-9334356 (2026-10-21): subnet parameters, incentive and weight concentration, emission split and owner/uid comparisons (booleans only)</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/108.html"><small>← Previous</small>SN108 ChipForge</a><a rel="next" href="/bittensor-docs/subnets/111.html"><small>Next →</small>SN111 Claims</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-21. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DaniLabs (SN2) | Bittensor Subnet Docs</title>
+<meta name="description" content="Inference subnet handed from Inference Labs&#x27; DSperse to DaniLabs in Oct 2026; new service and miner kit not yet public.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h14">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>2</span><div>
+<h1>DaniLabs <span class="muted">SN2</span></h1>
+<p class="tagline">Inference subnet handed from Inference Labs&#x27; DSperse to DaniLabs in Oct 2026; new service and miner kit not yet public.</p>
+<span class="st s-transitioning">transitioning</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>12<small>/day</small></b><span>last 7 d</span></li><li class="pl4"><b>2.2<small>/day</small></b><span>days 8-30</span></li><li class="pl4"><b>2.2<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-23</b><span>last chat</span></li><li class="pw"><b>11,082</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>AI inference (previously zk proof-of-inference)</dd>
+<dt>Status</dt><dd>As of 2026-10-21 the subnet changed hands on 2026-10-16: Inference Labs (DSperse, zero-knowledge proof of inference) handed SN2 to a new team, DaniLabs, which is building a general inference network. The new miner kit is not public and the validator repo has documentation only. On chain at the same date all incentive sits on one uid that matches the owner&#x27;s own hotkey.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-21</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>Subnet 2 ran for years as DSperse, a proof-of-inference subnet from Inference Labs where miners returned zero-knowledge proofs of model predictions. On 2026-10-16 both sides announced that Inference Labs was handing the subnet to DaniLabs (Distributed Accelerated Neural Intelligence). DaniLabs says it is building an AI inference network around three priorities: no data retention, fast responses and low cost. The service is described by its own team as in development, and no miner software or scoring rules are published yet.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Under the former DSperse design, miners ran a Rust binary that generated zero-knowledge proofs of model outputs for validator requests. Under DaniLabs the team says miners will run inference; the miner kit (a separate project called ManagedVNetIR) is described as mid-migration and is not public as of 2026-10-21. The team said in chat on 2026-10-21 that mining would open &#x27;soon&#x27;, with no date.</p></div><div><h3>Validators</h3><p>The new validator repo (DaniLabsAI/subnet) contains a README only. It says the validator is being developed to validate performance reports, score miners on latency, token throughput, completed requests and availability, and submit weights, and that reports should carry operational measurements and not customer prompts or responses. Formulas and eligibility rules are not yet written. The old DSperse validator verified proofs and weighted miners by delivered work and response speed, with a minimum of 100 samples per miner in the archived code.</p></div><div><h3>Incentive</h3><p>No DaniLabs scoring or payout rule is published; the README says the formula will be documented and tested before live weight submission. On chain at 2026-10-21 (block about 9334300), 5 validators hold permits and each puts all its weight on a single uid, and that uid holds 100% of incentive. Its hotkey and coldkey match the subnet owner&#x27;s. This shows what is configured on chain, not why; no source explains it.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-21</span> <span class="muted">(GitHub DaniLabsAI, #danilabs)</span> The public DaniLabsAI GitHub organization lists two repositories: an organization profile and the subnet validator repo. The latter holds only a README with intended responsibilities. The profile lists a server, a platform and a miner project as not yet public. In chat the new lead said the hardware (ASIC) vision continues and that &#x27;zero data retention&#x27; would need a way to enforce what miner hardware records.</li>
+<li><span class="when">2026-10-20</span> <span class="muted">(GitHub inference-labs-inc/subnet-2)</span> The old Inference Labs repository received a notice that Subnet 2 is now DaniLabs and is marked archived on GitHub. Its last release remains 14.14.3 (2026-09-08).</li>
+<li><span class="when">2026-10-20</span> <span class="muted">(#danilabs)</span> The team said the subnet repo is linked from the chain identity, and that the miner kit and other pieces are being migrated and are not public yet. Earlier on 2026-10-19 it said the first aim is regular inference at scale before any specialty inference.</li>
+<li><span class="when">2026-10-16</span> <span class="muted">(#danilabs)</span> DaniLabs introduced itself as the next chapter of SN2, and an Inference Labs post said the timing was not right for it to keep running the subnet. It cited over 6 billion proofs of inference and a peak above 1,000 proofs per second (team claims). The following day the new lead said Inference Labs had agreed to transition the subnet.</li>
+<li><span class="when">2026-10-16</span> <span class="muted">(#danilabs)</span> The channel saw heated discussion about the change, including disputes about the new lead&#x27;s earlier project. These are not assessed on this page. Moderators said they do not step into subnet disputes.</li>
+<li><span class="when">2026-09-02</span> <span class="muted">(#danilabs)</span> Versions 14.14.0 and 14.14.2 let the main validator rotate its IP address. The team said the aim was to reward raw performance rather than co-location with that validator, after a public debate about validator stake concentration.</li>
+<li><span class="when">2026-08-14</span> <span class="muted">(#danilabs and GitHub inference-labs-inc/subnet-2 releases)</span> From mid-August to early September miners reported many epochs where miner emission was burned or went to the owner uid (for example roughly 95% effective burn over 20 epochs by 2026-09-04). Community members traced it to validator restarts losing a delivered-work counter and sent fixes; the team released version 14.14.3 on 2026-09-08 with a guard for zero-score weight sets and said the underlying cause was an unstable validator instance. Miners reported a run of normal epochs by 2026-09-10.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Mining is not open yet according to the team (2026-10-21, &#x27;soon&#x27;); the miner kit is not public.</li>
+<li>Validators: the new validator code is not published, only a README. The team said in chat on 2026-10-17 that it would clarify the code validators run; check the DaniLabs repo and announcements before running anything.</li>
+<li>Treat old DSperse instructions, binaries and &#x27;Dsperse wallet&#x27; sites with caution: the old repo is archived, and chat warns that sites asking for a wallet phrase are scams.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>This page reflects public chat, GitHub and a read-only chain check on 2026-10-21. The DaniLabs scoring rules, miner software and token details are unpublished.</li>
+<li>Why all weight and incentive sit on the owner uid at the time of checking is not explained by any source, and whether the old DSperse software still runs on the network was not determined.</li>
+<li>Claims about proof counts and throughput come from Inference Labs&#x27; own announcement and were not verified.</li>
+<li>Disputes raised in the channel on 2026-10-16 and 2026-10-17 about the new lead&#x27;s earlier project and ownership were not investigated.</li>
+<li>Chain identity contents were not read directly (the lookup timed out); the link to the DaniLabs repo is a team statement in chat.</li>
+<li>Former DSperse documentation and dashboards were not read and may belong to the previous operator.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://danilabs.ai/" rel="noopener noreferrer">DaniLabs site</a></li>
+<li><a href="https://github.com/DaniLabsAI" rel="noopener noreferrer">DaniLabs GitHub organization</a></li>
+<li><a href="https://github.com/DaniLabsAI/subnet" rel="noopener noreferrer">Validator repo (README only)</a></li>
+<li><a href="https://x.com/danilabsai" rel="noopener noreferrer">DaniLabs on X</a></li>
+<li><a href="https://github.com/inference-labs-inc/subnet-2" rel="noopener noreferrer">Former DSperse repo (archived)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 7 sources</summary>
+<ul>
+<li><strong>msg</strong> #danilabs (SN2), 2026-08-12 to 2026-10-21</li>
+<li><strong>repo</strong> DaniLabsAI/subnet @a5ec4aa (2026-10-21): README.md</li>
+<li><strong>repo</strong> DaniLabsAI/.github @4b911a5 (2026-10-21): profile/README.md</li>
+<li><strong>repo</strong> inference-labs-inc/subnet-2 @5019f7b (2026-10-20, archived): README.md, crates/sn2-validator/src/scoring.rs, crates/sn2-types/src/constants.rs; releases 14.14.2 and 14.14.3</li>
+<li><strong>web</strong> https://danilabs.ai/ (2026-10-21)</li>
+<li><strong>web</strong> api.github.com org and repo metadata for DaniLabsAI and inference-labs-inc/subnet-2 (2026-10-21)</li>
+<li><strong>web</strong> Bittensor chain read-only queries (subnet hyperparameters, neuron and weight state) for netuid 2 at blocks 9334298 to 9334301, 2026-10-21</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/1.html"><small>← Previous</small>SN1 Apex</a><a rel="next" href="/bittensor-docs/subnets/3.html"><small>Next →</small>SN3 Teutonic</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-21. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

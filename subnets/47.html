@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GPUForge (SN47) | Bittensor Subnet Docs</title>
+<meta name="description" content="Pre-alpha subnet design for verifiable GPU training; a protocol library is public, with no miner or validator release.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h17">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>47</span><div>
+<h1>GPUForge <span class="muted">SN47</span></h1>
+<p class="tagline">Pre-alpha subnet design for verifiable GPU training; a protocol library is public, with no miner or validator release.</p>
+<span class="st s-quiet">quiet</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl2"><b>0.43<small>/day</small></b><span>last 7 d</span></li><li class="pl3"><b>0.83<small>/day</small></b><span>days 8-30</span></li><li class="pl3"><b>1.2<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-22</b><span>last chat</span></li><li class="pw"><b>97</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>verifiable GPU training compute</dd>
+<dt>Status</dt><dd>The repository&#x27;s last commit and the team&#x27;s last chat update are both from 2026-09-30; the README says the code is not ready for miners, validators, testnet or mainnet. Chat questions from 2026-10-11 to 2026-10-19 had no team reply in the messages read.</dd>
+<dt>Confidence</dt><dd>high</dd>
+<dt>Researched</dt><dd>2026-10-21</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>GPUForge describes itself as a proposed subnet for verifiable GPU training. A publisher signs an immutable training job, miners run it on NVIDIA H100 hardware inside a sandbox, and validators score only work they can verify. At the time of research the public code is a protocol and verification library, not a running miner or validator, and the team labels the project pre-alpha.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Intended design: report H100 capabilities, supply hardware-backed attestation evidence where supported, accept a short-lived lease, run the pinned training container in an isolated environment, and return signed results, checkpoint commitments and timing evidence. There is no supported miner release and no installation guide yet.</p></div><div><h3>Validators</h3><p>Intended design: issue fresh challenges, check attestation, job identity, correctness probes, freshness and throughput, and turn verified results into normalized weights. The repository contains verification libraries but no validator program and no code that sets weights on chain was found.</p></div><div><h3>Incentive</h3><p>Planned rule is to score verified work rather than claimed hardware: missing, stale or inconsistent evidence earns nothing. The team&#x27;s website says final scoring rules are still being defined, so the reward formula is not published.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-19</span> <span class="muted">(#gpuforge)</span> Members were still asking when mining would open and whether contributions were possible; no reply appears in the messages read.</li>
+<li><span class="when">2026-09-30</span> <span class="muted">(#gpuforge; GitHub forgenet47/gpuforge)</span> Final team update: an NVIDIA attestation adapter, container isolation and checks that bind execution evidence; the same day the last repository commit merged.</li>
+<li><span class="when">2026-09-26</span> <span class="muted">(#gpuforge)</span> Update on hardware attestation, workload isolation and training supervision, plus a first version of the project website.</li>
+<li><span class="when">2026-09-23</span> <span class="muted">(#gpuforge)</span> Development update: integrity checks for training artifacts and rules for H100 capability reports, with failure-case tests. The owner said they would update the group once the code is complete.</li>
+<li><span class="when">2026-09-21</span> <span class="muted">(#gpuforge)</span> Project introduced in chat as a pre-alpha subnet with a public repository; the team listed miners, validators, testnet and mainnet as not ready.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>There is no supported way to mine or validate yet; the README says operating instructions will be added only after the protocol, sandbox, adversarial tests and testnet criteria are met.</li>
+<li>Developers can read the README and run the offline configuration checks and unit tests described there, using local development configs that contain no credentials.</li>
+<li>Follow the repository and the team&#x27;s chat updates for a release announcement.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Nothing here describes a running network. Chain registration, emissions, validators and UIDs were not checked.</li>
+<li>The repository&#x27;s licence file says no licence is selected and all rights are reserved, so the code is viewable but not licensed for use or redistribution.</li>
+<li>Capability reports are self-reported by design; hardware attestation, sandboxing and correctness checks exist as library code that the README says are not approved for untrusted workloads.</li>
+<li>No team answers were found for the roadmap, the reason GPU training verification matters, or timing questions asked in chat after 2026-09-27.</li>
+<li>The channel also contains unverified personal claims about the project&#x27;s owner; these are not repeated here.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/forgenet47/gpuforge" rel="noopener noreferrer">GitHub</a></li>
+<li><a href="https://gpuforge-gpuforge.static.hf.space/index.html" rel="noopener noreferrer">Project website</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 3 sources</summary>
+<ul>
+<li><strong>repo</strong> forgenet47/gpuforge @7f9e0a7 (2026-09-30): README.md, LICENSE, src/gpuforge module list, git log</li>
+<li><strong>web</strong> gpuforge-gpuforge.static.hf.space, read 2026-10-21</li>
+<li><strong>msg</strong> #47 gpuforge, 2026-09-21 to 2026-10-19</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/46.html"><small>← Previous</small>SN46 Instant</a><a rel="next" href="/bittensor-docs/subnets/48.html"><small>Next →</small>SN48 Quantum Compute</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-21. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

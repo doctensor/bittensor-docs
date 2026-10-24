@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ReadyAI (SN33) | Bittensor Subnet Docs</title>
+<meta name="description" content="Data-tagging subnet: miners tag content, validators score by embedding similarity; team pivoting to agent skills">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h15">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>33</span><div>
+<h1>ReadyAI <span class="muted">SN33</span></h1>
+<p class="tagline">Data-tagging subnet: miners tag content, validators score by embedding similarity; team pivoting to agent skills</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>8.1<small>/day</small></b><span>last 7 d</span></li><li class="pl4"><b>6.4<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>12<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-24</b><span>last chat</span></li><li class="pw"><b>7,525</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>structured data, tagging and enrichment</dd>
+<dt>Status</dt><dd>As of 2026-10-23 the channel is active (178 messages in the 30 days to 2026-10-21, 16 more since). The validator repo&#x27;s main branch was last changed on 2026-09-24 (version 2.39.76); an open, unmerged pull request from 2026-10-21 would turn on a 25 percent owner burn and randomize task order. The team&#x27;s Skill Store 33 was announced for October and is still only an early-access sign-up page. The chain shows 239 of 256 UIDs held by 11 coldkeys, which participants dispute (see caveats).</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-23</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>ReadyAI (SN33, repo still named Conversation Genome Project) turns raw content into structured data. Miners tag or enrich pieces of text, validators build a reference answer from the full content and score each miner against it. The code defines six task types; the team&#x27;s current direction is agent skills (generated skills with test assertions, sold through the planned Skill Store 33) plus a paid Jobs API and an llms.txt dataset of 10,000+ websites. On chain, nearly all UIDs and incentive sit with eleven coldkeys and miner UIDs turn over within days.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Run the neuron from the repo, register on netuid 33 (testnet is 138) and answer tasks with your own LLM. For conversation tagging, the task people discuss in chat, a miner receives one masked window of up to 10 lines of a longer conversation and returns a list of topical tags; the validator computes the embeddings itself, so miners do not need to send them (team confirmed 2026-09-19). Other task types in the code: webpage metadata, survey tagging, named entities, skill generation, and skill_coverage_evaluation, where the miner writes a skill plus tests for it. A project moderator said on 2026-09-08 that the subnet sends several of these task types and that the repo ships only default code. Miner IP addresses are committed on chain in encrypted form, so the metagraph shows the same address for everyone; the team says this protects miners from DDoS. On chain (block 9343853, 2026-10-23) the median miner UID was registered 2.5 days earlier and the oldest 27 days earlier.</p></div><div><h3>Validators</h3><p>Each validator needs an API key for the ReadyAI Conversation Server (issued after a stake check) and a private commitment key that the team hands out to validators, so task supply and validator onboarding go through the team. A validator fetches about 10 task bundles, cuts each into up to 5 tasks, sends each task to 6 random miners (the README says 3; the code default is 6) and scores the replies against ground-truth tags it built from the whole conversation. Embeddings are made with OpenAI text-embedding-3-small (hard-coded in the code; the large model named in config files is only written into the record sent to the team server). On mainnet validators ignore LLM overrides and use the in-code default (OpenAI gpt-5.2). Results are uploaded to the team server at the end of each loop. On chain there are 10 validator permits: two validators hold about two thirds of the dividends, and the owner&#x27;s own hotkey holds a permit but its last weight update on record is over 5 million blocks old (about 700 days).</p></div><div><h3>Incentive</h3><p>Per-tag score is the cosine similarity between the tag&#x27;s embedding and the average embedding of the ground-truth tags. The set score is 55 percent mean of the top 3 unique tags, 25 percent mean, 10 percent median and 10 percent max, with multiplicative penalties for few tags, no overlap with ground truth or a very low best score; fewer than 3 tags scores zero. Scores are smoothed with a moving average (alpha 0.1). The weights a validator sets are rank-based: miners are sorted by score, ties are broken randomly, and weight falls along a cubic curve whose top is about three times its bottom; every serving miner also gets a tiny baseline weight. Chain read at block 9343854 (2026-10-23) agrees: 242 of 256 UIDs have incentive, the best UID has 0.6 percent, commit-reveal is off, and each active validator&#x27;s top target holds only 0.6 to 0.75 percent of its weights. The emission split on chain is 18 percent owner, 41 percent validators, 41 percent miners, and miner emission aimed at owner hotkeys is configured to be burned. The code&#x27;s miner burn rate is 0 (removed 2026-06-30; no validator row on chain shows a burn share today); open pull request 139 would set it to 25 percent.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-23</span> <span class="muted">(chain read (aggregates only))</span> Chain read at block 9343854: 256 of 256 UIDs, 25 distinct coldkeys; the ten largest hold 19 to 25 UIDs each (232 in all, 94.2 percent of incentive) and an eleventh holds 7, which makes 239 UIDs and 97.3 percent of incentive for the eleven wallets named in the 2026-10-20 analysis. The ten validators each use their own coldkey. 59 UIDs were under one day old and the oldest miner UID was 27 days old.</li>
+<li><span class="when">2026-10-21</span> <span class="muted">(GitHub (PR 139))</span> Pull request 139 was opened (not merged as of 2026-10-23): it shuffles the task dispatch order, sets the validator burn rate from 0 to 0.25 so a quarter of weight goes to the owner UID, and bumps the version to 2.39.77. The burn is not mentioned in the channel.</li>
+<li><span class="when">2026-10-20</span> <span class="muted">(#33-ready)</span> Team said it was proposing that validators send tasks in random order instead of the order received, to make it hard to group windows of one conversation across many UIDs. On 2026-10-21 and 2026-10-22 it told miners the update would be announced soon and that it was waiting for a go-ahead.</li>
+<li><span class="when">2026-10-07</span> <span class="muted">(#33-ready)</span> Participants began posting on-chain analyses claiming a few coldkeys hold most UIDs and most incentive and that newcomers are removed right after immunity; more followed on 2026-10-08, 2026-10-15 and 2026-10-20 (a long analysis arguing eleven wallets share one operator). The team replied that running several UIDs is allowed, that ReadyAI is not mining its own subnet, and that deregistration removes the lowest-scoring UID outside immunity.</li>
+<li><span class="when">2026-10-06</span> <span class="muted">(#33-ready; readyai.ai dashboard data)</span> Team said the paid Jobs API was nearing six-figure annualised revenue. Its public dashboard data (generated 2026-10-23) lists about 8.1k USDC across 2026-09-23 to 2026-10-22, roughly 230 to 313 per day apart from one low day (68 on 2026-10-08).</li>
+<li><span class="when">2026-09-24</span> <span class="muted">(#33-ready, 2026-09-24 to 2026-10-21)</span> From this date the team posts benchmarks (slide decks, social carousels, a security audit test) where a cheaper model with one SN33 skill beats or matches the same model without it. These are team-run tests and were not independently checked.</li>
+<li><span class="when">2026-09-21</span> <span class="muted">(#33-ready; GitHub PR 137)</span> Validator release 2.39.76: task results are uploaded after the whole scoring loop instead of during it, plus a batch-numbering fix. Validator side only.</li>
+<li><span class="when">2026-09-17</span> <span class="muted">(#33-ready; ss33.ai)</span> Team announced Skill Store 33 (ss33.ai), a storefront for agent skills generated by the subnet, each with test assertions, and said it would launch the next month. The site is still an early-access sign-up page on 2026-10-23.</li>
+<li><span class="when">2026-09-12</span> <span class="muted">(#33-ready; chain read)</span> The buyback the team called the August one ran on this date: 17.07 TAO staked and the alpha burned (block 9048873). The team said it was 2.35 times the first in USD. On 2026-10-06 it reported the September buyback as 45 percent larger; that transaction was not located here.</li>
+<li><span class="when">2026-08-18</span> <span class="muted">(#33-ready; GitHub (PRs 135 and 136))</span> The skill_coverage_evaluation task type (announced as release 2.37.74 on 2026-08-13) was merged: a miner generates a skill from a request and writes tests, scored on section coverage and skill coverage with an LLM correctness check. On 2026-08-20 mainnet validators lost the ability to override the LLM provider and model.</li>
+<li><span class="when">2026-07-21</span> <span class="muted">(#33-ready; chain read)</span> First buyback and burn announced: 9.2 TAO staked into the subnet and the alpha burned in one transaction (decoded on chain at block 8670960). The team says 75 percent of its Jobs API revenue funds buybacks; that share is the team&#x27;s statement.</li>
+<li><span class="when">2026-06-30</span> <span class="muted">(#33-ready (pinned); GitHub commit history)</span> Team removed the burn on miner emission (pinned announcement; code change merged the same day) and said validators had to upgrade. It named skills as a data type as the next focus.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Clone the repo, copy env.example to .env and fill in an OpenAI key and a Weights and Biases key (both are required for miners and validators).</li>
+<li>Check that your miner port is reachable from outside; the moderator and team name this as the most common reason a miner gets no requests.</li>
+<li>Start on testnet (netuid 138) with the miner command in the README, ideally also run a validator there to see both logs; the team says testnet is for checking setup, not for competing.</li>
+<li>Build a local test set with the repo&#x27;s code (generate your own tasks and ground truth) and compare miner changes in a closed loop before registering on mainnet; validator ground truth is not published.</li>
+<li>Registration on mainnet was cheap on 2026-10-23 (about 0.055 TAO) but all 256 slots are full and most miner UIDs are under a week old, so expect to be replaced if you score low outside the one-day immunity period.</li>
+<li>Register on netuid 33 and run neurons.miner; validators additionally need a ReadyAI Conversation Server key and the commitment key from the team. Check pull request 139 first: if it merges, validators will send tasks in random order and 25 percent of weight goes to the owner UID.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>The chain numbers are one snapshot (block 9343844 to 9343854, 2026-10-23). The chain proves that eleven coldkeys hold 239 of 256 UIDs; it does not prove they share one operator. That claim comes from a participant&#x27;s funding-history and transaction-ordering analysis posted on 2026-10-20, which was not re-run here, and the team says several UIDs per operator are allowed.</li>
+<li>The claim that most newcomers are removed within 48 hours of registering was not verified: a snapshot only shows that no miner UID is older than 27 days and the median is 2.5 days.</li>
+<li>Which task types mainnet serves right now is decided by the team&#x27;s server and is not visible in the repo; a project moderator listed several types on 2026-09-08 and chat shows conversation tagging is what miners discuss most.</li>
+<li>The README says three miners per task and GPT-4o; the code defaults are six miners and gpt-5.2.</li>
+<li>Pull request 139 is not merged, so the 25 percent burn and random task order are not in any released validator; no validator&#x27;s weight row on chain shows a burn share today (each active validator&#x27;s largest weight is under 1 percent). Whether the burned share would be destroyed or paid out depends on the subnet&#x27;s burn setting, which is currently &#x27;burn&#x27;.</li>
+<li>Task supply, validator keys and the commitment key come from the team, so the subnet depends on team-run services.</li>
+<li>Revenue figures and the 75 percent buyback share are the team&#x27;s statements. Two buybacks (9.2 and 17.07 TAO) were confirmed on chain; the September one was not located.</li>
+<li>Skill Store 33, the MCP package and the new dataset are announced but not launched as of 2026-10-23; the readyai.ai docs page says it is in internal testing and the home page statistics are labelled March 2026.</li>
+<li>The benchmark claims about skills (cost and quality gains) are the team&#x27;s own and were not reproduced.</li>
+<li>A community moderator hired by the project answers many miner questions in the channel; those answers are not official team policy.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/afterpartyai/bittensor-conversation-genome-project" rel="noopener noreferrer">GitHub (validator and miner code)</a></li>
+<li><a href="https://github.com/afterpartyai/bittensor-conversation-genome-project/pull/139" rel="noopener noreferrer">Open pull request 139 (25 percent burn, random task order)</a></li>
+<li><a href="https://readyai.ai/" rel="noopener noreferrer">Website and Jobs API dashboard</a></li>
+<li><a href="https://ss33.ai/" rel="noopener noreferrer">Skill Store 33 (early access)</a></li>
+<li><a href="https://github.com/afterpartyai/llms_txt_store" rel="noopener noreferrer">llms.txt dataset repository</a></li>
+<li><a href="https://huggingface.co/ReadyAi/datasets" rel="noopener noreferrer">Hugging Face datasets</a></li>
+<li><a href="https://wandb.ai/afterparty/conversationgenome/table" rel="noopener noreferrer">Public Weights and Biases score table (redirects to a new host)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 6 sources</summary>
+<ul>
+<li><strong>msg</strong> #33-ready, 2026-06-09 to 2026-10-23, plus pinned posts 2025-10-09 to 2026-09-07</li>
+<li><strong>repo</strong> github.com/afterpartyai/bittensor-conversation-genome-project README, neurons/validator.py, validator/evaluator.py, validator/ValidatorLib.py, base/validator.py, llm/llm_openai.py, task/TaskLib.py, scoring_mechanism/SkillCoverageScoringMechanism.py @92b3e70 (2026-09-24, version 2.39.76); open PR 139 (commit d293b8c, 2026-10-21)</li>
+<li><strong>web</strong> Chain read at blocks 9343826 to 9343854 (2026-10-23): subnet 33 parameters, incentive, dividends, validator weight rows, emission split, coldkey grouping and UID registration ages (addresses masked, aggregates only)</li>
+<li><strong>web</strong> Decoded extrinsics at blocks 8670960 and 9048873 (SubtensorModule add_stake_burn on netuid 33, 9.2 and 17.07 TAO)</li>
+<li><strong>web</strong> https://readyai.ai/ (home, /docs, /dashboard and its usage data file generated 2026-10-23) and https://ss33.ai/ read 2026-10-23</li>
+<li><strong>web</strong> huggingface.co/api/datasets?author=ReadyAi (2 datasets, last modified 2025-06-19 and 2025-09-29)</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/32.html"><small>← Previous</small>SN32 It&#x27;s AI</a><a rel="next" href="/bittensor-docs/subnets/34.html"><small>Next →</small>SN34 BitMind (moving to Yugos)</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-23. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

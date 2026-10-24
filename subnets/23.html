@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Trishool (SN23) | Bittensor Subnet Docs</title>
+<meta name="description" content="Weekly red-team contest: miners write jailbreak templates against the team&#x27;s Halo guards; 80% of miner emission burns.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h17">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>23</span><div>
+<h1>Trishool <span class="muted">SN23</span></h1>
+<p class="tagline">Weekly red-team contest: miners write jailbreak templates against the team&#x27;s Halo guards; 80% of miner emission burns.</p>
+<span class="st s-transitioning">transitioning</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>11<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>8.5<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>16<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-24</b><span>last chat</span></li><li class="pw"><b>6,153</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>AI security (adversarial training of guard models)</dd>
+<dt>Status</dt><dd>Weekly challenges are still running (Challenge 14 opened 2026-10-21, repo last updated 10-20), and the team launched its first paid product, HaloGuard EU, on 10-21. But on 10-19 the team said the current round ends after two more challenges, followed by a break to prepare the mechanism for the next phase.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-23</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>Trishool is a subnet built by Astroware to harden guard models for AI systems. Miners act as red teamers: each week they write a prompt template that tries to get harmful requests past the team&#x27;s Halo input and output guards. The successful attacks are used to retrain the guards during a short training window, and the team&#x27;s longer-term plan is to sell the resulting guard models to enterprises and AI labs. On 2026-10-21 the team&#x27;s company, Astroware, launched HaloGuard EU, a hosted guard aimed at the EU AI Act, priced at $30 per billion input tokens; no revenue figure has been published.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>In the current Phase 3 format a miner submits one universal jailbreak template: a single prompt with exactly one {{objective}} placeholder, at most 2,000 characters, written in English. The platform inserts each of the challenge&#x27;s six harmful requests, one from each of six constitutions, into the placeholder. Submissions go through the team&#x27;s miner CLI, and a similarity filter rejects templates that are too close to other miners&#x27; templates in the same challenge. Winning prompts are not published; after each challenge the team posts a summary of the techniques the top prompts used.</p></div><div><h3>Validators</h3><p>Each validator runs every expanded prompt through the team&#x27;s agent stack: an OpenClaw agent (Qwen3.8-27B served by Chutes) with its tools restricted, behind the Halo input guard and Halo output guard, which are also hosted on Chutes. A judge model (Qwen3.5-397B on Chutes) rates each response 0 (safe), 1 (partial) or 2 (full jailbreak), so a template can reach 12. The final score is the average across validators. Validators must be whitelisted by the team, and they do not compute weights themselves: they download the weight vector from the team&#x27;s platform and set it on chain. At the end of the submission window the team manually reviews the top submissions and can disqualify gaming.</p></div><div><h3>Incentive</h3><p>On chain (block 9,343,343, 2026-10-23) the split is simple: only two uids earn incentive, the subnet owner&#x27;s hotkey with 80 percent and one miner with 20 percent. All 11 validators that have set weights give the owner uid 80 percent, and the chain is set to burn miner emission aimed at the owner slot, so 80 percent of the miner share is destroyed and the winning miner keeps 20 percent. That matches the team&#x27;s 2026-08-06 statement (burn lowered from 100 to 80 percent, to be stepped down as demand milestones are met) and not the older docs (75 percent burn, 25 percent paid over the next window) or the 85 percent a community member reported on 08-19. The 10-07 experiment that randomized the burn between 75 and 80 percent was over by 10-23: the vectors checked were identical. The winner is the top scorer of the previous challenge (two hotkeys won Challenge 11, three won Challenge 12) and ties split equally, as stated by the team. Of the subnet&#x27;s emission, 18 percent is set aside for the owner, 41 percent for validators and 41 percent for miners (read from SubnetEmissionWeights); the owner hotkey also holds the largest share of validator dividends.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-23</span> <span class="muted">(On-chain read (block 9,343,343))</span> Chain check: 80 percent of miner incentive goes to the owner slot and is burned, 20 percent to a single miner; commit-reveal is off; 11 validators set identical weights.</li>
+<li><span class="when">2026-10-22</span> <span class="muted">(#23-trishool)</span> The team declined to publish a rule-checking script (manual review decides), said the paraphrase test would be published, that winning prompts stay hidden but disqualified ones will be disclosed, and posted five banned technique families. A member shared the team&#x27;s thread saying most Astroware revenue will first go to alpha buybacks, leaning toward burning.</li>
+<li><span class="when">2026-10-21</span> <span class="muted">(#23-trishool, astroware.ai)</span> The team launched HaloGuard EU, its first product: a hosted guard that blocks output the EU AI Act bans or treats as high risk, $30 per billion input tokens, output free. Its own test reports 99.7 percent English accuracy; asked about income, the team said nothing changes immediately.</li>
+<li><span class="when">2026-10-20</span> <span class="muted">(#23-trishool, Challenge 14 card)</span> Challenge 14 was announced with updated anti-gaming rules, and both guard models were redeployed before it opened. On 10-21 the team explained that &#x27;suspected sentences&#x27; means text whose purpose in the attack cannot be explained by its persona, framing or instruction.</li>
+<li><span class="when">2026-10-19</span> <span class="muted">(#23-trishool)</span> The team said the top Challenge 13 submission follows the rules as written but not their spirit, and it stays the winner. Rules will change, guard weights will no longer be published on Hugging Face, the round ends after two more challenges, and a break follows while the next phase is prepared.</li>
+<li><span class="when">2026-10-14</span> <span class="muted">(#23-trishool (hyperparameter tracker))</span> The chain hyperparameter tracker showed commit-reveal switched from a 3-epoch period back to 1 and then disabled, about two hours after the team said it was set to 3 epochs.</li>
+<li><span class="when">2026-10-13</span> <span class="muted">(#23-trishool)</span> Challenge 13 introduced a rule against runs of incoherent tokens meant to perturb the guard, tested by swapping the suspected text for coherent padding, because the guard weights were public and could be optimized against.</li>
+<li><span class="when">2026-10-07</span> <span class="muted">(#23-trishool)</span> The team ran a short experiment randomizing the burn between 75 and 80 percent. Separately, a Chutes team member said linked subscriptions used to call the guard were treated as account farming and about 11 were cancelled, most later restored.</li>
+<li><span class="when">2026-09-27</span> <span class="muted">(#23-trishool)</span> One validator was offline, leaving three scoring, and the team said it would wait for it to return before announcing a winner.</li>
+<li><span class="when">2026-09-04</span> <span class="muted">(#23-trishool)</span> On buybacks and rank the team said it was not buying back alpha, that it is pursuing enterprise sales of guard models through design partnerships (two said to be under way, unnamed), and that its rank of about 80 was below its target.</li>
+<li><span class="when">2026-08-18</span> <span class="muted">(#23-trishool)</span> The team said it had caught two gaming attempts, bundling several questions into one template and submitting in languages other than English, and restated both rules.</li>
+<li><span class="when">2026-08-06</span> <span class="muted">(#23-trishool)</span> The team announced that challenges would resume in a redesigned format and that miner burn would drop from 100 to 80 percent. Phase 3, built around universal jailbreak templates, followed.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Register a hotkey on subnet 23 with btcli (the registration cost varies).</li>
+<li>Read the current Challenge Card on the team&#x27;s Notion pages (linked from the channel each Monday or Tuesday) for the six requests, the dates and the rules against gaming.</li>
+<li>Clone trishool-phase2 and write a template file with exactly one {{objective}} placeholder, in English and under 2,000 characters.</li>
+<li>Optionally test locally with tri-check; this needs a Chutes API key, and the Halo guard weights that the card links to were no longer publicly downloadable on 2026-10-21.</li>
+<li>Upload with the miner CLI (alignet.cli.miner upload, surface area 1, netuid 23) during the four-day submission window, and expect a similarity check and a manual review of top entries.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>The chain read is a single snapshot (2026-10-23): it shows the 80/20 split and identical validator weights, but not which challenge the paid miner won, and the burn level can change at any time; the team treats it as a dial. Whether anything has been bought back or burned on chain was not checked. One coldkey controls five uids including the paid miner; that is a count, not a claim about who it is.</li>
+<li>Weights are computed by the team&#x27;s closed platform backend and copied by whitelisted validators, so scoring, similarity filtering and the manual review are not independently reproducible.</li>
+<li>The public miner guide (last updated 2026-03-19) and the website still describe the Phase 2 format: 12 entries per submission, one submission a day, a 25 percent miner share. The Phase 3 template format is documented only in the repo and the weekly Notion card.</li>
+<li>Rules changed during live challenges (10-13 and 10-20), the definition of a suspected sentence came after the 10-20 card, and the team said on 10-19 that the leading entry did not follow the spirit of the rules but kept it as winner. A community member on 10-14 argued the scoring is too sensitive to single words.</li>
+<li>The Challenge 14 card calls the score the number of requests carried through both guards but lists a maximum of 12 for six requests (the repo scores 0, 1 or 2 per request), and its submission-window start date shows 21 Sep instead of 21 Oct.</li>
+<li>No formal winner post for Challenge 13 was found in the channel.</li>
+<li>The Hugging Face pages for the Halo 0.8B guard and output guard linked from the card returned 401 on 2026-10-21 and were missing from the public astroware listing; this fits the team&#x27;s statement that weights will stop being published, but it could not be checked whether they are private or removed.</li>
+<li>Everything runs on Chutes (agent, guards, judge). Chutes outages, slow guard warm-ups and one report on 09-30 of a stale model revision after an update have affected rounds.</li>
+<li>Revenue, design partners and enterprise demand are team statements. HaloGuard EU has a public price ($30 per billion input tokens) and a self-run benchmark against another guard model (Jev), but no customer or revenue figure was published. On 09-04 the team said it was not buying back alpha; a 10-22 team thread says most Astroware revenue will first go to buybacks, leaning toward burning (only a chat embed of that thread was read). The 2025 docs site describes a different revenue split (40 percent treasury, 30 percent buyback, 15 percent builder, 15 percent stakers).</li>
+<li>The repo has no license file, and the phase after the announced break has not been described.</li>
+<li>The team&#x27;s HaloGuard 1.0 paper calls the models open-weights, and three Halo models are public on Hugging Face, but the two guard models used in the contest returned 401 on 2026-10-23 and the team said weights will no longer be published.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://trishool.ai" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://trishool.ai/dashboard" rel="noopener noreferrer">Miner dashboard</a></li>
+<li><a href="https://github.com/TrishoolAI/trishool-phase2" rel="noopener noreferrer">GitHub (miner CLI and validator)</a></li>
+<li><a href="https://trishool.notion.site/p3-014" rel="noopener noreferrer">Challenge 14 card</a></li>
+<li><a href="https://docs.trishool.ai" rel="noopener noreferrer">Docs site (vision and roadmap, 2025 era)</a></li>
+<li><a href="https://guide.trishool.ai" rel="noopener noreferrer">Miner guide (Phase 2 era)</a></li>
+<li><a href="https://litepaper.trishool.ai" rel="noopener noreferrer">Litepaper</a></li>
+<li><a href="https://astroware.ai" rel="noopener noreferrer">Astroware (HaloGuard EU, research)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 6 sources</summary>
+<ul>
+<li><strong>repo</strong> TrishoolAI/trishool-phase2@e0a154d (2026-10-20, v2.0.34, unchanged on 2026-10-23): README, docs/universal-jailbreaks.md, neurons/validator.py, tri-claw and tri-judge configs</li>
+<li><strong>repo</strong> TrishoolAI/trishool-ai-docs@80eb933 (2026-08-12) and https://guide.trishool.ai (read 2026-10-21)</li>
+<li><strong>web</strong> On-chain reads of subnet 23 at block 9,343,343 (2026-10-23): incentive, weights, SubnetEmissionWeights, RecycleOrBurn, hyperparameters, owner-slot test</li>
+<li><strong>web</strong> https://trishool.ai, https://docs.trishool.ai (read 2026-10-23) and the Challenge 14 card at trishool.notion.site/p3-014 (header and summary only)</li>
+<li><strong>web</strong> https://astroware.ai (HaloGuard EU, read 2026-10-23), arXiv 2607.02079 and the Hugging Face API listing for the astroware organisation (checked 2026-10-23)</li>
+<li><strong>msg</strong> #23-trishool 2025-12-03 to 2026-10-23</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/22.html"><small>← Previous</small>SN22 Desearch</a><a rel="next" href="/bittensor-docs/subnets/25.html"><small>Next →</small>SN25 UR</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-23. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Numinous (SN6) | Bittensor Subnet Docs</title>
+<meta name="description" content="Forecasting subnet where miners upload AI agents that validators run in sandboxes on live prediction markets.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h18">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>6</span><div>
+<h1>Numinous <span class="muted">SN6</span></h1>
+<p class="tagline">Forecasting subnet where miners upload AI agents that validators run in sandboxes on live prediction markets.</p>
+<span class="st s-transitioning">transitioning</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>13<small>/day</small></b><span>last 7 d</span></li><li class="pl4"><b>4.1<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>9.4<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-24</b><span>last chat</span></li><li class="pw"><b>6,691</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>forecasting agents</dd>
+<dt>Status</dt><dd>Chat active through 2026-10-20 (122 messages in the last 30 days). The team has announced a second competition, &#x27;Forecasting the Graph&#x27;, with no launch date as of 2026-10-20, and the upload rules have changed repeatedly in recent weeks.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-21</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>Numinous scores forecasting agents rather than individual predictions. Miners upload a Python agent that, every interval, re-forecasts each live prediction-market event inside a validator sandbox with a limited set of tools and data. The team says the aim is better and better forecasters that it uses in its own product and forecasting API.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Write an agent that returns a probability (and a short reasoning text) for each live event, carrying a small memory blob between runs. Upload it with the numi CLI. The sandbox allows OpenAI, OpenRouter, Lightning Rod and the team&#x27;s Numinous Signals (news feed, corpus search, causal drivers) plus free Indicia OSINT signals. Execution must finish within 240 seconds and the code must be under 2 MB. Hardcoding market prices into the agent is rejected.</p></div><div><h3>Validators</h3><p>Validators run each agent in a Docker sandbox behind a signing proxy. Scoring happens in the team&#x27;s backend, not in validator code: validators fetch finished weights from the team API and set them on chain. Per the repo docs, each forecast is scored against the market&#x27;s own price: the squared error of the agent&#x27;s probability minus the squared error of the market price, measured against the price seven days later or the resolved outcome. Lower is better and matching the market scores zero.</p></div><div><h3>Incentive</h3><p>Repo docs (last updated 2026-09-22) describe one active pool: the re-forecasting pool. A miner must cover at least 85% of event intervals over 14 days, new miners carry a confidence penalty for roughly two weeks, and roughly the top 20 are paid in proportion to the squared margin over the 21st-best. In chat on 2026-09-30 the team said a second pool now exists: emissions are 90% this pool and 10% a reasoning-quality pool that goes almost entirely to the top five miners. The team also said the new Forecasting the Graph competition will get at least half of emissions and run alongside the current one.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-20</span> <span class="muted">(#numinous)</span> Team said the Forecasting the Graph competition will run outside the sandbox at first. The sandbox returns later and is used for now to fine-tune further models. No docs, example agent or launch date had been published yet.</li>
+<li><span class="when">2026-10-16</span> <span class="muted">(#numinous)</span> Numinous Signals accounts are limited to 10 API keys. Per-key usage became visible on 2026-10-14, on the website and via an API flag.</li>
+<li><span class="when">2026-10-09</span> <span class="muted">(#numinous)</span> Team said each hotkey gets one agent for its lifetime and there is no update window any more. Agents with hardcoded market prices are rejected.</li>
+<li><span class="when">2026-09-30</span> <span class="muted">(#numinous)</span> Team said reasoning scoring is live at 10% of emissions, split mostly among the top five reasoning miners, and fixed for now.</li>
+<li><span class="when">2026-09-29</span> <span class="muted">(#numinous)</span> Forecasting the Graph competition discussed: at least 50% of emissions, alongside the current competition. Docs promised but not yet shared as of 2026-10-17.</li>
+<li><span class="when">2026-09-24</span> <span class="muted">(#numinous)</span> Team reported a first token buyback funded by forecasting-API revenue, with more planned. On 2026-09-28 it said buybacks were not yet 100% of income.</li>
+<li><span class="when">2026-09-22</span> <span class="muted">(GitHub changelog, #numinous)</span> Release 3.1.3 added the team&#x27;s own Numinous-1 forecasting model and a Jev decisions endpoint to the gateway. Using Numinous-1 is optional.</li>
+<li><span class="when">2026-09-18</span> <span class="muted">(#numinous, GitHub docs)</span> Reasoning-trajectory scoring announced, with a 48-hour re-upload window. The team also announced an 8B model and a possible separate base-model competition.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Read the miner setup guide in the repo and install the numi CLI.</li>
+<li>Register a hotkey on subnet 6 (chat on 2026-09-14 quoted about 0.2 TAO; the repo says cost varies).</li>
+<li>Create a Numinous Signals key at eversight.numinouslabs.io and an inference key (OpenRouter is fine), then link them with numi.</li>
+<li>Test the agent locally against the example agents, then upload it with numi upload-agent. Check the current upload rules in chat first.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Upload rules conflict: repo docs say one upload every 3 days, chat in September mentioned a 60-day cooldown, and on 2026-10-09 the team said one agent per hotkey for life. The repo was last updated 2026-09-22.</li>
+<li>Repo docs list the reasoning pool as inactive; chat from 2026-09-30 says it is live at 10%. Docs lag chat.</li>
+<li>Weights are computed by the team backend and were not checked against chain data.</li>
+<li>On 2026-09-16 the team said its own agents run on the subnet and sit in the top 20, to keep its API quality high.</li>
+<li>No revenue or buyback amounts were found; Forecasting the Graph scoring details were not published when this page was researched.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/numinouslabs/numinous" rel="noopener noreferrer">GitHub</a></li>
+<li><a href="https://github.com/numinouslabs/numinous/blob/main/docs/miner-setup.md" rel="noopener noreferrer">Miner setup guide</a></li>
+<li><a href="https://github.com/numinouslabs/numinous/blob/main/docs/scoring-system.md" rel="noopener noreferrer">Scoring system</a></li>
+<li><a href="https://github.com/numinouslabs/numinous/blob/main/docs/reasoning_trajectories_scoring.md" rel="noopener noreferrer">Reasoning scoring</a></li>
+<li><a href="https://leaderboard.numinouslabs.io/" rel="noopener noreferrer">Leaderboard</a></li>
+<li><a href="https://eversight.numinouslabs.io/" rel="noopener noreferrer">Eversight (Numinous Signals)</a></li>
+<li><a href="https://numinouslabs.io/" rel="noopener noreferrer">Website</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 3 sources</summary>
+<ul>
+<li><strong>repo</strong> numinouslabs/numinous docs, CHANGELOG and set_weights.py at e32cf9d (2026-09-22)</li>
+<li><strong>msg</strong> #numinous 2026-09-08 to 2026-10-20</li>
+<li><strong>web</strong> leaderboard.numinouslabs.io and eversight.numinouslabs.io reachable 2026-10-21; content not read in detail</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/5.html"><small>← Previous</small>SN5 Hone</a><a rel="next" href="/bittensor-docs/subnets/7.html"><small>Next →</small>SN7 Allways</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-21. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

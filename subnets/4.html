@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Targon (SN4) | Bittensor Subnet Docs</title>
+<meta name="description" content="Confidential GPU cloud: miners run TargonOS on attested TEE hardware and are paid per card hour via auctions.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h4">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>4</span><div>
+<h1>Targon <span class="muted">SN4</span></h1>
+<p class="tagline">Confidential GPU cloud: miners run TargonOS on attested TEE hardware and are paid per card hour via auctions.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl3"><b>1.0<small>/day</small></b><span>last 7 d</span></li><li class="pl3"><b>2.0<small>/day</small></b><span>days 8-30</span></li><li class="pl4"><b>3.2<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-20</b><span>last chat</span></li><li class="pw"><b>21,636</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>confidential GPU compute (AI cloud)</dd>
+<dt>Status</dt><dd>Miners were being paid on 2026-10-21: four miner UIDs shared about 1,130 USD per hour of allocation on the team&#x27;s stats API, and the validators&#x27; on-chain weights matched those shares. The team said on 09-21 that emissions for the older TVM mining route would stop that week, so only miners on TargonOS earn. Platform capacity problems for sandboxes were reported on 10-17 and 10-20.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-21</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>Targon is a decentralized confidential AI cloud built by Manifold Labs. Customers rent GPU virtual machines that run inside hardware trusted-execution environments (Intel TDX or AMD SEV-SNP with NVIDIA confidential computing), and the product also lists bare metal, sandboxes and reserved capacity; the site says bare metal is not confidential. Miners supply the hardware by running the team&#x27;s signed TargonOS image on attested machines. Validators check the hardware through the team&#x27;s attestation service and set weights from auction targets that the team&#x27;s backend publishes.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Mining means installing TargonOS, a signed operating system image, on a machine that has a TEE enabled in the BIOS (Intel TDX or AMD SEV-SNP), TPM 2.0 and a UEFI boot, then letting it attest to the team&#x27;s service on every boot. The installer wipes every eligible disk and builds encrypted storage, and it can be run by network boot or from an ISO. Hardware profiles are 8-GPU servers of one SKU: H100, H200, B200, B300 or RTX PRO 6000 Blackwell on Intel, B300 or RTX PRO 6000 Blackwell on AMD (added 10-15), plus CPU-only profiles with 48 threads and 477 GiB of memory; all need 3 TB of storage. The release read was 0.1.0. A separate miner process lists the node addresses and only answers validators that hold a validator permit and at least a minimum stake (default 1,000 alpha); others are refused.</p></div><div><h3>Validators</h3><p>A validator works in intervals of about 361 blocks (roughly 72 minutes). It fetches each miner&#x27;s node list every 30 blocks, asks randomly chosen nodes for attestation evidence with a fresh nonce, and sends that evidence to the team&#x27;s service, which returns the node&#x27;s auction name, GPU cards and VM id. A VM id seen twice in one interval is rejected, and errors are not retried within the interval. Weights are set at the start of the next interval and skipped if the validator has run for under 180 blocks or found no nodes. The validator runs as a service stack with a local weights helper, on a CPU server with AMD SEV-SNP according to the October docs.</p></div><div><h3>Incentive</h3><p>The code assumes miners receive 41 percent of the subnet&#x27;s emission. It turns that into a dollar pool per interval using the TAO price (supplied by the team&#x27;s backend) and the subnet&#x27;s moving price. The backend also publishes auctions, each with a target number of cards, a target price, a maximum price per card hour and a minimum cluster size. Each live card earns the auction&#x27;s pool divided by live cards, capped at the maximum price, and nodes smaller than the minimum cluster size are rejected. If the payouts add up to more than the pool they are scaled down; any remainder goes to a burn distribution the backend supplies and then to a fixed UID. While an auction is under its card target every live card earns up to the maximum price, and more cards push the rate toward the target price. On chain at block 9334306 the weights followed the payout shares of the four miner UIDs and gave about nothing to the remainder UID.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-21</span> <span class="muted">(team stats API)</span> The team&#x27;s stats API listed 46 node allocation records from four miner UIDs: 112 H200 cards, 64 B300 cards on Intel TDX, 72 B300 cards on AMD SEV, 24 H100 cards, 16 RTX PRO 6000 Blackwell cards and 10 CPU nodes. Estimated payouts summed to about 1,130 USD per hour, with the largest UID taking about 70 percent. These are the team&#x27;s estimates, not settled payments.</li>
+<li><span class="when">2026-10-21</span> <span class="muted">(chain read (block 9334306))</span> On chain at block 9334306 the subnet had 256 of 256 slots filled, commit-reveal on, 13 validator permits and 9 validators with weights. The validator whose full row was read gave about 70, 24, 6 and 1 percent to four miner UIDs and about zero to the code&#x27;s remainder UID, and the other eight gave the same top share (69.6 percent) to the largest miner UID. Only 5 UIDs had non-zero incentive.</li>
+<li><span class="when">2026-10-20</span> <span class="muted">(release index)</span> The release index listed version 0.1.0 and a second release named horizon, both updated this day; what horizon is was not documented.</li>
+<li><span class="when">2026-10-17</span> <span class="muted">(#4-targon)</span> A tester said they could not get much load onto Targon sandboxes, and a team member said they would look into capacity failures and thread oversubscription. On 10-19 a customer asked whether rollouts are tested, and on 10-20 a team member said there are not enough resources for 55,000 sandboxes at once.</li>
+<li><span class="when">2026-10-15</span> <span class="muted">(GitHub, #4-targon)</span> The miner docs gained AMD hardware profiles (the repo head is from this day). Answering a holder&#x27;s question about buybacks, the team said no burn from revenue had happened yet because of tax questions but was planned soon, that alpha is not sold automatically, that buybacks use TAO deposits, and that a revenue dashboard was close.</li>
+<li><span class="when">2026-10-10</span> <span class="muted">(#4-targon)</span> The team said B300 is supported on both AMD and Intel, as bare metal with TDX or SEV-SNP enabled in the BIOS and confidential computing required.</li>
+<li><span class="when">2026-09-30</span> <span class="muted">(#4-targon)</span> The team said B300 GPUs were available on demand through the Targon inventory page.</li>
+<li><span class="when">2026-09-22</span> <span class="muted">(#4-targon)</span> The team said confidential VMs get one GPU each with no NVLink, and that a TPM is required to run TargonOS.</li>
+<li><span class="when">2026-09-21</span> <span class="muted">(#4-targon)</span> The team said emissions for the older TVM mining route would be turned off that week for miners not running TargonOS.</li>
+<li><span class="when">2026-08-09</span> <span class="muted">(#4-targon)</span> The team said consumer RTX 4090 and 5090 cards were still under review because of how GPU memory can be reached, that management VMs would need Intel TDX or possibly AMD SEV CPUs, and that it planned to begin producing its own Targon tower machines at the end of August.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Read docs/miner/miner.md and docs/miner/installing-targonos.md in the repo (the docs site mirrors the miner page).</li>
+<li>Check that your hardware matches a profile: exactly 8 GPUs of the listed SKU, or a CPU profile with 48 threads and 477 GiB of memory, plus 3 TB of storage, a UEFI machine, TPM 2.0, TDX or SEV-SNP enabled in the BIOS, DHCP and outbound HTTPS.</li>
+<li>Install TargonOS by network boot or ISO; this wipes every eligible disk, and the node attests to the team&#x27;s service on each boot.</li>
+<li>Run the miner process with a config naming your node addresses, external address, port 7777 and netuid 4. Validators need a permit and the minimum stake to query it.</li>
+<li>Use the stats site to see allocation and estimated earnings, remembering these are estimates and auction targets change.</li>
+<li>Validators should start from docs/validator/validator.md (a CPU server with AMD SEV-SNP, database credentials needed) and check chat first, since the hardware advice has changed.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>The team&#x27;s backend is closed: auction targets, the dollar pool inputs, attestation verification and the burn distribution cannot be audited from the repo. A plain request to the auction endpoint returned a 502 error on 2026-10-21, so live targets were not read, and the stats site is client-rendered.</li>
+<li>Earnings figures come from the team&#x27;s stats API and are estimates of allocation, not settled payments. Revenue, buyback and burn statements made in chat on 10-15 were not checked on chain.</li>
+<li>Validator hardware advice conflicts: chat in August said a TDX CPU server with 8 to 16 cores and about 32 GB of memory, while the October docs say an AMD SEV-SNP server and still use the older VM installer for the validator.</li>
+<li>Miners asked on 08-27 why emissions had dropped to zero, and no explanation from the team was found.</li>
+<li>Only four miner UIDs shared the allocation on 10-21, and one of them held about 70 percent. Whether those UIDs are independent operators was not checked.</li>
+<li>Sandbox capacity was a problem on 10-17 and 10-20, and B300 and B200 capacity was described by the team as fully rented on 08-21 and 10-05. A question about the tower waitlist on 10-17 had no answer in the archive.</li>
+<li>The site lists a TypeScript SDK as coming soon and the README roadmap lists training, storage and more vendors; none of that was verified.</li>
+<li>Only about 60 chat messages appeared in the 30 days before 10-21, so activity in the channel is low.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://targon.com" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://docs.targon.com" rel="noopener noreferrer">Docs</a></li>
+<li><a href="https://github.com/manifold-inc/targon" rel="noopener noreferrer">GitHub</a></li>
+<li><a href="https://stats.targon.com" rel="noopener noreferrer">Stats site (earnings and allocation, client-rendered)</a></li>
+<li><a href="https://releases.targon.com" rel="noopener noreferrer">Release index (TargonOS and tools)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 6 sources</summary>
+<ul>
+<li><strong>repo</strong> manifold-inc/targon@c846ea1 (2026-10-15): README.md, docs/miner/miner.md, docs/miner/installing-targonos.md, docs/validator/validator.md, docs/sn4/sn4.md, cmd/miner/main.go, internal/validator/callbacks/callbacks.go and cvms.go and weights.go, internal/tower/tower.go, weights-api/main.py</li>
+<li><strong>web</strong> https://targon.com and https://docs.targon.com (read 2026-10-21)</li>
+<li><strong>web</strong> https://stats.targon.com/docs and /api/miners (read 2026-10-21, summed by UID, no hotkeys); https://tower.targon.com/api/v2/auctions (502 on 2026-10-21)</li>
+<li><strong>web</strong> https://releases.targon.com index (read 2026-10-21)</li>
+<li><strong>web</strong> Subnet 4 on-chain state read at blocks 9334288 to 9334306 on 2026-10-21: hyperparameters, validator permits, incentive spread and validator weight rows</li>
+<li><strong>msg</strong> #4-targon, 2026-08-09 to 2026-10-20</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/3.html"><small>← Previous</small>SN3 Teutonic</a><a rel="next" href="/bittensor-docs/subnets/5.html"><small>Next →</small>SN5 Hone</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-21. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

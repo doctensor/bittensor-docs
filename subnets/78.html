@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UMI (SN78) | Bittensor Subnet Docs</title>
+<meta name="description" content="ASL-to-English translation: miners serve or submit sign-language models that are scored in cohorts on held-out video">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h18">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>78</span><div>
+<h1>UMI <span class="muted">SN78</span></h1>
+<p class="tagline">ASL-to-English translation: miners serve or submit sign-language models that are scored in cohorts on held-out video</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>17<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>12<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>7.7<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-24</b><span>last chat</span></li><li class="pw"><b>859</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>sign language (ASL) to English translation</dd>
+<dt>Status</dt><dd>Cohort 5 rewards are live: a chain read on 2026-10-22 (block 9338250) shows the four validators that earn dividends all set the same cohort 5 weight vector within the previous 1,000 blocks, the team said on 2026-10-18 that rewards were live across validators, and the repository README says so as of 2026-10-22. Cohort 6, a public-model round, is still in intake, with evaluation tentatively targeted for 16:00 UTC on 2026-10-23. The public status service still reports rewards as not active (intake mode), which conflicts with the chain.</dd>
+<dt>Confidence</dt><dd>high</dd>
+<dt>Researched</dt><dd>2026-10-22</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>UMI aims to translate raw American Sign Language video into short English text through open competition. Endpoint miners run translation services they control, while model contributors submit complete licensed model bundles that can become the next public baseline. A team-run coordinator issues benchmark clips, collects signed responses and certifies results in numbered cohorts, with rewards for a cohort paid during the following one. Cohort 5 is certified and paying; cohort 6, a public-model round, is in intake.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Miners register a hotkey on subnet 78 (all 256 UIDs were in use on 2026-10-22 and the registration burn was about 0.4 TAO). There are two tracks. Model contributors upload a complete, reproducible bundle (weights, inference code, dependencies, notices) under an allowed open license (MIT, Apache-2.0, CC-BY-4.0 or CC-BY-SA-4.0) with the model client; for cohort 6 the bytes go straight to R2 storage through signed URLs, a running endpoint is not needed, and the model has to match or beat the cohort 5 winning model, which the team named as the baseline (a lower score earns nothing). Endpoint miners (cohorts up to 5) serve translations from systems they control and answer signed benchmark clips and paid service requests within the policy&#x27;s time limit; the team said an endpoint used only for cohort 5 may go offline once every issued request has a retirement receipt, provided its signed records and journals are kept.</p></div><div><h3>Validators</h3><p>Evaluation is run by team-operated services rather than open validator code. The coordinator sends held-out ASL clips, collects signed responses and scores them against hidden references: character error rate for fingerspelling and word error rate for continuous signing, weighted 3 to 10. Late, oversized or invalid answers score zero, while verified evaluator failures are voided rather than charged to the miner. The signed policy lists two evaluators in one UMI-operated control group and requires one group. On chain (2026-10-22) five UIDs hold validator permits; four of them set the same cohort 5 vector within the previous 1,000 blocks and earn all the dividends (one UID about 70 percent), while the owner-slot validator last set weights about 22 days earlier and earns none.</p></div><div><h3>Incentive</h3><p>In the cohort 5 policy the miner pool is split 50 percent to paid service work (shared by certified quality credit) and 50 percent to public models, with unallocated model share burned on UID 0. The chain emission split on 2026-10-22 was 18 percent owner, 41 percent validators and 41 percent miners, and miner emission aimed at the owner hotkey is burned. The live weight vector follows the team&#x27;s published cohort 5 results: one miner UID&#x27;s service-work share matched the public results API exactly, the cohort 5 top model&#x27;s UID holds about 10.6 percent of the incentive, 131 of 256 UIDs earn some, and under 1 percent of the vector goes to the burn UID. On 2026-10-13 and 2026-10-14 the team changed the model share from one winner per band to a shared allocation with 75 percent decay across quality bands and within each band, using 2.5-point bands; the open-competition documentation page still shows the older five-point rule. Rewards for cohort N are paid during cohort N+1, and the previous certified allocation stays in force until a successor is certified. On 2026-10-19 the team said it may introduce LLM-based scoring in cohort 7; that is a stated possibility, not a rule.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-22</span> <span class="muted">(#umi, 2026-10-22; GitHub Umi-BitSign/umi README, 2026-10-22)</span> The team said cohort 6 is still in intake while a storage fix and readiness checks finish, tentatively targeting 16:00 UTC on 2026-10-23 to begin evaluation, with the submission cutoff to be announced in advance. The repository documentation was updated the same morning to say cohort 5 rewards are live and cohort 6 uses direct R2 uploads.</li>
+<li><span class="when">2026-10-21</span> <span class="muted">(#umi, 2026-10-21)</span> The team published a demo of the first competitive public fingerspelling model (the cohort 5 winner), said it is the cohort 6 baseline and can be downloaded without a key from the results API, and held the cohort 6 start after most miners asked for more training time.</li>
+<li><span class="when">2026-10-20</span> <span class="muted">(#umi, 2026-10-20)</span> The team said an endpoint used only for cohort 5 can go offline once every issued request has a retirement receipt, as long as its signed records and journals are kept; an endpoint enrolled in a later cohort has to stay online for it.</li>
+<li><span class="when">2026-10-19</span> <span class="muted">(#umi, 2026-10-19)</span> An AMA with the dev lead took place. The team said cohort 5 rewards are live, cohort 6 uploads go straight to R2 so several miners can upload at once, the cohort 5 top model (score 37.10) is the cohort 6 baseline, and cohort 5 emission would last at least 24 hours and probably a few days longer.</li>
+<li><span class="when">2026-10-18</span> <span class="muted">(#umi, 2026-10-18; chain read 2026-10-22)</span> The team said cohort 5 rewards were live across all validators once the last large validator operator updated; a chain read on 2026-10-22 agrees.</li>
+<li><span class="when">2026-10-13</span> <span class="muted">(#umi, 2026-10-13 and 2026-10-14)</span> Cohort 5 certification closed: 14 public-model submissions and 196 endpoint submissions were scored, with 9 models beating the frozen baseline (top score 37.10 against a baseline of 26.26 on a 0 to 100 scale). The team then changed the model-reward formula to shared bands (2.5 points wide from 2026-10-14).</li>
+<li><span class="when">2026-10-06</span> <span class="muted">(#umi, 2026-10-05 and 2026-10-06; chain read 2026-10-22)</span> A hyperparameter bot reported the registration burn floor halving from 0.75 to 0.375 TAO after miners asked about lowering the fee; the chain showed the floor at 0.375 TAO on 2026-10-22.</li>
+<li><span class="when">2026-10-01</span> <span class="muted">(#umi, 2026-10-01 to 2026-10-12)</span> Cohort 5 enrollment opened for both tracks. Coordinator outages, dispatch bottlenecks and a model-upload capacity hold put evaluation far behind its targets (about 84 percent of endpoint benchmark cases had responses by 2026-10-09), and a miner cutoff was applied on 2026-10-12.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Register a hotkey on subnet 78 following the official Bittensor mining guide and check the current registration burn first (about 0.4 TAO on 2026-10-22, floor 0.375); all 256 UIDs were in use.</li>
+<li>Read the page on what miners should run now: for cohort 6 the track is public models, and an older endpoint plan is not an instruction to enroll an endpoint.</li>
+<li>Check the cohort catalog and the status and readiness endpoints for the exact cohort, its accepted tracks and its admission URL, and wait for the team to announce the submission cutoff rather than relying on a date.</li>
+<li>Download the cohort 5 winning model from the results API (about 3 GB, no key) and benchmark against it: a model has to match or beat it to earn.</li>
+<li>Prepare a complete, licensed and reproducible bundle, install or update the model client and upload as the model guide describes (direct to R2 for cohort 6); keep the signed request and the original source directory.</li>
+<li>After upload, run the admission query with the original signed request: the first receipt stays pending_attestation, and neither it nor a certified admission means the model has been scored or paid.</li>
+<li>Existing endpoint operators: follow the connection guide and keep assignment, grant, nonce and retirement journals unchanged.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>The public status service still reports mode intake_no_weight and rewards_active false (read 2026-10-22), which conflicts with the chain, the README and the team. The chain read is direct evidence that cohort 5 weights are being set; the docs say admission, scoring and payout are separate states, so check the chain for payouts.</li>
+<li>Documentation lags the rules: the open-competition page (last changed 2026-10-17) still describes five-point bands with one credit per band, which the team replaced on 2026-10-13 and 2026-10-14, and a 120-second response limit, while the signed policy and the model guide use 600,000 ms.</li>
+<li>Dates slip. Cohort 5 targets were missed by days, emissions went live nearly six days after certification closed, and cohort 6 was in intake by 2026-10-21 with evaluation not started on 2026-10-22. The team says block targets are nominal; the 16:00 UTC start on 2026-10-23 is tentative and the cutoff is not announced. Miners reported repeated 502 and 503 errors on uploads and service-work claims earlier in October.</li>
+<li>Evaluators, work issuance and certification are team-operated and the policy requires only one control group. On chain, one validator UID earns about 70 percent of dividends and the owner-slot validator has not set weights for about 22 days; one UID holds about 10.6 percent of incentive and 131 of 256 UIDs earn some. Miners criticised the reward design as favouring operators with many hotkeys (2026-10-02 and 2026-10-05); the team said its duplicate rules limit this but are not a complete Sybil defence.</li>
+<li>Not checked: the repository&#x27;s weight-setting code was not read end to end, the cohort 5 model-pool shares were not recomputed from per-model scores, hardware requirements were not found, and the buyback claim (2026-10-04) is unverified.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://www.umi.vision" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://bitsign.umi.vision" rel="noopener noreferrer">Live demo of the cohort 5 model</a></li>
+<li><a href="https://github.com/Umi-BitSign/umi" rel="noopener noreferrer">GitHub (subnet)</a></li>
+<li><a href="https://github.com/Umi-BitSign/umi-reference-model" rel="noopener noreferrer">GitHub (public reference model)</a></li>
+<li><a href="https://github.com/Umi-BitSign/umi/blob/main/docs/CURRENT_MINER_OPERATION.md" rel="noopener noreferrer">What miners should run now</a></li>
+<li><a href="https://github.com/Umi-BitSign/umi/blob/main/docs/miners/model.md" rel="noopener noreferrer">Model submission guide</a></li>
+<li><a href="https://github.com/Umi-BitSign/umi/blob/main/docs/miners/connection.md" rel="noopener noreferrer">Current miner connection guide</a></li>
+<li><a href="https://github.com/Umi-BitSign/umi/blob/main/docs/OPEN_COMPETITION.md" rel="noopener noreferrer">Open competition and rewards</a></li>
+<li><a href="https://github.com/Umi-BitSign/umi/blob/main/docs/reference/competition-results-api.md" rel="noopener noreferrer">Public results API guide</a></li>
+<li><a href="https://github.com/Umi-BitSign/umi/blob/main/whitepaper/README.md" rel="noopener noreferrer">Whitepaper</a></li>
+<li><a href="https://api.umi.vision/v1/competition/status" rel="noopener noreferrer">Live competition status (API)</a></li>
+<li><a href="https://api.umi.vision/v1/competition/cohorts" rel="noopener noreferrer">Cohort catalog (API)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 5 sources</summary>
+<ul>
+<li><strong>repo</strong> Umi-BitSign/umi README.md, docs/CURRENT_MINER_OPERATION.md, docs/OPEN_COMPETITION.md, docs/operators/bridge.md and dispatch.md, docs/miners/model.md and connection.md, docs/reference/competition-results-api.md, docs/competition/C5_POLICY.json and C5_INPUTS.md, whitepaper/README.md; commit log 2026-10-20 to 2026-10-22 at fa7aa3a (2026-10-22, Apache-2.0)</li>
+<li><strong>web</strong> api.umi.vision competition status, readiness, cohort catalog and cohort 5 service-results (public, read 2026-10-22)</li>
+<li><strong>web</strong> Chain read at block 9338250 (2026-10-22, public finney node): subnet info, hyperparameters, validator permits, dividends, last-update blocks, weight vectors, RecycleOrBurn and SubnetEmissionWeights for netuid 78</li>
+<li><strong>msg</strong> #umi pinned announcements 2026-09-03 to 2026-09-18</li>
+<li><strong>msg</strong> #umi, team and miner discussion 2026-10-01 to 2026-10-22</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/77.html"><small>← Previous</small>SN77 Liquidity</a><a rel="next" href="/bittensor-docs/subnets/79.html"><small>Next →</small>SN79 MVTRX</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-22. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

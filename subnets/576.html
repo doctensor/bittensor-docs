@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Microtensor (SN576) | Bittensor Subnet Docs</title>
+<meta name="description" content="Testnet-only network that pays for certified small-model systems; its mainnet slot was lost in September 2026.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h0">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>576</span><div>
+<h1>Microtensor <span class="muted">SN576</span></h1>
+<p class="tagline">Testnet-only network that pays for certified small-model systems; its mainnet slot was lost in September 2026.</p>
+<span class="st s-transitioning">transitioning</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl2"><b>0.29<small>/day</small></b><span>last 7 d</span></li><li class="pl3"><b>0.91<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>19<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-23</b><span>last chat</span></li><li class="pw"><b>1,147</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>specialised small language models (certified inference)</dd>
+<dt>Status</dt><dd>Testnet only. Mainnet has no netuid 576 (chain read 2026-10-21). The team said on 2026-09-25 it was still looking for a mainnet slot, and no later message names one. The repo was updated daily through 2026-10-20 and chat since mid-October is almost only links to the team&#x27;s posts.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-21</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>Microtensor pays miners for systems built around a small language model trained for one task, plus a harness, a router that decides when to trust the small model, and an escalation path that repairs wrong answers with a frontier model. Validators run these systems on their own GPUs against hidden items and score them in separate pools. The project ran on a mainnet slot until mid-September 2026, lost it, and now runs this redesigned version as netuid 576 on the Bittensor test network while it looks for a new mainnet slot.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Ship two Hugging Face repositories per arena: the artifact (harness, router, escalation code and a manifest) and the model (weights and training record). Commit the revision on chain, paying the arena&#x27;s fee if it charges one. The arenas on testnet are context compression for agents (ctx_compress) and SQL generation (sql_gen), both in the small-GPU envelope class. Separate roles exist for inference operators, who hold certified systems and serve customer requests, and for compute miners.</p></div><div><h3>Validators</h3><p>Each epoch (50,400 blocks, about a week) validators decrypt a hidden item bundle, serve each submission&#x27;s model with vLLM and run the miner&#x27;s code in a gVisor sandbox with no network except validator services. A pass over about 30 submissions takes around 20 hours on three 24 GB GPUs. Each validator signs a report and sets weights from its own scores. Running a validator needs relay access granted by the team.</p></div><div><h3>Incentive</h3><p>Five pools (model, harness, router, escalation, whole system) each pay 20%. Within a pool the top five ranks get 40, 25, 15, 12 and 8 percent. Scores are one-sided lower bounds, and a published score moves only when a new result beats the previous best for the same artifact by 0.01. All of this is testnet configuration from the repo; nothing here describes mainnet emissions.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-20</span> <span class="muted">(GitHub repo microtensor-io/microtensor-subnet)</span> The subnet repo saw a run of validator commits that day, covering per-arena scoring rules, llama.cpp support for GGUF models and envelope checks.</li>
+<li><span class="when">2026-10-12</span> <span class="muted">(#576 microtensor (link to team post))</span> The team relayed a post saying it had redesigned its platform and upgraded the whole miner mechanism the week before.</li>
+<li><span class="when">2026-09-25</span> <span class="muted">(#576 microtensor)</span> In reply to a question, the team said it was not yet on mainnet and was still looking for a slot; it would share the UID once registered.</li>
+<li><span class="when">2026-09-24</span> <span class="muted">(#576 microtensor)</span> The team announced the network live on testnet as netuid 576 and invited miners and validators, saying it was preparing to relaunch on mainnet.</li>
+<li><span class="when">2026-09-19</span> <span class="muted">(#576 microtensor)</span> The team said validators were abstaining because the coordinator&#x27;s signing hotkey had been pruned from the subnet and the slot&#x27;s owner had moved on. It said the project was live but not operational on that slot.</li>
+<li><span class="when">2026-09-18</span> <span class="muted">(#576 microtensor)</span> The team said a scoring bug had made every invoice output score zero and that release v0.4.12 fixed it. Validators on an old version reported zeros for round 1242 until they updated.</li>
+<li><span class="when">2026-09-16</span> <span class="muted">(#576 microtensor)</span> While still on a mainnet slot, round 1242 opened with two arenas (invoice extraction and text-to-SQL), and the team announced a post-settlement audit using contaminated and fresh control sets.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Treat this as testnet work: netuid 576 exists on the test network only, so use a testnet wallet and testnet TAO.</li>
+<li>Start from the miner template repo and pick an arena (ctx_compress or sql_gen) from the arenas repo.</li>
+<li>Train a small model for the arena following docs/miner_setup.md, and check latency and memory with mt envelope check.</li>
+<li>Package and validate the two repositories with the mt submit commands, pay the fee if the arena charges one, then commit the revision on chain.</li>
+<li>Validators and inference operators follow validator_setup.md and inference_miner.md in the subnet repo; validators need relay access from the team.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>No mainnet netuid 576 exists. Nothing here describes mainnet participation, emissions or token economics.</li>
+<li>September chat describes the earlier mainnet mechanism (invoice and text-to-SQL rounds). The repo has since been rewritten with epochs, five pools and new arenas, so treat that chat as history.</li>
+<li>The loss of the earlier mainnet slot is described from team posts and a moderator note in another subnet&#x27;s channel. The cause was not checked on chain.</li>
+<li>A testnet read on 2026-10-21 (block 8273074) shows netuid 576 registered as Microtensor on 2026-09-23 with one registered neuron, and the chain tool reported emissions as not enabled. Whether anything is running there, and any weights, were not read. The docs site is client-rendered and was not read; the repo docs were.</li>
+<li>Chat since 2026-09-25 contains almost no discussion of the new mechanism, so miner experience with it is not documented. Market and price talk in the channel is not included.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/microtensor-io/microtensor-subnet" rel="noopener noreferrer">GitHub (subnet)</a></li>
+<li><a href="https://github.com/microtensor-io/microtensor-arenas" rel="noopener noreferrer">GitHub (arena definitions)</a></li>
+<li><a href="https://github.com/microtensor-io/microtensor-miner-template" rel="noopener noreferrer">GitHub (miner template)</a></li>
+<li><a href="https://www.microtensor.cloud" rel="noopener noreferrer">Project site</a></li>
+<li><a href="https://www.microtensor.cloud/docs/certified-inference" rel="noopener noreferrer">Docs</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 4 sources</summary>
+<ul>
+<li><strong>repo</strong> microtensor-io/microtensor-subnet @f8b5f67 (2026-10-20): README.md, docs/{mechanism,miner_setup,inference_miner,validator_setup}.md, microtensor_subnet/scoring/pools.py; microtensor-io/microtensor-arenas README</li>
+<li><strong>web</strong> Bittensor chain read, read-only: subnet 576 does not exist on mainnet at block 9334344 (2026-10-21); api.github.com org repo list</li>
+<li><strong>msg</strong> #576 microtensor, 2026-09-15 to 2026-10-21; #92 pinned note 2026-09-21 naming Microtensor as the previous occupant of netuid 92</li>
+<li><strong>web</strong> Testnet chain read (chain.py --net test subnet 576) at block 8273074 on 2026-10-21: exists, name Microtensor, registered 2026-09-23, 1 neuron, emission_enabled False</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/554.html"><small>← Previous</small>SN554 Sentinel</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-21. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

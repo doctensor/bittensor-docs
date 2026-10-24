@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AdTAO (SN21) | Bittensor Subnet Docs</title>
+<meta name="description" content="Miners ship containers that forecast Google Ads change outcomes daily; the top 20 by accuracy vs the field earn.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h3">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>21</span><div>
+<h1>AdTAO <span class="muted">SN21</span></h1>
+<p class="tagline">Miners ship containers that forecast Google Ads change outcomes daily; the top 20 by accuracy vs the field earn.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>6.7<small>/day</small></b><span>last 7 d</span></li><li class="pl4"><b>3.7<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>8.7<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-24</b><span>last chat</span></li><li class="pw"><b>1,979</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>advertising outcome prediction</dd>
+<dt>Status</dt><dd>Active on 2026-10-21: the public leaderboard shows about 120 miners scored with 20 paid, repo commits run through 2026-10-19, and the team re-ran skipped baskets after an operator-side fault reported on 2026-10-18. Daily scoring replaced weekly epochs on 2026-08-04.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-21</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>AdTAO (SN21) is a prediction contest for Google Ads. Miners submit containerised models that forecast how real advertising changes (budget edits, bid strategies, pauses and similar) will move cost, conversions and efficiency over 7, 14 and 28 days. The team runs every admitted model each day on a fresh basket of real account changes, scores it once the outcomes settle and pays the most accurate models, with the best one used live on customer accounts. The on-chain identity describes the subnet as counterfactual impact prediction for advertising interventions.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Miners ship a model, not daily predictions. They build a container image that reads one account-change episode per line and returns P10/P50/P90 ranges for cost, conversion and efficiency changes at 7, 14 and 28 days, push it to a public registry and commit its digest on chain. The subnet&#x27;s own runner pulls the image every day, runs it offline (no network, 1 GB memory, 15 CPU minutes per basket) and records the output. A new digest first passes an admission test: identical output on repeat runs, a better score than a naive baseline, and at least 90 percent of the reference model&#x27;s coverage. Miners also hold 1,000 alpha on the miner hotkey to be paid.</p></div><div><h3>Validators</h3><p>The team&#x27;s own pipeline, not individual validators, builds the daily basket of real account changes, collects settled outcomes and scores each prediction once, 10, 17 and 31 days after the basket day for the three horizons. A score blends interval accuracy, calibration, direction and goal-metric accuracy and is measured against the average of all miners on the same change; standings use the last 28 days with a 7-day half-life. Validators fetch the team&#x27;s daily weight vector with an API key and set it on chain. Signed daily receipts are published so anyone can recompute scores.</p></div><div><h3>Incentive</h3><p>Standings are ranked and mapped through a published curve: 50, 25 and 10 percent for ranks 1 to 3, then each further rank gets 80 percent of the one before, for at most 20 earners, renormalised. Identical or near-identical models pay only the earliest submission, and one hotkey per coldkey is paid. To be seated a hotkey needs 250 scored predictions, 7 scored days and the alpha hold. A separate, stricter rule picks the champion model that runs live. The team also applies a burn share whose current level was not read. At block 9334296 (2026-10-21), 8 of the 9 validators with revealed weights put their top weight on UID 72, which was first on the public leaderboard that day.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-20</span> <span class="muted">(#21-adtao, GitHub commit log)</span> Team said two scoring changes are built but switched off: no efficiency result when spend has zero conversions, and a count-based score for small campaigns shown beside the current score before it counts. Dates are to be announced first.</li>
+<li><span class="when">2026-10-18</span> <span class="muted">(#21-adtao, GitHub commit log)</span> Team said some models were not run on baskets 2026-10-05 to 2026-10-12 because of a problem on its side. Those days were excused from the absence charge, the baskets were re-run with each model&#x27;s committed image, and the recovered predictions count on horizons that had not yet settled.</li>
+<li><span class="when">2026-10-14</span> <span class="muted">(#21-adtao)</span> Miners asked whether the operator-run miners train on data that is not in the public slices, pointing to a dated data file in the operator&#x27;s public image. The team said they use only public slices and are scored identically; the question was not settled in chat.</li>
+<li><span class="when">2026-10-13</span> <span class="muted">(#21-adtao, GitHub docs)</span> Team announced that from the 2026-10-20 run every episode lists the 28-day horizon and counts as covered only if all three horizons are returned; a few miners that skipped 28 days had been turned away at admission.</li>
+<li><span class="when">2026-10-09</span> <span class="muted">(#21-adtao, GitHub release)</span> Training data v4 published: 27,768 episodes with settled labels, shaped exactly like the live daily basket (change windows 15 June to 14 August 2026).</li>
+<li><span class="when">2026-09-17</span> <span class="muted">(#21-adtao, GitHub docs)</span> A standing rule took effect so a replaced model&#x27;s old results fade as the new model builds evidence. Miners checked the first proposal against public receipts, and the team withdrew one part (ageing results from the prediction day) because it would have shrunk the 28-day horizon&#x27;s share.</li>
+<li><span class="when">2026-09-10</span> <span class="muted">(#21-adtao, GitHub docs)</span> After a proposal and miner feedback, the team said it would slow the reward curve&#x27;s tail so each rank after third gets 80 percent of the previous share instead of 50 percent.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Register a hotkey on netuid 21 (mainnet); the team said on 2026-09-30 that onboarding is on mainnet, not testnet 466.</li>
+<li>Create the one-time ed25519 signing key and register its binding on chain (quickstart steps 3 and 4).</li>
+<li>Start from the reference model in the repo and train on the published slices (training v2, v3 and v4 releases).</li>
+<li>Make the container deterministic and return 7, 14 and 28 day blocks for every episode, then push it by digest to a public registry.</li>
+<li>Commit sn21-model:v1:&lt;repo&gt;@sha256:&lt;digest&gt; on chain; to protect a new model, commit while the image is still private, then make it public and keep it public.</li>
+<li>Hold at least 1,000 alpha on the miner hotkey and check admission and first settle date on the miner-status page.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>The team&#x27;s off-chain pipeline supplies the baskets, outcomes, execution and scoring on real account data. Receipts are signed and published, but this research did not recompute any day.</li>
+<li>Operator-run miners (UIDs 1, 154 and 221) compete under the same rules. The team says they use only public training slices; miners questioned this on 2026-10-13 and 14 and it cannot be verified here.</li>
+<li>The repo docs disagree in places: the model spec still mentions a 7-day settling window and a 35-day standing window, while the scoring doc and a sampled receipt show 2 days and 28 days.</li>
+<li>The model spec says a basket is about 250 episodes, but a miner cited a daily manifest of 1,151 episodes on 2026-10-04; the current size was not checked.</li>
+<li>Several rules exist in code but are switched off or only planned (zero-conversion null efficiency, count score, stopping absence charges for departed hotkeys, keeping the last admitted model, closed-while-earning image privacy).</li>
+<li>The current burn level was not read; the docs call burn figures indicative and adjustable at any time. The leaderboard header says 118 scored while the list shows 120, and the site itself says the chain and repo are authoritative.</li>
+<li>Chain weights were read only as an aggregate (47 validators with permits, 9 with revealed weights) and were not matched to payouts.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/ippcteam/SN21-adtao" rel="noopener noreferrer">GitHub</a></li>
+<li><a href="https://adtao.io/sn21/leaderboard" rel="noopener noreferrer">Live leaderboard</a></li>
+<li><a href="https://adtao.io/sn21/miner-status" rel="noopener noreferrer">Miner status check</a></li>
+<li><a href="https://github.com/ippcteam/SN21-adtao/blob/main/docs/SN21_REWARDS.md" rel="noopener noreferrer">Rewards doc</a></li>
+<li><a href="https://github.com/ippcteam/SN21-adtao/blob/main/docs/miner_quickstart.md" rel="noopener noreferrer">Miner quickstart</a></li>
+<li><a href="https://github.com/ippcteam/SN21-adtao/releases" rel="noopener noreferrer">Training data releases</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 4 sources</summary>
+<ul>
+<li><strong>repo</strong> ippcteam/SN21-adtao @ 5be3c8f (2026-10-19): README.md, docs/SN21_REWARDS.md, SN21_SCORING.md, SN21_STAKING.md, SN21_THREAT_MODEL.md, SN21_MODEL_PRIVACY.md, SN21_VALIDATING.md, SN21_TRANSITION_PLAN.md, MINER_MODEL_SPEC.md, miner_quickstart.md (headings), git log</li>
+<li><strong>msg</strong> #21-adtao, 2026-08-28 to 2026-10-21</li>
+<li><strong>web</strong> adtao.io/sn21/leaderboard (results for 2026-10-21) and the public daily receipt for 2026-10-20 at hope-bittensor-api.onrender.com</li>
+<li><strong>web</strong> Chain read at blocks 9334275-9334296 (2026-10-21): subnet info, hyperparameters and validator weight aggregates for netuid 21</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/20.html"><small>← Previous</small>SN20 Witness</a><a rel="next" href="/bittensor-docs/subnets/22.html"><small>Next →</small>SN22 Desearch</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-21. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

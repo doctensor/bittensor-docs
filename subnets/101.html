@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tag101 (SN101) | Bittensor Subnet Docs</title>
+<meta name="description" content="Miners tag X posts with three short labels; scores depend on how closely tags match other miners and the post.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h11">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>101</span><div>
+<h1>Tag101 <span class="muted">SN101</span></h1>
+<p class="tagline">Miners tag X posts with three short labels; scores depend on how closely tags match other miners and the post.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl4"><b>5.7<small>/day</small></b><span>last 7 d</span></li><li class="pl4"><b>2.5<small>/day</small></b><span>days 8-30</span></li><li class="pl4"><b>3.0<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-24</b><span>last chat</span></li><li class="pw"><b>960</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>social post tagging (semantic labels for X posts)</dd>
+<dt>Status</dt><dd>Tasks are flowing: on 2026-10-21 (about 12:07 UTC) the team&#x27;s task server showed a miner answer logged one minute earlier, and release 1.1.1 went into the repo on 2026-10-14. The scoring rules changed on 2026-10-08 and miners are disputing how rewards are shared (see caveats). Chain emissions, weights and UID ownership were not read.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-21</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>Tag101 is a subnet for tagging social posts. Validators draw X posts from a team-run database of posts from a published whitelist of accounts (AI-related accounts at launch) and send each one to miners, who return a few short tags such as entities, topics or events. The team plans to sell the resulting tags as structured signals for trend detection, search and research; a first product called SignalFeed was announced on 2026-10-09. There is no fixed correct answer for a post, so rewards come from how a miner&#x27;s tags compare with the other miners&#x27; tags and with the post text.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>A miner receives an X post from a validator about every 15 minutes (the default task interval in the code) and returns up to 3 short tags (the repo&#x27;s task limit is 3). The reference miner asks an OpenAI-compatible chat model, gpt-4o-mini by default, for exactly 3 lower-case tags, so a default miner needs an OpenAI key; miners can replace this with their own logic. Stated minimum hardware is 2 CPU cores, 8 GB RAM and no GPU. A miner serves an HTTP endpoint, publishes it on chain and, by default, also announces it to the team&#x27;s task server. Out of the box a miner accepts calls from any registered hotkey, not only validators, unless the validator-permit option is switched on.</p></div><div><h3>Validators</h3><p>A validator pulls posts from the team&#x27;s task server (crawler.tag101.ai by default), sends each post to the miners and scores the answers with the shared reference scorer. Since release 1.1.0 the posts come from a tweet corpus whose digest is pinned to a published hash; release 1.1.1 pins a rebuilt corpus. The scorer puts all tags from all miners on one post into clusters (between 3 and 8), then gives each tag the mean of three scores: signal (how many different miners support its cluster, how close the tag is to the cluster centre, and stability checks), validity (relevance to the post and format, in tiers of 0.3, 0.6 and 1.0) and utility (how well separated and label-like the tag is). A miner&#x27;s task score sums its best tag per qualifying cluster. Miners that submit an identical tag set are scaled down by a curve that barely bites until roughly 50 miners share the same set. Task scores are averaged over a rolling 24 hour window per UID and turned into weights with a softmax (beta 10). A validator uses other validators&#x27; signed scoreboards only if they cover more than half of qualified validator stake; otherwise it uses its own.</p></div><div><h3>Incentive</h3><p>Rewards follow the validator weights, so a miner earns more when its tags land in clusters that many other miners also reach, sit near the cluster centre and are close to the post text. By design a score depends on what the other miners send. From 2026-07-31 the code sent 90% of each validator&#x27;s weight to UID 0 (a burn or owner share that community messages described as going to the owner hotkey; not checked on chain). Release 1.1.0 on 2026-10-08 set that share to zero in code. How much the chain currently pays this subnet was not read.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-20</span> <span class="muted">(#101-tag101)</span> After miners reported abrupt score shifts and weights from the owner&#x27;s validator that differ from other validators, the team said it was checking validator versions and settings, small samples and unusual submissions, and would fix the cause once confirmed.</li>
+<li><span class="when">2026-10-14</span> <span class="muted">(#101-tag101, GitHub commits)</span> Release 1.1.1 pinned a rebuilt tweet corpus (52,670 of the earlier 77,428 tweets kept); validators still on 1.1.0 skip a round when they draw a revised tweet. Same day the team defended the consensus-based scoring and said the 24 hour window matches the 24 hour immunity period.</li>
+<li><span class="when">2026-10-08</span> <span class="muted">(#101-tag101, GitHub commits)</span> Release 1.1.0: new three-part scorer, tweet-corpus leasing, hardened weight setting, and the 90% burn switched off in code. The team announced it on 10-09 together with SignalFeed, a product built on the subnet&#x27;s tagging data.</li>
+<li><span class="when">2026-08-31</span> <span class="muted">(#101-tag101, GitHub commits)</span> Team said a scoring bug reported by an outside contributor had also been found internally; a commit the same day hardened tag normalization and duplicate-set matching.</li>
+<li><span class="when">2026-08-13</span> <span class="muted">(#101-tag101)</span> Project website went live, together with an endpoint where a miner can check whether it answered the latest task. On 08-14 the team said score APIs would wait until the scoring is adjusted, to avoid overfitting.</li>
+<li><span class="when">2026-07-31</span> <span class="muted">(#101-tag101, GitHub commits)</span> Repo change sent 90% of validator weight to UID 0; the team said it was finalizing new rules and would temporarily reduce emissions during the transition.</li>
+<li><span class="when">2026-07-29</span> <span class="muted">(#101-tag101, GitHub commits)</span> Team fixed a scoring flaw that let incomplete submissions score higher than intended.</li>
+<li><span class="when">2026-07-18</span> <span class="muted">(#101-tag101, GitHub commits)</span> Breaking release 0.3.0 added Bittensor 11 compatibility and a signed HTTP transport; the team told miners to check that theirs still worked.</li>
+<li><span class="when">2026-07-15</span> <span class="muted">(#101-tag101)</span> Team repeated that it was working to get emissions resumed and was discussing rules with the OTF (also said on 07-06 and 07-10). The chat does not say what the chain was paying at the time.</li>
+<li><span class="when">2026-07-02</span> <span class="muted">(#101-tag101, GitHub commits)</span> Release 0.2.0 added a penalty for identical tag sets after the team announced duplicate-answer penalties on 06-30.</li>
+<li><span class="when">2026-06-25</span> <span class="muted">(#101-tag101)</span> Team said a crawler-based task source cannot be fully decentralized, promised to publish some crawled posts and to add a way for miners to self-report their IP, after community and OTF questions about centralization.</li>
+<li><span class="when">2026-06-13</span> <span class="muted">(#101-tag101)</span> Launch announced: decentralized tagging of real X posts, starting with AI-related accounts, with the GitHub repo published.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Register a hotkey on netuid 101 and install Python 3.12, then create a virtual environment and run pip install -e . in the repo.</li>
+<li>Copy deploy/miner.docker.example (or miner.pm2.env.example) to an env file and fill in the wallet, hotkey, axon port and public IP, plus OPENAI_API_KEY (optional OPENAI_BASE_URL and OPENAI_MODEL) if you use the reference miner.</li>
+<li>Build the image with python -m tag101.deploy.docker_node build --image tag101:latest, then start a miner with docker_node start --role miner --env-file &lt;file&gt;; the PM2 route is python -m tag101.deploy.pm2_node.</li>
+<li>A validator follows the same steps with validator.docker.example and --role validator.</li>
+<li>Check that tasks arrive and are answered with the status endpoint linked above, and keep the repo current: the Docker flow auto-updates and the team has shipped breaking releases.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Chain weights, emissions, stake, the metagraph and who owns which UID were not read. Statements about burn, whales or self-mining in chat are community claims that were not verified; the team has said that it neither encourages whale behavior nor runs the miners that members point at, and that several groups compete.</li>
+<li>Members complained in October that one group holds well over half of the UIDs (their counts ranged from about 140 to 153) and that this group wins most of the reward, and some called the subnet self-mined. Others replied that open registration and competition apply to everyone. The code confirms that scores depend on other miners&#x27; answers and that repeated identical sets are only penalised strongly near 50 copies; whether the scorer measures tag quality is the main open dispute.</li>
+<li>Score history is stored per UID in the validator code. Members argued in October that a new miner inherits the old occupant&#x27;s scores; the team said inherited scores help new miners. The code was not tested for this.</li>
+<li>Tasks, the corpus credentials and the signed announcements all go through a team-run server, so the subnet depends on that server being up. A member reported it not answering HTTP from 2026-07-31, with no reply in chat; it was answering on 2026-10-21.</li>
+<li>The stock miner accepts task calls from any registered hotkey by default; a miner operator reported on 2026-10-15 being flooded by another miner and asked the team for help, with no reply seen in chat by 2026-10-21.</li>
+<li>Code at a commit shows what was written, not what each validator runs. Which validators have upgraded to 1.1.x was not checked, and the README does not mention the 15 minute cadence or the 24 hour window.</li>
+<li>The public site roadmap lists LLM-based scoring, insight tags and an open API as planned, not live. The SignalFeed product was announced in chat; its page was not read.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/tag101-ai/tag101" rel="noopener noreferrer">GitHub (tag101-ai/tag101)</a></li>
+<li><a href="https://tag101.ai/" rel="noopener noreferrer">Project site</a></li>
+<li><a href="https://crawler.tag101.ai/miners/task-answer-status/latest?miner_uid=N" rel="noopener noreferrer">Miner task-answer status API (replace N with your UID)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 4 sources</summary>
+<ul>
+<li><strong>repo</strong> tag101-ai/tag101@c3d788b (2026-10-14): README.md, chain/{settings,weights,scoreboard}.py, validator.py, miner.py, tasks/sn101.py, tasks/sn101_reference/core/{miner.py,scoring/*}, min_compute.yml, commit log</li>
+<li><strong>msg</strong> #101-tag101, 2026-06-11 to 2026-10-21 (team posts 06-13, 06-25, 06-30, 07-02, 07-06, 07-10, 07-15, 07-17, 07-29, 07-31, 08-13, 08-14, 08-31, 09-03, 09-07, 10-09, 10-14, 10-20)</li>
+<li><strong>web</strong> https://tag101.ai/ (home page and roadmap, read 2026-10-21)</li>
+<li><strong>web</strong> https://crawler.tag101.ai/miners/task-answer-status/latest?miner_uid=1 (public GET, read 2026-10-21; hotkey field not used)</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/100.html"><small>← Previous</small>SN100 Cortex</a><a rel="next" href="/bittensor-docs/subnets/102.html"><small>Next →</small>SN102 Connito</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-21. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

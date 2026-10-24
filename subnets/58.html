@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Attune (SN58) | Bittensor Subnet Docs</title>
+<meta name="description" content="Miners train weights for one fixed robot model; validators duel them in simulation and the 4 newest champions are paid.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h22">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>58</span><div>
+<h1>Attune <span class="muted">SN58</span></h1>
+<p class="tagline">Miners train weights for one fixed robot model; validators duel them in simulation and the 4 newest champions are paid.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>15<small>/day</small></b><span>last 7 d</span></li><li class="pl4"><b>4.8<small>/day</small></b><span>days 8-30</span></li><li class="pl2"><b>0.63<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-23</b><span>last chat</span></li><li class="pw"><b>252</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>robot foundation models (adaptive robot intelligence)</dd>
+<dt>Status</dt><dd>Vector, the first competition, was running Level 2 duels as of 2026-10-24: 87 at Level 2 after 68 at Level 1, a new king crowned on 2026-10-23 and an empty queue. A Level 3 spec exists on an unmerged branch but is not live. Miners keep asking for a lower burn share and registration cost and for protection against near-copy entries; the team has given no date. Horizon, the second competition, is not open.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-24</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>Attune is a Bittensor subnet from Robotensor for adaptive robot intelligence: models that are shown one demonstration of a task and must do it in a different simulated scene, with their weights frozen. Its first competition, Vector, has every miner train the weights of one fixed network, so entries differ only in training. Validators run each entry against the reigning model in head-to-head duels on a simulated two-arm benchmark and publish every result. A second competition, Horizon, is announced but not open.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>A miner trains weights for the fixed vector_v1.1 network (about 781 million parameters) and submits a Hugging Face repo that holds only model.safetensors. A commitment of the form vector:&lt;owner&gt;/&lt;repo&gt;@&lt;commit&gt;.&lt;digest&gt; goes on chain, naming the revision and the sha256 of the weights. Each hotkey gets one submission, whatever happens to it, and the registration burn was 0.3 TAO on 2026-10-24. The miner command (robotensor-attune on PyPI) checks the weights, uploads to a private repo, commits on chain and then makes the repo public. The repo must stay public: a challenger whose repo is missing at its turn is dropped, and a paid champion whose repo disappears loses its place. Only byte-identical weights are refused as duplicates.</p></div><div><h3>Validators</h3><p>Validators queue commitments oldest first and duel each entry against the current king. A duel deals 240 units (16 tasks times 15 runs) from the hash of a chain block finalized after the commitment. Each unit has a demonstration scene recorded by the benchmark&#x27;s scripted expert and a different scene to play. The king plays all units, then the challenger plays the same ones. A side&#x27;s score is the mean of its per-task success rates, so every task weighs the same; with no void units that equals the share of all 240 units solved, and the 3.0-point margin means a net lead of at least 8 units. The challenger takes the crown only at or above that margin. In the 2026-10-23 duel that crowned the king reigning on 2026-10-24 (91.3 percent against 87.9), 208 of the 240 units were ties and 32 were decided, 20 for the challenger and 12 for the king. A duel with more than 20 percent void units is not published and uses up the submission. Nothing a miner uploads is executed: the weights are checked against the pinned tensor layout and served by the validator&#x27;s own code. The tasks are 16 manipulation jobs on the RoboTwin-Vector simulator, 14 of them pick and place. Since 2026-10-15 the scene variation is Level 2: object position and yaw, which arm acts, lighting, wall and table texture, and table height. A Level 3 spec (object instance, category, size and colour) was pushed to an unmerged branch on 2026-10-23.</p></div><div><h3>Incentive</h3><p>Per the code, the team&#x27;s docs and its white paper, Vector gets 30 percent of miner emissions. That share goes to the four newest champions, newest first: 40, 30, 20 and 10 percent of it (12, 9, 6 and 3 percent of miner emissions). Everything else, including empty places and deregistered champions, goes to the subnet owner&#x27;s hotkey as a burn, until more competitions open. Weights are set about every 72 minutes. The chain agrees: at block 9355513 (2026-10-24 19:22Z), with no setting changed since block 9355128 (18:05Z), the owner&#x27;s hotkey held 70.2 percent of incentive and four other uids shared the rest. The owner&#x27;s own validator row puts 70, 12, 9, 6 and 3 percent on five uids, and four other validators also put 70 percent on the owner&#x27;s uid across five targets; two validators put everything on the owner&#x27;s uid. Emission is configured 0/0/18/41/41 percent (burn, recycle, owner, validator, miner) with RecycleOrBurn set to Burn, and the chain counts 28.78 percent of subnet emission as miner-side emission withheld from the owner&#x27;s hotkey.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-24</span> <span class="muted">(attune.robotensor.ai)</span> The Vector page showed Level 2 still live: 87 Level 2 duels after 68 at Level 1, an empty queue, and a king crowned on 2026-10-23 at a 92.1 percent average with 11 defences since. The four paid champions were crowned on 2026-10-23, 10-22, 10-21 and 10-18. The docs&#x27; key-numbers page still showed spec version 2.</li>
+<li><span class="when">2026-10-23</span> <span class="muted">(GitHub)</span> A Level 3 spec was pushed to an unmerged branch of vector-orchestrator. It adds object instance, alternative object categories, and the size and colour of procedurally built objects to Level 2&#x27;s lighting, texture and table height. The same branch holds a reaper that clears finished duels&#x27; run directories to keep 300 GB free. Neither is on the main branch.</li>
+<li><span class="when">2026-10-23</span> <span class="muted">(#58-attune, playground.robotensor.ai)</span> The team opened the Robotensor Playground (a prototype that replays a recorded expert episode) and answered a miner&#x27;s report of an object vanishing in a replay: a rare physics glitch in the simulator after hard contact, not a scoring bug, to be addressed in a later benchmark update announced in advance. Miners asked for re-evaluation of duels decided by 2.9 points; no decision was posted.</li>
+<li><span class="when">2026-10-22</span> <span class="muted">(#58-attune, white paper)</span> After miners described near-copies of other models winning the crown, the team listed its safeguards (3-point margin, registration fee, more units per duel, no resubmission of previously seen models), called near-copies a concern and said it would consider keeping submissions private until crowned. The code refuses only byte-identical weights; the white paper lists a near-duplicate check and a tighter crown rule as planned.</li>
+<li><span class="when">2026-10-20</span> <span class="muted">(robotensor.ai blog, #58-attune)</span> The team&#x27;s blog reported that Level 1 ended with the crown at 87.9 percent after 68 duels, against 87.2 percent for a fine-tuned pi0.5 on the same benchmark. The same week several miners said emissions no longer cover training costs and asked for a lower burn share or registration cost; the team said it was working on it, with no date.</li>
+<li><span class="when">2026-10-15</span> <span class="muted">(#58-attune, GitHub)</span> After miners said the first difficulty level was too narrow, the team moved Vector to Level 2 (adds lighting, textures and table height). Validators restarted and every new model was evaluated at Level 2. The king is re-run in each duel, so there is no fixed score to beat.</li>
+<li><span class="when">2026-10-14</span> <span class="muted">(GitHub, #58-attune)</span> Duels went from 10 to 15 runs per task, so 240 units per side instead of 160. Separately, the team told miners that every model receiving emissions must stay public, not only the king, and that emissions cannot be restored by hand if a repo is made private.</li>
+<li><span class="when">2026-10-13</span> <span class="muted">(GitHub)</span> Validator code now watches every paid champion&#x27;s repository, not just the king&#x27;s. A gone champion stops being paid at once, and a gone king&#x27;s crown is handed back to the newest earlier king still on the Hub.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Read the Vector rules in the Attune docs and check the live spec (spec.json in vector-orchestrator): level, runs per task and crown margin have changed within a month, and a Level 3 spec sits on a branch.</li>
+<li>Train weights for the fixed vector_v1.1 network; the tensor layout is pinned and anything else is refused.</li>
+<li>pip install robotensor-attune, then run attune miner check --dir on the folder that holds only model.safetensors.</li>
+<li>Run attune miner submit with your Hugging Face repo, wallet and netuid 58. It uploads privately, commits on chain, then makes the repo public.</li>
+<li>Keep the repo public, use attune miner status to follow the entry, and remember each hotkey gets only one submission.</li>
+<li>Validators need one GPU host with three Python environments (simulator, policy, host) and the repo&#x27;s validator config; the README lists the steps and notes a unit can use up to 34 GB of GPU memory.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Weights are validator opinions, not payouts. The chain was read at blocks 9355128 and 9355513 (2026-10-24, 18:05Z and 19:22Z; no setting changed between them) and matches the 30 percent Vector share and the 40/30/20/10 split in the code, but the four paid uids were not matched to the dashboard&#x27;s champion list, and why two validators put everything on the owner&#x27;s uid is unknown.</li>
+<li>Code and the team&#x27;s docs disagree on a gone king (re-checked 2026-10-24): code from 2026-10-13 hands the crown back to the newest earlier king, while the docs, FAQ and white paper say the share is burned and the next entry takes the empty throne. It is not known which one validators run, and no gone-king case has been seen.</li>
+<li>Team docs lag the code in places: the repo README and the white paper still say 160 units per duel, while spec.json and the docs&#x27; key-numbers page say 240. The white paper lists a near-duplicate check, a tighter crown rule and an adaptation-gain measure as planned, not live.</li>
+<li>The white paper was read from text extracted from the PDF (no PDF tools were available), so wording may have small errors; its numbers were checked against the docs and spec.json.</li>
+<li>Level 3 exists only as a spec on an unmerged branch of vector-orchestrator (2026-10-23); there is no announcement in chat through 2026-10-23, and the Discord archive lags about a day.</li>
+<li>Horizon has no published rules, round or code as of 2026-10-24 (the site says coming soon); its protocol repo says the code moved to a repository that is not in the organisation&#x27;s public list.</li>
+<li>The Discord channel&#x27;s pinned posts are still the server&#x27;s unclaimed-channel notice from 2026-09-18, and moderators said on 2026-10-06 they did not know the owner. Team replies in chat were matched to the project by its own repos and site, not by a channel owner role.</li>
+<li>The slot&#x27;s previous project was Greevils, per the same moderator notice, and the chain dates the change (read at block 9355513, 2026-10-24, sampled every four days). The current registration of this netuid dates from 2026-06-29 and got the Greevils chain identity on 2026-06-30; its owner coldkey and owner hotkey changed on 2026-09-15 and 2026-09-16, the Greevils identity was cleared on 2026-09-18, and the Attune identity (repo, site, channel) was set on 2026-10-07. That is an owner key change inside one registration, not a new registration, and it does not show whether the keys were sold or handed over. An earlier registration of the same netuid (2024-11-28) ended when the slot was re-registered on 2026-06-29, so older chat and older chain history in this slot can belong to other projects.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://attune.robotensor.ai" rel="noopener noreferrer">Attune site</a></li>
+<li><a href="https://attune.robotensor.ai/vector" rel="noopener noreferrer">Vector leaderboard and duel records</a></li>
+<li><a href="https://attune.robotensor.ai/docs" rel="noopener noreferrer">Docs</a></li>
+<li><a href="https://attune.robotensor.ai/whitepaper.pdf" rel="noopener noreferrer">White paper (PDF, v1.0, October 2026)</a></li>
+<li><a href="https://www.robotensor.ai/blog/attune-vector-level-1-results" rel="noopener noreferrer">Vector Level 1 results (blog)</a></li>
+<li><a href="https://github.com/robotensor/attune-subnet" rel="noopener noreferrer">GitHub: attune-subnet</a></li>
+<li><a href="https://github.com/robotensor/vector-orchestrator" rel="noopener noreferrer">GitHub: vector-orchestrator</a></li>
+<li><a href="https://github.com/robotensor/RoboTwin-Vector" rel="noopener noreferrer">GitHub: RoboTwin-Vector</a></li>
+<li><a href="https://pypi.org/project/robotensor-attune/" rel="noopener noreferrer">Miner package (PyPI)</a></li>
+<li><a href="https://huggingface.co/robotensor" rel="noopener noreferrer">Robotensor on Hugging Face</a></li>
+<li><a href="https://playground.robotensor.ai/" rel="noopener noreferrer">Robotensor Playground (prototype)</a></li>
+<li><a href="https://www.robotensor.ai" rel="noopener noreferrer">Robotensor</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 11 sources</summary>
+<ul>
+<li><strong>repo</strong> robotensor/attune-subnet at 352b96a (2026-10-13): README, src/robotensor/protocol/weights.py, config.py, validator.py, lanes/vector.py</li>
+<li><strong>repo</strong> robotensor/vector-orchestrator at 2336ded (2026-10-15): spec.json, README, units.py, duel/score.py; branch spec/level-3 at 7f84397 (2026-10-23)</li>
+<li><strong>repo</strong> robotensor/RoboTwin-Vector at e87619a (2026-10-07): README, envs/_levels.py, env_cfg/task_config/level1-2.yml</li>
+<li><strong>repo</strong> robotensor/horizon-protocol at 7cd44bc (2026-09-28): README, CHANGELOG</li>
+<li><strong>web</strong> attune.robotensor.ai: /vector, /horizon, /docs, /docs/vector/guide/the-ladder, /docs/vector/guide/the-tasks, /docs/vector/reference/{key-numbers,faq}, a duel record page, whitepaper.pdf v1.0 (read 2026-10-24)</li>
+<li><strong>web</strong> robotensor.ai/blog/attune-vector-level-1-results (2026-10-20); playground.robotensor.ai; pypi.org/project/robotensor-attune (release dates)</li>
+<li><strong>web</strong> Chain read at block 9355128 (2026-10-24 18:05Z UTC): SN58 (Attune): registered 2026-06-29, tempo 360, 256 of 256 uids, commit-reveal on; emission weights burn/recycle/owner/validator/miner = 0/0/18/41/41 %, RecycleOrBurn = Burn; uids under the owner hotkey hold 70.2 % of incentive and 65.41 % of last-epoch emission (a floor); 7 validators have weight rows, on average 78.6 % of weight goes to uid 0; no setting changed in 33 checked items since block 9328174 (2026-10-20 23:59Z UTC)</li>
+<li><strong>web</strong> Chain read at block 9355206 (2026-10-24): SN58 weights set by the owner&#x27;s validator uid: 70.0 % to uid 0 and 12 / 9 / 6 / 3 % to four other uids</li>
+<li><strong>msg</strong> #58-attune, 2026-09-18 to 2026-10-23</li>
+<li><strong>web</strong> Chain read at block 9355513 (2026-10-24 19:22Z UTC): SN58 (Attune): no setting changed in 33 checked items and the emission split unchanged since block 9355128 (18:05Z); uids under the owner hotkey hold 70.2 % of incentive and 65.41 % of last-epoch emission (a floor); 7 validators have weight rows, on average 78.6 % of weight goes to uid 0</li>
+<li><strong>web</strong> Chain read at block 9355513 (2026-10-24 19:22Z UTC): SN58 slot timeline: registered 2026-06-29 09:38Z (block 8511017), replacing the registration of the same netuid from 2024-11-28; owner coldkey changed 2026-09-15 (block 9076036) and owner hotkey 2026-09-16 (block 9079946); chain identity set to Greevils 2026-06-30, cleared 2026-09-18 (block 9095079), set to Attune 2026-10-07 (block 9231695); sampled every 4 days over the current registration</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/56.html"><small>← Previous</small>SN56 Gradients</a><a rel="next" href="/bittensor-docs/subnets/60.html"><small>Next →</small>SN60 Bitsec</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-24. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

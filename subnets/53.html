@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>engy (SN53) | Bittensor Subnet Docs</title>
+<meta name="description" content="Verified-inference gateway: miners serve paid LLM traffic and are scored on billed tokens; the team signs the weights.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h11">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>53</span><div>
+<h1>engy <span class="muted">SN53</span></h1>
+<p class="tagline">Verified-inference gateway: miners serve paid LLM traffic and are scored on billed tokens; the team signs the weights.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>13<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>8.3<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>52<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-24</b><span>last chat</span></li><li class="pw"><b>4,052</b><span>chat msgs in all</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>inference (verified LLM serving)</dd>
+<dt>Status</dt><dd>Live product and weekly epochs: epoch 18 was signed on 2026-10-21 and epoch 19 is open (25 active miners on 10-23); the repo last changed on 10-19 and the team posted a pricing change on 10-22.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-23</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-what">What it is</h2>
+<p>engy is an inference provider built on subnet 53. Buyers call one OpenAI- and Anthropic-compatible API with prepaid billing, and GPU miners serve the requests for open models such as Kimi K3, GLM and DeepSeek. Miners are paid in proportion to the paid tokens they serve, subject to quality gates. The team says each response carries a fingerprint proving the named model produced it, and the team&#x27;s own master validator computes and signs the weights that other validators copy.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Miners bring GPU boxes online and the gateway routes buyer requests to them. The current route is permissionless auto-provisioning, and on 2026-10-22 the team said the original onboarding process is retired: claim a gateway key with a hotkey, boot the team&#x27;s golden serve image with that key, declare the model and SSH port in the provider dashboard, and the team verifies the box over SSH (hardware attestation on confidential-computing hosts, an SSH identity check otherwise) and activates it. The team keeps a management SSH channel into the image and says miners must leave the box alone; one miner objected on 10-22 that this is intrusive and rules out container hosts without nested Docker, and no alternative had been offered by 10-23. The repo still holds an older self-hosted miner for sglang, which the team called legacy on 2026-10-14. Models are downloaded after boot; for glm-5.3-flash the team said at least eight H100-class GPUs are needed. Miners reported qwen3.8-27b and glm-5.3-flash workers stuck in pending through 10-22.</p></div><div><h3>Validators</h3><p>The master validator is the team&#x27;s own, and it holds the canonical checkpoints and does the verification. It samples requests, checks the activation fingerprints against the real model, scores every miner and model pair from the gateway request log, and publishes one signed result per epoch. Third-party light validators run on CPU only, fetch that result from the team&#x27;s API, verify the signature against the pinned master hotkey and submit the same weights on chain. On chain (block 9343310, 2026-10-23) 15 uids hold validator permits and 13 had set weights recently; all 13 put their largest weight on the same miner, and none gives weight to uid 0. The master hotkey is the subnet owner hotkey and is registered as one uid that is the only one under the owner coldkey. Verification is sampled, and the team conceded on 2026-09-18 that its public materials describe it inconsistently.</p></div><div><h3>Incentive</h3><p>The team&#x27;s docs say a miner&#x27;s score for a model is the sum of prompt and completion tokens over paid, successful requests times a per-model rate that the team sets, and it is zero if a gate fails (acceptance, first-token and per-token latency, cheat verdicts). Scores are normalized into one weight vector, and with no billed traffic everything goes to the owner hotkey. Epochs are 7 days, and work in one epoch is applied on chain in the next. In the signed result for epoch 18 (10-14 to 10-21), 36 hotkeys received weight, the top hotkey about 11 percent and the top three about 32 percent; Kimi K3 made up about 56 percent of the scored value and glm-5.3-flash about 18 percent. No miner failed a gate and no audit verdicts were recorded. The published formula did not reproduce the signed scores from the public token counts, so treat it as a description of intent. On chain the incentive shares match that signed vector to within 0.01 percentage point, and the emission split is 18 percent to the owner, 41 percent to validators and 41 percent to miners, with nothing burned or recycled by that split. The team&#x27;s buyback page lists burns of subnet alpha funded by revenue, 20,653 alpha in total, the latest on 10-17; those burns were not checked on chain.</p></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-22</span> <span class="muted">(#53-engy)</span> The team set DeepSeek-V4.1-Flash buyer pricing to 20 percent of the official rates from 16:00 UTC (input down 25 percent, output up 50 percent), said a provisioning bug was fixed, and told a miner the original onboarding process is retired in favour of the dashboard docs.</li>
+<li><span class="when">2026-10-21</span> <span class="muted">(provider.engy.ai epoch API and epochs page, #53-engy)</span> Epoch 18 closed and its weights were signed: 70 miner-model rows, 36 hotkeys with weight, about 9.1 million requests; epoch 19 opened the same day. Miners reported qwen3.8-27b and glm-5.3-flash workers still stuck in pending on 10-21 and 10-22.</li>
+<li><span class="when">2026-10-17</span> <span class="muted">(provider.engy.ai buyback page)</span> Latest burn on the team&#x27;s buyback page: 2,468 alpha at block 9300388.</li>
+<li><span class="when">2026-10-14</span> <span class="muted">(#53-engy, team epoch API)</span> Epoch 17 closed and its weights were signed. The team answered prospective-miner questions: all listed models can be mined, traffic is round-robin among workers unless a worker is full, and three models had been served only by the team&#x27;s own workers recently. Same day, a miner from another subnet alleged that scoring on that subnet is distorted via engy providers; the team disputed it.</li>
+<li><span class="when">2026-09-29</span> <span class="muted">(#53-engy)</span> Miner connections moved from Cloudflare to a direct gateway link; the team reported about five times fewer failed requests in an 18-hour comparison.</li>
+<li><span class="when">2026-09-23</span> <span class="muted">(#53-engy)</span> Permissionless auto-provisioning for both TEE and non-TEE boxes opened for every model, starting with epoch 15.</li>
+<li><span class="when">2026-09-18</span> <span class="muted">(#53-engy)</span> After a community member posted a long critique on 09-17 about centralization, emissions versus revenue and verification, the team replied that centralized gateway and settlement are by design, agreed to document governance and fix the verification wording, and promised published reliability metrics and licensing.</li>
+<li><span class="when">2026-07-22</span> <span class="muted">(#53-engy, GitHub)</span> engy launched on subnet 53 (announced 07-21), after publishing its one-pager and miner and validator code; the netuid previously hosted Efficient Frontier.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Check the hardware: the team said at least eight H100-class GPUs for glm-5.3-flash; other models have their own needs and the full specs were still unpublished on 2026-10-14.</li>
+<li>Log in to provider.engy.ai with the hotkey and claim a gateway key.</li>
+<li>Boot the golden serve image (ghcr.io/hanlinai/engy-golden-serve:prod) with only that key in its environment; the box registers itself. The team retired the original onboarding process on 2026-10-22, so this is the supported route.</li>
+<li>Open the server in the dashboard, pick the model and enter the SSH port that the team&#x27;s runner can reach; verification needs that SSH access, which some miners find a blocker.</li>
+<li>Wait for verification and activation; the dashboard shows booted, declared, verifying, verified, provisioned or failed, and failed workers can be retried or corrected.</li>
+<li>Keep the box untouched afterwards; the team warns that tampering counts as cheating.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Chain state was read on 2026-10-23 (block 9343310): the incentive matches the team&#x27;s signed epoch 18 vector, but the burns, alpha price and holder balances were not checked on chain; buyback figures come from the team&#x27;s own page, and it showed no burn after 10-17 as of 10-23.</li>
+<li>Scoring is controlled by the team: the master validator is the team&#x27;s, per-model score rates are set by the team with no published change process, and third-party validators only copy its signed result. By the chain split the owner slice is 18 percent and the master validator holds the largest validator dividend share (about 39 percent of dividends).</li>
+<li>The published scoring formula (tokens times a per-model rate) does not reproduce the signed epoch 18 scores from the public token counts: the effective rate per row is far below the configured one and varies by row. The master scorer was not read, so the real formula is unknown.</li>
+<li>The signed epoch 18 data shows zero audit verdicts for every miner row, and the cheat gate needs a minimum of 500 verdicts, so that gate did not act in that epoch either.</li>
+<li>Docs and live settings differ: docs say 99 percent acceptance and a 1 percent cheat limit, the live parameters use 95 and 5 percent; one doc says daily epochs, live epochs are weekly; the README says no TEEs, while onboarding docs and chat describe TEE nodes. The team said repo docs were legacy on 10-14.</li>
+<li>Which hotkeys are the team&#x27;s own was not found. The team said three models were served 100 percent by its own workers in recent epochs, and a miner alleged on 10-19 that traffic goes mostly to team pods. Within one model, glm-5.3-flash weight in epoch 18 was concentrated: the top three hotkeys held about 65 percent.</li>
+<li>Active miners per the team dashboard fell from 199 in epoch 10 to 20 in epoch 16, then 30, 38 in epoch 18 and 25 so far in epoch 19. The dashboard&#x27;s epoch 18 totals (38 miners, 10.0 million requests) differ from the signed result (37 hotkeys, 9.1 million requests); the reason was not found.</li>
+<li>Only three models have public checkpoint specs in the repo, although nine are listed in the live parameters.</li>
+<li>A claim on 10-14 that engy providers distort SN11 scoring is a miner allegation that the team disputes; it was not verified.</li>
+<li>A question on 10-16 about two coldkeys holding about 38 percent of holder balances was still unanswered in the channel on 10-23.</li>
+<li>The repo has no license file.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://engy.ai" rel="noopener noreferrer">Website and API</a></li>
+<li><a href="https://provider.engy.ai/epochs" rel="noopener noreferrer">Provider dashboard (epochs, miners)</a></li>
+<li><a href="https://provider.engy.ai/dashboard/docs" rel="noopener noreferrer">Worker onboarding guide</a></li>
+<li><a href="https://provider.engy.ai/buyback" rel="noopener noreferrer">Buyback and burn page</a></li>
+<li><a href="https://github.com/hanlinai/engy" rel="noopener noreferrer">GitHub</a></li>
+<li><a href="https://github.com/hanlinai/engy/blob/main/docs/SN53_ONE_PAGER.md" rel="noopener noreferrer">SN53 one-pager</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 5 sources</summary>
+<ul>
+<li><strong>repo</strong> hanlinai/engy@ed84d0b (2026-10-19, no commits since): README, docs/SN53_ONE_PAGER.md, docs/ANNOUNCEMENT.md, validator/</li>
+<li><strong>web</strong> https://provider.engy.ai/api/subnet/v1/epoch/latest (epoch 18 signed result, read 2026-10-23)</li>
+<li><strong>web</strong> https://provider.engy.ai/epochs, /buyback and /dashboard/docs (read 2026-10-23)</li>
+<li><strong>web</strong> Chain reads at block 9343305-9343310 (2026-10-23): subnet parameters, emission split, incentive, dividends, validator weights, owner-key check</li>
+<li><strong>msg</strong> #53-engy 2026-04-30 to 2026-10-23</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/51.html"><small>← Previous</small>SN51 Lium</a><a rel="next" href="/bittensor-docs/subnets/54.html"><small>Next →</small>SN54 Yanez</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-23. Site built 2026-10-24. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>
