@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ByteLeap (SN128) | Bittensor Subnet Docs</title>
+<meta name="description" content="GPU rental subnet: miners are paid in alpha only while their GPUs are rented, scored by the team&#x27;s MeshHub.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h8">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>128</span><div>
+<h1>ByteLeap <span class="muted">SN128</span></h1>
+<p class="tagline">GPU rental subnet: miners are paid in alpha only while their GPUs are rented, scored by the team&#x27;s MeshHub.</p>
+<span class="st s-unclear">unclear</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl1"><b>0.14<small>/day</small></b><span>last 7 d</span></li><li class="pl2"><b>0.48<small>/day</small></b><span>days 8-30</span></li><li class="pl3"><b>1.7<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-26</b><span>last chat</span></li><li class="pw"><b>1,202</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Quiet</b><span>code activity</span></li><li class="pw"><b>0</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-08-11</b><span>last commit</span></li><li class="pw"><b>2026-01-20</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>compute (GPU rental)</dd>
+<dt>Status</dt><dd>Emission is on, but by 2026-10-30 one uid earns all miner incentive (ten did on 2026-10-28), no repo has changed since 2026-08-11 and no public dashboard exists.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-30</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Who earns now</a></li><li><a href="#sn-x1">Docs vs code vs chain</a></li><li><a href="#sn-x2">Rental offer</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-similar">Similar subnets</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>customers rent GPUs by the hour; miners earn alpha only while their GPUs are rented.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>one miner uid takes all miner incentive (2026-10-30); ten shared it on 2026-10-28.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>validators only relay lease scores from the team&#x27;s closed MeshHub service; no GPU is measured.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>miners need a bare-metal GPU host and team approval (allowlist, 2026-08-18).</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>pool 3,928 TAO (rank 89 of 128); 30-day net outflow 90 TAO, 88 of it in the week to 2026-10-28.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-high">High barrier</span></h3><p>Connects bare-metal GPU hosts through a Python miner and Go worker; paid in alpha only while its GPUs are rented.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-caution">GPU needed</li><li class="fl fl-good">No paid service</li><li class="fl fl-bad">Permissioned</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>Bare-metal GPU on the team&#x27;s list (RTX 3090 to B200); 8+ cores, 32 GB RAM, 500 GB disk</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>No paid service found; team approval needed (allowlist, 2026-08-18)</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Registration burn 0.0005 TAO (2026-10-30); no stake or fee found</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Linux admin: kernel 6.0+, VFIO GPU binding, reboot, PM2</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Relays the team&#x27;s MeshHub lease scores into on-chain weights; measures no GPU itself.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-unk">Paid service unknown</li><li class="fl fl-bad">Permissioned</li></ul><dl class="v2-needs"><div class="v2-need n-no"><dt>Hardware</dt><dd>No GPU; team advice 8 cores, 16 GB RAM, 100 GB NVMe, 100 Mbps (2026-08-04)</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>Team-issued MeshHub token; how to get one is not documented</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Burn 0.0005 TAO; a permit needs the global 1,000 TAO stake floor</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Python 3.8+, SQLite or PostgreSQL, PM2; start aborts without the token</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-10-30. Not financial advice.</span></div><p>Small pool, net outflow, idle code and one earning uid; rentals are stated by the team only. <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>ByteLeap says it is a decentralized GPU cloud: miners earn alpha only while their GPUs are rented. Validators do not test the GPUs; they relay lease scores from the team&#x27;s closed MeshHub service. By 2026-10-30 one miner uid earned all miner incentive, and no public data shows rented compute.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>A miner is a Python node that gathers Go worker agents running on bare-metal GPU hosts. Only leased GPUs earn; answering validator challenges earns nothing. Access is limited: an allowlist of partner compute centers (2026-08-18), then &#x27;connect your own GPU&#x27; (2026-09-20).</p></div><div><h3>Validators</h3><p>A validator links to the team&#x27;s MeshHub service (it will not start without a team-issued token), stores the per-worker lease scores MeshHub sends, sums them per miner every 420 seconds and submits the shares as weights. No heartbeat for 30 minutes scores 0.</p></div><div><h3>Incentive</h3><p>A miner&#x27;s weight is its share of all lease scores; nobody outside the team can recompute them. Configured split: 41% validators, 41% miners, 18% owner; RecycleOrBurn is Burn. Owner uid 0 earned 14.8% of last-epoch emission as validator dividends and no incentive.</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-10-30, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-caution">Whitelisted</span>Validator code aborts without a team-issued MeshHub token; 27 hold a permit and 11 set weights.</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">14.8%</span>Owner uid 0 takes 14.8% of emission (29.7% of dividends), 0% of incentive; owner cut 18%, RecycleOrBurn is Burn.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">1 uid</span><span class="v2-sx muted">top 5 hold 100% of incentive.</span> One uid earns all incentive (ten did on 2026-10-28); it is not linked to the owner on chain.</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Converged</span>All 11 validators with weights put 100% on one uid; shared MeshHub scores would make honest validators agree.</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-good">Open</span>Miner and validator are public (MIT), but lease scores come from the team&#x27;s closed MeshHub.</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-high">High barrier</span></h3><p>Connects bare-metal GPU hosts through a Python miner and Go worker; paid in alpha only while its GPUs are rented.</p><ul>
+<li>Worker needs Ubuntu 22.04+ on bare metal (no Docker or VMs); installed from a team-hosted script or zip.</li>
+<li>Only leased GPUs earn; the team recommends 4 to 8 GPUs per miner (2026-10-08).</li>
+<li>A miner on default settings reported no tasks and no rewards on 2026-10-18.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Relays the team&#x27;s MeshHub lease scores into on-chain weights; measures no GPU itself.</p><ul>
+<li>The example config ships a pre-filled MeshHub endpoint and token in a public repo; it may be revoked.</li>
+<li>27 hold a permit (2026-10-30); 11 had set weights, all on one uid; 19 had not set weights for over five tempos.</li>
+</ul></section></div>
+<h2 id="sn-x0">Who earns now</h2>
+<p>Chain shows the change, not the cause. All 11 validators with weights now put 100% on uid 144.</p>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Date (UTC)</th><th>Uids earning</th><th>Top uid share</th></tr></thead><tbody><tr><td>2026-10-28</td><td>10</td><td>14.7%</td></tr><tr><td>2026-10-29</td><td>2</td><td>53.9%</td></tr><tr><td>2026-10-30</td><td>1</td><td>100%</td></tr></tbody></table></div>
+<h2 id="sn-x1">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Scoring</td><td>Docs: 70% leases, 30% challenges</td><td>Code: lease-only since 2026-01-20</td><td>2026-10-30</td></tr><tr><td>Who can mine</td><td>Team: miners can connect their own GPU (2026-09-20)</td><td>Chain: one uid earns</td><td>2026-10-30</td></tr><tr><td>Conviction lock</td><td>Team promised one (2026-08-18 to 09-02)</td><td>Chain: owner lock 3,775 alpha, last changed 2026-08-17</td><td>2026-10-30</td></tr></tbody></table></div>
+<h2 id="sn-x2">Rental offer</h2>
+<ul class="v2-list">
+<li>Team site lists hourly prices: a 3090 VM 0.26 USD per GPU-hour, an H100 VM 1.98 (read 2026-10-21).</li>
+<li>Team says capacity is fully rented (2026-10-08), yet a user was told GPUs were out of stock (2026-09-28).</li>
+<li>No usage figure or customer name was found.</li>
+</ul>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-10-30. Not financial advice.</span></div>
+<p class="v2-thesis">Small pool (rank 89 of 128), 90 TAO net outflow in 30 days, quiet code, ten earners down to one, rentals stated by the team only.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.002633 TAO per alpha</dd></div><div><dt>Pool</dt><dd>3,928 TAO, rank 89</dd></div><div><dt>Price, 30 days</dt><dd>-6%, 2026-09-28 to 2026-10-30</dd></div><div><dt>Net flow, 30 days</dt><dd>-90 TAO, 2026-09-30 to 2026-10-30</dd></div><div><dt>Miner pay</dt><dd>7.75 TAO per day, one uid (gross)</dd></div><div><dt>Code activity</dt><dd>last commit 2026-08-11; last release 2026-01-20</dd></div></dl>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>Team active in chat (2026-10-26)</li>
+<li>Price -6%, pool -2.4% in 30 days</li>
+<li>Earning uid not owner-linked on chain</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>Ten earning uids became one in two days</li>
+<li>No repo commit since 2026-08-11; dashboard and open mining not shipped</li>
+<li>Rentals stated by the team only</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> Bullish: public lease data, a release, earners returning. Bearish: the last earner drops to zero, more outflow.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-similar">Similar subnets</h2>
+<div class="v2-sim"><p>By pool size this is <strong>rank 10 of 12</strong> among the subnets grouped as <em>compute</em> (what they mainly sell). Pool and price as of 2026-10-30 to 2026-10-31, price in TAO per alpha; the barrier is the easiest miner role.</p><div class="scroll"><table class="v2-table"><thead><tr><th>#</th><th>Subnet</th><th>Pool</th><th>Price</th><th>Miner barrier</th></tr></thead><tbody><tr><td>8</td><td><a href="/bittensor-docs/subnets/105.html">Beam</a> <span class="muted">SN105</span></td><td>5,356 TAO</td><td>0.006499</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>9</td><td><a href="/bittensor-docs/subnets/90.html">KubeTEE</a> <span class="muted">SN90</span></td><td>5,125 TAO</td><td>0.01638</td><td><span class="v2-barrier b-high">High</span></td></tr><tr class="me" aria-current="true"><td>10</td><td>ByteLeap <span class="muted">SN128, this page</span></td><td>3,928 TAO</td><td>0.002633</td><td><span class="v2-barrier b-high">High</span></td></tr><tr><td>11</td><td><a href="/bittensor-docs/subnets/94.html">Cathedral</a> <span class="muted">SN94</span></td><td>2,020 TAO</td><td>0.003487</td><td><span class="v2-barrier b-high">High</span></td></tr><tr><td>12</td><td><a href="/bittensor-docs/subnets/47.html">GPUForge</a> <span class="muted">SN47</span></td><td>953 TAO</td><td>0.001589</td><td><span class="v2-barrier b-high">High</span></td></tr></tbody></table></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-30</span> <span class="muted">(on-chain read (2026-10-30))</span> Chain: one uid takes all miner incentive (ten shared it on 2026-10-28); all 11 validators with weights put 100% on it.</li>
+<li><span class="when">2026-10-28</span> <span class="muted">(on-chain read (2026-10-30))</span> Net user outflow of 88 TAO in the week to this date, the largest of the last 30 days.</li>
+<li><span class="when">2026-10-26</span> <span class="muted">(#byteleap)</span> Team posted its supported GPU list (RTX 3090 to B200); nothing since in the channel.</li>
+<li><span class="when">2026-08-17</span> <span class="muted">(#byteleap, #announce)</span> Team said emissions resumed after a reinstatement request; users alleged self-mining, the team cited partner compute centers.</li>
+<li><span class="when">2026-08-11</span> <span class="muted">(GitHub)</span> Last code change: an SDK upgrade for miner and validator.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Check fit: bare-metal Ubuntu 22.04+, 8+ cores, 32 GB RAM, 500 GB disk and a GPU on the team&#x27;s list (2026-10-26).</li>
+<li>Ask in the subnet channel whether your machine can join: the team described an allowlist (2026-08-18) and a self-connect option (2026-09-20).</li>
+<li>Install the worker (team script or zip), bind the GPUs to VFIO, reboot, then run miner and worker with a registered hotkey.</li>
+<li>Alpha arrives only while a GPU is rented; the lease-status API the team mentioned (2026-10-20) was not identified.</li>
+<li>Validators need a team-issued MeshHub token; the repos do not say how to get one.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Lease scores come from a closed, team-run MeshHub, so nobody outside the team can check that rented compute exists.</li>
+<li>Chat is what the team said; its claims on revenue, full rental, partner compute centers and buybacks were not checked.</li>
+<li>The earning uid&#x27;s operator is unknown; no owner link on chain does not show it is independent or that its GPUs are rented.</li>
+<li>Not read: locks held by other accounts, the lease-status API named on 2026-10-20 and the 2026-08-12 economic report attachment.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://byteleap.ai" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://byteleap.ai/pricing" rel="noopener noreferrer">GPU pricing page</a></li>
+<li><a href="https://github.com/byteleapai/byteleap-Miner" rel="noopener noreferrer">GitHub (Miner)</a></li>
+<li><a href="https://github.com/byteleapai/byteleap-Validator" rel="noopener noreferrer">GitHub (Validator)</a></li>
+<li><a href="https://github.com/byteleapai/byteleap-Worker" rel="noopener noreferrer">GitHub (Worker)</a></li>
+<li><a href="https://x.com/byteleap_ai" rel="noopener noreferrer">X</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 7 sources</summary>
+<ul>
+<li><strong>msg</strong> #byteleap 2026-06-04 to 2026-10-26 (no newer message on 2026-10-30); #announce 2026-06-22 and 2026-08-14 (no post naming SN128 since 2026-10-01)</li>
+<li><strong>repo</strong> byteleapai/byteleap-Validator @9552e72 (2026-08-11, unchanged on 2026-10-30): weight_manager.py, meshhub_client.py, validator.py, config example, commit 8060707 (2026-01-20); last release v0.0.7 (2026-01-20); MIT</li>
+<li><strong>repo</strong> byteleapai/byteleap-Miner @cb6f296 (2026-08-11, unchanged on 2026-10-30): README, config/miner_config.yaml; last release v0.0.6 (2026-01-12); MIT</li>
+<li><strong>repo</strong> byteleapai/byteleap-Worker @ad78097 (2026-01-12, unchanged on 2026-10-30): README, config; release v0.0.6; main is the only branch of all three repos (2026-10-30)</li>
+<li><strong>web</strong> Chain read at block 9399754 (2026-10-30 22:50Z UTC): SN128 (ByteLeap): registered 2025-06-25, tempo 360, 256 of 256 uids, commit-reveal off; emission weights burn/recycle/owner/validator/miner = 0/0/18/41/41 % (stored, same values as the chain default), RecycleOrBurn = Burn; uids under the owner hotkey or owner coldkey hold 0 % of incentive and 14.83 % of last-epoch emission (a floor); 11 validators have weight rows, on average 0 % of weight goes to uid 0.</li>
+<li><strong>web</strong> Chain read at block 9399674 (2026-10-30 22:34Z UTC): price SN128, 6 samples every 7d from block 9183674 (2026-09-30 22:17Z): price 0.002788 -&gt; 0.002633 TAO per alpha (-5.6%), pool TAO 4026.2 -&gt; 3927.8; net user flow -90.04 TAO over 5 intervals; pool rank 89 of 128 by TAO in the pool (shared snapshot, same block).</li>
+<li><strong>web</strong> Chain reads of uid 144 and uid 230 at blocks 9371301, 9378501, 9385701, 9392901, 9396501 and 9399674 (2026-10-27 to 2026-10-30), OwnerLock and DecayingOwnerLock at block 9399674; 2 of 62 node requests in the uid reads were answered by fallback nodes. Site, pricing page (read 2026-10-21; client-rendered), X profile and the three repo links answered HTTP 200 on 2026-10-30.</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/127.html"><small>← Previous</small>SN127 Astrid</a><a rel="next" href="/bittensor-docs/subnets/163.html"><small>Next →</small>SN163 Safe Scan</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-30. Site built 2026-10-31. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

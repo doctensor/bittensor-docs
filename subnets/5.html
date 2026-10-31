@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hone (SN5) | Bittensor Subnet Docs</title>
+<meta name="description" content="Miners&#x27; AI agents solve hidden-test coding and terminal tasks; validators grade them in sandboxes for training data.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h11">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>5</span><div>
+<h1>Hone <span class="muted">SN5</span></h1>
+<p class="tagline">Miners&#x27; AI agents solve hidden-test coding and terminal tasks; validators grade them in sandboxes for training data.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl3"><b>1.0<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>11<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>13<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-30</b><span>last chat</span></li><li class="pw"><b>3,375</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Shipping</b><span>code activity</span></li><li class="pw"><b>6</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-10-20</b><span>last commit</span></li><li class="pw"><b>none</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>coding agents / training data (RLVR)</dd>
+<dt>Status</dt><dd>Active on 2026-10-31: 256 of 256 slots filled, 241 miners earning; main unchanged since 2026-10-20, two pull requests open.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-31</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Proposed scoring change</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>miners&#x27; AI agents fix code or write scripts; validators grade them on hidden tests in a sandbox.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>it trains its own model on the solutions; no product, customer or revenue is public.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>rewards are nearly flat: 241 of 256 uids earn, the top one just 0.5% (2026-10-31).</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>a miner registers for about 0.48 TAO plus model costs; a validator permit needs 1,000 TAO stake.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>one validator earns about 71% of dividends; tasks and hidden tests are team-run and cannot be checked.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-low">Low barrier</span></h3><p>Runs an AI agent that solves a coding or terminal task and returns a patch or script plus its trace.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-caution">Paid service needed</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>A server with a public TCP port; no GPU mentioned</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>A model API key (the demo miner uses Amazon Bedrock); cost not documented</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Registration burn about 0.48 TAO (2026-10-31); no stake needed</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Python 3.10-3.12; run the demo miner or your own agent</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Leases tasks from the team&#x27;s server, sends them to miners, grades answers in Docker and sets weights.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>Linux, Docker, 12 GB RAM, 25 GB free disk, direct network route (no proxy)</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None (no model key needed); the problem server&#x27;s access terms are not documented</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Registration burn about 0.48 TAO; a permit needs 1,000 TAO stake (chain minimum)</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Two scripts (setup, start); non-root docker-group user; synced clock</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-neutral">Neutral</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">low confidence, as of 2026-10-31. Not financial advice.</span></div><p>Top-15 pool, net outflow in all five weeks (-1,912 TAO in 30 days); usage and revenue unverified. <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>Hone trains AI with verifiable rewards. A team-run server issues coding tasks (fix a bug or add a feature in a repository, or write a terminal script); miners&#x27; AI agents answer and validators grade the answers on hidden tests in a sandbox.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Miners run an AI agent behind a public port. For each task it downloads a workspace and uploads a signed patch or Bash script plus a trajectory (the record of its work); any model may be used.</p></div><div><h3>Validators</h3><p>About every 7.6 minutes a validator leases a task from the team&#x27;s server and offers it to 128 of the roughly 246 eligible miners, picked at random. Answers are graded on hidden checks in a Docker sandbox, and every 180 blocks the validator sets weights from its own scores.</p></div><div><h3>Incentive</h3><p>A task scores 1 only if every hidden check passes, else 0 (speed stopped counting on 2026-10-12). A miner&#x27;s score is the average of its latest 100 results; weights are scores scaled to sum to 1. Emission: 18% owner, 41% validators, 41% miners; nothing is burned.</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-10-31, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-good">Open</span>Open: 1,000+ TAO stake gets a permit (11 of 64 used); server terms not documented.</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">0%</span>Owner uid holds 0% of last-epoch emission; owner cut 18%; RecycleOrBurn is Burn.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">241 uids</span><span class="v2-sx muted">top 5 hold 2.3% of incentive.</span> 241 uids earn incentive; the top five hold 2.3%.</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Converged</span>7 of 11 validators share one top uid, but every row is nearly flat (top about 0.5%).</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-good">Open</span>Validator and reference miner are public (MIT); problem server, tasks and hidden checks are not.</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-low">Low barrier</span></h3><p>Runs an AI agent that solves a coding or terminal task and returns a patch or script plus its trace.</p><ul>
+<li>Tasks are a repository patch (unified diff) or a terminal script; every answer carries a signed trajectory file.</li>
+<li>Validators wait up to an hour per miner, so keep connections alive (keepalive fix merged 2026-10-20).</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Leases tasks from the team&#x27;s server, sends them to miners, grades answers in Docker and sets weights.</p><ul>
+<li>On 2026-10-31, 11 of 64 permit slots were held; 10 set weights within the last 72 minutes and one had not for about 213 days.</li>
+</ul></section></div>
+<h2 id="sn-x0">Proposed scoring change</h2>
+<ul class="v2-list">
+<li>Pull request #24 (open, unreviewed) would pay by rank: best miner weight 1, each next one 0.995 times the one above.</li>
+<li>Team estimate: top miner about 0.7% of weights (0.5% now), top 50 about 32% (23%); a 90% miner would earn about 1.4 times an 80% miner.</li>
+<li>New miners would ramp over 20 results instead of 4 (16 to 33 hours, inside the 36-hour immunity).</li>
+</ul>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-neutral">Neutral</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">low confidence, as of 2026-10-31. Not financial advice.</span></div>
+<p class="v2-thesis">The pool is 14th of 128, the price is down 5.6% in 30 days and users sold in each of the five weeks, more slowly over the last two days. Emission reaches 241 miners evenly, but tasks and checks are team-run and no revenue is named.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.012105 TAO per alpha (28th highest of 128)</dd></div><div><dt>Pool</dt><dd>33,098 TAO, rank 14</dd></div><div><dt>Price, 30 days</dt><dd>-5.6%, 2026-10-01 to 2026-10-31</dd></div><div><dt>Net flow, 30 days</dt><dd>-1,912 TAO, 2026-10-01 to 2026-10-31</dd></div><div><dt>Miner pay</dt><dd>0.148 TAO per day on average (35.6 TAO per day over 241 uids)</dd></div><div><dt>Miner pay outside top 5</dt><dd>0.147 TAO per day on average (34.7 TAO per day over 236 uids)</dd></div><div><dt>Code activity</dt><dd>last commit 2026-10-20; 10 commits in 30 days; no releases</dd></div></dl>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>Emission reaches 241 independent miners; nothing is burned.</li>
+<li>Outflow slowed to about 20 TAO a day over the last two days (122 the week before).</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>Net outflow in all five weeks: 1,912 TAO, 5.7% of the pool.</li>
+<li>Team-run, unauditable tasks; one validator holds about 71% of dividends.</li>
+<li>No named customers or revenue; main unchanged since 2026-10-20.</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> Named paying customers or the commercial product plus weeks of net inflow: bullish. Sustained outflow or a bigger share for the top validator: bearish.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-31</span> <span class="muted">(On-chain data; honedashboard.com)</span> Registration cost fell to about 0.48 TAO (0.99 on 2026-10-23). Dashboard median miner accuracy is 82% to 93% on 3 of its 13 listed validators (80% to 89% on 2026-10-28).</li>
+<li><span class="when">2026-10-29</span> <span class="muted">(#hone)</span> A validator operator reported 11 rounds in a row with no task for one miner. The team found no fault: each round draws 128 of about 246 miners at random, so such streaks hit someone a couple of times a day.</li>
+<li><span class="when">2026-10-27</span> <span class="muted">(hone-subnet GitHub)</span> Pull requests #24 (rank-based pay) and #22 (logging) were updated; both are still unmerged and main has not changed since 2026-10-20.</li>
+<li><span class="when">2026-10-18</span> <span class="muted">(#hone; on-chain data)</span> Immunity for new miners rose from 7,200 to 10,800 blocks (36 hours). On 2026-10-19 the team said a commercial product was in the works.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Clone hone-subnet; read README.md and docs/DEMO_MINER.md. A miner needs a funded hotkey on netuid 5 (about 0.48 TAO), Python 3.10-3.12 and a public TCP port.</li>
+<li>Practise on the retired tasks in tests/fixtures with scripts/try_task.py (Docker required).</li>
+<li>Use any model or agent, submit its trace with each answer and keep validator connections open.</li>
+<li>Validators: run setup_validator.sh then start_validator.sh as a non-root docker-group user (12 GB RAM, 25 GB disk, direct route, 1,000 TAO stake).</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Tasks, hidden checks and the problem server are team-run and not public, so accuracy and task quality cannot be checked independently.</li>
+<li>Each validator scores from its own tasks; one holds about 71% of dividends and the team said on 2026-10-04 it effectively controls scoring. Pooling results (PR #17) is held.</li>
+<li>Describes the code on main as of 2026-10-20 (unchanged on 2026-10-31); PR #24 may change scoring. Commit-reveal is off.</li>
+<li>Dashboard accuracy is reported verdicts from 3 of 13 listed validators (2026-10-31); harder problems since 2026-10-14 make older figures not comparable.</li>
+<li>Own-model training, the commercial product and the claim that earnings scale with hotkey count are unverified; team statements after 2026-10-30 are unknown.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/hone-subnet-org/hone-subnet" rel="noopener noreferrer">GitHub</a></li>
+<li><a href="https://github.com/hone-subnet-org/hone-subnet/blob/main/docs/V3_TASKS.md" rel="noopener noreferrer">Task protocol (V3)</a></li>
+<li><a href="https://github.com/hone-subnet-org/hone-subnet/blob/main/docs/DEMO_MINER.md" rel="noopener noreferrer">Reference miner guide</a></li>
+<li><a href="https://github.com/hone-subnet-org/hone-subnet/blob/main/docs/MINER_DIAGNOSTICS.md" rel="noopener noreferrer">Miner diagnostics and scoring</a></li>
+<li><a href="https://honedashboard.com/" rel="noopener noreferrer">Dashboard</a></li>
+<li><a href="https://x.com/traininghone" rel="noopener noreferrer">X (project account)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 7 sources</summary>
+<ul>
+<li><strong>repo</strong> hone-subnet-org/hone-subnet README.md, docs/V3_TASKS.md, docs/DEMO_MINER.md, docs/MINER_DIAGNOSTICS.md, rlvr/policy.py, rlvr/scoring/, rlvr/v3/round.py, rlvr/v3/selection.py, rlvr/neurons/decentralized.py at 53454a9 (2026-10-20, still the main branch on 2026-10-31)</li>
+<li><strong>repo</strong> hone-subnet pull requests #17, #22 and #24 and issues #20 and #23, read through the GitHub API on 2026-10-31 (all open, no comments)</li>
+<li><strong>web</strong> https://honedashboard.com/ and its public JSON endpoints, read 2026-10-31 (counts and medians only)</li>
+<li><strong>web</strong> Chain read at block 9403436 (2026-10-31 11:07Z UTC): SN5 (Hone): registered 2024-03-04, tempo 360, 256 of 256 uids, commit-reveal off; emission weights burn/recycle/owner/validator/miner = 0/0/18/41/41 % (stored, same values as the chain default), RecycleOrBurn = Burn; uids under the owner hotkey or owner coldkey hold 0 % of incentive and 0 % of last-epoch emission (a floor); 11 validators have weight rows, on average 0 % of weight goes to uid 0; validator permit stake threshold 1000 TAO (global), 64 permit slots, 11 held. Compared with block 9378501 (2026-10-28 00:00Z): no setting changed except the registration burn.</li>
+<li><strong>web</strong> Chain read at block 9403436 (2026-10-31 11:07Z): price SN5, 6 samples every 7d from block 9187436 (2026-10-01 10:49Z): price 0.012828 -&gt; 0.012105 TAO per alpha (-5.6%), pool TAO 33688.3 -&gt; 33098.3; over the 5 intervals where the pool change equals flow + protocol: net user flow -1911.9 TAO (staked minus unstaked), protocol flow +1321.9 TAO, gross volume 5314.4 TAO. Pool and price ranks (14th and 28th of 128) from the shared snapshot at the same block.</li>
+<li><strong>msg</strong> #hone pinned launch notice 2026-07-29 and team posts 2026-07-30 to 2026-08-12</li>
+<li><strong>msg</strong> #hone, owner, team and miner discussion 2026-09-20 to 2026-10-30</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/4.html"><small>← Previous</small>SN4 Targon</a><a rel="next" href="/bittensor-docs/subnets/6.html"><small>Next →</small>SN6 Numinous</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-31. Site built 2026-10-31. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

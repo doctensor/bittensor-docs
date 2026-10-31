@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Entangle Protocol (SN395) | Bittensor Subnet Docs</title>
+<meta name="description" content="Testnet-only cross-chain messaging subnet with scanner and relay miners; no team post since 2026-06-27.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h5">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>395</span><div>
+<h1>Entangle Protocol <span class="muted">SN395</span></h1>
+<p class="tagline">Testnet-only cross-chain messaging subnet with scanner and relay miners; no team post since 2026-06-27.</p>
+<span class="st s-quiet">quiet</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl0"><b>0<small>/day</small></b><span>last 7 d</span></li><li class="pl1"><b>0.04<small>/day</small></b><span>days 8-30</span></li><li class="pl0"><b>0.02<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-02</b><span>last chat</span></li><li class="pw"><b>97</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Unknown</b><span>code activity</span></li><li class="pw"><b>none read</b><span>last commit</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>cross-chain messaging (relay network)</dd>
+<dt>Status</dt><dd>Quiet and testnet only (2026-10-31): last team post 2026-06-27 (126 days ago), linked repository returns 404, no testnet validator weights for about 97 days.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-31</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Docs vs code vs chain</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>testnet only. Netuid 395 is not on mainnet (2026-10-31); the docs&#x27; Q1 2026 mainnet date passed with no launch.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>no testnet neuron earns incentive, and no validator has set weights for about 97 days (2026-10-31).</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>miners and validators have been open on testnet since 2026-05-27; the team&#x27;s last post is 2026-06-27.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>none public. The repo the team links returns 404, so nothing here was checked against code.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>scanners need private RPC endpoints, relay miners funded wallets on each chain; no GPU is mentioned.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner (scanner) <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Watches source chains and reports cross-chain message events to validators as early as possible.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-unk">GPU unknown</li><li class="fl fl-caution">Paid service needed</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-unk"><dt>Hardware</dt><dd>Not documented (no CPU, RAM or GPU line); Python 3.10+</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>Private RPC per watched chain (docs: strongly recommended); team model assumes about $500 a month</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Testnet registration burn 0.0005 test TAO (2026-10-31); no mainnet slot exists</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Environment variables, wallet, then one start command; no setup time stated</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Miner (relay) <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Wins sealed-bid auctions and delivers messages on the destination chain from its own wallet.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-unk">GPU unknown</li><li class="fl fl-caution">Paid service needed</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-unk"><dt>Hardware</dt><dd>Not documented (no CPU, RAM or GPU line); Python 3.10+</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>RPC per chain; private mempool RPC advised on EVM; team model assumes about $400 a month</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Burn 0.0005 test TAO (2026-10-31); a funded wallet on every destination chain for gas</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>One key, RPC and contract address per chain, plus fee and concurrency flags</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Queries scanners, runs auctions, verifies deliveries, signs verified messages and sets weights.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-unk">GPU unknown</li><li class="fl fl-unk">Paid service unknown</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-unk"><dt>Hardware</dt><dd>Not documented; no validator setup guide exists in the docs</dd></div><div class="v2-need n-unk"><dt>API tokens / subscriptions</dt><dd>Not documented (destination-chain RPC access is implied); team model assumes about $1,200 a month</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Burn 0.0005 test TAO; permit stake floor 0, smallest holder not read (2026-10-31)</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Five signing keys (EVM, Solana, Sui, Cosmos, Stellar), HSM or secrets manager advised</dd></div></dl><a class="v2-more" href="#sn-role-2">Full requirements</a></div></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>Entangle Protocol is a cross-chain message relay network on Bittensor. Scanner miners watch source chains for message events, relay miners compete to deliver them on the destination chain, and validators check and score both. The team pitches it as the messaging layer for apps such as buying subnet alpha from other chains. Everything here comes from team documents; no code is public.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Two miner types share the subnet. Scanners watch chains for cross-chain events and report them fast; they need private RPC endpoints. Relay miners win sealed-bid auctions and deliver the message from their own funded wallet on the destination chain. Validators check miners about every 10 minutes and skip any that do not answer within 60 seconds.</p></div><div><h3>Validators</h3><p>Validators ask scanners for events and time their arrival, spot-check about 20 percent of reports, keep a shared gas-price estimate, run the relay auctions, confirm each delivery on the destination chain and set weights every epoch.</p></div><div><h3>Incentive</h3><p>Scanners are scored by how early their report arrives. Relay score is delivery success 50 percent, speed 25, proof correctness 15, fee efficiency 5 and reliability 5; the auction winner&#x27;s score adds a bid-quality part. Emission is split 30 percent scanners and 70 percent relays (an owner-set value); the testnet holds two mechanisms split 30 / 70.</p></div></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner (scanner) <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Watches source chains and reports cross-chain message events to validators as early as possible.</p><ul>
+<li>Docs: a scanner on a shared public RPC will systematically lose to private, low-latency infrastructure.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Miner (relay) <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Wins sealed-bid auctions and delivers messages on the destination chain from its own wallet.</p><ul>
+<li>Defaults: at most $10 of gas per relay, 12 relays in parallel, tasks with under 20 seconds left are refused.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-2"><h3>Validator <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Queries scanners, runs auctions, verifies deliveries, signs verified messages and sets weights.</p><ul>
+<li>Eight neurons hold validator permits out of 64 slots; none has set weights on either mechanism in about 97 days (2026-10-31).</li>
+<li>Docs: messages execute only after validators holding over 60 percent of registered stake attest.</li>
+</ul></section></div>
+<h2 id="sn-x0">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Mainnet date</td><td>Docs: Q1 2026; litepaper: Q2 2026; team in chat: May, then mid-July</td><td>Chain: netuid 395 is still not on mainnet</td><td>2026-10-31</td></tr><tr><td>Testnet open</td><td>Team said on 2026-05-27 that miners and validators can join the testnet subnet</td><td>Chain: no neuron has incentive; no weights set on either mechanism for about 97 days</td><td>2026-10-31</td></tr><tr><td>Source code</td><td>Team links a GitHub repository in the chain identity and the channel</td><td>Code: the link returns 404; the repo is private or removed</td><td>2026-10-31</td></tr><tr><td>Epoch length</td><td>Docs: validators set weights every 100 blocks</td><td>Chain: the testnet tempo is 360 blocks</td><td>2026-10-31</td></tr><tr><td>Fee use</td><td>Docs: 70% of the fee to the relay miner, 30% to a treasury, 20% of that to buybacks</td><td>Chat: team said all relay fees fund alpha buybacks (2026-05-10)</td><td>2026-05-10</td></tr></tbody></table></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-31</span> <span class="muted">(Testnet and mainnet chain reads)</span> Testnet: 28 neurons, 8 validator permits, no incentive, newest weight update about 97 days old (around 2026-07-25). Netuid 395 is still absent from mainnet.</li>
+<li><span class="when">2026-06-27</span> <span class="muted">(#entangle)</span> Last team post (a link to an X post). A 2026-08-08 request for a website has no reply, and nothing from the team follows through 2026-10-31.</li>
+<li><span class="when">2026-06-13</span> <span class="muted">(#entangle)</span> Asked about mainnet, the team said it was talking to investors and targeting mid-July, not fixed.</li>
+<li><span class="when">2026-06-05</span> <span class="muted">(#entangle)</span> Team said the network was live on 9 testnet chains and was building an application layer where any chain can buy subnet alpha.</li>
+<li><span class="when">2026-05-27</span> <span class="muted">(#entangle)</span> Team announced the subnet open on testnet for miners and validators, then near-daily dev updates on the Alpha Bridge V2 until 2026-06-04.</li>
+<li><span class="when">2026-05-07</span> <span class="muted">(#entangle)</span> Channel opened with a status post: miner and validator logic built, contracts on 7 chains, an end-to-end testnet demo, audit fixes under way. Team said mainnet was likely within the month (2026-05-14).</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Read the Running a Miner page in the docs: it lists the environment settings for scanners and relay miners.</li>
+<li>Register on testnet netuid 395 (btcli with --network test); the subnet does not exist on mainnet.</li>
+<li>The miner and validator code is in a GitHub repository that returns 404. Ask in the channel where it is before investing time.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Testnet only: nothing here describes mainnet emissions or economics. Testnet token and pool numbers are not real value and are left out.</li>
+<li>No code was read: the linked repository returns 404 (private or removed). Mechanism details come from team docs; the whitepaper was not read and the demo site (test.entangleprotocol.com) does not respond.</li>
+<li>The testnet looks idle: no incentive, no weight update for about 97 days on either mechanism. Two uids take about 54% and 35% of last-epoch emission; who holds them was not traced. Days assume 12 s per block.</li>
+<li>Revenue, message-volume and cost figures in the docs (including the running costs quoted above) are team projections, not observed numbers.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://entangleprotocol.com" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://docs.entangleprotocol.com" rel="noopener noreferrer">Docs</a></li>
+<li><a href="https://litepaper.entangleprotocol.com" rel="noopener noreferrer">Litepaper (May 2026)</a></li>
+<li><a href="https://x.com/webuildentangle" rel="noopener noreferrer">X</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 7 sources</summary>
+<ul>
+<li><strong>msg</strong> #entangle 2026-05-07 to 2026-10-02 (read via the chat archive; no newer messages through 2026-10-31)</li>
+<li><strong>web</strong> https://entangleprotocol.com (read 2026-10-21; link re-checked 2026-10-31)</li>
+<li><strong>web</strong> https://docs.entangleprotocol.com pages running-a-miner, validators, security-model, tokenomics-economics, roadmap (re-read in a browser 2026-10-31); scoring-incentives (2026-10-21)</li>
+<li><strong>web</strong> https://litepaper.entangleprotocol.com, v2.0 May 2026 (read 2026-10-21)</li>
+<li><strong>web</strong> Chain read at mainnet block 9400905: netuid 395 does not exist (2026-10-31); also absent on 2026-10-21 and 2026-10-26</li>
+<li><strong>web</strong> Testnet chain reads at block 8339349 (2026-10-31: subnet info and neuron aggregates for both mechanisms), compared with the reads at blocks 8306179 (2026-10-26) and 8273002 (2026-10-21): every mechanism-0 weight age grew by exactly the block difference</li>
+<li><strong>web</strong> https://github.com/Entangle-Foundation/entangle-subnet returned 404 and git asked for credentials (2026-10-21, 2026-10-26, 2026-10-31)</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/335.html"><small>← Previous</small>SN335 BrainPlay (testnet)</a><a rel="next" href="/bittensor-docs/subnets/405.html"><small>Next →</small>SN405 ACORE AI</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-31. Site built 2026-10-31. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

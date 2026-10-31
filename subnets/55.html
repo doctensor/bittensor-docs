@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NIOME (SN55) | Bittensor Subnet Docs</title>
+<meta name="description" content="Synthetic genomics subnet: miners submit CRISPR designs scored every 2.4 h; the drug-response V4 is still testnet-only.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h1">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>55</span><div>
+<h1>NIOME <span class="muted">SN55</span></h1>
+<p class="tagline">Synthetic genomics subnet: miners submit CRISPR designs scored every 2.4 h; the drug-response V4 is still testnet-only.</p>
+<span class="st s-transitioning">transitioning</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>14<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>8.9<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>32<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-31</b><span>last chat</span></li><li class="pw"><b>5,544</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Shipping</b><span>code activity</span></li><li class="pw"><b>16</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-10-21</b><span>last commit</span></li><li class="pw"><b>none</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>synthetic genomic data and pharmacogenomic benchmarks</dd>
+<dt>Status</dt><dd>Mainnet runs the V3 CRISPR task every 2.4 hours (about 230 miners scored per round, 2026-10-28). V4, a drug-response task, is testnet-only with no mainnet date. No code changes since 10-21.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-28</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Where the emission goes</a></li><li><a href="#sn-x1">Product and customers</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li>Miners send CRISPR designs for the HBB gene; validators simulate and score them every 2.4 hours.</li><li>Only the top 10 miners per round earn, and the top spot changes almost every round.</li><li>No customer or revenue is named yet.</li><li>Main risk: scoring is disputed and the owner side takes about a third of emission.</li><li>Joining costs about 0.002 TAO, but you write your own generator.</li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Writes its own generator and uploads CRISPR designs (about 250 rows reported) within 300 seconds.</p><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>16 vCPU, 16 GB RAM, GPU &#x27;necessary&#x27; (guide)</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None documented (guide: no third-party API)</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Registration burn about 0.002 TAO; no stake</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Write your own generator; the repo miner is an empty stub</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Fetches the task, scores miners&#x27; designs and sets weights each round.</p><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>32 vCPU, 64 GB RAM, no GPU, Docker</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>S3 or a Google Drive shared drive (service account)</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>A validator permit (10 holders); stake needed not read</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Run entrypoint.sh; needs the team backend</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-neutral">Neutral</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">low confidence, as of 2026-10-28. Not financial advice.</span></div><p>Mild inflow and a rising price, but no verified usage and disputed scoring. <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>NIOME is Genomes.io&#x27;s subnet for privacy-safe synthetic genomic data for pharma research. Miners now submit synthetic CRISPR designs for the HBB (sickle-cell) gene, which validators simulate and score. V4 would predict drug response and runs only on testnet. Netuid 55 was Precog before.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>V3 (mainnet): each miner gets the same task and a 300-second upload link, and returns CRISPR experiments for the HBB gene (guide RNA, target, strand, mutation, Cas9 or Cas12a, cell type). Validators simulate the outcomes. V4 (testnet): miners call gene variants and drug-prescribing actions for synthetic patients and state a confidence.</p></div><div><h3>Validators</h3><p>A validator fetches the task from the team&#x27;s backend, sends it to miners one at a time, and 1.5 hours into each 2.4-hour round scores the files: format checks, a simulated cut-and-repair outcome, a consistency score and a fidelity score, averaged over three random seeds. Consistency is how well a random forest predicts the simulated outcomes from the designs.</p></div><div><h3>Incentive</h3><p>Only the top ten scores get weight, split from 30% for first to 1% for tenth. A &#x27;burn&#x27; share goes as weight to the owner&#x27;s own validator uid: 99% until 2026-10-18, 1% since. The chain withholds it, but that uid also earns validator dividends.</p></div></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Writes its own generator and uploads CRISPR designs (about 250 rows reported) within 300 seconds.</p><ul>
+<li>Guide: Ubuntu 22.04, Python 3.12, standard port forwarding; no Windows.</li>
+<li>Miners say some operators run 10 to 90 instances each (unmeasured).</li>
+<li>If tasks return 401, set require_receiver=False (team advice, 10-19 and 10-20).</li>
+<li>The guide&#x27;s requirements.txt is not in the repo (it uses pyproject.toml).</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Fetches the task, scores miners&#x27; designs and sets weights each round.</p><ul>
+<li>Backend calls are signed with the validator hotkey; whether any validator is accepted is not documented.</li>
+<li>Only the owner&#x27;s validator (uid 119) appears in the public results feed.</li>
+<li>The guide still asks for Docker for PharmCAT, which the V3 code does not use.</li>
+</ul></section></div>
+<h2 id="sn-x0">Where the emission goes</h2>
+<p>Estimates of total emission, 2026-10-28.</p>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Who</th><th>Share</th><th>Note</th></tr></thead><tbody><tr><td>Subnet owner</td><td>18%</td><td>Fixed chain cut</td></tr><tr><td>Owner&#x27;s validator uid</td><td>about 14%</td><td>Dividends</td></tr><tr><td>Other validators</td><td>about 27%</td><td>Nine permit holders</td></tr><tr><td>Miners</td><td>41%</td><td>0.4% withheld (owner hotkey)</td></tr></tbody></table></div>
+<h2 id="sn-x1">Product and customers</h2>
+<p>The team offers custom synthetic cohorts to pharma; no customer, sale or price is named. The roadmap lists 24 challenges: 1 complete, 2 (HBB CRISPR) active.</p>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-neutral">Neutral</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">low confidence, as of 2026-10-28. Not financial advice.</span></div>
+<p class="v2-thesis">Holders were net buyers in both of the last two weeks (+301 TAO) and the price rose 9.7% on a 6,466 TAO pool (65th of 128). No customer or revenue is named, miners dispute the scoring and the owner side takes about a third of emission. Only 14 days of flow were read.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.002587 TAO per alpha</dd></div><div><dt>Pool</dt><dd>6,466 TAO (65th of 128)</dd></div><div><dt>Price, 14 days</dt><dd>+9.7%</dd></div><div><dt>Net user flow, 14 days</dt><dd>+301 TAO (in both weeks)</dd></div><div><dt>Volume, last 7 days</dt><dd>5,819 TAO (10,355 before)</dd></div></dl>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>Net inflow two weeks running.</li>
+<li>A round every 2.4 hours, about 230 miners scored.</li>
+<li>145 miners reached the top ten in three days.</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>Scoring disputed; live scorer never shown to match the code.</li>
+<li>Owner side takes about a third of emission.</li>
+<li>No customer, revenue or V4 date.</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> A named customer, a scoring audit or a V4 mainnet date would turn it bullish; renewed outflow or a stopped feed, bearish.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-28</span> <span class="muted">(#55-niome)</span> Miners asked for a leaderboard other than W&amp;B and for the token migration date; no team answer.</li>
+<li><span class="when">2026-10-26</span> <span class="muted">(#55-niome, team results feed)</span> A miner derived from the public code a consistency ceiling near 0.40 (the feed shows up to 0.71) and asked for top submissions to be published.</li>
+<li><span class="when">2026-10-23</span> <span class="muted">(#55-niome, team results feed)</span> Miners reported negative and offset-looking scores; the team said the code is the public one. Negative rows appear in the feed only from 10-21 to 10-23.</li>
+<li><span class="when">2026-10-21</span> <span class="muted">(#55-niome, team results feed)</span> The cap of 100 scored miners per round ended; about 200 to 230 are scored per round since.</li>
+<li><span class="when">2026-10-18</span> <span class="muted">(GitHub genomesio/subnet-niome, team results feed)</span> Owner share cut from 99% to 1% in code and the public results feed began.</li>
+<li><span class="when">2026-10-06</span> <span class="muted">(#55-niome)</span> V4 announced live on testnet (V3 has been live on mainnet since 08-14); V4 mainnet only after the workflow is validated.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Read the pinned posts in the subnet channel first; the site&#x27;s miner and validator pages say docs are coming soon.</li>
+<li>Miner: Ubuntu 22.04, Python 3.12, 16 vCPU, 16 GB RAM, GPU per the guide. Clone genomesio/subnet-niome and install from pyproject.toml.</li>
+<li>Write your own generator (process_task is a stub); benchmark_submission in the repo scores a file locally.</li>
+<li>Register a hotkey on netuid 55 with btcli (about 0.002 TAO), then run neurons/miner.py with --netuid 55 on finney (open axon port).</li>
+<li>Upload each result to the task&#x27;s link within 300 seconds, then look for your uid in the results feed.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Scoring is disputed: miners say the top consistency values (up to 0.71) cannot come from the public code, and many rows share one decimal tail. Not tested here.</li>
+<li>The live validator may differ from the repo: a validator-side change was reverted on 10-19, and no commit explains the 10-21 coverage fix or the end of negative rows.</li>
+<li>Tasks and scores run through the team&#x27;s closed backend; only the owner&#x27;s validator posts to the feed, and other validators&#x27; top weights match it.</li>
+<li>Submissions and weights are keyed by uid, so a uid taken over mid-round inherits the old result (reported 10-02, no fix seen).</li>
+<li>The V4 date and token migration are unanswered; the site and the team disagree on whether the HBB challenge is done.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://niome.genomes.io" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://github.com/genomesio/subnet-niome" rel="noopener noreferrer">GitHub (mainnet V3 code)</a></li>
+<li><a href="https://github.com/genomesio/subnet-niome-v4" rel="noopener noreferrer">GitHub (V4 code, testnet)</a></li>
+<li><a href="https://niome-leaderboard.genomes.io/api/v3/miners/scores" rel="noopener noreferrer">Team results feed (public read, large JSON)</a></li>
+<li><a href="https://discord.gg/7mJkaJZX" rel="noopener noreferrer">Discord (linked from the chain identity)</a></li>
+<li><a href="https://x.com/niomeai" rel="noopener noreferrer">X</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 8 sources</summary>
+<ul>
+<li><strong>repo</strong> genomesio/subnet-niome @c5a5197 (2026-10-21, unchanged on 2026-10-28): README, docs/miner_guide.md, docs/validator_guide.md, neurons/miner.py, utils/settings.py, validator/forward.py, base/validator.py, genomics/validation/*, git history</li>
+<li><strong>repo</strong> genomesio/subnet-niome-v4 @99ff6bf (2026-10-19): README, docs/validation.md, utils/settings.py, git history; organisation repository list checked 2026-10-28</li>
+<li><strong>web</strong> https://niome-leaderboard.genomes.io/api/v3/miners/scores (public feed, hotkeys not read, 28,566 rows fetched 2026-10-28 10:01Z) and https://niome.genomes.io (read 2026-10-28)</li>
+<li><strong>web</strong> Chain read at block 9381461 (2026-10-28 09:52Z UTC): SN55 (NIOME), registered 2025-01-14, tempo 360, 256 of 256 uids, commit-reveal off; emission weights burn/recycle/owner/validator/miner = 0/0/18/41/41 % (stored), RecycleOrBurn = Burn; uids under the owner hotkey hold 1 % of incentive and 16.91 % of last-epoch emission (a floor); 10 validators have weight rows; pool 6465.84 TAO, price 0.002587 TAO per alpha</li>
+<li><strong>web</strong> Chain read at block 9381537 (2026-10-28 10:07Z), compared with block 9342501 (2026-10-23 00:00Z): no setting changed in 33 checked items; registration burn differs (moves with demand); emission split unchanged; weights of the 10 permit holders: 7 top-weight uid 143, 2 uid 248, 1 the owner uid</li>
+<li><strong>web</strong> Chain read at block 9381537: price SN55, 3 samples every 7d from block 9280737 (2026-10-14 09:51Z): price 0.002359 -&gt; 0.002587 TAO per alpha (+9.7%), pool TAO 6171.7 -&gt; 6465.9; net user flow +301.0 TAO (staked minus unstaked), protocol flow -6.8 TAO, gross volume 16173.6 TAO. Shared snapshot over 129 subnets at the same block: pool rank 65 of 128, 0.323 % of all pools, price rank 95. The 30-day flow was not read</li>
+<li><strong>web</strong> Discord invite API (2026-10-28): the invite on the chain identity opens the NIOME server, 756 members</li>
+<li><strong>msg</strong> #55-niome, 2026-10-23 to 2026-10-28 10:00 UTC (72 messages), plus pinned posts and earlier history read on 2026-10-21 and 2026-10-23</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/54.html"><small>← Previous</small>SN54 Yanez</a><a rel="next" href="/bittensor-docs/subnets/56.html"><small>Next →</small>SN56 Gradients</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-28. Site built 2026-10-31. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EchoIC (testnet) (SN309) | Bittensor Subnet Docs</title>
+<meta name="description" content="Testnet-only voice-cloning subnet where the fastest miner that clears a quality bar takes each round.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h3">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>309</span><div>
+<h1>EchoIC (testnet) <span class="muted">SN309</span></h1>
+<p class="tagline">Testnet-only voice-cloning subnet where the fastest miner that clears a quality bar takes each round.</p>
+<span class="st s-quiet">quiet</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl0"><b>0<small>/day</small></b><span>last 7 d</span></li><li class="pl0"><b>0<small>/day</small></b><span>days 8-30</span></li><li class="pl0"><b>0<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-02-12</b><span>last chat</span></li><li class="pw"><b>11</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Quiet</b><span>code activity</span></li><li class="pw"><b>0</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-01-15</b><span>last commit</span></li><li class="pw"><b>none</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>voice cloning (text-to-speech)</dd>
+<dt>Status</dt><dd>Quiet and testnet only as of 2026-10-31. Mainnet has no netuid 309. On the testnet slot (registered 2025-12-22) the one validator has set no weights for about 312 days and no uid has incentive. The last team post is from 2026-02-12 (261 days ago), the repository has had no commit since 2026-01-15 and the team&#x27;s site did not answer on four checks.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-31</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Docs vs code vs chain</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>miners clone a voice from a sample and a transcript; validators score text, voice match, intonation and sound quality.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>netuid 309 is not on mainnet (2026-10-31). The testnet slot dates from 2025-12-22 and has 6 neurons.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>the one testnet validator has set no weights for about 312 days, and no uid has incentive (2026-10-31).</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>public repo, last commit 2026-01-15. Miners need a GPU; validators need an API key from the team&#x27;s site.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>last post (2026-02-12) promised ElevenLabs and Chatterbox methods; neither is in the code. Site unreachable.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Runs a voice-cloning model on a GPU and returns each result as a file link in its own storage bucket.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-caution">GPU needed</li><li class="fl fl-caution">Paid service needed</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>GPU required: 4 GB VRAM minimum, 8 GB advised (RTX 3060); 4+ cores, 16 GB RAM, 20 GB SSD</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>A storage bucket (Backblaze, Amazon S3 or Cloudflare R2) for result files; price not stated</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Testnet burn 0.0005 test TAO (2026-10-31); no mainnet slot and no stake rule documented</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Python 3.10 or older, TTS libraries and .env bucket keys; no time estimate given</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Fetches voice tasks from the team&#x27;s server, scores miners&#x27; audio and sets weights. Needs a team-issued API key.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-bad">Permissioned</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>CPU only works (GPU optional): 4+ cores, 16 GB RAM, 10 GB SSD, ffmpeg</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None paid in the docs; a team-issued API key (echo-ic.com) is required and the site was unreachable on 2026-10-31</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Testnet burn 0.0005 test TAO; permit stake threshold 0 TAO, 64 permit slots (2026-10-31)</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Install requirements and ffmpeg, then sign up on the team&#x27;s site for an API key; no time estimate</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>EchoIC is a voice-cloning subnet. A miner gets a short voice sample and a transcript, produces speech in that voice with a cloning model and returns an audio file; validators score text accuracy, voice similarity, intonation and sound quality. Everything found describes testnet use; the channel has been silent since February 2026 and the project looks dormant.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Miners run one of four cloning methods (XTTS by default, Bark, Tortoise or RVC), upload each result to their own storage bucket (Backblaze, Amazon S3 or Cloudflare R2) and return the file&#x27;s address.</p></div><div><h3>Validators</h3><p>Validators fetch tasks (a voice sample, a transcript and a time limit) from the team&#x27;s own server, so the task source is closed. Each task goes to up to 50 responsive miners. Results are scored 30 percent text accuracy (speech recognition against the transcript), 30 percent voice similarity, 30 percent intonation and 10 percent audio quality.</p></div><div><h3>Incentive</h3><p>In the code a miner scoring below 0.7 overall fails the round. Among passing miners the fastest response wins and scores 1; everyone else scores 0. A moving average (weight 0.1 on the newest round) turns the results into the validator&#x27;s weights. On testnet no uid has incentive, so no round results reach the chain.</p></div></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Runs a voice-cloning model on a GPU and returns each result as a file link in its own storage bucket.</p><ul>
+<li>Speed counts: the fastest passing miner wins the round (code).</li>
+<li>The README calls a GPU &#x27;recommended&#x27;; the repository&#x27;s min_compute.yml marks it required for miners.</li>
+<li>Nothing can be earned today: no uid has incentive on testnet 309 (chain, 2026-10-31).</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Fetches voice tasks from the team&#x27;s server, scores miners&#x27; audio and sets weights. Needs a team-issued API key.</p><ul>
+<li>Scoring uses a Whisper base speech model (GPU if found, else CPU) and a speaker-recognition model (code).</li>
+<li>Tasks come only from the team&#x27;s server; with no task the validator waits 60 seconds (code).</li>
+</ul></section></div>
+<h2 id="sn-x0">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Score thresholds</td><td>README: overall 0.8, intonation 0.75, quality 0.85 to earn</td><td>Code: only overall (default 0.7) is enforced; other limits commented out</td><td>2026-10-31</td></tr><tr><td>Repository link</td><td>README clone URL names the echoic-labs organization</td><td>Code: the team&#x27;s repo is echo-ic/echo-bittensor-subnet; echoic-labs returns 404</td><td>2026-10-31</td></tr><tr><td>Testnet validation</td><td>Team (2026-02-12): v1.0.0 passed full testnet validation</td><td>Chain: the one validator has set no weights since registration; no uid has incentive</td><td>2026-10-31</td></tr><tr><td>New methods</td><td>Team (2026-02-12): ElevenLabs and Chatterbox being added</td><td>Code: neither appears in the repository; no commit since 2026-01-15</td><td>2026-10-31</td></tr></tbody></table></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-31</span> <span class="muted">(Testnet and mainnet chain reads (netuid 309); GitHub echo-ic/echo-bittensor-subnet; #echo-ic (testnet 309))</span> Netuid 309 is still registered on testnet as EchoIC (6 neurons); its one validator has set no weights since registration and no uid has incentive. Repository and channel unchanged; site unreachable.</li>
+<li><span class="when">2026-02-12</span> <span class="muted">(#echo-ic (testnet 309))</span> Team said version 1.0.0 had launched and passed full testnet validation, and that ElevenLabs and Chatterbox were being added. Last team post.</li>
+<li><span class="when">2026-02-06</span> <span class="muted">(#echo-ic (testnet 309))</span> A user suggested stricter version checks, versioning for clone tasks and tighter reward thresholds. No team reply appears.</li>
+<li><span class="when">2026-02-05</span> <span class="muted">(#echo-ic (testnet 309))</span> Team introduced the subnet in the channel with links to the repository, the website and its X account.</li>
+<li><span class="when">2026-01-15</span> <span class="muted">(GitHub echo-ic/echo-bittensor-subnet)</span> Last commits to the public repository: a reward correction for failed responses and a change that moves model loading to the miner side.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>There is nothing to join today: no testnet uid earns and the one validator has set no weights for about 312 days. Ask in the project&#x27;s channel whether anything runs first.</li>
+<li>Miners: use a GPU machine with Python 3.10 or older, clone echo-ic/echo-bittensor-subnet (the README&#x27;s organization link is dead) and install requirements.txt plus miner_additional_requirements.txt.</li>
+<li>Copy .env.example to .env and set a storage provider, endpoint, bucket and keys. Run neurons/miner.py with your wallet, the netuid and --voice_cloning.method xtts.</li>
+<li>Validators: install ffmpeg and sign up on the team&#x27;s site for an API key. The site did not answer on 2026-10-31, so a validator cannot start without the team.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Testnet only: nothing here describes mainnet emissions or economics. Test-network pool and price figures are test tokens and are not given.</li>
+<li>The team&#x27;s site did not respond on 2026-10-21, 2026-10-26, 2026-10-27 or 2026-10-31. Validators depend on its task server, so the subnet may not be running.</li>
+<li>The no-weights finding is an inference: the validator&#x27;s last update age equals the slot&#x27;s age. Individual weights were not read; block-to-date conversions are estimates.</li>
+<li>Who runs the permit holder, and whether any miner runs, were not read. No incentive on any uid means only that nobody earned in the last epoch.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/echo-ic/echo-bittensor-subnet" rel="noopener noreferrer">GitHub (echo-ic/echo-bittensor-subnet)</a></li>
+<li><a href="https://x.com/echoic_lab" rel="noopener noreferrer">X (EchoIC)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 5 sources</summary>
+<ul>
+<li><strong>repo</strong> echo-ic/echo-bittensor-subnet @ 7fb1069 (2026-01-15): README.md, min_compute.yml, .env.example, requirements files, echo/validator/{forward,reward,evaluator}.py, echo/base/validator.py, echo/protocol.py; head re-checked 2026-10-31 (unchanged)</li>
+<li><strong>msg</strong> #echo-ic (testnet 309) posts dated 2026-02-05, 2026-02-06 and 2026-02-12; archive search after 2026-10-27 returned no message</li>
+<li><strong>web</strong> Mainnet chain reads for netuid 309 (not registered): block 9334506 (2026-10-21), 9367710 (2026-10-26), 9375194 (2026-10-27) and 9400980 (2026-10-31)</li>
+<li><strong>web</strong> Testnet chain reads for netuid 309 at block 8339425 (2026-10-31): subnet (exists, name EchoIC, registered 2025-12-22, 6 neurons, on-chain identity) and uids (1 validator permit, weight age 2,249,864 blocks = block minus registration block, no incentive or dividends, empty commit-reveal queues); earlier reads at blocks 8273084, 8306179 and 8313638 gave the same picture; block dates are estimates</li>
+<li><strong>web</strong> git ls-remote of echo-ic/echo-bittensor-subnet (head 7fb1069), github.com/echo-ic (HTTP 200), github.com/echoic-labs (HTTP 404), x.com/echoic_lab (HTTP 200, content not read); echo-ic.com and its API path no answer within 20 seconds, all checked 2026-10-31</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/305.html"><small>← Previous</small>SN305 Blockchain Insights (testnet 305)</a><a rel="next" href="/bittensor-docs/subnets/310.html"><small>Next →</small>SN310 AuditPal</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-31. Site built 2026-10-31. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

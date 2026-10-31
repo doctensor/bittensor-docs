@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UR (SN25) | Bittensor Subnet Docs</title>
+<meta name="description" content="Privacy network on home connections: live since 2026-10-08, no provider paid yet; v2 payouts start about 2026-10-30.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h7">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>25</span><div>
+<h1>UR <span class="muted">SN25</span></h1>
+<p class="tagline">Privacy network on home connections: live since 2026-10-08, no provider paid yet; v2 payouts start about 2026-10-30.</p>
+<span class="st s-transitioning">transitioning</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl4"><b>6.3<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>6.9<small>/day</small></b><span>days 8-30</span></li><li class="pl4"><b>6.1<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-30</b><span>last chat</span></li><li class="pw"><b>569</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Shipping</b><span>code activity</span></li><li class="pw"><b>2,016</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-10-29</b><span>last commit</span></li><li class="pw"><b>2026-10-27</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>privacy network (VPN bandwidth)</dd>
+<dt>Status</dt><dd>Live on mainnet since 2026-10-08 with no provider paid on chain. The v2 payout pool was registered on 2026-10-29 for epoch 4, starting about 2026-10-30 18:25 UTC.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-30</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Payout status by epoch</a></li><li><a href="#sn-x1">Docs vs code vs chain</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-similar">Similar subnets</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>providers share home bandwidth as relay points; the first operator is the team&#x27;s own ur.io VPN app.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>live since 2026-10-08, but no provider paid yet; epochs 1 and 2 ended with no payout list.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>about 45% of miner and validator emission goes to a reserve multisig, 25% to the owner&#x27;s validator.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>joining as a provider needs an installer, a stable public IP and an operator account; no burn.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>price down 22% in 30 days, net selling in 4 of 5 weeks; usage claims are the team&#x27;s alone.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner (provider) <span class="v2-barrier b-low">Low barrier</span></h3><p>Shares a home or server connection as a relay and joins an operator&#x27;s pool.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>Home PC, server or Raspberry Pi; one stable public IP (docs)</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>Operator account (BringYour by default); no fee documented</dd></div><div class="v2-need n-no"><dt>Stake / fees</dt><dd>No burn or stake for pool providers; a little TAO for claim gas</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Run an installer, sign in, sign one wallet message</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Tests providers and sets weights; in practice only the owner&#x27;s validator measures.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-unk">GPU unknown</li><li class="fl fl-good">No paid service</li><li class="fl fl-bad">Permissioned</li></ul><dl class="v2-needs"><div class="v2-need n-unk"><dt>Hardware</dt><dd>Not documented</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>Team-provisioned production config and approvals (docs)</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Burn 0.0005 TAO; permit threshold 1,000 TAO (global)</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Not self-service: the team provisions the bootstrap</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div><div class="v2-role"><h3>Network operator <span class="v2-barrier b-high">High barrier</span></h3><p>Runs the servers that carry user traffic and commits each epoch&#x27;s payout list.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-caution">Paid service needed</li><li class="fl fl-bad">Permissioned</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>Linux host, PostgreSQL, Redis, GeoLite2 (docs)</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>Own domain and hosting</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Owner-gated registration; alpha deposits (rate 0 for now)</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>One binary serves API, Connect and tasks; talk to the owner first</dd></div></dl><a class="v2-more" href="#sn-role-2">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-10-30. Not financial advice.</span></div><p>A month of net selling and no payout yet; v2 is set to start. <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>UR (SN25) pays people who share their home internet connection as relay points in a VPN-style privacy network with layered encryption. The first operator is BringYour, which runs the ur.io apps and says it has 100,000+ providers to move over. The slot was Mainframe&#x27;s before 2026-08.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>A provider runs the provider program on a PC, server or Raspberry Pi with one stable public IP, signs in with an operator account (BringYour by default) and registers a Bittensor wallet. Most providers need no slot or burn: the operator holds one shared slot for all of them, and each provider claims a proof-backed share from a settlement contract.</p></div><div><h3>Validators</h3><p>Validators walk server-assigned chains of providers to test that they carry traffic, then set weights each tempo. A pool&#x27;s weight is its operator&#x27;s reported usage times a quality score of 0.75 to 1.0. Only the owner&#x27;s validator measures at launch. Of 16 permit holders, 12 set weights and 11 rank the same reserve slot first; whether they are independent of the team is unknown.</p></div><div><h3>Incentive</h3><p>Emission splits 18% owner, 41% miners, 41% validators, no burn. Launch policy gives providers 10% of the miner share and sends 90% to a 2-of-3 multisig, the Network Capacity Reserve, which the team says will fund capacity ahead of demand. Payouts run in 7-day epochs: v1 pays only providers the validator measured (about 1,500 an epoch); v2 pays by completed usage.</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-10-30, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-caution">Whitelisted</span>The team provisions the validator setup; 16 stake permits exist, but only the owner&#x27;s validator measures.</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">25.4%</span>Owner&#x27;s validator earns 25.4% of emission (50.8% of dividends); owner cut is 18%, burn mode is Burn.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">3 uids</span><span class="v2-sx muted">top 5 hold 100% of incentive.</span> Three slots earn all incentive, the top one 45%; one shared pool slot stands in for all providers.</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Converged</span>11 of 12 weight-setters put their top weight on one slot. That is concentration, not proof of copying.</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-good">Open</span>Miner and validator code is public in urfoundation/sn with an MPL-2.0 licence file; GitHub detects no licence.</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner (provider) <span class="v2-barrier b-low">Low barrier</span></h3><p>Shares a home or server connection as a relay and joins an operator&#x27;s pool.</p><ul>
+<li>Installers for Linux, macOS and Windows; ports TCP 443 and UDP 443, 53, 4053.</li>
+<li>Up to about 200 head-tier fleets (ranked by distinct exit prefixes) can bind their own slot, burn alpha to register and earn no pool share; none earned on 2026-10-23.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Tests providers and sets weights; in practice only the owner&#x27;s validator measures.</p><p class="muted">No further detail found in the sources.</p></section><section class="v2-rdetail" id="sn-role-2"><h3>Network operator <span class="v2-barrier b-high">High barrier</span></h3><p>Runs the servers that carry user traffic and commits each epoch&#x27;s payout list.</p><p class="muted">No further detail found in the sources.</p></section></div>
+<h2 id="sn-x0">Payout status by epoch</h2>
+<p>No claim has appeared on the contracts (2026-10-30). Epoch 0 was a one-day bootstrap.</p>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Epoch</th><th>Dates</th><th>Settled by</th><th>What happened</th></tr></thead><tbody><tr><td>1</td><td>Oct 9-16</td><td>v1</td><td>3,482 alpha captured, no payout list, carried.</td></tr><tr><td>2</td><td>Oct 16-23</td><td>v1</td><td>Close step missed, funded with 0.</td></tr><tr><td>3</td><td>Oct 23-30</td><td>v1</td><td>Open; close due 2026-10-30 18:25 UTC.</td></tr><tr><td>4</td><td>Oct 30-Nov 6</td><td>v2 (target)</td><td>v2 pool registered 2026-10-29; claims from Nov 8.</td></tr></tbody></table></div>
+<h2 id="sn-x1">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Validators</td><td>Team: permissionless</td><td>Code: validator guide needs team-provisioned config</td><td>2026-10-30</td></tr><tr><td>v2 start</td><td>Site: pool registration pending</td><td>Chain: v2 pool registered 2026-10-29, first epoch 4</td><td>2026-10-30</td></tr></tbody></table></div>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-10-30. Not financial advice.</span></div>
+<p class="v2-thesis">Holders sold in four of five weeks (net outflow 1,651 TAO, price down 22%), though selling slowed in the last two days. No provider has been paid and most emission sits in team-linked slots.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.005174 TAO per alpha</dd></div><div><dt>Pool</dt><dd>11,745 TAO, rank 42</dd></div><div><dt>Price, 30 days</dt><dd>-22%, 2026-09-28 to 2026-10-30</dd></div><div><dt>Net flow, 30 days</dt><dd>-1,651 TAO, 2026-09-30 to 2026-10-30</dd></div><div><dt>Miner pay</dt><dd>12.5 TAO per day over 3 paid uids (too few for an average)</dd></div><div><dt>Miner pay outside top 5</dt><dd>12.5 TAO per day over 3 paid uids (too few for an average)</dd></div><div><dt>Code activity</dt><dd>last commit 2026-10-29; 2,495 commits in 30 days; last release 2026-10-27</dd></div></dl>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>Team ships: 82 commits since 2026-10-21; the v2 pool is registered.</li>
+<li>Open routing competition on Apex (SN1) announced 2026-10-28.</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>No payout after three weeks; epoch 2&#x27;s close was missed.</li>
+<li>About 75% of emission sits in team-linked slots.</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> Epoch 3 closing on time with providers claiming, and v2 live from epoch 4, would move it toward neutral.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-similar">Similar subnets</h2>
+<div class="v2-sim"><p>By pool size this is <strong>rank 6 of 12</strong> among the subnets grouped as <em>compute</em> (what they mainly sell). Pool and price as of 2026-10-30 to 2026-10-31, price in TAO per alpha; the barrier is the easiest miner role.</p><div class="scroll"><table class="v2-table"><thead><tr><th>#</th><th>Subnet</th><th>Pool</th><th>Price</th><th>Miner barrier</th></tr></thead><tbody><tr><td>4</td><td><a href="/bittensor-docs/subnets/12.html">ComputeHorde</a> <span class="muted">SN12</span></td><td>12,615 TAO</td><td>0.004746</td><td><span class="v2-barrier b-high">High</span></td></tr><tr><td>5</td><td><a href="/bittensor-docs/subnets/110.html">Green Compute</a> <span class="muted">SN110</span></td><td>11,762 TAO</td><td>0.02472</td><td><span class="v2-barrier b-high">High</span></td></tr><tr class="me" aria-current="true"><td>6</td><td>UR <span class="muted">SN25, this page</span></td><td>11,745 TAO</td><td>0.005174</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr><td>7</td><td><a href="/bittensor-docs/subnets/106.html">Nodexo</a> <span class="muted">SN106</span></td><td>5,626 TAO</td><td>0.002127</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>8</td><td><a href="/bittensor-docs/subnets/105.html">Beam</a> <span class="muted">SN105</span></td><td>5,356 TAO</td><td>0.006499</td><td><span class="v2-barrier b-medium">Medium</span></td></tr></tbody></table></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-29</span> <span class="muted">(Bittensor EVM contracts, ur.xyz/mainnet)</span> The v2 payout pool was registered on chain for epoch 4; the team&#x27;s timeline still showed it pending.</li>
+<li><span class="when">2026-10-29</span> <span class="muted">(GitHub (urfoundation/sn))</span> Repo: 19 commits that day; the owner&#x27;s validator uploads a signed head summary; policy and weights unchanged.</li>
+<li><span class="when">2026-10-28</span> <span class="muted">(#25-ur, ur.xyz/investors)</span> Team announced an open routing competition on Apex (SN1) with public benchmark data; prize terms unpublished.</li>
+<li><span class="when">2026-10-26</span> <span class="muted">(#25-ur, ur.xyz/operators.yml)</span> Team said Persistent AI joins as a third-party operator; the published list shows only BringYour.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Read the miner guide (updated 2026-10-22); BringYour is the only listed operator, so join its pool.</li>
+<li>Install the newest provider release for your OS (v2026.10.27); the old miner is deprioritised from 2026-11-11.</li>
+<li>Run &#x27;provider setup&#x27;: sign in, register the device and sign a payout-address message with your coldkey; run it as a service.</li>
+<li>After an epoch&#x27;s payout list finalizes, claim with &#x27;provider claim --epoch N&#x27; using an EVM relayer key; v2 claims start no earlier than 2026-11-08.</li>
+<li>Validators: not self-service; ask the team in the channel first.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Dates keep moving: v2 slipped from epoch 2 to 3 to 4 and is confirmed only when epoch 4 begins; the &#x27;modern provider&#x27; gate moved to 2026-11-11.</li>
+<li>Why epoch 2&#x27;s close was missed is unknown; epoch 3&#x27;s close (about 2026-10-30 18:25 UTC) is the next check.</li>
+<li>One operator and one measuring validator, both UR&#x27;s; whether the other weight-setters are independent is unknown.</li>
+<li>Scale and privacy claims are the team&#x27;s (100,000+ providers); its threat model says no independent audit exists yet.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/urfoundation/sn" rel="noopener noreferrer">GitHub (subnet)</a></li>
+<li><a href="https://ur.xyz/" rel="noopener noreferrer">Protocol site</a></li>
+<li><a href="https://ur.xyz/mainnet" rel="noopener noreferrer">Mainnet launch timeline</a></li>
+<li><a href="https://ur.xyz/docs/miner" rel="noopener noreferrer">Miner guide</a></li>
+<li><a href="https://ur.xyz/docs/validator" rel="noopener noreferrer">Validator guide</a></li>
+<li><a href="https://ur.xyz/docs/operator" rel="noopener noreferrer">Operator guide</a></li>
+<li><a href="https://ur.xyz/docs/litepaper" rel="noopener noreferrer">Litepaper</a></li>
+<li><a href="https://ur.xyz/reserve" rel="noopener noreferrer">Network Capacity Reserve</a></li>
+<li><a href="https://ur.xyz/operators.yml" rel="noopener noreferrer">Published operator list</a></li>
+<li><a href="https://ur.xyz/investors/apex-competition" rel="noopener noreferrer">Apex competition announcement</a></li>
+<li><a href="https://ur.xyz/research/2026-q3-report" rel="noopener noreferrer">Research report</a></li>
+<li><a href="https://ur.io/docs/threat-model" rel="noopener noreferrer">Threat model (URnetwork docs)</a></li>
+<li><a href="https://github.com/urnetwork/build/releases" rel="noopener noreferrer">Provider releases</a></li>
+<li><a href="https://ur.io/" rel="noopener noreferrer">VPN app and operator</a></li>
+<li><a href="https://t.me/ursn25" rel="noopener noreferrer">Telegram</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 8 sources</summary>
+<ul>
+<li><strong>repo</strong> urfoundation/sn at 94d6e350 (2026-10-29): README.md, VALIDATOR.md, mainnet/MAINNET.md, mainnet/LAUNCH.md, mainnet/TIMELINE-UPDATE.md, validator/treasury_policy.go, deploy/mainnet, evm/src, api/competition.yml; no change to the policy and contract files since c9d96068 (2026-10-22); on 2026-10-29 the validator head arithmetic moved into a shared package and a head-summary upload was added (commit notes: policy, weights, treasury path unchanged).</li>
+<li><strong>web</strong> https://ur.xyz/mainnet (&#x27;Updated 2026-10-27&#x27;), https://ur.xyz/docs/miner (2026-10-22), /docs/operator (2026-10-21), /docs/validator (2026-10-07), https://ur.xyz/reserve, /operators.yml, /investors/apex-competition (dated 2026-10-28), /research/2026-q3-report, read 2026-10-28 and 2026-10-30.</li>
+<li><strong>web</strong> https://ur.io/docs/threat-model (written against code of 2026-09-17); api.github.com urnetwork/build releases (newest v2026.10.27, 2026-10-27) and the urfoundation/sn releases feed, read 2026-10-30.</li>
+<li><strong>web</strong> Chain read at block 9393045 (2026-10-30 00:28Z UTC): SN25 (UR): registered 2024-05-20, tempo 360, 256 of 256 uids, commit-reveal on; emission weights burn/recycle/owner/validator/miner = 0/0/18/41/41 % (stored, same values as the chain default), RecycleOrBurn = Burn; uids under the owner hotkey or owner coldkey hold 0 % of incentive and 25.4 % of last-epoch emission (a floor); 12 validators have weight rows. Incentive: 3 uids nonzero, top uid 45.0 %; 16 validator permits.</li>
+<li><strong>web</strong> Chain read at block 9393045 (2026-10-30 00:28Z): price SN25, 6 samples every 7d from block 9177045 (2026-09-30 00:11Z): price 0.006726 -&gt; 0.005174 TAO per alpha (-23.1%), pool TAO 13258.6 -&gt; 11744.9; net user flow -1651.1 TAO, protocol flow +137.4 TAO, gross volume 39848.2 TAO.</li>
+<li><strong>web</strong> Chain read at block 9393045 (2026-10-30 00:28Z): shared snapshot over 129 subnets: SN25 pool 11744.9 TAO (42nd of 128 non-root, 0.59% of all pools, median 6342), price rank 51st of 128.</li>
+<li><strong>web</strong> Bittensor EVM archive RPC (chain 964), eth_getLogs on the v1 coordinator, v1 and v2 settlement vaults, blocks 9,297,000 to 9,393,112 (2026-10-30 00:42Z): epoch 1 capture 3,482.26 alpha (block 9,297,631), root missed and carried (9,312,031); epoch 2 emission deferred (9,348,551), root missed with 0 carried (9,362,431); v2 pool registered for first epoch 4 (block 9,386,659); no claim events.</li>
+<li><strong>msg</strong> #25-ur 2026-08-18 to 2026-10-29 (last message read 2026-10-29 17:41 UTC)</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/23.html"><small>← Previous</small>SN23 Trishool</a><a rel="next" href="/bittensor-docs/subnets/26.html"><small>Next →</small>SN26 Perturb</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-30. Site built 2026-10-31. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cacheon (SN14) | Bittensor Subnet Docs</title>
+<meta name="description" content="Miners race to speed up AI model serving on SGLang; the team&#x27;s evaluator scores each bundle and pays the winner.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h2">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>14</span><div>
+<h1>Cacheon <span class="muted">SN14</span></h1>
+<p class="tagline">Miners race to speed up AI model serving on SGLang; the team&#x27;s evaluator scores each bundle and pays the winner.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>29<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>21<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>23<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-31</b><span>last chat</span></li><li class="pw"><b>3,722</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Shipping</b><span>code activity</span></li><li class="pw"><b>799</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-10-28</b><span>last commit</span></li><li class="pw"><b>2026-10-01</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>AI inference speed contests (serving engine, SGLang)</dd>
+<dt>Status</dt><dd>Arena open and entries evaluated; the first crown was revoked and re-won, and the evaluator was idle about 5 hours at the 2026-10-31 check.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-31</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Docs vs code vs chain</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-similar">Similar subnets</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>a new entry must beat the current winner by 1.5% (about 1.039x stock) to be paid.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>90% of incentive goes to one miner, 10% to a kernel-challenge claimant; the team&#x27;s board puts the winner 2.4% over stock.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>scoring runs on team servers; its dashboard showed the evaluator idle about 5 hours on 2026-10-31.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>hard to join: 8 B300 GPUs, kernel skills, 0.5 TAO per entry; validators only follow the team&#x27;s offer.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>revenue of about 100 thousand USD in a month; chain and code do not show usage.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-high">High barrier</span></h3><p>Builds and tests a faster bundle for the open arena; pays 0.5 TAO per entry.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-caution">GPU needed</li><li class="fl fl-caution">Paid service needed</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>B300-class GPUs: 8 for the DeepSeek arena (4 prefill, 4 decode)</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>GPU rental if you own none; a public URL for the bundle</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>0.5 TAO per entry, not refunded if an arena pauses; burn 0.0005 TAO</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Kernel and SGLang engineering; Python 3.11+, Docker</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Nine permit holders, seven publish weights, all the team&#x27;s one offer; the team does the scoring.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-unk">GPU unknown</li><li class="fl fl-unk">Paid service unknown</li><li class="fl fl-bad">Permissioned</li></ul><dl class="v2-needs"><div class="v2-need n-unk"><dt>Hardware</dt><dd>Not documented for followers; the team&#x27;s evaluator uses rented B300 hosts</dd></div><div class="v2-need n-unk"><dt>API tokens / subscriptions</dt><dd>Not documented</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Stake threshold 1,000 TAO; smallest permit holder not read; burn 0.0005 TAO</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Run the follower command; the weights gateway is permit-gated (access rule not tested)</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div><div class="v2-role"><h3>Challenge claimant <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Competes in Meta&#x27;s kernel challenge, then claims the code here for a share of 10% of weights.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-caution">GPU needed</li><li class="fl fl-unk">Paid service unknown</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>One H200 for the five kernel boards; eight for the serving board</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>Challenge account; a public URL for the bundle</dd></div><div class="v2-need n-no"><dt>Stake / fees</dt><dd>No fee; burn 0.0005 TAO</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Register a username with &#x27;Cacheon&#x27; on chain, then claim (kestrel branch guide)</dd></div></dl><a class="v2-more" href="#sn-role-2">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-neutral">Neutral</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">low confidence, as of 2026-10-31. Not financial advice.</span></div><p>Mid-table pool with 30-day inflow, but pay rests on one miner and a stalled evaluator. <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>Cacheon runs speed contests for AI inference. Miners submit code that speeds up one part of a serving engine (SGLang); the team&#x27;s evaluator checks that it is faster with no loss of quality. One arena is open now (DeepSeek V4.1 Flash).</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Build a bundle that replaces one part of the SGLang baseline, host it, pay the fee and commit it on chain; model weights may not change.</p></div><div><h3>Validators</h3><p>The team&#x27;s evaluator replays a sealed workload against baseline and candidate and audits speed and quality. One signed weight offer goes out; follower validators republish it.</p></div><div><h3>Incentive</h3><p>Credit needs one audited pass that beats the arena&#x27;s best earlier pass by 1.5%, and grows with the log of the speedup. Chain split: 18% owner, 41% validators, 41% miners.</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-10-31, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-bad">Owner only</span>The team scores everything; 7 of 9 permit holders republish its offer.</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">40.3%</span>Owner uid 29 gets 40.3% as dividends plus an 18% cut; RecycleOrBurn is Burn.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">2 uids</span><span class="v2-sx muted">top 5 hold 100% of incentive.</span> One miner at 90% of incentive, one claimant at 10%.</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Converged</span>All 7 weight-setters publish the same vector: they follow one offer.</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-caution">Partial</span>Apache-2.0 repo with SDK, intake and follower code; the scoring arena is not shipped.</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-high">High barrier</span></h3><p>Builds and tests a faster bundle for the open arena; pays 0.5 TAO per entry.</p><ul>
+<li>Score: output tokens per second against stock; gate: 150 tokens/s per user at the decode median.</li>
+<li>A paid entry must beat the winner by 1.5% (about 1.039x stock now); a qualification takes 40 to 90 minutes.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Nine permit holders, seven publish weights, all the team&#x27;s one offer; the team does the scoring.</p><ul>
+<li>On 2026-10-31 all seven weight-setters put the same miner first at 90% and one claimant at 10%; who they are is not known.</li>
+<li>If the gateway fails, followers repeat the last offer for up to 12 hours, then send 100% to a burn hotkey.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-2"><h3>Challenge claimant <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Competes in Meta&#x27;s kernel challenge, then claims the code here for a share of 10% of weights.</p><ul>
+<li>A claim counts while its job ranks top three on a board; claims split 10% equally (2 claims, 1 paid).</li>
+</ul></section></div>
+<h2 id="sn-x0">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Entries after a first crown</td><td>Docs: later entries go unevaluated</td><td>Chat: later entries are evaluated; the owner calls the docs out of date</td><td>2026-10-31</td></tr><tr><td>Reference fault</td><td>Docs: reference problem = NO_DECISION, free rerun</td><td>Chat: 2026-10-30 regrade recorded as a candidate FAIL by operator ruling</td><td>2026-10-30</td></tr><tr><td>Who is paid</td><td>Dashboard: Muse arena &#x27;included in global offer&#x27;</td><td>Chain: only uid 9 (90%) and uid 65 (10%) earn; Muse winners hold 0</td><td>2026-10-31</td></tr></tbody></table></div>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-neutral">Neutral</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">low confidence, as of 2026-10-31. Not financial advice.</span></div>
+<p class="v2-thesis">Price is up 5.6% in 30 days on +262 TAO of net inflow, +752 TAO of it in the one day that held the first crown (cause not known). The team ships, but that crown was revoked, 90% of incentive sits on one miner and about half of emission is on the owner side.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.009401 TAO per alpha</dd></div><div><dt>Pool</dt><dd>25,728 TAO, rank 18 of 128</dd></div><div><dt>Price, 30 days</dt><dd>+5.6%, 2026-10-01 to 2026-10-31</dd></div><div><dt>Net flow, 30 days</dt><dd>+262 TAO, 2026-10-01 to 2026-10-31</dd></div><div><dt>Miner pay</dt><dd>27.7 TAO per day across 2 paid uids, before costs</dd></div><div><dt>Code activity</dt><dd>last commit 2026-10-28; 21 commits in 30 days; last release 2026-10-01</dd></div></dl>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>Team ships: arena merged 2026-10-28, branch commits to 2026-10-31</li>
+<li>Net inflow +262 TAO and price +5.6% in 30 days</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>First crown revoked; pay moved twice in three days</li>
+<li>90% of incentive on one miner; half of emission on the owner side</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> Steady paid winners and inflow over many days: bullish; another stall, revoked crown or outflow: bearish.</p>
+<p class="muted">Since the last pass: Neutral on 2026-10-28 too: flow turned positive, but pay moved to one miner after a revoked crown.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-similar">Similar subnets</h2>
+<div class="v2-sim"><p>By pool size this is <strong>rank 3 of 11</strong> among the subnets grouped as <em>inference</em> (what they mainly sell). Pool and price as of 2026-10-29 to 2026-10-31, price in TAO per alpha; the barrier is the easiest miner role.</p><div class="scroll"><table class="v2-table"><thead><tr><th>#</th><th>Subnet</th><th>Pool</th><th>Price</th><th>Miner barrier</th></tr></thead><tbody><tr><td>1</td><td><a href="/bittensor-docs/subnets/53.html">engy</a> <span class="muted">SN53</span></td><td>38,322 TAO</td><td>0.03312</td><td><span class="v2-barrier b-high">High</span></td></tr><tr><td>2</td><td><a href="/bittensor-docs/subnets/28.html">SayGM (gm)</a> <span class="muted">SN28</span></td><td>29,168 TAO</td><td>0.03315</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr class="me" aria-current="true"><td>3</td><td>Cacheon <span class="muted">SN14, this page</span></td><td>25,728 TAO</td><td>0.009401</td><td><span class="v2-barrier b-high">High</span></td></tr><tr><td>4</td><td><a href="/bittensor-docs/subnets/95.html">Actual</a> <span class="muted">SN95</span></td><td>23,661 TAO</td><td>0.03172</td><td><span class="v2-barrier b-high">High</span></td></tr><tr><td>5</td><td><a href="/bittensor-docs/subnets/114.html">SOMA</a> <span class="muted">SN114</span></td><td>9,320 TAO</td><td>0.01753</td><td><span class="v2-barrier b-medium">Medium</span></td></tr></tbody></table></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-31</span> <span class="muted">(dashboard)</span> A paid entry has waited over an hour; the evaluator reports idle since about 04:00 UTC and its last qualification ended about 01:30 UTC.</li>
+<li><span class="when">2026-10-30</span> <span class="muted">(#cacheon)</span> The owner traced the first crown to an evaluator flaw (stock timed too easily); the regrade failed and the 90% weight fell to zero. Evals restarted that evening and the same miner passed again at +2.39%.</li>
+<li><span class="when">2026-10-28</span> <span class="muted">(#cacheon)</span> The DeepSeek V4.1 Flash arena went live with a 90/10 weight offer; the first crown followed within hours and the arena code merged to main.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Read the miner guide and examples/arena_inputs/dsv41pd on main, then the newest evaluator rules on the linked branch.</li>
+<li>Check the dashboard queue first; then install the package (Python 3.11+) and run scan and verify on an example.</li>
+<li>Register a hotkey on subnet 14, build on the arena&#x27;s SGLang baseline, then chain-submit (0.5 TAO, not refunded if an arena pauses).</li>
+<li>Kernel-challenge route: submit there, register your username on chain, then claim without a fee.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Scoring and weight publication run on team servers; the chain shows what is paid, not that scoring is fair (one crown was revoked by operator ruling).</li>
+<li>Pay moved from two Muse winners to one DeepSeek miner, to zero and back within three days; a second winner&#x27;s share of the 90% is not published.</li>
+<li>The code behind the newest rules and the payment bar is on a branch and was not read; who runs the seven followers and gets the 18% owner cut is unknown.</li>
+<li>Four paid Muse entries (101 to 136 hours old) were never answered; arena shares, decay and fees are unpublished operator settings.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/latent-to/cacheon" rel="noopener noreferrer">GitHub: latent-to/cacheon (SDK, validator, docs)</a></li>
+<li><a href="https://cacheon.ai/docs/" rel="noopener noreferrer">Documentation</a></li>
+<li><a href="https://dash.cacheon.ai/" rel="noopener noreferrer">Live dashboard (submissions, winners, queue, weights)</a></li>
+<li><a href="https://dash.cacheon.ai/api/overview" rel="noopener noreferrer">Dashboard API, read-only JSON (health, queue and arena status)</a></li>
+<li><a href="https://github.com/latent-to/cacheon/blob/main/examples/arena_inputs/dsv41pd/README.md" rel="noopener noreferrer">DeepSeek arena inputs README (main)</a></li>
+<li><a href="https://github.com/latent-to/cacheon/blob/codex/pd-reference-pairs/docs/results/deepseek-v41-flash-pd.md" rel="noopener noreferrer">DeepSeek arena results and newest evaluator rules (branch)</a></li>
+<li><a href="https://github.com/latent-to/sglang" rel="noopener noreferrer">GitHub: latent-to/sglang (team fork used for baselines)</a></li>
+<li><a href="https://github.com/latent-to/sglang/commit/15338a8e6455d661268553c1efc7241bcb2f982f" rel="noopener noreferrer">SGLang commit the DeepSeek arena baseline runs on</a></li>
+<li><a href="https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017" rel="noopener noreferrer">Model of the live arena: DeepSeek-V4.1-Flash-1017 (Hugging Face)</a></li>
+<li><a href="https://huggingface.co/meta-models/Muse-Spark-Open-816B-A42B-NVFP4" rel="noopener noreferrer">Model of the closed arena: Muse Spark Open (Hugging Face)</a></li>
+<li><a href="https://github.com/latent-to/cacheon/tree/kestrel" rel="noopener noreferrer">GitHub: kestrel branch (Open Kernel Challenge rules)</a></li>
+<li><a href="https://openkernelchallenge.dev/" rel="noopener noreferrer">Muse Spark Open Kernel Challenge (Meta&#x27;s competition)</a></li>
+<li><a href="https://dashboard.cacheon.ai/okc" rel="noopener noreferrer">Dashboard: Open Kernel Challenge arena</a></li>
+<li><a href="https://x.com/cacheon_ai" rel="noopener noreferrer">X account linked by the team in chat</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 6 sources</summary>
+<ul>
+<li><strong>repo</strong> latent-to/cacheon main @09e663e (2026-10-28, #158 merge): docs/validator-guide/settlement-and-weights.md, docs/validator-guide/scoring.md, docs/validator-guide/overview.md, docs/miner-guide/incentives.md, docs/architecture/pipeline.md, AGENTS.md, examples/arena_inputs/dsv41pd/README.md, README.md; branch codex/pd-reference-pairs @0f2ff7d (2026-10-31): docs/results/deepseek-v41-flash-pd.md, docs/miner-guide/incentives.md; branch kestrel @878dd9e. Branch heads re-checked 2026-10-31 09:11 UTC, unchanged. Pace on 2026-10-31: last main commit 2026-10-28, 21 commits and 20 code commits in 30 days, last release 2026-10-01</li>
+<li><strong>msg</strong> #cacheon 2026-10-18 to 2026-10-30 in full (read 2026-10-31 08:37 UTC); no message on 2026-10-31 at 09:11 UTC; team posts from 2026-09-28 and archive searches for 2026-05-11 to 2026-09-22 in earlier passes</li>
+<li><strong>web</strong> dash.cacheon.ai public API (overview, health, queue, winners, weights, payments, okc), read 2026-10-31 08:37 UTC and re-checked 09:11 UTC (tip block 9402855); Muse arena via the arena parameter. Muse queue: four paid entries submitted 2026-10-25 to 2026-10-27, unanswered at 08:38 UTC</li>
+<li><strong>web</strong> Chain reads via the hosted checker: dossier 14 at block 9402676 (2026-10-31 08:35 UTC): tempo 360, 256 of 256 uids, registration burn 0.0005 TAO, emission split 0/0/18/41/41, 9 validator permits, 2 uids with incentive (uid 9 90.0%), owner hotkey 80.5% of dividends and 40.3% of emission; weights of all 7 weight-setting permit holders; uid 9 read at four blocks (9380901 to 9402676); settings refresh since 2026-10-28: 0 of 33 differ</li>
+<li><strong>web</strong> Market reads at block 9402676 (2026-10-31 08:35 UTC): price 0.008905 (2026-10-01) to 0.009401 TAO per alpha, pool 24,779 to 25,728 TAO, net user flow +262.17 TAO over 30 days in five steps, daily flow of the last 7 days +871 TAO (+752 on 2026-10-28 to 2026-10-29), volume 12,416 TAO; pool snapshot rank 18 of 128 (1.29% of 1,996,027 TAO)</li>
+<li><strong>web</strong> openkernelchallenge.dev, Hugging Face model pages, cacheon.ai and its docs: availability checked 2026-10-31 (14 links of the previous page answered 200 at 08:43 UTC; the two new links 09:12 UTC)</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/13.html"><small>← Previous</small>SN13 Data Universe</a><a rel="next" href="/bittensor-docs/subnets/15.html"><small>Next →</small>SN15 ORO</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-31. Site built 2026-10-31. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

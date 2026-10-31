@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OpenRoboto (SN80) | Bittensor Subnet Docs</title>
+<meta name="description" content="Miners fine-tune robot-control AI in weekly simulation contests; 85% of reward weight goes to robot-data collection.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h8">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>80</span><div>
+<h1>OpenRoboto <span class="muted">SN80</span></h1>
+<p class="tagline">Miners fine-tune robot-control AI in weekly simulation contests; 85% of reward weight goes to robot-data collection.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>35<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>20<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>44<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-31</b><span>last chat</span></li><li class="pw"><b>3,855</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Quiet</b><span>code activity</span></li><li class="pw"><b>0</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-09-30</b><span>last commit</span></li><li class="pw"><b>none</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>robotics (vision-language-action models + data collection)</dd>
+<dt>Status</dt><dd>Active but strained (2026-10-31): AXIS v2.6 is open, the robot-arm track is paused, and the price fell about 40% in a month.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-31</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Simulation seasons so far</a></li><li><a href="#sn-x1">Docs vs code vs chain</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-similar">Similar subnets</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>weekly simulation contests train robot-control AI; each entry burns 0.2 TAO (AXIS v2.6).</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>15% of weight follows the simulation board; 85% sits on seven data uids, seven separate coldkeys.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>price down 40% and a net 3,182 TAO withdrawn in about a month; pool rank 84 of 128.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>the champion&#x27;s coldkey holds 11 uids; its Hugging Face account won five seasons running.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>mining needs a 24 GB+ GPU; data collection needs team devices and its pay rules are private.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner (simulation) <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Fine-tunes the season&#x27;s base model, submits a checkpoint and pays an entry fee.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-caution">GPU needed</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>GPU, 24 GB VRAM minimum (A100 80 GB advised)</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None (free Hugging Face account)</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>0.0005 TAO to register; 0.2 TAO burned per entry</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Ubuntu, Docker with NVIDIA toolkit, Python 3.11</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Data collector (Shift) <span class="v2-barrier b-unknown">Barrier unknown</span></h3><p>Records first-person video of real work with a team OR-S1 device; the team says it pays.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-unk">Paid service unknown</li><li class="fl fl-unk">Access unknown</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>OR-S1 device from the team; price not documented</dd></div><div class="v2-need n-unk"><dt>API tokens / subscriptions</dt><dd>Not documented</dd></div><div class="v2-need n-unk"><dt>Stake / fees</dt><dd>Not documented</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Onboarding via shift.openroboto.ai; rules not published</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Copies the backend&#x27;s settled weights onto the chain.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-no"><dt>Hardware</dt><dd>No GPU: a light weight-setter (docs); sizing not stated</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None (the team&#x27;s read key is public)</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Permit stake threshold 1,000 TAO; 0.0005 TAO to register</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>openroboto init --validator, then validator run</dd></div></dl><a class="v2-more" href="#sn-role-2">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-10-31. Not financial advice.</span></div><p>Price down about 40% in a month, outflow every week; usage and payouts largely unverified. <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>OpenRoboto pays miners who improve AI models that turn camera images and a text instruction into robot-arm movements, and who collect first-person video of real work. Reward weight is 15% for the weekly simulation contest and 85% for data collection, scored by a private team backend.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Simulation miners fine-tune the season&#x27;s open π0.5 base model, upload a full checkpoint to Hugging Face, pay the entry fee and announce it on chain; the champion&#x27;s model is published about 24 hours after the crown. Data miners record first-person video with team OR-S1 devices.</p></div><div><h3>Validators</h3><p>A thin client copies settled weights from the team&#x27;s backend (read key published in a config file) onto the chain; it cannot recompute scores. On 2026-10-31, 10 of 11 weight-setters ranked the same uid first; one sent everything to the owner uid.</p></div><div><h3>Incentive</h3><p>Simulation is king of the hill: a challenger must beat the champion by more than 0.01 mean, and the top three share 70 / 20 / 10 of the simulation weight. Data pay follows accepted minutes x rate x quality x novelty (unpublished).</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-10-31, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-good">Open</span>Any holder above the 1,000 TAO permit threshold can set weights; the documented client just copies the backend.</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">9.3%</span>9.27% of last-epoch emission sits on the owner uid (dividends); owner cut 18%; RecycleOrBurn is Burn.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">10 uids</span><span class="v2-sx muted">top 5 hold 91.3% of incentive.</span> 10 uids earn incentive; the top five hold 91.3%, and the seven data uids hold 85% of weight.</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Converged</span>10 of 11 weight-setters rank uid 95 first; one sends 100% to the owner uid. One backend feeds them.</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-good">Open</span>Miner CLI and validator are MIT-licensed on GitHub; the scoring backend and data-track rules are private.</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner (simulation) <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Fine-tunes the season&#x27;s base model, submits a checkpoint and pays an entry fee.</p><ul>
+<li>Export a full merged checkpoint, not a LoRA adapter.</li>
+<li>Gross pay now: champion about 4.6 TAO a day, rank 2 about 1.3, rank 3 about 0.7.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Data collector (Shift) <span class="v2-barrier b-unknown">Barrier unknown</span></h3><p>Records first-person video of real work with a team OR-S1 device; the team says it pays.</p><ul>
+<li>Rates, review and the payout unit ($ROBOTO) are not public; the seven data uids have separate coldkeys, none owner-linked.</li>
+<li>Team, 2026-10-31: open to independent operators; whether the sample-video staff are team members is unanswered.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-2"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Copies the backend&#x27;s settled weights onto the chain.</p><ul>
+<li>15 permits, 11 with weight rows; 7 are over two tempos stale.</li>
+</ul></section></div>
+<h2 id="sn-x0">Simulation seasons so far</h2>
+<p>Tasks rise each season; the champion&#x27;s mean drifts down. One Hugging Face account won v2.0 and v2.2 to v2.6.</p>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Season</th><th>Tasks</th><th>Champion mean</th><th>Entries</th></tr></thead><tbody><tr><td>v2.0</td><td>30</td><td>0.952</td><td>116</td></tr><tr><td>v2.1</td><td>40</td><td>0.919</td><td>63</td></tr><tr><td>v2.2</td><td>50</td><td>0.911</td><td>39</td></tr><tr><td>v2.3</td><td>60</td><td>0.906</td><td>18</td></tr><tr><td>v2.4</td><td>70</td><td>0.907</td><td>37</td></tr><tr><td>v2.5</td><td>80</td><td>0.902</td><td>11</td></tr><tr><td>v2.6 (open)</td><td>90</td><td>0.879 (leader)</td><td>17 so far</td></tr></tbody></table></div>
+<h2 id="sn-x1">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Reward split</td><td>Subnet repo: 15/25/25/35; CLI docs: 15/85/0</td><td>Chain: 15% to the simulation top three, 85% to seven data uids, 0 to the real-robot pool</td><td>2026-10-31</td></tr><tr><td>Validators copy the backend</td><td>Docs: the client copies the backend&#x27;s weights</td><td>Chain: 10 of 11 rank uid 95 first; one sends 100% to the owner uid</td><td>2026-10-31</td></tr></tbody></table></div>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-10-31. Not financial advice.</span></div>
+<p class="v2-thesis">Users withdrew a net 3,182 TAO and weekly volume more than halved; chain-side emission alone held the pool near 5,100 TAO. Public code is quiet, one account tops the board and 85% of weight sits on unverifiable data uids.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.01497 TAO per alpha</dd></div><div><dt>Pool</dt><dd>5,118 TAO, rank 84</dd></div><div><dt>Price, 30 days</dt><dd>-40%, 2026-09-28 to 2026-10-31</dd></div><div><dt>Net flow, 30 days</dt><dd>-3,182 TAO, 2026-10-01 to 2026-10-31</dd></div><div><dt>Miner pay</dt><dd>About 4.4 TAO per day on average (44.1 over 10 uids, gross)</dd></div><div><dt>Miner pay outside top 5</dt><dd>0.77 TAO per day on average (3.85 over 5 uids)</dd></div><div><dt>Code activity</dt><dd>last commit 2026-10-27 (docs); no code commit in 30 days</dd></div></dl>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>Weekly seasons keep running (17 entries in v2.6).</li>
+<li>Chain and docs agree on 15 / 85.</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>Net outflow in all five weekly windows.</li>
+<li>No code commit in 30 days; one account tops the board.</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> Sustained net inflow, public data-track rates and holders, or a champion outside the dominant account.</p>
+<p class="muted">Since the last pass: Same verdict as 2026-10-28, stronger evidence: price -30% since.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-similar">Similar subnets</h2>
+<div class="v2-sim"><p>By pool size this is <strong>rank 1 of 3</strong> among the subnets grouped as <em>robotics</em> (what they mainly sell). Pool and price as of 2026-10-30 to 2026-10-31, price in TAO per alpha; the barrier is the easiest miner role.</p><div class="scroll"><table class="v2-table"><thead><tr><th>#</th><th>Subnet</th><th>Pool</th><th>Price</th><th>Miner barrier</th></tr></thead><tbody><tr class="me" aria-current="true"><td>1</td><td>OpenRoboto <span class="muted">SN80, this page</span></td><td>5,118 TAO</td><td>0.01497</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>2</td><td><a href="/bittensor-docs/subnets/49.html">Nepher Robotics</a> <span class="muted">SN49</span></td><td>3,989 TAO</td><td>0.00556</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>3</td><td><a href="/bittensor-docs/subnets/58.html">Attune</a> <span class="muted">SN58</span></td><td>1,328 TAO</td><td>0.01101</td><td><span class="v2-barrier b-medium">Medium</span></td></tr></tbody></table></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-31</span> <span class="muted">(chain, blocks 9402338 and 9402500, 2026-10-31)</span> One validator with 23% of dividends now sends all its weight to the owner uid; the other ten rank uid 95 first.</li>
+<li><span class="when">2026-10-31</span> <span class="muted">(#openroboto, 2026-10-29 to 31 (to 07:58 UTC))</span> Holders keep asking about self-mining, trouble at the AXIS partner team and sell pressure; the team says it does not self-mine, the teams are separate and Shift is open to independent operators (unverified).</li>
+<li><span class="when">2026-10-30</span> <span class="muted">(api.openroboto.ai, 2026-10-31)</span> Real-robot Season 2 shows a champion and &#x27;paying&#x27; in settlements but no leaderboard rows; Season 1 still &#x27;paying&#x27;.</li>
+<li><span class="when">2026-10-28</span> <span class="muted">(api.openroboto.ai, 2026-10-31)</span> AXIS v2.6 opened (90 tasks); its 0.8789 champion has stood since day one; 17 entries.</li>
+<li><span class="when">2026-10-27</span> <span class="muted">(openroboto-cli docs, 2026-10-27)</span> Real-robot track paused for a workcell upgrade; its 25% weight moved to data collection.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Check open seasons and fees at api.openroboto.ai/api/v1/competitions; docs lag the live rules.</li>
+<li>Register a hotkey on subnet 80 (0.0005 TAO), pip install -U openroboto, then run openroboto init and doctor.</li>
+<li>Fine-tune the season&#x27;s base model, export a full merged checkpoint and test it free with openroboto check.</li>
+<li>openroboto submit pays the 0.2 TAO fee and announces the commit; confirm with openroboto status.</li>
+<li>Data collection: shift.openroboto.ai. Validators: a permit needs 1,000+ TAO stake, then openroboto validator run.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Scoring, ranking, held-out data and data-track payouts run on a private team backend.</li>
+<li>One Hugging Face account holds the champion in v2.0 and v2.2 to v2.6; its coldkey holds 11 uids, the runner-up&#x27;s 55 of 256. The team says it is not theirs.</li>
+<li>85% of weight sits on seven data uids, each under its own coldkey and none owner-linked; holders, rates and review are not public.</li>
+<li>Real-robot Season 2 has no announced result; Season 1 has read &#x27;paying&#x27; since 2026-09-29.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://www.openroboto.ai" rel="noopener noreferrer">Website (leaderboard, queue, docs)</a></li>
+<li><a href="https://shift.openroboto.ai" rel="noopener noreferrer">Shift data-collection app</a></li>
+<li><a href="https://github.com/openroboto-ai/openroboto-cli" rel="noopener noreferrer">GitHub: openroboto-cli (miner and validator package, docs)</a></li>
+<li><a href="https://pypi.org/project/openroboto/" rel="noopener noreferrer">PyPI: openroboto</a></li>
+<li><a href="https://github.com/openroboto-ai/openroboto-subnet" rel="noopener noreferrer">GitHub: openroboto-subnet (early miner, validator, protocol record)</a></li>
+<li><a href="https://github.com/openroboto-ai/openroboto-protocol" rel="noopener noreferrer">GitHub: openroboto-protocol (shared seed, commitment and weights code)</a></li>
+<li><a href="https://github.com/openroboto-ai/openroboto-evaluation" rel="noopener noreferrer">GitHub: openroboto-evaluation (benchmark harness)</a></li>
+<li><a href="https://github.com/openroboto-ai/axis-task-selector" rel="noopener noreferrer">GitHub: axis-task-selector</a></li>
+<li><a href="https://huggingface.co/openroboto-ai/champion-sim-10" rel="noopener noreferrer">Champion snapshots, current season (Hugging Face)</a></li>
+<li><a href="https://api.openroboto.ai/api/v1/competitions" rel="noopener noreferrer">Public API (seasons, leaderboards)</a></li>
+<li><a href="https://x.com/openroboto" rel="noopener noreferrer">X account linked by the team</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 13 sources</summary>
+<ul>
+<li><strong>repo</strong> openroboto-ai/openroboto-cli @85c1ffb (2026-10-27): README.md, CHANGELOG.md, docs/MINER_DEPLOY.md, MINER.md, PAYMENT.md, VALIDATOR.md, SUBNET_OVERVIEW.md, REAL_TRACK.md, REAL_TRACKS.md; MIT licence</li>
+<li><strong>repo</strong> openroboto-ai/openroboto-subnet @822e3b6 (2026-10-05): README.md, docs/SUBNET_OVERVIEW.md, validator code; MIT licence</li>
+<li><strong>repo</strong> openroboto-ai/openroboto-protocol @443fdbb (2026-09-24): README.md, constants.py, weights.py, schemas.py</li>
+<li><strong>repo</strong> openroboto-ai/openroboto-evaluation @3966a93 (2026-09-30) and axis-task-selector @98fb5b2 (2026-09-26): READMEs, docs, benchmark_worker/scoring.py</li>
+<li><strong>web</strong> api.openroboto.ai /api/v1/competitions (include_archived), /competitions/14 and /roster, /leaderboard for competitions 6 to 14, /settlements, /real/competitions/7/entries (fetched 2026-10-31 07:32 to 07:36 UTC; competition 14, its leaderboard and /settlements fetched again 08:13 UTC: unchanged)</li>
+<li><strong>web</strong> Chain read at block 9402338 (2026-10-31 07:27Z UTC): SN80 (OpenRoboto): registered 2025-12-22, tempo 360, 256 of 256 uids, commit-reveal on; emission weights burn/recycle/owner/validator/miner = 0/0/18/41/41 % (stored, same values as the chain default), RecycleOrBurn = Burn; uids under the owner hotkey or owner coldkey hold 0 % of incentive and 9.27 % of last-epoch emission (a floor); 11 validators have weight rows, on average 9.1 % of weight goes to uid 0.</li>
+<li><strong>web</strong> Chain read at block 9402338 (2026-10-31 07:27Z UTC), compared with block 9378501 (2026-10-28 00:00Z UTC): SN80: no setting changed in 33 checked items; emission split unchanged; pool 5969.55 -&gt; 5117.98 TAO.</li>
+<li><strong>web</strong> Chain read at block 9402338 (2026-10-31 07:27Z): shared snapshot over 129 subnets of name, SubnetOwner, Tempo, Burn, SubnetworkN, MaxAllowedUids, SubnetEmissionEnabled, price, tao_in, alpha_in, age_days.</li>
+<li><strong>web</strong> Chain read at block 9402338 (2026-10-31 07:27Z): price SN80, 6 samples every 7d from block 9186338 (2026-10-01 07:10Z): price 0.027823 -&gt; 0.014967 TAO per alpha (-46.2%), pool TAO 5445.9 -&gt; 5118.0; over the 5 intervals where the pool change equals flow + protocol: net user flow -3182.3 TAO (staked minus unstaked), protocol flow +2854.4 TAO, gross volume 97922.7 TAO.</li>
+<li><strong>web</strong> Chain read at block 9402500 (2026-10-31 07:59Z UTC): subnet 80 weights of all validators: 15 permits, 11 with weight rows, ten rank uid 95 first at 32.6 %, one (uid 1) sends 100 % to uid 0, same as at block 9402338; compared with block 9400101 (2026-10-31 00:00Z UTC): SN80: no setting changed in 33 checked items; emission split unchanged; pool 5268.4 -&gt; 5116.12 TAO.</li>
+<li><strong>web</strong> Owner validator weights, per-validator weight summary and slot reads of subnet 80 uids 1, 8, 84, 88, 109, 168, 171, 172, 174, 181 at block 9402338 (2026-10-31); uid 95 read 2026-10-27</li>
+<li><strong>web</strong> huggingface.co/openroboto-ai (champion-sim-10 live, 2026-10-31); pypi.org/project/openroboto; shift.openroboto.ai and www.openroboto.ai front-end shells (2026-10-27 and 2026-10-31)</li>
+<li><strong>msg</strong> #openroboto, 2026-10-03 to 2026-10-31 07:58 UTC (read in full), plus archive searches for 2026-08-31 to 2026-09-28</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/79.html"><small>← Previous</small>SN79 MVTRX</a><a rel="next" href="/bittensor-docs/subnets/81.html"><small>Next →</small>SN81 Reliquary</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-31. Site built 2026-10-31. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

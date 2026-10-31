@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>sundae_bar (SN121) | Bittensor Subnet Docs</title>
+<meta name="description" content="Miners write AI skills for business tasks; whoever leads the scoreboard earns until the Challenge closes.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h7">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>121</span><div>
+<h1>sundae_bar <span class="muted">SN121</span></h1>
+<p class="tagline">Miners write AI skills for business tasks; whoever leads the scoreboard earns until the Challenge closes.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl4"><b>4.0<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>9.9<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>7.7<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-31</b><span>last chat</span></li><li class="pw"><b>1,761</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Shipping</b><span>code activity</span></li><li class="pw"><b>1</b><span>code commit in 30 d</span></li><li class="pw"><b>2026-10-16</b><span>last commit</span></li><li class="pw"><b>2026-10-14</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>AI skills for business workflows</dd>
+<dt>Status</dt><dd>SBC33 opened on 2026-10-29 and its leader is paid (chain, 2026-10-30); nothing was paid for about 5.7 days before it.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-30</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Challenge cycle</a></li><li><a href="#sn-x1">Docs vs code vs chain</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-similar">Similar subnets</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>miners upload a text skill; a base agent and LLM judges score it on test scenarios (10 in SBC33).</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>in a Challenge the leader gets 40% of the miner share, UID 0 60% (burned); between Challenges all is burned.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>316 TAO net outflow in 30 days, price down 12%; one miner is paid at a time, about 4 TAO a day.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>miners need no GPU or paid service, only a Lab account linked to a registered hotkey.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>platform revenue will fund buybacks; none found in code or on chain.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-low">Low barrier</span></h3><p>Write a skill (SKILL.md plus reference files) for the live Challenge and upload it on the Lab.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-no"><dt>Hardware</dt><dd>None (the team runs the base agent)</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None required; your own LLM spend is optional</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Burn 0.0005 TAO (2026-10-30); no stake</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Lab account with the hotkey linked by signature; hours of skill writing</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Poll the team&#x27;s coordinator for scoring tasks, run the evaluator and set weights.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-caution">Paid service needed</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-no"><dt>Hardware</dt><dd>No GPU; 1 vCPU, 2 GB RAM, 5 GB disk (min_compute.yml)</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>Model-provider API keys (Chutes, OpenRouter); cost not stated</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>1,000 TAO stake threshold and a top-64 rank (chain); burn 0.0005 TAO</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Docker Compose stack, about an hour</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-10-30. Not financial advice.</span></div><p>Bearish: 316 TAO net outflow in 30 days and a month-low price; usage and revenue are team statements. <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>SN121 is run by Sundae Bar AI PLC, which sells AI agents to businesses. Each Challenge is a business task: miners write a skill file, a base agent applies it to test scenarios, and LLM judges score the answers. The leader earns, and its skill may join the platform.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Register a hotkey, create a sundae_bar account and link that hotkey. While a Challenge is open, upload a skill bundle: a SKILL.md (10,000 bytes at most) plus optional text reference files.</p></div><div><h3>Validators</h3><p>The team&#x27;s validator sends each skill to its evaluator. A fixed base agent answers every scenario with the skill loaded, and graders score the answers (SBC33: quality 30%, skill use 30%, scenario quality 30%, originality 10%).</p></div><div><h3>Incentive</h3><p>Whoever is first earns. The validator puts a fixed share of weight on the leader (40% live, 20% default) and the rest on UID 0, the owner hotkey. A challenger must beat the leader&#x27;s best score by 0.01.</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-10-30, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-good">Open</span>Any hotkey with a permit can set weights; 8 hold one and the team&#x27;s holds 79% of dividends.</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">69.6%</span>UID 0 gets 69.6% of emission; owner cut is 18% and RecycleOrBurn is Burn, so its miner share is burned.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">2 uids</span><span class="v2-sx muted">top 5 hold 100% of incentive.</span> Only the leader (40%) and UID 0 (60%, burned) earn incentive in a Challenge; none between them.</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Converged</span>All 8 validators carry the same vector: fits child-keying or one shared rule, not proof of copying.</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-caution">Partial</span>Validator code is public but unlicensed; the evaluator is an image only; the subnet repo is docs.</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-low">Low barrier</span></h3><p>Write a skill (SKILL.md plus reference files) for the live Challenge and upload it on the Lab.</p><ul>
+<li>SKILL.md up to 10,000 bytes; up to 30 reference files, 128,000 characters in total.</li>
+<li>SBC33: 10 agent steps and 29,000 tokens per scenario; 3 submissions a day (README: 5 per hotkey per Challenge).</li>
+<li>An entry must be under 93% similar to others&#x27; and 97% to your own; text aimed at the judges scores zero.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Poll the team&#x27;s coordinator for scoring tasks, run the evaluator and set weights.</p><ul>
+<li>Chutes and OpenRouter keys cover most Challenges; OpenAI, Anthropic, Google and Together also work.</li>
+<li>The validator sets weights itself: EMISSIONS_PERCENT (default 20%) to the leader, rest to UID 0; the team runs 40%.</li>
+<li>The coordinator is team-run; whether it accepts any permit holder is not documented.</li>
+</ul></section></div>
+<h2 id="sn-x0">Challenge cycle</h2>
+<ul class="v2-list">
+<li>Now: SBC33, Regulatory Compliance Triage Skill: the agent reads a regulation and a company profile and returns a verdict table and one label.</li>
+<li>Close: after a score clears the 80% bar and a review agrees, a closing window of a few hours starts.</li>
+</ul>
+<h2 id="sn-x1">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Leader&#x27;s share</td><td>README and team: 40%; one dev-log line says 20%</td><td>Chain: 40% to the leader; the code default is 20%</td><td>2026-10-30</td></tr><tr><td>Evaluator code</td><td>README: gate internals are not published</td><td>Code: public Docker image (v1.0.38); no source repo</td><td>2026-10-30</td></tr><tr><td>Buybacks</td><td>README: part of platform revenue is intended for buybacks</td><td>Code: no buyback code in the validator repo; none seen on chain</td><td>2026-10-30</td></tr></tbody></table></div>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-10-30. Not financial advice.</span></div>
+<p class="v2-thesis">Money flowed out in four of the five intervals and the price is at its lowest weekly reading. One miner is paid, and 60% of miner weight is burned in a Challenge, all of it between. Revenue and buybacks are stated intent.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.003433 TAO per alpha</dd></div><div><dt>Pool</dt><dd>5,447 TAO, rank 78</dd></div><div><dt>Price, 30 days</dt><dd>-12%, 2026-09-30 to 2026-10-30</dd></div><div><dt>Net flow, 30 days</dt><dd>-316 TAO, 2026-09-30 to 2026-10-30</dd></div><div><dt>Miner pay</dt><dd>4.0 TAO per day to the one paid miner; none between Challenges</dd></div><div><dt>Miner pay outside top 5</dt><dd>None: one miner is paid</dd></div><div><dt>Code activity</dt><dd>last commit 2026-10-16; 3 commits in 30 days; 1 release</dd></div></dl>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>Live Challenge with a public suite, score hashes and open-source validator.</li>
+<li>A paid leader now; regular launches planned.</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>Net outflow of 316 TAO in 30 days; price at its weekly low.</li>
+<li>Burned miner share; revenue and buybacks are intent only.</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> Inflow, evidenced revenue or an on-chain buyback would lift it to neutral; longer gaps would deepen it.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-similar">Similar subnets</h2>
+<div class="v2-sim"><p>By pool size this is <strong>rank 3 of 8</strong> among the subnets grouped as <em>agents</em> (what they mainly sell). Pool and price as of 2026-10-30 to 2026-10-31, price in TAO per alpha; the barrier is the easiest miner role.</p><div class="scroll"><table class="v2-table"><thead><tr><th>#</th><th>Subnet</th><th>Pool</th><th>Price</th><th>Miner barrier</th></tr></thead><tbody><tr><td>1</td><td><a href="/bittensor-docs/subnets/11.html">TrajectoryRL</a> <span class="muted">SN11</span></td><td>18,900 TAO</td><td>0.006575</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr><td>2</td><td><a href="/bittensor-docs/subnets/15.html">ORO</a> <span class="muted">SN15</span></td><td>13,478 TAO</td><td>0.01873</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr class="me" aria-current="true"><td>3</td><td>sundae_bar <span class="muted">SN121, this page</span></td><td>5,447 TAO</td><td>0.003433</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr><td>4</td><td><a href="/bittensor-docs/subnets/118.html">Ditto</a> <span class="muted">SN118</span></td><td>5,064 TAO</td><td>0.004557</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr><td>5</td><td><a href="/bittensor-docs/subnets/71.html">Leadpoet</a> <span class="muted">SN71</span></td><td>4,902 TAO</td><td>0.00379</td><td><span class="v2-barrier b-medium">Medium</span></td></tr></tbody></table></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-30</span> <span class="muted">(chain; #sundae-bar)</span> SBC33 is paid on chain: the leader has 40% of the miner share, UID 0 60%. Miners debate a private period for top skills.</li>
+<li><span class="when">2026-10-29</span> <span class="muted">(#sundae-bar; sundaebar.ai Lab)</span> SBC33 opened (10 scenarios, 3 submissions a day). Team: launches aim for Mondays and Thursdays; a planned close shows on the brief 2 to 12 hours ahead.</li>
+<li><span class="when">2026-10-29</span> <span class="muted">(#sundae-bar)</span> Miners alleged self-mining; a Bittensor community manager (not the team) said it is not against the rules. Unverified.</li>
+<li><span class="when">2026-10-24</span> <span class="muted">(chain; #sundae-bar)</span> After SBC32&#x27;s paid window ended near midnight UTC, nothing was paid until SBC33, about 5.7 days.</li>
+<li><span class="when">2026-10-22</span> <span class="muted">(#sundae-bar)</span> SBC32 opened; an outage zeroed the first 11 scores by error, submissions paused about 45 minutes and the team said it would re-evaluate them.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Read the README and check the Lab for the live Challenge.</li>
+<li>Register a hotkey on subnet 121, create a sundae_bar account and link the hotkey by signing the message the form shows.</li>
+<li>Download the Challenge&#x27;s suite files (suite.yaml, dataset, rubric), write a short SKILL.md that teaches a procedure, and upload it on the Lab form.</li>
+<li>Read the results for grader notes and improve until you beat the leader by 0.01. To validate, get a permit and run docker compose up -d from the validator repo.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Payment needs an open Challenge: none was paid for about 5.7 days after SBC32, and the team says gaps now follow when scores reach production grade.</li>
+<li>The leader&#x27;s share is a team setting (40% live, 20% default) and can change at any time.</li>
+<li>Chat disputes (self-mining, similarity-check complaints, an integrity-grader report, a local re-score gap) are unverified; the team denies self-mining.</li>
+<li>Usage and revenue are team statements, not seen on chain or in code. Whether the 7 other permit holders are child keys or copies was not shown.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://www.sundaebar.ai/lab" rel="noopener noreferrer">Lab (live Challenge and leaderboard)</a></li>
+<li><a href="https://github.com/sundae-bar/bittensor-subnet" rel="noopener noreferrer">SN121 README</a></li>
+<li><a href="https://github.com/sundae-bar/sb-validator" rel="noopener noreferrer">Validator repo</a></li>
+<li><a href="https://www.sundaebar.ai/news/how-rewards-are-earned-sn121" rel="noopener noreferrer">Dev log: how rewards are earned</a></li>
+<li><a href="https://www.sundaebar.ai/news/how-we-audit-scores" rel="noopener noreferrer">Dev log: how every score is audited</a></li>
+<li><a href="https://hub.docker.com/r/sundaebarai/sn121-skill-evals" rel="noopener noreferrer">Evaluator image on Docker Hub</a></li>
+<li><a href="https://www.sundaebar.ai/news" rel="noopener noreferrer">Dev log and news</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 9 sources</summary>
+<ul>
+<li><strong>repo</strong> sundae-bar/bittensor-subnet@8fcfc1d (2026-10-16): README.md; docs only, no code, no licence</li>
+<li><strong>repo</strong> sundae-bar/sb-validator@3a5a80b (v1.0.24, 2026-10-14): README.md, docker-compose.yaml, min_compute.yml, src/validator.ts, src/weights.ts, src/leaderboard.ts; no licence file</li>
+<li><strong>web</strong> sundaebar.ai Lab SBC33 challenge page (read 2026-10-30); dev logs &#x27;How Rewards are Earned on SN121&#x27; (2026-07-22) and &#x27;Show Your Work: How sundae_bar Audits Every Score&#x27; (2026-07-15)</li>
+<li><strong>web</strong> hub.docker.com sundaebarai/sn121-skill-evals (latest v1.0.38, 2026-10-22) and sn121-validator (2026-10-14), public API read 2026-10-30</li>
+<li><strong>web</strong> Chain read at block 9,393,953 (2026-10-30 03:30Z UTC): SN121 (sundae_bar): registered 2025-06-12, tempo 360, 256 of 256 uids, commit-reveal off; emission weights burn/recycle/owner/validator/miner = 0/0/18/41/41 % (stored, same values as the chain default), RecycleOrBurn = Burn; uids under the owner hotkey or owner coldkey hold 60 % of incentive and 69.59 % of last-epoch emission (a floor); 8 validators have weight rows, on average 60 % of weight goes to uid 0.</li>
+<li><strong>web</strong> Chain read at block 9,385,701 (2026-10-29 00:00Z UTC): SN121: uids under the owner hotkey or owner coldkey hold 100 % of incentive and 89.58 % of last-epoch emission (a floor); 8 validators have weight rows, on average 100 % of weight goes to uid 0.</li>
+<li><strong>web</strong> Chain read at block 9,393,953 (2026-10-30 03:30Z UTC), compared with block 9,349,701 (2026-10-24 00:00Z UTC): SN121: no setting changed in 33 checked items; emission split unchanged; pool 5510.6 -&gt; 5447.3 TAO.</li>
+<li><strong>web</strong> Chain read at block 9,393,953 (2026-10-30 03:30Z): price SN121, 6 samples every 7d from block 9,177,953 (2026-09-30 03:13Z): price 0.003895 -&gt; 0.003433 TAO per alpha (-11.9%), pool TAO 5802.3 -&gt; 5447.3; over the 5 intervals where the pool change equals flow + protocol: net user flow -316.1 TAO (staked minus unstaked), protocol flow -38.9 TAO, gross volume 2720.3 TAO.</li>
+<li><strong>msg</strong> #121 sundae-bar, 2025-06-17 to 2026-10-30</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/120.html"><small>← Previous</small>SN120 Affine</a><a rel="next" href="/bittensor-docs/subnets/122.html"><small>Next →</small>SN122 CookingTAO</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-30. Site built 2026-10-31. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gittensor (SN74) | Bittensor Subnet Docs</title>
+<meta name="description" content="Meant to pay for merged PRs and GPU compute, but since 2026-10-12 all miner emission is recycled to the owner uid.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h14">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>74</span><div>
+<h1>Gittensor <span class="muted">SN74</span></h1>
+<p class="tagline">Meant to pay for merged PRs and GPU compute, but since 2026-10-12 all miner emission is recycled to the owner uid.</p>
+<span class="st s-unclear">unclear</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl3"><b>0.71<small>/day</small></b><span>last 7 d</span></li><li class="pl3"><b>1.5<small>/day</small></b><span>days 8-30</span></li><li class="pl4"><b>3.8<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-30</b><span>last chat</span></li><li class="pw"><b>5,345</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Shipping</b><span>code activity</span></li><li class="pw"><b>133</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-10-12</b><span>last commit</span></li><li class="pw"><b>2026-10-12</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>open-source contribution rewards, GPU inference optimisation and compute</dd>
+<dt>Status</dt><dd>As of 2026-10-30 the subnet is live but pays no miner: the owner&#x27;s repository registry has been empty since 2026-10-12 and the chain recycles the miner half of emission. No reason or restart date is given; the last team message is from 2026-10-19.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-30</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Docs vs code vs chain</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-similar">Similar subnets</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>the registry of paid repositories has been empty since 2026-10-12, so no miner work earns anything.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>1 of 256 uids has incentive (uid 0, the owner slot); the chain recycles the miner half of emission.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>joining costs a 0.15 TAO burn; a validator permit needs about 1,000 TAO; validators still earn 50%.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>the paid tracks were GPU speed-up PRs (sparkinfer) and agent strategies (Spark-Hermes); neither pays now.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>no reason or restart date given; last message in the channel 2026-10-19.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-high">High barrier</span></h3><p>Contribute merged PRs to registered repositories; nothing pays while the registry is empty.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-bad">Permissioned</li></ul><dl class="v2-needs"><div class="v2-need n-no"><dt>Hardware</dt><dd>None for PRs; sparkinfer changes are tested on Blackwell GPUs (RTX 5090)</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None; a free GitHub account and token</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>0.15 TAO burn; no stake stated</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>GitHub token, CLI install; coding skill</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Score pull requests and set weights; 11 of 12 permit holders do, all on uid 0.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>CPU only: 4 CPUs, 8 GB RAM per docs (2 CPUs per min_compute.yml); one public TCP port</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None; an optional free Weights &amp; Biases key</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>0.15 TAO burn; permit needs about 1,000 TAO of stake</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Docker Compose, public port, auto-update</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div><div class="v2-role"><h3>Compute provider <span class="v2-barrier b-high">High barrier</span></h3><p>Run a verified NVIDIA GPU server for the compute pool; the pool has no share now.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-caution">GPU needed</li><li class="fl fl-good">No paid service</li><li class="fl fl-bad">Permissioned</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>Admitted NVIDIA cards (RTX 5090 to B300) in boxes of 1, 2, 4 or 8; public IP</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None stated</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>0.15 TAO burn; no stake stated</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Vetted driver, Docker with NVIDIA toolkit, one open TCP port, bench checks</dd></div></dl><a class="v2-more" href="#sn-role-2">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-10-30. Not financial advice.</span></div><p>Price down and 336 TAO net outflow; miners unpaid, main unchanged since 2026-10-12, no team message since 2026-10-19. <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>Gittensor set out to pay open-source work: miners link a GitHub account to a hotkey, validators score merged pull requests against an owner-set repository registry. In 2026 it narrowed to team-run projects (sparkinfer, Spark-Hermes) plus a GPU compute pool. Since 2026-10-12 the registry is empty, so no miner is paid.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>No miner neuron runs. A miner registers on netuid 74, makes a free fine-grained GitHub token, installs the CLI and posts the token to validators. Pay comes from merged pull requests to registered repositories (sparkinfer GPU speed-ups, Spark-Hermes agent strategies) or, on the compute track, from verified GPU servers.</p></div><div><h3>Validators</h3><p>Every two hours a validator scores recent merged pull requests against per-repository rules (default: 3 merged, 80% merge rate). Repository weights come from a local registry; an empty registry allocates nothing. Compute pay needs a signed scorecard and a nonzero compute share.</p></div><div><h3>Incentive</h3><p>Miner emission splits across registered repositories by share; leftovers and any unused compute share recycle to uid 0. Before 2026-10-12 the registry held three repositories (25%, 20%, 5%); that day&#x27;s change emptied it and zeroed the compute share. The chain&#x27;s split is 50% validators, 50% miners, the miner half withheld from owner hotkeys.</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-10-30, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-good">Open</span>12 permit holders; the stake threshold (about 1,000 TAO) is the only gate found.</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">50%</span>Uid 0 holds 100% of incentive and 50% of emission; owner cut 0%, Recycle, miner half withheld.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">1 uid</span><span class="v2-sx muted">top 5 hold 100% of incentive.</span> Only uid 0, the owner slot, has incentive; no independent miner is paid.</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Converged</span>11 of 11 weight-setters put about 100% on uid 0; the empty registry explains it, not copying.</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-good">Open</span>All three repositories are MIT; main has not changed since 2026-10-12.</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-high">High barrier</span></h3><p>Contribute merged PRs to registered repositories; nothing pays while the registry is empty.</p><ul>
+<li>Spark-Hermes: one signed PR per GitHub account; no hardware or API stated.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Score pull requests and set weights; 11 of 12 permit holders do, all on uid 0.</p><ul>
+<li>Validators and stakers still get the 50% validator share: 10 uids have dividends.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-2"><h3>Compute provider <span class="v2-barrier b-high">High barrier</span></h3><p>Run a verified NVIDIA GPU server for the compute pool; the pool has no share now.</p><ul>
+<li>Admission is by proof, not approval.</li>
+</ul></section></div>
+<h2 id="sn-x0">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Miners are paid</td><td>README and docs (built 2026-10-09): merged PRs and compute earn emission</td><td>Chain: incentive on 1 uid only (owner slot); code: registry empty since 2026-10-12</td><td>2026-10-30</td></tr><tr><td>Burn or recycle</td><td>Team 2026-10-19: miner emission is at 100% burn</td><td>Chain: setting is Recycle; the miner half is withheld from owner hotkeys</td><td>2026-10-30</td></tr><tr><td>Compute pay</td><td>Team 2026-09-02: compute live, up to 5% of emission, $0.70 per GPU-hour</td><td>Code: compute share set to 0 on 2026-10-12; no production fleet found</td><td>2026-10-30</td></tr></tbody></table></div>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-10-30. Not financial advice.</span></div>
+<p class="v2-thesis">Rank 74 of 128; net flow -336 TAO and price down 10% in 30 days. All miner emission is recycled, the last team message is 11 days old and usage claims are unverified; validators and stakers still get half.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.002882 TAO per alpha</dd></div><div><dt>Pool</dt><dd>5,632 TAO, rank 74</dd></div><div><dt>Price, 30 days</dt><dd>-10%, 2026-09-28 to 2026-10-30</dd></div><div><dt>Net flow, 30 days</dt><dd>-336 TAO, 2026-09-30 to 2026-10-30</dd></div><div><dt>Miner pay</dt><dd>No independent miner is paid (miner side burned)</dd></div><div><dt>Code activity</dt><dd>last commit 2026-10-12; 36 commits in 30 days; last release 2026-10-12</dd></div></dl>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>Validator half still pays: 10 uids receive dividends</li>
+<li>Code intact; PR 1840 (signed-runner check) updated on 2026-10-29</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>Nothing paid to miners; registry empty since 2026-10-12</li>
+<li>Net outflow of 336 TAO in 30 days, no reversal in the last interval</li>
+<li>No team message since 2026-10-19; docs still advertise pay</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> Bullish: a merged change refilling the registry or restarting a paid track, with flows turning positive. Bearish: a shutdown or migration notice.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-similar">Similar subnets</h2>
+<div class="v2-sim"><p>By pool size this is <strong>rank 5 of 8</strong> among the subnets grouped as <em>other</em> (what they mainly sell). Pool and price as of 2026-10-28 to 2026-10-31, price in TAO per alpha; the barrier is the easiest miner role.</p><div class="scroll"><table class="v2-table"><thead><tr><th>#</th><th>Subnet</th><th>Pool</th><th>Price</th><th>Miner barrier</th></tr></thead><tbody><tr><td>3</td><td><a href="/bittensor-docs/subnets/29.html">Hotfloat</a> <span class="muted">SN29</span></td><td>7,903 TAO</td><td>0.002507</td><td><span class="v2-barrier b-high">High</span></td></tr><tr><td>4</td><td><a href="/bittensor-docs/subnets/72.html">StreetVision (NATIX) / chillyshort</a> <span class="muted">SN72</span></td><td>6,164 TAO</td><td>0.002113</td><td><span class="v2-barrier b-high">High</span></td></tr><tr class="me" aria-current="true"><td>5</td><td>Gittensor <span class="muted">SN74, this page</span></td><td>5,632 TAO</td><td>0.002882</td><td><span class="v2-barrier b-high">High</span></td></tr><tr><td>6</td><td><a href="/bittensor-docs/subnets/108.html">ChipForge</a> <span class="muted">SN108</span></td><td>530 TAO</td><td>0.004796</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>7</td><td><a href="/bittensor-docs/subnets/16.html">Unnamed subnet</a> <span class="muted">SN16</span></td><td>338 TAO</td><td>0.001009</td><td><span class="v2-barrier b-unknown">Unknown</span></td></tr></tbody></table></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-30</span> <span class="muted">(chain data, #gittensor)</span> Chain: no setting changed since 2026-10-26; validators still put about 100% on uid 0. Five member messages (burning, &#x27;dead&#x27;, a new-launch hint); no team reply.</li>
+<li><span class="when">2026-10-29</span> <span class="muted">(GitHub (entrius/gittensor))</span> Pull request 1840 (a signed-receipt check so a challenge can name Cathedral as official runner) got new commits and is no longer a draft; it targets a side branch, not main.</li>
+<li><span class="when">2026-10-19</span> <span class="muted">(#gittensor)</span> A team member said miner emission is at 100% burn; it is the last team message in the archive.</li>
+<li><span class="when">2026-10-12</span> <span class="muted">(GitHub (entrius/gittensor, Spark-Hermes))</span> The change emptying the registry was merged and released.</li>
+<li><span class="when">2026-10-05</span> <span class="muted">(GitHub (entrius/gittensor), docs.gittensor.io)</span> Compute pool raised to 30% of miner emission, then GPU rental work; the docs say rental runs on the test network only.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Ask in the channel whether miner emission has resumed; as of 2026-10-30 nothing pays.</li>
+<li>Open-source track: register a hotkey on netuid 74, make a read-only GitHub token (no expiry), install the CLI, post it; no repository is registered today.</li>
+<li>sparkinfer: read CONTRIBUTING.md; a paid change needs a verified speed-up on an RTX 5090; docs-only changes earn nothing.</li>
+<li>Spark-Hermes: read the README (two-hour rounds, practice and hidden bugs); its feed has been stuck since 2026-10-12.</li>
+<li>Validator: run the Docker setup with one public TCP port and stake above the permit threshold.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>The team says burn; the chain setting is Recycle, which is not proof of what the owner does with other alpha.</li>
+<li>The docs CLI reference shows default netuid 2 for the post command (mainnet is 74); not checked in code.</li>
+<li>Fleet size and demand for compute were not found. A critic alleged on 2026-09-26 that the sparkinfer owner self-mines (the team says it has answered); no first-hand evidence.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://gittensor.io" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://docs.gittensor.io" rel="noopener noreferrer">Docs</a></li>
+<li><a href="https://docs.gittensor.io/compute-mining.html" rel="noopener noreferrer">Docs: compute mining</a></li>
+<li><a href="https://docs.gittensor.io/compute-renting.html" rel="noopener noreferrer">Docs: renting a GPU box</a></li>
+<li><a href="https://github.com/entrius/gittensor" rel="noopener noreferrer">GitHub (entrius/gittensor)</a></li>
+<li><a href="https://github.com/gittensor-ai-lab/sparkinfer" rel="noopener noreferrer">sparkinfer (GPU inference runtime)</a></li>
+<li><a href="https://github.com/gittensor-model-hub/Spark-Hermes" rel="noopener noreferrer">Spark-Hermes (agent strategy competition)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 6 sources</summary>
+<ul>
+<li><strong>msg</strong> #gittensor, 2026-08-16 to 2026-10-30 (newest team message 2026-10-19); archive searches for burn and recycle wording back to 2025-11-03</li>
+<li><strong>repo</strong> entrius/gittensor @884ce17 (2026-10-12; main and test unchanged on 2026-10-30): README, constants, emission allocation, registry file and history, tags, min_compute.yml, docker-compose.vali.yml, .env.example; PR 1840 and open items via api.github.com</li>
+<li><strong>repo</strong> gittensor-ai-lab/sparkinfer @f86e43c (2026-10-11), CONTRIBUTING.md; gittensor-model-hub/Spark-Hermes @cafd8d5 (2026-10-12), README, submissions/README.md, live feed (round 77, stage evaluate, updated 2026-10-12); both unchanged on 2026-10-30</li>
+<li><strong>web</strong> https://docs.gittensor.io (index built 2026-10-09; miner, validator, compute mining, compute renting, OSS contributions pages), read 2026-10-26 and 2026-10-30</li>
+<li><strong>web</strong> Chain read at block 9398253 (2026-10-30 17:50Z UTC): SN74 (Gittensor): registered 2025-03-08, tempo 360, 256 of 256 uids, commit-reveal on; emission weights burn/recycle/owner/validator/miner = 0/0/0/50/50 %, RecycleOrBurn = Recycle; uids under the owner hotkey or owner coldkey hold 100 % of incentive and 50 % of last-epoch emission (a floor); 10 validators have weight rows within the last tempo (2 older than 5 tempos), on average 100 % of weight goes to uid 0. No setting changed since the 2026-10-26 read.</li>
+<li><strong>web</strong> Chain read at block 9397482 (2026-10-30 15:16Z): price SN74, 6 samples every 7d from block 9181482 (2026-09-30 14:59Z): price 0.003260 -&gt; 0.002882 TAO per alpha (-11.6%), pool TAO 5989.4 -&gt; 5632.5; over the 5 intervals where the pool change equals flow + protocol: net user flow -336.0 TAO (staked minus unstaked), protocol flow -20.9 TAO, gross volume 4535.4 TAO; pool rank 74 of 128 (shared snapshot, same block).</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/72.html"><small>← Previous</small>SN72 StreetVision (NATIX) / chillyshort</a><a rel="next" href="/bittensor-docs/subnets/75.html"><small>Next →</small>SN75 Hippius</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-30. Site built 2026-10-31. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

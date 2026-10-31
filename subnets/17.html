@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>404-GEN (SN17) | Bittensor Subnet Docs</title>
+<meta name="description" content="Miners write Python that turns images into Three.js code with OpenAI models; each round&#x27;s winner takes all miner reward.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h23">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>17</span><div>
+<h1>404-GEN <span class="muted">SN17</span></h1>
+<p class="tagline">Miners write Python that turns images into Three.js code with OpenAI models; each round&#x27;s winner takes all miner reward.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>12<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>7.6<small>/day</small></b><span>days 8-30</span></li><li class="pl4"><b>2.0<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-31</b><span>last chat</span></li><li class="pw"><b>7,810</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Quiet</b><span>code activity</span></li><li class="pw"><b>0</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-09-04</b><span>last commit</span></li><li class="pw"><b>2026-10-28</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>3D generation (Three.js code from images, closed-source models)</dd>
+<dt>Status</dt><dd>The GPT competition began on 2026-10-28; round 0 (34 submissions) was in duels on 2026-10-30. Chat had 157 messages in 30 days.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-30</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Docs vs code vs chain</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-similar">Similar subnets</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>Miners write Python that calls OpenAI models to turn a picture into Three.js 3D code; the round winner takes all miner reward.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>One uid holds 100% of miner incentive; all 10 validators with weights back it (2026-10-30).</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>Joining needs an OpenAI key or ChatGPT plan (up to $5 per prompt) and a 100-alpha lock; no GPU is needed.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>Pool is 23,069 TAO (rank 21); the price fell 22% and a net 2,958 TAO left in 30 days to 2026-10-30.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>launch ran two days late and a bug left generations stuck on 2026-10-28; expect more client updates.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Writes a public Python program that turns each prompt image into one Three.js module.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-caution">Paid service needed</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-no"><dt>Hardware</dt><dd>No GPU or Docker. Linux x86_64 with Python 3.13, Go 1.27.3, a C compiler and Git (guide)</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>OpenAI API key or ChatGPT plan; nominal cap $5 and 60 calls per prompt</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Lock 100 alpha per hotkey (about 0.7 TAO); registration burn 0.0005 TAO (2026-10-30)</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Python repo with main.py; commit fixed on chain before prompts; 24 h to generate each round</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Runs a weights-setter that copies the team&#x27;s published leader onto the chain; the team runs the judging.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-no"><dt>Hardware</dt><dd>No GPU. A small always-on server with Python 3.11+ and PM2 (weights-setter README)</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None found (a GitHub token and a Discord alert hook are optional)</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Registration burn 0.0005 TAO; permit stake threshold 1,000 TAO (chain, 2026-10-30)</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>PM2 service that reads the public state repo; sets weights every 30 minutes by default</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-neutral">Neutral</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-10-30. Not financial advice.</span></div><p>Mixed: net outflow and a falling price, against a fast-shipping team and a newly launched competition. <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>404-GEN is a competition subnet run by the 404 team. A miner writes a Python program that sends a picture to OpenAI models through a team-run recording service and gets back Three.js code that builds the object. Every three days the best program wins all miner rewards. This phase replaced the open-source one on 2026-10-28.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Each round a miner fixes a public repo and commit on chain. Once prompts and a seed are published, the program runs on 128 images through the witness, a team-run pod that records every OpenAI call, and saves one Three.js module per image within 24 hours.</p></div><div><h3>Validators</h3><p>The team&#x27;s judge compares renders of two miners&#x27; outputs with a vision-language model. A challenger must beat the sitting leader by 7%, then pass a replay of its recorded calls and a source audit. Permit holders run a weights-setter that copies the published winner onto the chain.</p></div><div><h3>Incentive</h3><p>Winner stays in: the leader gets all miner weight until beaten. The split is owner 18%, validators 41%, miners 41%, nothing burned. Since 2026-10-28 the seat is held by the hotkey that won the last Three.js round, with its entry replaced by the team&#x27;s base-miner code; the chain does not link it to the owner.</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-10-30, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-good">Open</span>Any permit holder can set weights, but the weights-setter only follows the team&#x27;s published winner; the team judges.</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">8.6%</span>8.59% of last-epoch emission sits on the owner&#x27;s uid as dividends; the owner cut is 18% and RecycleOrBurn is Burn.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">1 uid</span><span class="v2-sx muted">top 5 hold 100% of incentive.</span> One uid earns all miner incentive (100%); ten uids earn validator dividends.</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Converged</span>All 10 validators with weights put their top weight on one uid; that is concentration, not proof of copying.</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-good">Open</span>Subnet and base-miner code are MIT-licensed on GitHub; entries must keep their repos public.</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Writes a public Python program that turns each prompt image into one Three.js module.</p><ul>
+<li>Each round has 128 images; output is one self-contained Three.js module per image, with no imports, assets or randomness.</li>
+<li>The nominal cap allows up to $640 per round (128 x $5); the team says the whole budget cannot be used.</li>
+<li>Repos must stay public during the build, audits and after a win, or the entry is disqualified (team rule, 2026-10-26).</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Runs a weights-setter that copies the team&#x27;s published leader onto the chain; the team runs the judging.</p><ul>
+<li>The repo does not say outsiders can run the judge, replay or audit steps.</li>
+<li>On chain, 14 hotkeys hold permits and 10 set weights, all with the same top uid (2026-10-30).</li>
+</ul></section></div>
+<h2 id="sn-x0">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Leader weight decay</td><td>README: a defending leader&#x27;s weight decays to a floor</td><td>Code: no decay in the weights-setter; leader weight is 1.0 and one uid gets 100%</td><td>2026-10-30</td></tr><tr><td>Which code is current</td><td>Main README describes open-source Docker miners</td><td>Code: the live competition follows the witness branch; main is unchanged since 2026-09-04</td><td>2026-10-30</td></tr></tbody></table></div>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-neutral">Neutral</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-10-30. Not financial advice.</span></div>
+<p class="v2-thesis">The price fell 22% in 30 days as users withdrew a net 2,958 TAO (about 13% of the pool). Usage and revenue are only team statements, and the new competition is days old.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.007083 TAO per alpha</dd></div><div><dt>Pool</dt><dd>23,069 TAO, rank 21</dd></div><div><dt>Price, 30 days</dt><dd>-22%, 2026-09-28 to 2026-10-30</dd></div><div><dt>Net flow, 30 days</dt><dd>-2,958 TAO, 2026-09-30 to 2026-10-30</dd></div><div><dt>Miner pay</dt><dd>About 20.9 TAO per day to the one paid uid (gross)</dd></div><div><dt>Miner pay outside top 5</dt><dd>None: only one uid is paid</dd></div><div><dt>Code activity</dt><dd>last commit 2026-10-28 (live branch; main 2026-09-04); about 90 commits in 30 days</dd></div></dl>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>About 90 commits on the live branch in 30 days; three client releases on 2026-10-28.</li>
+<li>34 entries in round 0, in line with 33-47 in recent rounds.</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>Net outflow and a 22% lower price over 30 days.</li>
+<li>Launch ran late and rules still change.</li>
+<li>All miner reward goes to one hotkey.</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> A clean round 0 with a new winner would point up; renewed outflow or falling entries would point down.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-similar">Similar subnets</h2>
+<div class="v2-sim"><p>By pool size this is <strong>rank 2 of 6</strong> among the subnets grouped as <em>media</em> (what they mainly sell). Pool and price as of 2026-10-30 to 2026-10-31, price in TAO per alpha; the barrier is the easiest miner role.</p><div class="scroll"><table class="v2-table"><thead><tr><th>#</th><th>Subnet</th><th>Pool</th><th>Price</th><th>Miner barrier</th></tr></thead><tbody><tr><td>1</td><td><a href="/bittensor-docs/subnets/44.html">Score</a> <span class="muted">SN44</span></td><td>62,227 TAO</td><td>0.03076</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr class="me" aria-current="true"><td>2</td><td>404-GEN <span class="muted">SN17, this page</span></td><td>23,069 TAO</td><td>0.007083</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>3</td><td><a href="/bittensor-docs/subnets/93.html">Bitcast</a> <span class="muted">SN93</span></td><td>21,480 TAO</td><td>0.0144</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr><td>4</td><td><a href="/bittensor-docs/subnets/69.html">Herald</a> <span class="muted">SN69</span></td><td>3,518 TAO</td><td>0.005126</td><td><span class="v2-barrier b-high">High</span></td></tr><tr><td>5</td><td><a href="/bittensor-docs/subnets/117.html">EveryFrame</a> <span class="muted">SN117</span></td><td>3,119 TAO</td><td>0.002977</td><td><span class="v2-barrier b-low">Low</span></td></tr></tbody></table></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-30</span> <span class="muted">(GitHub 404-active-competition)</span> Round 0 had 34 submissions; duels had no winner yet, two candidates await replay validation.</li>
+<li><span class="when">2026-10-28</span> <span class="muted">(#404-gen; GitHub releases)</span> Round 0 prompts went out and witness client 0.2.15 was released. In the evening the team said OpenAI errors had left some generations stuck, reset them and began a fix.</li>
+<li><span class="when">2026-10-27</span> <span class="muted">(#404-gen)</span> Pre-launch notice: entries are reshuffled before duels and compete against a base miner.</li>
+<li><span class="when">2026-10-26</span> <span class="muted">(#404-gen)</span> The team closed the Three.js competition after 59 rounds and said the launch would slip. The generation window was set at 24 hours.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Read the launch quickstart in the miner guide on the witness branch.</li>
+<li>Register a hotkey on subnet 17 and lock 100 alpha from your coldkey for it.</li>
+<li>Build the witness and renderer clients and start from the team&#x27;s base-miner repo.</li>
+<li>Add your OpenAI key (or a Codex login with a ChatGPT plan) and fix your repo and full commit on chain before the prompts are published.</li>
+<li>Take the prompts and seed from the state repo, run through the witness pod and save each result within 24 hours.</li>
+<li>Validators: run the weights-setter from the subnet repo.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>The competition is days old; clients and rules changed almost daily from 2026-10-26 to 2026-10-28.</li>
+<li>The live system runs from an unmerged branch; main still describes the old phase.</li>
+<li>Round 0 was undecided on 2026-10-30, so the seat, and the pay that goes with it, may change.</li>
+<li>Weights are validator opinions, not payouts. The witness server was read as documentation only.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/404-Repo/404-gen-subnet" rel="noopener noreferrer">GitHub (subnet code)</a></li>
+<li><a href="https://github.com/404-Repo/404-gen-subnet/tree/feat/witness-public-release/miner-reference" rel="noopener noreferrer">Miner guide (witness branch)</a></li>
+<li><a href="https://github.com/404-Repo/404-active-competition" rel="noopener noreferrer">GitHub (live competition state)</a></li>
+<li><a href="https://github.com/404-Repo/404-base-miner-gpt" rel="noopener noreferrer">Base miner</a></li>
+<li><a href="https://competitions-viewer.subnet404.xyz/" rel="noopener noreferrer">Round dashboard (shared by team)</a></li>
+<li><a href="https://www.404.xyz" rel="noopener noreferrer">404 website</a></li>
+<li><a href="https://game.404.xyz/" rel="noopener noreferrer">Game platform and game jam</a></li>
+<li><a href="https://discord.gg/404gen" rel="noopener noreferrer">404 community Discord</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 5 sources</summary>
+<ul>
+<li><strong>repo</strong> 404-Repo/404-gen-subnet branch feat/witness-public-release at d3d2ac1 (2026-10-28): README.md, Competitions/competition3.md, miner-reference/README.md (launch quickstart), weights-setter, judge-service README; main at c4dc226 (2026-09-04)</li>
+<li><strong>repo</strong> 404-Repo/404-active-competition (2026-10-30): config.json, state.json, leader.json, rounds/0; 404-Repo/404-competition-2 (2026-10-26): leader.json, rounds/58; 404-Repo/404-base-miner-gpt at 26c3ad3 (2026-10-27)</li>
+<li><strong>web</strong> Mainnet chain read of netuid 17 at block 9394131 (2026-10-30 04:06Z): subnet, parameters, uids, emission split, owner share, weights, one-uid detail; compared with block 9349701 (2026-10-24); pool snapshot at the same block; price history read at block 9393953 (2026-10-30 03:30Z); re-checked at block 9394287 (2026-10-30 04:37Z): no setting or split change, pool and price unchanged</li>
+<li><strong>web</strong> GitHub releases feed of 404-gen-subnet (witness-client v0.2.13rc9 to v0.2.15, 2026-10-28); link checks 2026-10-30</li>
+<li><strong>msg</strong> #17 404-gen, 2026-10-23 to 2026-10-30</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/16.html"><small>← Previous</small>SN16 Unnamed subnet</a><a rel="next" href="/bittensor-docs/subnets/18.html"><small>Next →</small>SN18 Zeus</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-30. Site built 2026-10-31. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

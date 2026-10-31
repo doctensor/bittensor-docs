@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ACORE AI (SN405) | Bittensor Subnet Docs</title>
+<meta name="description" content="Dormant testnet-only text-to-3D subnet; its testnet slot 405 now runs another project, Verathos (mainnet SN96).">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h3">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>405</span><div>
+<h1>ACORE AI <span class="muted">SN405</span></h1>
+<p class="tagline">Dormant testnet-only text-to-3D subnet; its testnet slot 405 now runs another project, Verathos (mainnet SN96).</p>
+<span class="st s-quiet">quiet</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl0"><b>0<small>/day</small></b><span>last 7 d</span></li><li class="pl0"><b>0<small>/day</small></b><span>days 8-30</span></li><li class="pl0"><b>0<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-06-21</b><span>last chat</span></li><li class="pw"><b>35</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Quiet</b><span>code activity</span></li><li class="pw"><b>0</b><span>code commits in 30 d</span></li><li class="pw"><b>2025-11-30</b><span>last commit</span></li><li class="pw"><b>none</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>3D generation (text-to-3D objects for virtual agents)</dd>
+<dt>Status</dt><dd>Quiet and testnet only (2026-10-31): not on mainnet, its testnet slot has run Verathos since 2026-03-10, and the team&#x27;s last post is 2025-12-01. &#x27;Quiet&#x27; is inferred from missing activity, not a team statement.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-31</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Docs vs code vs chain</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>testnet only. Netuid 405 is not registered on mainnet (2026-10-31) and the team never gave a mainnet date.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>ACORE&#x27;s testnet slot now runs another project, Verathos (registered 2026-03-10), so ACORE has no live subnet to join.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>quiet. The repo&#x27;s last commit is 2025-11-30 and the team&#x27;s last post is 2025-12-01, about eleven months ago.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>only text-to-3D generation and scoring. The speech and emotion features in the team&#x27;s pitch are not in the repo.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>heavy to run. Miners need a 48 GB GPU, validators a 24 GB GPU plus their own Claude API key (repo requirements).</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Turns a text prompt into a 3D model (preview image plus .glb file) with a generator the miner supplies.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-caution">GPU needed</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>GPU, 48 GB VRAM (A6000 class), 32 GB RAM, 40 GB disk (min_compute.yml)</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None required by the repo; optional S3 bucket; you must supply a text-to-3D model</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Testnet burn 0.0005 TAO (2026-10-31, slot now another project&#x27;s); no mainnet slot exists</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Python, bittensor 9.10.1 and your own text-to-3D service on port 8093; README covers testnet only</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Samples miners each round, sends a prompt and scores the 3D models with its own scoring service.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-caution">GPU needed</li><li class="fl fl-caution">Paid service needed</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>GPU, 24 GB VRAM (RTX 4090 class), 16 GB RAM, 40 GB disk (min_compute.yml); pytorch3d renderer</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>Claude API key for the scoring service (Claude 3 Haiku in the code); price not stated</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Testnet burn 0.0005 TAO (2026-10-31); permit stake threshold 0, smallest permit holder not read</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Python plus a second service (validation/serve.py, port 8094); its README is a template stub</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>ACORE AI is pitched as a platform for 3D virtual agents that talk and show emotion; its subnet was meant to supply the AI work. The code only turns text prompts into scored 3D models. It ran on testnet only, gave no mainnet date, and has been silent since December 2025.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>A miner turns a text prompt into a 3D model and returns a preview image plus a .glb file. It passes the prompt, with a fixed style suffix, to its own text-to-3D service; the repo&#x27;s bundled server is only a stub, so miners bring their own model. The miner&#x27;s blacklist is meant to block unregistered callers but, as written, lets them through (code reading, not tested).</p></div><div><h3>Validators</h3><p>Each round (700 seconds by default) a validator sends up to 25 miners one prompt from a team-run API, with an 87-second limit. Its own scoring service renders each model from seven angles, rejects images that do not look like a real object, has Claude describe the preview and renders, and compares them with the prompt by text and image similarity plus a quality model.</p></div><div><h3>Incentive</h3><p>Score per round: 0.25 x prompt-vs-preview similarity + 0.5 x prompt-vs-render + 0.3 x preview-vs-render + 0.1 x quality; below 0.35 is zero. Scores are normalised and squared, averaged over time, and only averages above 0.4 earn weight, raised to the eighth power, so top scorers dominate.</p></div></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Turns a text prompt into a 3D model (preview image plus .glb file) with a generator the miner supplies.</p><ul>
+<li>Reports idle or busy before each job; the prompt gets a fixed style suffix.</li>
+<li>The repo&#x27;s generation server is a stub (sleeps 5-15 seconds, returns a placeholder).</li>
+<li>Output returns as base64 or presigned S3 links (needs AWS keys). No Dockerfile or .env example; MIT licence.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Samples miners each round, sends a prompt and scores the 3D models with its own scoring service.</p><ul>
+<li>Prompts come from a team-run API (api.acore.app, not called); a fixed list of 10 prompts is the test-mode fallback.</li>
+<li>The scoring service needs pytorch3d, trimesh, CLIP and the operator&#x27;s own CLAUDE_API_KEY.</li>
+<li>Only the owner hotkey can send the team app&#x27;s prompts through validators; this does not change scores.</li>
+</ul></section></div>
+<h2 id="sn-x0">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Product scope</td><td>README, launch post, whitepaper: speech, emotion rendering, 3D virtual agents</td><td>Code: only text-to-3D generation and scoring; no speech or emotion code in the repo</td><td>2026-10-31</td></tr><tr><td>Testnet slot</td><td>README and 2025 chat: ACORE runs on testnet netuid 405</td><td>Chain: testnet netuid 405 was registered 2026-03-10 as &#x27;verathos&#x27;; Verathos calls it its testnet</td><td>2026-10-31</td></tr></tbody></table></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-31</span> <span class="muted">(Chain reads, GitHub, chat archive)</span> Mainnet still has no netuid 405; the repo is unchanged and the channels are silent.</li>
+<li><span class="when">2026-08-21</span> <span class="muted">(#verathos)</span> The Verathos team (mainnet SN96) names its testnet as netuid 405, and repeats it on 2026-10-14.</li>
+<li><span class="when">2026-06-21</span> <span class="muted">(#acoreai)</span> Newest message in the ACORE channel: a user asks why the testnet still exists. No team reply appears.</li>
+<li><span class="when">2026-03-10</span> <span class="muted">(Testnet chain reads)</span> Testnet netuid 405 was registered as verathos, so ACORE&#x27;s slot changed hands. No ACORE explanation appears.</li>
+<li><span class="when">2026-01-23</span> <span class="muted">(#acoreai)</span> A user asked when mainnet would launch; no reply appears in the archive.</li>
+<li><span class="when">2025-12-01</span> <span class="muted">(#acoreai, GitHub)</span> Last team post: the repo update with miner and validator neurons and testnet commands (last commit 2025-11-30).</li>
+<li><span class="when">2025-08-30</span> <span class="muted">(#acoreai)</span> Asked about mainnet, the team gave no date and tied it to finishing the test phases.</li>
+<li><span class="when">2025-08-12</span> <span class="muted">(#acoreai)</span> Testnet launch announced: netuid 405 registered, validators and miners described as running. Pitch: speech, emotion rendering and 3D interaction for virtual agents.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Do not register on testnet netuid 405 for ACORE: since 2026-03-10 it is the Verathos project&#x27;s subnet.</li>
+<li>To study the code, clone acoreai/subnet-acoreai and run pip install -e . in a Python virtual environment.</li>
+<li>Miner: run your own text-to-3D service on the port in --generation.endpoint (default 8093), then neurons/miner.py.</li>
+<li>Validator: start the scoring service in validation/ (serve.py, port 8094; GPU and Claude API key), then neurons/validator.py.</li>
+<li>No live ACORE netuid and no mainnet guide exist; both neurons take --netuid and --subtensor.network.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Dormant and testnet only: no mainnet economics exist and testnet TAO has no market value. The team never said the project stopped.</li>
+<li>The neurons on testnet slot 405 (21, with 4 validators setting weights on 2026-10-31) belong to Verathos, not ACORE; the link rests on Verathos&#x27;s own posts, as the slot&#x27;s chain identity holds only a name.</li>
+<li>Scores rest on a team-run prompt API (not called) and the validator operator&#x27;s own Claude API key.</li>
+<li>The repo is a template fork: README mainnet and staging sections, the validation README and wandb defaults are leftovers, and the generation server is a stub, so a working node needs parts not in the repo.</li>
+<li>The website (acore.app) and app (ai.acore.app) did not load from our server on 2026-10-31, so product claims rest on the repo, whitepaper and chat.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/acoreai/subnet-acoreai" rel="noopener noreferrer">GitHub (acoreai/subnet-acoreai)</a></li>
+<li><a href="https://acore-ai.gitbook.io/whitepaper-acore-ai" rel="noopener noreferrer">Whitepaper (virtual-agent platform)</a></li>
+<li><a href="https://x.com/acore_ai" rel="noopener noreferrer">X (ACORE AI)</a></li>
+<li><a href="https://t.me/acoreai" rel="noopener noreferrer">Telegram</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 10 sources</summary>
+<ul>
+<li><strong>repo</strong> acoreai/subnet-acoreai@488b276 (2025-11-30, head unchanged on 2026-10-31): README.md, min_compute.yml, requirements.txt, validation/requirements.txt, docs/running_on_mainnet.md</li>
+<li><strong>repo</strong> acoreai/subnet-acoreai@488b276: acoreai/protocol.py, acoreai/miner/utils.py, acoreai/miner/server.py, neurons/miner.py</li>
+<li><strong>repo</strong> acoreai/subnet-acoreai@488b276: neurons/validator.py, acoreai/validator/forward.py, reward.py, task_manager.py, utils/taskLib.py, utils/config.py, base/validator.py</li>
+<li><strong>repo</strong> acoreai/subnet-acoreai@488b276: validation/serve.py, validation_endpoint.py, claude_integration.py, rendering.py</li>
+<li><strong>msg</strong> #acoreai 2025-08-12 to 2026-06-21 (searched again for messages after 2026-10-27: none)</li>
+<li><strong>msg</strong> #verathos (mainnet SN96 channel) 2026-07-13, 2026-08-21, 2026-10-14: use of netuid 405 as the Verathos testnet; no testnet mention after 2026-10-27</li>
+<li><strong>web</strong> https://acore-ai.gitbook.io/whitepaper-acore-ai (welcome, Bittensor subnet integration, roadmap; read 2026-10-21)</li>
+<li><strong>web</strong> Mainnet chain read of netuid 405 at block 9401056 (2026-10-31): exists False; earlier reads 2026-10-21, 2026-10-26 and 2026-10-27 agree</li>
+<li><strong>web</strong> Testnet chain reads at block 8339500 (2026-10-31): subnet 405 and uids 405, compared with the 2026-10-27 read at block 8316401 (every weight age moved by exactly the block difference); identity read 2026-10-26</li>
+<li><strong>web</strong> github.com/acoreai/subnet-acoreai (git ls-remote, shallow clone and GitHub API, 2026-10-26 to 2026-10-31): head 488b276, last push 2025-11-30; link checks of 2026-10-31 (repo, whitepaper, X, Telegram 200; both ACORE sites no connection)</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/395.html"><small>← Previous</small>SN395 Entangle Protocol</a><a rel="next" href="/bittensor-docs/subnets/427.html"><small>Next →</small>SN427 Dinobets</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-31. Site built 2026-10-31. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

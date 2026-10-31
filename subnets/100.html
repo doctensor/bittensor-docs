@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cortex (SN100) | Bittensor Subnet Docs</title>
+<meta name="description" content="Bug-bounty and verifiable AI-training subnet; on 2026-10-31 all incentive still burns to the owner&#x27;s uid.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h4">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>100</span><div>
+<h1>Cortex <span class="muted">SN100</span></h1>
+<p class="tagline">Bug-bounty and verifiable AI-training subnet; on 2026-10-31 all incentive still burns to the owner&#x27;s uid.</p>
+<span class="st s-transitioning">transitioning</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl4"><b>6.3<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>24<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>27<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-31</b><span>last chat</span></li><li class="pw"><b>14,361</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Shipping</b><span>code activity</span></li><li class="pw"><b>219</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-10-25</b><span>last commit</span></li><li class="pw"><b>2026-09-24</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>research challenges (bug bounty + decentralized LLM pretraining)</dd>
+<dt>Status</dt><dd>Transitioning and not paying: on 2026-10-31 only uid 0, the owner&#x27;s own hotkey, has incentive. The team has not explained the burn; its HyperTrain code last moved on 2026-10-25.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-31</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Challenges</a></li><li><a href="#sn-x1">Why nothing is paid</a></li><li><a href="#sn-x2">Docs vs code vs chain</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-similar">Similar subnets</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>Cortex pays for bug reports (Bounty) and for shared AI-model training (HyperTrain).</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>nobody earns. All incentive sits on the owner&#x27;s own uid and the miner share is burned (2026-10-31).</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>validators only re-compute the team gateway&#x27;s vector, so all seven agree and scoring is not independent.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>130,236 bug reports counted valid, 68,029 awaiting review; Bounty scoring paused about 10 days.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>Bounty needs team approval and a Cortex Chat account; HyperTrain needs an RTX 5090 and team admission.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner (Bounty) <span class="v2-barrier b-high">High barrier</span></h3><p>Files bug reports on Cortex products; each one the team marks valid scores a point.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-unk">Paid service unknown</li><li class="fl fl-bad">Permissioned</li></ul><dl class="v2-needs"><div class="v2-need n-no"><dt>Hardware</dt><dd>None</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>Dedicated Cortex Chat account; price not documented</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>0.0005 TAO to register (2026-10-31)</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Python 3.12+, uv; the team authorises each pairing</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Miner (HyperTrain) <span class="v2-barrier b-high">High barrier</span></h3><p>Trains a shared model in rounds; other nodes replay samples to check the work.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-caution">GPU needed</li><li class="fl fl-good">No paid service</li><li class="fl fl-bad">Permissioned</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>RTX 5090, one GPU per process</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None (a rented GPU host works)</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>0.0005 TAO to register; a bond of escrowed rewards later</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Pinned Docker image; team admits you; probation</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Verifies and submits the team&#x27;s sealed vector; adds no independent judgement.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>Linux, Python 3.12+, libsodium; no GPU</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>0.0005 TAO to register; a permit needs 1,000 TAO of stake (2026-10-31)</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>One setup script; verify-only needs no wallet</dd></div></dl><a class="v2-more" href="#sn-role-2">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-10-31. Not financial advice.</span></div><p>Small pool, 30-day net outflow of 214 TAO, nothing paid to miners; leans bearish despite a two-day bounce. <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>Cortex calls itself an autonomous research network: the team runs the challenges and a gateway that seals each epoch&#x27;s scores, and validators submit them. Bounty rewards bug reports; HyperTrain is a research-stage attempt at verifiable shared training. Formerly Platform, then BASE.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Bounty miners file reproducible bug reports; HyperTrain miners train in rounds while other nodes replay samples to audit them.</p></div><div><h3>Validators</h3><p>Validators download the gateway&#x27;s sealed vector, verify it against the chain, recompute the weights and submit them.</p></div><div><h3>Incentive</h3><p>Bounty pays one point per report the team marks valid, cumulatively. HyperTrain rewards would vest over about ten rounds.</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-10-31, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-good">Open</span>Permits go by stake (1,000 TAO); 7 hold one, but they only re-run the team gateway&#x27;s vector.</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">74.5%</span>Owner uid 0: 74.5% of emission, 100% of incentive; owner cut 18%, RecycleOrBurn is Burn.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">1 uid</span><span class="v2-sx muted">top 5 hold 100% of incentive.</span> One uid earns, the owner&#x27;s own; no independent miner is paid.</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Converged</span>All 7 weight-setters put 100% on uid 0: one gateway vector, so agreement is by design.</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-good">Open</span>Apache-2.0 repos hold the miner CLI, validator and challenges; the report backend and live settings are private.</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner (Bounty) <span class="v2-barrier b-high">High barrier</span></h3><p>Files bug reports on Cortex products; each one the team marks valid scores a point.</p><ul>
+<li>Pairing lets the team use the account&#x27;s chats for research and to reward or penalise the hotkey.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Miner (HyperTrain) <span class="v2-barrier b-high">High barrier</span></h3><p>Trains a shared model in rounds; other nodes replay samples to check the work.</p><ul>
+<li>The client refuses any other GPU model.</li>
+<li>The miner guide says one GPU, the README multi-GPU clusters.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-2"><h3>Validator <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Verifies and submits the team&#x27;s sealed vector; adds no independent judgement.</p><ul>
+<li>7 of 64 validator slots hold a permit; the owner&#x27;s own validator earns 49% of the dividends (2026-10-31).</li>
+</ul></section></div>
+<h2 id="sn-x0">Challenges</h2>
+<p>Shares are the gateway&#x27;s ceilings (2026-10-31); all three paid 0%.</p>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Challenge</th><th>Miners</th><th>Share</th><th>State (2026-10-31)</th></tr></thead><tbody><tr><td>Bounty</td><td>File bug reports</td><td>30%</td><td>Only one the guide calls live; scoring paused</td></tr><tr><td>HyperTrain</td><td>Train a shared model</td><td>35%</td><td>Preview; nothing matured</td></tr><tr><td>Proof</td><td>Submit research</td><td>35%</td><td>Guide calls it retired</td></tr></tbody></table></div>
+<h2 id="sn-x1">Why nothing is paid</h2>
+<ul class="v2-list">
+<li>Chain split: 18% owner, 41% validators, 41% miners (2026-10-31). All miner-side incentive lands on uid 0, the owner&#x27;s own hotkey, and is burned; that uid holds 74.5% of the emission paid to uids. Until about 2026-10-19 roughly 70% sat there and the rest reached 26 to 85 other uids.</li>
+<li>A challenge that fails, is not on the team&#x27;s container list or has no open topic gets no score and its share burns to uid 0; on 2026-10-31 all three answered empty.</li>
+<li>Bounty must read its whole report feed within 120 s: 21,000 reports took 37 s on 2026-10-16, so today&#x27;s 131,030 would take nearly 4 minutes. That fits the 10-day &#x27;refresh in progress&#x27; status but is arithmetic, not a team statement.</li>
+</ul>
+<h2 id="sn-x2">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Bounty pay</td><td>Docs: guide says precision times mean severity</td><td>Code: one point per valid report, any severity</td><td>2026-10-31</td></tr><tr><td>HyperTrain</td><td>Team: mining live on 2026-10-12</td><td>Chain: no miner has incentive; site says preview</td><td>2026-10-31</td></tr><tr><td>Emission shares</td><td>Repo files: 80/20, 70/30 or 35/35/30</td><td>Chain: nothing paid; gateway lists 30/35/35</td><td>2026-10-31</td></tr></tbody></table></div>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-10-31. Not financial advice.</span></div>
+<p class="v2-thesis">Small pool (104th of 128). Miners earn nothing, the team is silent in chat and its claims conflict; the last two days saw net buying.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.002917 TAO per alpha</dd></div><div><dt>Pool</dt><dd>2,174 TAO, rank 104</dd></div><div><dt>Price, 30 days</dt><dd>-20%, 2026-09-28 to 2026-10-31</dd></div><div><dt>Net flow, 30 days</dt><dd>-214 TAO, 2026-10-01 to 2026-10-31</dd></div><div><dt>Net flow, 7 days</dt><dd>+75 TAO (net buying on 3 of 7 days)</dd></div><div><dt>Miner pay</dt><dd>No independent miner is paid (miner side burned)</dd></div><div><dt>Miner pay outside top 5</dt><dd>No independent miner is paid (miner side burned)</dd></div><div><dt>Code activity</dt><dd>last commit 2026-10-25; 302 commits in 30 days (hypertrain 236, cortex 65, bounty 1); latest release 2026-09-24</dd></div></dl>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>Team code is active (HyperTrain commits to 2026-10-25).</li>
+<li>Net buying of 72 TAO in the last 2 days.</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>All miner-side incentive burns to the owner uid; Bounty scoring paused about 10 days.</li>
+<li>Net outflow of 214 TAO over 30 days; team silent on the burn.</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> A team explanation, a first miner payout and weeks of net inflow would turn it neutral or bullish; checkable usage would settle the valuation.</p>
+<p class="muted">Since the last pass: Was bearish, low confidence on 2026-10-28 (7-day read only); now medium with a 30-day read.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-similar">Similar subnets</h2>
+<div class="v2-sim"><p>By pool size this is <strong>rank 12 of 14</strong> among the subnets grouped as <em>training</em> (what they mainly sell). Pool and price as of 2026-10-30 to 2026-10-31, price in TAO per alpha; the barrier is the easiest miner role.</p><div class="scroll"><table class="v2-table"><thead><tr><th>#</th><th>Subnet</th><th>Pool</th><th>Price</th><th>Miner barrier</th></tr></thead><tbody><tr><td>10</td><td><a href="/bittensor-docs/subnets/102.html">Connito</a> <span class="muted">SN102</span></td><td>3,045 TAO</td><td>0.004348</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>11</td><td><a href="/bittensor-docs/subnets/119.html">CapabilityForge Next</a> <span class="muted">SN119</span></td><td>3,001 TAO</td><td>0.002159</td><td><span class="v2-barrier b-unknown">Unknown</span></td></tr><tr class="me" aria-current="true"><td>12</td><td>Cortex <span class="muted">SN100, this page</span></td><td>2,174 TAO</td><td>0.002917</td><td><span class="v2-barrier b-high">High</span></td></tr><tr><td>13</td><td><a href="/bittensor-docs/subnets/40.html">Ralph</a> <span class="muted">SN40</span></td><td>1,234 TAO</td><td>0.001795</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>14</td><td><a href="/bittensor-docs/subnets/78.html">UMI</a> <span class="muted">SN78</span></td><td>1,050 TAO</td><td>0.001923</td><td><span class="v2-barrier b-medium">Medium</span></td></tr></tbody></table></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-31</span> <span class="muted">(api.cortex.foundation bounty board, read 2026-10-31 06:50 UTC; the 1,000 newest-reviewed public reports, read 2026-10-31 06:21 UTC)</span> Bounty board: 131,030 reports, 68,029 waiting; reviews now cover reports sent 4 to 5 days earlier. All 39,366 published since 2026-10-21 counted valid.</li>
+<li><span class="when">2026-10-31</span> <span class="muted">(network.cortex.foundation/hypertrain page text and gateway weights route, read 2026-10-31 06:50 to 06:53 UTC)</span> HyperTrain page still says preview, nothing paid: one offline participant, last round started 2026-10-17. The gateway still seals a 100% burn vector.</li>
+<li><span class="when">2026-10-21</span> <span class="muted">(#cortex, 2026-10-21 to 2026-10-31; network.cortex.foundation)</span> From here on team chat held only greetings; miners&#x27; questions about the burn and next challenge went unanswered.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Bounty: install the cortex CLI (Python 3.12+, uv, libsodium), register a hotkey, and ask the team to authorise pairing with a dedicated Cortex Chat account.</li>
+<li>HyperTrain: only with an RTX 5090; run the self-check and join, then send the signed request to the operator.</li>
+<li>Validators: run scripts/run-validator.sh with --verify-only first, then with a registered wallet.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>The burn&#x27;s cause is unconfirmed; explanations here come from public code and arithmetic, and the team&#x27;s deployed setup is not public.</li>
+<li>Bounty counts are the team&#x27;s own, reviewed by operators with an AI agent; no report published since 2026-10-21 was marked duplicate or invalid, which this page cannot explain.</li>
+<li>Validators are told to read their profile from /v1/trust; both public hosts answer 404 (2026-10-31).</li>
+<li>Not researched: product and partnership claims; no bounty report was independently verified.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/CortexLM/cortex" rel="noopener noreferrer">GitHub: cortex (master, gateway, validator, miner CLI)</a></li>
+<li><a href="https://github.com/CortexLM/bounty" rel="noopener noreferrer">GitHub: bounty challenge</a></li>
+<li><a href="https://github.com/CortexLM/hypertrain" rel="noopener noreferrer">GitHub: hypertrain challenge</a></li>
+<li><a href="https://github.com/CortexLM/opendecision" rel="noopener noreferrer">GitHub: opendecision (model for HyperTrain)</a></li>
+<li><a href="https://cortex.foundation" rel="noopener noreferrer">Project website</a></li>
+<li><a href="https://huggingface.co/OpenType/neon-1.2-genesis" rel="noopener noreferrer">Genesis model on Hugging Face (354M parameters)</a></li>
+<li><a href="https://network.cortex.foundation/llms.txt" rel="noopener noreferrer">Network guide with live status text</a></li>
+<li><a href="https://network.cortex.foundation/challenge/bounty/v1/status" rel="noopener noreferrer">Bounty status route (public)</a></li>
+<li><a href="https://api.cortex.foundation/v1/bounty/public/status" rel="noopener noreferrer">Public Bounty board: report counts and leaderboard</a></li>
+<li><a href="https://network.cortex.foundation/hypertrain" rel="noopener noreferrer">HyperTrain preview page (client-rendered)</a></li>
+<li><a href="https://chain.joinbase.ai/v1/weights/latest" rel="noopener noreferrer">Latest sealed weights vector from the team&#x27;s gateway</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 14 sources</summary>
+<ul>
+<li><strong>repo</strong> CortexLM/cortex @008610a (2026-10-20, unchanged on 2026-10-31): README.md, docs/CHALLENGES.md, docs/external-miner/{README,bounty,validators}.md, scripts/run-validator.sh, deploy/challenges/registry.toml, src/cortex/master.py (epoch loop, registry, runtime), gateway/api.py, config.py, challenges/client.py, protocol/aggregate.py, validator/service.py</li>
+<li><strong>repo</strong> CortexLM/bounty @f2790a6 (2026-10-16, v1.0.0 2026-09-24, unchanged): docs/miner.md, docs/scoring.md, src/bounty_challenge/feed.py (120 s snapshot deadline, probe lock), service.py, app.py</li>
+<li><strong>repo</strong> CortexLM/hypertrain @679eb5b (2026-10-25, unchanged): README.md, CHANGELOG, docs/miner.md, docs/network-v2.md, commits 2026-10-20 to 2026-10-25</li>
+<li><strong>repo</strong> CortexLM/opendecision @9cc618f (2026-10-12, unchanged): README.md</li>
+<li><strong>msg</strong> #cortex: latest 200 messages (2026-10-09 to 2026-10-18), team posts, pinned posts and archive search 2025-11 to 2026-10-21, and every message from 2026-10-21 to 2026-10-31 03:48 UTC</li>
+<li><strong>web</strong> https://network.cortex.foundation/llms.txt and /challenge/bounty/v1/status, read 2026-10-21 23:37 UTC, 2026-10-27, 2026-10-28 and 2026-10-31 06:50 UTC (scoring version 2, can_score false each time; llms.txt byte-identical since 2026-10-27); /hypertrain page text 2026-10-21 (browser) and 2026-10-31 06:53 UTC (server-rendered HTML)</li>
+<li><strong>web</strong> https://api.cortex.foundation/v1/bounty/public/status and /leaderboard, read 2026-10-21 23:40 UTC (revision 200112), 2026-10-27, 2026-10-28 (revision 292373) and 2026-10-31 06:50 UTC (revision 306504); the 1,000 newest-reviewed public reports read 2026-10-31 06:21 UTC (80 reports on 2026-10-27)</li>
+<li><strong>web</strong> https://chain.joinbase.ai/v1/weights/latest and https://network.cortex.foundation/v1/weights/latest, epochs 25984 (2026-10-27), 25985 (2026-10-28) and 26051 (read 2026-10-31 06:50 UTC, algorithm 3); /v1/trust answered 404 on both hosts each time</li>
+<li><strong>web</strong> https://huggingface.co/api/models/OpenType/neon-1.2-genesis, read 2026-10-31 (created and last modified 2026-10-14, public, 353.9M parameters, 9 downloads)</li>
+<li><strong>web</strong> Chain read at block 9402079 (2026-10-31 06:35Z UTC): SN100 (Cortex): registered 2025-10-19, tempo 360, 256 of 256 uids, commit-reveal on; emission weights burn/recycle/owner/validator/miner = 0/0/18/41/41 % (stored, same values as the chain default), RecycleOrBurn = Burn; uids under the owner hotkey or owner coldkey hold 100 % of incentive and 74.49 % of last-epoch emission (a floor); 7 validators have weight rows, on average 100 % of weight goes to uid 0; validator permit StakeThreshold 1000 TAO (global).</li>
+<li><strong>web</strong> Chain read at block 9402079 (2026-10-31 06:35Z UTC), compared with block 9378501 (2026-10-28 00:00Z UTC): SN100: no setting changed in 33 checked items; emission split unchanged; pool 2150.63 -&gt; 2173.86 TAO.</li>
+<li><strong>web</strong> Chain read at block 9402079 (2026-10-31 06:35Z): shared snapshot over 129 subnets of name, SubnetOwner, Tempo, Burn, SubnetworkN, MaxAllowedUids, SubnetEmissionEnabled, price, tao_in, alpha_in, age_days (SN100 pool rank 104 of 128 excluding root, price rank 90 of 128).</li>
+<li><strong>web</strong> Chain read at block 9402079 (2026-10-31 06:35Z): price SN100, 6 samples every 7d from block 9186079 (2026-10-01 06:18Z): price 0.003651 -&gt; 0.002917 TAO per alpha (-20.1%), pool TAO 2423.7 -&gt; 2173.9; over the 5 intervals where the pool change equals flow + protocol: net user flow -213.5 TAO (staked minus unstaked), protocol flow -36.3 TAO, gross volume 13034.2 TAO. 7 daily samples from block 9351679 (2026-10-24 06:35Z): price 0.002740 -&gt; 0.002917 (+6.4%), net user flow +74.7 TAO.</li>
+<li><strong>web</strong> Chain reads at blocks 9226694 to 9327494 (about 2026-10-06 to 2026-10-20) for the incentive spread before the burn</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/99.html"><small>← Previous</small>SN99 Thirty Spokes</a><a rel="next" href="/bittensor-docs/subnets/101.html"><small>Next →</small>SN101 Tag101</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-31. Site built 2026-10-31. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

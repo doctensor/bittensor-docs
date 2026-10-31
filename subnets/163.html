@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Safe Scan (SN163) | Bittensor Subnet Docs</title>
+<meta name="description" content="Testnet-only continuation of the former mainnet SN76 skin-cancer contest; the team paused its comeback in April 2026.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h13">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>163</span><div>
+<h1>Safe Scan <span class="muted">SN163</span></h1>
+<p class="tagline">Testnet-only continuation of the former mainnet SN76 skin-cancer contest; the team paused its comeback in April 2026.</p>
+<span class="st s-quiet">quiet</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl2"><b>0.43<small>/day</small></b><span>last 7 d</span></li><li class="pl1"><b>0.13<small>/day</small></b><span>days 8-30</span></li><li class="pl2"><b>0.33<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-28</b><span>last chat</span></li><li class="pw"><b>4,578</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Quiet</b><span>code activity</span></li><li class="pw"><b>0</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-02-11</b><span>last commit</span></li><li class="pw"><b>2024-09-04</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>medical imaging (skin-lesion detection model competitions)</dd>
+<dt>Status</dt><dd>Testnet only and dormant. The team said the project was deregistered from mainnet (chat, 2026-02-19) and on 2026-04-10 said it was delaying its comeback; no team post followed through 2026-10-28. On the testnet on 2026-10-31 no validator had set weights for over 180 days.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-31</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Docs vs code vs chain</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>miners train skin-lesion classifiers that validators score on data from medical institutions (Tricorder-3 contest).</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>testnet only. Netuid 163 does not exist on mainnet (checked 2026-10-31).</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>dormant. None of the 43 validator permit holders has set weights in over 180 days, and no neuron earns incentive (2026-10-31).</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>comeback delayed on 2026-04-10; the team now builds a dermatology company. No team post since.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>no commits since 2026-02-11; the guides target mainnet SN76, and only the validator guide has a testnet 163 example.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-low">Low barrier</span></h3><p>Trains and submits a skin-lesion classifier for the current competition.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>CPU only per min_compute.yml: 4 cores, 8 GB RAM, 500 GB SSD; no GPU required</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None required; a Hugging Face account and write token are needed</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Registration burn 0.0005 test TAO on testnet 163 (2026-10-31); mainnet n/a</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Python 3.12 and a venv; a competitive model needs ML work the docs do not cost</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-low">Low barrier</span></h3><p>Detects new data batches, downloads them and scores every eligible model.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-unk">Paid service unknown</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>CPU: 8 cores, 16 GB RAM, 300 GB SSD (min_compute.yml); no GPU required yet</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>W&amp;B API key and Hugging Face token (price not stated)</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Burn 0.0005 test TAO; a permit needs stake (smallest holder&#x27;s stake not read)</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Python 3.12, PM2 and a start script that auto-updates the code</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>Safe Scan (repo cancer-ai) runs model competitions: miners submit medical-imaging classifiers, such as skin-lesion models, and validators score them on data from medical institutions. It was mainnet subnet 76 until early 2026; the team then said it would keep testing on testnet, as netuid 163. It looks dormant: the comeback is on hold and no testnet validator has set weights for over 180 days.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Per the docs (written for mainnet SN76): miners train an ONNX model for the current competition (documented: Tricorder-3, 11 skin-lesion classes, image plus demographics), publish it with its training code under an MIT licence on Hugging Face, and commit the link on chain 120+ minutes before the start.</p></div><div><h3>Validators</h3><p>A competition starts when medical institutions add a data batch to a central Hugging Face dataset repo; validators download it and score every eligible model. The Tricorder-3 score is 0.9 x prediction + 0.1 x efficiency. Prediction is half accuracy, half weighted F1 (malignant 3, medium 2, benign 1); efficiency is 1.0 up to 50 MB and falls to 0 at 150 MB. The scoring code was not audited.</p></div><div><h3>Incentive</h3><p>The competition doc splits rewards among the top 10 models: 50, 17, 10, 7, 5, 4, 3, 2, 1 and 0.5 percent, with a minimal share for the rest. Testnet tokens have no market value (moderator, 2026-03-19), and on 2026-10-31 no testnet 163 neuron earned incentive or dividends.</p></div></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-low">Low barrier</span></h3><p>Trains and submits a skin-lesion classifier for the current competition.</p><ul>
+<li>Also in min_compute.yml: 4 GB swap, Ubuntu 24.04, 1 TB SSD recommended; each competition dataset takes about 1 to 5 GB.</li>
+<li>The Hugging Face repo must be public and hold an extrinsic_record.json (the guide&#x27;s anti-copy rule).</li>
+<li>The guide targets netuid 76 on finney; the network flag takes finney or test, with the testnet netuid left as a placeholder.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-low">Low barrier</span></h3><p>Detects new data batches, downloads them and scores every eligible model.</p><ul>
+<li>Also in min_compute.yml: 4 GB swap, Ubuntu 24.04, 500 GB SSD recommended; a card with 6 GB of VRAM is listed only for future use.</li>
+<li>A Hugging Face token (--hf_token) is required; .env.example also lists W&amp;B and Axiom keys, and whether Axiom is optional was not read.</li>
+<li>Testnet 163 allows 64 validators; 43 permits were held on 2026-10-31, none with recent weights.</li>
+</ul></section></div>
+<h2 id="sn-x0">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Where it runs</td><td>Miner and validator guides default to netuid 76 on finney (mainnet)</td><td>Chat: deregistered from mainnet, continuing on testnet 163 (moderator)</td><td>2026-02-19</td></tr><tr><td>Rewards</td><td>Top 10 models share rewards 50/17/10/7/5/4/3/2/1/0.5 percent</td><td>Chain: no testnet 163 neuron has incentive; no validator weights in 180+ days</td><td>2026-10-31</td></tr></tbody></table></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-31</span> <span class="muted">(Bittensor testnet)</span> Testnet 163 still exists with 97 neurons and 43 validator permits. No neuron earns incentive, and no validator has set weights for over 180 days (about 175 days on 2026-10-26).</li>
+<li><span class="when">2026-10-28</span> <span class="muted">(#safe-scan)</span> The latest channel messages are two pings to a user. October had 6 messages, all pings or a greeting; in September a member asked when the testnet would return and the team did not reply.</li>
+<li><span class="when">2026-04-10</span> <span class="muted">(#safe-scan)</span> The team said it was delaying its comeback to watch how things develop and was now building a dermatology company. This is its last post in the channel.</li>
+<li><span class="when">2026-03-19</span> <span class="muted">(#safe-scan)</span> After a member said on 2026-03-12 that you could mine on testnet uid 163, a moderator confirmed it is the testnet and that incentives there are test alpha.</li>
+<li><span class="when">2026-02-19</span> <span class="muted">(#safe-scan)</span> After weeks of miner complaints (2026-02-17 the team said it would be back if deregistered), a moderator said Safe Scan was deregistered from mainnet but would keep testing on testnet; mainnet SN76 now belongs to another project.</li>
+<li><span class="when">2026-02-11</span> <span class="muted">(GitHub)</span> Last push to the public repo (coroutine protection and logging). Nothing newer was found.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Ask in the channel whether anyone still validates: no testnet 163 validator has set weights for over 180 days (2026-10-31), so nothing would be scored.</li>
+<li>Read DOCS/miner.md and DOCS/validator.md. Both default to mainnet SN76; the validator guide&#x27;s testnet example uses --netuid 163.</li>
+<li>Miner: build an ONNX model for Tricorder-3, upload it to a public Hugging Face repo, and use the command line (evaluate, self-check, upload, submit) with --subtensor.network test --netuid 163.</li>
+<li>Validator: install Python 3.12 and PM2, copy .env.example to .env, add a W&amp;B key, and run scripts/start_validator.py with a Hugging Face token.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Testnet only: netuid 163 does not exist on mainnet (2026-10-31). Testnet tokens have no market value, so the page gives no price or emission figures.</li>
+<li>The chain slot has no subnet identity and was registered 2024-05-24, before the repo existed; the Safe Scan link rests on the repo (validator guide, code) and chat.</li>
+<li>The weights figure covers validator permits only; it does not show that nobody runs miner software. Scoring numbers come from the docs, not a code audit.</li>
+<li>A testnet competition config exists (tricorder-3, daily 14:38, no time zone stated); whether a competition or dataset is live on testnet was not verified.</li>
+<li>safe-scan.ai redirects to frichi.cz, which blocked the research machine; dashboard.safe-scan.ai does not respond; skin-scan.ai (200) never mentions Bittensor.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/safe-scan-ai/cancer-ai" rel="noopener noreferrer">GitHub (safe-scan-ai/cancer-ai)</a></li>
+<li><a href="https://github.com/safe-scan-ai/cancer-ai/blob/99ea548/DOCS/miner.md" rel="noopener noreferrer">Miner guide (written for mainnet SN76)</a></li>
+<li><a href="https://github.com/safe-scan-ai/cancer-ai/blob/99ea548/DOCS/COMPETITIONS.md" rel="noopener noreferrer">Competitions overview</a></li>
+<li><a href="https://github.com/safe-scan-ai/cancer-ai/blob/99ea548/DOCS/competitions/TRICORDER-3.md" rel="noopener noreferrer">Tricorder-3 competition</a></li>
+<li><a href="https://skin-scan.ai" rel="noopener noreferrer">skin-scan.ai (team&#x27;s dermatology company, linked from the README)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 6 sources</summary>
+<ul>
+<li><strong>repo</strong> safe-scan-ai/cancer-ai@99ea548 (last commit 2026-02-11, head re-checked 2026-10-31): README.md, DOCS/miner.md, DOCS/validator.md, DOCS/COMPETITIONS.md, DOCS/competitions/TRICORDER-3.md, min_compute.yml, .env.example, requirements.txt, config/competition_config_testnet.json, cancer_ai/validator/competition_manager.py</li>
+<li><strong>repo</strong> safe-scan-ai/cancer-ai@99ea548: tricorder_3_handler.py (efficiency function only)</li>
+<li><strong>msg</strong> #safe-scan 2024-10 to 2026-10-28 (newest messages re-read 2026-10-31; 2026-02-10 to 2026-04-10 and the team&#x27;s own posts read in full)</li>
+<li><strong>web</strong> Bittensor mainnet chain reads, netuid 163 absent at block 9400611 (2026-10-31), 9367492 (2026-10-26), 9334347 (2026-10-21) and five earlier points back about 300 days</li>
+<li><strong>web</strong> Bittensor testnet chain reads, netuid 163 parameters, permits and weight ages, testnet block 8339056 (about 2026-10-31 01:42 UTC, estimated at 12 s per block); earlier reads at blocks 8305902 (2026-10-26) and about 8272838 (2026-10-21)</li>
+<li><strong>web</strong> https://skin-scan.ai (HTTP 200, 2026-10-31); safe-scan.ai answers a 301 to frichi.cz, which then returns 403, 2026-10-31</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/128.html"><small>← Previous</small>SN128 ByteLeap</a><a rel="next" href="/bittensor-docs/subnets/234.html"><small>Next →</small>SN234 TuneForge</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-31. Site built 2026-10-31. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

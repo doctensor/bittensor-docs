@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nodexo (SN106) | Bittensor Subnet Docs</title>
+<meta name="description" content="Verified GPU rental market: miners keep proving their GPUs and only machines that pass earn emissions.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h22">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>106</span><div>
+<h1>Nodexo <span class="muted">SN106</span></h1>
+<p class="tagline">Verified GPU rental market: miners keep proving their GPUs and only machines that pass earn emissions.</p>
+<span class="st s-transitioning">transitioning</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl4"><b>2.6<small>/day</small></b><span>last 7 d</span></li><li class="pl3"><b>1.8<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>10<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-30</b><span>last chat</span></li><li class="pw"><b>44,762</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>No repo</b><span>code activity</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>compute (verified GPU rental)</dd>
+<dt>Status</dt><dd>As of 2026-10-30 the subnet still pays 10 miner uids and the team-run stats page lists 61 GPUs, but the direction is unclear: the team has talked of winding down (2026-10-01), a sale (10-04), a comeback (10-15) and an upgrade (10-28).</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-30</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Product and usage</a></li><li><a href="#sn-x1">Docs vs code vs chain</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-similar">Similar subnets</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>miners prove real NVIDIA GPUs; validators weight each machine by a fixed hourly reference price.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>10 of 256 uids earn; the top uid, never a weight-setter and not owner-linked, holds 38.3%.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>60 of 61 listed GPUs are rented; renters and revenue are not on chain.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>no public commit since 2026-07-23, while the team has talked of both winding down and an upgrade.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>joining costs a 0.0005 TAO burn plus a supported GPU; a validator permit needs about 1,000 TAO.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Host a verified GPU, answer proofs and run rental containers.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-caution">GPU needed</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>Supported NVIDIA GPU; 4 cores, 16 GB RAM, 40 GB Docker disk</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None required; a domain for the HTTPS endpoint is advised</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>0.0005 TAO burn; alpha stake 24 x GPU hourly price x GPUs (A100: about 30)</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Docker, sysbox, PM2, HTTPS endpoint, open rental ports</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Verify proofs, score machines, set weights; rentals and canaries run only on the primary validator.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>CPU only: 4 vCPU, 16 GB RAM, 100 GB disk, Postgres</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None; run your own Subtensor RPC node</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>0.0005 TAO burn; permit needs about 1,000 TAO of stake</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Install script, PM2, Postgres, public endpoint</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div><div class="v2-role"><h3>Renter <span class="v2-barrier b-low">Low barrier</span></h3><p>Rent verified GPUs by the hour through the team&#x27;s web app, CLI or API.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-caution">Paid service needed</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-no"><dt>Hardware</dt><dd>None; an SSH client</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>USDC via x402 or credits; $0.31 to $1.52 per GPU-hour (team reference prices)</dd></div><div class="v2-need n-no"><dt>Stake / fees</dt><dd>None for x402; credits via locked alpha (team claim)</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>An SSH key and a wallet or account</dd></div></dl><a class="v2-more" href="#sn-role-2">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-10-30. Not financial advice.</span></div><p>Steady price and +123 TAO flow, but quiet code, an unidentified top uid and an unclear direction. <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>Nodexo is a GPU rental marketplace. Miners register GPU hosts and keep proving the hardware is real; validators check the proofs, test idle machines by renting them and weight each machine by a fixed hourly price.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Run the miner on an Ubuntu host with a supported NVIDIA GPU, Docker and sysbox. Each GPU endpoint is one executor in an on-chain registry that answers a timed proof about every 3 minutes and starts rental containers on request.</p></div><div><h3>Validators</h3><p>Validators check proofs and heartbeats on a CPU, score every executor and set weights about every 72 minutes. Only the primary validator rents idle machines to itself (canaries) to test memory, bandwidth and a hash; follower mode copies its scores.</p></div><div><h3>Incentive</h3><p>Score = the GPU model&#x27;s fixed hourly price x GPU count x (1.0 if rented, 0.8 if idle) x pass rate squared. It is zero if any gate fails: valid recent proof, canary, heartbeat, sybil check, minimum version, alpha stake or reliability of 0.67. The live config burns nothing.</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-10-30, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-good">Open</span>Permits are open (19 holders), but canaries run only on the owner-tied primary validator.</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">18.6%</span>Uid 0 holds 18.6% of emission as validator dividends, 0% of incentive; owner cut 18%, Burn.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">10 uids</span><span class="v2-sx muted">top 5 hold 93.2% of incentive.</span> 10 uids earn; the top uid holds 38.3% and its operator is unknown.</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Converged</span>13 of 17 weight-setters put their top weight on one uid; follower mode may explain it (not checked).</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-good">Open</span>Miner and validator are MIT in one repo, last commit 2026-07-23; the web app and credits backend are private.</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Host a verified GPU, answer proofs and run rental containers.</p><ul>
+<li>Ports 8091 (API) and 20000-20100 (rentals) must be reachable; Cloudflare&#x27;s HTTP proxy does not carry the rental ports.</li>
+<li>Accepted GPUs (site docs): B200, H200, H100, RTX PRO 6000, A100, RTX 5090, 4090, A6000.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Verify proofs, score machines, set weights; rentals and canaries run only on the primary validator.</p><ul>
+<li>The primary validator&#x27;s key is the owner&#x27;s hotkey (uid 0), which earns dividends but no incentive.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-2"><h3>Renter <span class="v2-barrier b-low">Low barrier</span></h3><p>Rent verified GPUs by the hour through the team&#x27;s web app, CLI or API.</p><p class="muted">No further detail found in the sources.</p></section></div>
+<h2 id="sn-x0">Product and usage</h2>
+<ul class="v2-list">
+<li>Team-run stats page, 2026-10-30: 60 of 61 GPUs rented, 52 of them A100; listed nodes were 94 on 2026-09-20. Renters and revenue are not published.</li>
+<li>The homepage now pitches managed training on idle GPUs and a confidential-compute tier (team says); the repo has no training code, only a confidential-compute scaffold.</li>
+</ul>
+<h2 id="sn-x1">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Canary and scoring defaults</td><td>Repo docs: canary 24 h, ban at 3 failures, idle share 20%, burn 80%</td><td>Code: live config v58: 4 h, limit 6, idle 0.8, no burn</td><td>2026-10-30</td></tr><tr><td>Minimum miner version</td><td>Team 2026-07-16: 1004 (v0.1.4)</td><td>Code: live config reads 1001 (v0.1.1), waived while rented</td><td>2026-10-30</td></tr><tr><td>Supported GPUs</td><td>Repo lists 5 models, site docs 10</td><td>Chat: team says 8x B300 works (2026-10-09); on neither list</td><td>2026-10-30</td></tr><tr><td>Direction</td><td>Team 2026-10-01: wind down, miners move to 96</td><td>Chat: team 2026-10-28: mining live, upgrade soon; chain still pays 10 uids</td><td>2026-10-30</td></tr></tbody></table></div>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-10-30. Not financial advice.</span></div>
+<p class="v2-thesis">Rank 75 of 128 by pool; price +4% in 30 days, but all the net inflow came in week one. Ten uids share emission, the repo has been quiet for 99 days and usage rests on the team&#x27;s own page.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.002127 TAO per alpha</dd></div><div><dt>Pool</dt><dd>5,626 TAO, rank 75</dd></div><div><dt>Price, 30 days</dt><dd>+4%, 2026-09-30 to 2026-10-30</dd></div><div><dt>Net flow, 30 days</dt><dd>+123 TAO, 2026-09-30 to 2026-10-30</dd></div><div><dt>Miner pay</dt><dd>0.63 TAO per day on average (6.26 TAO per day over 10 uids)</dd></div><div><dt>Miner pay outside top 5</dt><dd>0.085 TAO per day on average (0.43 TAO per day over 5 uids outside the top 5)</dd></div><div><dt>Code activity</dt><dd>last commit 2026-07-23; 0 commits in 30 days; last release 2026-07-23 (v0.1.8)</dd></div></dl>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>Net inflow +123 TAO in 30 days, price up 4%; team page: 60 of 61 GPUs rented</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>No public code since 2026-07-23</li>
+<li>Top five uids take 93.2%; the top uid is unidentified</li>
+<li>Team has spoken of winding 106 down; 3-week outflow of 130 TAO</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> Bullish: a public release for the upgrade plus a payment trail matching the stats page. Bearish: a wind-down notice or falling supply.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-similar">Similar subnets</h2>
+<div class="v2-sim"><p>By pool size this is <strong>rank 7 of 12</strong> among the subnets grouped as <em>compute</em> (what they mainly sell). Pool and price as of 2026-10-30 to 2026-10-31, price in TAO per alpha; the barrier is the easiest miner role.</p><div class="scroll"><table class="v2-table"><thead><tr><th>#</th><th>Subnet</th><th>Pool</th><th>Price</th><th>Miner barrier</th></tr></thead><tbody><tr><td>5</td><td><a href="/bittensor-docs/subnets/110.html">Green Compute</a> <span class="muted">SN110</span></td><td>11,762 TAO</td><td>0.02472</td><td><span class="v2-barrier b-high">High</span></td></tr><tr><td>6</td><td><a href="/bittensor-docs/subnets/25.html">UR</a> <span class="muted">SN25</span></td><td>11,745 TAO</td><td>0.005174</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr class="me" aria-current="true"><td>7</td><td>Nodexo <span class="muted">SN106, this page</span></td><td>5,626 TAO</td><td>0.002127</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>8</td><td><a href="/bittensor-docs/subnets/105.html">Beam</a> <span class="muted">SN105</span></td><td>5,356 TAO</td><td>0.006499</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>9</td><td><a href="/bittensor-docs/subnets/90.html">KubeTEE</a> <span class="muted">SN90</span></td><td>5,125 TAO</td><td>0.01638</td><td><span class="v2-barrier b-high">High</span></td></tr></tbody></table></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-30</span> <span class="muted">(chain data)</span> Chain: 10 uids earn (11 on 2026-10-26), top uid 38.3%; no setting changed.</li>
+<li><span class="when">2026-10-30</span> <span class="muted">(#nodexo, scoring code)</span> A miner wrote that mining is unprofitable; on 2026-10-22 another reported a healthy, rented executor with a zero score. No team reply to either.</li>
+<li><span class="when">2026-10-28</span> <span class="muted">(#nodexo)</span> A team-tagged account said mining is live, an upgrade is coming and the compute will be monetised in a new way. No dates.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Ask in the channel first (the direction is unclear) and check your GPU model is on the docs&#x27; supported list.</li>
+<li>Prepare an Ubuntu host that meets the miner requirements above and a hotkey registered on netuid 106.</li>
+<li>Run install.sh or scripts/setup_miner.sh, fund the miner&#x27;s EVM address with TAO for gas, hold the alpha stake your GPUs need, start under PM2.</li>
+<li>Serve the API on a real HTTPS domain, keep ports 20000-20100 reachable, and expect no score until valid proofs and a passed canary (about every 4 hours).</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>The top uid (38.3%) is not owner-linked, has never set weights and its operator is unknown; chain weights are opinions, not payouts.</li>
+<li>Usage and revenue are team statements; the web app and credits backend are not public. The team&#x27;s X posts and claimed locked stake were not checked.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/nodexo-ai/nodexo" rel="noopener noreferrer">GitHub (miner, validator, CLI, contracts)</a></li>
+<li><a href="https://nodexo.ai/docs" rel="noopener noreferrer">Docs</a></li>
+<li><a href="https://nodexo.ai/stats" rel="noopener noreferrer">Network stats</a></li>
+<li><a href="https://nodexo.ai/operator" rel="noopener noreferrer">Operator dashboard</a></li>
+<li><a href="https://validator.nodexo.ai/subnet-config" rel="noopener noreferrer">Live runtime config</a></li>
+<li><a href="https://nodexo.ai" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://nodexo.ai/whitepaper" rel="noopener noreferrer">Whitepaper (team site)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 7 sources</summary>
+<ul>
+<li><strong>repo</strong> nodexo-ai/nodexo @0b4a5b4 (2026-07-23, no commits since; re-read 2026-10-30): README, docs/, neurons/validator/scoring/scorer.py, neurons/validator/canary/*, neurons/validator/follower.py, common/subnet_runtime_config.py, common/attestation.py</li>
+<li><strong>web</strong> https://validator.nodexo.ai/subnet-config (version 58, updated 2026-10-14, read 2026-10-30) and /health</li>
+<li><strong>web</strong> https://nodexo.ai home page, /docs, /stats, /operator and /whitepaper (read 2026-10-30)</li>
+<li><strong>web</strong> api.github.com repo and issues for nodexo-ai/nodexo (v0.1.8, pushed 2026-07-23; four open items, read 2026-10-30)</li>
+<li><strong>msg</strong> #nodexo, 2026-06-10 to 2026-10-30 (team posts, miner support, status statements); #verathos, 2026-09-30 to 2026-10-07 (statements about subnet 106)</li>
+<li><strong>web</strong> Chain read at block 9396224 (2026-10-30 11:04Z UTC): SN106 (Nodexo): registered 2025-05-13, tempo 360, 256 of 256 uids, commit-reveal on; emission weights burn/recycle/owner/validator/miner = 0/0/18/41/41 %, RecycleOrBurn = Burn; uids under the owner keys hold 0 % of incentive and 18.58 % of last-epoch emission (a floor); 17 validators have weight rows. No setting changed since block 9364101 (2026-10-26 00:00Z).</li>
+<li><strong>web</strong> Chain read at block 9396224 (2026-10-30 11:04Z): price SN106, 6 samples every 7d from block 9180224 (2026-09-30 10:47Z): price 0.002048 -&gt; 0.002127 TAO per alpha (+3.9%), pool TAO 5513.9 -&gt; 5626.0; net user flow +123.0 TAO over 5 intervals; pool rank 75 of 128 (shared snapshot, same block).</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/105.html"><small>← Previous</small>SN105 Beam</a><a rel="next" href="/bittensor-docs/subnets/107.html"><small>Next →</small>SN107 Minos</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-30. Site built 2026-10-31. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

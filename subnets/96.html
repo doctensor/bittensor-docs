@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Verathos (SN96) | Bittensor Subnet Docs</title>
+<meta name="description" content="Decision-model inference: miners serve open-weight models that give a probability for each option of a typed question.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h0">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>96</span><div>
+<h1>Verathos <span class="muted">SN96</span></h1>
+<p class="tagline">Decision-model inference: miners serve open-weight models that give a probability for each option of a typed question.</p>
+<span class="st s-transitioning">transitioning</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl3"><b>1.4<small>/day</small></b><span>last 7 d</span></li><li class="pl4"><b>4.8<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>12<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-29</b><span>last chat</span></li><li class="pw"><b>2,046</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Shipping</b><span>code activity</span></li><li class="pw"><b>315</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-10-14</b><span>last commit</span></li><li class="pw"><b>2026-10-14</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>AI inference (decision models)</dd>
+<dt>Status</dt><dd>Live since 2026-10-15 and working, but the team&#x27;s data shows no paid customers. A private lane and a training competition are in development, not live.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-30</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Where the emission goes</a></li><li><a href="#sn-x1">Docs vs code vs chain</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-similar">Similar subnets</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>open-weight models give a probability per option for typed questions; the API is System One compatible.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>no paid usage (0.00 USD); 23-65 requests a day since 2026-10-18, bar one burst on 2026-10-24.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>about 72% of emission goes to the owner side or is burned; independent miners get about 6% (2026-10-30).</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>mining needs an NVIDIA GPU (12-21 GiB) and a public IP; light validators need no GPU.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>alpha fell 33% in 30 days on 393 TAO net outflow; pool rank 103 of 128 (2026-10-30).</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Serves a decision model on an NVIDIA GPU; earns by the request capacity the auditor proves.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-caution">GPU needed</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>NVIDIA GPU, 12-21 GiB; Ubuntu 22.04/24.04; CUDA 12.8+</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>0.1 TAO registration burn; no stake documented</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>One-command installer; public IP, one open TCP port</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Sets weights each epoch: light mode copies the owner&#x27;s auditor, full mode checks miners&#x27; answers.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>Light: no GPU. Full: 41-119 GiB RAM (CPU is enough)</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Permit: 1,000 TAO chain-wide stake threshold (17 of 64 slots held); full mode: 10,000 stake (unit not stated)</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>One-command installer; synced clock</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div><div class="v2-role"><h3>Referrer <span class="v2-barrier b-low">Low barrier</span></h3><p>Any registered hotkey except the owner&#x27;s can register referral codes and earn from referred users&#x27; payments.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-no"><dt>Hardware</dt><dd>None; one uvx command on any machine with the hotkey</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Registered hotkey; no stake documented</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>One command</dd></div></dl><a class="v2-more" href="#sn-role-2">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-fair">Fairly valued</span></span><span class="v2-conf muted">medium confidence, as of 2026-10-30. Not financial advice.</span></div><p>Price down 33% in 30 days on 393 TAO of net outflow; no paid usage anchors it. <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>Since 2026-10-15 SN96 sells Verathos Decide: open-weight models that read a state (ticket, document, code change or image) and answer typed yes/no, choice or scale questions with a probability per option, via a System One compatible API. Miners sign a receipt for each answer. The owner runs the gateway, auditor and model catalog.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Miners run one of four models (kev-4b, clef-flash, d3-flash, d3-mini) per NVIDIA GPU. The auditor tests the declared capacity; the score stays zero until it is proven.</p></div><div><h3>Validators</h3><p>Light validators copy the weights the owner&#x27;s auditor publishes each epoch. Full validators send canary prompts and compare answers with float32 references; a probability over 0.10 off zeroes the hotkey for 6 epochs.</p></div><div><h3>Incentive</h3><p>Each model has an emission share (kev-4b 0.17, clef-flash 0.22, d3-flash 0.33, d3-mini 0.28), split among its endpoints by proven capacity, availability and latency. Miners get 15%; the rest goes to the owner UID, which the chain burns.</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-10-30, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-good">Open</span>Any permit holder can set weights; 17 permits, 7 set weights; light validators follow the owner&#x27;s auditor.</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">66.3%</span>66.3% of last-epoch emission is on the owner UID (incl. dividends); owner cut 18%; RecycleOrBurn is Burn.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">20 uids</span><span class="v2-sx muted">top 5 hold 94.4% of incentive.</span> 20 uids earn incentive; the top 5 take 94.4%, and the owner UID alone 85.5% (burned).</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Converged</span>All 7 validators with weights put their top weight on UID 0 (85.7% on average): concentration, not proof of copying.</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-good">Open</span>Miner and validator code share one public repo under the MIT licence; no commits since 2026-10-14.</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Serves a decision model on an NVIDIA GPU; earns by the request capacity the auditor proves.</p><ul>
+<li>GPU memory: kev-4b about 15 GiB, clef-flash 21 (reads images), d3-flash 21, d3-mini 12.</li>
+<li>The installer picks the best-paying model per GPU.</li>
+<li>Pay is small: about 429 alpha a day (about 1.3 TAO on 2026-10-30) shared by all independent miners.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Sets weights each epoch: light mode copies the owner&#x27;s auditor, full mode checks miners&#x27; answers.</p><ul>
+<li>17 permits; 7 validators set weights, all mostly on the owner UID, the auditor; the other 10 have not set weights for about 90 days.</li>
+<li>Only the owner&#x27;s validator runs throughput tests; others apply its verdicts.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-2"><h3>Referrer <span class="v2-barrier b-low">Low barrier</span></h3><p>Any registered hotkey except the owner&#x27;s can register referral codes and earn from referred users&#x27; payments.</p><ul>
+<li>Pool up to 10% of emission; no referrers or referred spend yet.</li>
+</ul></section></div>
+<h2 id="sn-x0">Where the emission goes</h2>
+<p>Share of the stated 7,200 alpha a day on 2026-10-30 (our arithmetic).</p>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Share</th><th>Where it goes</th></tr></thead><tbody><tr><td>35%</td><td>Burned (miner side on the owner UID)</td></tr><tr><td>18%</td><td>Owner cut</td></tr><tr><td>19%</td><td>Owner UID, as validator dividends</td></tr><tr><td>22%</td><td>Six other weight-setting validators</td></tr><tr><td>6%</td><td>Independent miners (20 hotkeys)</td></tr></tbody></table></div>
+<h2 id="sn-x1">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Product</td><td>Site: Verathos Decide, since 2026-10-15</td><td>Chain: identity still names the old repo and &#x27;Verified AI inference and training subnet&#x27;</td><td>2026-10-30</td></tr><tr><td>Epoch</td><td>Catalog: 180 blocks (about 36 min)</td><td>Chain: tempo is 360 blocks (about 72 min); 180 is the owner&#x27;s own clock</td><td>2026-10-30</td></tr></tbody></table></div>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-fair">Fairly valued</span></span><span class="v2-conf muted">medium confidence, as of 2026-10-30. Not financial advice.</span></div>
+<p class="v2-thesis">Users withdrew about 393 TAO in 30 days and the price fell 33%; the last two days were flat. The product works, but the team&#x27;s own data shows no paid usage and about 72% of emission goes to the owner side or is burned. The pool is in the bottom fifth by size.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.003138 TAO per alpha</dd></div><div><dt>Pool</dt><dd>2,215 TAO, rank 103</dd></div><div><dt>Price, 30 days</dt><dd>-33%, 2026-09-28 to 2026-10-30</dd></div><div><dt>Net flow, 30 days</dt><dd>-393 TAO, 2026-09-30 to 2026-10-30</dd></div><div><dt>Miner pay</dt><dd>0.067 TAO per day on average (1.35 TAO per day over 20 uids)</dd></div><div><dt>Miner pay outside top 5</dt><dd>0.035 TAO per day on average (0.52 TAO per day over 15 uids)</dd></div><div><dt>Code activity</dt><dd>last commit 2026-10-14; 364 commits in 30 days; last release 2026-10-14</dd></div></dl>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>20 miners and 116 scored endpoints; all four models operational</li>
+<li>Private lane and training competition built, not live (2026-10-30)</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>No paid usage; 10 accounts</li>
+<li>About 72% of emission on the owner side or burned; miners report pay below power cost</li>
+<li>No new commits since 2026-10-14</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> Paid usage, a marketplace listing or a paying usage pool would move it toward neutral; more outflow with the owner UID still taking most emission would confirm bearish.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-similar">Similar subnets</h2>
+<div class="v2-sim"><p>By pool size this is <strong>rank 9 of 11</strong> among the subnets grouped as <em>inference</em> (what they mainly sell). Pool and price as of 2026-10-30 to 2026-10-31, price in TAO per alpha; the barrier is the easiest miner role.</p><div class="scroll"><table class="v2-table"><thead><tr><th>#</th><th>Subnet</th><th>Pool</th><th>Price</th><th>Miner barrier</th></tr></thead><tbody><tr><td>7</td><td><a href="/bittensor-docs/subnets/46.html">Instant</a> <span class="muted">SN46</span></td><td>7,474 TAO</td><td>0.002745</td><td><span class="v2-barrier b-high">High</span></td></tr><tr><td>8</td><td><a href="/bittensor-docs/subnets/92.html">REAX</a> <span class="muted">SN92</span></td><td>3,142 TAO</td><td>0.02077</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr class="me" aria-current="true"><td>9</td><td>Verathos <span class="muted">SN96, this page</span></td><td>2,215 TAO</td><td>0.003138</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>10</td><td><a href="/bittensor-docs/subnets/31.html">Recall</a> <span class="muted">SN31</span></td><td>1,694 TAO</td><td>0.003529</td><td><span class="v2-barrier b-high">High</span></td></tr><tr><td>11</td><td><a href="/bittensor-docs/subnets/99.html">Thirty Spokes</a> <span class="muted">SN99</span></td><td>431 TAO</td><td>0.001198</td><td><span class="v2-barrier b-high">High</span></td></tr></tbody></table></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-30</span> <span class="muted">(Team data)</span> 20 miner hotkeys, 116 scored endpoints; 540 requests per second declared, 488 credited.</li>
+<li><span class="when">2026-10-29</span> <span class="muted">(#verathos)</span> Team: inference stays the focus while demand moves toward the frontier; more details promised.</li>
+<li><span class="when">2026-10-27</span> <span class="muted">(#verathos)</span> Team: private lane and another inference type come first, then training; training competition versus training as a service undecided.</li>
+<li><span class="when">2026-10-24</span> <span class="muted">(Team data)</span> One-day burst of 3,232 requests (about 3 million input tokens), no paid usage; sender unknown.</li>
+<li><span class="when">2026-10-15</span> <span class="muted">(#verathos)</span> Switch to Verathos Decide: 1,787 requests on launch day, 176 the next.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Miner: Ubuntu machine with an NVIDIA GPU (12-21 GiB), public IP, open TCP port; register a hotkey on netuid 96 (0.1 TAO burn).</li>
+<li>Run the one-command installer from the miner guide; it picks the model and installs pinned engines. Use unquantized weights.</li>
+<li>Expect a zero score until the auditor&#x27;s throughput test credits your capacity; check your declared address answers.</li>
+<li>Validator: light mode needs a permit and no GPU; full mode needs 10,000 stake and 41 GiB or more of RAM.</li>
+<li>Customer: create a key at verathos.ai/account/keys and call POST /v1/systemone on api.verathos.ai.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Usage, revenue and capacity figures are the team&#x27;s own, read 2026-10-30; the 2026-10-24 burst&#x27;s sender is unknown.</li>
+<li>The owner runs gateway, auditor and catalog. Revenue-funded burns are only a whitepaper promise; the burn ledger was empty on 2026-10-30.</li>
+<li>Whether the usage pool is on in the catalog committed on chain was not read.</li>
+<li>The docs never mention the old Gleipnir and Sleipnir mesh.</li>
+<li>A monthly alpha sale to fund costs (team, September) is unconfirmed; SN106, announced for wind-down, was still registered on 2026-10-30.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://verathos.ai" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://github.com/verathos-ai/verathos-decide" rel="noopener noreferrer">GitHub (Verathos Decide)</a></li>
+<li><a href="https://verathos.ai/llms.txt" rel="noopener noreferrer">Docs index</a></li>
+<li><a href="https://verathos.ai/docs/mining.md" rel="noopener noreferrer">Miner guide</a></li>
+<li><a href="https://verathos.ai/docs/validating.md" rel="noopener noreferrer">Validator guide</a></li>
+<li><a href="https://verathos.ai/economics" rel="noopener noreferrer">Economics (team dashboard)</a></li>
+<li><a href="https://verathos.ai/api/economics" rel="noopener noreferrer">Economics data (JSON)</a></li>
+<li><a href="https://verathos.ai/roadmap" rel="noopener noreferrer">Roadmap</a></li>
+<li><a href="https://verathos.ai/whitepaper.md" rel="noopener noreferrer">Whitepaper</a></li>
+<li><a href="https://api.verathos.ai/v1/status" rel="noopener noreferrer">API model status</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 6 sources</summary>
+<ul>
+<li><strong>repo</strong> verathos-ai/verathos-decide @0c0e8ec (2026-10-14; MIT licence; no newer commits or releases on 2026-10-30; tags v1.0.0 and v1.0.1): README, docs/SCORING.md, MINING.md, VALIDATING.md, DISCOVERY.md, THROUGHPUT_AUDIT.md, SUBNET_ADMIN.md, validator/scoring.py, __main__.py, chain.py, usage.py</li>
+<li><strong>web</strong> verathos.ai/llms.txt and docs pages mining, validating, limitations (read 2026-10-28); /whitepaper.md (2026-10-21 and 2026-10-28); /roadmap (2026-10-30)</li>
+<li><strong>web</strong> verathos.ai/api/economics, /api/economics/series, /api/stats and the signed /api/network document (epoch 52,191, issued 2026-10-30 05:19Z); api.verathos.ai/v1/models and /v1/status (2026-10-30)</li>
+<li><strong>web</strong> Chain read at block 9,394,287 (2026-10-30 04:37Z): SN96 (Verathos): registered 2026-03-07, tempo 360, 256 of 256 uids, commit-reveal on; emission weights burn/recycle/owner/validator/miner = 0/0/18/41/41 % (stored, same values as the chain default), RecycleOrBurn = Burn; uids under the owner hotkey or owner coldkey hold 85.48 % of incentive and 66.27 % of last-epoch emission (a floor); 7 validators have weight rows, on average 85.7 % of weight goes to uid 0; 17 permits, 10 without weights for over 5 tempos; chain-wide stake threshold 1,000 TAO, 64 validator slots.</li>
+<li><strong>web</strong> Chain read at block 9,394,287 compared with block 9,378,501 (2026-10-28): no setting changed in 33 items, emission split unchanged, pool 2220.39 to 2214.85 TAO. Price read, 6 samples every 7 days, blocks 9,178,287 to 9,394,287 (2026-09-30 to 2026-10-30): price 0.004635 to 0.003138 TAO per alpha (-32.3%), net user flow -393.12 TAO, protocol flow -74.16 TAO, gross volume 6343.1 TAO. Second refresh at block 9,394,482 against block 9,392,901 (2026-10-30 00:00Z): no setting changed in 33 items, emission split unchanged, pool 2215.03 to 2214.82 TAO. Pool snapshot at block 9,394,363 (129 subnets): rank 103 of 128 non-root by pool, 0.11% of all pools.</li>
+<li><strong>msg</strong> #verathos pinned posts and chat 2026-07-30 to 2026-10-29; archive search &#x27;sleipnir&#x27; 2026-09-15 to 2026-10-28 (last mention 2026-09-30)</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/95.html"><small>← Previous</small>SN95 Actual</a><a rel="next" href="/bittensor-docs/subnets/97.html"><small>Next →</small>SN97 Ingot</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-30. Site built 2026-10-31. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

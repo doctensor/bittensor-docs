@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RedTeam (SN61) | Bittensor Subnet Docs</title>
+<meta name="description" content="Miners submit Docker images of browser-side detection code; a daily cutoff turns accepted scores into rewards.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h19">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>61</span><div>
+<h1>RedTeam <span class="muted">SN61</span></h1>
+<p class="tagline">Miners submit Docker images of browser-side detection code; a daily cutoff turns accepted scores into rewards.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>66<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>55<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>37<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-31</b><span>last chat</span></li><li class="pw"><b>9,069</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>No repo</b><span>code activity</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>security challenges (browser fingerprinting and detection)</dd>
+<dt>Status</dt><dd>Both challenges pay and the team answers daily, but public code is unchanged since 2026-10-13 and the top BEX entry is fading.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-31</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">The two live challenges</a></li><li><a href="#sn-x1">What to watch</a></li><li><a href="#sn-x2">Docs vs code vs chain</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-similar">Similar subnets</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>miners write browser-side detection code for security challenges and ship it as Docker images.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>winner-take-most. Two BEX entries hold 60% of incentive; about 130 others share 40% (2026-10-31).</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>a new challenge may come this week or next (2026-10-28); ADA v3 retires first. Still no date.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>a banking partnership is at contract stage (2026-10-30); no usage shows on chain.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>mining needs a small server and Docker Hub; validating needs a bare-metal server, stake and a team key.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-low">Low barrier</span></h3><p>Writes detection JavaScript, builds a Docker image and commits its digest; one commit per challenge per day.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>2+ cores, 8 GB RAM, 50 GB disk, Linux; no GPU</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>Docker Hub account (private repo advised); no paid API</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Burn 0.014 TAO (2026-10-31)</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Docker, Python 3.10+, JavaScript; winning is the hard part</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Fetches the team&#x27;s scored results and sets weights; scoring runs on the team&#x27;s server.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-unk">Access unknown</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>Bare metal, 8+ cores, 32 GB RAM, 512 GB disk; no GPU named</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>Team-issued storage API key; no paid service named</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Burn 0.014 TAO; permit needs 1,000 TAO stake (chain setting); docs give no figure</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Python 3.10+, Docker; a server kept online</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-10-31. Not financial advice.</span></div><p>Price down 40% in 30 days with net selling; usage claims are unverified. <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>RedTeam is a competition subnet: the team sets security challenges and miners ship detection code as Docker images. Two pay out (2026-10-31): BEX Tracer (spot Chrome extensions) and ADA v3 (spot anti-detect browsers). ADA v3 is to retire first when a new challenge arrives.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>A miner writes JavaScript for a challenge, packs it in a Docker image and commits its digest once per 24 hours. BEX files may make no outside requests. ADA v3 needs one file per anti-detect browser (AdsPower, Dolphin Anty, GoLogin, Multilogin, Octo Browser) plus a headless detector.</p></div><div><h3>Validators</h3><p>Commits are revealed after about a day, checked, compared and scored on the team&#x27;s own server. Validators fetch the scored results daily (from 14:00 UTC) and set weights about every 20 minutes.</p></div><div><h3>Incentive</h3><p>An entry counts if it reaches the challenge&#x27;s minimum score and is not too similar to others (limit 0.6; 0.8 against your own commits). A best entry holds full value for 10 days, then fades to zero by day 15; a resubmission restarts that only if accepted and higher. Miners sharing an IP, Docker Hub account or coldkey count as one.</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-10-31, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-unk">Unknown</span>14 hotkeys hold a permit, 10 set weights; the scoring key comes from the team and its policy is not public.</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">0%</span>Owner uids hold 0% of last-epoch emission; configured owner cut 18%; RecycleOrBurn is Burn.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">132 uids</span><span class="v2-sx muted">top 5 hold 61.4% of incentive.</span> 132 uids earn incentive; the top five hold 61.4%.</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Converged</span>All 10 validators with weights rank one uid first; a shared scored feed makes honest validators agree.</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-good">Open</span>Miner, validator and challenge repos are MIT; the team&#x27;s scoring server is not published.</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-low">Low barrier</span></h3><p>Writes detection JavaScript, builds a Docker image and commits its digest; one commit per challenge per day.</p><ul>
+<li>Needs git, a wallet and the miner repo 3.0.5+; one Docker Hub username for all images.</li>
+<li>BEX files: up to 750 lines, 10 s budget. ADA files: up to 500 lines.</li>
+<li>Docs say results take up to 48 hours; staff said about 26 (2026-10-28).</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Fetches the team&#x27;s scored results and sets weights; scoring runs on the team&#x27;s server.</p><ul>
+<li>The key comes from the team&#x27;s storage service; whether every validator gets one is not public.</li>
+</ul></section></div>
+<h2 id="sn-x0">The two live challenges</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Challenge</th><th>Miners detect</th><th>Weight</th><th>Minimum</th></tr></thead><tbody><tr><td>BEX Tracer v1</td><td>Which of 89 Chrome extensions are active</td><td>0.6</td><td>0.8</td></tr><tr><td>ADA v3</td><td>Which anti-detect browser drives a session</td><td>0.4</td><td>0.9</td></tr></tbody></table></div>
+<h2 id="sn-x1">What to watch</h2>
+<ul class="v2-list">
+<li>The top BEX entry (41% to 37% since 2026-10-28) fades to zero about 2026-11-04, the second (22%) about 2026-11-05 (estimates); with no new accepted entry the code moves BEX&#x27;s 0.6 to ADA.</li>
+</ul>
+<h2 id="sn-x2">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Outside requests (BEX)</td><td>Docs: egress is not restricted</td><td>Chat: team says none allowed outside the bait page</td><td>2026-10-31</td></tr><tr><td>Own-commit similarity</td><td>Docs: lower limit, about 0.9 vs 0.7</td><td>Code: 0.8 own, 0.6 others; team agrees</td><td>2026-10-31</td></tr><tr><td>New commit vs earning one</td><td>Docs: replaces it at once</td><td>Code: best accepted kept; team agrees</td><td>2026-10-31</td></tr></tbody></table></div>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-10-31. Not financial advice.</span></div>
+<p class="v2-thesis">The price fell 25% in two days and 40% in 30 days, with 4,140 TAO net outflow. Two BEX entries hold 60% of incentive and fade by about 2026-11-05. Usage is unverified and there is no public commit since 2026-10-13.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.006441 TAO per alpha</dd></div><div><dt>Pool</dt><dd>10,830 TAO, rank 44</dd></div><div><dt>Price, 30 days</dt><dd>-40%, 2026-09-28 to 2026-10-31</dd></div><div><dt>Net flow, 30 days</dt><dd>-4,140 TAO, 2026-10-01 to 2026-10-31</dd></div><div><dt>Miner pay</dt><dd>0.144 TAO per day on average (19.0 TAO per day over 132 uids)</dd></div><div><dt>Miner pay outside top 5</dt><dd>0.058 TAO per day on average (7.3 TAO per day over 127 uids outside the top 5)</dd></div><div><dt>Code activity</dt><dd>last commit 2026-10-13; 6 commits in 30 days; last release 2026-10-13</dd></div></dl>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>Team answers daily; a new challenge is promised</li>
+<li>Emission reaches 132 uids; none is burned</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>Net outflow of 4,140 TAO in 30 days</li>
+<li>Both top entries fade by about 2026-11-05</li>
+<li>No public commit since 2026-10-13</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> Net inflow with a shipped challenge or named paying users would lift it; a late new challenge would deepen it.</p>
+<p class="muted">Since the last pass: Was bearish (low confidence) on 2026-10-28; the 30-day read now confirms the outflow.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-similar">Similar subnets</h2>
+<div class="v2-sim"><p>By pool size this is <strong>rank 2 of 6</strong> among the subnets grouped as <em>security</em> (what they mainly sell). Pool and price as of 2026-10-30 to 2026-10-31, price in TAO per alpha; the barrier is the easiest miner role.</p><div class="scroll"><table class="v2-table"><thead><tr><th>#</th><th>Subnet</th><th>Pool</th><th>Price</th><th>Miner barrier</th></tr></thead><tbody><tr><td>1</td><td><a href="/bittensor-docs/subnets/63.html">Enigma</a> <span class="muted">SN63</span></td><td>12,570 TAO</td><td>0.005318</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr class="me" aria-current="true"><td>2</td><td>RedTeam <span class="muted">SN61, this page</span></td><td>10,832 TAO</td><td>0.006444</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr><td>3</td><td><a href="/bittensor-docs/subnets/32.html">It&#x27;s AI</a> <span class="muted">SN32</span></td><td>6,586 TAO</td><td>0.00249</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>4</td><td><a href="/bittensor-docs/subnets/104.html">TAOStatus</a> <span class="muted">SN104</span></td><td>5,837 TAO</td><td>0.004021</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr><td>5</td><td><a href="/bittensor-docs/subnets/87.html">Provenonce (Proof of Assurance)</a> <span class="muted">SN87</span></td><td>1,500 TAO</td><td>0.003282</td><td><span class="v2-barrier b-high">High</span></td></tr></tbody></table></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-31</span> <span class="muted">(#red-team)</span> Staff: a resubmission restarts decay only if accepted and scoring above your best; limits are 0.6 against others, 0.8 against your own commits.</li>
+<li><span class="when">2026-10-30</span> <span class="muted">(#red-team)</span> Owner: a banking partnership is at contract stage; a traction update is promised for the weekend. Miners worried about the falling price.</li>
+<li><span class="when">2026-10-29</span> <span class="muted">(#red-team)</span> Staff listed BEX security rules (no outside requests, no eval, no tampering with browser functions); the docs are not updated.</li>
+<li><span class="when">2026-10-28</span> <span class="muted">(#red-team)</span> Staff: a new challenge may come within weeks, ADA v3 retires first, BEX stays until the next one. Staff said both accepted BEX entries ran in the same environment as now.</li>
+<li><span class="when">2026-10-27</span> <span class="muted">(#red-team)</span> Team: BEX solutions must make no outbound requests; bypasses are known and being handled. Miners dispute a 1.0 BEX score from 2026-10-20.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Read the live challenge&#x27;s docs; one commit per challenge per 24 hours, and results take about 26 hours.</li>
+<li>Clone the challenge repo and test your detector with its harness; BEX detectors may make no outside requests.</li>
+<li>Push the Docker image to Docker Hub (private repo advised, one account for all images).</li>
+<li>Run the miner repo (3.0.5+) to commit the digest. Do not swap hotkeys; the team advises against it, as it has broken commit tracking.</li>
+<li>Check the dashboard that your entry is scored and accepted before 14:00 UTC.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Weights, minimums, decay and fade dates come from repo config, code and a fit to chain data; the scoring server is private.</li>
+<li>The BEX bypass dispute is mostly miners&#x27; claims; staff did not say whether a fix is live or accepted entries get re-checked.</li>
+<li>Buyback (2026-10-23, 2026-10-27) and banking-partnership (2026-10-30) statements are not visible on chain or in code. Chat read: 2026-09-20 to 2026-10-31.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/RedTeamSubnet/RedTeam" rel="noopener noreferrer">GitHub (main repo)</a></li>
+<li><a href="https://docs.theredteam.io/" rel="noopener noreferrer">Docs</a></li>
+<li><a href="https://www.theredteam.io/dashboard/miner?challenge=bex_tracer_v1" rel="noopener noreferrer">Dashboard (new, BEX Tracer)</a></li>
+<li><a href="https://www.theredteam.io/dashboard/miner?challenge=ada_detection_v3" rel="noopener noreferrer">Dashboard (new, ADA v3)</a></li>
+<li><a href="https://dashboard.theredteam.io/" rel="noopener noreferrer">Dashboard (old, announced for retirement 2026-10-24)</a></li>
+<li><a href="https://github.com/RedTeamSubnet/miner" rel="noopener noreferrer">Miner repo</a></li>
+<li><a href="https://github.com/RedTeamSubnet/validator" rel="noopener noreferrer">Validator repo</a></li>
+<li><a href="https://github.com/RedTeamSubnet/bex-tracer-challenge" rel="noopener noreferrer">BEX Tracer challenge repo</a></li>
+<li><a href="https://github.com/RedTeamSubnet/ada-detection-challenge" rel="noopener noreferrer">ADA detection challenge repo</a></li>
+<li><a href="https://x.com/_redteam_" rel="noopener noreferrer">X account (per docs)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 9 sources</summary>
+<ul>
+<li><strong>repo</strong> RedTeamSubnet/RedTeam @1277ac5 (2026-10-13, v4.10.10; all five repo heads re-checked 2026-10-31, unchanged): validator and challenge-manager code, config, changelog, getting-started and miner concept docs</li>
+<li><strong>repo</strong> RedTeamSubnet/bex-tracer-challenge @8dfa689 (2026-09-29): src/bex_tracer/challenge_manager.py (acceptance, decay, softmax), docs</li>
+<li><strong>repo</strong> RedTeamSubnet/ada-detection-challenge @5689cd9 (2026-09-27): src/ada_challenge/challenge_manager.py, AGENTS.md, scoring code, challenge.yml</li>
+<li><strong>repo</strong> RedTeamSubnet/validator @f0b4a36 (2026-10-13): src/validator/_core.py (centralized scoring pull, storage API key request, set_weights) and _base.py (20-minute loop); RedTeamSubnet/miner @11317f1 (2026-09-27)</li>
+<li><strong>web</strong> docs.theredteam.io (challenge pages and the miner concept pages incentive, lifecycle, comparison, validation, dashboard and commit cooldown, fetched 2026-10-27; BEX and comparison pages re-read 2026-10-31)</li>
+<li><strong>web</strong> RedTeam miner dashboard for BEX Tracer (www.theredteam.io/dashboard/miner, per-miner table in the page, fetched 2026-10-27 and 2026-10-31)</li>
+<li><strong>web</strong> Chain read at block 9401857 (2026-10-31 05:51Z UTC): SN61 (RedTeam): registered 2024-12-11, tempo 360, 256 of 256 uids, commit-reveal on; emission weights burn/recycle/owner/validator/miner = 0/0/18/41/41 % (stored, same values as the chain default), RecycleOrBurn = Burn; uids under the owner hotkey or owner coldkey hold 0 % of incentive and last-epoch emission (a floor); 14 permit holders, 10 with weight rows, all ranking uid 136 first; 132 uids with incentive, top 5 hold 61.4 %; registration burn 0.0139 TAO. Same figures at block 9401689 (05:17Z) except burn 0.0192 and top uid 37.6 %; compared with block 9378501 (2026-10-28): no setting changed in 33 checked items; shared snapshot of 129 subnets at block 9401689: pool rank 44 of 128.</li>
+<li><strong>web</strong> Chain read at block 9401689 (2026-10-31 05:17Z): price SN61, 6 samples every 7d from block 9185689 (2026-10-01 05:00Z): price 0.011102 -&gt; 0.006444 TAO per alpha (-42.0%), pool TAO 13897.5 -&gt; 10831.9; over the 5 intervals where the pool change equals flow + protocol: net user flow -4140.2 TAO (staked minus unstaked), protocol flow +1074.6 TAO, gross volume 98415.4 TAO.</li>
+<li><strong>msg</strong> #red-team, 2026-09-20 to 2026-10-31 (the 2026-10-14 BEX threshold and weights post found by an archive search of 2026-09-26 to 2026-10-23)</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/60.html"><small>← Previous</small>SN60 Bitsec</a><a rel="next" href="/bittensor-docs/subnets/62.html"><small>Next →</small>SN62 Ridges</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-31. Site built 2026-10-31. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

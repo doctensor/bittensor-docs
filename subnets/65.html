@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TPN (True Performance Network) (SN65) | Bittensor Subnet Docs</title>
+<meta name="description" content="Miners shrink an open language model under a memory cap; one winner per round, scored on a closed benchmark.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h23">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>65</span><div>
+<h1>TPN (True Performance Network) <span class="muted">SN65</span></h1>
+<p class="tagline">Miners shrink an open language model under a memory cap; one winner per round, scored on a closed benchmark.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl4"><b>2.3<small>/day</small></b><span>last 7 d</span></li><li class="pl4"><b>4.2<small>/day</small></b><span>days 8-30</span></li><li class="pl4"><b>6.4<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-30</b><span>last chat</span></li><li class="pw"><b>2,998</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Shipping</b><span>code activity</span></li><li class="pw"><b>3</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-10-08</b><span>last commit</span></li><li class="pw"><b>none</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>language model compression (quantized GGUF competitions)</dd>
+<dt>Status</dt><dd>TPN-006 (launched 2026-10-15) was paid and its window closed about 2026-10-29. On 2026-10-27 the team said the KL-check testnet run passed and the next round would start that week; the leader&#x27;s list showed no TPN-007 on 2026-10-30.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-30</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Rounds so far</a></li><li><a href="#sn-x1">Tokenomics and burn</a></li><li><a href="#sn-x2">Next version (testnet branch)</a></li><li><a href="#sn-x3">Docs vs code vs chain</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-similar">Similar subnets</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>miners shrink an open model into a GGUF file under a memory cap; the best closed-benchmark score wins a round.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>only two uids earn. The owner uid holds 75% of incentive and it is burned; the last winner gets 25%, still paid on 2026-10-30.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>the next round (TPN-007, with a KL check) goes live this week; the leader&#x27;s list showed none on 2026-10-30.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>an entry costs a 0.2 TAO burn plus paid benchmark runs; chat quoted about $10 to $22 per run.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Compresses the round&#x27;s base model into one GGUF under the cap and pays for its own benchmark runs.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-unk">GPU unknown</li><li class="fl fl-caution">Paid service needed</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-unk"><dt>Hardware</dt><dd>Not documented for quantizing; benchmark GPUs are the service&#x27;s</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>Benchmark service credits; chat quoted about $10 to $22 per run (Oct 2026)</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Registration burn 0.2 TAO (2026-10-30); no collateral</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>tpn CLI via uv, a Hugging Face account, quantizing skill</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Followers copy the leader&#x27;s results into weights; the leader seat, which scores entries, is the team&#x27;s in practice.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-no"><dt>Hardware</dt><dd>No GPU, no Docker; 2 vCPU, 4 GB RAM, 20-40 GB disk (docs)</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None for followers; the leader needs an admin key for the benchmark service</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Burn 0.2 TAO; permit needs 1,000 TAO stake (chain-wide, 2026-10-30)</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Linux, Python 3.12, uv, PM2, btcli; follower mode and leader URL in .env</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-neutral">Neutral</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">low confidence, as of 2026-10-30. Not financial advice.</span></div><p>Price steady, but one paid miner, no live round and net outflow since mid-October. <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>TPN, built by Taofu Labs, runs timed competitions: miners compress a base language model into a quantized GGUF file that fits a memory cap and scores highest on a closed benchmark. One team-run leader validator ranks the entries. Until 2026-08-17 the subnet was a VPN project.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>A miner uploads one GGUF of the round&#x27;s base model to Hugging Face, runs the benchmark on the team&#x27;s paid service and commits the file hash and run ids in a timelocked chain message.</p></div><div><h3>Validators</h3><p>The team&#x27;s leader validator checks every run id, ranks the entries and prechecks the files in a Docker container; followers copy its results into weights.</p></div><div><h3>Incentive</h3><p>A round holds 25% of validator weight, split by rank: five places in rounds 1 to 4, three in TPN-005, one in TPN-006. The other 75% goes to uid 0 and is burned.</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-10-30, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-good">Open</span>Anyone with 1,000+ TAO stake can run a follower (16 of 64 permits held), but one team-run leader does all scoring.</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">58.8%</span>Owner uid 0 gets 58.8% of last-epoch emission; owner cut 18%; RecycleOrBurn is Burn, so its miner share is burned.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">2 uids</span><span class="v2-sx muted">top 5 hold 100% of incentive.</span> Two uids earn: the burned owner uid (75%) and the last round&#x27;s winner (25%). Sixteen validators earn dividends.</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Converged</span>16 of 16 validators put most weight on uid 0. They copy one leader by design, so agreement says little.</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-good">Open</span>Miner CLI and validator are public under MIT; the benchmark service and the Fluid Bench question set are closed.</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Compresses the round&#x27;s base model into one GGUF under the cap and pays for its own benchmark runs.</p><ul>
+<li>Runs failed often in October (no GPU capacity, worker errors, stuck credit holds); an unfinished run scores zero.</li>
+<li>Production bans a hotkey whose file hash differs at precheck; the testnet branch removes the ban.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Followers copy the leader&#x27;s results into weights; the leader seat, which scores entries, is the team&#x27;s in practice.</p><ul>
+<li>16 of 64 permit slots were held on 2026-10-30; all 16 had set weights within one tempo.</li>
+<li>Two leaders can produce conflicting scoring state (docs); the admin key can cancel or retry any user&#x27;s runs.</li>
+</ul></section></div>
+<h2 id="sn-x0">Rounds so far</h2>
+<p>Dates are approximate.</p>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Round</th><th>Memory cap</th><th>Paid places</th><th>Payout from</th></tr></thead><tbody><tr><td>TPN-001</td><td>2 GB</td><td>5</td><td>2026-08-27</td></tr><tr><td>TPN-002</td><td>4 GiB</td><td>5</td><td>2026-09-06</td></tr><tr><td>TPN-003</td><td>8 GiB</td><td>5</td><td>2026-09-11</td></tr><tr><td>TPN-004</td><td>16 GiB</td><td>5</td><td>2026-09-18</td></tr><tr><td>TPN-005</td><td>11 GiB</td><td>3 (60/25/15)</td><td>2026-10-14</td></tr><tr><td>TPN-006</td><td>8 GiB</td><td>1 winner</td><td>2026-10-22</td></tr></tbody></table></div>
+<h2 id="sn-x1">Tokenomics and burn</h2>
+<ul class="v2-list">
+<li>Emission split: 18% owner, 41% validators, 41% miners (2026-10-30).</li>
+<li>75% of miner incentive sits on the owner&#x27;s uid and is burned: about 30.75% of subnet emission.</li>
+</ul>
+<h2 id="sn-x2">Next version (testnet branch)</h2>
+<p>Not live: the leader still lists RAM-based specs (2026-10-30).</p>
+<ul class="v2-list">
+<li>Memory becomes GPU memory read from the benchmark service; the precheck container and hash ban are deleted.</li>
+<li>A round can add a KL check: score = lowest benchmark score x exp(-KL); a missing KL run means no score.</li>
+</ul>
+<h2 id="sn-x3">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Memory limit</td><td>Docs: validators measure RAM in a CPU Docker precheck</td><td>Code: the testnet branch reads GPU memory from the benchmark service</td><td>2026-10-30</td></tr><tr><td>Payout length</td><td>Docs: weights run 50,400 blocks (about 7 days) after scoring</td><td>Chain: the winner still held 25% about 23 hours after the window closed</td><td>2026-10-30</td></tr></tbody></table></div>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-neutral">Neutral</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">low confidence, as of 2026-10-30. Not financial advice.</span></div>
+<p class="v2-thesis">Price is up 5% in 30 days, but the net inflow came in one week to 2026-10-14; about 500 TAO has left since and no round is live. One miner is paid.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.00216 TAO per alpha</dd></div><div><dt>Pool</dt><dd>5,632 TAO, rank 74</dd></div><div><dt>Price, 30 days</dt><dd>+5.3%</dd></div><div><dt>Net flow, 30 days</dt><dd>+160 TAO</dd></div><div><dt>Miner pay</dt><dd>1.59 TAO per day to one winner uid (gross)</dd></div><div><dt>Code activity</dt><dd>last commit 2026-10-08; 7 in 30 days; no releases</dd></div></dl>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>KL check passed testnet (team, 2026-10-27)</li>
+<li>Open code (MIT); TPN-006 model on Hugging Face</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>One miner paid; 75% of miner incentive burned</li>
+<li>About 500 TAO net outflow since 2026-10-14; no live round</li>
+<li>Closed benchmark, one team-run scorer, usage unproven</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> A live TPN-007 with several paid places or a named customer would lift the view; a longer gap or more outflow would lower it.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-similar">Similar subnets</h2>
+<div class="v2-sim"><p>By pool size this is <strong>rank 7 of 14</strong> among the subnets grouped as <em>training</em> (what they mainly sell). Pool and price as of 2026-10-30 to 2026-10-31, price in TAO per alpha; the barrier is the easiest miner role.</p><div class="scroll"><table class="v2-table"><thead><tr><th>#</th><th>Subnet</th><th>Pool</th><th>Price</th><th>Miner barrier</th></tr></thead><tbody><tr><td>5</td><td><a href="/bittensor-docs/subnets/37.html">Aurelius</a> <span class="muted">SN37</span></td><td>7,048 TAO</td><td>0.002611</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>6</td><td><a href="/bittensor-docs/subnets/20.html">Witness</a> <span class="muted">SN20</span></td><td>6,426 TAO</td><td>0.002301</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr class="me" aria-current="true"><td>7</td><td>TPN (True Performance Network) <span class="muted">SN65, this page</span></td><td>5,632 TAO</td><td>0.00216</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>8</td><td><a href="/bittensor-docs/subnets/38.html">ChronoLLM</a> <span class="muted">SN38</span></td><td>5,243 TAO</td><td>0.005995</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>9</td><td><a href="/bittensor-docs/subnets/91.html">Cascade</a> <span class="muted">SN91</span></td><td>3,236 TAO</td><td>0.004512</td><td><span class="v2-barrier b-high">High</span></td></tr></tbody></table></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-30</span> <span class="muted">(chain, leader API)</span> TPN-006&#x27;s payout window closed about 2026-10-29, but its winner still holds 25% of incentive because validators copy the last weights. No TPN-007 is listed.</li>
+<li><span class="when">2026-10-27</span> <span class="muted">(#tpn)</span> The team said the KL-check testnet run passed and the next round would go live that week.</li>
+<li><span class="when">2026-10-26</span> <span class="muted">(GitHub (testnet branch))</span> The testnet branch now scores every ranked entry, pays only the top places and breaks ties by entry rank.</li>
+<li><span class="when">2026-10-15</span> <span class="muted">(#tpn, leader API)</span> TPN-006 launched: same base model, 8 GiB cap, one winner taking the whole round share.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Check the leader&#x27;s public endpoint for an open round; none was open on 2026-10-30.</li>
+<li>Install the CLI (install_cli.sh: Python 3.12, uv), get a Hugging Face account and register a hotkey (0.2 TAO burn).</li>
+<li>Quantize the base model into one GGUF under the cap; the memory figure you commit must match the validator&#x27;s within 1%.</li>
+<li>Upload with tpn upload, top up benchmark credits, run tpn benchmark well before the deadline, then tpn commit and tpn publish before scoring.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>No round is live; TPN-007&#x27;s spec and whether validators move to the testnet branch are unknown.</li>
+<li>Round specs and results live on the team&#x27;s leader API, not in git, and followers copy it: one node is the single point of trust.</li>
+<li>The benchmark is closed and runs only on the team&#x27;s paid service; that the TPN-006 model beats its 17 GB target is the team&#x27;s figure.</li>
+<li>A miner said the TPN-005 top three were one model in three layouts; the leader data shows three different file hashes, so this is unverified.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/taofu-labs/true-performance-network" rel="noopener noreferrer">GitHub (taofu-labs, main last changed 2026-10-08)</a></li>
+<li><a href="https://github.com/taofu-labs/true-performance-network/tree/testnet" rel="noopener noreferrer">Testnet branch (KL check, GPU memory; merged 2026-10-22)</a></li>
+<li><a href="https://github.com/taofu-labs/true-performance-network/blob/main/docs/Overview.md" rel="noopener noreferrer">Subnet overview for miners</a></li>
+<li><a href="https://github.com/taofu-labs/true-performance-network/blob/main/docs/Miner.md" rel="noopener noreferrer">Miner operations guide</a></li>
+<li><a href="https://github.com/taofu-labs/true-performance-network/blob/main/docs/Validator.md" rel="noopener noreferrer">Validator guide</a></li>
+<li><a href="https://val0.trueperformancenetwork.com/v1/competitions" rel="noopener noreferrer">Leader validator: competition specs (public API)</a></li>
+<li><a href="https://www.trueperformancenetwork.com/" rel="noopener noreferrer">TPN website (TPN Gateway)</a></li>
+<li><a href="https://bench.trueperformancenetwork.com/" rel="noopener noreferrer">TPN Workbench (benchmark service, formerly TPN Bench)</a></li>
+<li><a href="https://stats.trueperformancenetwork.com/" rel="noopener noreferrer">Public competition dashboard</a></li>
+<li><a href="https://huggingface.co/tpnlabs" rel="noopener noreferrer">Hugging Face organisation (quantized GGUF repos)</a></li>
+<li><a href="https://gratis.trueperformancenetwork.com/" rel="noopener noreferrer">Gratis (runs models on-device)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 7 sources</summary>
+<ul>
+<li><strong>repo</strong> taofu-labs/true-performance-network: main 2994eb0 (2026-10-08) README, docs, validator and scoring code; testnet branch d1a9e13 (2026-10-26) docs, code and commit messages; read 2026-10-30</li>
+<li><strong>web</strong> https://val0.trueperformancenetwork.com/v1/competitions and /v1/state/competitions/tpn-006 (public API, read 2026-10-30); https://www.trueperformancenetwork.com/, https://bench.trueperformancenetwork.com/, https://stats.trueperformancenetwork.com/, https://gratis.trueperformancenetwork.com/ and https://huggingface.co/tpnlabs (read 2026-10-26 to 2026-10-30)</li>
+<li><strong>web</strong> Chain read at block 9395184 (2026-10-30 07:36Z UTC): SN65 (True Performance Network): registered 2025-02-18, tempo 360, 256 of 256 uids, commit-reveal on; emission weights burn/recycle/owner/validator/miner = 0/0/18/41/41 % (stored, same values as the chain default), RecycleOrBurn = Burn; uids under the owner hotkey or owner coldkey hold 75 % of incentive and 58.77 % of last-epoch emission (a floor); 16 validators have weight rows, on average 75 % of weight goes to uid 0.</li>
+<li><strong>web</strong> Chain read at block 9395184 (2026-10-30 07:36Z UTC), compared with block 9364101 (2026-10-26 00:00Z UTC): SN65: no setting changed in 33 checked items; emission split unchanged; pool 5837.96 -&gt; 5631.75 TAO.</li>
+<li><strong>web</strong> Chain read at block 9395184 (2026-10-30 07:36Z): price SN65, 6 samples every 7d from block 9179184 (2026-09-30 07:19Z): price 0.002050 -&gt; 0.002160 TAO per alpha (+5.3%), pool TAO 5487.1 -&gt; 5631.7; over the 5 intervals net user flow +160.26 TAO. Pool rank from the shared snapshot at the same block.</li>
+<li><strong>msg</strong> #tpn 2026-09-03 to 2026-10-30</li>
+<li><strong>web</strong> Chain read at block 9395333 (2026-10-30 08:06Z UTC), compared with block 9392901 (2026-10-30 00:00Z UTC): SN65: no setting changed in 33 checked items; emission split unchanged; pool 5656.28 -&gt; 5620.93 TAO.</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/64.html"><small>← Previous</small>SN64 Chutes</a><a rel="next" href="/bittensor-docs/subnets/66.html"><small>Next →</small>SN66 Conjectures.io</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-30. Site built 2026-10-31. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

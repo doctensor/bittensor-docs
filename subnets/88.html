@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Investing88 (SN88) | Bittensor Subnet Docs</title>
+<meta name="description" content="Decentralized hedge fund: miners file Tao/Alpha and US-stock portfolios, validators score risk-adjusted daily returns.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h16">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>88</span><div>
+<h1>Investing88 <span class="muted">SN88</span></h1>
+<p class="tagline">Decentralized hedge fund: miners file Tao/Alpha and US-stock portfolios, validators score risk-adjusted daily returns.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl4"><b>2.6<small>/day</small></b><span>last 7 d</span></li><li class="pl4"><b>4.5<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>8.4<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-29</b><span>last chat</span></li><li class="pw"><b>8,118</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Shipping</b><span>code activity</span></li><li class="pw"><b>2</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-10-29</b><span>last commit</span></li><li class="pw"><b>none</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>investment strategies (decentralized asset management)</dd>
+<dt>Status</dt><dd>Active: graylist update shipped 2026-10-29; MetaTrader planned for November; 74 uids earn incentive.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-30</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Where the incentive goes</a></li><li><a href="#sn-x1">Docs vs code vs chain</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-similar">Similar subnets</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>top miner strategies feed its 88 Quant Fund; fund results and revenue cannot be checked.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>74 uids earn incentive; the top five hold 60.5%, and the top earner changed this week.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>no GPU; joining costs 0.01 TAO plus about 256 alpha; scores rely on the team&#x27;s closed API.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>MetaTrader forex accounts become a third asset class, planned for November.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-low">Low barrier</span></h3><p>Design a portfolio strategy and file it; earn by out-scoring peers in your asset class.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-no"><dt>Hardware</dt><dd>None: CPU only, Ubuntu 22.04, 20 GB disk (min_compute.yml)</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None; the team API and KYM app are free</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>0.01 TAO burn (2026-10-30); alpha: 192 staked + 64 paid (README) or 64 per UID (chat)</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Python and pm2 or the KYM app; hours, then a strategy that beats peers</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Fetch the team&#x27;s data, run the public scoring code and set weights.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-no"><dt>Hardware</dt><dd>None: CPU only, Ubuntu 22.04, 20 GB disk (min_compute.yml)</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None; the team API needs no key in the code</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>0.01 TAO burn; 1,000 TAO stake threshold for a permit (chain, 2026-10-30)</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Python and pm2, about an hour; the validator updates itself from GitHub</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-10-30. Not financial advice.</span></div><p>Outflows and a falling price, fund results unverified; the team keeps shipping. <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>Investing88, run by Mobius Fund, calls itself a decentralized hedge fund. Miners submit simulated Tao/Alpha or US-stock portfolios; validators score their daily risk-adjusted returns from the team&#x27;s API. The team says it turns top strategies into funds such as the 88 Quant Fund.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>A miner picks one asset class, Tao/Alpha staking or US stocks, and cannot switch later. The strategy is a file named after the hotkey: a Python dict of allocations (negative means short, stocks only). The miner program or the KYM web app sends it to the team&#x27;s API. Scores update daily at 00:00 UTC (Tao/Alpha) and 06:00 UTC (stocks).</p></div><div><h3>Validators</h3><p>Validators fetch PnL, days-active, similarity and asset-ratio data from the team&#x27;s API, run the public scoring code and set weights. The API computes the PnL itself, so validators cannot recompute it. The code zeroes strategies that ended below their start value and cuts scores for near-duplicates, inactivity and heavy cash. Since 2026-10-29 it can graylist a uid; the team&#x27;s lists were empty on 2026-10-30.</p></div><div><h3>Incentive</h3><p>Score = return over drawdown x profit-versus-loss ratio x Kelly-normalized win odds x daily compounded return, over a rolling 50-day window. New miners are scaled down for 30 days and the top two profit days are clipped. The team sets each asset class&#x27;s share of incentive (table below).</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-10-30, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-good">Open</span>Anyone with enough stake gets a permit (22 held); the team&#x27;s API needs no validator key (code, chain).</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">37.4%</span>Owner uid 0 takes 74.8% of validator dividends (37.4% of emission); owner cut 18%; RecycleOrBurn is Burn.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">74 uids</span><span class="v2-sx muted">top 5 hold 60.5% of incentive.</span> 74 uids earn incentive; the top five hold 60.5% and the top one 20.4%.</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Converged</span>13 of 13 weight-setting validators put their top weight on uid 174; one team API feeds them all.</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-good">Open</span>Miner and validator are public (MIT); PnL, days, dedupe and the ratio come from the team&#x27;s closed API.</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-low">Low barrier</span></h3><p>Design a portfolio strategy and file it; earn by out-scoring peers in your asset class.</p><ul>
+<li>The address for the 64 alpha comes in the API&#x27;s reply to the first submission (team, 2026-07-13).</li>
+<li>The team can blacklist a coasting uid (strong early profit, then silence); its list was empty on 2026-10-30.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Fetch the team&#x27;s data, run the public scoring code and set weights.</p><ul>
+<li>Chain, 2026-10-30: 22 permit holders, 13 set weights, all with the same top uid.</li>
+</ul></section></div>
+<h2 id="sn-x0">Where the incentive goes</h2>
+<p>Team table, 2026-10-29: a class with few scorers pays each of them more.</p>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Slice</th><th>Share</th><th>Scoring miners</th></tr></thead><tbody><tr><td>Tao/Alpha class</td><td>about 45%</td><td>14</td></tr><tr><td>US stocks class</td><td>about 45%</td><td>52</td></tr><tr><td>Staging uid 142</td><td>9.8% (chain)</td><td>Team-run</td></tr></tbody></table></div>
+<h2 id="sn-x1">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Staging share</td><td>Team: 9% of miner emissions</td><td>Chain: uid 142 gets 9.81%; code divides by 0.91</td><td>2026-10-30</td></tr><tr><td>Entry alpha</td><td>README: 192 staked + 64 paid</td><td>Chat: 64 alpha per new UID; no code checks either</td><td>2026-10-07</td></tr><tr><td>Revenue plan</td><td>Subnet88.md: fees from clients</td><td>Chat: no clients onboarded (2026-09-29); revenue flat</td><td>2026-10-03</td></tr></tbody></table></div>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-10-30. Not financial advice.</span></div>
+<p class="v2-thesis">The pool (rank 78 of 128) lost 601 TAO net over 30 days, in each of five weeks, and the price fell 20%. Fund results and revenue are team statements only, and the team says its dTao growth bet has not paid off. It does keep shipping.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.002348 TAO per alpha</dd></div><div><dt>Pool</dt><dd>5,447 TAO, rank 78</dd></div><div><dt>Price, 30 days</dt><dd>-20%, 2026-09-28 to 2026-10-30</dd></div><div><dt>Net flow, 30 days</dt><dd>-601 TAO, 2026-09-30 to 2026-10-30</dd></div><div><dt>Miner pay</dt><dd>0.093 TAO per day on average (6.91 TAO per day over 74 uids)</dd></div><div><dt>Miner pay outside top 5</dt><dd>0.040 TAO per day on average (2.73 TAO per day over 69 uids)</dd></div><div><dt>Code activity</dt><dd>last commit 2026-10-29; 2 commits in 30 days; no releases</dd></div></dl>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>Team ships: graylist on 2026-10-29, MetaTrader planned for November</li>
+<li>74 uids earn and incentive moves between them</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>Net outflow in each of the last five weeks; price down 20%</li>
+<li>Owner cut and uid 0 take about 49% of emission (shared with uid 0&#x27;s stakers)</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> Bullish: outside proof of fund returns or revenue, or a MetaTrader launch that brings miners and inflow. Bearish: outflows continuing after launch.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-similar">Similar subnets</h2>
+<div class="v2-sim"><p>By pool size this is <strong>rank 9 of 10</strong> among the subnets grouped as <em>trading</em> (what they mainly sell). Pool and price as of 2026-10-30, price in TAO per alpha; the barrier is the easiest miner role.</p><div class="scroll"><table class="v2-table"><thead><tr><th>#</th><th>Subnet</th><th>Pool</th><th>Price</th><th>Miner barrier</th></tr></thead><tbody><tr><td>6</td><td><a href="/bittensor-docs/subnets/6.html">Numinous</a> <span class="muted">SN6</span></td><td>7,298 TAO</td><td>0.002202</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr><td>7</td><td><a href="/bittensor-docs/subnets/89.html">InfiniteQuant</a> <span class="muted">SN89</span></td><td>6,105 TAO</td><td>0.002954</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr><td>8</td><td><a href="/bittensor-docs/subnets/123.html">MANTIS</a> <span class="muted">SN123</span></td><td>5,598 TAO</td><td>0.002271</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr class="me" aria-current="true"><td>9</td><td>Investing88 <span class="muted">SN88, this page</span></td><td>5,447 TAO</td><td>0.002348</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr><td>10</td><td><a href="/bittensor-docs/subnets/127.html">Astrid</a> <span class="muted">SN127</span></td><td>3,464 TAO</td><td>0.003034</td><td><span class="v2-barrier b-high">High</span></td></tr></tbody></table></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-30</span> <span class="muted">(chain reads)</span> Chain: uid 174 now leads incentive (20.4%); uid 252, the leader on 2026-10-27 (21.7%), fell to 0.02%. The cause is not visible.</li>
+<li><span class="when">2026-10-30</span> <span class="muted">(chain reads)</span> Chain: the staging uid&#x27;s stake fell from 1,854 to 14 alpha since 2026-10-29, as it did a week earlier: a weekly outflow, receiver not visible.</li>
+<li><span class="when">2026-10-29</span> <span class="muted">(GitHub, #88-investing)</span> Version 1.7.1 added a graylist, a dated uid list whose scores shrink daily, in preparation for MetaTrader.</li>
+<li><span class="when">2026-10-29</span> <span class="muted">(#88-investing)</span> The team detailed MetaTrader: asset class 9, scored on trading account history (major forex pairs first), plus a signal subscription to fund buybacks. Existing miners are unaffected.</li>
+<li><span class="when">2026-10-28</span> <span class="muted">(#88-investing)</span> The team said its public and private funds will be merged and that its bet on dTao growth has not played out yet.</li>
+<li><span class="when">2026-09-24</span> <span class="muted">(GitHub, #88-investing)</span> Version 1.7.0 routed 9% of incentive to a staging uid, paid out weekly to alpha lockers, the team says.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Read the repo README and strat/README.md; backtest ideas with the simst tool.</li>
+<li>Register a hotkey on netuid 88 (0.01 TAO burn); fund the coldkey with 192 alpha staked plus 64 paid per the README (the team says 64 per UID).</li>
+<li>Run the miner with pm2 or use the KYM web app, with a strategy file named after your hotkey in Investing/strat/ (key &#x27;_&#x27;: 0 Tao/Alpha, 1 US stocks).</li>
+<li>Check the dashboard after the next daily score; a new uid has 3 days of immunity.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>PnL, days, similarity and the asset ratio come only from the team&#x27;s API, so scoring cannot be checked end to end.</li>
+<li>Fund performance, revenue and customers are team or user statements; the fund pages show no data.</li>
+<li>The staging uid&#x27;s stake leaves its hotkey weekly, as the team says; who receives it is not visible.</li>
+<li>MetaTrader is announced for November but is not in the repo; how the API will verify accounts is undocumented.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://investing88.ai/" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://db.investing88.ai/" rel="noopener noreferrer">Miner dashboard</a></li>
+<li><a href="https://kym.investing88.ai/" rel="noopener noreferrer">KYM (zero-code mining)</a></li>
+<li><a href="https://api.investing88.ai/assets" rel="noopener noreferrer">Supported assets and live asset ratio</a></li>
+<li><a href="https://api.investing88.ai/dedupe" rel="noopener noreferrer">Strategy similarity (dedupe) matrix and lists</a></li>
+<li><a href="https://db.investing88.ai/88-quant-fund" rel="noopener noreferrer">88 Quant Fund</a></li>
+<li><a href="https://db.investing88.ai/88-public-index" rel="noopener noreferrer">88 Public Index</a></li>
+<li><a href="https://app.trustedstake.ai/strat?strategy=88-public-index" rel="noopener noreferrer">88 Public Index at TrustedStake</a></li>
+<li><a href="https://github.com/mobiusfund/investing" rel="noopener noreferrer">GitHub (miner, validator, scoring)</a></li>
+<li><a href="https://github.com/mobiusfund/investing/blob/main/Investing/doc/Subnet88.md" rel="noopener noreferrer">Subnet overview doc</a></li>
+<li><a href="https://x.com/Investing88ai" rel="noopener noreferrer">Official X account</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 7 sources</summary>
+<ul>
+<li><strong>repo</strong> mobiusfund/investing@5b78370 (2026-10-29, v1.7.1; cloned 2026-10-30): README, strat/README.md, Investing/doc/Subnet88.md, min_compute.yml, neurons/validator.py, Investing/core/etc.py, api.py, const.py, simst.py; MIT licence</li>
+<li><strong>web</strong> api.investing88.ai /ratio, /assets and /dedupe (read 2026-10-30 about 07:25 UTC); db.investing88.ai public score API (scores dated 2026-10-29, read 2026-10-30); investing88.ai, kym.investing88.ai and the fund pages (landing pages)</li>
+<li><strong>web</strong> Chain read at block 9395109 (2026-10-30 07:21Z UTC): SN88 (Investing): registered 2025-04-07, tempo 360, 256 of 256 uids, commit-reveal on; emission weights burn/recycle/owner/validator/miner = 0/0/18/41/41 % (stored, same values as the chain default), RecycleOrBurn = Burn; uids under the owner hotkey or owner coldkey hold 0 % of incentive and 37.4 % of last-epoch emission (a floor); 13 validators have weight rows, on average 0 % of weight goes to uid 0</li>
+<li><strong>web</strong> Chain read at block 9395109 (2026-10-30 07:21Z UTC), compared with block 9364101 (2026-10-26 00:00Z UTC): SN88: no setting changed in 33 checked items; emission split unchanged; pool 5735.4 -&gt; 5446.51 TAO</li>
+<li><strong>web</strong> Chain read at block 9395003 (2026-10-30 07:00Z): price SN88, 6 samples every 7d from block 9179003 (2026-09-30 06:43Z): price 0.002914 -&gt; 0.002348 TAO per alpha (-19.4%), pool TAO 6052.3 -&gt; 5446.7; net user flow -600.8 TAO (staked minus unstaked), protocol flow -4.8 TAO, gross volume 7890.5 TAO; pool rank 78 of 128 non-root pools at block 9395109</li>
+<li><strong>web</strong> Chain reads of uids 142, 174 and 252 at block 9395109 (2026-10-30 07:21Z UTC), and of uid 142 at blocks 9335301 (2026-10-22 00:00Z), 9342501 (2026-10-23 00:00Z), 9387909 (2026-10-29 07:21Z) and 9392901 (2026-10-30 00:00Z)</li>
+<li><strong>msg</strong> #88-investing, 2025-04 to 2026-10-29, including pinned posts; team answers of 2026-10-26 to 2026-10-29 read in full</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/87.html"><small>← Previous</small>SN87 Provenonce (Proof of Assurance)</a><a rel="next" href="/bittensor-docs/subnets/89.html"><small>Next →</small>SN89 InfiniteQuant</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-30. Site built 2026-10-31. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

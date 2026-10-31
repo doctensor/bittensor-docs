@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VoiceGuard (SN253) | Bittensor Subnet Docs</title>
+<meta name="description" content="Testnet-only voice deepfake and speech AI subnet; code stopped January 2025, no team post since April 2025.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h19">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>253</span><div>
+<h1>VoiceGuard <span class="muted">SN253</span></h1>
+<p class="tagline">Testnet-only voice deepfake and speech AI subnet; code stopped January 2025, no team post since April 2025.</p>
+<span class="st s-quiet">quiet</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl0"><b>0<small>/day</small></b><span>last 7 d</span></li><li class="pl1"><b>0.04<small>/day</small></b><span>days 8-30</span></li><li class="pl1"><b>0.03<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-02</b><span>last chat</span></li><li class="pw"><b>2,554</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Quiet</b><span>code activity</span></li><li class="pw"><b>0</b><span>code commits in 30 d</span></li><li class="pw"><b>2025-01-24</b><span>last commit</span></li><li class="pw"><b>none</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>audio AI (voice deepfake detection, voice cloning, speech-to-text)</dd>
+<dt>Status</dt><dd>Quiet and testnet only (2026-10-31): the last team message is 2025-04-23 and the last commit on any branch is 2025-01-24. &#x27;Quiet&#x27; is an inference from missing activity, not a team statement.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-31</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Docs vs code vs chain</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>testnet only. Netuid 253 is not registered on mainnet (2026-10-31), and no mainnet date has been stated.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>no testnet neuron earns incentive, and no validator has set weights for about 225 days (2026-10-31).</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>quiet. The last commit on any branch is 2025-01-24; the team&#x27;s last chat message is 2025-04-23.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>the committed validator only queries cloning on one miner, so the README&#x27;s three-way scoring cannot run.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>a 16 GB GPU is listed for miners and validators; some data and the detection model come from a team server.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Answers three request types: transcribe a YouTube segment, clone a voice, or tell real from AI-generated audio.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-caution">GPU needed</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>GPU with 16 GB+ VRAM, 4+ CPU cores, 16 GB RAM, Ubuntu 22.04, 1 Gbps (README, compute file)</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>Optional: a proxy for YouTube rate limits (cost not stated)</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Testnet registration burn 0.0005 test TAO (2026-10-31); no mainnet slot exists</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Python 3.10+, requirements install, then a script that downloads models and datasets</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Sends the request types, scores replies with Whisper, speaker-similarity and quality models, and sets weights.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-caution">GPU needed</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>Same compute file as miners: GPU 16 GB+ VRAM, 4+ cores, 16 GB RAM</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None (no API keys in the code); detection audio comes from a team-run server</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Burn 0.0005 test TAO; permit stake floor 0, smallest holder not read (2026-10-31)</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Same install as miners; the README&#x27;s validator example still uses netuid 44</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>VoiceGuard is a Bittensor subnet project by the Cazure team that aimed to detect AI-generated voices, clone voices to build training data for detectors, and offer speech-to-text. Its earlier mainnet slot (SN44) was dissolved in August 2024; this rebuild only ever had a testnet slot, 253.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Per the README, miners answer three request types: transcribe a segment of a YouTube video, clone a voice from a reference clip and a text, and say whether an audio clip is real or AI-generated. The repo ships a Whisper path, a cloning path and a detection path that returns a probability; the detection model itself is not in the repo, a download script fetches it.</p></div><div><h3>Validators</h3><p>For cloning, the validator picks a sentence and a reference clip, transcribes the miner&#x27;s audio with Whisper, gives zero if the text match is below 0.8, and otherwise scores speaker similarity (50%), pitch similarity (25%) and audio quality (25%). Detection is scored on correctness, confidence and batch accuracy; transcription on text correctness (70%) and speed (30%).</p></div><div><h3>Incentive</h3><p>The README says validators combine 20% transcription, 40% cloning and 40% detection, with zero for any miner whose transcription score is zero. In the last commit the validator loop only queries cloning on one hard-coded miner, so as written every combined score would be zero; this looks like a debug state and was not run. On testnet no neuron has incentive or dividends (2026-10-31).</p></div></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Answers three request types: transcribe a YouTube segment, clone a voice, or tell real from AI-generated audio.</p><ul>
+<li>The compute file lists 16 GB VRAM as the minimum and 10 GB as recommended (inconsistent).</li>
+<li>Detection model and part of the data come from a team-run server at a hard-coded address (not tested).</li>
+<li>Cloning uses a YourTTS model on CPU; transcription uses Whisper large.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Sends the request types, scores replies with Whisper, speaker-similarity and quality models, and sets weights.</p><ul>
+<li>Seven neurons hold validator permits out of 64 slots; none has set weights in about 225 days (2026-10-31).</li>
+<li>The committed loop queries one hard-coded miner, and the transcription and detection branches never run.</li>
+<li>The detection reward is called with a parameter name it does not accept, and a code comment and the reward disagree on whether a probability above 0.5 means fake or real.</li>
+</ul></section></div>
+<h2 id="sn-x0">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Request types</td><td>README: validators send transcription, cloning and detection requests, paid 20/40/40</td><td>Code: the last validator loop queries only cloning, on one hard-coded miner; the other branches never run</td><td>2026-10-31</td></tr><tr><td>Netuid in examples</td><td>README: validator example and status link use netuid 44, the dissolved 2024 slot</td><td>Code: the miner example uses 253, the same README&#x27;s roadmap names testnet UID 253</td><td>2026-10-31</td></tr></tbody></table></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-31</span> <span class="muted">(#voiceguard, GitHub, testnet and mainnet chain reads)</span> No new message or commit and no validator weight update on testnet 253 since 2026-10-26; mainnet still has no netuid 253.</li>
+<li><span class="when">2026-08-07</span> <span class="muted">(#voiceguard)</span> Since January 2026 the channel holds only newcomers asking for testnet tokens; a moderator warned that anyone offering help by direct message is a scam.</li>
+<li><span class="when">2025-04-23</span> <span class="muted">(#voiceguard)</span> Asked when mainnet would start, the team only said to stay tuned. This is the last team message in the archive.</li>
+<li><span class="when">2025-01-24</span> <span class="muted">(GitHub (Cazure8/voiceguard-subnet))</span> Last commit in the repository: a pitch-similarity term for the cloning reward and the Common Voice dataset merged. None of its 23 branches is newer.</li>
+<li><span class="when">2025-01-07</span> <span class="muted">(#voiceguard)</span> Team said the code was ready and it wanted to go to mainnet; a whitepaper (not read) followed on 2025-01-14.</li>
+<li><span class="when">2024-12-02</span> <span class="muted">(#voiceguard and testnet chain read)</span> Team post introducing VoiceGuard: voice deepfake detection, voice cloning for datasets and a speech-to-text API. The same day, testnet subnet 253 was registered.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Install Bittensor, clone the repo, run pip install -r requirements.txt and pip install -e . (Python 3.10.x; add pip install TTS for cloning).</li>
+<li>Run python3 voiceguard/utils/download.py for datasets and the detection model; part comes from a team-run server that may be down.</li>
+<li>Optionally set a proxy URL in a .env file to avoid YouTube rate limits on transcription tasks.</li>
+<li>Create a testnet wallet, get test TAO and register a hotkey on testnet netuid 253.</li>
+<li>Start neurons/miner.py with --netuid 253 --subtensor.network test plus your wallet, axon IP and port (the README&#x27;s example omits the network flag).</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Testnet only: nothing here describes mainnet participation, emissions or token economics, and no mainnet plan has been stated since 2025-04-23.</li>
+<li>Testnet 253 has 14 neurons and 7 validator permits; the freshest weight stamp is about 225 days old (around 2026-03-20) and it grew by exactly the blocks elapsed since 2026-10-26. No working miner or validator was found.</li>
+<li>Who owns the testnet slot is unresolved; the link to the VoiceGuard team rests on the README roadmap, the channel name and the registration date matching the launch post.</li>
+<li>The datasets, detection model and test audio depend on a team-run server at a hard-coded address (not tested). The team&#x27;s Miner Hubs site (taoscribe.ai) does not resolve.</li>
+<li>The whitepaper and the Q2-Q3 2025 roadmap items (Chrome extension, iOS app, film partner) were not verified. Channel history before December 2024 belongs to earlier subnets and a different codebase.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/Cazure8/voiceguard-subnet" rel="noopener noreferrer">GitHub (Cazure8/voiceguard-subnet)</a></li>
+<li><a href="https://drive.google.com/file/d/1v7_8DA7WE8f1vvkcVqQBFrAAYhoTJ4Cv/view?usp=sharing" rel="noopener noreferrer">Whitepaper (Google Drive PDF, not read)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 6 sources</summary>
+<ul>
+<li><strong>repo</strong> Cazure8/voiceguard-subnet@84aca43 (2025-01-24): README.md, min_compute.yml, requirements.txt, .env.sample, neurons/*.py, voiceguard/protocol.py (head re-checked 2026-10-31: unchanged; 23 other branches, all older)</li>
+<li><strong>repo</strong> Cazure8/voiceguard-subnet@84aca43: voiceguard/validator/{forward,clone_reward,detection_reward,stt_reward}.py, voiceguard/base/validator.py (set_weights), voiceguard/utils/{download,helper,config}.py, voiceguard/miner/*.py</li>
+<li><strong>msg</strong> #voiceguard 2024-08-05 to 2026-10-31 (read via the chat archive; the newest item is an empty post on 2026-10-02, nothing after)</li>
+<li><strong>web</strong> Mainnet chain reads of netuid 253 on 2026-10-21, 2026-10-26 and at block 9400804 on 2026-10-31: it does not exist</li>
+<li><strong>web</strong> Testnet chain reads of netuid 253 at blocks 8339250 and 8339349 (2026-10-31, about 20 minutes apart: subnet info, neuron aggregates), compared with the reads at blocks 8306179 (2026-10-26) and 8272993 (2026-10-21): every weight age grew by exactly the block difference each time (99 blocks between the two reads of 2026-10-31)</li>
+<li><strong>web</strong> taoscribe.ai: DNS lookup returned no such domain on 2026-10-21, 2026-10-26 and 2026-10-31</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/234.html"><small>← Previous</small>SN234 TuneForge</a><a rel="next" href="/bittensor-docs/subnets/272.html"><small>Next →</small>SN272 Nobi</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-31. Site built 2026-10-31. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

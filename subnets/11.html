@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TrajectoryRL (SN11) | Bittensor Subnet Docs</title>
+<meta name="description" content="Miners compete to write the best agent routing policy; one winner at a time takes all miner emission.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h5">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>11</span><div>
+<h1>TrajectoryRL <span class="muted">SN11</span></h1>
+<p class="tagline">Miners compete to write the best agent routing policy; one winner at a time takes all miner emission.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>9.4<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>9.3<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>29<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-31</b><span>last chat</span></li><li class="pw"><b>11,175</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>No repo</b><span>code activity</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>agent skills and model routing (winner-take-all competition)</dd>
+<dt>Status</dt><dd>Busy contest (199 packs queued, 13 seat changes since 2026-10-28), but no team post in chat since 2026-10-22 and no code since 2026-10-04.</dd>
+<dt>Confidence</dt><dd>high</dd>
+<dt>Researched</dt><dd>2026-10-31</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Where emission goes</a></li><li><a href="#sn-x1">Queue and seat changes</a></li><li><a href="#sn-x2">Docs vs code vs chain</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-similar">Similar subnets</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>Miners need no GPU, only a text pack; the seat holder takes all miner emission, about 2,940 alpha a day.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>Pool 18,901 TAO (rank 24); the price fell 16% and a net 1,747 TAO left in 30 days to 2026-10-31.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>199 packs wait, about 13 days at today&#x27;s pace; the seat changed hands 25 times since 2026-10-23.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>The owner&#x27;s validator earns about 44% of the pool, second only to the seat holder&#x27;s 50%.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>No commit since 2026-10-04 and no team post in chat since 2026-10-22; usage is unverified.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-low">Low barrier</span></h3><p>Writes packs and submits them; the seat holder earns all miner emission.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-no"><dt>Hardware</dt><dd>None: any laptop with Python 3.10+</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None needed; an Engy API key for local tests is optional</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Burn 0.02 TAO (2026-10-31, it varies), then 50 alpha burned per submission</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Hours to days of tuning; Docker for local tests</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Follows the team&#x27;s published winner and sets weights; only the team&#x27;s validator evaluates.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>Weight-only mode (default): small Docker host; evaluating mode: not specified</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None in weight-only mode; evaluating mode: Engy API key, up to 6 USD per pack</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Burn 0.02 TAO (2026-10-31); docs: 10,000 alpha staked (about 66 TAO); chain permit threshold 1,000 TAO</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Docker Compose from the repo with auto-updates</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div><div class="v2-role"><h3>Staker <span class="v2-barrier b-none">No barrier</span></h3><p>Stakes alpha on a validator to share its dividends; no hardware or code.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-no"><dt>Hardware</dt><dd>None</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Any amount above the chain&#x27;s dust minimum (docs)</dd></div><div class="v2-need n-no"><dt>Setup effort</dt><dd>None: a single staking command</dd></div></dl><a class="v2-more" href="#sn-role-2">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-10-31. Not financial advice.</span></div><p>Mid-size pool (rank 24) with outflow, a silent team and unproven usage; the contest itself is busy. <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>TrajectoryRL is a continuous contest. Miners submit a pack: a SKILL.md plus a fusion policy that picks which of eight open models answers each agent request. The team&#x27;s validator tests packs in sandboxed tasks. One miner at a time holds the seat and gets all miner emission. The team plans to serve the winning policy on its Engy platform.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>A miner writes a pack: a SKILL.md and a fusion policy (JSON, Python or an OpenAI-style server). The miner tool burns the fee on chain, then sends the pack; one pack per hotkey can wait. A pack that earns any reward passes its copyright to trajrl.com.</p></div><div><h3>Validators</h3><p>An integrity judge rejects packs with hints matching many scenarios. A first-in-first-out queue feeds one challenger per epoch (about 1 hour). Only the team&#x27;s validator (UID 74) evaluates, in a sandbox with eight listed models and a 0.30 USD cap per scenario; other validators copy its winner.</p></div><div><h3>Incentive</h3><p>Score is tests passed over tests total, summed over 20 scenarios (maximum 20; the seat holder has 19.94). A challenger must beat the seat by about 3% at low scores, less near the top. A first win is provisional: two re-runs of both packs must confirm it.</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-10-31, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-good">Open</span>Any permit holder can set weights, but only the team&#x27;s validator evaluates packs; the others follow its winner.</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">43.7%</span>43.68% of last-epoch emission sits on the owner&#x27;s validator as dividends; the owner cut is 18%, RecycleOrBurn is Burn.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">1 uid</span><span class="v2-sx muted">top 5 hold 100% of incentive.</span> One uid, the seat holder, earns all miner incentive (100%); six uids earn validator dividends.</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Converged</span>6 of 7 validators with weights rank the seat holder first; that is concentration, not proof of copying.</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-good">Open</span>Miner and validator code are in the MIT-licensed main repo; the scenario repo is public (licence not read).</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-low">Low barrier</span></h3><p>Writes packs and submits them; the seat holder earns all miner emission.</p><ul>
+<li>Packs are limited to 32 KB; one submission per hotkey every 20 minutes. Local tests need Docker, 10 GB of disk and an Engy key.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Follows the team&#x27;s published winner and sets weights; only the team&#x27;s validator evaluates.</p><p class="muted">No further detail found in the sources.</p></section><section class="v2-rdetail" id="sn-role-2"><h3>Staker <span class="v2-barrier b-none">No barrier</span></h3><p>Stakes alpha on a validator to share its dividends; no hardware or code.</p><p class="muted">No further detail found in the sources.</p></section></div>
+<h2 id="sn-x0">Where emission goes</h2>
+<p>Share of the miner and validator pool (5,888 alpha a day on 2026-10-31); the owner&#x27;s 18% cut is extra.</p>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Recipient</th><th>Share of pool</th><th>Alpha a day</th></tr></thead><tbody><tr><td>Seat holder (UID 138)</td><td>about 50%</td><td>about 2,940</td></tr><tr><td>Owner&#x27;s validator (UID 74)</td><td>about 44%</td><td>about 2,570</td></tr><tr><td>Other validators</td><td>about 6%</td><td>about 370</td></tr></tbody></table></div>
+<h2 id="sn-x1">Queue and seat changes</h2>
+<ul class="v2-list">
+<li>199 packs wait (the oldest from 2026-10-25) and about 15 are evaluated a day; arrivals fell from 82 a day on 2026-10-26 to 21 on 2026-10-30.</li>
+<li>A takeover can score below the old seat (19.94 against 19.97 on 2026-10-31), as a first win is provisional.</li>
+</ul>
+<h2 id="sn-x2">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Who evaluates packs</td><td>Website guide: every validator runs the benchmark</td><td>Code: weight-only default since 2026-10-03; the site shows only UID 74 evaluating</td><td>2026-10-31</td></tr><tr><td>Scenario count</td><td>README and website miner guide: 26 scenarios</td><td>Code: the scenario repo and benchmark page list 20</td><td>2026-10-31</td></tr></tbody></table></div>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-10-31. Not financial advice.</span></div>
+<p class="v2-thesis">A net 1,747 TAO left the pool in 30 days, 1,163 of it in the last two days; the price fell 16%. The team has been silent in chat for nine days, its code is unchanged for 27, and usage is unverified. The contest is busy, but the owner&#x27;s validator takes about 44% of the pool.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.006575 TAO per alpha</dd></div><div><dt>Pool</dt><dd>18,901 TAO, rank 24</dd></div><div><dt>Price, 30 days</dt><dd>-16%, 2026-09-27 to 2026-10-31</dd></div><div><dt>Net flow, 30 days</dt><dd>-1,747 TAO, 2026-10-01 to 2026-10-31</dd></div><div><dt>Miner pay</dt><dd>About 19.4 TAO a day to the one paid uid (gross)</dd></div><div><dt>Miner pay outside top 5</dt><dd>None: one paid uid</dd></div><div><dt>Code activity</dt><dd>last commit 2026-10-04; 6 commits in 30 days; last release 2026-10-03</dd></div></dl>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>Busy contest: 199 packs queued, 25 different seat holders since 2026-10-23.</li>
+<li>No emission is burned.</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>Net outflow in 4 of 5 weeks, 1,163 TAO in the last two days.</li>
+<li>Team silent 9 days; code unchanged 27 days.</li>
+<li>Owner&#x27;s validator takes about 44% of the pool.</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> Bullish: net inflow, a team post, or an Engy auto mode with named usage. Bearish: more outflow, longer silence.</p>
+<p class="muted">Since the last pass: Was neutral on 2026-10-28; now bearish: 1,163 TAO left in two days, the team stayed silent and the owner validator&#x27;s pool share rose to 44%.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-similar">Similar subnets</h2>
+<div class="v2-sim"><p>By pool size this is <strong>rank 1 of 8</strong> among the subnets grouped as <em>agents</em> (what they mainly sell). Pool and price as of 2026-10-30 to 2026-10-31, price in TAO per alpha; the barrier is the easiest miner role.</p><div class="scroll"><table class="v2-table"><thead><tr><th>#</th><th>Subnet</th><th>Pool</th><th>Price</th><th>Miner barrier</th></tr></thead><tbody><tr class="me" aria-current="true"><td>1</td><td>TrajectoryRL <span class="muted">SN11, this page</span></td><td>18,900 TAO</td><td>0.006575</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr><td>2</td><td><a href="/bittensor-docs/subnets/15.html">ORO</a> <span class="muted">SN15</span></td><td>13,478 TAO</td><td>0.01873</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr><td>3</td><td><a href="/bittensor-docs/subnets/121.html">sundae_bar</a> <span class="muted">SN121</span></td><td>5,447 TAO</td><td>0.003433</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr><td>4</td><td><a href="/bittensor-docs/subnets/118.html">Ditto</a> <span class="muted">SN118</span></td><td>5,064 TAO</td><td>0.004557</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr><td>5</td><td><a href="/bittensor-docs/subnets/71.html">Leadpoet</a> <span class="muted">SN71</span></td><td>4,902 TAO</td><td>0.00379</td><td><span class="v2-barrier b-medium">Medium</span></td></tr></tbody></table></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-31</span> <span class="muted">(trajrl.com winners and queue pages)</span> UID 138 holds the seat (score 19.94); 199 packs wait, the oldest from 2026-10-25.</li>
+<li><span class="when">2026-10-31</span> <span class="muted">(#trajectory-rl)</span> Miners asked about the 15-day queue and a new season; the team has not answered.</li>
+<li><span class="when">2026-10-23</span> <span class="muted">(#trajectory-rl, trajrl.com winners page)</span> Dual evaluation went live, as announced on 2026-10-22.</li>
+<li><span class="when">2026-10-04</span> <span class="muted">(GitHub trajectoryRL/trajectoryRL)</span> Last code commit to the main repo (v0.7.4 released 2026-10-03).</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Read the miner and fusion policy guides, install the miner tool with pip, and write a SKILL.md (keep it general or the integrity check rejects it) and a policy from the repo&#x27;s examples.</li>
+<li>Test with scripts/eval_pack.py (Docker, your own Engy key).</li>
+<li>Check the queue first: 199 packs wait, about 13 days, and the seat holds 19.94 of 20 (2026-10-31).</li>
+<li>Register a hotkey (0.02 TAO burn on 2026-10-31), hold 50+ alpha, then submit with the web-submit command.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>One party runs all evaluation, and scores cannot be checked on chain.</li>
+<li>The confirmation rule has no public text (chat 2026-10-22 and site data only).</li>
+<li>Usage and revenue are unverified: the website&#x27;s totals are frozen since 2026-10-21 and Engy lists no auto mode.</li>
+<li>Why the owner validator&#x27;s dividend share rose from 74.6% to 87.4% since 2026-10-28 is not known.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/trajectoryRL/trajectoryRL" rel="noopener noreferrer">GitHub (main repo)</a></li>
+<li><a href="https://trajrl.com/" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://trajrl.com/docs" rel="noopener noreferrer">Docs site</a></li>
+<li><a href="https://trajrl.com/docs/miner-guide" rel="noopener noreferrer">Miner guide</a></li>
+<li><a href="https://github.com/trajectoryRL/trajectoryRL/blob/main/docs/FUSION_POLICY.md" rel="noopener noreferrer">Fusion policy guide (repo)</a></li>
+<li><a href="https://github.com/trajectoryRL/trajectoryRL/blob/main/docs/ROADMAP.md" rel="noopener noreferrer">Roadmap (repo)</a></li>
+<li><a href="https://trajrl.com/submissions" rel="noopener noreferrer">Submission queue</a></li>
+<li><a href="https://trajrl.com/winners" rel="noopener noreferrer">Winners page</a></li>
+<li><a href="https://trajrl.com/docs/benchmark" rel="noopener noreferrer">Benchmark (20 scenarios and test counts)</a></li>
+<li><a href="https://github.com/trajectoryRL/trajrl-bench" rel="noopener noreferrer">Scenario images and verifiers (repo)</a></li>
+<li><a href="https://github.com/trajectoryRL/trajectoryRL/blob/main/docs/INCENTIVE_MECHANISM.md" rel="noopener noreferrer">Incentive mechanism (repo)</a></li>
+<li><a href="https://github.com/trajectoryRL/trajectoryRL/blob/main/scripts/eval_pack.py" rel="noopener noreferrer">Local evaluation script (repo)</a></li>
+<li><a href="https://engy.ai/docs/get-started/models-and-pricing" rel="noopener noreferrer">Engy models and prices</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 9 sources</summary>
+<ul>
+<li><strong>repo</strong> trajectoryRL/trajectoryRL @e1399fd (2026-10-04, v0.7.4, MIT licence, unchanged on 2026-10-31): README.md, docs/FUSION_POLICY.md, docs/INCENTIVE_MECHANISM.md, docs/MINER_OPERATIONS.md, docs/VALIDATOR_OPERATIONS.md, docs/ROADMAP.md, trajectoryrl/utils/config.py, trajectoryrl/policy/meter.py. REPO trajectoryRL/trajectoryRL last_commit=2026-10-04 commits_30d=6 code_30d=6 path_last=2026-10-04 last_release=2026-10-03 checked=2026-10-31</li>
+<li><strong>repo</strong> trajectoryRL/trajrl-bench @0c905b3 (2026-08-24, unchanged on 2026-10-31): scenarios and tests of the 20 active scenarios</li>
+<li><strong>web</strong> trajrl.com public read API fetched 2026-10-28 09:40 UTC and 2026-10-31 06:02 UTC (epoch, winner, validators, queue, submissions, winners, stats) and docs pages /docs, /docs/architecture, /docs/benchmark, /docs/consensus-score, /docs/miner-guide, /docs/validator-guide, /docs/staking, /docs/roadmap (fetched 2026-10-31 06:03 UTC)</li>
+<li><strong>web</strong> engy.ai/docs/get-started/models-and-pricing fetched on 2026-10-28 and 2026-10-31, same content (model list and prices; no auto mode listed)</li>
+<li><strong>web</strong> Chain read at block 9402170 (2026-10-31 06:53Z UTC): SN11 (TrajectoryRL): registered 2024-05-09, tempo 360, 256 of 256 uids, commit-reveal on; emission weights burn/recycle/owner/validator/miner = 0/0/18/41/41 % (stored, same values as the chain default), RecycleOrBurn = Burn; uids under the owner hotkey or owner coldkey hold 0 % of incentive and 43.68 % of last-epoch emission (a floor); 7 validators have weight rows, on average 0 % of weight goes to uid 0.</li>
+<li><strong>web</strong> Chain read at block 9401857 (2026-10-31 05:51Z UTC), compared with block 9378501 (2026-10-28 00:00Z UTC): SN11: no setting changed in 33 checked items; Burn differs (moves with demand); emission split unchanged; pool 19717.86 -&gt; 18900.25 TAO.</li>
+<li><strong>web</strong> Chain read at block 9401857 (2026-10-31 05:51Z): price SN11, 6 samples every 7d from block 9185857 (2026-10-01 05:34Z): price 0.007714 -&gt; 0.006575 TAO per alpha (-14.8%), pool TAO 20248.8 -&gt; 18900.2; over the 5 intervals where the pool change equals flow + protocol: net user flow -1747.4 TAO (staked minus unstaked), protocol flow +398.8 TAO, gross volume 23908.1 TAO. Pool rank 24 of 128 from the shared snapshot at the same block.</li>
+<li><strong>web</strong> Chain read at block 9378569 (2026-10-28 00:13Z): price SN11, 11 samples every 3d from block 9162569 (2026-09-27 23:56Z): price 0.007832 -&gt; 0.007158 TAO per alpha (-8.6%); start of the 30-day price window. Chain read at block 9381385 (2026-10-28 09:36Z UTC): owner hotkey dividends 74.6 %, owner-controlled uids 37.32 % of last-epoch emission.</li>
+<li><strong>msg</strong> #trajectory-rl, 2026-03-16 to 2026-10-31 (team posts and the latest messages; last team post 2026-10-22)</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/10.html"><small>← Previous</small>SN10 Pareton</a><a rel="next" href="/bittensor-docs/subnets/12.html"><small>Next →</small>SN12 ComputeHorde</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-31. Site built 2026-10-31. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

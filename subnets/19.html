@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>blockmachine (SN19) | Bittensor Subnet Docs</title>
+<meta name="description" content="Pay-per-request blockchain RPC on 11 chains: miners run nodes and only each chain&#x27;s top-ranked nodes are paid.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h13">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>19</span><div>
+<h1>blockmachine <span class="muted">SN19</span></h1>
+<p class="tagline">Pay-per-request blockchain RPC on 11 chains: miners run nodes and only each chain&#x27;s top-ranked nodes are paid.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>16<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>7.0<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>8.3<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-31</b><span>last chat</span></li><li class="pw"><b>1,647</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Shipping</b><span>code activity</span></li><li class="pw"><b>1</b><span>code commit in 30 d</span></li><li class="pw"><b>2026-10-24</b><span>last commit</span></li><li class="pw"><b>2026-10-24</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>blockchain RPC and archive node infrastructure</dd>
+<dt>Status</dt><dd>Live 2026-10-30: 11 networks, 28 miners earning; ranked payout and traffic-based scoring since 2026-10-29.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-30</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Scoring since 2026-10-29</a></li><li><a href="#sn-x1">Docs vs code vs chain</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-similar">Similar subnets</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>customers pay for RPC access, with the Taostats team the main user; usage is not independently shown.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>only the top 5 archive and top 10 full nodes per chain are paid; 28 uids earn and the top 5 hold 60%.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>the validator is MIT and public; the miner repo is unlicensed; the gateway is closed.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>763 TAO net outflow in 30 days; scoring changed on 2026-10-29 and region-split rewards are announced.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-high">High barrier</span></h3><p>Runs an archive or full node per chain behind the team&#x27;s gateway.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>Own node per chain; archive needs full history; miners say top spots need datacentre-class servers</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None required; servers are your own cost</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Burn about 1 TAO (2026-10-30); no stake needed</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Sync a node, gateway script and bm CLI</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Reads the gateway&#x27;s logs and CU files and sets weights; blockmachine runs one validator itself.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>4+ cores, 8 GB RAM, 50 GB SSD (README)</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None paid; hotkey login to the team&#x27;s registry</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Burn about 1 TAO plus permit stake; threshold 1,000 TAO</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Docker or Python 3.11; registry URL required</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-neutral">Neutral</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-10-30. Not financial advice.</span></div><p>Neutral: 763 TAO net outflow in 30 days against a working product and a new payout regime. <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>blockmachine sells JSON-RPC access to blockchains, including archive nodes. A gateway routes each customer request to a competing miner&#x27;s node and bills only for successful answers. Validators turn each miner&#x27;s served work into weights. The team behind Taostats runs it and is its largest named customer (its own claim).</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>A miner runs an archive (full history) or full (recent blocks) node for a chain behind the team&#x27;s gateway, registered with the bm tool at a fixed bid of $0.50 per million compute units (CU, a measure of request work). Automatic checks cover chain, client family, tip distance and archive depth; wrong answers exclude the UID from payouts.</p></div><div><h3>Validators</h3><p>Validators read each epoch&#x27;s gateway logs and CU files, cross-check answers and set weights from each miner&#x27;s CU. The weight code is public but is only the last step: ranking and routing come from the team&#x27;s closed gateway. On chain, 9 of 10 validators with weights share the same top miner.</p></div><div><h3>Incentive</h3><p>Emission is 41% miners, 41% validators and 18% owner. Since 2026-10-29 the miner pool is split equally across the 11 chains; per chain, 90% goes to the five archive nodes that served the most CU and 10% to the ten top full nodes, pro rata; others earn nothing there. An epoch is 7,200 blocks (about 24 hours). Monthly buybacks of alpha (the subnet token) are burned.</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-10-30, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-good">Open</span>Open: 11 uids hold permits (threshold 1,000 TAO), 9 set weights in the last day; needs the team&#x27;s registry login.</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">24.7%</span>24.7% of last-epoch emission, all validator dividends (0% incentive); configured owner cut 18%; RecycleOrBurn is Burn.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">28 uids</span><span class="v2-sx muted">top 5 hold 60.3% of incentive.</span> 28 uids earn incentive; the top 5 hold 60.3%, the top 10 82.1%. It was 43 uids on 2026-10-28, before the ranked payout.</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Converged</span>9 of 10 validators put their top weight on uid 129; expected, as they share one input from the team&#x27;s gateway.</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-caution">Partial</span>Validator is MIT and public; the miner repo has no licence; gateway, registry and traffic simulator are closed.</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-high">High barrier</span></h3><p>Runs an archive or full node per chain behind the team&#x27;s gateway.</p><ul>
+<li>Only the top 5 archive and top 10 full nodes per chain are paid; being eligible is not enough (site, 2026-10-30).</li>
+<li>One hotkey per coldkey, at most one archive and one full node per chain. All 256 UIDs are taken, so a newcomer replaces the lowest-ranked after about 3 days of immunity.</li>
+<li>Client families only, no versions: reth, geth, op-reth, bor, nitro or subtensor depending on chain (README, team 2026-10-29).</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Reads the gateway&#x27;s logs and CU files and sets weights; blockmachine runs one validator itself.</p><ul>
+<li>11 of 64 possible permits are held; 9 set weights in the last day and 2 have not for weeks (chain, 2026-10-30).</li>
+<li>The owner&#x27;s hotkey earns 49% of validator dividends.</li>
+</ul></section></div>
+<h2 id="sn-x0">Scoring since 2026-10-29</h2>
+<ul class="v2-list">
+<li>Team-run simulated traffic replaced capacity tests and is raised until responses slow, so faster nodes score higher.</li>
+<li>Latency: rolling-hour p95, full marks at 20 ms (the site says 1 ms for full nodes), zero at 1,000 ms; slow tails also count.</li>
+<li>Reliability maxes out after 3 good days (was 7). Announced, not live: US and Asia gateways and region-split rewards.</li>
+</ul>
+<h2 id="sn-x1">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Capacity tests</td><td>Miner README: capacity score scales routing</td><td>Chat: replaced by simulated traffic by 2026-10-29</td><td>2026-10-29</td></tr><tr><td>Epoch length</td><td>Miner README: about 72 minutes</td><td>Chain: 7,200 blocks, about 24 hours</td><td>2026-10-30</td></tr><tr><td>Reference nodes</td><td>Team (2026-10-22): reference nodes set right answers</td><td>Chat: none used since 2026-10-29; miners are cross-checked</td><td>2026-10-29</td></tr></tbody></table></div>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-neutral">Neutral</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-10-30. Not financial advice.</span></div>
+<p class="v2-thesis">The one inflow week was given back (759 TAO left in 9 days), but the team changes rules fast and emission reaches many miners. Paid revenue is small next to emissions (the last buyback is about 4% of a month&#x27;s miner alpha) and usage is team-reported.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.008969 TAO per alpha</dd></div><div><dt>Pool</dt><dd>30,811 TAO, rank 15</dd></div><div><dt>Price, 30 days</dt><dd>-2%, 2026-09-28 to 2026-10-30</dd></div><div><dt>Net flow, 30 days</dt><dd>-763 TAO, 2026-09-30 to 2026-10-30</dd></div><div><dt>Miner pay</dt><dd>0.95 TAO per day on average (26.5 TAO per day over 28 uids)</dd></div><div><dt>Miner pay outside top 5</dt><dd>0.46 TAO per day on average</dd></div><div><dt>Code activity</dt><dd>last commit 2026-10-24 (validator), 2026-10-14 (miner); 2 validator commits in 30 days</dd></div></dl>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>Live on 11 chains; six monthly on-chain burns (9,797 alpha).</li>
+<li>27 uids besides the top one earn, none under the owner&#x27;s coldkey.</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>Net outflow of 763 TAO in 30 days; earners fell from 43 to 28.</li>
+<li>Revenue proof is about 4% of miner alpha; the main customer is the owner&#x27;s team.</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> Sustained inflow or independent revenue proof would make it bullish; more outflow or another rule reversal, bearish.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-similar">Similar subnets</h2>
+<div class="v2-sim"><p>By pool size this is <strong>rank 1 of 3</strong> among the subnets grouped as <em>infrastructure</em> (what they mainly sell). Pool and price as of 2026-10-30, price in TAO per alpha; the barrier is the easiest miner role.</p><div class="scroll"><table class="v2-table"><thead><tr><th>#</th><th>Subnet</th><th>Pool</th><th>Price</th><th>Miner barrier</th></tr></thead><tbody><tr class="me" aria-current="true"><td>1</td><td>blockmachine <span class="muted">SN19, this page</span></td><td>30,811 TAO</td><td>0.008969</td><td><span class="v2-barrier b-high">High</span></td></tr><tr><td>2</td><td><a href="/bittensor-docs/subnets/7.html">Allways</a> <span class="muted">SN7</span></td><td>5,430 TAO</td><td>0.002322</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>3</td><td><a href="/bittensor-docs/subnets/122.html">CookingTAO</a> <span class="muted">SN122</span></td><td>1,190 TAO</td><td>0.003048</td><td><span class="v2-barrier b-high">High</span></td></tr></tbody></table></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-30</span> <span class="muted">(blockmachine.io)</span> Site incentive page and whitepaper rewritten for the top 5 archive and top 10 full node payout.</li>
+<li><span class="when">2026-10-29</span> <span class="muted">(#19-blockmachine)</span> Simulated-traffic scoring live (announced 2026-10-28, US and Asia gateways to follow); reliability ramp cut to 3 epochs; reference nodes and client-version checks dropped.</li>
+<li><span class="when">2026-10-15</span> <span class="muted">(blockmachine.io/buybacks)</span> Buyback cycle 6: 28.58 TAO bought 3,183.94 alpha; six cycles, 9,797.31 alpha in total.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Pick a chain and sync an accepted client family (the miner README has the table); archive nodes need full history.</li>
+<li>Register a hotkey on netuid 19: burn about 1 TAO (2026-10-30); a newcomer takes the lowest-ranked of 256 slots after about 3 days.</li>
+<li>Install the CLI (pip install blockmachine, Python 3.10+), run the README install script on the node&#x27;s server, then bm miner login, add and test.</li>
+<li>Watch the public dashboard (Payouts, Live routing score, Eligibility); latency now decides traffic, so load-test your own hardware.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Scoring comes from the team&#x27;s closed gateway, registry and traffic simulator; only the final weight step is public code.</li>
+<li>Rules changed twice in two weeks and regional gateways are planned, so new-miner earnings are not predictable.</li>
+<li>A miner said on 2026-10-29 that full TAO nodes were unpaid unless the hotkey also ran an archive node; the site says top-10 full nodes are paid; no team answer yet.</li>
+<li>Usage and revenue are team figures: buybacks are on chain, but request counts are not independently shown.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://blockmachine.io/" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://blockmachine.io/incentive-mechanism" rel="noopener noreferrer">How miner rewards work</a></li>
+<li><a href="https://blockmachine.io/miners" rel="noopener noreferrer">Miner performance dashboard</a></li>
+<li><a href="https://blockmachine.io/buybacks" rel="noopener noreferrer">Buyback ledger</a></li>
+<li><a href="https://blockmachine.io/roadmap" rel="noopener noreferrer">Roadmap</a></li>
+<li><a href="https://github.com/taostat/blockmachine-miner" rel="noopener noreferrer">Miner repo (gateway, eligibility and capacity rules)</a></li>
+<li><a href="https://github.com/taostat/blockmachine-validator" rel="noopener noreferrer">Validator repo</a></li>
+<li><a href="https://github.com/taostat/blockmachine" rel="noopener noreferrer">Project overview repo</a></li>
+<li><a href="https://github.com/taostat/blockmachine-miner/releases" rel="noopener noreferrer">Miner repo releases (capacity helper)</a></li>
+<li><a href="https://blockmachine.io/whitepaper" rel="noopener noreferrer">Whitepaper (payout and burn rules)</a></li>
+<li><a href="https://blockmachine.io/docs" rel="noopener noreferrer">Customer docs</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 8 sources</summary>
+<ul>
+<li><strong>repo</strong> taostat/blockmachine-validator@c9a75b0 (2026-10-24, v0.2.15, MIT): README, common/scoring/weights.py, chain/submitter.py, config.py, weights/loop.py, api/logs_client.py; weight logic unchanged since 25ca87c (2026-09-17)</li>
+<li><strong>repo</strong> taostat/blockmachine-miner@451d323 (2026-10-14): README (eligibility, capacity testing, CLI), releases capacity-helper-v1 and v2; no licence file</li>
+<li><strong>repo</strong> taostat/blockmachine@031c1da (2026-07-27): README</li>
+<li><strong>web</strong> https://blockmachine.io/, /incentive-mechanism, /buybacks, /miners (public dashboard), /roadmap, /whitepaper, /docs, /pricing (read 2026-10-30 and fetched again 03:43Z: unchanged apart from the dashboard&#x27;s live figures and the buyback sync block; the incentive page and whitepaper were rewritten since 2026-10-28; repo heads checked again 03:43Z, unchanged)</li>
+<li><strong>web</strong> Chain read at block 9,393,775 (2026-10-30 02:54Z UTC): SN19 (blockmachine): registered 2023-12-18, tempo 7200, 256 of 256 uids, commit-reveal off; emission weights burn/recycle/owner/validator/miner = 0/0/18/41/41 % (stored, same values as the chain default), RecycleOrBurn = Burn; uids under the owner hotkey or owner coldkey hold 0 % of incentive and 24.66 % of last-epoch emission (a floor); 10 validators have weight rows, on average 0 % of weight goes to uid 0.</li>
+<li><strong>web</strong> Chain read at block 9,393,852 (2026-10-30 03:10Z UTC), compared with block 9,378,501 (2026-10-28 00:00Z UTC): SN19: no setting changed in 33 checked items; emission split unchanged; pool 31014.02 -&gt; 30810.84 TAO.</li>
+<li><strong>web</strong> Chain read at block 9,393,852 (2026-10-30 03:10Z): price SN19, 6 samples every 7d from block 9,177,852 (2026-09-30 02:53Z): price 0.009173 -&gt; 0.008969 TAO per alpha (-2.2%), pool TAO 30890.8 -&gt; 30810.8; over the 5 intervals where the pool change equals flow + protocol: net user flow -763.4 TAO (staked minus unstaked), protocol flow +683.4 TAO, gross volume 17070.2 TAO.</li>
+<li><strong>msg</strong> #19-blockmachine, 2025-09-08 to 2026-10-29 (no newer message when re-checked 2026-10-30 03:43Z), including pinned posts and hyperparameter bot posts</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/18.html"><small>← Previous</small>SN18 Zeus</a><a rel="next" href="/bittensor-docs/subnets/20.html"><small>Next →</small>SN20 Witness</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-30. Site built 2026-10-31. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

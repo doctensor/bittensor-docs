@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MVTRX (SN79) | Bittensor Subnet Docs</title>
+<meta name="description" content="Simulated order-book markets where miners run trading bots; pay is half liquidity, half skill, and rules change often.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h1">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>79</span><div>
+<h1>MVTRX <span class="muted">SN79</span></h1>
+<p class="tagline">Simulated order-book markets where miners run trading bots; pay is half liquidity, half skill, and rules change often.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>8.4<small>/day</small></b><span>last 7 d</span></li><li class="pl4"><b>4.5<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>9.3<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-30</b><span>last chat</span></li><li class="pw"><b>5,281</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Shipping</b><span>code activity</span></li><li class="pw"><b>7</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-10-23</b><span>last commit</span></li><li class="pw"><b>none</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>trading-agent simulation (agent-based order-book markets) with an optional order-book model training pool</dd>
+<dt>Status</dt><dd>Active on 2026-10-29: 0.6.5 runs on mainnet; 0.6.6 is on testnet, promised for mainnet on 10-30 (team). Chat is busy with a scoring-bug dispute.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-29</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Live scoring settings</a></li><li><a href="#sn-x1">Docs vs code vs chain</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>miners run trading bots in simulated order-book markets; pay is half liquidity provided, half risk-adjusted profit.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>245 of 256 miner slots earn (top miner 1.2%, about 0.03 TAO a day on average); one owner validator sets every weight.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>no GPU or paid service needed, about 0.07 TAO to register; the hard part is a strategy that scores.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>the real-capital exchange is not live on mainnet; scoring rules change fast.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-low">Low barrier</span></h3><p>Writes and runs a Python trading agent that places orders in the simulated markets.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>Basic server; about 1 GB RAM per miner (template file: 4 cores, 4 GB RAM)</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None required; optional GenTRX training uses your own S3 bucket</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Registration burn about 0.07 TAO (2026-10-29, moves with demand); no stake documented</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Install script on Ubuntu, then your own strategy; example agents will not win</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Runs the simulator and validator, scores miners and sets weights; only the owner&#x27;s validator holds a permit today.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-bad">Permissioned</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>16 cores, 32 GB RAM, 200 GB SSD, Ubuntu 22.04+, g++ 14</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None required; optional GenTRX needs a GPU (8 to 16 GB VRAM) and S3 credentials</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Registration burn about 0.07 TAO plus stake for a permit (chain minimum 1,000 TAO)</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Install compiles a toolchain (2+ hours on Ubuntu 22.04); about weekly configuration updates</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-neutral">Neutral</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">low confidence, as of 2026-10-29. Not financial advice.</span></div><p>Flat price and pool for a month; small net inflow; usage unverified. <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>MVTRX (formerly tau-os, repo sn-79) simulates limit-order-book markets where miners act as trading agents against background traders. It pays for liquidity and risk-adjusted profit. The team&#x27;s alpha-token exchange is not live on mainnet.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>A miner&#x27;s Python trading agent answers each validator update with orders; slower replies add simulated delay, and since 0.6.5 query order is random. Optional: train the shared GenTRX model (1 miner did on 2026-10-29).</p></div><div><h3>Validators</h3><p>A validator pairs a C++ market simulator with a Python validator that sends state to miners, applies their orders, scores them and sets weights from a 3-hour moving average. Runs last four to five days on the owner&#x27;s configuration. Only the owner&#x27;s UID holds a validator permit, so it alone sets all incentive.</p></div><div><h3>Incentive</h3><p>About 95% of miner pay goes to trading, up to 5% to GenTRX training. Trading splits into two equal halves paid by share, not rank: making (spread captured on two-sided maker fills and held 20 simulated seconds later) and skill (profit after removing market drift). Chain split: 18% owner, 41% validators, 41% miners, none burned.</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-10-29, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-bad">Owner only</span>Only the owner&#x27;s validator holds a permit and sets weights (2026-10-29); the code is public.</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">50%</span>Owner validator holds half of uid emission (the validator share); a separate 18% owner cut; nothing burned.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">245 uids</span><span class="v2-sx muted">top 5 hold 4.9% of incentive.</span> 245 of 256 uids earn; top 1 holds 1.2%, top 10 hold 8.7% (2026-10-29).</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-caution">Single validator</span>One validator has weight rows, so no second opinion exists (concentration, not copying).</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-good">Open</span>Miner, validator and simulator share one MIT repo (taos-im/sn-79).</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-low">Low barrier</span></h3><p>Writes and runs a Python trading agent that places orders in the simulated markets.</p><ul>
+<li>Limits: replies within 3 s; 5 instructions per book per round; volume cap 10x capital per book per 24 simulated hours.</li>
+<li>Optional GenTRX: a GPU with 6 to 8 GB VRAM is advised.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Runs the simulator and validator, scores miners and sets weights; only the owner&#x27;s validator holds a permit today.</p><ul>
+<li>The owner&#x27;s UID holds the only permit (2026-10-29) and gets 50% of emission, the validator half.</li>
+</ul></section></div>
+<h2 id="sn-x0">Live scoring settings</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Setting</th><th>Value</th><th>Since</th></tr></thead><tbody><tr><td>Asset classes</td><td>64, 32 and 32 books, weighted 50, 25 and 25%</td><td>0.6.5</td></tr><tr><td>Making credit</td><td>Spread held 20 s, net of a 0.005 maker-fee share; miner-sourced credit capped at 4x</td><td>0.6.3-0.6.4</td></tr><tr><td>Skill bar</td><td>Profit over 2.3 bp of filled notional on 10 of 64, 5 of 32, 5 of 32 books</td><td>0.6.2-0.6.5</td></tr><tr><td>0.6.6 (testnet)</td><td>Skill marked at the mid quote; making on maker fills only; new calibrations at the next run start (about 11-02)</td><td>10-29</td></tr></tbody></table></div>
+<h2 id="sn-x1">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Exchange live?</td><td>README says live</td><td>Code: the same README says its scoring is not enabled on mainnet (localnet only)</td><td>2026-10-28</td></tr><tr><td>Taking earns credit?</td><td>FAQ: never (from 0.6.3)</td><td>Code: 0.6.5 let taker fills lift the making factor; 0.6.6 removes them</td><td>2026-10-29</td></tr></tbody></table></div>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-neutral">Neutral</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">low confidence, as of 2026-10-29. Not financial advice.</span></div>
+<p class="v2-thesis">Price moved +1% in 30 days on a steady pool near 6,950 TAO; net inflow was 34 TAO, but the last two days saw a 60 TAO outflow. The team ships fast and the code is open; usage is unverified.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.00304 TAO per alpha</dd></div><div><dt>Pool</dt><dd>6,947 TAO, rank 59</dd></div><div><dt>Price, 30 days</dt><dd>+1%, 2026-09-28 to 2026-10-29</dd></div><div><dt>Net flow, 30 days</dt><dd>+34 TAO, 2026-09-29 to 2026-10-29</dd></div><div><dt>Miner pay</dt><dd>0.030 TAO per day on average (7.34 TAO per day over 245 uids)</dd></div><div><dt>Miner pay outside top 5</dt><dd>0.029 TAO per day on average (6.98 TAO per day over 240 uids)</dd></div><div><dt>Code activity</dt><dd>last commit 2026-10-23; 7 commits in 30 days; no releases</dd></div></dl>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>Team ships often; code is open (MIT).</li>
+<li>245 of 256 slots earn; top miner 1.2%.</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>One owner validator sets all weights.</li>
+<li>Exchange not live; real-capital market gated.</li>
+<li>Rules keep changing; a confirmed scoring bug awaits its fix.</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> A second independent validator, a live exchange or named revenue would turn it bullish; renewed outflow or another scoring dispute, bearish.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-29</span> <span class="muted">(#79-mvtrx, GitHub (test branch))</span> 0.6.6 is on testnet; mainnet promised for 10-30, new calibrations at the next run start (about 11-02). Skill is marked at the mid price; making counts maker fills only.</li>
+<li><span class="when">2026-10-29</span> <span class="muted">(#79-mvtrx)</span> Members reported agents exploiting a scoring bug; the team confirmed it, said 0.6.6 fixes it, and said no score is set by hand.</li>
+<li><span class="when">2026-10-23</span> <span class="muted">(#79-mvtrx, GitHub)</span> 0.6.5 final went live on mainnet mid-run: random query order, hashed price seed, new instruction stats.</li>
+<li><span class="when">2026-09-29</span> <span class="muted">(#79-mvtrx)</span> After wash-trading reports the team said the largest coordinated set held 7.9% of incentive (its figure) and declined to ban by IP or coldkey.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Read the FAQ, the README incentive sections and agents/README.md; scoring changes between releases.</li>
+<li>Install with install_miner.sh on Ubuntu and write your own strategy; the example agents are templates.</li>
+<li>Test locally with the proxy tools or on testnet netuid 366; mainnet miners can ask the team for testnet TAO.</li>
+<li>Register on mainnet netuid 79 (about 0.07 TAO) and run the miner within the 3-second and 5-instruction limits.</li>
+<li>After each release post, pull the repo and restart; the team says a 0.6.5 agent runs unchanged on 0.6.6.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>One owner-run validator holds the only permit and sets every weight; nothing independent checks the scoring.</li>
+<li>Rules change often: five scoring releases in five weeks, from 0.6.2 (09-24) to 0.6.6 (testnet, 10-29).</li>
+<li>The team confirmed a scoring bug on 10-29; the 0.6.6 fix is promised for mainnet on 10-30.</li>
+<li>Wash trading: coordinated-set figures are the team&#x27;s own. On 2026-10-23, 256 slots sat under 37 coldkeys, 18 holding 88% of incentive (not proof of one operator).</li>
+<li>Whether a new miner profits is unknown: 61 UIDs re-registered in the day before 10-23. GenTRX had 1 active miner on 10-29, down from 21 on 10-21.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://mvtrx.ai" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://mvtrx.ai/roadmap.html" rel="noopener noreferrer">Roadmap (team-maintained)</a></li>
+<li><a href="https://github.com/taos-im/sn-79" rel="noopener noreferrer">Repository (MIT, 0.6.5 final)</a></li>
+<li><a href="https://github.com/taos-im/sn-79/tree/test" rel="noopener noreferrer">Version 0.6.6 (testnet branch)</a></li>
+<li><a href="https://github.com/taos-im/sn-79/blob/main/FAQ.md" rel="noopener noreferrer">FAQ with the scoring rules</a></li>
+<li><a href="https://github.com/taos-im/sn-79/blob/main/agents/README.md" rel="noopener noreferrer">Agent guide for miners</a></li>
+<li><a href="https://taos.simulate.trading" rel="noopener noreferrer">Dashboard (Grafana)</a></li>
+<li><a href="https://mvtrx.simulate.trading" rel="noopener noreferrer">Newer terminal dashboard</a></li>
+<li><a href="https://testnet.simulate.trading" rel="noopener noreferrer">Testnet (netuid 366) dashboard</a></li>
+<li><a href="https://simulate.trading/taos-im-paper" rel="noopener noreferrer">Whitepaper (file download page)</a></li>
+<li><a href="https://mvtrx.ai/resources.html" rel="noopener noreferrer">Research papers and brochures</a></li>
+<li><a href="https://x.com/mvtrx_79" rel="noopener noreferrer">Team posts on X</a></li>
+<li><a href="https://discord.gg/372ec3U8mv" rel="noopener noreferrer">Team Discord (182 members, 2026-10-29)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 10 sources</summary>
+<ul>
+<li><strong>repo</strong> taos-im/sn-79 main at c36caa9 (0.6.5 final, 2026-10-23, MIT) and test branch at 9133060 (0.6.6, 2026-10-29): README.md, FAQ.md, min_compute.yml, agents/README.md, taos/im/config, validator reward.py, query.py, forward.py, debeta.py, FundamentalPrice.cpp; read 2026-10-21, 2026-10-23, 2026-10-28 and 2026-10-29</li>
+<li><strong>web</strong> Chain read at block 9392669 (2026-10-29 23:13Z UTC): SN79 (MVTRX): registered 2025-03-21, tempo 360, 256 of 256 uids, commit-reveal on; emission weights burn/recycle/owner/validator/miner = 0/0/18/41/41 % (stored, same values as the chain default), RecycleOrBurn = Burn; uids under the owner hotkey or owner coldkey hold 0 % of incentive and 50.01 % of last-epoch emission (a floor); 1 validators have weight rows, on average 0 % of weight goes to uid 0.</li>
+<li><strong>web</strong> Chain read at block 9392747 (2026-10-29 23:29Z UTC), compared with block 9378501 (2026-10-28 00:00Z UTC): SN79: no setting changed in 33 checked items; Burn differs (moves with demand); emission split unchanged; pool 7001.36 -&gt; 6946.65 TAO.</li>
+<li><strong>web</strong> Chain read at block 9392747 (2026-10-29 23:29Z): shared snapshot over 129 subnets (SN79 pool rank 59 of 128 excluding root, 0.35% of all pools). Chain read at block 9392747 (2026-10-29 23:29Z): price SN79, 6 samples every 7d from block 9176747 (2026-09-29 23:12Z): price 0.003030 -&gt; 0.003040 TAO per alpha (+0.3%), pool TAO 6911.4 -&gt; 6946.6; over the 5 intervals where the pool change equals flow + protocol: net user flow +33.7 TAO (staked minus unstaked), protocol flow +1.6 TAO, gross volume 5007.4 TAO.</li>
+<li><strong>web</strong> Chain reads at blocks 9343602 to 9343627 (2026-10-23): registration ages and coldkey grouping (aggregates only, no addresses published)</li>
+<li><strong>web</strong> taos.simulate.trading Grafana dashboards and read-only metrics (miner incentive, asset class, GenTRX gauges, scoring settings), read 2026-10-28 and 2026-10-29</li>
+<li><strong>web</strong> mvtrx.ai roadmap page and its roadmap data script, read 2026-10-28; all page links checked 2026-10-28</li>
+<li><strong>web</strong> Discord public invite metadata for the team server, checked 2026-10-29</li>
+<li><strong>web</strong> github.com/taos-im/sn-79 issue 6 (filed 2026-10-28) and the commit list of the test branch, read 2026-10-29</li>
+<li><strong>msg</strong> #79-mvtrx team and member discussion 2026-09-22 to 2026-10-29; pinned posts 2025-04 to 2025-12</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/78.html"><small>← Previous</small>SN78 UMI</a><a rel="next" href="/bittensor-docs/subnets/80.html"><small>Next →</small>SN80 OpenRoboto</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-29. Site built 2026-10-31. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

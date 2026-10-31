@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quantum Compute (SN48) | Bittensor Subnet Docs</title>
+<meta name="description" content="Marketplace for real quantum hardware: miners route Open Quantum circuit jobs to processors and earn alpha.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h0">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>48</span><div>
+<h1>Quantum Compute <span class="muted">SN48</span></h1>
+<p class="tagline">Marketplace for real quantum hardware: miners route Open Quantum circuit jobs to processors and earn alpha.</p>
+<span class="st s-transitioning">transitioning</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl1"><b>0.14<small>/day</small></b><span>last 7 d</span></li><li class="pl4"><b>2.0<small>/day</small></b><span>days 8-30</span></li><li class="pl2"><b>0.42<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-29</b><span>last chat</span></li><li class="pw"><b>432</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Shipping</b><span>code activity</span></li><li class="pw"><b>2</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-10-20</b><span>last commit</span></li><li class="pw"><b>none</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>quantum computing access (QPU job marketplace)</dd>
+<dt>Status</dt><dd>As of 2026-10-30 four miner uids under one coldkey take all miner pay; open mining, announced 2026-10-09, is not confirmed.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-30</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Where pay and alpha sit</a></li><li><a href="#sn-x1">Docs vs code vs chain</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-similar">Similar subnets</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>users run circuits on real quantum processors via Open Quantum; miners route the jobs and earn alpha.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>all miner pay (about 24 TAO a day) goes to 4 uids under one non-owner coldkey (2026-10-30).</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>the 2.0 miner checks for no quantum processor; the team site still says one is required.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>pool 15,127 TAO (rank 30); price +103% and net inflow 4,515 TAO in 30 days to 2026-10-30.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>usage is growing; buybacks and open mining are coming. None shows on chain yet.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-high">High barrier</span></h3><p>Routes validator circuits to quantum hardware through an Open Quantum organization account; closed in practice.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-caution">Paid service needed</li><li class="fl fl-bad">Permissioned</li></ul><dl class="v2-needs"><div class="v2-need n-no"><dt>Hardware</dt><dd>No GPU; quantum-processor access per the team site (the 2.0 code checks none)</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>Open Quantum credits pay per job; the miner rate-limits below 50 credits</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>5,000 alpha staked (about 41 TAO); registration burn 0.0005 TAO (2026-10-30)</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Python 3.12, SDK v11, Open Quantum SDK key; the guide is marked coming soon</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Feeds Open Quantum jobs to miners and applies the platform&#x27;s weight snapshot; team-onboarded.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-bad">Permissioned</li></ul><dl class="v2-needs"><div class="v2-need n-no"><dt>Hardware</dt><dd>No GPU; 2 vCPU, 8 GB RAM, 80 GB SSD (min_compute.yml)</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None found; job API access comes from team onboarding</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Registration burn 0.0005 TAO; permit stake threshold 1,000 TAO (2026-10-30)</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Team onboards the hotkey first, then neurons/validator.py with the axon off</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div><div class="v2-role"><h3>User of Open Quantum <span class="v2-barrier b-low">Low barrier</span></h3><p>Runs circuits on real processors via portal, SDK or plugins; pays in dollars, no TAO.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-caution">Paid service needed</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-no"><dt>Hardware</dt><dd>None beyond a computer</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>$50 free credits every 90 days, then paid plans (docs)</dd></div><div class="v2-need n-no"><dt>Stake / fees</dt><dd>None on chain</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Minutes: sign up, make an SDK key</dd></div></dl><a class="v2-more" href="#sn-role-2">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-neutral">Neutral</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">low confidence, as of 2026-10-30. Not financial advice.</span></div><p>Price doubled on net inflow, but miner pay sits with one coldkey and usage is team-reported. <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>Quantum Compute (SN48), run by qBitTensor Labs, is the job side of Open Quantum, a platform where users run circuits on real quantum processors (IonQ, Rigetti, IQM, AQT) and pay in dollars. Miners submit the jobs and earn alpha. Usage and savings figures are the team&#x27;s own.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Version 1 miners had to own or operate a quantum processor. The 2.0 code sends each circuit through a provider adapter (only Open Quantum exists), whose organization account pays per job; nothing checks QPU access. A miner needs 5,000 alpha staked, a public address and credits.</p></div><div><h3>Validators</h3><p>A validator pulls jobs from the Open Quantum API, sends each to an eligible miner, bans miners whose lease expires or proofs fail, and sets weights from a frozen platform snapshot, not from chain data.</p></div><div><h3>Incentive</h3><p>The snapshot gives each miner&#x27;s job cost; a miner is owed cost times a markup (code fallback 1.2). If the total fits the miner emission, weights follow cost share, so miners get the whole emission, not only what is owed; otherwise rank order pays until it runs out.</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-10-30, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-caution">Whitelisted</span>The team onboards validators by hotkey; 18 permit holders, 11 with weights.</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">0%</span>0% of last-epoch emission on owner uids; owner cut 18%, RecycleOrBurn Burn.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">4 uids</span><span class="v2-sx muted">top 5 hold 100% of incentive.</span> 4 uids earn all miner incentive, all under one non-owner coldkey.</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Converged</span>6 of 11 validators back uid 255, 4 uid 206, 1 uid 10; concentration, not proof of copying.</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-good">Open</span>Miner and validator code are MIT on GitHub; the platform&#x27;s weight snapshot is closed.</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-high">High barrier</span></h3><p>Routes validator circuits to quantum hardware through an Open Quantum organization account; closed in practice.</p><ul>
+<li>Chat 2026-04 and 2026-05: a miner with an IBM account was told a direct partnership needs an institutional contract with the hardware provider.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Feeds Open Quantum jobs to miners and applies the platform&#x27;s weight snapshot; team-onboarded.</p><p class="muted">No further detail found in the sources.</p></section><section class="v2-rdetail" id="sn-role-2"><h3>User of Open Quantum <span class="v2-barrier b-low">Low barrier</span></h3><p>Runs circuits on real processors via portal, SDK or plugins; pays in dollars, no TAO.</p><p class="muted">No further detail found in the sources.</p></section></div>
+<h2 id="sn-x0">Where pay and alpha sit</h2>
+<ul class="v2-list">
+<li>Miner pay (2026-10-30): 4 uids share incentive 30.8 / 30.1 / 20.1 / 19.0%. One coldkey holds them and 3 more uids; the team says it runs the miners (unverified).</li>
+<li>Validators: one uid takes 80.3% of dividends.</li>
+<li>Of the 88.9% of staked alpha read, the owner&#x27;s coldkey holds 28.0% and the miners&#x27; coldkey 24.3%.</li>
+</ul>
+<h2 id="sn-x1">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Who can mine</td><td>Site: mining needs your own or a partner&#x27;s quantum computer</td><td>Code: the 2.0 miner pays through an Open Quantum account; no ownership check found</td><td>2026-10-30</td></tr><tr><td>Open mining</td><td>Team post: anyone with an API key can mine; guide says coming soon</td><td>Chain: still 4 paid uids, one coldkey; no new uid 2026-10-09 to 10-26 (last full check)</td><td>2026-10-30</td></tr></tbody></table></div>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-neutral">Neutral</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">low confidence, as of 2026-10-30. Not financial advice.</span></div>
+<p class="v2-thesis">Strong flow and price on a mid-size pool, and the team keeps shipping. But all miner pay goes to four uids under one coldkey, and usage and buybacks are team claims.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.00815 TAO per alpha</dd></div><div><dt>Pool</dt><dd>15,127 TAO, rank 30</dd></div><div><dt>Price, 30 days</dt><dd>+103%, 2026-09-28 to 2026-10-30</dd></div><div><dt>Net flow, 30 days</dt><dd>+4,515 TAO, 2026-09-30 to 2026-10-30</dd></div><div><dt>Miner pay</dt><dd>About 24 TAO per day over 4 paid uids (gross)</dd></div><div><dt>Miner pay outside top 5</dt><dd>None: only 4 uids are paid</dd></div><div><dt>Code activity</dt><dd>last commit 2026-10-20; 4 commits in 30 days; no releases</dd></div></dl>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>Net inflow in 4 of 5 intervals, the last included; price rose with it.</li>
+<li>Team ships: 2.0 code, Qrisp and Cirq plugins.</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>No independent miner is paid: all 4 paid uids share one coldkey.</li>
+<li>Usage and buyback figures are team claims; no buyback seen.</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> An independent miner earning, a visible buyback or outside-verified usage turns this bullish; net outflow or another emission stop turns it bearish.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-similar">Similar subnets</h2>
+<div class="v2-sim"><p>By pool size this is <strong>rank 3 of 12</strong> among the subnets grouped as <em>compute</em> (what they mainly sell). Pool and price as of 2026-10-30 to 2026-10-31, price in TAO per alpha; the barrier is the easiest miner role.</p><div class="scroll"><table class="v2-table"><thead><tr><th>#</th><th>Subnet</th><th>Pool</th><th>Price</th><th>Miner barrier</th></tr></thead><tbody><tr><td>1</td><td><a href="/bittensor-docs/subnets/4.html">Targon</a> <span class="muted">SN4</span></td><td>142,192 TAO</td><td>0.05762</td><td><span class="v2-barrier b-high">High</span></td></tr><tr><td>2</td><td><a href="/bittensor-docs/subnets/75.html">Hippius</a> <span class="muted">SN75</span></td><td>34,980 TAO</td><td>0.01832</td><td><span class="v2-barrier b-high">High</span></td></tr><tr class="me" aria-current="true"><td>3</td><td>Quantum Compute <span class="muted">SN48, this page</span></td><td>15,127 TAO</td><td>0.00815</td><td><span class="v2-barrier b-high">High</span></td></tr><tr><td>4</td><td><a href="/bittensor-docs/subnets/12.html">ComputeHorde</a> <span class="muted">SN12</span></td><td>12,615 TAO</td><td>0.004746</td><td><span class="v2-barrier b-high">High</span></td></tr><tr><td>5</td><td><a href="/bittensor-docs/subnets/110.html">Green Compute</a> <span class="muted">SN110</span></td><td>11,762 TAO</td><td>0.02472</td><td><span class="v2-barrier b-high">High</span></td></tr></tbody></table></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-30</span> <span class="muted">(Bittensor chain state (read-only))</span> Pay moved between the four paid uids (one coldkey) since 2026-10-26: uid 10 fell from 24.4% to 0, uid 22 rose to 20.1%.</li>
+<li><span class="when">2026-10-29</span> <span class="muted">(#48-quantum-c)</span> A member asked when the buyback would come; no reply or announcement found.</li>
+<li><span class="when">2026-10-22</span> <span class="muted">(#48-quantum-c; Open Quantum docs)</span> A Cirq plugin for Open Quantum went live in beta, after Qrisp on 2026-10-20.</li>
+<li><span class="when">2026-10-09</span> <span class="muted">(#48-quantum-c; GitHub)</span> Version 2.0 of the code landed after three months without commits, and the team announced open mining.</li>
+<li><span class="when">2026-10-01</span> <span class="muted">(qBitTensor Labs news)</span> Team broadcast: it says over 90% of Open Quantum traffic runs through SN48 and the first buybacks are due in October.</li>
+<li><span class="when">2026-09-09</span> <span class="muted">(#48-quantum-c; qBitTensor Labs news; chain)</span> Emission, off since 2026-09-02, came back. The team says it got no warning and does not know why it returned.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Ask the team first: the site says mining needs a quantum computer, the guide says coming soon.</li>
+<li>Miner (2.0 code): Python 3.12, SDK v11, a hotkey on netuid 48, 5,000 alpha staked, a public axon, PROVIDER=openquantum with an organization id and SDK key, credits above 50.</li>
+<li>Validator: ask the team to onboard the hotkey, then run neurons/validator.py with the axon off.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Who controls the miners&#x27; coldkey and the owner&#x27;s is not shown; the team says it runs the miners and pays compute in dollars (unverified).</li>
+<li>Weights come from a snapshot behind a closed API, so costs, prices and the markup cannot be rechecked.</li>
+<li>Weights are opinions, not payouts; which validators run the 2.0 code is unknown.</li>
+<li>Open mining is unconfirmed: at the last full check (2026-10-26) no uid had registered since about 2026-10-09.</li>
+<li>Usage, growth, traffic share and buybacks are team statements; docs list five processors, the team&#x27;s report six systems.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/qbittensor-labs/quantum-compute" rel="noopener noreferrer">GitHub</a></li>
+<li><a href="https://www.qbittensorlabs.com/quantum" rel="noopener noreferrer">Subnet page (qBitTensor Labs)</a></li>
+<li><a href="https://www.qbittensorlabs.com/next" rel="noopener noreferrer">Next-era announcement</a></li>
+<li><a href="https://www.openquantum.com/" rel="noopener noreferrer">Open Quantum platform</a></li>
+<li><a href="https://docs.openquantum.com/" rel="noopener noreferrer">Open Quantum documentation</a></li>
+<li><a href="https://www.qbittensorlabs.com/news/qbtll-live-2026-10-01" rel="noopener noreferrer">Team broadcast, 2026-10-01</a></li>
+<li><a href="https://www.qbittensorlabs.com/news/emission-updates-and-whats-next" rel="noopener noreferrer">Team account of the September emission halt</a></li>
+<li><a href="https://github.com/qbittensor-labs/quantum-compute/blob/main/qbittensor/miner/README.md" rel="noopener noreferrer">Miner guide (repo)</a></li>
+<li><a href="https://github.com/qbittensor-labs/quantum-compute/blob/main/qbittensor/validator/README.md" rel="noopener noreferrer">Validator guide (repo)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 11 sources</summary>
+<ul>
+<li><strong>msg</strong> #48-quantum-c, 2025-08-19 to 2026-10-29 (whole channel read 2026-10-30)</li>
+<li><strong>repo</strong> qbittensor-labs/quantum-compute README, miner and validator guides, min_compute.yml, weights/epoch.py, neurons/validator.py at 01f5528 (2026-10-20); still the newest commit on 2026-10-30</li>
+<li><strong>web</strong> https://www.qbittensorlabs.com/quantum, /next and /news (read 2026-10-21, 2026-10-26 and 2026-10-30)</li>
+<li><strong>web</strong> https://www.qbittensorlabs.com/news/qbtll-live-2026-10-01 (read 2026-10-21)</li>
+<li><strong>web</strong> https://www.qbittensorlabs.com/news/emission-updates-and-whats-next (read 2026-10-26)</li>
+<li><strong>web</strong> https://docs.openquantum.com/ concepts/backends and concepts/credits (read 2026-10-26 and 2026-10-30)</li>
+<li><strong>web</strong> Chain read at block 9399130 (2026-10-30 20:45Z UTC), compared with block 9364101 (2026-10-26 00:00Z UTC): SN48: no setting changed in 33 checked items; emission split unchanged; pool 13234.95 -&gt; 15127.04 TAO. Pool snapshot at block 9399206 (2026-10-30 21:01Z): pool 15127.23 TAO, rank 30 of 128 non-root pools.</li>
+<li><strong>web</strong> Chain read at block 9399206 (2026-10-30 21:01Z): price SN48, 6 samples every 7 days from 2026-09-30 to 2026-10-30: price 0.004005 -&gt; 0.008150 TAO per alpha (+103.5%); net user flow +4514.9 TAO.</li>
+<li><strong>web</strong> Chain read at block 9399206 (2026-10-30 21:01Z): detail of the seven uids under the miners&#x27; coldkey (incentive, emission, stake, registration) and holders of subnet alpha (1259 coldkeys, 88.9% of staked alpha read, 11.1% unread).</li>
+<li><strong>web</strong> Chain read at block 9367421 (2026-10-26 11:04Z UTC): SN48 emission flag False at block 8980521 (2026-09-02 15:31Z) and True at block 9029889 (2026-09-09 12:16Z); in the window read (2026-08-28 to 2026-10-26, sampled every 1d) owner coldkey, owner hotkey and chain identity changed 0 times.</li>
+<li><strong>web</strong> Chain read at block 9367162 (2026-10-26 10:12Z UTC): registration blocks of all 256 uids; none registered since about 2026-10-09 (newest 2026-09-17); not repeated on 2026-10-30.</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/47.html"><small>← Previous</small>SN47 GPUForge</a><a rel="next" href="/bittensor-docs/subnets/49.html"><small>Next →</small>SN49 Nepher Robotics</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-30. Site built 2026-10-31. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

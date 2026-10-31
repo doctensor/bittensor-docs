@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nepher Robotics (SN49) | Bittensor Subnet Docs</title>
+<meta name="description" content="Tournaments for robot control policies: miners train in NVIDIA Isaac Lab, validators score them in GPU sandboxes">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h7">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>49</span><div>
+<h1>Nepher Robotics <span class="muted">SN49</span></h1>
+<p class="tagline">Tournaments for robot control policies: miners train in NVIDIA Isaac Lab, validators score them in GPU sandboxes</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>16<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>12<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>17<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-31</b><span>last chat</span></li><li class="pw"><b>4,738</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>No repo</b><span>code activity</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>robotics policy tournaments (simulation)</dd>
+<dt>Status</dt><dd>Go2 LiDAR Maze Phase 2 (contest to 2026-11-06) and the Franka Tabletop RL Challenge (to 2026-11-14) are open.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-31</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Open tournaments</a></li><li><a href="#sn-x1">Where the reward weight goes</a></li><li><a href="#sn-x2">Docs vs code vs chain</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-similar">Similar subnets</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>miners train robot-control policies in simulation; the top three of each tournament share the rewards.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>companies could later buy winning policies; no paying buyer is verified.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>a miner needs a 24 GB+ GPU, Isaac Sim 6.1 and at least 0.1 TAO per upload.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>validators need admin approval; a closed backend and manual review pick winners.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>price down 43% in 30 days, with net TAO outflow every week (market view below).</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Trains a robot-control policy in simulation and uploads it.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-caution">GPU needed</li><li class="fl fl-caution">Paid service needed</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>NVIDIA GPU, 24 GB+ VRAM (training only)</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>Platform balance: 0.1 TAO per upload, up to 0.5 right after one</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Registration burn 0.05 TAO; no stake documented</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Python 3.12, Isaac Sim 6.1, Isaac Lab 3.0.0</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Scores uploaded agents in an Isaac Sim sandbox and sets weights.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-caution">GPU needed</li><li class="fl fl-good">No paid service</li><li class="fl fl-bad">Permissioned</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>RTX A6000 24 GB (A100 40 GB+ advised), 32 GB RAM, 100 GB SSD</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>Validator account and API key; admin activation</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Registration 0.05 TAO; a permit needs stake above the 1,000 TAO network threshold</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Docker, NVIDIA container toolkit, driver 580+</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div><div class="v2-role"><h3>Robot company (task poster) <span class="v2-barrier b-high">High barrier</span></h3><p>Robot makers submit real projects in a test-flagged proof-of-concept tournament.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-unk">GPU unknown</li><li class="fl fl-unk">Paid service unknown</li><li class="fl fl-bad">Permissioned</li></ul><dl class="v2-needs"><div class="v2-need n-unk"><dt>Hardware</dt><dd>Not documented</dd></div><div class="v2-need n-unk"><dt>API tokens / subscriptions</dt><dd>Not documented</dd></div><div class="v2-need n-unk"><dt>Stake / fees</dt><dd>Not documented</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Isaac Sim 6.1 project plus videos</dd></div></dl><a class="v2-more" href="#sn-role-2">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-fair">Fairly valued</span></span><span class="v2-conf muted">medium confidence, as of 2026-10-31. Not financial advice.</span></div><p>Price down 43% in 30 days on weekly net outflows; verified usage is thin <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>Nepher Robotics runs tournaments in which each round fixes one robot and one NVIDIA Isaac Lab task, such as a Unitree Go2 quadruped solving mazes from LiDAR. Miners upload trained control policies, validators score them on hidden scenes, and after a team review up to three miners share the miner rewards.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Miners register a hotkey, train a policy for the current task and submit a signed agent archive with nepher-cli. Only the latest upload per hotkey counts; an automated scan checks it, and flagged uploads wait for an admin.</p></div><div><h3>Validators</h3><p>Validators run each eligible agent in a throwaway Docker container (no wallet, outbound firewall) and report scores to the team&#x27;s backend, which combines them by stake weight.</p></div><div><h3>Incentive</h3><p>Each tournament runs contest, evaluation, review and reward stages. The team approves up to three winners, or none; they get the miner weight in the reward window, 70/20/10 percent by default.</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-10-31, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-caution">Whitelisted</span>Chain permits are open (15 held, 1,000 TAO threshold), but the team admits evaluating validators by hand.</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">37.1%</span>37.15% of last-epoch emission sits on the owner&#x27;s uid as dividends; owner cut 18%, RecycleOrBurn is Burn.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">6 uids</span><span class="v2-sx muted">top 5 hold 99% of incentive.</span> Six uids earn incentive: a podium of three plus three 1% leaders; ten uids earn validator dividends.</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Converged</span>All 10 validators with weights back one top uid, following the team backend; this is not independent judgment.</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-caution">Partial</span>Subnet code is MIT and task repos BSD-3; the eval-nav scorer carries a proprietary licence and the backend is closed.</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Trains a robot-control policy in simulation and uploads it.</p><ul>
+<li>Account and API key at nepher.ai/account; platform deposits are one-way and larger ones earn a bonus.</li>
+<li>Final scoring uses your latest upload per hotkey after an automated scan. Others&#x27; evaluation logs can be downloaded; a winner&#x27;s submission only if paid for.</li>
+<li>Several uids may submit; only one gets a reward (team, 2026-10-27).</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Scores uploaded agents in an Isaac Sim sandbox and sets weights.</p><ul>
+<li>Evaluating needs an admin-activated account: ask the team on Discord to link your hotkey (docs). A CPU-only mode only sets weights.</li>
+<li>On 2026-10-31, 15 uids held a permit and 10 had set weights; five had not for over 6 hours, the stalest for about 53 days.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-2"><h3>Robot company (task poster) <span class="v2-barrier b-high">High barrier</span></h3><p>Robot makers submit real projects in a test-flagged proof-of-concept tournament.</p><ul>
+<li>Whitelisted accounts only; podium in a reward window to 2026-11-01.</li>
+</ul></section></div>
+<h2 id="sn-x0">Open tournaments</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Tournament</th><th>Stages (UTC)</th><th>Entries</th></tr></thead><tbody><tr><td>Go2 Maze, Phase 2</td><td>Contest to 2026-11-06; reward 11-08 to 11-10</td><td>36 uploads, 9 participants</td></tr><tr><td>Franka Tabletop RL, Phase 1</td><td>Contest to 2026-11-14; reward 11-16 to 11-17</td><td>2 uploads, 2 participants</td></tr><tr><td>Go2 Maze, Test (test-flagged)</td><td>Reward 2026-11-11 to 11-13</td><td>3 uploads, 1 participant</td></tr><tr><td>Task Generation PoC (test-flagged)</td><td>Reward 2026-10-30 to 11-01 (moved from 10-26 to 10-28)</td><td>4 entries</td></tr></tbody></table></div>
+<h2 id="sn-x1">Where the reward weight goes</h2>
+<ul class="v2-list">
+<li>Tournaments outside a reward window give 1% to their current leader; weight with no receiver goes to uid 0, the owner&#x27;s hotkey.</li>
+<li>On 2026-10-31 all 10 validators with weights put 67.9% on uid 9, fitting the Task Generation podium (70/20/10 scaled by 0.97) plus three 1% leaders. Uid 2 led on 2026-10-28 and is now third; why is not public.</li>
+<li>The top uid earns about 11 TAO a day, so a two-day window (widened from one day on 2026-10-28) pays about 22 TAO before selling costs.</li>
+</ul>
+<h2 id="sn-x2">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Reward split</td><td>Repo README: winner takes all</td><td>Chain: 67.9%, 19.4%, 9.7% to three uids; docs site says 70/20/10</td><td>2026-10-31</td></tr><tr><td>Isaac versions</td><td>Docs site: Isaac Sim 5.1, Lab 2.3.2</td><td>Code: repos need Isaac Sim 6.1.0, Lab 3.0</td><td>2026-10-31</td></tr></tbody></table></div>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-fair">Fairly valued</span></span><span class="v2-conf muted">medium confidence, as of 2026-10-31. Not financial advice.</span></div>
+<p class="v2-thesis">The price fell from 0.0098 to 0.0056 TAO in 30 days, with 1,299 TAO net withdrawn. The team ships, but no paying customer is verified and a closed backend picks winners.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.00556 TAO per alpha</dd></div><div><dt>Pool</dt><dd>3,989 TAO, rank 90 of 128</dd></div><div><dt>Price, 30 days</dt><dd>-43% (2026-10-01 to 10-31)</dd></div><div><dt>Net flow, 30 days</dt><dd>-1,299 TAO (2026-10-01 to 10-31)</dd></div><div><dt>Miner pay</dt><dd>16.4 TAO per day over 6 paid uids; top uid 68% (2026-10-31)</dd></div><div><dt>Code activity</dt><dd>scorer repo last commit 2026-10-29; subnet repo 2026-10-05</dd></div></dl>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>Two production tournaments run in parallel; Go2 Phase 2 grew from 6 to 9 participants.</li>
+<li>The team ships: scorer merged 2026-10-29, new task repo busy.</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>Net outflow every week of the month.</li>
+<li>A closed backend picks winners; no verified buyers.</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> Verified paying users or net inflows would soften the view; a missed reward window or security trouble would harden it.</p>
+<p class="muted">Since the last pass: Unchanged since 2026-10-28 (bearish, fair).</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-similar">Similar subnets</h2>
+<div class="v2-sim"><p>By pool size this is <strong>rank 2 of 3</strong> among the subnets grouped as <em>robotics</em> (what they mainly sell). Pool and price as of 2026-10-30 to 2026-10-31, price in TAO per alpha; the barrier is the easiest miner role.</p><div class="scroll"><table class="v2-table"><thead><tr><th>#</th><th>Subnet</th><th>Pool</th><th>Price</th><th>Miner barrier</th></tr></thead><tbody><tr><td>1</td><td><a href="/bittensor-docs/subnets/80.html">OpenRoboto</a> <span class="muted">SN80</span></td><td>5,118 TAO</td><td>0.01497</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr class="me" aria-current="true"><td>2</td><td>Nepher Robotics <span class="muted">SN49, this page</span></td><td>3,989 TAO</td><td>0.00556</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>3</td><td><a href="/bittensor-docs/subnets/58.html">Attune</a> <span class="muted">SN58</span></td><td>1,328 TAO</td><td>0.01101</td><td><span class="v2-barrier b-medium">Medium</span></td></tr></tbody></table></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-31</span> <span class="muted">(#nepher, 2026-10-31)</span> The team said final scoring uses each hotkey&#x27;s latest upload in an environment different from the public one, and winners&#x27; submissions are paid downloads.</li>
+<li><span class="when">2026-10-30</span> <span class="muted">(#nepher, 2026-10-30; tournament API)</span> The team launched the Franka Tabletop RL Challenge: miners build the robot &#x27;brain&#x27; that makes demonstration data; contest to 2026-11-14.</li>
+<li><span class="when">2026-10-29</span> <span class="muted">(GitHub eval-nav; #nepher, 2026-10-29)</span> The team merged the Franka scorer; a held Phase 2 upload was cleared after two agent-instruction text files were removed.</li>
+<li><span class="when">2026-10-26</span> <span class="muted">(#nepher, 2026-10-26 to 2026-10-27)</span> The platform went offline after attack attempts; back on 2026-10-27.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Register a hotkey on subnet 49 with btcli (burn 0.05 TAO).</li>
+<li>Sign up at nepher.ai/account, create an API key and fund the platform balance.</li>
+<li>Install Python 3.12, Isaac Sim 6.1 and Isaac Lab 3.0.0, then clone the tournament&#x27;s task repository and train.</li>
+<li>Submit with nepher-cli (npcli); keep the hotkey registered until the reward window ends.</li>
+<li>Validators: sign up with the validator role and ask the team on Discord to activate it, then follow the validator guide.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Podium approval, score aggregation and the security scan run in a closed backend.</li>
+<li>Scan rules and the 2026-10-26 incident cause are not public. Which tournaments receive weight is inferred from chain data; chain figures are validator opinions, not payouts.</li>
+<li>Sandbox fixes sit on unmerged subnet-repo branches, so what validators run is unknown.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://nepher.ai" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://docs.nepher.ai" rel="noopener noreferrer">Docs</a></li>
+<li><a href="https://docs.nepher.ai/im" rel="noopener noreferrer">Incentive mechanism (docs)</a></li>
+<li><a href="https://docs.nepher.ai/platform-balance" rel="noopener noreferrer">Platform balance and fees</a></li>
+<li><a href="https://github.com/nepher-ai/nepher-subnet" rel="noopener noreferrer">GitHub (subnet code)</a></li>
+<li><a href="https://github.com/nepher-ai/eval-nav" rel="noopener noreferrer">GitHub (evaluation harness)</a></li>
+<li><a href="https://github.com/nepher-ai/task-go2-lidar-maze" rel="noopener noreferrer">GitHub (Go2 LiDAR Maze task)</a></li>
+<li><a href="https://github.com/nepher-ai/task-franka-tabletop-rl" rel="noopener noreferrer">GitHub (Franka tabletop task)</a></li>
+<li><a href="https://pypi.org/project/nepher-cli/" rel="noopener noreferrer">Nepher CLI on PyPI</a></li>
+<li><a href="https://nepher.ai/tournament/tournaments/b011678d-f12b-49d3-b0fb-a159ced67a6a/leaderboard" rel="noopener noreferrer">Go2 LiDAR Maze Phase 2 leaderboard</a></li>
+<li><a href="https://nepher.ai/tournament/tournaments/862bef9f-a9a1-46ba-9f99-5176086842c6/leaderboard" rel="noopener noreferrer">Franka Tabletop RL leaderboard</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 9 sources</summary>
+<ul>
+<li><strong>repo</strong> nepher-ai/nepher-subnet@dfbd06a (main, 2026-10-05, unchanged on 2026-10-31): README, docs/ guides, validator and reward code; unmerged branches feat/fix@889193e, fix/sandbox-aiohttp-prebundle@afb976f, feat/brain-runtime@75fe32e</li>
+<li><strong>repo</strong> nepher-ai/eval-nav@15dac05 (main, merge of 2026-10-29): scorers/manipulation/multitask_rl.py, configs, LICENSE; nepher-ai/task-franka-tabletop-rl@4d1fc95 README; nepher-ai/nepher-cli 0.2.8; organization repo list and licences checked 2026-10-31</li>
+<li><strong>web</strong> docs.nepher.ai: /im, /platform-balance, /miner-guide, /validator-guide, read 2026-10-31 (unchanged since 2026-10-28)</li>
+<li><strong>web</strong> Nepher tournament API (public, no auth): active list and per-tournament reads 2026-10-31 about 12:35 UTC; PyPI nepher-cli 0.2.8 (2026-10-27)</li>
+<li><strong>web</strong> Chain read at block 9403979 (2026-10-31 12:55Z UTC): SN49 (Nepher Robotics): registered 2025-10-31, tempo 360, 256 of 256 uids, commit-reveal on; emission weights burn/recycle/owner/validator/miner = 0/0/18/41/41 % (stored, same values as the chain default), RecycleOrBurn = Burn; uids under the owner hotkey or owner coldkey hold 0 % of incentive and 37.15 % of last-epoch emission (a floor); 10 validators have weight rows, on average 0 % of weight goes to uid 0.</li>
+<li><strong>web</strong> Chain read at block 9403812 (2026-10-31 12:22Z): price SN49, 6 samples every 7d from block 9187812 (2026-10-01 12:05Z): price 0.009772 -&gt; 0.005560 TAO per alpha (-43.1%), pool TAO 4906.3 -&gt; 3989.1; over the 5 intervals where the pool change equals flow + protocol: net user flow -1299.3 TAO (staked minus unstaked), protocol flow +382.1 TAO, gross volume 32517.9 TAO.</li>
+<li><strong>web</strong> Chain read at block 9403812 (2026-10-31 12:22Z): shared snapshot over 129 subnets of name, SubnetOwner, Tempo, Burn, SubnetworkN, MaxAllowedUids, SubnetEmissionEnabled, price, tao_in, alpha_in, age_days.</li>
+<li><strong>msg</strong> #nepher pinned announcements 2025-11-12 to 2026-10-06</li>
+<li><strong>msg</strong> #nepher, team and miner discussion 2025-11-03 to 2026-10-31, including the 2026-10-26 incident notice</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/48.html"><small>← Previous</small>SN48 Quantum Compute</a><a rel="next" href="/bittensor-docs/subnets/50.html"><small>Next →</small>SN50 Synth</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-31. Site built 2026-10-31. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AdTAO (SN21) | Bittensor Subnet Docs</title>
+<meta name="description" content="Miners ship containers that forecast Google Ads change outcomes daily; the top 20 by accuracy vs the field earn.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h3">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>21</span><div>
+<h1>AdTAO <span class="muted">SN21</span></h1>
+<p class="tagline">Miners ship containers that forecast Google Ads change outcomes daily; the top 20 by accuracy vs the field earn.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>17<small>/day</small></b><span>last 7 d</span></li><li class="pl4"><b>4.8<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>7.9<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-31</b><span>last chat</span></li><li class="pw"><b>2,098</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Shipping</b><span>code activity</span></li><li class="pw"><b>41</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-10-26</b><span>last commit</span></li><li class="pw"><b>2026-10-23</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>advertising outcome prediction</dd>
+<dt>Status</dt><dd>Active: 20 miners paid on the 2026-10-29 leaderboard, commits to 2026-10-26, 19 UIDs with incentive on chain (2026-10-30).</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-30</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Rule change from 2026-10-30</a></li><li><a href="#sn-x1">Operator control and self-mining</a></li><li><a href="#sn-x2">Docs vs code vs chain</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-similar">Similar subnets</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>the best model runs live on real Google Ads accounts; nothing on chain shows usage or revenue.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>19 UIDs earn; the top miner gets 40.5% and the top five 80.6%; about 13 TAO a day goes to miners.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>miners need only CPU and 1,000 alpha (about 4.5 TAO); the hard part is a good, repeatable model.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>validators need a team-issued API key and set the team&#x27;s vector; 8 of 51 permit holders set weights.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>it runs baskets, outcomes and scoring and mines itself (UIDs 1, 154, 221); members dispute more.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-low">Low barrier</span></h3><p>Builds a forecasting container; the team runs and scores it daily.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>CPU only; 2 cores, 4 GB RAM, 5 GB disk (min_compute.yml)</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None; public container registry, free training data</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>1,000 alpha held (about 4.5 TAO); 0.126 TAO to register (2026-10-30)</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Docker, on-chain key binding, a trained repeatable model</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Sets the team&#x27;s daily weight vector on chain; scoring stays with the team.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-bad">Permissioned</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>CPU only; 4 cores, 8 GB RAM, 10 GB disk (min_compute.yml)</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>Team-issued API key, requested from the operator team</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Permit stake threshold 1,000 TAO; 0.126 TAO to register (2026-10-30)</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Python loop (scripts/run_partner_validator.py)</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-neutral">Neutral</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-fair">Fairly valued</span></span><span class="v2-conf muted">medium confidence, as of 2026-10-30. Not financial advice.</span></div><p>Net inflow and a shipping team, but usage is unproven and one operator controls scoring. <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>AdTAO is a prediction contest for Google Ads. Miners submit containerised models that forecast how real advertising changes will move cost, conversions and efficiency over 7, 14 and 28 days. The team runs every model daily on real account changes, scores it when outcomes settle and pays the 20 most accurate.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Miners ship a model, not daily predictions: a container that reads one account-change episode per line and returns P10/P50/P90 ranges for cost, conversions and efficiency at 7, 14 and 28 days. The team runs it daily, offline, and scores it when outcomes settle. New models first pass an admission test.</p></div><div><h3>Validators</h3><p>The team&#x27;s pipeline builds each daily basket, collects settled outcomes and scores each prediction once (interval accuracy 50%, width 10%, direction 15%, goal metric 15%). Validators fetch the team&#x27;s weight vector with an API key and set it on chain.</p></div><div><h3>Incentive</h3><p>Models are ranked by recent score against the field on the same changes; the top 20 are paid on a fixed curve (50%, 25%, 10%, then 80% of the previous rank). Copies pay only the earliest. On chain, 19 UIDs hold incentive in line with the curve; nothing sits on UID 0.</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-10-30, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-caution">Whitelisted</span>The team issues the API key for the daily vector; 8 of 51 permit holders set weights.</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">29.6%</span>Owner coldkey UIDs hold 29.65% of emission via dividends; owner cut 18%.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">19 uids</span><span class="v2-sx muted">top 5 hold 80.6% of incentive.</span> 19 UIDs hold incentive; the top one gets 40.5%, in line with the curve.</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Converged</span>7 of 8 weight-setters top UID 107; they take the team&#x27;s vector, so agreement is expected.</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-good">Open</span>MIT repo holds miner reference, validator and scoring code; baskets and outcomes are private.</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-low">Low barrier</span></h3><p>Builds a forecasting container; the team runs and scores it daily.</p><ul>
+<li>Sandbox: no network, 1 GB RAM, 15 CPU-minutes per basket; the spec says about 250 episodes a day, the latest held 2,276.</li>
+<li>Paid: top 20, 7 scored days, 50 scored predictions, earliest of identical models only.</li>
+<li>Gross pay: about 13 TAO a day over 19 miners, 0.70 each on average, 0.18 outside the top 5.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Sets the team&#x27;s daily weight vector on chain; scoring stays with the team.</p><ul>
+<li>51 UIDs hold permits; 8 set weights, 43 none in over 5 epochs; 7 of the 8 top UID 107.</li>
+</ul></section></div>
+<h2 id="sn-x0">Rule change from 2026-10-30</h2>
+<p>Announced 2026-10-23; scored results do not change.</p>
+<ul class="v2-list">
+<li>Episodes carry change descriptions and account context.</li>
+<li>Results compare the 28 days before a change with the days after; zero-conversion cases get no efficiency result.</li>
+<li>A waiting or rejected new model leaves the last admitted one running.</li>
+</ul>
+<h2 id="sn-x1">Operator control and self-mining</h2>
+<ul class="v2-list">
+<li>The team supplies baskets and outcomes and runs and scores the models; receipts are public, inputs are not.</li>
+<li>Team-owned miners are UIDs 1, 154 and 221. Members allege more self-mining; the team asked for evidence and none was settled in chat.</li>
+</ul>
+<h2 id="sn-x2">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Burn share</td><td>Validator guide: apply the team&#x27;s burn share; legacy code default 95%.</td><td>Chain: nothing on UID 0; incentive follows the curve.</td><td>2026-10-30</td></tr><tr><td>Standing window</td><td>Rewards doc: 35 days; scoring doc: 28.</td><td>Code: default 35 days; the daily audit records 28.</td><td>2026-10-29</td></tr><tr><td>Placement floor</td><td>Rewards doc: 250 scored predictions.</td><td>Code: the team&#x27;s daily audit shows 50.</td><td>2026-10-29</td></tr></tbody></table></div>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-neutral">Neutral</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-fair">Fairly valued</span></span><span class="v2-conf muted">medium confidence, as of 2026-10-30. Not financial advice.</span></div>
+<p class="v2-thesis">The pool took in 1,120 TAO net in 30 days with the price up, and the team keeps shipping. Usage and revenue are team claims only, one operator controls scoring, and self-mining is disputed. Pool rank 49 of 128 fits that.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.0045 TAO per alpha</dd></div><div><dt>Pool</dt><dd>8,704 TAO, rank 49</dd></div><div><dt>Price, 30 days</dt><dd>+38%, 2026-09-28 to 2026-10-30</dd></div><div><dt>Net flow, 30 days</dt><dd>+1,120 TAO, 2026-09-30 to 2026-10-30</dd></div><div><dt>Miner pay</dt><dd>0.70 TAO per day on average (13.3 TAO per day over 19 uids)</dd></div><div><dt>Code activity</dt><dd>last commit 2026-10-26; 50 commits in 30 days; last release 2026-10-23</dd></div></dl>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>Net inflow in 4 of 5 weekly intervals, price up with it.</li>
+<li>Team shipping: 41 code commits in 30 days.</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>Usage and revenue are team claims only.</li>
+<li>One operator controls scoring and also mines; its owner coldkey takes 29.7% of emission.</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> Independent proof of paying customers would lift it; net outflow or proven self-mining at the top would lower it.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-similar">Similar subnets</h2>
+<div class="v2-sim"><p>By pool size this is <strong>rank 4 of 10</strong> among the subnets grouped as <em>trading</em> (what they mainly sell). Pool and price as of 2026-10-30, price in TAO per alpha; the barrier is the easiest miner role.</p><div class="scroll"><table class="v2-table"><thead><tr><th>#</th><th>Subnet</th><th>Pool</th><th>Price</th><th>Miner barrier</th></tr></thead><tbody><tr><td>2</td><td><a href="/bittensor-docs/subnets/41.html">Almanac</a> <span class="muted">SN41</span></td><td>16,557 TAO</td><td>0.008385</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr><td>3</td><td><a href="/bittensor-docs/subnets/77.html">Liquidity</a> <span class="muted">SN77</span></td><td>11,311 TAO</td><td>0.004663</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr class="me" aria-current="true"><td>4</td><td>AdTAO <span class="muted">SN21, this page</span></td><td>8,714 TAO</td><td>0.004511</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr><td>5</td><td><a href="/bittensor-docs/subnets/30.html">Endure</a> <span class="muted">SN30</span></td><td>8,294 TAO</td><td>0.003234</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr><td>6</td><td><a href="/bittensor-docs/subnets/6.html">Numinous</a> <span class="muted">SN6</span></td><td>7,298 TAO</td><td>0.002202</td><td><span class="v2-barrier b-low">Low</span></td></tr></tbody></table></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-29</span> <span class="muted">(#21-adtao, leaderboard)</span> Team confirmed the new scoring rules start with the 2026-10-30 run. Leaderboard: 135 miners, 20 paid, latest basket 2,276 episodes.</li>
+<li><span class="when">2026-10-26</span> <span class="muted">(#21-adtao, GitHub commit log)</span> Team removed two files labelled as a private evaluation set (local-testing leftovers, no bearing on scoring) and said its own miners are the UIDs listed in the repo.</li>
+<li><span class="when">2026-10-23</span> <span class="muted">(#21-adtao, GitHub docs)</span> Rule amendment effective 2026-10-30 announced; training data v5 (27,325 episodes) published.</li>
+<li><span class="when">2026-10-18</span> <span class="muted">(#21-adtao, GitHub commit log)</span> Team said models were not run on baskets 2026-10-05 to 12 (a team-side problem); days excused, baskets re-run.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Register a hotkey on netuid 21 (mainnet) and set up Docker and the repo tools.</li>
+<li>Create the one-time ed25519 key and bind it on chain (quickstart steps 3 and 4).</li>
+<li>Start from the reference model and train on the published slices (training v5).</li>
+<li>Return 7, 14 and 28 day blocks per episode, repeatably, offline, within 1 GB and 15 CPU-minutes.</li>
+<li>Push the image by digest to a public registry and commit sn21-model:v1:&lt;repo&gt;@sha256:&lt;digest&gt; on chain.</li>
+<li>Hold 1,000 alpha; check admission on the miner-status page. Validators: ask the operator team for an API key.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>The team&#x27;s pipeline supplies baskets, outcomes and scoring; receipts are public, but no score was recomputed for this page.</li>
+<li>Usage, customers and revenue are team claims; nothing on chain or in code shows them.</li>
+<li>The 2026-10-30 rules show in no receipt yet; some switched-off rules have no start date.</li>
+<li>Reports of hotkeys shown as not registered (2026-10-22) got no team answer in the channel.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/ippcteam/SN21-adtao" rel="noopener noreferrer">GitHub</a></li>
+<li><a href="https://adtao.io/sn21/leaderboard" rel="noopener noreferrer">Live leaderboard</a></li>
+<li><a href="https://adtao.io/sn21/miner-status" rel="noopener noreferrer">Miner status check</a></li>
+<li><a href="https://github.com/ippcteam/SN21-adtao/blob/main/docs/SN21_REWARDS.md" rel="noopener noreferrer">Rewards doc</a></li>
+<li><a href="https://github.com/ippcteam/SN21-adtao/blob/main/docs/miner_quickstart.md" rel="noopener noreferrer">Miner quickstart</a></li>
+<li><a href="https://github.com/ippcteam/SN21-adtao/blob/main/docs/SN21_VALIDATING.md" rel="noopener noreferrer">Validator guide</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 4 sources</summary>
+<ul>
+<li><strong>repo</strong> ippcteam/SN21-adtao at af0fb44 (2026-10-26): docs, min_compute.yml, scoring and validator code, git log</li>
+<li><strong>msg</strong> #21-adtao, 2026-08-28 to 2026-10-29</li>
+<li><strong>web</strong> adtao.io/sn21/leaderboard (2026-10-29); hope-bittensor-api.onrender.com allocation audits (2026-09-10 to 2026-10-29), receipt 2026-10-25</li>
+<li><strong>web</strong> Chain read at block 9395503 (2026-10-30 08:40Z): subnet, incentive, emission, weight and pool data; price and flow at block 9395426 (08:25Z)</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/20.html"><small>← Previous</small>SN20 Witness</a><a rel="next" href="/bittensor-docs/subnets/22.html"><small>Next →</small>SN22 Desearch</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-30. Site built 2026-10-31. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

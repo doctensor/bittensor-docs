@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ComputeHorde (SN12) | Bittensor Subnet Docs</title>
+<meta name="description" content="GPU compute for other subnets’ validators; the team’s config sends about 99% of miner weight to burn targets.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h12">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>12</span><div>
+<h1>ComputeHorde <span class="muted">SN12</span></h1>
+<p class="tagline">GPU compute for other subnets’ validators; the team’s config sends about 99% of miner weight to burn targets.</p>
+<span class="st s-quiet">quiet</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl3"><b>1.3<small>/day</small></b><span>last 7 d</span></li><li class="pl3"><b>1.7<small>/day</small></b><span>days 8-30</span></li><li class="pl4"><b>2.1<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-29</b><span>last chat</span></li><li class="pw"><b>9,212</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>No repo</b><span>code activity</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>GPU compute for subnet validation</dd>
+<dt>Status</dt><dd>Quiet on chat (one message since 2026-10-26) but the repo had 5 code commits in 30 days, the latest on 2026-10-26. The owner’s uids still hold 99.4% of incentive (2026-10-30).</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-30</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Docs vs code vs chain</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-similar">Similar subnets</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>Miners rent out GPUs (A6000 class) to validators, which check the work on a separate trusted GPU.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>the owner&#x27;s uids hold 99.4% of incentive and 80% of emission; non-owner miners get about 0.6% (2026-10-30).</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>one paying client exists, no customer named; validators built on a new framework are not on mainnet.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>Pool 12,615 TAO (rank 34); price +0.3% and a net 41 TAO in over 30 days to 2026-10-30.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>5 code commits in 30 days (latest 2026-10-26); joining as a miner needs a GPU and earns almost nothing.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-high">High barrier</span></h3><p>Runs executors with GPUs that take jobs from validators; pay is nearly all burned.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-caution">GPU needed</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>GPU, A6000 class (A100 next); VRAM and machine count not stated</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None required; optional DDoS shield and collateral</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Registration burn 0.0005 TAO (2026-10-30); optional collateral with validators</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Docker on Ubuntu via install_miner.sh over SSH; about a day</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Sends synthetic and organic jobs, checks results on a trusted GPU and sets weights.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-caution">GPU needed</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>A separate trusted GPU (README); rest Not documented</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None found</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Registration burn 0.0005 TAO; permit stake threshold 1,000 TAO (chain)</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Docker validator from install_validator.sh; follows the team&#x27;s dynamic config</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-overvalued">Overvalued</span></span><span class="v2-conf muted">medium confidence, as of 2026-10-30. Not financial advice.</span></div><p>Flat price and flows, but the miner side is burned and no customer is verified. <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>ComputeHorde aims to give validators of other Bittensor subnets cheap, trusted GPU capacity. Miners register executors, validators send them synthetic and organic jobs and check results with a trusted GPU. The chat names no customer subnet, and the live burn setting sends about 99% of miner weight to a team-chosen burn list.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Miners run executors (several GPUs behind one miner hotkey) that accept jobs from validators. Only the A6000 class is documented as supported, with A100 next. They can post collateral with validators to get organic jobs and run an optional DDoS shield.</p></div><div><h3>Validators</h3><p>Validators run synthetic jobs and relay organic jobs from a facilitator, checking results against a separate trusted GPU. Each block mints compute allowance per miner and validator pair, scaled by validator stake, and a job spends allowance equal to its runtime. Validators then apply the burn described below before setting weights.</p></div><div><h3>Incentive</h3><p>Paid runtime per miner is summed by coldkey and split across that coldkey’s hotkeys. Validators send a share of weight to a list of burn hotkeys; the share and list come from a config in the team’s public repository, so they change without a release. On 2026-10-30 it read burn rate 0.9935 and main-burner share 0.975, unchanged since 2025-11-18. The chain agrees: owner uids hold 99.37% of incentive and the top uid 96.9%; it rotates between cycles. The team’s stated reason is to avoid drawing in miners before demand exists.</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-10-30, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-good">Open</span>10 hotkeys hold validator permits (1,000 TAO threshold); 8 set weights and follow the team&#x27;s burn config.</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">80.3%</span>80.27% of emission sits on owner uids; owner cut 18%, RecycleOrBurn is Burn, and they hold 99.37% of incentive.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">9 uids</span><span class="v2-sx muted">top 5 hold 98.9% of incentive.</span> 9 uids earn incentive; the top uid holds 96.9%, all but 0.6% of it on owner-linked uids.</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Converged</span>7 of 8 validators put their top weight on uid 53; the team&#x27;s burn list makes them agree, not necessarily copying.</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-good">Open</span>Miner, validator and SDK code are public on GitHub under the MIT licence.</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-high">High barrier</span></h3><p>Runs executors with GPUs that take jobs from validators; pay is nearly all burned.</p><ul>
+<li>Non-owner uids hold about 0.6% of mechanism 0 incentive; the miner side is burned (chain, 2026-10-30).</li>
+<li>The chain has 2 mechanisms; only mechanism 0 was read, and the second one’s purpose is not documented.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Sends synthetic and organic jobs, checks results on a trusted GPU and sets weights.</p><ul>
+<li>10 permits held and 8 sets of weights; 3 permit holders have not set weights in over 5 tempos (2026-10-30).</li>
+<li>Outside validators must follow the team&#x27;s burn config to match the weights of the others.</li>
+</ul></section></div>
+<h2 id="sn-x0">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Miner rewards</td><td>README: a free market for GPU resources</td><td>Chain: owner uids hold 99.37% of incentive; miners get about 0.6%</td><td>2026-10-30</td></tr></tbody></table></div>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-overvalued">Overvalued</span></span><span class="v2-conf muted">medium confidence, as of 2026-10-30. Not financial advice.</span></div>
+<p class="v2-thesis">The price is unchanged over 30 days with a small net inflow, so the market is not selling. But owner uids hold 99.4% of incentive and 80% of emission, and usage rests on the owner’s statement of one paying client, which makes the pool of 12,615 TAO hard to support.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.004746 TAO per alpha</dd></div><div><dt>Pool</dt><dd>12,615 TAO, rank 34</dd></div><div><dt>Price, 30 days</dt><dd>+0.3%, 2026-09-30 to 2026-10-30</dd></div><div><dt>Net flow, 30 days</dt><dd>+41 TAO, 2026-09-30 to 2026-10-30</dd></div><div><dt>Miner pay</dt><dd>not computed (2 mechanisms)</dd></div><div><dt>Miner pay outside top 5</dt><dd>not computed (2 mechanisms)</dd></div><div><dt>Code activity</dt><dd>last commit 2026-10-26; 6 commits in 30 days; no versioned release read</dd></div></dl>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>Price and flow flat for 30 days; the repo shipped 5 code commits and library and SDK bumps.</li>
+<li>Owner says the burn is deliberate and could be lowered, and integrations are in progress.</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>Miner side burned: about 0.6% of incentive reaches outside miners.</li>
+<li>No customer subnet or traffic named; owner called it barely alive.</li>
+<li>Owner-linked uids hold most emission.</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> A lower burn rate, or a named subnet validating on ComputeHorde, would point up; outflow or a quiet repo would point down.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-similar">Similar subnets</h2>
+<div class="v2-sim"><p>By pool size this is <strong>rank 4 of 12</strong> among the subnets grouped as <em>compute</em> (what they mainly sell). Pool and price as of 2026-10-30 to 2026-10-31, price in TAO per alpha; the barrier is the easiest miner role.</p><div class="scroll"><table class="v2-table"><thead><tr><th>#</th><th>Subnet</th><th>Pool</th><th>Price</th><th>Miner barrier</th></tr></thead><tbody><tr><td>2</td><td><a href="/bittensor-docs/subnets/75.html">Hippius</a> <span class="muted">SN75</span></td><td>34,980 TAO</td><td>0.01832</td><td><span class="v2-barrier b-high">High</span></td></tr><tr><td>3</td><td><a href="/bittensor-docs/subnets/48.html">Quantum Compute</a> <span class="muted">SN48</span></td><td>15,127 TAO</td><td>0.00815</td><td><span class="v2-barrier b-high">High</span></td></tr><tr class="me" aria-current="true"><td>4</td><td>ComputeHorde <span class="muted">SN12, this page</span></td><td>12,615 TAO</td><td>0.004746</td><td><span class="v2-barrier b-high">High</span></td></tr><tr><td>5</td><td><a href="/bittensor-docs/subnets/110.html">Green Compute</a> <span class="muted">SN110</span></td><td>11,762 TAO</td><td>0.02472</td><td><span class="v2-barrier b-high">High</span></td></tr><tr><td>6</td><td><a href="/bittensor-docs/subnets/25.html">UR</a> <span class="muted">SN25</span></td><td>11,745 TAO</td><td>0.005174</td><td><span class="v2-barrier b-low">Low</span></td></tr></tbody></table></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-26</span> <span class="muted">(GitHub)</span> The repo bumped the library to v0.0.27 and the SDK to v0.0.19 and fixed a validator monitoring image; the last 2 commits followed the 2026-10-23 certificate-authority fix.</li>
+<li><span class="when">2026-10-24</span> <span class="muted">(#horde)</span> The owner said the main obstacle was integrating into existing validators, so a new framework was built; validators on it exist for a handful of subnets, none on mainnet yet.</li>
+<li><span class="when">2026-10-23</span> <span class="muted">(GitHub)</span> A commit pinned a newer certificate library across all images, because earlier releases trust certificate authorities reported as compromised.</li>
+<li><span class="when">2026-07-03</span> <span class="muted">(#horde)</span> The owner called the subnet not dead because it has a paying client, but not really alive either.</li>
+<li><span class="when">2025-11-18</span> <span class="muted">(GitHub)</span> A config commit raised the burn rate to 0.9935, citing the wait for the TAO-flow situation to unfold.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Read the live burn settings in the dynamic config repository first: about 0.6% of incentive reaches miners outside the owner’s uids.</li>
+<li>Read the README and the miner and validator READMEs; install_miner.sh and install_validator.sh are in the repo root.</li>
+<li>Test a miner on testnet netuid 174 before registering on mainnet 12.</li>
+<li>A6000 is the only documented hardware class; other GPUs do not count as that class.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>The burn is team-set and dynamic: validators follow a config repository, so the figures can change without a release.</li>
+<li>No traffic, revenue or customer subnet could be confirmed; no public repository shows another subnet validating on ComputeHorde.</li>
+<li>Chat includes accusations about the owner’s holdings; they were not checked on chain and are not repeated as fact.</li>
+<li>Alpha transfers being disabled comes from chat and was not checked on chain; the 2026-10-22 security commit was not audited.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://computehorde.io" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://github.com/backend-developers-ltd/ComputeHorde" rel="noopener noreferrer">GitHub</a></li>
+<li><a href="https://github.com/backend-developers-ltd/ComputeHorde/blob/master/compute_horde_sdk/README.md" rel="noopener noreferrer">SDK readme</a></li>
+<li><a href="https://github.com/backend-developers-ltd/compute-horde-dynamic-config" rel="noopener noreferrer">Dynamic config (burn settings)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 6 sources</summary>
+<ul>
+<li><strong>repo</strong> backend-developers-ltd/ComputeHorde @d4d01df (2026-10-26): README.md, install_miner.sh, miner/README.md, validator/docs/validator.md, commits to 2026-10-26</li>
+<li><strong>repo</strong> backend-developers-ltd/compute-horde-dynamic-config @d8d5cbe: validator-config-prod.json and commit history, read 2026-10-30</li>
+<li><strong>web</strong> computehorde.io, read 2026-10-26</li>
+<li><strong>web</strong> Chain read at block 9399496 (2026-10-30 21:59Z UTC): SN12 (Compute Horde): registered 2024-01-30, tempo 360, 64 of 64 uids, 2 mechanisms (uids / weights = mechanism 0), commit-reveal on; emission weights burn/recycle/owner/validator/miner = 0/0/18/41/41 %, RecycleOrBurn = Burn; uids under the owner hotkey or owner coldkey hold 99.37 % of incentive and 80.27 % of last-epoch emission (a floor); 8 validators have weight rows.</li>
+<li><strong>web</strong> Chain read at block 9399496 (2026-10-30 21:59Z): price SN12, 6 samples every 7d from block 9183496 (2026-09-30 21:41Z): price 0.004733 -&gt; 0.004746 TAO per alpha (+0.3%), pool TAO 12597.9 -&gt; 12614.7; net user flow +41.0 TAO, protocol flow -24.2 TAO, gross volume 4722.6 TAO.</li>
+<li><strong>msg</strong> #horde 2026-06-14 to 2026-10-29 and pinned posts</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/11.html"><small>← Previous</small>SN11 TrajectoryRL</a><a rel="next" href="/bittensor-docs/subnets/13.html"><small>Next →</small>SN13 Data Universe</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-30. Site built 2026-10-31. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

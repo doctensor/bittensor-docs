@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aurelius (SN37) | Bittensor Subnet Docs</title>
+<meta name="description" content="Miners train sparse autoencoders for one 7B model; only the champion earns, after a 70% burn, and one validator scores.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h19">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>37</span><div>
+<h1>Aurelius <span class="muted">SN37</span></h1>
+<p class="tagline">Miners train sparse autoencoders for one 7B model; only the champion earns, after a 70% burn, and one validator scores.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl2"><b>0.29<small>/day</small></b><span>last 7 d</span></li><li class="pl4"><b>2.9<small>/day</small></b><span>days 8-30</span></li><li class="pl2"><b>0.63<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-29</b><span>last chat</span></li><li class="pw"><b>864</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Shipping</b><span>code activity</span></li><li class="pw"><b>6</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-10-20</b><span>last commit</span></li><li class="pw"><b>2026-03-20</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>AI interpretability / sparse autoencoders</dd>
+<dt>Status</dt><dd>SAE competition live since 2026-10-15; chat has 2 messages in 7 days; last commit 2026-10-20; 2 of 256 UIDs have incentive (2026-10-30).</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-30</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">History</a></li><li><a href="#sn-x1">Docs vs code vs chain</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-similar">Similar subnets</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>UID 200, controlled by the owner, holds 70.7% of incentive (the code&#x27;s burn); one other UID holds 29.3% (2026-10-30).</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>only the rank-1 SAE earns; a challenger must beat it by 0.003, which miners call too high; the team plans a tweak (10-20).</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>one validator permit, under the owner&#x27;s coldkey; the evaluator code is not public, so one operator scores everyone.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>miners need GPUs to train, a public IPv4 server and alpha (10 per evaluation); the repo licence reserves all rights.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>SAEs feed Proba, a data-debugging product with design partners; no customer or revenue figure is public (09-17).</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Train an SAE for the pinned model and submit it; only the champion earns.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-caution">GPU needed</li><li class="fl fl-caution">Paid service needed</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>GPU to train (VRAM not stated); CPU server with public IPv4 and disk</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>GPU rental or ownership for training; no API keys</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Burn 0.0005 TAO (2026-10-30); 10 alpha per evaluation; alpha held sets payout</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Python 3.11/3.12, uv, SAE-Lens 6.46.0, an SAE trained for the pinned model</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Run the evaluator and set weights. Closed in practice: one permit, evaluator code not public.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-caution">GPU needed</li><li class="fl fl-unk">Paid service unknown</li><li class="fl fl-bad">Permissioned</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>GPUs, amount not stated (team, 2026-10-06)</dd></div><div class="v2-need n-unk"><dt>API tokens / subscriptions</dt><dd>Not documented</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Burn 0.0005 TAO; one permit slot; permit threshold 1,000 TAO</dd></div><div class="v2-need n-unk"><dt>Setup effort</dt><dd>Not documented; the validator code is not in the public repo</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-neutral">Neutral</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">low confidence, as of 2026-10-30. Not financial advice.</span></div><p>Neutral: price and flows are flat, but 71% of incentive goes to the burn UID and one operator scores. <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>Aurelius runs a competition in which miners train sparse autoencoders (SAEs), tools that read a model&#x27;s internal activations, for one pinned model: OLMo-2 7B, layer 16. An evaluator scores how much of the model&#x27;s accuracy each SAE keeps, and the champion takes the reward. The team says the SAEs feed its Proba product for debugging fine-tuning data.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Miners train an SAE (32,768 features on 4,096-dimension activations) on their own GPUs, export two files and run the miner service on a Linux machine with a public IPv4 address. Each evaluation costs 10 work tokens (WT), bought with SN37 alpha at 1 WT per alpha.</p></div><div><h3>Validators</h3><p>The chain allows one validator permit (cut from 64 on 2026-10-10; the team calls it null consensus mode). Its evaluator splices each SAE into the model on a rotating text draw and measures the loss recovered, with sparsity, copying and probing checks. The evaluator code is not public.</p></div><div><h3>Incentive</h3><p>A 70% base burn comes first. The champion&#x27;s share is scaled by its SN37 alpha (about 16% at 100 alpha, 95% at 10,000); anything unpaid is burned. A challenger must beat the champion by 0.003, or a quarter of its remaining gap if larger; ties keep the incumbent.</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-10-30, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-bad">Owner only</span>The one permit sits under the owner&#x27;s coldkey; max_validators is 1 and the evaluator code is not public.</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">68.2%</span>UIDs 200 and 203 hold 68.24% of emission, UID 200 70.7% of incentive; owner cut 18%, unused burned.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">2 uids</span><span class="v2-sx muted">top 5 hold 100% of incentive.</span> 2 UIDs have incentive: the owner&#x27;s UID 200 with 70.7% and one other with 29.3% (2026-10-30).</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-caution">Single validator</span>Only one validator has weight rows; its top target is UID 200.</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-caution">Partial</span>Miner and shared protocol are public but all rights reserved (no licence); evaluator and validator are not public.</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Train an SAE for the pinned model and submit it; only the champion earns.</p><ul>
+<li>Pay: one non-owner UID earns about 2.25 TAO a day (gross, 2026-10-30); the owner UID takes 70.7% of incentive.</li>
+<li>A failed run still costs 10 WT unless the failure is infrastructure (refund-eligible).</li>
+<li>Team says (10-29): only alpha on the miner&#x27;s own hotkey counts for the multiplier; other hotkeys on the coldkey are to count later.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Run the evaluator and set weights. Closed in practice: one permit, evaluator code not public.</p><ul>
+<li>The one permit sits under the owner&#x27;s coldkey; its weights were 40 blocks old on 2026-10-30.</li>
+<li>Team (10-06): new versions need much more validator resources; auto-update is off by default.</li>
+</ul></section></div>
+<h2 id="sn-x0">History</h2>
+<ul class="v2-list">
+<li>2025-09: Aurelius took the subnet over from Macrocosmos.</li>
+<li>2026-01 to 04: burn at 90%, then 75%, and 100% between versions; work tokens arrived 04-21.</li>
+<li>2026-10-15: the SAE competition went live; dates had slipped since a July promise of August.</li>
+</ul>
+<h2 id="sn-x1">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>What it does</td><td>Site and chain text: decentralized AI alignment</td><td>Code: README and config v31 describe an SAE competition</td><td>2026-10-30</td></tr><tr><td>Licence</td><td>README: public repo, code governed by LICENSE</td><td>Code: LICENSE is proprietary, all rights reserved</td><td>2026-10-30</td></tr></tbody></table></div>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-neutral">Neutral</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">low confidence, as of 2026-10-30. Not financial advice.</span></div>
+<p class="v2-thesis">Price fell 4.3% and users withdrew a net 138 TAO in 30 days, with no clear trend. The mechanism went live on 2026-10-15; most emission is burned, one non-owner UID earns the rest, and usage is a team claim.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.002611 TAO per alpha</dd></div><div><dt>Pool</dt><dd>7,048 TAO, rank 59</dd></div><div><dt>Price, 30 days</dt><dd>-4.3%, 2026-09-30 to 2026-10-30</dd></div><div><dt>Net flow, 30 days</dt><dd>-138 TAO, 2026-09-30 to 2026-10-30</dd></div><div><dt>Miner pay</dt><dd>2.25 TAO per day to the one non-owner uid (gross)</dd></div><div><dt>Code activity</dt><dd>last commit 2026-10-20; 8 commits in 30 days; last release 2026-03-20</dd></div></dl>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>Net flow is small and mixed, about 2% of the pool</li>
+<li>Mechanism live since 10-15; 6 code commits in 30 days</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>70.7% of incentive goes to the owner UID; one other UID earns the rest</li>
+<li>One validator, unlicensed code, and usage is a team claim</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> Bullish: a lower burn, a second validator or paying Proba users. Bearish: sustained outflow or all weight on the burn UID.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-similar">Similar subnets</h2>
+<div class="v2-sim"><p>By pool size this is <strong>rank 5 of 14</strong> among the subnets grouped as <em>training</em> (what they mainly sell). Pool and price as of 2026-10-30 to 2026-10-31, price in TAO per alpha; the barrier is the easiest miner role.</p><div class="scroll"><table class="v2-table"><thead><tr><th>#</th><th>Subnet</th><th>Pool</th><th>Price</th><th>Miner barrier</th></tr></thead><tbody><tr><td>3</td><td><a href="/bittensor-docs/subnets/56.html">Gradients</a> <span class="muted">SN56</span></td><td>49,207 TAO</td><td>0.01452</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>4</td><td><a href="/bittensor-docs/subnets/97.html">Ingot</a> <span class="muted">SN97</span></td><td>10,847 TAO</td><td>0.01213</td><td><span class="v2-barrier b-high">High</span></td></tr><tr class="me" aria-current="true"><td>5</td><td>Aurelius <span class="muted">SN37, this page</span></td><td>7,048 TAO</td><td>0.002611</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>6</td><td><a href="/bittensor-docs/subnets/20.html">Witness</a> <span class="muted">SN20</span></td><td>6,426 TAO</td><td>0.002301</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>7</td><td><a href="/bittensor-docs/subnets/65.html">TPN (True Performance Network)</a> <span class="muted">SN65</span></td><td>5,632 TAO</td><td>0.00216</td><td><span class="v2-barrier b-medium">Medium</span></td></tr></tbody></table></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-29</span> <span class="muted">(#37)</span> A team engineer said only alpha on the miner&#x27;s own hotkey counts for the payout multiplier; other hotkeys on the coldkey are to count in an expanded version &#x27;coming soon&#x27;.</li>
+<li><span class="when">2026-10-20</span> <span class="muted">(#37)</span> A team engineer said the gap to beat the champion is partly intended and will be tweaked; no repo or config change followed.</li>
+<li><span class="when">2026-10-18</span> <span class="muted">(#37)</span> A miner reported seven failed runs from an infrastructure error; the team flagged them refund-eligible and said it fixed the issue halting the competition.</li>
+<li><span class="when">2026-10-15</span> <span class="muted">(#37)</span> The owner said the new mechanism was up and running and mining officially live.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Read INCENTIVES.md and lanes/lane1.md in the repo; the miner asks you to confirm the incentive terms.</li>
+<li>Prepare a Linux server with Python 3.11 or 3.12, uv and a public IPv4 address; register a hotkey on subnet 37 (burn 0.0005 TAO on 2026-10-30) and hold alpha.</li>
+<li>Install per the README, make a hotkey-only wallet copy, fill in .env and run aurelius-miner serve --netuid 37 --port 8091.</li>
+<li>Buy WT with aurelius-miner fund (preview, then --execute); check the repo&#x27;s runtime pin first.</li>
+<li>Train an SAE with SAE-Lens 6.46.0, check it with aurelius-sae check, then upload, stage and track it with aurelius-sae status.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>The docs call the rules an open beta that can change at any time; the signed config is authoritative and rewards may be adjusted retroactively.</li>
+<li>Chain weights are one validator&#x27;s opinions, not payouts. The champion&#x27;s identity and score are not public (a miner&#x27;s 0.99383 is unverified).</li>
+<li>README and .env.example pin runtime 479 while the 2026-10-20 funding update admits 481; check before sending funds.</li>
+<li>A stake-retention mechanism (hold-time credit, exit penalties, a WT bonus) is built but disabled and unpublished.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/Aurelius-Protocol/Aurelius-Protocol" rel="noopener noreferrer">GitHub (miner and protocol)</a></li>
+<li><a href="https://aureliusaligned.ai" rel="noopener noreferrer">Project site</a></li>
+<li><a href="https://aureliusaligned.ai/product/" rel="noopener noreferrer">Proba product page</a></li>
+<li><a href="https://central.aureliusaligned.ai/api/config" rel="noopener noreferrer">Signed public configuration</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 8 sources</summary>
+<ul>
+<li><strong>repo</strong> Aurelius-Protocol/Aurelius-Protocol @4be6392 (2026-10-20, HEAD on 2026-10-30; LICENSE: all rights reserved): README.md, INCENTIVES.md, lanes/lane1.md, LICENSE, docs/funding-runtime481-verification.md, .env.example, subnet/src/subnet/operator/burn_authority.py</li>
+<li><strong>repo</strong> REPO Aurelius-Protocol/Aurelius-Protocol last_commit=2026-10-20 commits_30d=8 code_30d=6 path_last=2026-10-20 last_release=2026-03-20 checked=2026-10-30; commits 99ef804 (2026-10-06), 31b119e (10-13), 5846856 (10-14), c664c09, 5350e9b, 4be6392 (10-16..20)</li>
+<li><strong>web</strong> Signed public configuration https://central.aureliusaligned.ai/api/config, version 31, read 2026-10-30; aureliusaligned.ai home and /product/, read 2026-10-30</li>
+<li><strong>web</strong> Chain read at block 9398777 (2026-10-30 19:35Z UTC): SN37 (Aurelius): registered 2024-06-19, tempo 360, 256 of 256 uids, commit-reveal on; emission weights burn/recycle/owner/validator/miner = 0/0/18/41/41 % (stored, same values as the chain default), RecycleOrBurn = Burn; uids under the owner hotkey or owner coldkey hold 70.7 % of incentive and 68.24 % of last-epoch emission (a floor); 1 validators have weight rows, on average 0 % of weight goes to uid 0.</li>
+<li><strong>web</strong> Chain read at block 9398777 (2026-10-30 19:35Z UTC), compared with block 9364101 (2026-10-26 00:00Z UTC): SN37: no setting changed in 33 checked items; emission split unchanged; pool 7027.89 -&gt; 7048.07 TAO.</li>
+<li><strong>web</strong> Chain read at block 9398777 (2026-10-30 19:35Z): price SN37, 6 samples every 7d from block 9182777 (2026-09-30 19:18Z): price 0.002727 -&gt; 0.002611 TAO per alpha (-4.3%), pool TAO 7201.4 -&gt; 7048.1; over the 5 intervals where the pool change equals flow + protocol: net user flow -138.1 TAO (staked minus unstaked), protocol flow -15.1 TAO, gross volume 2134.1 TAO.</li>
+<li><strong>web</strong> Chain read at block 9398777 (2026-10-30 19:35Z): shared snapshot over 129 subnets of name, owner, tempo, burn, uids, price and pool sizes: SN37 pool 7048.07 TAO, rank 59 of 128 non-root pools, price rank 97.</li>
+<li><strong>msg</strong> #aurelius (channel 37): 2025-09-24 to 2026-10-29, including team posts of 2026-01-17, 02-13, 03-03, 04-21, 05-11, 07-08, 10-06, 10-10, 10-15, 10-18, 10-20, 10-29</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/36.html"><small>← Previous</small>SN36 Epago</a><a rel="next" href="/bittensor-docs/subnets/38.html"><small>Next →</small>SN38 ChronoLLM</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-30. Site built 2026-10-31. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

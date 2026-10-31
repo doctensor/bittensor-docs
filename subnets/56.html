@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gradients (SN56) | Bittensor Subnet Docs</title>
+<meta name="description" content="Weekly tournaments where miners submit open-source text and image training code that validators run and score.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h8">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>56</span><div>
+<h1>Gradients <span class="muted">SN56</span></h1>
+<p class="tagline">Weekly tournaments where miners submit open-source text and image training code that validators run and score.</p>
+<span class="st s-transitioning">transitioning</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl4"><b>4.1<small>/day</small></b><span>last 7 d</span></li><li class="pl4"><b>4.6<small>/day</small></b><span>days 8-30</span></li><li class="pl4"><b>3.2<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-31</b><span>last chat</span></li><li class="pw"><b>6,920</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Shipping</b><span>code activity</span></li><li class="pw"><b>22</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-10-28</b><span>last commit</span></li><li class="pw"><b>none</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>model training / AutoML</dd>
+<dt>Status</dt><dd>Tournaments run weekly and the repo ships often (last commit 2026-10-28). Environment tournaments ended 2026-10-23; a text overhaul announced 2026-10-08 is still undated.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-30</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Docs vs code vs chain</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-similar">Similar subnets</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>miners enter open-source training code in weekly text and image tournaments.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>gradients.io sells fine-tuning on it; no customer or revenue figures are public.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>only 6 of 256 uids earn and the top one takes 51%, so winners take most rewards.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>net outflow of 2,700 TAO in 30 days (5% of the pool); price down 4.8%.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>miners need no GPU but pay a burned entry fee; validators need GPU servers.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Submits a public training repo and commit for each tournament; validators train it on their GPUs.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-no"><dt>Hardware</dt><dd>No GPU needed (validators train it); an endpoint server on port 7999, size not documented</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None required; an Anthropic key only for the optional local duplicate check</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Registration burn 0.0005 TAO (2026-10-30); entry fee 0.7 TAO text, 0.4 TAO image, burned</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Weeks of ML work on a training repo; register an hour before Monday&#x27;s start</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Creates tasks, trains miners&#x27; repos on trainer GPUs, evaluates the models and sets weights.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-caution">GPU needed</li><li class="fl fl-unk">Paid service unknown</li><li class="fl fl-unk">Access unknown</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>NVIDIA GPU trainers (image tasks: one H100), Postgres, Redis, Docker; sizes not documented</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>S3-compatible storage, Hugging Face and W&amp;B accounts; costs not documented</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Registration burn 0.0005 TAO (2026-10-30); global stake threshold 1,000 TAO</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Self-hosted validator, trainer and storage stack; setup time not documented</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-neutral">Neutral</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">low confidence, as of 2026-10-30. Not financial advice.</span></div><p>A 49,200 TAO pool (rank 9) is slowly shrinking; evidence of demand is the team&#x27;s word only. <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>Gradients (repo G.O.D) runs weekly tournaments in which miners submit open-source training code for text and image models. Validators train it on their own GPUs, score the models and set weights from the standings. The team uses it to power gradients.io, a fine-tuning service.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Run an endpoint (port 7999, registered with Fiber) that returns a GitHub repo and an exact 40-character commit for each tournament type, text or image. The repo needs the required Dockerfiles, a licence and no bundled data or models. The entry fee is burned; one entry counts per coldkey, IP and GitHub account, and duplicates are screened in three tiers. Winning repos are republished, so submit only code you will open-source.</p></div><div><h3>Validators</h3><p>Validators build each repo, train it on managed GPUs and evaluate it. Text: a group round, pairwise knockouts, then a six-task boss round against the champion. On most tasks the challenger must win 55% of decided samples and lead by 0.01 nats or 1% of the champion&#x27;s loss, and it needs five of six tasks. Image: three small tasks, a knockout, then six tasks at a 1% margin. Tournaments should end by Friday 14:00 UTC, after the team reviews the winner&#x27;s code.</p></div><div><h3>Incentive</h3><p>Text is guaranteed 0.50 of weight and image 0.30; the other 0.20 follows recent entrant counts. Inside a type the top three ranks get about 76, 19 and 5%. A champion winning by over 0.10 earns a boost (the code marks its interaction with the minimums undecided). Nothing is burned by design. On chain (2026-10-30) 6 uids earn and 13 validators weight uid 148 first.</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-10-30, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-unk">Unknown</span>Chain: 14 permits (1,000 TAO threshold); docs do not say who runs the other validators.</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">1.3%</span>Chain: owner uid 38 holds 1.27% of emission, 0% of incentive; owner cut 18%, RecycleOrBurn is Burn.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">6 uids</span><span class="v2-sx muted">top 5 hold 98.4% of incentive.</span> Chain: 6 uids earn; the top uid takes 51.1% and the top five 98.4%.</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Converged</span>Chain: 13 of 13 validators weight uid 148 first; one shared scorer agrees by design, copying not measured.</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-good">Open</span>Code: miner and validator are in one Apache-2.0 repo; winning tournament repos are republished.</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Submits a public training repo and commit for each tournament; validators train it on their GPUs.</p><ul>
+<li>Entry opens Monday (text 11:00 UTC, image 13:00 UTC); at least four validated miners are needed.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Creates tasks, trains miners&#x27; repos on trainer GPUs, evaluates the models and sets weights.</p><ul>
+<li>Chain: 14 validator permits, 13 with recent weights. The docs do not say whether outside validators run their own tournaments.</li>
+</ul></section></div>
+<h2 id="sn-x0">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Text overhaul timing</td><td>Team says: new text tasks about four weeks out (2026-10-08); on 2026-10-24, a week&#x27;s notice, no date</td><td>Code: no overhaul branch in the public repo (main only)</td><td>2026-10-30</td></tr></tbody></table></div>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-neutral">Neutral</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">low confidence, as of 2026-10-30. Not financial advice.</span></div>
+<p class="v2-thesis">About 2,700 TAO left the pool in 30 days (5%) and the price slipped 4.8%, while the team ships often. Usage and revenue are only the team&#x27;s word and six uids get the miner pay, so the pool is hard to call cheap or dear.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.01452 TAO per alpha</dd></div><div><dt>Pool</dt><dd>49,206 TAO, rank 9</dd></div><div><dt>Price, 30 days</dt><dd>-4.8%, 2026-09-30 to 2026-10-30</dd></div><div><dt>Net flow, 30 days</dt><dd>-2,700 TAO, 2026-09-30 to 2026-10-30</dd></div><div><dt>Miner pay</dt><dd>About 42.8 TAO per day over 6 paid uids (too few for an average)</dd></div><div><dt>Code activity</dt><dd>last commit 2026-10-28; 20 commits in 30 days; no releases</dd></div></dl>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>Team ships every few days and bans cheaters</li>
+<li>Nothing is burned; three ranks per type are paid</li>
+<li>Public arena at sn56.io</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>Net outflow in all five weekly intervals</li>
+<li>Six uids earn; most entrants earn nothing</li>
+<li>No public revenue figure; overhaul undated</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> Published revenue or API volume, or weeks of net inflow, would turn it bullish; a larger exit or a quiet repo, bearish.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-similar">Similar subnets</h2>
+<div class="v2-sim"><p>By pool size this is <strong>rank 3 of 14</strong> among the subnets grouped as <em>training</em> (what they mainly sell). Pool and price as of 2026-10-30 to 2026-10-31, price in TAO per alpha; the barrier is the easiest miner role.</p><div class="scroll"><table class="v2-table"><thead><tr><th>#</th><th>Subnet</th><th>Pool</th><th>Price</th><th>Miner barrier</th></tr></thead><tbody><tr><td>1</td><td><a href="/bittensor-docs/subnets/120.html">Affine</a> <span class="muted">SN120</span></td><td>74,303 TAO</td><td>0.04141</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>2</td><td><a href="/bittensor-docs/subnets/9.html">IOTA</a> <span class="muted">SN9</span></td><td>52,502 TAO</td><td>0.02319</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr class="me" aria-current="true"><td>3</td><td>Gradients <span class="muted">SN56, this page</span></td><td>49,207 TAO</td><td>0.01452</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>4</td><td><a href="/bittensor-docs/subnets/97.html">Ingot</a> <span class="muted">SN97</span></td><td>10,847 TAO</td><td>0.01213</td><td><span class="v2-barrier b-high">High</span></td></tr><tr><td>5</td><td><a href="/bittensor-docs/subnets/37.html">Aurelius</a> <span class="muted">SN37</span></td><td>7,048 TAO</td><td>0.002611</td><td><span class="v2-barrier b-medium">Medium</span></td></tr></tbody></table></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-28</span> <span class="muted">(#gradients)</span> The team said a miner exploit was caught by hand in round 1; round-2 LLM checks would have caught it anyway.</li>
+<li><span class="when">2026-10-28</span> <span class="muted">(GitHub commits)</span> Repo: duplicate instruct rows are dropped before the train/test split, round-1 text training is capped at 2.5 h, and a public API for sn56.io was added.</li>
+<li><span class="when">2026-10-26</span> <span class="muted">(#gradients)</span> The team announced an exploit attempt and banned two hotkeys from the tournament.</li>
+<li><span class="when">2026-10-24</span> <span class="muted">(#gradients)</span> The team said text overhaul details come at least a week before launch.</li>
+<li><span class="when">2026-10-23</span> <span class="muted">(GitHub commits, #gradients)</span> Environment tournaments were retired; weights reset to text 0.50 and image 0.30 plus a participation-based remainder.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Read docs/miner.md in the repo.</li>
+<li>Register a hotkey on netuid 56, register with Fiber and post your miner IP an hour before Monday&#x27;s start (text 11:00 UTC, image 13:00 UTC).</li>
+<li>Build a training repo with the required Dockerfiles and licence and pin a full 40-character commit.</li>
+<li>Hold TAO for the entry fee (text 0.7, image 0.4); it is burned.</li>
+<li>Follow #gradients: the text overhaul may change tasks, fees and margins.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>The text overhaul was announced for about four weeks after 2026-10-08 and has no date since; rules and fees may change.</li>
+<li>Mechanism numbers come from the public repo (2026-10-28) and docs; what validators run shows only as consensus on chain.</li>
+<li>Uids are not mapped to winners; the drop from 9 to 6 earners on 2026-10-24 fits the end of environment payouts but is not proven.</li>
+<li>Usage and revenue are not published; the fees endpoint on api.gradients.io returned HTTP 500 on 2026-10-30.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/gradients-ai/G.O.D" rel="noopener noreferrer">GitHub</a></li>
+<li><a href="https://github.com/gradients-ai/G.O.D/blob/main/docs/miner.md" rel="noopener noreferrer">Miner guide</a></li>
+<li><a href="https://gradients.io" rel="noopener noreferrer">Gradients.io</a></li>
+<li><a href="https://sn56.io" rel="noopener noreferrer">Live arena</a></li>
+<li><a href="https://github.com/gradients-opensource" rel="noopener noreferrer">Winning repos</a></li>
+<li><a href="https://api.gradients.io/docs" rel="noopener noreferrer">API docs</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 6 sources</summary>
+<ul>
+<li><strong>repo</strong> gradients-ai/G.O.D README, docs/miner.md, docs/developer.md, validator/scoring and validator/tournament constants, subnet_api at a57d900 (2026-10-28); changes since 2f9b490 (2026-10-23) read as a diff</li>
+<li><strong>msg</strong> #gradients 2026-08-13 to 2026-10-29</li>
+<li><strong>web</strong> Link checks of 2026-10-30: github.com/gradients-ai/G.O.D and its miner guide, gradients.io, github.com/gradients-opensource, api.gradients.io/docs, sn56.io (200); api.gradients.io/tournament/fees (500)</li>
+<li><strong>web</strong> Chain read at block 9395426 (2026-10-30 08:25Z UTC): SN56 (Gradients): registered 2024-11-21, tempo 360, 256 of 256 uids, commit-reveal off; emission weights burn/recycle/owner/validator/miner = 0/0/18/41/41 %, RecycleOrBurn = Burn; uids under the owner hotkey or coldkey hold 0 % of incentive and 1.27 % of last-epoch emission (a floor); 13 validators have weight rows.</li>
+<li><strong>web</strong> Chain read at block 9395503 (2026-10-30 08:40Z UTC), compared with block 9364101 (2026-10-26 00:00Z UTC): no setting changed in 33 checked items; Burn differs (moves with demand); emission split unchanged; pool 49805.19 -&gt; 49206.89 TAO.</li>
+<li><strong>web</strong> Chain read at block 9395503 (2026-10-30 08:40Z): price SN56, 6 samples every 7d from block 9179503 (2026-09-30 08:23Z): price 0.015257 -&gt; 0.014523 TAO per alpha (-4.8%), pool TAO 49993.2 -&gt; 49206.9; net user flow -2700.0 TAO, protocol flow +1913.7 TAO, gross volume 9569.4 TAO; pool rank 9 of 128 in the snapshot at the same block.</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/55.html"><small>← Previous</small>SN55 NIOME</a><a rel="next" href="/bittensor-docs/subnets/58.html"><small>Next →</small>SN58 Attune</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-30. Site built 2026-10-31. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

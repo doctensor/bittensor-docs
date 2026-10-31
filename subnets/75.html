@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hippius (SN75) | Bittensor Subnet Docs</title>
+<meta name="description" content="Distributed cloud: encrypted Drive, S3, model Hub and confidential compute on erasure-coded miner storage.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h21">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>75</span><div>
+<h1>Hippius <span class="muted">SN75</span></h1>
+<p class="tagline">Distributed cloud: encrypted Drive, S3, model Hub and confidential compute on erasure-coded miner storage.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl4"><b>4.1<small>/day</small></b><span>last 7 d</span></li><li class="pl4"><b>4.5<small>/day</small></b><span>days 8-30</span></li><li class="pl4"><b>4.1<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-30</b><span>last chat</span></li><li class="pw"><b>6,651</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Shipping</b><span>code activity</span></li><li class="pw"><b>62</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-10-26</b><span>last commit</span></li><li class="pw"><b>2026-10-27</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>decentralized storage and cloud</dd>
+<dt>Status</dt><dd>Launches continued to 2026-10-29 and the miner bank paid on schedule on 2026-10-30; new families wait on a 600-family cap.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-30</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">How the money flows</a></li><li><a href="#sn-x1">Docs vs code vs chain</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-similar">Similar subnets</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>Hippius sells a cloud account (Drive, S3, Hub, CDN, VMs); paying use is not visible on chain.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>99.7% of Bittensor incentive sits on uid 238; miners are paid in hAlpha on the Hippius chain (2026-10-30).</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>all 600 miner family slots are full; a 2nd node needs a 50,000 alpha lock (2026-10-30).</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>shipping, 84 commits in 30 days over three repos; runtime 92023 is released but not live.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-high">High barrier</span></h3><p>Runs a Hippius node and the Arion miner, stores encrypted file pieces and answers storage audits.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-bad">Permissioned</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>Server with 2 TB+ storage, static IP, 1 Gbps, 4+ cores, 16 GB RAM, Ubuntu 22.04+ (docs)</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None: no API keys or subscriptions in the docs</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Burn about 1 TAO; Alpha for fees; a 2nd+ node locks 50,000 alpha (about 916 TAO)</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Chain node plus Arion miner; a new family needs a free slot (600 of 600 used)</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Scores nodes on the Hippius chain; sets Bittensor weights from the ranking.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-unk">Access unknown</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>12 cores, 128 GB RAM, 2 TB NVMe, Ubuntu 24.04 (validator guide)</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None: no API keys in the guide</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>1,000 TAO stake for a Bittensor permit; Hippius: bond Alpha (amount not documented)</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Ansible deploy per the guide; the team runs the Arion validator and gateway</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-neutral">Neutral</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">low confidence, as of 2026-10-30. Not financial advice.</span></div><p>Mid-size pool, price up 12% in 30 days on flat net flow; usage and revenue cannot be checked on chain. <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>Hippius sells cloud services: encrypted file storage (Drive), S3-compatible storage, an AI model registry (Hub), a CDN and confidential compute. Files are split into 30 erasure-coded pieces held by storage miners; a separate Hippius blockchain tracks them and pays miners.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Storage miners run a Hippius chain node and the Arion miner, offering 2 TB+ and a static IP; they hold encrypted file pieces and answer storage audits.</p></div><div><h3>Validators</h3><p>Validators score nodes on the Hippius chain (storage, bandwidth, uptime, failures). The team runs the Arion validator and gateway. On Bittensor, 12 validators hold permits and a script sets weights from that ranking.</p></div><div><h3>Incentive</h3><p>A node scores 70% bandwidth and 30% storage, times uptime, minus penalties. On Bittensor the code gives miners 1% of the weight and uid 238 the other 99%; the chain agrees. A Hippius-chain bank pays families by weight.</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-10-30, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-unk">Unknown</span>Docs let anyone bond Alpha and validate, but the team runs the Arion validator and gateway; report writers not read.</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">20.7%</span>20.7% of last-epoch emission sits on uids under the owner&#x27;s keys, 0% of incentive; owner cut 18%; RecycleOrBurn is Burn.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">98 uids</span><span class="v2-sx muted">top 5 hold 99.8% of incentive.</span> 98 uids earn, but uid 238 takes 99.7%; real miner pay is the Hippius-chain payout to about 600 families.</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Converged</span>All 12 validators put their top weight on uid 238; weights follow one script, so this is not independent agreement.</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-caution">Partial</span>Chain and S3 gateway code is public (GPL-3.0, Apache-2.0); the Arion miner repo has no recognised licence.</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-high">High barrier</span></h3><p>Runs a Hippius node and the Arion miner, stores encrypted file pieces and answers storage audits.</p><ul>
+<li>Nodes sit in families under one account; the first node is free, a family holds up to 35.</li>
+<li>Pay arrives as hAlpha on the Hippius chain, not as Bittensor incentive (team).</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Scores nodes on the Hippius chain; sets Bittensor weights from the ranking.</p><ul>
+<li>12 of 64 validator slots hold permits; all 12 set weights within one tempo, top weight on uid 238.</li>
+<li>Not read: who holds the 12 permits and who writes the on-chain quality reports.</li>
+</ul></section></div>
+<h2 id="sn-x0">How the money flows</h2>
+<ol class="v2-steps"><li>Bittensor sets aside 41% of emission for miners (about 54 TAO a day); the code gives miners 1% and uid 238, the Hippius code&#x27;s emission capture account, 99%.</li><li>The team says (2026-08-04) this emission is routed to the Hippius chain. On chain, three bridge guardians sign a deposit of 147 or 293 alpha about every two hours, and a bank pays families by weight (3,500 alpha a day cap).</li><li>Not traced: the hop from uid 238 to the bridge. The daily amounts match within 0.03%.</li></ol>
+<h2 id="sn-x1">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Miner share</td><td>Alphanomics: miners receive 41%</td><td>Chain: uid 238 holds 99.7% of incentive</td><td>2026-10-30</td></tr><tr><td>Family limit</td><td>Team: limit would be raised (2026-10-06)</td><td>Chain: still 600, all in use</td><td>2026-10-30</td></tr><tr><td>Extra-node lock</td><td>Team: to become dynamic (2026-10-10)</td><td>Chain: still 50,000 alpha</td><td>2026-10-30</td></tr></tbody></table></div>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-neutral">Neutral</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">low confidence, as of 2026-10-30. Not financial advice.</span></div>
+<p class="v2-thesis">The pool ranks 13th and the price rose 12% in 30 days, but net user flow was about flat (+163 TAO on 35,000), so buyers did not drive it. The team ships fast and the bank pays on schedule, yet one uid takes 99.7% of incentive and on-chain customer deposits are tiny.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.01832 TAO per alpha</dd></div><div><dt>Pool</dt><dd>34,980 TAO, rank 13 of 128</dd></div><div><dt>Price, 30 days</dt><dd>+11.9%, 2026-09-30 to 2026-10-30</dd></div><div><dt>Net flow, 30 days</dt><dd>+163 TAO, 2026-09-30 to 2026-10-30</dd></div><div><dt>Miner pay</dt><dd>54 TAO per day in all, 99.7% on uid 238; about 0.09 per family after payout (gross)</dd></div><div><dt>Miner pay outside top 5</dt><dd>About 0.11 TAO per day in all, over 93 uids</dd></div><div><dt>Code activity</dt><dd>last commit 2026-10-26; 84 commits in 30 days, 3 repos</dd></div></dl>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>Ships fast: CDN, extension and WAF in four days</li>
+<li>Bank paid out all 2,936 alpha it received in 24 hours</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>One uid takes 99.7% of incentive; the hop from it to the bridge is not traced</li>
+<li>Customer deposits on chain: about 86 alpha in 7 days against 20,541 alpha of emission</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> Weeks of net outflow or a late payout would turn it bearish; visible customer revenue or an open family cap, bullish.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-similar">Similar subnets</h2>
+<div class="v2-sim"><p>By pool size this is <strong>rank 2 of 12</strong> among the subnets grouped as <em>compute</em> (what they mainly sell). Pool and price as of 2026-10-30 to 2026-10-31, price in TAO per alpha; the barrier is the easiest miner role.</p><div class="scroll"><table class="v2-table"><thead><tr><th>#</th><th>Subnet</th><th>Pool</th><th>Price</th><th>Miner barrier</th></tr></thead><tbody><tr><td>1</td><td><a href="/bittensor-docs/subnets/4.html">Targon</a> <span class="muted">SN4</span></td><td>142,192 TAO</td><td>0.05762</td><td><span class="v2-barrier b-high">High</span></td></tr><tr class="me" aria-current="true"><td>2</td><td>Hippius <span class="muted">SN75, this page</span></td><td>34,980 TAO</td><td>0.01832</td><td><span class="v2-barrier b-high">High</span></td></tr><tr><td>3</td><td><a href="/bittensor-docs/subnets/48.html">Quantum Compute</a> <span class="muted">SN48</span></td><td>15,127 TAO</td><td>0.00815</td><td><span class="v2-barrier b-high">High</span></td></tr><tr><td>4</td><td><a href="/bittensor-docs/subnets/12.html">ComputeHorde</a> <span class="muted">SN12</span></td><td>12,615 TAO</td><td>0.004746</td><td><span class="v2-barrier b-high">High</span></td></tr><tr><td>5</td><td><a href="/bittensor-docs/subnets/110.html">Green Compute</a> <span class="muted">SN110</span></td><td>11,762 TAO</td><td>0.02472</td><td><span class="v2-barrier b-high">High</span></td></tr></tbody></table></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-30</span> <span class="muted">(Hippius chain public RPC, 2026-10-30)</span> The bridge brought 2,936 alpha onto the Hippius chain in 24 hours; the bank paid out the same.</li>
+<li><span class="when">2026-10-29</span> <span class="muted">(#75 chat)</span> WAF went live on every CDN zone, run in attested confidential VMs. The team posted a Phala comparison and said most gaps would close within days.</li>
+<li><span class="when">2026-10-29</span> <span class="muted">(#75 chat)</span> A miner reported four nodes with stalled bandwidth credit and falling weights; the team said to update to Arion 0.1.38.</li>
+<li><span class="when">2026-10-28</span> <span class="muted">(#75 chat)</span> A browser extension for screen recordings reached the Chrome Web Store; captures are encrypted before saving to Drive.</li>
+<li><span class="when">2026-10-26</span> <span class="muted">(#75 chat; GitHub thenervelab/thebrain)</span> Hippius CDN went live. Chain runtime 92023 was released on GitHub the same day and is not live as of 2026-10-30.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Ask in the channel whether a family slot is free before buying hardware or locking funds (600 of 600 used on 2026-10-30).</li>
+<li>Run and sync a Hippius chain node (docs: Running Hippius Blockchain Node).</li>
+<li>Register your family and node from the provider dashboard or the hippius CLI; this needs Alpha.</li>
+<li>Run the Arion miner (v0.1.38) with the team&#x27;s validator and warden node IDs and your family ID, with the UDP ports open; without the warden ID audits fail.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Miner pay is not visible on Bittensor (uid 238 holds 99.7% of incentive); individual payouts were not read.</li>
+<li>Customers (Ditto and ZapMe are named), revenue and storage totals come from the team&#x27;s posts; on-chain customer deposits were about 86 alpha in 7 days.</li>
+<li>The code was read at its 2026-10-22 state, matching live runtime 92022; 92023 (miner payment paths) is not live. Whether burned hAlpha withdrawals released Alpha was not checked.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://hippius.com/" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://docs.hippius.com/" rel="noopener noreferrer">Docs</a></li>
+<li><a href="https://docs.hippius.com/learn/weights" rel="noopener noreferrer">How weights and rewards work</a></li>
+<li><a href="https://docs.hippius.com/earn/storage-miner" rel="noopener noreferrer">Storage miner overview</a></li>
+<li><a href="https://docs.hippius.com/earn/installing-validator" rel="noopener noreferrer">Validator guide</a></li>
+<li><a href="https://hippius.com/alphanomics" rel="noopener noreferrer">Alphanomics</a></li>
+<li><a href="https://provider.hippius.com/" rel="noopener noreferrer">Provider dashboard</a></li>
+<li><a href="https://hipstats.com/" rel="noopener noreferrer">Hipstats network explorer</a></li>
+<li><a href="https://status.hippius.com/" rel="noopener noreferrer">Service status</a></li>
+<li><a href="https://github.com/thenervelab" rel="noopener noreferrer">GitHub organisation</a></li>
+<li><a href="https://github.com/thenervelab/arion" rel="noopener noreferrer">Arion storage protocol</a></li>
+<li><a href="https://github.com/thenervelab/thebrain" rel="noopener noreferrer">Hippius chain and weights</a></li>
+<li><a href="https://github.com/thenervelab/hippius-s3" rel="noopener noreferrer">S3 gateway</a></li>
+<li><a href="https://console.hippius.com/" rel="noopener noreferrer">Console</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 11 sources</summary>
+<ul>
+<li><strong>msg</strong> #75 chat, 2025-03-11 to 2026-10-30 (history search for the alphanomics roll-out; new messages after 2026-10-24; checked again 2026-10-30 08:05Z: nothing newer than the 2026-10-30 01:24 message)</li>
+<li><strong>web</strong> Chain read at block 9395003 (2026-10-30 07:00Z UTC): SN75 (Hippius): registered 2025-03-11, tempo 360, 256 of 256 uids, commit-reveal off; emission split burn/recycle/owner/validator/miner 0/0/18/41/41 %, RecycleOrBurn = Burn; uids under the owner hotkey or coldkey hold 0 % of incentive and 20.71 % of last-epoch emission (a floor); 12 validators have weight rows, uid 238 their most common top target</li>
+<li><strong>web</strong> Chain read at block 9395003 (2026-10-30 07:00Z UTC), compared with block 9364101 (2026-10-26 00:00Z UTC): SN75: no setting changed in 33 checked items; emission split unchanged; pool 34803.17 -&gt; 34979.63 TAO</li>
+<li><strong>web</strong> Chain read at block 9395003 (2026-10-30 07:00Z): price SN75, 6 samples every 7d from block 9179003 (2026-09-30 06:43Z): price 0.016376 -&gt; 0.018322 TAO per alpha (+11.9%), pool TAO 32546.1 -&gt; 34979.6; over the 5 intervals where the pool change equals flow + protocol: net user flow +163.4 TAO, protocol flow +2270.1 TAO, gross volume 81547.8 TAO; shared snapshot of 129 subnets at the same block for the pool rank</li>
+<li><strong>web</strong> Hippius chain public JSON-RPC (read-only, 2026-10-30 about 07:13 to 07:20Z, heads near 8,208,230): runtime version, Arion, Hippocampus and AlphaBridge storage and constants, state at 24 h, 7 d and up to 30 d earlier (counts and totals only); read again at head 8,208,771 (2026-10-30 08:07Z): runtime 92022 still live, 600 families, 691 active children, lock on, distribution on, bridge not paused: unchanged</li>
+<li><strong>repo</strong> thenervelab/thebrain@395a14b (readme_weights.md, pallets/execution-unit, hippocampus, arion-pallet, alpha-bridge, runtime/mainnet; read 2026-10-22, still the default-branch head on 2026-10-30)</li>
+<li><strong>repo</strong> thenervelab/arion@1e6518c (README.md, llms.txt, 2026-10-24)</li>
+<li><strong>repo</strong> thenervelab/hippius-s3@a8d80df (README, staging, 2026-10-26); thenervelab/hippius-hub README (main, read 2026-10-26)</li>
+<li><strong>web</strong> https://docs.hippius.com/ (learn/weights, earn/storage-miner, earn/installing-validator, llms.txt), read 2026-10-30</li>
+<li><strong>web</strong> https://hippius.com/alphanomics and the team&#x27;s Phala comparison page on s3.hippius.com, 2026-10-29</li>
+<li><strong>web</strong> https://api.github.com/repos/thenervelab (releases, licences, org repo list), 2026-10-30</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/74.html"><small>← Previous</small>SN74 Gittensor</a><a rel="next" href="/bittensor-docs/subnets/76.html"><small>Next →</small>SN76 Ormas</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-30. Site built 2026-10-31. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Graphite (SN43) | Bittensor Subnet Docs</title>
+<meta name="description" content="Financial knowledge graph from SEC filings; most emission goes to owner-key UIDs and the subnet is listed for sale.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h13">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>43</span><div>
+<h1>Graphite <span class="muted">SN43</span></h1>
+<p class="tagline">Financial knowledge graph from SEC filings; most emission goes to owner-key UIDs and the subnet is listed for sale.</p>
+<span class="st s-transitioning">transitioning</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl2"><b>0.43<small>/day</small></b><span>last 7 d</span></li><li class="pl2"><b>0.57<small>/day</small></b><span>days 8-30</span></li><li class="pl4"><b>2.6<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-29</b><span>last chat</span></li><li class="pw"><b>4,906</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Quiet</b><span>code activity</span></li><li class="pw"><b>0</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-06-03</b><span>last commit</span></li><li class="pw"><b>none</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>data (financial knowledge graph)</dd>
+<dt>Status</dt><dd>Chain settings are unchanged since 2026-10-26. The team said on 2026-10-15 and 2026-10-29 that the subnet is for sale; the repo&#x27;s last commit is 2026-06-03.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-30</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Where emission goes</a></li><li><a href="#sn-x1">Docs vs code vs chain</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-similar">Similar subnets</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>owner-key UIDs take 88.6% of emission; five outside miners share about 2.4 TAO a day.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>the subnet is for sale (posts on 2026-10-15 and 2026-10-29).</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>the repo has not changed since 2026-06-03; newer rules exist only in chat.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>graph access is sold through a portal and an MCP server; usage is not visible.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>mining is CPU-only and costs a 0.1 TAO burn plus any LLM tokens you choose to buy.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-low">Low barrier</span></h3><p>Extract facts from SEC filings; post signed, sourced submissions.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>Normal computer, CPU only</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None required; LLM keys optional</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>0.1 TAO burn (2026-10-30); team says 1,000 alpha stake, not in code</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Python 3.11; reference miners to start from</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Verify sources, score submissions, merge to the graph, set weights hourly.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>Public IP, port 8765 open; sizing not documented</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None required (scoring uses no LLM)</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>0.1 TAO burn; 1,000 TAO stake floor for a permit</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Python 3.11 and an SEC contact email; no Dockerfile</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-overvalued">Overvalued</span></span><span class="v2-conf muted">medium confidence, as of 2026-10-30. Not financial advice.</span></div><p>Flat pool, but a quiet repo, owner-key emission and a sale notice outweigh it. <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>Graphite is a financial knowledge graph: miners extract entities and facts from SEC filings, each with a source URL, hash and quote. The team sells access through a portal and an MCP server. Most emission goes to UIDs under the owner&#x27;s key, and the subnet is for sale.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Miners watch each validator&#x27;s feed of new SEC filings, extract entities and facts, and post signed submissions with source URL, document hash and quote. Any stack works; the repo has a regex and an LLM reference miner.</p></div><div><h3>Validators</h3><p>Validators fetch the sources themselves, check hash and quote, and score eight measures, from accuracy to latency. Scores of 0.3 or more are merged into the graph on a team-run server; a verified fact that contradicts an unverified one halves that miner&#x27;s multiplier.</p></div><div><h3>Incentive</h3><p>Code: weight is the sum of a miner&#x27;s scores times its slash multiplier, scaled to 20%; the other 80% goes to one burn UID rotating among UIDs 74, 102, 155 and 177. Those and UID 20, the owner&#x27;s hotkey, sit under the owner&#x27;s coldkey.</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-10-30, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-good">Open</span>Permits go by stake (1,000 TAO floor, 64 slots); at least 3 of 4 recent weight-setters are outside the owner&#x27;s key.</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">88.6%</span>Owner-key UIDs hold 88.6% of last-epoch emission; configured owner cut 18%; RecycleOrBurn is Burn.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">6 uids</span><span class="v2-sx muted">top 5 hold 100% of incentive.</span> 6 UIDs earn incentive, 5 outside the owner&#x27;s key; the owner UID holds 78.9% and the chain withholds it.</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Diverse</span>5 validators have weight rows; their top targets are UIDs 20, 102 and 155, all under the owner&#x27;s key.</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-caution">Partial</span>Miner and validator code are public with no licence terms; newer rules are unpublished (last commit 2026-06-03).</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-low">Low barrier</span></h3><p>Extract facts from SEC filings; post signed, sourced submissions.</p><ul>
+<li>SEC requires a real contact email.</li>
+<li>The default client connects to validators with 10,000+ stake plus the owner; the guide&#x27;s example says 1,000.</li>
+<li>Some miners were blacklisted for splitting documents (2026-09-06).</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Verify sources, score submissions, merge to the graph, set weights hourly.</p><ul>
+<li>Merges go to the team&#x27;s graph server by signed request; the owner can revoke a validator&#x27;s items.</li>
+<li>UID 20 holds 98.2% of dividends; three others share 1.8%, about 0.2 TAO a day.</li>
+<li>Four permit holders set weights this tempo; one permit is under the owner&#x27;s key.</li>
+</ul></section></div>
+<h2 id="sn-x0">Where emission goes</h2>
+<p>On chain, 2026-10-30, gross:</p>
+<ul class="v2-list">
+<li>Miner and validator pool: about 5,888 alpha (23 TAO) a day, half each.</li>
+<li>Owner-key UIDs take 88.6%: the chain withholds 78.9% of the miner side, and UID 20 holds 98.2% of validator dividends.</li>
+<li>Five outside miners share about 620 alpha (2.45 TAO) a day; three outside validators about 52 alpha (0.2 TAO).</li>
+</ul>
+<h2 id="sn-x1">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Miner weight formula</td><td>README: mean score x sqrt(N) x slash</td><td>Code: sum of scores x slash multiplier</td><td>2026-10-30</td></tr><tr><td>Miner share</td><td>Validator guide: 5%; team raised it to 20% (2026-05-26)</td><td>Code: 20%; the other 80% goes to one burn UID</td><td>2026-10-30</td></tr><tr><td>Miner stake</td><td>Team: 1,000 alpha staked to be scored (2026-09-06)</td><td>Code: no such rule in the repo</td><td>2026-10-30</td></tr><tr><td>Discovery scoring</td><td>Team: floors of 0.95, 0.90, 0.60 apply (2026-05-26)</td><td>Code: the floors exist but are never called</td><td>2026-10-30</td></tr><tr><td>Who validates</td><td>Team: it runs only the owner&#x27;s validator (2026-07-22)</td><td>Chain: 4 permit holders set weights, one permit is the owner&#x27;s</td><td>2026-10-30</td></tr></tbody></table></div>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-overvalued">Overvalued</span></span><span class="v2-conf muted">medium confidence, as of 2026-10-30. Not financial advice.</span></div>
+<p class="v2-thesis">Mid-sized pool (rank 36 of 128), flat for 30 days on thin volume (about 5% of the pool). Against that: a quiet repo, owner-key emission, unverified usage and a sale notice.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.003952 TAO per alpha</dd></div><div><dt>Pool</dt><dd>12,285 TAO, rank 36</dd></div><div><dt>Price, 30 days</dt><dd>-0.2%, 2026-09-28 to 2026-10-30</dd></div><div><dt>Net flow, 30 days</dt><dd>+19 TAO, 2026-09-30 to 2026-10-30</dd></div><div><dt>Miner pay</dt><dd>2.45 TAO a day for 5 outside UIDs</dd></div><div><dt>Code activity</dt><dd>last commit 2026-06-03; 0 commits in 30 days; no releases</dd></div></dl>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>Price and pool held steady for 30 days</li>
+<li>Emission stays on; no chain setting changed</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>Sale notice; people asked not to buy the alpha</li>
+<li>88.6% of emission goes to owner-key UIDs</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> A completed sale with a plan, new commits, or a readable API showing usage would help; a rising owner-key share or an emission stop would hurt.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-similar">Similar subnets</h2>
+<div class="v2-sim"><p>By pool size this is <strong>rank 2 of 7</strong> among the subnets grouped as <em>data</em> (what they mainly sell). Pool and price as of 2026-10-30, price in TAO per alpha; the barrier is the easiest miner role.</p><div class="scroll"><table class="v2-table"><thead><tr><th>#</th><th>Subnet</th><th>Pool</th><th>Price</th><th>Miner barrier</th></tr></thead><tbody><tr><td>1</td><td><a href="/bittensor-docs/subnets/13.html">Data Universe</a> <span class="muted">SN13</span></td><td>17,149 TAO</td><td>0.004119</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr class="me" aria-current="true"><td>2</td><td>Graphite <span class="muted">SN43, this page</span></td><td>12,285 TAO</td><td>0.003952</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr><td>3</td><td><a href="/bittensor-docs/subnets/33.html">ReadyAI</a> <span class="muted">SN33</span></td><td>11,842 TAO</td><td>0.003039</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr><td>4</td><td><a href="/bittensor-docs/subnets/22.html">Desearch</a> <span class="muted">SN22</span></td><td>7,357 TAO</td><td>0.002873</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr><td>5</td><td><a href="/bittensor-docs/subnets/45.html">AlphaRidge</a> <span class="muted">SN45</span></td><td>5,992 TAO</td><td>0.002236</td><td><span class="v2-barrier b-medium">Medium</span></td></tr></tbody></table></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-29</span> <span class="muted">(#graphite)</span> A team member repeated that the subnet is for sale; users had asked on 10-26 and 10-27 about continued support.</li>
+<li><span class="when">2026-10-15</span> <span class="muted">(#graphite)</span> First sale post; people were asked not to buy the alpha token meanwhile.</li>
+<li><span class="when">2026-09-06</span> <span class="muted">(#graphite)</span> Team found miners splitting documents into tiny submissions, blacklisted some, and announced fact counting, deduplication and a 1,000 alpha stake; none is in the repo.</li>
+<li><span class="when">2026-08-11</span> <span class="muted">(#graphite)</span> Validator disk filled with 300 GB of submissions; data moved to cloud storage.</li>
+<li><span class="when">2026-06-22</span> <span class="muted">(#announce, #graphite)</span> Listed among subnets whose emission was stopped; flowing again by late July, no reinstatement notice found.</li>
+<li><span class="when">2026-05-19</span> <span class="muted">(GitHub, PyPI)</span> MCP server (7 tools) and portal published: free tier of 100 queries a month, paid tier &#x27;coming soon&#x27;.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Ask in the subnet channel first: the subnet is for sale and the 1,000 alpha stake is unconfirmed.</li>
+<li>Read docs/miner_readme.md for wire format and signing; its weight formula is outdated.</li>
+<li>Register a hotkey on subnet 43 (burn 0.1 TAO on 2026-10-30) and set a real SEC contact email.</li>
+<li>Start from a reference miner (regex or LLM) and connect to the validators in the metagraph.</li>
+<li>Post signed submissions with source URL, sha256 and quote; the team slashes split or repeated reports.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>The subnet is for sale: ownership, rules and emission could change quickly.</li>
+<li>Live validators may run unpublished code; later rules exist only in chat.</li>
+<li>UID 20 holds 98.2% of validator dividends; whether they are paid out or burned was not traced.</li>
+<li>Graph size and contribution counts are team claims: the API host did not answer on 2026-10-26 or 2026-10-30.</li>
+<li>Miners accuse the owner of self-mining and the team denies it; dollar figures in chat are unverified. Who runs the other validators is not shown.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/GraphiteAI/FinancialKnowledgeGraph/tree/main/sn43" rel="noopener noreferrer">GitHub (current, Financial Knowledge Graph)</a></li>
+<li><a href="https://github.com/GraphiteAI/Graphite-Subnet" rel="noopener noreferrer">GitHub (legacy Graphite-Subnet)</a></li>
+<li><a href="https://graph.graphite-ai.net/" rel="noopener noreferrer">Graph portal and pricing</a></li>
+<li><a href="https://github.com/GraphiteAI/graphite-mcp" rel="noopener noreferrer">MCP server (GitHub)</a></li>
+<li><a href="https://dashboard.graphite-ai.net/" rel="noopener noreferrer">Metagraph dashboard</a></li>
+<li><a href="https://graphite-ai.net/" rel="noopener noreferrer">Website</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 6 sources</summary>
+<ul>
+<li><strong>msg</strong> #graphite 2024-10 to 2026-10-30 (pinned posts, team posts from 2026-04-25, full chat from 2026-07-23; newest message 2026-10-29), #announce 2026-06-22</li>
+<li><strong>repo</strong> GraphiteAI/FinancialKnowledgeGraph sn43 at 743e54d (2026-06-03, unchanged on 2026-10-30): README.md, docs/miner_readme.md, docs/validator_readme.md, .env.example, docker-compose.yml, pyproject.toml, neurons/__init__.py, envs/knowledge_graph/scoring.py, ingestion/event_bus.py, ingestion/multi_validator_client.py</li>
+<li><strong>repo</strong> GraphiteAI/graphite-mcp at f3eb6fb (2026-05-19, unchanged); GraphiteAI/Graphite-Subnet at 503b551 (2025-10-12) and GraphiteAI/sn43 at 08b3da5 (2025-12-26), checked for dates only</li>
+<li><strong>web</strong> https://graph.graphite-ai.net/ (env.js, pricing code, read 2026-10-26 and re-checked 2026-10-30); https://dashboard.graphite-ai.net/; https://pypi.org/project/graphite-mcp/ (0.1.0 and 0.1.1, both 2026-05-19)</li>
+<li><strong>web</strong> Chain read at block 9399969 (2026-10-30 23:33Z UTC): SN43 (Graphite): registered 2024-07-17, tempo 360, 256 of 256 uids, commit-reveal on; emission weights burn/recycle/owner/validator/miner = 0/0/18/41/41 % (stored, same values as the chain default), RecycleOrBurn = Burn; uids under the owner hotkey or owner coldkey hold 78.95 % of incentive and 88.59 % of last-epoch emission (a floor); 5 validators have weight rows, on average 0 % of weight goes to uid 0</li>
+<li><strong>web</strong> Chain read at block 9399969 (2026-10-30 23:33Z): price SN43, 6 samples every 7d from block 9183969 (2026-09-30 23:16Z): price 0.003961 -&gt; 0.003952 TAO per alpha (-0.2%), pool TAO 12298.3 -&gt; 12285.1; net user flow +19.4 TAO (staked minus unstaked), gross volume 617.4 TAO; no setting changed in 33 checked items since block 9364101 (2026-10-26)</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/41.html"><small>← Previous</small>SN41 Almanac</a><a rel="next" href="/bittensor-docs/subnets/44.html"><small>Next →</small>SN44 Score</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-30. Site built 2026-10-31. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

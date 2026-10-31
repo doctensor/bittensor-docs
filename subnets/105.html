@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Beam (SN105) | Bittensor Subnet Docs</title>
+<meta name="description" content="Bandwidth network: miners move clients&#x27; data between cloud storage and earn by verified bytes delivered.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h15">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>105</span><div>
+<h1>Beam <span class="muted">SN105</span></h1>
+<p class="tagline">Bandwidth network: miners move clients&#x27; data between cloud storage and earn by verified bytes delivered.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>15<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>60<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>38<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-31</b><span>last chat</span></li><li class="pw"><b>15,453</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Shipping</b><span>code activity</span></li><li class="pw"><b>18</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-10-30</b><span>last commit</span></li><li class="pw"><b>none</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>bandwidth and data transfer</dd>
+<dt>Status</dt><dd>Very active: about 1,460 chat messages in 30 days, commits through 2026-10-30, all 256 slots filled (2026-10-31).</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-31</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">How tiers pay</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-similar">Similar subnets</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>miners run servers that move clients&#x27; files between cloud storage; pay follows verified megabytes.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>validators only copy the team&#x27;s BeamCore weight vector to the chain; none scores independently.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>joining costs about 0.01 TAO (2026-10-31), but pay follows a team-run rank that keeps changing.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>real companies are testing it. Prices are public ($0.10 per transfer plus $10 per TB), but no customer is visible.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>211 uids earn about 0.09 TAO a day each, gross; the owner&#x27;s uid 0 takes 91% of validator dividends.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Runs an orchestrator that takes transfer jobs from BeamCore and farms them out to its workers.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-unk">GPU unknown</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-unk"><dt>Hardware</dt><dd>Not documented; a public server with TLS plus workers with good bandwidth</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None required; BeamCore sign-up and its API key are free</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>About 0.01 TAO to register (2026-10-31); no stake minimum documented</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Build two Go programs, set up TLS and NATS, then qualify</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Fetches BeamCore&#x27;s weight vector and submits it to the chain; does no scoring of its own.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-unk">GPU unknown</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-unk"><dt>Hardware</dt><dd>Not documented (a Python 3.10-3.12 service; no GPU mentioned)</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None; BeamCore issues the validator API key on the first heartbeat</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Permit needs 1,000 TAO stake (chain, 2026-10-31); registration about 0.01 TAO</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Python virtualenv and a few environment variables</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div><div class="v2-role"><h3>Client <span class="v2-barrier b-low">Low barrier</span></h3><p>Pays to move files or run live Rooms through the SDK, CLI or Studio builder.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-caution">Paid service needed</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-no"><dt>Hardware</dt><dd>None; CLI, SDK or browser</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>Credits at $0.50: a transfer costs $0.10 plus $0.01 per GB (docs, 2026-10-28)</dd></div><div class="v2-need n-no"><dt>Stake / fees</dt><dd>None; pay by card, TAO or Beam alpha</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Install the CLI or SDK, or use Studio, which runs free</dd></div></dl><a class="v2-more" href="#sn-role-2">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-neutral">Neutral</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">low confidence, as of 2026-10-31. Not financial advice.</span></div><p>Price up 57% in a week on net inflow; demand and scoring stay unverified. <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>Beam moves data between cloud storage services and between software agents. Clients start transfers with an SDK, CLI or Studio; the team&#x27;s BeamCore service splits them into chunks for miners&#x27; orchestrators, whose workers move the bytes. Miners earn by verified megabytes delivered.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Miners register a hotkey, sign up with BeamCore (free) and run a Go orchestrator plus worker servers. BeamCore sends chunk jobs to orchestrators; workers move the byte ranges and report back. Room work (live agent-to-agent traffic) is optional.</p></div><div><h3>Validators</h3><p>Validators check no transfers and compute no scores: they fetch BeamCore&#x27;s weight vector, submit it to the chain and post a proof. Seven uids hold permits (2026-10-31); all rank the same uid first.</p></div><div><h3>Incentive</h3><p>Routing uses PRISM, a 24-hour head-to-head score between neighbouring orchestrators: reliability first, then speed. Since 2026-10-29 it is also multiplied by the share of the miner&#x27;s tasks verified successful. Pay follows verified MiB uploaded in that window, ranked into five tiers (table below), then adjusted by bonuses, sale limits and penalties. Split: owner 18%, validators 41%, miners 41%. On 2026-10-31, 211 of 256 uids earned incentive; the top uid held 2.2%.</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-10-31, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-good">Open</span>Anyone with a permit (1,000 TAO stake threshold) can run the validator, which only relays BeamCore&#x27;s vector.</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">45.7%</span>Uid 0 holds 45.7% of emission, all as validator dividends (91%). Configured owner cut 18%; RecycleOrBurn is Burn.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">211 uids</span><span class="v2-sx muted">top 5 hold 11% of incentive.</span> 211 uids earn; the top uid holds 2.2%, the top five 11%; the top uid is not owner-linked.</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Converged</span>All 7 validators rank the same uid first because they relay one BeamCore vector, not by independent agreement.</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-good">Open</span>Miner and validator code is MIT; BeamCore, which scores and sets pay, is public only as unlicensed reference code.</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Runs an orchestrator that takes transfer jobs from BeamCore and farms them out to its workers.</p><ul>
+<li>Needs Go 1.24+, a registered hotkey, a public gateway URL and a TLS certificate. Workers need only a hotkey; worker pay is not documented.</li>
+<li>Qualifying takes 120 verified standard tasks (40 for Rooms).</li>
+<li>Failed or cut tasks cost routing; a failed recovery task costs 3 times the first-wave stake.</li>
+<li>Selling alpha costs weight: about 80% of base emission may be sold, ideally weekly.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Fetches BeamCore&#x27;s weight vector and submits it to the chain; does no scoring of its own.</p><ul>
+<li>Submits at most every 100 blocks (about 20 minutes); no approval step is documented.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-2"><h3>Client <span class="v2-barrier b-low">Low barrier</span></h3><p>Pays to move files or run live Rooms through the SDK, CLI or Studio builder.</p><p class="muted">No further detail found in the sources.</p></section></div>
+<h2 id="sn-x0">How tiers pay</h2>
+<p>Ranked by verified MiB in the 24-hour window; the multiplier applies to each member&#x27;s MiB.</p>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Tier</th><th>Rank</th><th>Pay per MiB</th></tr></thead><tbody><tr><td>A</td><td>Top 30</td><td>1</td></tr><tr><td>B</td><td>Next 30</td><td>0.8</td></tr><tr><td>C</td><td>Next 30</td><td>0.2</td></tr><tr><td>D</td><td>Next 30</td><td>0.08</td></tr><tr><td>E</td><td>Everyone else</td><td>0.0075</td></tr></tbody></table></div>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-neutral">Neutral</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">low confidence, as of 2026-10-31. Not financial advice.</span></div>
+<p class="v2-thesis">The pool ranks 81st of 128 and the price is back at its 2026-10-01 level, but the rally is two days old. The team ships often and 211 uids earn; scoring is team-run and customers are unverified.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.006499 TAO per alpha, rank 44</dd></div><div><dt>Pool</dt><dd>5,356 TAO, rank 81</dd></div><div><dt>Price, 30 days</dt><dd>-1%, 2026-10-01 to 2026-10-31</dd></div><div><dt>Net flow, 30 days</dt><dd>+47 TAO, 2026-10-01 to 2026-10-31</dd></div><div><dt>Miner pay</dt><dd>0.091 TAO per day on average (19.1 TAO per day over 211 uids)</dd></div><div><dt>Miner pay outside top 5</dt><dd>0.083 TAO per day on average (17.0 TAO per day over 206 uids)</dd></div><div><dt>Code activity</dt><dd>last commit 2026-10-30; 41 commits in 30 days; no releases</dd></div><div><dt>Price, 7 days</dt><dd>+57%, net flow +1,099 TAO, 2026-10-24 to 2026-10-31</dd></div></dl>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>Price +57% in 7 days on +1,099 TAO net inflow.</li>
+<li>Team ships: new scoring rules 2026-10-29 and 10-30.</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>Three weeks of outflow (about -1,000 TAO) came first; the pool is small.</li>
+<li>Earners fell from 228 to 211 in three days; customers unverified.</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> Named customers or revenue plus weeks of net inflow would turn it bullish; renewed outflow or fewer earners, bearish.</p>
+<p class="muted">Since the last pass: Was neutral on 2026-10-28; still neutral: the 30-day flow is flat and the rally is two days old.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-similar">Similar subnets</h2>
+<div class="v2-sim"><p>By pool size this is <strong>rank 8 of 12</strong> among the subnets grouped as <em>compute</em> (what they mainly sell). Pool and price as of 2026-10-30 to 2026-10-31, price in TAO per alpha; the barrier is the easiest miner role.</p><div class="scroll"><table class="v2-table"><thead><tr><th>#</th><th>Subnet</th><th>Pool</th><th>Price</th><th>Miner barrier</th></tr></thead><tbody><tr><td>6</td><td><a href="/bittensor-docs/subnets/25.html">UR</a> <span class="muted">SN25</span></td><td>11,745 TAO</td><td>0.005174</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr><td>7</td><td><a href="/bittensor-docs/subnets/106.html">Nodexo</a> <span class="muted">SN106</span></td><td>5,626 TAO</td><td>0.002127</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr class="me" aria-current="true"><td>8</td><td>Beam <span class="muted">SN105, this page</span></td><td>5,356 TAO</td><td>0.006499</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>9</td><td><a href="/bittensor-docs/subnets/90.html">KubeTEE</a> <span class="muted">SN90</span></td><td>5,125 TAO</td><td>0.01638</td><td><span class="v2-barrier b-high">High</span></td></tr><tr><td>10</td><td><a href="/bittensor-docs/subnets/128.html">ByteLeap</a> <span class="muted">SN128</span></td><td>3,928 TAO</td><td>0.002633</td><td><span class="v2-barrier b-high">High</span></td></tr></tbody></table></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-30</span> <span class="muted">(#beam; GitHub)</span> Team: Beam-side room timeouts will stop counting against miners; recovery taken back early now costs no 3x charge; no opt-out. Speed-won duels now pay up to 8 times the stake.</li>
+<li><span class="when">2026-10-29</span> <span class="muted">(#beam; GitHub)</span> A reliability multiplier was added to PRISM; one miner reported a 75% emission drop that evening.</li>
+<li><span class="when">2026-10-29</span> <span class="muted">(#beam; docs.b1m.ai)</span> The team announced Beam + Zapier (Studio workflows can run Zapier actions); docs also list a Chainlink CRE integration. No customers visible.</li>
+<li><span class="when">2026-10-29</span> <span class="muted">(#beam)</span> Miners reported bursts of failing standard transfers, as on 2026-10-27; no team answer seen.</li>
+<li><span class="when">2026-10-26</span> <span class="muted">(#beam; docs.b1m.ai)</span> Beam announced a Bittensor EVM integration: a Beam-run relay records transfer receipts on-chain; nothing independent checks them.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Build the orchestrator and worker from the beam repo (Go 1.24+).</li>
+<li>Register a hotkey on subnet 105 with btcli.</li>
+<li>Sign up with BeamCore by signing &#x27;&lt;hotkey&gt;:&lt;fee percentage&gt;&#x27;; keep the returned orchestrator id and API key.</li>
+<li>Set the BeamCore, NATS, gateway and TLS settings from the orchestrator guide; run under a supervisor.</li>
+<li>Register workers with the capabilities you want; for Rooms keep their ports reachable and set the coordinator URL.</li>
+<li>Complete calibration work until each workload qualifies. To validate instead, run actors/validator.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Rules changed on 2026-10-19, 10-29 and 10-30 and keep moving; older chat is outdated.</li>
+<li>The sale multiplier and the eligibility reviews are not in the public core repo, which cannot prove what production runs.</li>
+<li>Weights are validator opinions, not payouts. Whose stake earns uid 0&#x27;s 91% of dividends is not shown.</li>
+<li>Client volume is unknown; Zapier, EVM receipts and miners&#x27; claims about failures are unverified.</li>
+<li>No hardware spec or worker payout terms are published.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/Beam-Network/beam" rel="noopener noreferrer">GitHub (beam)</a></li>
+<li><a href="https://github.com/Beam-Network/beam-core-public" rel="noopener noreferrer">GitHub (beam-core-public)</a></li>
+<li><a href="https://docs.b1m.ai" rel="noopener noreferrer">Documentation</a></li>
+<li><a href="https://docs.b1m.ai/docs/api" rel="noopener noreferrer">API reference</a></li>
+<li><a href="https://docs.b1m.ai/docs/agent" rel="noopener noreferrer">Beam for agents</a></li>
+<li><a href="https://docs.b1m.ai/docs/billing" rel="noopener noreferrer">Billing and prices</a></li>
+<li><a href="https://miner.b1m.ai/guide/intro" rel="noopener noreferrer">Miner guide</a></li>
+<li><a href="https://miner.b1m.ai/" rel="noopener noreferrer">Miner dashboard</a></li>
+<li><a href="https://b1m.ai" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://docs.b1m.ai/docs/integrations/bittensor-evm" rel="noopener noreferrer">Bittensor EVM receipts (docs)</a></li>
+<li><a href="https://github.com/Beam-Network" rel="noopener noreferrer">GitHub organisation</a></li>
+<li><a href="https://github.com/Beam-Network/beam-cli-public" rel="noopener noreferrer">GitHub (beam-cli-public)</a></li>
+<li><a href="https://github.com/Beam-Network/beam-sdk-public" rel="noopener noreferrer">GitHub (beam-sdk-public)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 7 sources</summary>
+<ul>
+<li><strong>repo</strong> Beam-Network/beam @96b9dfd (2026-10-30): README.md, actors/*/README.md, guide/prism.md, weights.md, validators.md, transfer-overseer.md, ws-protocol.md, orchestrators.md, workers.md, rooms.md; actors/validator/core/weight_setting.py (unchanged since 2026-10-11)</li>
+<li><strong>repo</strong> Beam-Network/beam-core-public @1167020 (2026-10-30): packages/ops-scheduler/src/prism/scoring.ts and jobs/prism-score-updater.ts (reliability factor 2026-10-29, speed-scaled duel stake 2026-10-30), epoch-summary-math.ts (unchanged since 2026-10-19); no licence file</li>
+<li><strong>repo</strong> Beam-Network/beam-sdk-public @ba163ae (2026-10-21): packages/cre (Chainlink CRE project and EVM relay), packages/zapier</li>
+<li><strong>web</strong> Chain read at block 9401375 (2026-10-31 04:14Z UTC): SN105 (Beam): registered 2025-11-09, tempo 360, 256 of 256 uids, commit-reveal on; emission weights burn/recycle/owner/validator/miner = 0/0/18/41/41 % (stored, same values as the chain default), RecycleOrBurn = Burn; uids under the owner hotkey or owner coldkey hold 0 % of incentive and 45.71 % of last-epoch emission (a floor); 7 validators have weight rows, on average 0 % of weight goes to uid 0; validator stake threshold 1000 TAO (global). Uid 213 read at block 9401451 (not owner-linked). Pool and price rank from the shared snapshot at block 9401451 (128 subnets, root excluded). Re-checked at block 9401613 (2026-10-31 05:02Z UTC): no setting changed in 33 checked items, emission split unchanged; pool 5316.6 TAO, price 0.006403.</li>
+<li><strong>web</strong> Chain read at block 9401451 (2026-10-31 04:30Z UTC): price SN105, 6 samples every 7d from block 9185451 (2026-10-01 04:12Z): price 0.006565 -&gt; 0.006499 TAO per alpha (-1.0%), pool TAO 5191.0 -&gt; 5356.0, net user flow +47.5 TAO (staked minus unstaked); and 8 samples every 1d from block 9351051 (2026-10-24 04:30Z): price 0.004126 -&gt; 0.006499 (+57.5%), pool TAO 4248.0 -&gt; 5356.0, net user flow +1098.5 TAO.</li>
+<li><strong>web</strong> docs.b1m.ai billing page (2026-10-28), Zapier and Chainlink CRE integration pages (2026-10-31), API and Bittensor EVM pages (2026-10-27), miner.b1m.ai guide pages, b1m.ai and the Beam-Network GitHub pages; all 13 page links returned 200 on 2026-10-31</li>
+<li><strong>msg</strong> #beam, 2026-09-19 to 2026-10-31; older history from archive search of #beam, 2025-11 to 2026-08</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/104.html"><small>← Previous</small>SN104 TAOStatus</a><a rel="next" href="/bittensor-docs/subnets/106.html"><small>Next →</small>SN106 Nodexo</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-31. Site built 2026-10-31. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

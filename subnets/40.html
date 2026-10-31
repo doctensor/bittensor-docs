@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ralph (SN40) | Bittensor Subnet Docs</title>
+<meta name="description" content="Miners shrink Qwen3-8B into phone-sized low-bit GGUF files; validators score how closely each matches the original.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h16">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>40</span><div>
+<h1>Ralph <span class="muted">SN40</span></h1>
+<p class="tagline">Miners shrink Qwen3-8B into phone-sized low-bit GGUF files; validators score how closely each matches the original.</p>
+<span class="st s-unclear">unclear</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl3"><b>0.86<small>/day</small></b><span>last 7 d</span></li><li class="pl2"><b>0.39<small>/day</small></b><span>days 8-30</span></li><li class="pl4"><b>2.7<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-29</b><span>last chat</span></li><li class="pw"><b>4,052</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Quiet</b><span>code activity</span></li><li class="pw"><b>0</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-10-29</b><span>last commit</span></li><li class="pw"><b>none</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>model compression (low-bit quantised open models)</dd>
+<dt>Status</dt><dd>Unclear as of 2026-10-31: no scoring round since 2026-09-11 (8 entries wait), yet a team member said on 2026-10-28 it is live; the chain pays one unidentified uid, not the crowned miners.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-31</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Docs vs code vs chain</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-similar">Similar subnets</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>Miners shrink one open model (Qwen3-8B) into 1- to 4-bit files; validators score how well each copy matches the original.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>One uid that is not a crowned miner holds 100% of miner incentive; the crown hotkeys earn 0 (2026-10-31).</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>the newest scored round is from 2026-09-11; 8 entries wait and a team member said on 2026-10-12 that evaluation was stuck.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>Pool 1,234 TAO (rank 114); the price fell 31% and a net 202 TAO left in the 30 days to 2026-10-31.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>Miner hardware is not stated; auditing the arithmetic runs on a CPU, re-scoring models needs a matching GPU.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Compresses the pinned Qwen3-8B into one bit tier and serves it as a GGUF with a committed hash.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-unk">GPU unknown</li><li class="fl fl-unk">Paid service unknown</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-unk"><dt>Hardware</dt><dd>Not documented; the quickstart example declares 42 H100-hours of compute</dd></div><div class="v2-need n-unk"><dt>API tokens / subscriptions</dt><dd>Not documented; entries are hosted on Hugging Face</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Registration burn 0.99 TAO (2026-10-31); one entry per coldkey per tier per round</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Compression research; a GGUF that llama.cpp accepts</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-medium">Medium barrier</span></h3><p>The team&#x27;s validator scores on rented GPUs; others set weights from a round they verified.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-unk">GPU unknown</li><li class="fl fl-unk">Paid service unknown</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>Weight-setting: not stated. The scoring box needs a GPU (torch, llama-cpp-python 0.3.34)</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>GPU rental only if you re-score; none stated for weight-setting</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Registration burn 0.99 TAO; permit stake threshold 1,000 TAO (chain, 2026-10-31)</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Own hotkey, a verdict signing key, the scoring validator&#x27;s hotkey as anchor</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div><div class="v2-role"><h3>Auditor <span class="v2-barrier b-low">Low barrier</span></h3><p>Anyone can recheck a signed round: arithmetic on a CPU, model effects on matching GPUs.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-no"><dt>Hardware</dt><dd>None for levels L0 and L1 (CPU); L2 and L3 need a matching GPU</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None found</dd></div><div class="v2-need n-no"><dt>Stake / fees</dt><dd>None; no registration needed</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Python repo; pin the signer key from the trail&#x27;s index.json</dd></div></dl><a class="v2-more" href="#sn-role-2">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-10-31. Not financial advice.</span></div><p>Bearish: weekly net outflow, a falling price and miner reward on one uid that is not a crown holder. <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>Ralph (Ralph Labs) is a subnet where miners compress one open model, Qwen3-8B, into tiny GGUF files in four bit-width tiers so it can run on a phone. Validators score how closely each file matches the original, and the best per tier is crowned. The v2 design replaced an earlier research design in August 2026.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Miners compress the pinned model into a tier with a cap on bits per weight (binary 1.15, ternary 1.75, sub2 2.3, sub4 4.0) and serve a GGUF file at a fixed Hugging Face revision. They commit a hash of the bytes on chain before the round&#x27;s random value exists, then reveal after the round opens.</p></div><div><h3>Validators</h3><p>The scoring validator rents a GPU box and measures &#x27;observer KL&#x27; retention: judge models compare how the miner&#x27;s and the parent&#x27;s steps move the judge (1 = identical). Exam items come from a block hash drawn after commitments close; records are signed and anchored on chain.</p></div><div><h3>Incentive</h3><p>Team rules: per tier the king takes 80% and the best improving challenger 20%. Chain, 2026-10-31: split 18% owner, 41% validators, 41% miners. All miner incentive sits on uid 234 (registered 2026-09-23, never set weights); the five Round 7 hotkeys earn 0. Four of six weight-setters, including owner-linked uid 0, put all weight on it.</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-10-31, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-good">Open</span>Open: 6 of 7 permit holders are not owner-linked; the team runs the GPU scoring.</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">33.7%</span>33.68% of last-epoch emission goes to the owner uid as dividends; owner cut 18%, RecycleOrBurn is Burn.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">1 uid</span><span class="v2-sx muted">top 5 hold 100% of incentive.</span> One uid earns all miner incentive; six uids earn validator dividends.</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Converged</span>4 of 6 weight-setters put their top weight on one uid (concentration, not proof of copying).</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-caution">Partial</span>Miner and validator code are public on GitHub; no licence file was found.</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Compresses the pinned Qwen3-8B into one bit tier and serves it as a GGUF with a committed hash.</p><ul>
+<li>Only GGUF can pass the tiers; TQ1_0 and TQ2_0 are rejected (no Metal kernels in mainline llama.cpp).</li>
+<li>Chain, 2026-10-31: crown holders earn 0; incentive goes to uid 234.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-medium">Medium barrier</span></h3><p>The team&#x27;s validator scores on rented GPUs; others set weights from a round they verified.</p><ul>
+<li>Weight-setters set the newest verified round&#x27;s vector, burning when none is verified; no hardware or cost is published.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-2"><h3>Auditor <span class="v2-barrier b-low">Low barrier</span></h3><p>Anyone can recheck a signed round: arithmetic on a CPU, model effects on matching GPUs.</p><ul>
+<li>L0 recomputes the arithmetic; L1 re-digests the exam pool.</li>
+</ul></section></div>
+<h2 id="sn-x0">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Crown payout</td><td>Round 7 splits 0.40/0.20/0.20/0.15/0.05 over five crown hotkeys</td><td>Chain: incentive is 100% on uid 234; the five Round 7 hotkeys earn 0</td><td>2026-10-31</td></tr><tr><td>Is it running</td><td>A team member said on 2026-10-28 that it is live</td><td>Chat: the team said on 2026-10-12 that evaluation was stuck; no round since 2026-09-11</td><td>2026-10-31</td></tr></tbody></table></div>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-10-31. Not financial advice.</span></div>
+<p class="v2-thesis">The price fell 31% in 30 days as users withdrew a net 202 TAO (about 16% of the pool); the chain pays one unidentified uid and no round has run since 2026-09-11.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.001795 TAO per alpha</dd></div><div><dt>Pool</dt><dd>1,234 TAO, rank 114</dd></div><div><dt>Price, 30 days</dt><dd>-31%, 2026-10-01 to 2026-10-31</dd></div><div><dt>Net flow, 30 days</dt><dd>-202 TAO, 2026-10-01 to 2026-10-31</dd></div><div><dt>Miner pay</dt><dd>About 5.3 TAO per day, all to one uid (gross)</dd></div><div><dt>Miner pay outside top 5</dt><dd>None: only one uid is paid</dd></div><div><dt>Code activity</dt><dd>last commit 2026-10-29 (README only); 1 commit in 30 days</dd></div></dl>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>Round records and arithmetic are public and checkable on a CPU.</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>Net outflow in each of 5 weeks; price down 31%.</li>
+<li>All miner incentive on one unidentified uid.</li>
+<li>No round since 2026-09-11; 8 entries wait.</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> Weights that pay the crowned miners or a new scored round would point up; more outflow with the uid 234 pattern unchanged would point down.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-similar">Similar subnets</h2>
+<div class="v2-sim"><p>By pool size this is <strong>rank 13 of 14</strong> among the subnets grouped as <em>training</em> (what they mainly sell). Pool and price as of 2026-10-30 to 2026-10-31, price in TAO per alpha; the barrier is the easiest miner role.</p><div class="scroll"><table class="v2-table"><thead><tr><th>#</th><th>Subnet</th><th>Pool</th><th>Price</th><th>Miner barrier</th></tr></thead><tbody><tr><td>10</td><td><a href="/bittensor-docs/subnets/102.html">Connito</a> <span class="muted">SN102</span></td><td>3,045 TAO</td><td>0.004348</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>11</td><td><a href="/bittensor-docs/subnets/119.html">CapabilityForge Next</a> <span class="muted">SN119</span></td><td>3,001 TAO</td><td>0.002159</td><td><span class="v2-barrier b-unknown">Unknown</span></td></tr><tr><td>12</td><td><a href="/bittensor-docs/subnets/100.html">Cortex</a> <span class="muted">SN100</span></td><td>2,174 TAO</td><td>0.002917</td><td><span class="v2-barrier b-high">High</span></td></tr><tr class="me" aria-current="true"><td>13</td><td>Ralph <span class="muted">SN40, this page</span></td><td>1,234 TAO</td><td>0.001795</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>14</td><td><a href="/bittensor-docs/subnets/78.html">UMI</a> <span class="muted">SN78</span></td><td>1,050 TAO</td><td>0.001923</td><td><span class="v2-barrier b-medium">Medium</span></td></tr></tbody></table></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-31</span> <span class="muted">(on-chain read of mainnet)</span> Weight-setters uids 44 and 149 now split weight over five uids, shaped like Round 7; four still put 100% on uid 234, which now holds a validator permit.</li>
+<li><span class="when">2026-10-29</span> <span class="muted">(GitHub RalphLabsAI/ralph)</span> README updated after an auditor asked where the --signer key comes from. Only commit since 2026-09-16.</li>
+<li><span class="when">2026-10-12</span> <span class="muted">(#ralph)</span> A team member said mining is live but evaluation is stuck.</li>
+<li><span class="when">2026-09-11</span> <span class="muted">(Hugging Face ralph-v2-rounds; team subnet.json)</span> Round 7 record uploaded; it is still the newest round. A team-run test on 2026-09-14 ran the sub2 crown on four iPhones.</li>
+<li><span class="when">2026-08-11</span> <span class="muted">(GitHub RalphLabsAI/ralph (bench README))</span> The team withdrew its two benchmark result files after finding harness defects that favoured its own models.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Read the README in RalphLabsAI/ralph: the pinned parent (Qwen3-8B), the four tiers and their bit caps.</li>
+<li>Compress the model into one tier as a GGUF; check it with the repo&#x27;s bit-rate tool.</li>
+<li>Commit the file&#x27;s hash before the round nonce exists, reveal after the round opens (miner/QUICKSTART.md).</li>
+<li>Check the team&#x27;s status feed first: on 2026-10-31 no round is in flight and 8 entries wait.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>The chain does not pay the crowned miners: uid 234 holds all incentive and never set weights; who runs it is unknown.</li>
+<li>The team&#x27;s own gap list (checked 2026-09-13) says no v2 allocation was applied on chain; the 2026-10-31 read fits that.</li>
+<li>Members have alleged self-mining since July; the owner denies it. This page takes no side.</li>
+<li>Retention is fidelity to the parent, not capability; figures and the sub2-only iPhone test are the team&#x27;s, not independently reproduced.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://www.ralphlabs.ai/" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://www.ralphlabs.ai/models" rel="noopener noreferrer">Crowned models (team page)</a></li>
+<li><a href="https://github.com/RalphLabsAI/ralph" rel="noopener noreferrer">GitHub (RalphLabsAI/ralph)</a></li>
+<li><a href="https://huggingface.co/RalphLabsAI/ralph-crowns" rel="noopener noreferrer">Crown files on Hugging Face</a></li>
+<li><a href="https://huggingface.co/datasets/RalphLabsAI/ralph-v2-rounds" rel="noopener noreferrer">Round records (Hugging Face dataset)</a></li>
+<li><a href="https://www.ralphlabs.ai/.well-known/subnet.json" rel="noopener noreferrer">Team&#x27;s machine-readable subnet description</a></li>
+<li><a href="https://huggingface.co/datasets/RalphLabsAI/ralph-v2-status" rel="noopener noreferrer">Team live status feed (Hugging Face)</a></li>
+<li><a href="https://ralphlabs.ai/dashboard" rel="noopener noreferrer">Team dashboard</a></li>
+<li><a href="https://github.com/RalphLabsAI/ralph/blob/main/miner/QUICKSTART.md" rel="noopener noreferrer">Miner quickstart (GitHub)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 5 sources</summary>
+<ul>
+<li><strong>msg</strong> #ralph 2025-05-12 to 2026-10-29 (newest team message 2026-10-28), including the pinned posts of 2025-05 and 2026-06-18</li>
+<li><strong>repo</strong> RalphLabsAI/ralph at commit 194ff53 (2026-10-29; earlier 6500e1b, 2026-09-16): README.md, miner/QUICKSTART.md, bench/README.md, requirements-gpu.txt, deploy/, and the eval code for weight setting, the auditor and the watchdog</li>
+<li><strong>web</strong> https://www.ralphlabs.ai/.well-known/subnet.json (read 2026-10-31), llms.txt, the crowns page and the dashboard</li>
+<li><strong>web</strong> Hugging Face RalphLabsAI datasets ralph-v2-rounds (newest change 2026-09-11) and ralph-v2-status (live feed read 2026-10-31 00:30 UTC), and the ralph-crowns model repository</li>
+<li><strong>web</strong> Chain read at block 9400216 (2026-10-31 00:23Z UTC): SN40 (Ralph): registered 2026-06-15, tempo 360, 256 of 256 uids, commit-reveal off; emission weights burn/recycle/owner/validator/miner = 0/0/18/41/41 %, RecycleOrBurn = Burn; uids under the owner hotkey or coldkey hold 0 % of incentive and 33.68 % of last-epoch emission (a floor); 6 validators have weight rows, none puts weight on uid 0. Per-uid reads of uids 234, 44, 149; 30-day pool and flow read, same block; no addresses recorded. Re-read at block 9400304 (2026-10-31 00:40Z UTC): pool, price, incentive, dividends, emission split and the weight-setters&#x27; top targets unchanged; uid 234 still has not set weights (its weight age grew by exactly the 88 blocks between the reads).</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/39.html"><small>← Previous</small>SN39 Pending (former Basilica slot)</a><a rel="next" href="/bittensor-docs/subnets/41.html"><small>Next →</small>SN41 Almanac</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-31. Site built 2026-10-31. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

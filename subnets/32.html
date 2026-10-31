@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>It&#x27;s AI (SN32) | Bittensor Subnet Docs</title>
+<meta name="description" content="Miners rate texts as human- or AI-written on validator-built samples; the team sells the detector at its-ai.org.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h8">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>32</span><div>
+<h1>It&#x27;s AI <span class="muted">SN32</span></h1>
+<p class="tagline">Miners rate texts as human- or AI-written on validator-built samples; the team sells the detector at its-ai.org.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl4"><b>5.3<small>/day</small></b><span>last 7 d</span></li><li class="pl3"><b>1.8<small>/day</small></b><span>days 8-30</span></li><li class="pl4"><b>3.5<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-31</b><span>last chat</span></li><li class="pw"><b>6,635</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Shipping</b><span>code activity</span></li><li class="pw"><b>1</b><span>code commit in 30 d</span></li><li class="pw"><b>2026-10-28</b><span>last commit</span></li><li class="pw"><b>none</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>AI-generated text detection</dd>
+<dt>Status</dt><dd>Live, with v3.15.1 released on 2026-10-28, but validator consensus failed twice in three days: no UID had incentive at the 2026-10-30 15:00 and 21:00 UTC reads.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-30</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Docs vs code vs chain</a></li><li><a href="#sn-x1">When validators break</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-similar">Similar subnets</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>miners earned nothing at the 2026-10-30 15:00 and 21:00 UTC reads; the same happened on 2026-10-28.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>validator UID 222 weights only itself and gets 54.1% of emission; a member says it holds 53% of stake.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>open source (MIT). Miners need a 24 GB GPU and their own detector; validators an 80 GB GPU.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>ITSAI Technologies sells the detector and tops benchmarks; none of this is visible on chain.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>price -9%, net outflow 301 TAO in 30 days, pool 6,586 TAO (rank 62).</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Runs a text classifier and scores each text in a validator&#x27;s batch.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-caution">GPU needed</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>GPU, 24 GB VRAM, RTX 4090 advised (mining.md says 16 GB)</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None required (free weights download)</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Burn 0.0301 TAO (2026-10-30); no alpha stake needed</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Python, pm2, open port; bring your own detector</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Builds text batches, queries miners, scores them and sets weights.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-caution">GPU needed</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>GPU, 80 GB VRAM (A100), 80 GB RAM, 1 TB SSD</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None beyond a Weights and Biases key</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Stake above the chain&#x27;s 1,000 TAO floor; burn 0.0301 TAO</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Ollama with 30+ models, pm2, W&amp;B key</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-10-30. Not financial advice.</span></div><p>Net outflow and a 9% price fall; miner pay failed twice in three days <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>It&#x27;s AI detects whether a text was written by a person or an AI model. Miners run classifiers and score batches that validators build. The company behind it, ITSAI Technologies, sells the detector as a website, API and browser extension; its accuracy claims are its own.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>A miner runs its own text classifier and returns, for each text in a batch, the probability that an AI wrote it. The shipped baseline would not survive on the live network (FAQ), so miners bring their own model. Since v3.15.0 answers can be encrypted.</p></div><div><h3>Validators</h3><p>A validator builds each round: human texts from the Pile and AI texts from 30+ open models via Ollama, plus a Common Crawl set as out-of-domain test. It queries a random sample of miners, re-asks a few texts to catch inconsistent answers, scores them and sets weights on chain.</p></div><div><h3>Incentive</h3><p>Reward is the average of F1, a false-positive score and average precision on in-domain texts. It is zero if the running out-of-domain F1 is under 0.9, answers leave 0 to 1, or re-asked answers differ. A softmax across sampled miners follows. Pay then depends on stake-weighted validator agreement.</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-10-30, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-good">Open</span>Anyone with stake above the chain floor (1,000 TAO) can get a permit; 4 of 64 slots used, no whitelist found</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">0%</span>Owner UID 129 held 0% on 2026-10-30; cut set to 18%, RecycleOrBurn is Burn; it held all incentive on 2026-10-28</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">0 uids</span>0 UIDs earn at the 2026-10-30 21:00 UTC read; 243 earned at 00:00 UTC that day, top 5 took 2.7%</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Converged</span>2 of 3 weight-setters put top weight on UID 254; the third, UID 222, weights only itself (concentration)</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-good">Open</span>Miner and validator code are public under MIT; the DeBERTa weights sit in a separate Hugging Face repo</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Runs a text classifier and scores each text in a validator&#x27;s batch.</p><ul>
+<li>min_compute.yml: 24 GB VRAM and RAM, 100 GB SSD, Ubuntu 22.04; mining.md says RTX A4000, 16 GB.</li>
+<li>All 256 slots are full, so registering competes for a slot; no document says CPU mining works.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Builds text batches, queries miners, scores them and sets weights.</p><ul>
+<li>4 of 64 permit slots used; no whitelist found. Validators must set a Weights and Biases key.</li>
+<li>2026-10-30: UID 222 weighted only itself; UIDs 179 and 182 spread weight over about 245 UIDs each.</li>
+</ul></section></div>
+<h2 id="sn-x0">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Miner GPU</td><td>mining.md: RTX A4000, 16 GB</td><td>Code: min_compute.yml needs 24 GB</td><td>2026-10-30</td></tr><tr><td>Scoring</td><td>incentive.md: F1, false-positive score, average precision</td><td>Code: reward.py adds a 0.9 out-of-domain F1 gate and a softmax</td><td>2026-10-30</td></tr><tr><td>Testnet 87</td><td>mining.md: trial on netuid 87 with a team validator</td><td>Chain: no validator there has set weights in about 29 days</td><td>2026-10-30</td></tr></tbody></table></div>
+<h2 id="sn-x1">When validators break</h2>
+<p>Pay follows validators&#x27; weights combined by stake, so a validator holding over half the stake can zero every miner (a member&#x27;s explanation, 2026-10-30; the chain matches).</p>
+<ul class="v2-list">
+<li>2026-10-28: at 09:00 UTC the only weight-setting validator pointed at the owner&#x27;s UID, so all incentive went there (the setting is Burn). Normal again by 2026-10-29.</li>
+<li>2026-10-30: incentive fell to zero between 12:00 and 15:00 UTC and was still zero at 21:00. UID 222 had one weight target, itself.</li>
+<li>The team replied to earlier outages within a day but gave no cause; no reply on this one by 17:47 UTC.</li>
+</ul>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-10-30. Not financial advice.</span></div>
+<p class="v2-thesis">Net outflow in each of the last four weeks and a 9% price fall. Miner pay hangs on one validator with over half the stake, and consensus failed on 2026-10-28 and 2026-10-30. Usage is claimed only by the team, so value is unclear.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.00249 TAO per alpha</dd></div><div><dt>Pool</dt><dd>6,586 TAO, rank 62</dd></div><div><dt>Price, 30 days</dt><dd>-9%, 2026-09-30 to 2026-10-30</dd></div><div><dt>Net flow, 30 days</dt><dd>-301 TAO, 2026-09-30 to 2026-10-30</dd></div><div><dt>Miner pay</dt><dd>0.030 TAO per day on average (243 uids, 2026-10-30 00:00 UTC); none at 21:00 UTC</dd></div><div><dt>Miner pay outside top 5</dt><dd>0.030 TAO per day on average (2026-10-30 00:00 UTC)</dd></div><div><dt>Code activity</dt><dd>last commit 2026-10-28; 2 commits in 30 days; no releases</dd></div></dl>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>About 240 UIDs earned in normal states (2026-10-29, 2026-10-30 12:00 UTC)</li>
+<li>Pool nearly flat (-4%) despite the outflow</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>Consensus failed on 2026-10-28 and 2026-10-30</li>
+<li>One validator holds over half the stake; usage claims unverified</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> Stake or weights spreading beyond one validator, verified usage, or net inflow returning.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-similar">Similar subnets</h2>
+<div class="v2-sim"><p>By pool size this is <strong>rank 3 of 6</strong> among the subnets grouped as <em>security</em> (what they mainly sell). Pool and price as of 2026-10-30 to 2026-10-31, price in TAO per alpha; the barrier is the easiest miner role.</p><div class="scroll"><table class="v2-table"><thead><tr><th>#</th><th>Subnet</th><th>Pool</th><th>Price</th><th>Miner barrier</th></tr></thead><tbody><tr><td>1</td><td><a href="/bittensor-docs/subnets/63.html">Enigma</a> <span class="muted">SN63</span></td><td>12,570 TAO</td><td>0.005318</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr><td>2</td><td><a href="/bittensor-docs/subnets/61.html">RedTeam</a> <span class="muted">SN61</span></td><td>10,832 TAO</td><td>0.006444</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr class="me" aria-current="true"><td>3</td><td>It&#x27;s AI <span class="muted">SN32, this page</span></td><td>6,586 TAO</td><td>0.00249</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>4</td><td><a href="/bittensor-docs/subnets/104.html">TAOStatus</a> <span class="muted">SN104</span></td><td>5,837 TAO</td><td>0.004021</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr><td>5</td><td><a href="/bittensor-docs/subnets/87.html">Provenonce (Proof of Assurance)</a> <span class="muted">SN87</span></td><td>1,500 TAO</td><td>0.003282</td><td><span class="v2-barrier b-high">High</span></td></tr></tbody></table></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-30</span> <span class="muted">(#itsai and chain)</span> Zero incentive from about 13:00 UTC; validator UID 222 weighted only itself. No team reply by 17:47 UTC.</li>
+<li><span class="when">2026-10-29</span> <span class="muted">(#itsai)</span> Team post: a press release reached 1,100+ news sites; detection in five languages at up to 99.8% (team figures).</li>
+<li><span class="when">2026-10-28</span> <span class="muted">(#itsai and chain)</span> Validators dropped out and only the owner&#x27;s UID got incentive. The team said a validator was re-registered and it should normalise.</li>
+<li><span class="when">2026-10-28</span> <span class="muted">(GitHub)</span> v3.15.1: wandb bump for validator logging, no scoring change. First commit since 2026-07-23.</li>
+<li><span class="when">2026-10-24</span> <span class="muted">(#itsai)</span> Validator stalls (2026-10-20, 2026-10-23) and a Weights and Biases logging stop (from 2026-10-16) were reported fixed; no cause given.</li>
+<li><span class="when">2026-07-24</span> <span class="muted">(#itsai and GitHub)</span> v3.15.0 added encrypted predictions; v3.14 (2026-03-10) had removed the alpha stake minimum for miners.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Get a 24 GB GPU (RTX 4090 advised) and your own detector; the baseline fails the quality bar.</li>
+<li>Clone the repo, pip install -e ., download the DeBERTa weights named in docs/mining.md.</li>
+<li>Register with btcli s register --netuid 32 (0.0301 TAO on 2026-10-30; slots are full). No alpha stake needed.</li>
+<li>Run neurons/miner.py under pm2 with an open port; test with detection/data_generator.py. Testnet 87 is idle.</li>
+<li>Check the channel first: payouts were zero on 2026-10-30. Validators: docs/validating.md.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Payouts hang on few validators; no cause or operator is known for the 2026-10-28 and 2026-10-30 failures.</li>
+<li>Accuracy, benchmark, press and revenue figures are the team&#x27;s own and unverified; members doubt the detector is current (2026-10-10).</li>
+<li>A minimum alpha rule exists in code but defaults off; whether any validator sets it is unknown.</li>
+<li>A CPU miner and registration margins are member claims only.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/It-s-AI/llm-detection" rel="noopener noreferrer">GitHub (It-s-AI/llm-detection)</a></li>
+<li><a href="https://github.com/It-s-AI/llm-detection/blob/37dcb27/docs/incentive.md" rel="noopener noreferrer">Incentive mechanism doc</a></li>
+<li><a href="https://github.com/It-s-AI/llm-detection/blob/37dcb27/docs/mining.md" rel="noopener noreferrer">Mining doc</a></li>
+<li><a href="https://github.com/It-s-AI/llm-detection/blob/37dcb27/docs/validating.md" rel="noopener noreferrer">Validating doc</a></li>
+<li><a href="https://github.com/It-s-AI/llm-detection/blob/37dcb27/docs/FAQ.md" rel="noopener noreferrer">FAQ</a></li>
+<li><a href="https://its-ai.org/en" rel="noopener noreferrer">Product site (It&#x27;s AI)</a></li>
+<li><a href="https://x.com/ai_detection" rel="noopener noreferrer">X (ai_detection)</a></li>
+<li><a href="https://wandb.ai/itsai-dev/subnet32" rel="noopener noreferrer">Weights and Biases project</a></li>
+<li><a href="https://huggingface.co/spaces/sergak0/ai-detection-leaderboard" rel="noopener noreferrer">Miner leaderboard (Hugging Face Space, linked in the repo FAQ)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 6 sources</summary>
+<ul>
+<li><strong>repo</strong> It-s-AI/llm-detection @f184874 (2026-10-28, version 3.15.1, MIT; HEAD re-read 2026-10-30; the two commits since 37dcb27 change only the version and the wandb pin): README.md, docs/*, min_compute.yml</li>
+<li><strong>repo</strong> It-s-AI/llm-detection @37dcb27 (2026-07-23, unchanged in detection/validator since): detection/validator/reward.py, forward.py, detection/base/validator.py, detection/utils/config.py, detection/utils/encryption.py</li>
+<li><strong>msg</strong> #itsai 2025-02-24 to 2026-10-30 (pinned posts, team update posts v3.11.2 to v3.15.0, the last 30 days read in full, newest message 2026-10-30 17:47 UTC)</li>
+<li><strong>web</strong> https://its-ai.org/en (read 2026-10-21, HTTP 200 on 2026-10-30)</li>
+<li><strong>web</strong> Bittensor mainnet chain reads, netuid 32: parameters, neurons, weights and emission at 2026-10-30 21:01 UTC; earlier reads 2026-10-28 09:00, 2026-10-29 12:00 and 2026-10-30 00:00, 12:00 and 15:00 UTC; settings compared with 2026-10-26; price and flow 2026-09-30 to 2026-10-30</li>
+<li><strong>web</strong> Bittensor testnet chain read, netuid 87 neurons and weights, 2026-10-30</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/31.html"><small>← Previous</small>SN31 Recall</a><a rel="next" href="/bittensor-docs/subnets/33.html"><small>Next →</small>SN33 ReadyAI</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-30. Site built 2026-10-31. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

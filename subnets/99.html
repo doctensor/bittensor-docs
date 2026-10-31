@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Thirty Spokes (SN99) | Bittensor Subnet Docs</title>
+<meta name="description" content="Miners train a routing model that hands tasks to LLMs; one owner-run validator crowns the best quality per dollar.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h21">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>99</span><div>
+<h1>Thirty Spokes <span class="muted">SN99</span></h1>
+<p class="tagline">Miners train a routing model that hands tasks to LLMs; one owner-run validator crowns the best quality per dollar.</p>
+<span class="st s-quiet">quiet</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl3"><b>1.6<small>/day</small></b><span>last 7 d</span></li><li class="pl3"><b>0.91<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>11<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-30</b><span>last chat</span></li><li class="pw"><b>1,148</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Quiet</b><span>code activity</span></li><li class="pw"><b>0</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-09-15</b><span>last commit</span></li><li class="pw"><b>none</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>model routing / orchestration</dd>
+<dt>Status</dt><dd>No public duel result since window 84 (2026-10-01), no owner chat post since 2026-09-17 and no commit since 2026-09-15. The owner hotkey still sets weights, which a running daemon does on its own. Checked 2026-10-30.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-30</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Product side</a></li><li><a href="#sn-x1">Docs vs code vs chain</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-similar">Similar subnets</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>miners submit a ~70 GB fine-tuned routing model; best quality per dollar holds the crown.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>king uid 25 earns 85% of incentive, ex-king uid 18 15%; neither has set weights (2026-10-30).</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>every duel is published, yet the store ends at window 84 (2026-10-01).</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>joining takes a trained 35B model, a ~70 GB upload and your own OpenRouter credit.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>small pool (431 TAO, rank 122 of 128); net flow +46 TAO in 30 days, all from one week.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-high">High barrier</span></h3><p>Trains and submits a full fine-tune of the pinned routing model.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-caution">GPU needed</li><li class="fl fl-caution">Paid service needed</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>GPU training compute for a 35B model, amount not stated; ~70 GB disk</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>Own OpenRouter credit; docs floor estimate $0.25 to $17 per window</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>0.5 TAO registration burn (2026-10-30) plus about 0.01 TAO fees</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Python 3.12, uv, btcli 11; upload ~70 GB (hours)</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>The owner runs the only validator and sets weights.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-caution">GPU needed</li><li class="fl fl-caution">Paid service needed</li><li class="fl fl-bad">Permissioned</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>GPU serving host plus a separate Docker sandbox host; sizes not stated</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>OpenRouter key, Cloudflare R2 bucket, Hugging Face token</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>0.5 TAO registration burn; permit needs 1,000 TAO stake (global rule)</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Own serving, sandbox and R2 hosts; guide written for the owner only</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-10-30. Not financial advice.</span></div><p>Small pool, outflows in four of five intervals, no public results since 2026-10-01. <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>Thirty Spokes is a model-routing subnet. Miners train a &#x27;conductor&#x27;, a fine-tune of Qwen3.6-35B-A3B, that hands agentic tasks to OpenRouter models. One owner-run validator duels each challenger against the king and scores quality minus cost. Public results stop at 2026-10-01.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>A miner submits full weights on the pinned architecture (about 70 GB, bf16, no adapters). The &#x27;conductor&#x27; picks an OpenRouter model for each agentic task and never writes the answer; worker calls run on the miner&#x27;s own key.</p></div><div><h3>Validators</h3><p>One owner-run validator replays the king and each challenger on the same fresh slice of HLE and LiveCodeBench tasks, scoring quality minus a measured price. A challenger needs a paired gain above 0.05 plus three robustness checks. Each window publishes a reveal.</p></div><div><h3>Incentive</h3><p>Documented: king 85%, five ex-kings 5, 4, 3, 2 and 1%, unfilled slots burn to uid 0. On chain (2026-10-30): 85.0% on uid 25, 15.0% on uid 18, the former king. The owner hotkey earns 86.6% of dividends; owner cut 18%.</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-10-30, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-bad">Owner only</span>Design is one owner-run validator; two outside hotkeys set the same weights, the owner&#x27;s earns 86.6% of dividends.</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">43.3%</span>Owner hotkey holds 43.3% of last-epoch emission (all dividends); owner cut set at 18%, RecycleOrBurn is Burn.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">2 uids</span><span class="v2-sx muted">top 5 hold 100% of incentive.</span> Two uids earn incentive: the king (85%) and the ex-king (15%); neither has ever set weights.</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Converged</span>All 3 weight-setters put 85% on uid 25; one owner-run scorer and a public slate make that expected, not a check.</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-good">Open</span>MIT repo with miner, validator and owner tools; last commit 2026-09-15, the live validator goes beyond it on one point.</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-high">High barrier</span></h3><p>Trains and submits a full fine-tune of the pinned routing model.</p><ul>
+<li>Pinned base Qwen/Qwen3.6-35B-A3B, bf16; the hotkey must be ed25519; one submission per hotkey, ever.</li>
+<li>Queue depth is 6; three submissions have waited in the public queue since 2026-09-24.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>The owner runs the only validator and sets weights.</p><ul>
+<li>Design: one validator run by the owner (whitepaper D1); outsiders can only check the published reveals.</li>
+<li>Chain: 5 validator permits, 3 set weights (owner hotkey, two outside hotkeys); all three put 85% on uid 25.</li>
+</ul></section></div>
+<h2 id="sn-x0">Product side</h2>
+<ul class="v2-list">
+<li>Team says: the routing is also sold as an OpenAI-compatible gateway; no usage figure, price list or paying customer appears in the repo, docs or chain.</li>
+</ul>
+<h2 id="sn-x1">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Who gets the 15% slot</td><td>Five ex-kings share 5, 4, 3, 2, 1%; the rest burns to uid 0</td><td>Chain: 15% on one ex-king (uid 18), none to uid 0</td><td>2026-10-30</td></tr><tr><td>How a king is crowned</td><td>Docs and code: by winning a duel</td><td>Chain: uid 25 registered 2026-09-23, crowned 2026-09-24; the reveal cites the owner, no duel</td><td>2026-10-30</td></tr><tr><td>Duels per window</td><td>Docs: six per 24-hour window</td><td>Code: three per window, depth 6</td><td>2026-10-30</td></tr><tr><td>Is v3 live?</td><td>README, guides and site: still rehearsed on testnet 526</td><td>Chain: v3 pays out now; owner announced it live 2026-09-12</td><td>2026-10-30</td></tr><tr><td>Console view</td><td>Console: window 17, king is uid 18</td><td>Chain: king is uid 25; reveals reach window 84</td><td>2026-10-30</td></tr></tbody></table></div>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-10-30. Not financial advice.</span></div>
+<p class="v2-thesis">The pool is among the smallest (rank 122 of 128) and the price fell 11% over 30 days after a mid-October spike. The team is quiet and no usage can be verified.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.001198 TAO per alpha</dd></div><div><dt>Pool</dt><dd>431 TAO, rank 122</dd></div><div><dt>Price, 30 days</dt><dd>-11%, 2026-09-28 to 2026-10-30</dd></div><div><dt>Net flow, 30 days</dt><dd>+46 TAO, 2026-09-30 to 2026-10-30</dd></div><div><dt>Miner pay</dt><dd>3.5 TAO per day over 2 paid uids</dd></div></dl>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>Net flow is +46 TAO over 30 days, from one week of buying.</li>
+<li>Rules, MIT code and reveal format are public.</li>
+<li>Chain settings unchanged since 2026-10-21.</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>Four of five flow intervals were net outflows.</li>
+<li>No public duel since 2026-10-01, no owner post since 2026-09-17.</li>
+<li>The owner set the king without a duel.</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> A new public reveal with real duels or a commit matching the live validator would help; silence or deregistration would hurt.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-similar">Similar subnets</h2>
+<div class="v2-sim"><p>By pool size this is <strong>rank 11 of 11</strong> among the subnets grouped as <em>inference</em> (what they mainly sell). Pool and price as of 2026-10-30 to 2026-10-31, price in TAO per alpha; the barrier is the easiest miner role.</p><div class="scroll"><table class="v2-table"><thead><tr><th>#</th><th>Subnet</th><th>Pool</th><th>Price</th><th>Miner barrier</th></tr></thead><tbody><tr><td>7</td><td><a href="/bittensor-docs/subnets/46.html">Instant</a> <span class="muted">SN46</span></td><td>7,474 TAO</td><td>0.002745</td><td><span class="v2-barrier b-high">High</span></td></tr><tr><td>8</td><td><a href="/bittensor-docs/subnets/92.html">REAX</a> <span class="muted">SN92</span></td><td>3,142 TAO</td><td>0.02077</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>9</td><td><a href="/bittensor-docs/subnets/96.html">Verathos</a> <span class="muted">SN96</span></td><td>2,215 TAO</td><td>0.003138</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>10</td><td><a href="/bittensor-docs/subnets/31.html">Recall</a> <span class="muted">SN31</span></td><td>1,694 TAO</td><td>0.003529</td><td><span class="v2-barrier b-high">High</span></td></tr><tr class="me" aria-current="true"><td>11</td><td>Thirty Spokes <span class="muted">SN99, this page</span></td><td>431 TAO</td><td>0.001198</td><td><span class="v2-barrier b-high">High</span></td></tr></tbody></table></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-30</span> <span class="muted">(store; GitHub; chat; chain)</span> Nothing new: the store still ends at window 84, no commit since 2026-09-15, chat holds only &#x27;any update?&#x27; pings.</li>
+<li><span class="when">2026-10-13</span> <span class="muted">(chat)</span> Miners asked about a new owner and a scam; no team reply through 2026-10-30.</li>
+<li><span class="when">2026-10-01</span> <span class="muted">(store)</span> Window 84, the last public reveal: no duels, same slate since window 51.</li>
+<li><span class="when">2026-09-24</span> <span class="muted">(store; chain)</span> Window 51 starts reign 3 for uid 25 (registered the day before); the old reign ended by the owner, no duel. The 15% slot moved to uid 18.</li>
+<li><span class="when">2026-09-17</span> <span class="muted">(chat)</span> Owner&#x27;s last chat post: all OpenRouter models coming soon.</li>
+<li><span class="when">2026-09-12</span> <span class="muted">(chat; store)</span> Owner announced v3 live; window 2 crowned uid 18.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Check the public store&#x27;s latest window first: still window 84 (2026-10-01) on 2026-10-30.</li>
+<li>Create an ed25519 hotkey (pass --crypto-type ed25519 to btcli) and register on netuid 99 (burn 0.5 TAO).</li>
+<li>Register your own OpenRouter key with a spend cap.</li>
+<li>Train full weights on Qwen/Qwen3.6-35B-A3B (bf16) and run the dev kit&#x27;s local check.</li>
+<li>Rehearse on testnet netuid 526, then submit the ~70 GB tree: one shot per hotkey.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>The live validator goes beyond the published code (owner-set crown, 15% to an ex-king); the last commit is 2026-09-15, so what runs now is unconfirmed.</li>
+<li>Weights are re-set on a timer, so a fresh update shows no active team.</li>
+<li>Reveals for windows 3 to 5, 11 and 18 to 47 were never published; models.thirtyspokes.ai returned not-found (2026-10-30).</li>
+<li>The owner share is a floor: other uids may sit under unrelated keys.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://www.thirtyspokes.ai/" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://www.thirtyspokes.ai/docs/mining" rel="noopener noreferrer">Mining guide</a></li>
+<li><a href="https://www.thirtyspokes.ai/docs/koth" rel="noopener noreferrer">Mechanism docs</a></li>
+<li><a href="https://www.thirtyspokes.ai/docs/bittensor" rel="noopener noreferrer">Bittensor integration docs</a></li>
+<li><a href="https://www.thirtyspokes.ai/dashboard" rel="noopener noreferrer">Console</a></li>
+<li><a href="https://github.com/ThirtySpokes99/thirtyspokes" rel="noopener noreferrer">GitHub</a></li>
+<li><a href="https://store.thirtyspokes.ai/v3/latest.json" rel="noopener noreferrer">Public results store (latest window)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 6 sources</summary>
+<ul>
+<li><strong>msg</strong> #thirtyspokes-99, 2026-09-02 to 2026-10-30 (owner posts 2026-09-07, 09-08, 09-12, 09-17; miner questions and pings through 10-30)</li>
+<li><strong>repo</strong> ThirtySpokes99/thirtyspokes@439a718 (2026-09-15): README.md, docs/MINER.md, VALIDATOR.md, WHITEPAPER.md, .env.example, src/thirtyspokes/v3/ duel.py, config.py, emissions.py, validator.py</li>
+<li><strong>web</strong> https://www.thirtyspokes.ai/ and its docs pages mining, koth, bittensor, economics, anti-cheat and dashboard, read 2026-10-26 and 2026-10-30 (text unchanged between the two)</li>
+<li><strong>web</strong> Team public results store store.thirtyspokes.ai/v3/ latest.json, queue.json and reveal files for windows 1, 2, 6 to 10, 12 to 17 and 48 to 84, read 2026-10-26 and 2026-10-30 (hotkeys not copied)</li>
+<li><strong>web</strong> Chain read at block 9399283 (2026-10-30 21:16Z UTC): SN99 (Thirty Spokes) parameters, emission split 0/0/18/41/41, uid 0, 18, 25, 192 and 229, incentive, dividends and per-validator weights; refresh against block 9364101 (2026-10-26): no setting changed in 33 items. Rechecked at block 9399496 (2026-10-30 21:59Z UTC) against block 9392901 (2026-10-30 00:00Z UTC): no setting or emission-split change, pool 436.4 -&gt; 431.2 TAO.</li>
+<li><strong>web</strong> Chain read at block 9399283: price 0.001183 -&gt; 0.001198 TAO per alpha over 2026-09-30 to 2026-10-30, net user flow +45.7 TAO over 5 intervals, pool rank 122 of 128 non-root pools.</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/98.html"><small>← Previous</small>SN98 NeverPlayAlone</a><a rel="next" href="/bittensor-docs/subnets/100.html"><small>Next →</small>SN100 Cortex</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-30. Site built 2026-10-31. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

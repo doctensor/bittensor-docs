@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Root network (SN0) | Bittensor Subnet Docs</title>
+<meta name="description" content="TAO staked here earns a share of every subnet&#x27;s emission, paid as alpha baskets run by 64 root validators.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h0">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>0</span><div>
+<h1>Root network <span class="muted">SN0</span></h1>
+<p class="tagline">TAO staked here earns a share of every subnet&#x27;s emission, paid as alpha baskets run by 64 root validators.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>43<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>35<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>60<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-31</b><span>last chat</span></li><li class="pw"><b>56,693</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Shipping</b><span>code activity</span></li><li class="pw"><b>209</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-10-27</b><span>last commit</span></li><li class="pw"><b>2026-10-26</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>chain base layer (root network: TAO staking, validator baskets, chain-wide rules)</dd>
+<dt>Status</dt><dd>Not a mining subnet: active means the chain layer and #rao are moving. Mainnet runs runtime v486 (2026-10-31); the repo&#x27;s newest commit is from 2026-10-27.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-31</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Chain-wide rules in force</a></li><li><a href="#sn-x1">Docs vs code vs chain</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>root holds 5.47M TAO, about 47% of all issued TAO; it has no miners and no alpha token (2026-10-31).</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>all 64 root validator seats are filled; a seat costs a 1 TAO burn and pushes out the lowest-staked one.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>no root validator has set weights for about 44 days; payouts now go through alpha baskets.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>19 of 128 subnets use a custom Etao emission split; 2 run Null consensus.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>233 commits in 30 days, the newest on 2026-10-27; docs and website lag the chain.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Root validator <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Holds one of 64 root seats and runs a basket fund, keeping a cut (default 18%) of what stakers earn.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-no"><dt>Hardware</dt><dd>None (the docs say root has no validation work)</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Burn 1 TAO (2026-10-29 floor); stake your own TAO at once, the lowest-staked seat goes first</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>A few btcli commands (docs)</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Staker <span class="v2-barrier b-low">Low barrier</span></h3><p>Stakes TAO on netuid 0 behind a root validator and claims the subnet alpha that validator&#x27;s basket earns.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-no"><dt>Hardware</dt><dd>None</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Any TAO; a claim costs a fee (about 0.057 TAO on a full basket, docs)</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Two btcli commands: stake, then claim (docs)</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>Netuid 0 is the root network. It has no miners and no alpha token: it is the pool where TAO is staked directly, about 47% of all issued TAO on 2026-10-31. Root stake adds to validator weight on every subnet and earns a share of each subnet&#x27;s dividends, paid as a basket of subnet alpha that stakers claim. Its channel, #rao, is also where chain-wide rule changes are argued over.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>None: the docs say root has no miners. You take part by staking TAO behind a root validator or by holding a validator seat.</p></div><div><h3>Validators</h3><p>Root validators hold one of 64 seats. Registering burns a TAO price that rises about 26% per registration and halves in about 72 minutes; on 2026-10-29 it sat at its 1 TAO floor. When seats are full, the lowest-staked validator outside its immunity period is pruned. Each seat is a delegate (default take 18%) with its own alpha basket. Since v461 a fund changes only through bounded swap_basket trades; the old root weight vector was removed (last set about 2026-09-17), and root runs no epoch, so no code path pays from the old records.</p></div><div><h3>Incentive</h3><p>Stakers are paid in subnet alpha through their validator&#x27;s basket and realize it by claiming, which restakes the proceeds as TAO on root. There are no partial claims; amounts under 0.0005 TAO wait. Since Etao (v481) the chain pays root its baseline share off the top of each subnet&#x27;s validator slot every block, so owners cannot cut it. TAO emission between subnets follows each subnet&#x27;s moving-average price (docs). The TAO weight, which scales root stake in validator weight, is 0.18.</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-10-31, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-good">Open</span>Open: any hotkey can take a root seat for a 1 TAO burn, but no validator has set weights for about 44 days.</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-unk">Not read</span>Not applicable: root has no owner cut and no alpha emission.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-unk">Not read</span>Not applicable: stakers are paid through baskets. 23 old uids still show incentive, but root runs no epoch.</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-unk">Unknown</span>No validator has set weights for about 44 days, so there is nothing to compare.</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-good">Open</span>Open: the chain repo is public under Apache-2.0 (RaoFoundation/subtensor).</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Root validator <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Holds one of 64 root seats and runs a basket fund, keeping a cut (default 18%) of what stakers earn.</p><ul>
+<li>2026-10-23: the largest seat held 18.8% of staked TAO, the top five 63.4%; take was 18% on 23 seats, 9% on 17, 0% on 12.</li>
+<li>48 of 64 seats hold a validator permit; a new seat is immune from eviction for about 1 day.</li>
+<li>Basket trades are capped: 2% price band, 10% pool liquidity, 1/16 concentration, 10% of fund value per day (website).</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Staker <span class="v2-barrier b-low">Low barrier</span></h3><p>Stakes TAO on netuid 0 behind a root validator and claims the subnet alpha that validator&#x27;s basket earns.</p><ul>
+<li>Compare validators with btcli root list; the validator, not the staker, trades the basket.</li>
+<li>No partial claims; unstaking returns principal only and unclaimed yield stays owed.</li>
+</ul></section></div>
+<h2 id="sn-x0">Chain-wide rules in force</h2>
+<p>On 2026-10-31; governance or owners can change these.</p>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Rule</th><th>Now</th></tr></thead><tbody><tr><td>Subnet registration</td><td>Starts at 2x the last price paid (226.5 TAO), falls in a straight line to the 1 TAO floor in 8 days (about 378 TAO on 2026-10-31, calculated); 2 days between registrations; 60 days immunity</td></tr><tr><td>Emission split</td><td>Owner 0-33%, validators up to 50%, miners at least 33%; 109 of 128 subnets use 18/41/41</td></tr><tr><td>Consensus mode</td><td>Yuma on 126 subnets, Null on 2</td></tr><tr><td>TAO weight</td><td>0.18</td></tr></tbody></table></div>
+<h2 id="sn-x1">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Basket swaps</td><td>Root guide: testnet-only</td><td>Chain: basket trading switch is on</td><td>2026-10-31</td></tr><tr><td>Null consensus</td><td>Website: upcoming, 16,000 UIDs</td><td>Chain: live on 2 subnets; Code: 2,500-UID budget</td><td>2026-10-31</td></tr><tr><td>Registration settings</td><td>Defaults: 14-day interval, 1-day gap, 1,000 TAO floor, 120-day immunity</td><td>Chain: 8-day interval (about 4 days in effect), 2-day gap, 1 TAO floor, 60-day immunity</td><td>2026-10-31</td></tr><tr><td>Newest runtime</td><td>Website list ends at v481</td><td>Chain: v486 live; Code: main at 487, tags to v486</td><td>2026-10-31</td></tr></tbody></table></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-30</span> <span class="muted">(#rao, 2026-10-29 to 2026-10-31)</span> A team member said wallets with ML-DSA signatures and key rotation should arrive early next week. Members kept arguing over shorting; the team did not reply.</li>
+<li><span class="when">2026-10-29</span> <span class="muted">(#announce, 2026-10-29)</span> The team announced an open Novelty Search for 21:00 UTC on upcoming protocol updates. Its outcome was not seen.</li>
+<li><span class="when">2026-10-26</span> <span class="muted">(GitHub release v486; #rao, 2026-10-26; chain data)</span> Runtime v486 went live (reproducible builds). A subnet registered that day, cutting the recorded lock cost from 435 to 225 TAO; asked about the price, the team said it wants it low.</li>
+<li><span class="when">2026-10-23</span> <span class="muted">(GitHub release v484)</span> Runtime v484: root claims for baskets holding all 128 subnets plus TAO, EVM liquid-alpha controls.</li>
+<li><span class="when">2026-10-19</span> <span class="muted">(#announce and #rao, 2026-10-19)</span> Etao went live (v481): each subnet owner can set its emission split. The team called its own emission intervention temporary.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Install the bittensor Python package and use its btcli (the team said on 2026-10-02 that bittensor-cli is deprecated).</li>
+<li>Stake: compare validators with btcli root list, then btcli stake add --netuid 0 with a validator&#x27;s hotkey (or btcli root allocate). Claim with btcli root claim, previewing with --dry-run.</li>
+<li>Run a seat: check btcli subnets burn-cost 0, preview btcli subnets register --netuid 0 --dry-run, register, then stake on your own hotkey at once.</li>
+<li>Basket trading (btcli root swap) is on in chain state, but the root guide calls it testnet-only and wants an SDK from v461; check your btcli version first.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Netuid 0 has no mining task. #rao is mostly general chain and market talk; chat claims about particular subnets were not verified.</li>
+<li>Chain figures are from 2026-10-31 and can change by governance or owner action; seat stake and take figures are from 2026-10-23.</li>
+<li>Not checked: how much basket trading happens or the exact basket claim code. The 378 TAO registration price is calculated from the code rule, not read live.</li>
+<li>On a Null subnet one top-staked validator sets all weights (docs). Repo v487 (on main, not live) and the chat-only gamma-token idea were not read in depth.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/RaoFoundation/subtensor" rel="noopener noreferrer">GitHub: RaoFoundation/subtensor (chain, SDK, docs, website)</a></li>
+<li><a href="https://github.com/RaoFoundation/subtensor/releases" rel="noopener noreferrer">GitHub releases (runtime versions)</a></li>
+<li><a href="https://www.bittensor.com/docs" rel="noopener noreferrer">Bittensor documentation</a></li>
+<li><a href="https://www.bittensor.com/releases" rel="noopener noreferrer">Bittensor releases list</a></li>
+<li><a href="https://www.bittensor.com/docs/guides/root-reborn" rel="noopener noreferrer">Root Reborn guide (baskets, root validators, claiming)</a></li>
+<li><a href="https://www.bittensor.com/releases/etao" rel="noopener noreferrer">Etao release notes (per-subnet emission split)</a></li>
+<li><a href="https://www.bittensor.com/docs/guides/etao" rel="noopener noreferrer">Etao guide (emission split rules and commands)</a></li>
+<li><a href="https://www.bittensor.com/docs/guides/null-consensus" rel="noopener noreferrer">Null consensus guide</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 5 sources</summary>
+<ul>
+<li><strong>repo</strong> RaoFoundation/subtensor main, commit 8d7f421 (2026-10-27, spec 487 in the repo; mainnet on 486, branch mainnet at 72323e1): README, docs/guides (root-reborn, etao, null-consensus, subnets, validating, proxies), pallets/subtensor/src (lib.rs, coinbase/root.rs, subnets/subnet.rs, emission_weights.rs, coinbase/run_coinbase.rs, block_step.rs, block_emission.rs, subnets/subnet.rs), runtime constants, website releases list, git history 2026-10-05 to 2026-10-27, LICENSE (Apache-2.0)</li>
+<li><strong>web</strong> https://www.bittensor.com/docs, /releases and /releases/etao (all 200 on 2026-10-31); GitHub releases API for RaoFoundation/subtensor (v475 to v486)</li>
+<li><strong>web</strong> Chain read (mainnet) at block 9402425, 2026-10-31 07:44Z, compared with block 9385701 (2026-10-29): root network parameters, permits, weight age, registration settings, last lock cost, TAO weight, basket switch, issuance, per-subnet consensus mode and emission weights, newest registrations. Seat stake and take figures: chain read of 2026-10-23</li>
+<li><strong>msg</strong> #rao, 2026-10-09 to 2026-10-31 (all messages from 2026-10-19) plus team posts from 2026-09-18</li>
+<li><strong>msg</strong> #announce, 2026-10-13, 2026-10-19, 2026-10-22 and 2026-10-29</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="next" href="/bittensor-docs/subnets/1.html"><small>Next →</small>SN1 Apex</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-31. Site built 2026-10-31. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

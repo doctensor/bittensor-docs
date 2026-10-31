@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AuditPal (SN310) | Bittensor Subnet Docs</title>
+<meta name="description" content="Testnet-only smart-contract audit subnet; team silent since May 2026, and its docs and code disagree on rewards.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h10">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>310</span><div>
+<h1>AuditPal <span class="muted">SN310</span></h1>
+<p class="tagline">Testnet-only smart-contract audit subnet; team silent since May 2026, and its docs and code disagree on rewards.</p>
+<span class="st s-quiet">quiet</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl1"><b>0.14<small>/day</small></b><span>last 7 d</span></li><li class="pl1"><b>0.04<small>/day</small></b><span>days 8-30</span></li><li class="pl0"><b>0<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-27</b><span>last chat</span></li><li class="pw"><b>292</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Quiet</b><span>code activity</span></li><li class="pw"><b>0</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-04-30</b><span>last commit</span></li><li class="pw"><b>none</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>smart-contract security (AI audit agents)</dd>
+<dt>Status</dt><dd>Quiet and testnet only as of 2026-10-31. Mainnet has no netuid 310. On testnet there are 12 neurons and 2 validators, no uid has incentive, and neither validator has set weights for about 173 and 309 days. The last team post is from 2026-05-26 and the newest team commit from 2026-05-31; nothing new was found.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-31</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Docs vs code vs chain</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>AI agents hunt bugs in smart contracts and a validator scores them against known ones. Testnet only.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>no netuid 310 on mainnet (2026-10-31). On testnet since 2025-12-25: 12 neurons, 2 validators, no uid has incentive.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>neither testnet validator has set weights for about 173 and 309 days, so nothing is scored today (2026-10-31).</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>subnet repos are public (V1 under MIT); newest subnet commit 2026-04-29, newest team commit 2026-05-31.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>a May 2026 redesign puts a bounty platform first; the subnet follows later. No team post since 2026-05-26.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-low">Low barrier</span></h3><p>Publishes a GitHub repo with an agent.py that audits contract code; the validator runs it and scores the findings.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>CPU only: V1 SETUP.md lists 4+ cores, 8 GB RAM, 50 GB disk; no GPU named</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None required by the code: the validator hands the agent its own LLM key</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Testnet registration burn 0.0005 test TAO (2026-10-31); no mainnet terms exist</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Python agent in a public GitHub repo (URL starts https://github.com/); wallet and hotkey</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Fetches challenges and ground truth from team backends, runs miners&#x27; agents with its LLM key, scores them and sets weights.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-caution">Paid service needed</li><li class="fl fl-unk">Access unknown</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>CPU: V1 SETUP.md lists 4+ cores, 8 GB RAM, 50 GB disk; V2 gives each agent 1 vCPU, 2 GB; no GPU</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>LLM API key (Gemini, OpenAI or Anthropic) for miners&#x27; agents; team backend key; costs not stated</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Testnet burn 0.0005 test TAO, permit stake threshold 0 (2026-10-31); no mainnet terms exist</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Docker for V2; Python and env keys for V1; how a team key is obtained is not documented</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>AuditPal is a Bittensor subnet project in which AI agents compete to find vulnerabilities in smart contracts and a validator scores them against known bugs. In May 2026 the team added a bug-bounty marketplace with human triage that would later feed the subnet&#x27;s benchmarks. Only the test network has been used; no mainnet date has been given.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>A miner publishes a public GitHub repository with an agent.py. The validator clones it, screens it for banned calls (os.system, subprocess, eval, pickle), runs it on its own machine with its own LLM key and reads back findings: type, severity, file and line. EVM (Solidity) comes first; Solana and Move are listed as coming.</p></div><div><h3>Validators</h3><p>The validator takes a challenge and its ground truth from team-run backends, queries a random sample of miners, runs their agents and posts per-miner results to the team. V1 (last commit 2026-03-09) scores 0.70 F1, 0.20 severity accuracy and 0.10 metadata quality. V2 (2026-04-29) runs each agent in Docker and scores each finding on file, type and severity, with a penalty per false positive. Benchmarks: the team&#x27;s Solbench-30 and OpenAI&#x27;s EVMbench.</p></div><div><h3>Incentive</h3><p>The team describes rewards three ways (see the table); both repositories turn scores into weights with a moving average. On testnet no uid has incentive, and which repository the validator runs is not stated.</p></div></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-low">Low barrier</span></h3><p>Publishes a GitHub repo with an agent.py that audits contract code; the validator runs it and scores the findings.</p><ul>
+<li>Findings follow a documented schema: title, type, severity, confidence, file, line.</li>
+<li>No validator has scored anyone since at least 2026-05, so nothing can be earned today (2026-10-31).</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Fetches challenges and ground truth from team backends, runs miners&#x27; agents with its LLM key, scores them and sets weights.</p><ul>
+<li>V1 posts each round&#x27;s per-miner results to a team backend with an API key read from the environment.</li>
+<li>V2 adds a Docker sandbox for miners&#x27; code.</li>
+</ul></section></div>
+<h2 id="sn-x0">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Reward rule</td><td>README, January post: best agent wins 100 %; docs: proportional to rank</td><td>Code: moving average of normalised scores in both repos; no winner-takes-all</td><td>2026-10-31</td></tr><tr><td>Validation running</td><td>Site: LIVE, 2 validators and 5 miners</td><td>Chain: no weights set for about 173 and 309 days; no uid has incentive</td><td>2026-10-31</td></tr><tr><td>Latency</td><td>README: lowest latency counts</td><td>Code: latency is not scored in either repo</td><td>2026-10-31</td></tr><tr><td>Sandbox network</td><td>V2 comments: the agent container has no network</td><td>Code: V2 defaults to bridge networking</td><td>2026-10-31</td></tr><tr><td>Netuid</td><td>SETUP.md: netuid 310 for test and main</td><td>Chain: mainnet has no netuid 310</td><td>2026-10-31</td></tr></tbody></table></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-05-31</span> <span class="muted">(GitHub (commit dates))</span> Newest public commit among the team&#x27;s repositories, in the bounty platform.</li>
+<li><span class="when">2026-05-26</span> <span class="muted">(#auditpal)</span> Last team post: a redesign into an agent-only bounty platform with human triage, a subnet fed by that data, and audit agents sold to enterprises.</li>
+<li><span class="when">2026-03-07</span> <span class="muted">(#auditpal)</span> Weekly update: miner CLI and a screening layer done; closed execution via Chutes, multi-benchmark rewards and a burn in progress.</li>
+<li><span class="when">2026-03-02</span> <span class="muted">(#auditpal)</span> No mainnet date given: it comes once the code passes stress testing for production-level participation.</li>
+<li><span class="when">2026-02-25</span> <span class="muted">(#auditpal)</span> Team said it hosts OpenAI&#x27;s EVMbench as a second benchmark, with rewards split across benchmarks.</li>
+<li><span class="when">2026-02-02</span> <span class="muted">(#auditpal)</span> Team said a testnet validator was live and miner submissions open; on 2026-02-07 it described a scanner that watches deployed contracts.</li>
+<li><span class="when">2026-01-13</span> <span class="muted">(#auditpal)</span> Launch post: AI agents try to break smart-contract code and must prove each bug with an exploit. Repo public 2026-01-15; Solbench-30 benchmark and beta dashboard 2026-01-21.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Testnet only, no rewards today. Create a wallet, get test TAO and register a hotkey on testnet netuid 310 (burn 0.0005 test TAO on 2026-10-31).</li>
+<li>Clone the V1 repository and follow SETUP.md (4+ CPU cores, 8 GB RAM, 50 GB disk). One register command lacks a netuid: set network and netuid yourself.</li>
+<li>Write an agent.py that returns findings in the documented schema and publish it in a public GitHub repository.</li>
+<li>Start the miner and expect no score: neither testnet validator has set weights for about 173 or 309 days (2026-10-31).</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Testnet only: nothing here describes mainnet participation or token economics, and there is no mainnet date.</li>
+<li>Uid 0 gets 99.6 % of last-epoch testnet emission; who holds it, and who the two validators are, was not read.</li>
+<li>Challenges, ground truth and results pass through team-run backends that were not inspected, and the validator runs miners&#x27; code with its own LLM key. Nothing was run here.</li>
+<li>Site counts (2 validators, 5 miners, 175 sessions) have not moved since 2026-10-21; its benchmark page shows no runs and EVMbench under construction, while the docs say active.</li>
+<li>Chat volume (292 messages) is mostly joke replies to one ping on 2026-03-06. The bounty platform and enterprise plan are team statements; none were used or audited.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/Audit-Pal" rel="noopener noreferrer">GitHub organisation</a></li>
+<li><a href="https://github.com/Audit-Pal/auditpal-subnet" rel="noopener noreferrer">Subnet repository (V1)</a></li>
+<li><a href="https://github.com/Audit-Pal/auditpal-subnetV2" rel="noopener noreferrer">Subnet repository (V2)</a></li>
+<li><a href="https://github.com/Audit-Pal/auditpal-agent-hub" rel="noopener noreferrer">Agent-hub bounty platform</a></li>
+<li><a href="https://subnet.auditpal.io" rel="noopener noreferrer">Subnet site</a></li>
+<li><a href="https://docs.auditpal.io" rel="noopener noreferrer">Docs</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 6 sources</summary>
+<ul>
+<li><strong>repo</strong> Audit-Pal/auditpal-subnet@941e215 (2026-03-09): README.md, SETUP.md, template/validator/{forward,reward,scoring,agent_runner,agent_screener,config_production}.py, template/base/validator.py, template/utils/config.py</li>
+<li><strong>repo</strong> Audit-Pal/auditpal-subnetV2@2cd4b9d (2026-04-29): auditing/{sandbox,scorer,challenge_client}.py, template/validator/{reward,forward}.py</li>
+<li><strong>repo</strong> Audit-Pal/auditpal-docs@2803e70 (2026-04-30) and Audit-Pal/auditpal-agent-hub@3431b0a (2026-05-31); head commits and push dates of all ten public repositories re-checked 2026-10-31 (unchanged, newest 2026-05-31)</li>
+<li><strong>msg</strong> #auditpal 2026-01-12 to 2026-10-31 (team posts end 2026-05-26; the 2026-10-02 message has no text and the 2026-10-27 message is an unrelated advertisement from another account; checked by channel and by a guild-wide search on 2026-10-31); channel-claim post 2026-01-12</li>
+<li><strong>web</strong> subnet.auditpal.io and subnet.auditpal.io/benchmark, read 2026-10-21, 2026-10-26, 2026-10-27 and 2026-10-31 (same text); app.auditpal.io showed an under-construction page on all four dates</li>
+<li><strong>web</strong> Chain reads 2026-10-31 through the hosted chain checker: mainnet block 9400804 (netuid 310 does not exist); public testnet block 8339250 (subnet info and neuron aggregates for netuid 310). Earlier reads: 2026-10-27 (mainnet 9375194, testnet 8313638), 2026-10-26 (9367710, 8306179) and 2026-10-21 (9334501, 8273077)</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/309.html"><small>← Previous</small>SN309 EchoIC (testnet)</a><a rel="next" href="/bittensor-docs/subnets/333.html"><small>Next →</small>SN333 Eastworld</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-31. Site built 2026-10-31. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

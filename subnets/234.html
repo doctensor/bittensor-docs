@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TuneForge (SN234) | Bittensor Subnet Docs</title>
+<meta name="description" content="Testnet-only AI text-to-music subnet; no mainnet plan and no testnet validator weights since about June 2026.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h6">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>234</span><div>
+<h1>TuneForge <span class="muted">SN234</span></h1>
+<p class="tagline">Testnet-only AI text-to-music subnet; no mainnet plan and no testnet validator weights since about June 2026.</p>
+<span class="st s-quiet">quiet</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl0"><b>0<small>/day</small></b><span>last 7 d</span></li><li class="pl0"><b>0<small>/day</small></b><span>days 8-30</span></li><li class="pl1"><b>0.10<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-09-30</b><span>last chat</span></li><li class="pw"><b>91</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Quiet</b><span>code activity</span></li><li class="pw"><b>0</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-06-04</b><span>last commit</span></li><li class="pw"><b>2026-03-13</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>generative AI (text-to-music)</dd>
+<dt>Status</dt><dd>Quiet and testnet only as of 2026-10-31. Mainnet has no netuid 234. On the testnet no validator has set weights for about 142 days and no uid earns incentive. The maintainer said on 2026-06-08 there is no mainnet plan; the last team post is from 2026-06-12 and the last commit from 2026-06-04.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-31</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Docs vs code vs chain</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>miners generate music from text prompts on their own GPU; validators score the audio. Testnet only.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>no netuid 234 on mainnet (2026-10-31); the testnet subnet has 71 neurons and none earns incentive.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>no testnet validator has set weights for about 142 days, so the subnet has sat idle since June 2026.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>public repo under a non-commercial licence (CC BY-NC 4.0); last commit 2026-06-04, none in the last 30 days.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>no mainnet plan while registration costs are high, and no improvements until then (2026-06-08).</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Runs a text-to-music model on its own GPU and returns audio for each prompt.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-caution">GPU needed</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>NVIDIA GPU, about 10 GB VRAM (guide) to 16 GB (min_compute.yml); the sources disagree</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None (the default model runs locally); a free HuggingFace token only for gated models</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Testnet burn 0.0005 test TAO (2026-10-31); no mainnet terms exist</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Python 3.10-3.12, CUDA, Docker or pip; the default model needs a separate ACE-Step repo clone</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Builds prompts, scores miner audio and submits weights; can push rounds to the team&#x27;s platform.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>CPU-only works (8+ cores, 32 GB RAM, 50 GB disk); a GPU with 8 GB VRAM is faster</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None required; an optional AcoustID key sharpens the known-song penalty</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Testnet: burn 0.0005 test TAO; global stake floor 0 (2026-10-31); smallest permit holder&#x27;s stake not read</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Docker or pip; the CLAP, MERT and Whisper scoring models download on first run (about 4.5 GB)</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>TuneForge is a Bittensor subnet where miners generate music from text prompts and validators score the audio. A single maintainer runs it as a side project and would go to mainnet only if the registration price and customer demand made sense. Testnet only.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>A miner runs a music-generation model on its own GPU and returns audio for a text prompt (genre, mood, tempo, key, instruments, up to 180 seconds). The default model is ACE-Step 1.5; MusicGen, DiffRhythm, HeartMuLa or your own model also work. Scoring judges the audio, not the model.</p></div><div><h3>Validators</h3><p>Each round the validator sends a prompt to a batch of miners and scores the audio on 16 weighted signals fixed in the code. The largest are text-audio similarity (19 percent), attribute checks for tempo, key and instruments (11), musicality (9) and lyric quality (8). Penalties apply for silence, timeouts, wrong length and matches to known songs. A learned preference model (7) stays off unless a trained file is supplied.</p></div><div><h3>Incentive</h3><p>Scores are smoothed with a moving average. Miners with a positive score are ranked: the top 10 share 80 percent of the weight, the rest share 20, and within a tier weight grows with the square of the score. Weights go to chain every 115 blocks (about 23 minutes). This matches the team&#x27;s description of 2026-03-22. It is a design only: no mainnet emission exists and no testnet uid holds incentive.</p></div></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Runs a text-to-music model on its own GPU and returns audio for each prompt.</p><ul>
+<li>Default model ACE-Step 1.5 (MIT licence): about 10 GB VRAM in the guide and README, about 4 GB in the example miner config.</li>
+<li>Other models: MusicGen Large (16 GB, non-commercial licence), DiffRhythm and HeartMuLa 3B (8 to 10 GB).</li>
+<li>The dashboard and API docs are for registered neurons only (team, 2026-03-16) and could not be reached.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Builds prompts, scores miner audio and submits weights; can push rounds to the team&#x27;s platform.</p><ul>
+<li>Testnet: 61 of 71 uids hold a permit (64 slots) but none has set weights in over 5 tempos; the last update dates to about 2026-06-10.</li>
+<li>Rounds run every 240 seconds. Scoring weights are hard-coded for consensus; settings cannot change them.</li>
+<li>The example config points at the team&#x27;s platform API (round data out, preference model in hourly); not reachable.</li>
+</ul></section></div>
+<h2 id="sn-x0">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Miner GPU, default model</td><td>Guide and README: about 10 GB VRAM; min_compute.yml: 16 GB minimum</td><td>Code: the example miner config says about 4 GB for the same model</td><td>2026-10-31</td></tr><tr><td>Mainnet readiness</td><td>Team post 2026-06-04: the main repo is mainnet ready</td><td>Chat: 2026-06-08 no mainnet plan, registration cost too high</td><td>2026-10-31</td></tr></tbody></table></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-06-12</span> <span class="muted">(#tuneforge)</span> Last team post: still on testnet, nothing new. Later chat is user chit-chat only; nothing newer on 2026-10-31.</li>
+<li><span class="when">2026-06-08</span> <span class="muted">(#tuneforge)</span> A day after saying the testnet validator was up again, the team said there is no mainnet plan for now because registration costs too much, and it expects no improvements until a mainnet registration.</li>
+<li><span class="when">2026-06-04</span> <span class="muted">(GitHub (commit dates) and #rao)</span> Last repository commit adds COMPARISON.md, a side-by-side with two versions of the same idea built on subnet frameworks; the maintainer posted them in the netuid 0 channel that day.</li>
+<li><span class="when">2026-03-17</span> <span class="muted">(#tuneforge)</span> Asked about mainnet, the team said registering is risky and it would move only with an opportunity and customers; by 2026-04-15 it called the subnet sleeping on testnet because miners do not mine without money.</li>
+<li><span class="when">2026-03-13</span> <span class="muted">(#tuneforge)</span> Testnet launch announced (netuid 234) with a GPU requirement; the maintainer said it is a different project from an earlier subnet of theirs that was deregistered.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Testnet only, no rewards. You need an NVIDIA GPU: about 10 GB VRAM for the default model per the miner guide (16 GB per min_compute.yml).</li>
+<li>Clone the repo linked below; the README&#x27;s own clone address (another GitHub account) returned 404 on 2026-10-31.</li>
+<li>Install with pip install -e . (Python 3.10 to 3.12) or Docker; the default model also needs a clone of the ACE-Step 1.5 repo.</li>
+<li>Copy .env.miner.example to .env.miner (it already sets netuid 234 and the test network) and add your wallet and hotkey names.</li>
+<li>Register with btcli subnet register --netuid 234 --subtensor.network test (burn 0.0005 test TAO, 2026-10-31), then start the miner. With no validator setting weights, expect no score.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Testnet only: nothing here describes mainnet participation, emissions or economics, and there is no mainnet date.</li>
+<li>The testnet slot dates from 2024-10-18, 17 months before the launch post; who held it before was not checked.</li>
+<li>About 81 alpha was emitted in the last testnet epoch although no uid holds incentive; where it goes was not traced.</li>
+<li>Code was read at commit f680cdb and nothing was run, so scoring is unverified; whether a preference model was ever trained is unknown.</li>
+<li>tuneforge.io and mining.tuneforge.io gave no answer from the research machine on 2026-10-21, 10-26 and 10-31 (api.tuneforge.io on 10-31): the platform, dashboard and API docs are unverified.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/borgg-dev/tuneforge" rel="noopener noreferrer">GitHub (maintainer&#x27;s repo, linked in chat)</a></li>
+<li><a href="https://github.com/borgg-dev/tuneforge-chi" rel="noopener noreferrer">Variant built on a subnet framework (same maintainer)</a></li>
+<li><a href="https://github.com/borgg-dev/tuneforge-nexus" rel="noopener noreferrer">Second variant built on a subnet framework (same maintainer)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 6 sources</summary>
+<ul>
+<li><strong>repo</strong> borgg-dev/tuneforge@f680cdb (2026-06-04): README.md, COMPARISON.md, LICENSE, min_compute.yml, .env.miner.example, .env.validator.example, docs/miner_setup.md, docs/validator_setup.md, docs/setup.md</li>
+<li><strong>repo</strong> borgg-dev/tuneforge@f680cdb: tuneforge/config/scoring_config.py, tuneforge/rewards/leaderboard.py, tuneforge/rewards/weight_setter.py, tuneforge/scoring/preference_model.py, tuneforge/settings.py</li>
+<li><strong>repo</strong> REPO borgg-dev/tuneforge last_commit=2026-06-04 commits_30d=0 code_30d=0 last_release=2026-03-13 checked=2026-10-31; borgg-dev/tuneforge-chi HEAD aba0bbd (2026-06-04) and tuneforge-nexus HEAD 0e3489b (2026-06-08): ls-remote and API commit dates only, code not read</li>
+<li><strong>msg</strong> #tuneforge 2026-03-13 to 2026-09-30 (91 messages in the archive extract; live rechecks on 2026-10-21, 10-26 and 10-31 found only chit-chat after 2026-06-12); #rao 2026-06-04</li>
+<li><strong>web</strong> Chain reads 2026-10-21, 10-26 and 10-31: mainnet block 9400514 (netuid 234 does not exist); public testnet block 8338959 (subnet info and neuron aggregates for netuid 234)</li>
+<li><strong>web</strong> tuneforge.io and mining.tuneforge.io: DNS resolves, no HTTP response from the research machine on 2026-10-21, 10-26 and 10-31; api.tuneforge.io: no response 2026-10-31 (curl exit 35); github.com/tuneforge-ai returns 404 (2026-10-31)</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/163.html"><small>← Previous</small>SN163 Safe Scan</a><a rel="next" href="/bittensor-docs/subnets/253.html"><small>Next →</small>SN253 VoiceGuard</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-31. Site built 2026-10-31. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

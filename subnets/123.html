@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MANTIS (SN123) | Bittensor Subnet Docs</title>
+<meta name="description" content="Market-signal subnet: miners send encrypted crypto, forex and metals predictions; validators score what each one adds.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h21">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>123</span><div>
+<h1>MANTIS <span class="muted">SN123</span></h1>
+<p class="tagline">Market-signal subnet: miners send encrypted crypto, forex and metals predictions; validators score what each one adds.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl4"><b>6.3<small>/day</small></b><span>last 7 d</span></li><li class="pl2"><b>0.61<small>/day</small></b><span>days 8-30</span></li><li class="pl3"><b>1.0<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-30</b><span>last chat</span></li><li class="pw"><b>3,832</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Shipping</b><span>code activity</span></li><li class="pw"><b>13</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-10-27</b><span>last commit</span></li><li class="pw"><b>none</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>market prediction / trading signals</dd>
+<dt>Status</dt><dd>Chat active through 2026-10-30; 13 code commits in 30 days (last 2026-10-27); new scoring live on the team&#x27;s validator since 2026-10-26.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-30</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Challenges and weights</a></li><li><a href="#sn-x1">Docs vs code vs chain</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-similar">Similar subnets</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>miners upload encrypted predictions every minute; validators open them a week later and score each.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>FLOW (full Bitcoin trades, optional collateral) was set to 5% of emission on 2026-10-27; 25% is planned.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>the owner uid takes 46.5% of incentive (burned); the other uids share about 3.6 TAO a day, gross.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>mining needs Python and a Cloudflare R2 bucket, no GPU; a validator permit needs 1,000 TAO of stake.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>four forex and metals challenges retire in the week of 2026-11-02; their share is burned.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-low">Low barrier</span></h3><p>Upload encrypted predictions about once a minute; for FLOW, send Bitcoin trades and optionally post collateral.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-unk">Paid service unknown</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-no"><dt>Hardware</dt><dd>None required: Python 3.10+, Rust once to build the time-lock wrapper (guide)</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>Cloudflare R2 bucket (account needed); cost not stated in the docs</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Registration burn 0.15 TAO (2026-10-30); no stake</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Build the time-lock wrapper, set up R2, upload every ~60 s</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Download miner files, decrypt after the delay, score every challenge, set weights every 360 blocks.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>Disk for a 144 GB data archive (team, 2026-10-30); CPU by default; RAM not documented</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None required; FLOW reads default to a public archive EVM RPC, which can rate-limit</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Registration burn 0.15 TAO (2026-10-30); permit needs 1,000 TAO stake (chain-wide)</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Python, pm2, install_reqs.sh; updates ship as zip; no validator guide</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-neutral">Neutral</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-10-30. Not financial advice.</span></div><p>Flat price and pool, nearly half of miner incentive burned; the team ships, but use of the signals is unproven. <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>MANTIS pays miners for signals that help predict market moves. Miners upload encrypted predictions about once a minute; validators open them after a delay and score what each adds. A newer challenge, FLOW, takes full Bitcoin trades with optional collateral.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Each miner encrypts prediction vectors for every challenge and uploads one file per hotkey to its own Cloudflare R2 bucket, committed on chain, about every 60 seconds. For FLOW it also submits Bitcoin trades for four time regimes and may post collateral, held in a contract on Bittensor&#x27;s EVM.</p></div><div><h3>Validators</h3><p>Validators download the files, decrypt them after a delay (code default one week), score each challenge with walk-forward regressions, merge near-copy miners into one signal and set weights every 360 blocks. Price data comes from a team-run feed.</p></div><div><h3>Incentive</h3><p>Challenge scores are combined by fixed weights (table below). The code burns 45% of weight on the owner&#x27;s uid 0. New miners get a small floor weight for about 12 days. FLOW pays on path-adjusted, size-weighted trade returns.</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-10-30, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-good">Open</span>Anyone with enough stake gets a permit (1,000 TAO threshold); 13 hold one; the owner uid has 64% of dividends.</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">55.3%</span>Owner uid: 55.3% of emission, 46.5% of incentive (burned); owner cut 18%; RecycleOrBurn is Burn.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">249 uids</span><span class="v2-sx muted">top 5 hold 52.9% of incentive.</span> 249 uids earn incentive; the top five hold 52.9%, and the owner uid alone holds 46.5%.</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Converged</span>All 6 validators with weights put their top weight on the owner uid (the burn): it shows the burn, not miner agreement.</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-good">Open</span>Miner and validator code are public (MIT per README); the FLOW settlement process and price feed are team-run.</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-low">Low barrier</span></h3><p>Upload encrypted predictions about once a minute; for FLOW, send Bitcoin trades and optionally post collateral.</p><ul>
+<li>Do not pip install timelock: the PyPI version cannot read live payloads.</li>
+<li>Pay is small: about 0.014 TAO a day on average over 249 earning uids, gross (2026-10-30).</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Download miner files, decrypt after the delay, score every challenge, set weights every 360 blocks.</p><ul>
+<li>Chain, 2026-10-30: 13 permit holders, 6 with weight rows; 7 have not set weights for over 5 tempos.</li>
+<li>The team&#x27;s validator holds 64% of dividends, so outside validators earn little.</li>
+</ul></section></div>
+<h2 id="sn-x0">Challenges and weights</h2>
+<p>Relative weights (code, 2026-10-27).</p>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Challenge</th><th>Scope</th><th>Weight</th></tr></thead><tbody><tr><td>Range breakout</td><td>33 assets</td><td>5.0</td></tr><tr><td>Funding rank</td><td>20 assets, 8 h</td><td>4.0</td></tr><tr><td>ETH volatility</td><td>1 h</td><td>3.5</td></tr><tr><td>Cross-asset rank</td><td>33 assets, 4 h</td><td>3.0</td></tr><tr><td>BTC volatility</td><td>6 h</td><td>2.875</td></tr><tr><td>ETH direction</td><td>1 h</td><td>1.0</td></tr><tr><td>Forex and metals</td><td>four 1 h binaries (retiring)</td><td>0.5, 0.5, 1.0, 1.0</td></tr><tr><td>FLOW</td><td>Bitcoin trades</td><td>1.178 (5%)</td></tr></tbody></table></div>
+<h2 id="sn-x1">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>FLOW share</td><td>Miner guide: zero until 2026-09-14, then 25%</td><td>Code: 5% since 2026-10-27</td><td>2026-10-30</td></tr><tr><td>FLOW gate</td><td>README, guide: a significance gate withholds pay</td><td>Code: gate removed 2026-09-17</td><td>2026-10-30</td></tr><tr><td>Duplicate miners</td><td>Miner guide: uniqueness penalty</td><td>Code: near-copy miners merged (2026-10-26)</td><td>2026-10-30</td></tr><tr><td>GPU</td><td>min_compute.yml lists an RTX 4090</td><td>Code: CUDA hidden unless MANTIS_ALLOW_CUDA is set</td><td>2026-10-30</td></tr><tr><td>Forex and metals</td><td>Team: retired in the week of 2026-11-02</td><td>Code: still listed with weights</td><td>2026-10-30</td></tr></tbody></table></div>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-neutral">Neutral</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-10-30. Not financial advice.</span></div>
+<p class="v2-thesis">The pool is small (rank 76 of 128) and quiet: price about -2% in 30 days, net flow +12 TAO. The team ships often. But the owner uid takes 46.5% of incentive, miners share about 3.6 TAO a day, and no usage or revenue evidence is public.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.002271 TAO per alpha</dd></div><div><dt>Pool</dt><dd>5,598 TAO, rank 76</dd></div><div><dt>Price, 30 days</dt><dd>-2%, 2026-09-28 to 2026-10-30</dd></div><div><dt>Net flow, 30 days</dt><dd>+12 TAO, 2026-09-30 to 2026-10-30</dd></div><div><dt>Miner pay</dt><dd>0.014 TAO per day on average (3.58 TAO per day over 249 uids)</dd></div><div><dt>Miner pay outside top 5</dt><dd>0.013 TAO per day on average (3.15 TAO per day over 244 uids)</dd></div><div><dt>Code activity</dt><dd>last commit 2026-10-27; 15 commits in 30 days; no releases</dd></div></dl>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>Price and flow steady for 30 days</li>
+<li>Team ships weekly; announced changes reached its validator within a day</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>Owner uid takes 46.5% of incentive; miners average about 0.014 TAO a day</li>
+<li>No public evidence of who uses the signals</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> Bullish: evidence that someone uses or pays for the signals. Bearish: net outflow, a larger owner share, or the price feed freezing again.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-similar">Similar subnets</h2>
+<div class="v2-sim"><p>By pool size this is <strong>rank 8 of 10</strong> among the subnets grouped as <em>trading</em> (what they mainly sell). Pool and price as of 2026-10-30, price in TAO per alpha; the barrier is the easiest miner role.</p><div class="scroll"><table class="v2-table"><thead><tr><th>#</th><th>Subnet</th><th>Pool</th><th>Price</th><th>Miner barrier</th></tr></thead><tbody><tr><td>6</td><td><a href="/bittensor-docs/subnets/6.html">Numinous</a> <span class="muted">SN6</span></td><td>7,298 TAO</td><td>0.002202</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr><td>7</td><td><a href="/bittensor-docs/subnets/89.html">InfiniteQuant</a> <span class="muted">SN89</span></td><td>6,105 TAO</td><td>0.002954</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr class="me" aria-current="true"><td>8</td><td>MANTIS <span class="muted">SN123, this page</span></td><td>5,598 TAO</td><td>0.002271</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr><td>9</td><td><a href="/bittensor-docs/subnets/88.html">Investing88</a> <span class="muted">SN88</span></td><td>5,447 TAO</td><td>0.002348</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr><td>10</td><td><a href="/bittensor-docs/subnets/127.html">Astrid</a> <span class="muted">SN127</span></td><td>3,464 TAO</td><td>0.003034</td><td><span class="v2-barrier b-high">High</span></td></tr></tbody></table></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-30</span> <span class="muted">(#mantis)</span> Team re-uploaded the public data archive (144.4 GB; the old copy ended 2026-09-12); no fixed schedule.</li>
+<li><span class="when">2026-10-29</span> <span class="muted">(#mantis)</span> Team announced four forex and metals challenges retire in the week of 2026-11-02; their share goes to burn.</li>
+<li><span class="when">2026-10-27</span> <span class="muted">(#mantis; GitHub commit 2026-10-27)</span> FLOW emissions turned on at 5%, rising toward 25%; the repo commit of the same day sets 5%.</li>
+<li><span class="when">2026-10-26</span> <span class="muted">(#mantis)</span> Team said the new scoring (ETH hit-first retired, near-copy miners merged) runs on its paying validator; the top ETH LBFGS share fell from 0.40 to 0.09.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Register a hotkey on subnet 123 (burn 0.15 TAO on 2026-10-30).</li>
+<li>Install the dependencies in MINER_GUIDE.md, including the pinned time-lock wrapper (not the PyPI package).</li>
+<li>Create a Cloudflare R2 bucket and commit its public URL on chain; the object key must equal your hotkey.</li>
+<li>Build predictions for every active challenge, encrypt with generate_and_encrypt.py and upload about once a minute; backtest with the team&#x27;s iteration tool first.</li>
+<li>For FLOW, follow flow_post.py to open a collateral position and post bets before each trade opens.</li>
+<li>To validate, read install_reqs.sh and autoupdate.sh; no step-by-step validator guide exists.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>The team&#x27;s own validator is the one that pays; which version or FLOW share others run is not visible.</li>
+<li>The price feed is team-run and froze on 2026-09-01 and 2026-10-12; every challenge depends on it.</li>
+<li>Scoring detail goes out by direct message only; the public data archive lagged seven weeks until 2026-10-30.</li>
+<li>FLOW payout trusts the owner: only the owner posts realised losses and settles, outside the repo; the live contract was not compared with the source.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/Barbariandev/MANTIS" rel="noopener noreferrer">GitHub (validator and miner code)</a></li>
+<li><a href="https://github.com/Barbariandev/MANTIS/blob/main/MINER_GUIDE.md" rel="noopener noreferrer">Miner guide</a></li>
+<li><a href="https://github.com/Barbariandev/MANTIS/tree/main/flow_collateral" rel="noopener noreferrer">FLOW collateral contract source</a></li>
+<li><a href="https://mantis123.com/" rel="noopener noreferrer">Network console</a></li>
+<li><a href="https://github.com/BarbarianDev/mantis_model_iteration_tool" rel="noopener noreferrer">Model iteration tool for miners</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 4 sources</summary>
+<ul>
+<li><strong>repo</strong> Barbariandev/MANTIS@57d014f (2026-10-27): README.md, MINER_GUIDE.md, min_compute.yml, requirements.txt, install_reqs.sh, autoupdate.sh, config.py, validator.py, flow.py, flow_collateral.py and git history since 2026-10-15; earlier reads at 16907f4 (model.py, bucket_forecast.py, ledger.py, flow_collateral/src/FlowCollateralPool.sol)</li>
+<li><strong>msg</strong> #mantis, 2026-04-26 to 2026-10-30</li>
+<li><strong>web</strong> Chain read at block 9399591 (2026-10-30 22:18Z UTC): SN123 (MANTIS): registered 2025-06-16, tempo 360, 256 of 256 uids, commit-reveal on; emission weights burn/recycle/owner/validator/miner = 0/0/18/41/41 % (stored, same values as the chain default), RecycleOrBurn = Burn; uids under the owner hotkey or owner coldkey hold 46.48 % of incentive and 55.3 % of last-epoch emission (a floor); 6 validators have weight rows, on average 44.5 % of weight goes to uid 0.</li>
+<li><strong>web</strong> Chain read at block 9399591 (2026-10-30 22:18Z UTC): price SN123, 6 samples every 7d from block 9183591 (2026-09-30 22:00Z): price 0.002277 -&gt; 0.002271 TAO per alpha (-0.3%), pool TAO 5605.7 -&gt; 5598.0; net user flow +11.7 TAO (staked minus unstaked) over 5 intervals; pool rank 76 of 128 by TAO in the pool, from the shared snapshot at the same block. Public price feed and the six page links checked 2026-10-30 (all HTTP 200); mantis123.com is client-rendered (no data read).</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/122.html"><small>← Previous</small>SN122 CookingTAO</a><a rel="next" href="/bittensor-docs/subnets/124.html"><small>Next →</small>SN124 Swarm</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-30. Site built 2026-10-31. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

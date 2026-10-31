@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vanta (SN8) | Bittensor Subnet Docs</title>
+<meta name="description" content="On-chain prop firm: miners trade collateral-sized accounts and are paid weekly, in proportion to their profit.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h8">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>8</span><div>
+<h1>Vanta <span class="muted">SN8</span></h1>
+<p class="tagline">On-chain prop firm: miners trade collateral-sized accounts and are paid weekly, in proportion to their profit.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl4"><b>5.0<small>/day</small></b><span>last 7 d</span></li><li class="pl4"><b>2.1<small>/day</small></b><span>days 8-30</span></li><li class="pl4"><b>4.4<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-31</b><span>last chat</span></li><li class="pw"><b>10,859</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Shipping</b><span>code activity</span></li><li class="pw"><b>20</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-10-27</b><span>last commit</span></li><li class="pw"><b>none</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>trading (on-chain prop firm)</dd>
+<dt>Status</dt><dd>Active on 2026-10-30: the repo changed on 2026-10-27 and 14 of 18 validator permit holders set weights. Emission was off 2026-09-02 to 09-09.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-30</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Where the pay goes</a></li><li><a href="#sn-x1">Docs vs code vs chain</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-similar">Similar subnets</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>miners trade on accounts sized by locked alpha (300 to 1,000) and are paid weekly from profit, not volume.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>one uid takes 91.8% of miner incentive; only 19 of 256 uids earn anything (2026-10-30). Its operator is unknown.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>its product Vanta Trading runs as a miner and buys alpha with revenue; not visible on chain.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>a miner needs 2 vCPU and 8 GB; the hard part is 61+ profitable trading days inside a 5% drawdown limit.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Trades one asset class on collateral-backed capital; paid weekly in proportion to profit.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>CPU only: 2 vCPU, 8 GB memory (docs)</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None required by the docs; bring your own market data</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>300 to 1,000 alpha collateral (300 = about 9.6 TAO); registration burn 0.0005 TAO (2026-10-30)</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Python 3.10 and the Vanta CLI; 61+ trading days to pass the challenge</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Prices orders from paid data feeds, tracks profit and drawdown, sets weights every 5 minutes.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-caution">Paid service needed</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>4 vCPU, 16 GB memory, 1 TB disk (docs)</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>Tiingo Commercial and Massive (Stocks Business, Currencies Starter); prices not documented</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>1,000 alpha staked (docs, about 32 TAO); registration burn 0.0005 TAO (2026-10-30)</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Python 3.10, Massive KYC form; restores state from a team checkpoint</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div><div class="v2-role"><h3>Entity miner <span class="v2-barrier b-high">High barrier</span></h3><p>One hotkey hosting many trader subaccounts, each with its own size, fees and challenge.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-unk">Paid service unknown</li><li class="fl fl-bad">Permissioned</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>CPU only as a miner (2 vCPU, 8 GB); entity load not documented</dd></div><div class="v2-need n-unk"><dt>API tokens / subscriptions</dt><dd>Not documented</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>1,000 alpha one-time fee, slashed (about 32 TAO), plus collateral for subaccount fees</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Registered only through the team&#x27;s validator, max 10 entities</dd></div></dl><a class="v2-more" href="#sn-role-2">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-neutral">Neutral</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">low confidence, as of 2026-10-30. Not financial advice.</span></div><p>Rank-4 pool, price up about 10% in 30 days; usage and revenue rest on team claims <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>Vanta (formerly the Proprietary Trading Network, by Taoshi) works like an open prop firm: miners trade on accounts sized by the alpha they lock and are paid in emissions in proportion to profit. The team sells evaluation accounts on top (Vanta Trading).</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>A miner picks one asset class, locks alpha as collateral (500 USD of capacity per alpha, 300 to 1,000 alpha) and sends LONG, SHORT or FLAT orders. Entity miners are a variant: one hotkey hosts many trader subaccounts.</p></div><div><h3>Validators</h3><p>Validators price every order from paid data feeds, track each miner&#x27;s profit, drawdown and penalties, and set weights every 5 minutes.</p></div><div><h3>Incentive</h3><p>Pay is debt-based since December 2025: each week ends Sunday 00:00 UTC, a miner is owed its cumulative profit times penalties minus the emissions already received, and weights follow what is still owed. Weight not owed to anyone goes to UID 229, the owner&#x27;s own hotkey, so it is burned. Scoring code unchanged since 2026-10-15.</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-10-30, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-good">Open</span>18 of 64 permit slots used, 14 set weights; slashing and plagiarism scoring run through the team</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">0%</span>Owner cut is 0% (split 0/0/0/50/50 since 2026-10-20), owner uid holds 0.0% of emission; unowed weight is burned</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">19 uids</span><span class="v2-sx muted">top 5 hold 100% of incentive.</span> 19 uids earn; one takes 91.8% and the top 5 take 100.0% of incentive</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Converged</span>12 of 14 validators put their top weight on one uid; a deterministic scorer makes honest validators agree too</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-good">Open</span>Miner and validator code are public in one repo under the MIT licence</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Trades one asset class on collateral-backed capital; paid weekly in proportion to profit.</p><ul>
+<li>Challenge period up to 90 days: 61+ trading days, drawdown under 5%, return above 10% (8% forex), top-25 score; dust weight until then.</li>
+<li>Later a 5% intraday or 8% end-of-day drawdown eliminates; collateral is slashed on losses and burned.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Prices orders from paid data feeds, tracks profit and drawdown, sets weights every 5 minutes.</p><ul>
+<li>Chain, 2026-10-30: 18 permit holders, 14 with weights set. Plagiarism scores come from a team-run service and only the team&#x27;s designated validator slashes collateral.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-2"><h3>Entity miner <span class="v2-barrier b-high">High barrier</span></h3><p>One hotkey hosting many trader subaccounts, each with its own size, fees and challenge.</p><ul>
+<li>Vanta Trading is the team&#x27;s own entity miner; the team says anyone will be able to run one later (see the table).</li>
+</ul></section></div>
+<h2 id="sn-x0">Where the pay goes</h2>
+<p>Chain, 2026-10-30.</p>
+<ul class="v2-list">
+<li>The miner half of emissions is about 114 TAO a day before costs; one uid takes 91.8% of incentive and five take all of it.</li>
+<li>The chain does not say who runs the top uid; the team says Vanta Trading is one entity miner. 12 of 14 validators put their top weight on it, which a deterministic scorer produces anyway.</li>
+</ul>
+<h2 id="sn-x1">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Who can run an entity miner</td><td>Team post 2026-10-24: permissionless entity miners will let anyone run one</td><td>Code: at most 10 entities, registered only through the team&#x27;s validator</td><td>2026-10-30</td></tr><tr><td>Network size</td><td>Team posts 2026-10-20 to 10-29: Null Consensus will expand the network to 2,500 miners</td><td>Chain: 256 of 256 uids, maximum 256; nothing for it in the repo</td><td>2026-10-30</td></tr></tbody></table></div>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-neutral">Neutral</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">low confidence, as of 2026-10-30. Not financial advice.</span></div>
+<p class="v2-thesis">Pool, price and flow look healthy, but the 30-day inflow all came in the last 2 days. Against that, one uid takes 91.8% of miner incentive and usage and revenue are team claims.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.03188 TAO per alpha</dd></div><div><dt>Pool</dt><dd>86,178 TAO, rank 4</dd></div><div><dt>Price, 30 days</dt><dd>+10%, 2026-09-28 to 2026-10-30</dd></div><div><dt>Net flow, 30 days</dt><dd>+1,356 TAO, 2026-09-30 to 2026-10-30</dd></div><div><dt>Miner pay</dt><dd>6.02 TAO per day on average (114 TAO per day over 19 uids)</dd></div><div><dt>Code activity</dt><dd>last commit 2026-10-27; 22 commits in 30 days; no releases</dd></div></dl>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>Net inflow of 1,356 TAO over 30 days and price up about 10%</li>
+<li>Repo shipping: 20 code commits in 30 days; owner emission cut is 0%</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>The inflow came in the last 2 days; the four weeks before were net -303 TAO</li>
+<li>One unidentified uid takes 91.8% of incentive; independent miners earn almost nothing</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> Audited or on-chain outside revenue, an independent top miner, or pay spreading beyond 5 uids would turn this bullish; a new emission stop, net outflow or a quiet repo would turn it bearish.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-similar">Similar subnets</h2>
+<div class="v2-sim"><p>By pool size this is <strong>rank 1 of 10</strong> among the subnets grouped as <em>trading</em> (what they mainly sell). Pool and price as of 2026-10-30, price in TAO per alpha; the barrier is the easiest miner role.</p><div class="scroll"><table class="v2-table"><thead><tr><th>#</th><th>Subnet</th><th>Pool</th><th>Price</th><th>Miner barrier</th></tr></thead><tbody><tr class="me" aria-current="true"><td>1</td><td>Vanta <span class="muted">SN8, this page</span></td><td>86,178 TAO</td><td>0.03188</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>2</td><td><a href="/bittensor-docs/subnets/41.html">Almanac</a> <span class="muted">SN41</span></td><td>16,557 TAO</td><td>0.008385</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr><td>3</td><td><a href="/bittensor-docs/subnets/77.html">Liquidity</a> <span class="muted">SN77</span></td><td>11,311 TAO</td><td>0.004663</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>4</td><td><a href="/bittensor-docs/subnets/21.html">AdTAO</a> <span class="muted">SN21</span></td><td>8,714 TAO</td><td>0.004511</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr><td>5</td><td><a href="/bittensor-docs/subnets/30.html">Endure</a> <span class="muted">SN30</span></td><td>8,294 TAO</td><td>0.003234</td><td><span class="v2-barrier b-low">Low</span></td></tr></tbody></table></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-30</span> <span class="muted">(#vanta)</span> Team posts relayed in chat: Vanta Trading bought 160k USD of alpha in October and locked about 40k alpha of its miner take as conviction stake. Team-reported.</li>
+<li><span class="when">2026-10-27</span> <span class="muted">(GitHub taoshidev/vanta-network)</span> A fix to the lock order in the miner account manager removed an order-execution freeze. Scoring code was not touched.</li>
+<li><span class="when">2026-10-22</span> <span class="muted">(GitHub taoshidev/vanta-network)</span> Version 8.16.5: automatic promotion of funded subaccounts to the pro track, 100% of slashed collateral burned. On 2026-10-20 the split moved to 0% owner, 50% validator, 50% miner (the chain confirms).</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Read docs/miner.md and pick one asset class.</li>
+<li>Install the repo (the vanta CLI comes with it; remove the old vanta-cli package first).</li>
+<li>Register a hotkey on netuid 8 (0.0005 TAO burn on 2026-10-30); never reuse an eliminated one.</li>
+<li>Stake into alpha and deposit 300 to 1,000 alpha as collateral with the CLI.</li>
+<li>Send signals within the drawdown limits, or join an entity miner; to validate, see docs/validator.md.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Revenue, buyback, burn, collateral and trader counts are team claims with no audited figures. Vanta Trading sells simulated evaluation accounts (demo capital, fees about 33 to 1,299 USD).</li>
+<li>The top uid is not identified. It holds a validator permit and has never set weights itself.</li>
+<li>Critics said in September 2026 that burns are miners paying to earn; the team points to evaluation fees and payouts. Unresolved.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://www.vantanetwork.io" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://github.com/taoshidev/vanta-network" rel="noopener noreferrer">GitHub</a></li>
+<li><a href="https://github.com/taoshidev/vanta-network/blob/main/docs/miner.md" rel="noopener noreferrer">Miner docs</a></li>
+<li><a href="https://github.com/taoshidev/vanta-network/blob/main/docs/entity_miner.md" rel="noopener noreferrer">Entity miner docs</a></li>
+<li><a href="https://github.com/taoshidev/vanta-network/blob/main/docs/validator.md" rel="noopener noreferrer">Validator docs</a></li>
+<li><a href="https://github.com/taoshidev/vanta-network/blob/main/docs/vanta_cli.md" rel="noopener noreferrer">Vanta CLI docs</a></li>
+<li><a href="https://github.com/taoshidev/vanta-network/blob/main/docs/validator_rest_server.md" rel="noopener noreferrer">Validator API docs</a></li>
+<li><a href="https://www.vantanetwork.io/dashboard" rel="noopener noreferrer">Dashboard (team)</a></li>
+<li><a href="https://www.vantanetwork.io/tokenomics" rel="noopener noreferrer">Tokenomics (team)</a></li>
+<li><a href="https://www.vantatrading.io" rel="noopener noreferrer">Vanta Trading (team product)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 5 sources</summary>
+<ul>
+<li><strong>repo</strong> taoshidev/vanta-network README.md, docs/miner.md, entity_miner.md, validator.md, vanta_cli.md, validator_rest_server.md, entity_management/entity_manager.py, vali_objects/scoring/debt_based_scoring.py, weight_calculator_manager.py, vali_config.py at commit f860ec3 (2026-10-27); scoring files compared back to 4b630b1 (2026-10-15)</li>
+<li><strong>web</strong> Chain read at block 9398951 (2026-10-30 20:10Z UTC): SN8 (Vanta) dossier, refresh since 2026-10-26, lifecycle from 2026-08-25, uid 117, holders and price (6 samples from 2026-09-30); shared snapshot at the same block for the pool rank</li>
+<li><strong>web</strong> vantatrading.io home page (curl, 2026-10-30); vantanetwork.io /dashboard and /tokenomics are client-rendered and were not readable</li>
+<li><strong>msg</strong> #announce 2026-10-19 (eTAO release note)</li>
+<li><strong>msg</strong> #vanta, 2026-09-03 to 2026-10-30 plus pinned posts</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/7.html"><small>← Previous</small>SN7 Allways</a><a rel="next" href="/bittensor-docs/subnets/9.html"><small>Next →</small>SN9 IOTA</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-30. Site built 2026-10-31. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

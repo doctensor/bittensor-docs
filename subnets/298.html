@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ChronoSeek (SN298) | Bittensor Subnet Docs</title>
+<meta name="description" content="Video moment search, testnet only. Team quiet since September; no testnet validator weights since August.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h22">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>298</span><div>
+<h1>ChronoSeek <span class="muted">SN298</span></h1>
+<p class="tagline">Video moment search, testnet only. Team quiet since September; no testnet validator weights since August.</p>
+<span class="st s-quiet">quiet</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl0"><b>0<small>/day</small></b><span>last 7 d</span></li><li class="pl1"><b>0.04<small>/day</small></b><span>days 8-30</span></li><li class="pl2"><b>0.48<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-14</b><span>last chat</span></li><li class="pw"><b>96</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Quiet</b><span>code activity</span></li><li class="pw"><b>0</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-04-22</b><span>last commit</span></li><li class="pw"><b>none</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>video understanding (semantic video moment retrieval)</dd>
+<dt>Status</dt><dd>Quiet and testnet only as of 2026-10-31. Mainnet has no netuid 298; on the testnet no validator has set weights in 65+ days and no uid earns incentive. Last team post 2026-09-25, last repo commit 2026-09-02.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-31</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Docs vs code vs chain</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>miners return the time interval in a video that matches a plain-language query.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>no mainnet netuid 298 (2026-10-31); on the testnet no incentive and no validator weights for 65+ days.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>it stepped back in September but stays committed; no team post since 2026-09-25.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>public repo; newest commit 2026-09-02 (dev branch); the v2.0 pull request is unmerged.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>miners need a Chutes account and a rented 16 GB GPU; validators need Chutes, Hippius and Hugging Face keys.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Deploys a video-search runtime to Chutes and answers validators&#x27; search tasks.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-caution">GPU needed</li><li class="fl fl-caution">Paid service needed</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>Rented Chutes GPU: 1 GPU, 16 GB VRAM or more (example config)</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>Chutes account and API key; GPU billed to it, price not stated</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Testnet burn 0.0005 test TAO (2026-10-31); no mainnet terms</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Python 3.12+ and Poetry; deploy with a helper script</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Builds private video-search tasks, queries miner runtimes, scores answers and sets weights.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-caution">Paid service needed</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>CPU only (no GPU code in the validator); ffmpeg; sizes not documented</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>Chutes API key and Hippius S3 storage; Vidaio key optional. Prices not stated</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Testnet burn 0.0005 test TAO; chain stake floor 0 (2026-10-31); permit holder stake not read</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Python 3.12+ and Poetry, or Docker; three outside accounts</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>ChronoSeek is a subnet for searching inside videos by meaning: given a video and a plain-language description, miners return the time interval where that moment happens. The team ran it on testnet, said in August it had bought mainnet slot SN20, and said in late September it was stepping back. Only testnet netuid 298 exists today; SN20 carries a different project (Witness).</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>In the 2.0 design (dev branch) a miner deploys a video-search runtime to Chutes, a hosted compute platform, and commits it on chain; validators query it. The runtime takes a video link and a text query and returns the best-matching interval, using CLIP and Whisper models. The older 1.0 design (main branch) had miners run the service themselves.</p></div><div><h3>Validators</h3><p>Validators build tasks from ActivityNet Captions annotations and score each answer by how well its interval overlaps the true one. In the 2.0 code a private clip is compressed through Vidaio (another subnet) or ffmpeg and stored on Hippius, so miners see only that clip plus the query. The default score is 0.75 overlap plus small terms for centre, boundaries and length, smoothed by a moving average.</p></div><div><h3>Incentive</h3><p>Main branch: normalized moving-average scores become weights. Dev branch: 75, 20 and 5 percent to the top three miners with a positive score; an optional burn share (default 0) and the no-positive-score fallback go to UID 0, hard-coded. On the testnet no uid has incentive (2026-10-31); no mainnet emission exists.</p></div></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Deploys a video-search runtime to Chutes and answers validators&#x27; search tasks.</p><ul>
+<li>Example config: one pro_6000 GPU, 16 GB VRAM or more, up to 3 instances, TEE-enabled (required for Chutes production).</li>
+<li>One permanent submission per hotkey; a second revealed submission scores zero.</li>
+<li>An own-axon path exists (external IP set by hand); its hardware is not documented.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Builds private video-search tasks, queries miner runtimes, scores answers and sets weights.</p><ul>
+<li>Testnet: 8 of 64 permit slots held; none has set weights in over 5 tempos (newest update about 65 days ago).</li>
+<li>A Hippius bucket you own is required; the default name may belong to someone else.</li>
+<li>Hardened task mode adds CPU, disk, network and storage load; no figures given.</li>
+</ul></section></div>
+<h2 id="sn-x0">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Burn target</td><td>Team (2026-08-19): burn goes to UID 240</td><td>Code: the dev branch hard-codes UID 0</td><td>2026-10-31</td></tr><tr><td>Mainnet slot SN20</td><td>Team (2026-08-03, 08-19): bought SN20</td><td>Chain: named Witness since about 2026-09-09; owner unchanged since about 2026-08-14</td><td>2026-10-31</td></tr><tr><td>Network to join</td><td>Code: guides default to mainnet netuid 20</td><td>Chain: only testnet netuid 298 exists</td><td>2026-10-31</td></tr></tbody></table></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-09-23</span> <span class="muted">(#298)</span> Team said stepping back was a hard decision, that it is still committed and waiting for the right timing. Last team post: 2026-09-25.</li>
+<li><span class="when">2026-09-09</span> <span class="muted">(chain)</span> SN20&#x27;s on-chain name changed from ChronoSeek to Witness (give or take a day); the owner account did not change then.</li>
+<li><span class="when">2026-09-02</span> <span class="muted">(GitHub)</span> Last repo commit (dev branch). Both branch heads and the open v2.0 pull request are unchanged on 2026-10-31.</li>
+<li><span class="when">2026-08-19</span> <span class="muted">(#298 and chain)</span> Team said it burns against UID 240, which is SN20&#x27;s owner hotkey on chain (read 2026-10-21).</li>
+<li><span class="when">2026-08-11</span> <span class="muted">(#298)</span> Team asked volunteers to test the v2.0 branch (pull request 29); the Chutes integration needed a mainnet UID.</li>
+<li><span class="when">2026-07-22</span> <span class="muted">(#298)</span> Team welcomed as the new holder of mainnet SN20; on 2026-08-03 it said it had bought SN20 but was re-evaluating the slot.</li>
+<li><span class="when">2026-07-01</span> <span class="muted">(#298)</span> Team added Hippius storage (and Vidaio compression on 2026-07-02) to the validator task pipeline, so miners see only a transformed copy of each clip.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Testnet only, no rewards: no testnet validator has set weights in 65+ days (2026-10-31), so a new miner would not be scored.</li>
+<li>Clone the repo, check out dev (the 2.0 guides; main is 1.0), install Python 3.12+ and Poetry, run poetry install.</li>
+<li>Copy .env.example to .env, set wallet and hotkey names, and change NETWORK to the test network and NETUID to 298 (defaults: finney, 20).</li>
+<li>Register a hotkey on testnet netuid 298 (burn 0.0005 test TAO on 2026-10-31).</li>
+<li>Miner: get a Chutes API key, copy chronoseek_chute.example.py to chronoseek_chute.py, deploy it with scripts/deploy_chutes_runtime.py, then commit the slug with miner.py (permanent per hotkey).</li>
+<li>Validator: add Chutes, Hugging Face and Hippius keys to .env and run validator.py or the Docker image (docs/validator.md).</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Testnet only: nothing here describes mainnet participation or emissions; test tokens carry no value.</li>
+<li>The mainnet slot is unclear: the team said it bought SN20, but the chain shows only an owner change around 2026-08-14 and the Witness name since about 2026-09-09. Sale, handover or release is not claimed.</li>
+<li>SN20&#x27;s on-chain identity still listed this project&#x27;s Discord invite on 2026-10-21, so that link leads to the ChronoSeek server.</li>
+<li>Code is not proof of what ran: 2.0 sits on an unmerged dev branch, and the newest testnet weight update (about 2026-08-26) predates its last commit.</li>
+<li>chronoseek.org and the MCP endpoint (HTTP 526) did not answer on 2026-10-31; API, demo and MCP claims are team statements, untested.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/chronoseek/bittensor-subnet" rel="noopener noreferrer">GitHub (chronoseek/bittensor-subnet)</a></li>
+<li><a href="https://github.com/chronoseek/bittensor-subnet/pull/29" rel="noopener noreferrer">v2.0 pull request (open, dev branch)</a></li>
+<li><a href="https://github.com/chronoseek/bittensor-subnet/blob/dev/docs/CHRONOSEEK_V2_DESA.md" rel="noopener noreferrer">v2.0 design note (dev branch)</a></li>
+<li><a href="https://discord.gg/P2Y93BRYyC" rel="noopener noreferrer">ChronoSeek Discord (invite from the 2026-04-16 launch post)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 6 sources</summary>
+<ul>
+<li><strong>repo</strong> chronoseek/bittensor-subnet@1905a67 (dev, 2026-09-02): README.md, docs/miner.md, docs/validator.md, docs/CHRONOSEEK_V2_DESA.md, .env.example, chronoseek_chute.example.py, chronoseek/constants.py, chronoseek/scoring.py, chronoseek/validator/aggregation.py, validator.py</li>
+<li><strong>repo</strong> chronoseek/bittensor-subnet@04c999c (main, 2026-04-22): README.md, docs/DESIGN.md, validator.py. REPO last_commit=2026-04-22 (main), 2026-09-02 (dev) commits_30d=0 code_30d=0 last_release=none checked=2026-10-31</li>
+<li><strong>msg</strong> #298 (channel now named as testnet 298) 2026-04-16 to 2026-10-14, read via the chat archive; re-queried 2026-10-31 for newer messages (none)</li>
+<li><strong>web</strong> GitHub API and git ls-remote for chronoseek/bittensor-subnet: PR 29, branch heads, push dates (2026-10-21, 10-26 and 10-31)</li>
+<li><strong>web</strong> Chain reads 2026-10-21, 10-26 and 10-31: mainnet block 9400611 (netuid 298 absent; SN20 settings and owner unchanged since 2026-10-26); SN20 name and owner history at archive blocks (2026-10-21); testnet netuid 298 parameters and validator weight age (test blocks 8273071, 8305868, 8339056)</li>
+<li><strong>web</strong> discord.com invite API (ChronoSeek server, 2026-10-31) and HTTP checks of chronoseek.org, mcp.chronoseek.org and chronoseek.ai (2026-10-21, 10-26, 10-31)</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/292.html"><small>← Previous</small>SN292 Polaris</a><a rel="next" href="/bittensor-docs/subnets/305.html"><small>Next →</small>SN305 Blockchain Insights (testnet 305)</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-31. Site built 2026-10-31. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

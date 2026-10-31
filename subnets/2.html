@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DaniLabs (SN2) | Bittensor Subnet Docs</title>
+<meta name="description" content="DaniLabs is building an inference subnet on SN2: the validator is live, but miner rewards are still burned.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h14">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>2</span><div>
+<h1>DaniLabs <span class="muted">SN2</span></h1>
+<p class="tagline">DaniLabs is building an inference subnet on SN2: the validator is live, but miner rewards are still burned.</p>
+<span class="st s-transitioning">transitioning</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl3"><b>1.7<small>/day</small></b><span>last 7 d</span></li><li class="pl4"><b>5.8<small>/day</small></b><span>days 8-30</span></li><li class="pl4"><b>2.1<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-29</b><span>last chat</span></li><li class="pw"><b>11,094</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Shipping</b><span>code activity</span></li><li class="pw"><b>15</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-10-27</b><span>last commit</span></li><li class="pw"><b>2026-09-08</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>AI inference (previously zero-knowledge proof of inference)</dd>
+<dt>Status</dt><dd>As of 2026-10-30 DaniLabs runs one validator that sends all weight to the owner uid, so miner emission is burned. Scoring code exists in the repo but is log-only, and mining has no start date.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-30</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">How scoring is set up</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-similar">Similar subnets</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>an AI inference network built for no data retention, speed and low cost; the service is still &#x27;in development&#x27;.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>all 6 validators weight the owner&#x27;s uid, which holds 100% of incentive and 88.9% of emission (2026-10-30).</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>the repo scores miners on speed and reliability from signed reports, but only logs the result; burn stays at 100%.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>mining opens &#x27;soon&#x27; and starts with GPUs; no date, and the miner kit is not public.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>pool 8,460 TAO (rank 51), price +20% in 30 days on 716 TAO net inflow, yet no miner is paid.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-high">High barrier</span></h3><p>Serve model requests for DaniLabs&#x27; gateway. Not open yet: no software, no date, no pay.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-caution">GPU needed</li><li class="fl fl-unk">Paid service unknown</li><li class="fl fl-bad">Permissioned</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>GPU (team, 2026-10-22); VRAM not stated</dd></div><div class="v2-need n-unk"><dt>API tokens / subscriptions</dt><dd>Not documented</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Registration burn 0.0005 TAO (2026-10-30); no stake; no miner earns now</dd></div><div class="v2-need n-unk"><dt>Setup effort</dt><dd>Not documented: the miner kit is not public</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Hold a permit and set weights. Only the team&#x27;s burn weight is in use today.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-no"><dt>Hardware</dt><dd>No GPU; observer host of 4 vCPU, 8 GB RAM, 50 GB SSD (team estimate)</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None found; the report API is public and needs no key</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Registration burn 0.0005 TAO; permit needs the 1,000 TAO chain threshold (2026-10-30)</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Python 3.11+, signed-report config, PM2; the team coordinates validators in a private chat</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-neutral">Neutral</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">low confidence, as of 2026-10-30. Not financial advice.</span></div><p>Money flowed in after the handover, but no miner earns and usage is unverified. <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>Subnet 2 ran for years as DSperse, where miners returned zero-knowledge proofs of model predictions. On 2026-10-16 it passed to DaniLabs, which says it is building an AI inference network around no data retention, speed and low cost. Its validator is live on Finney but weights only the owner&#x27;s uid, so the miner side of emission is burned. The team says mining opens &#x27;soon&#x27; and gave no date.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>No miner is paid today. The miner kit is private and the team gives no date: mining opens &#x27;soon&#x27; and will need GPUs at the start (chat, 2026-10-22 and 2026-10-29). The scoring code targets one model, openai/gpt-oss-20b, at 300 tokens per second and 500 ms to the first token. One miner uid registered around 2026-10-27 and shows no requests in the public reports.</p></div><div><h3>Validators</h3><p>DaniLabs runs one validator (uid 14), announced live on 2026-10-26; the owner hotkey on chain changed the same day. All six permit holders put their weight on that uid. The repo&#x27;s validator scores signed reports from DaniLabs&#x27; own gateway, but the results are only logged. The signer that writes weights sends 100% to the owner uid.</p></div><div><h3>Incentive</h3><p>Emission splits 18% owner, 41% validator, 41% miner, and the withheld miner share is burned (chain, 2026-10-30). The team hopes the burn is off or decreasing by the end of the first week of November (chat, 2026-10-23): a hope, not a commitment. Paying miners needs a separate signer review and independent checks of token counts and correctness (repo docs).</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-10-30, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-good">Open</span>Permits go by stake on chain (6 of 64 slots held); the team runs onboarding in a private chat.</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">88.9%</span>Owner uid holds 88.9% of last-epoch emission and all incentive; owner cut 18%; RecycleOrBurn is Burn.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">1 uid</span><span class="v2-sx muted">top 5 hold 100% of incentive.</span> One uid earns incentive (the owner&#x27;s); no independent miner is paid.</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Converged</span>All 6 weight-setting validators target uid 14, the burn target; this is policy, not independent scoring.</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-caution">Partial</span>Validator repo is public with no licence; the miner kit, gateway and platform are private.</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-high">High barrier</span></h3><p>Serve model requests for DaniLabs&#x27; gateway. Not open yet: no software, no date, no pay.</p><ul>
+<li>Only openai/gpt-oss-20b has a target so far; other models need a policy update (repo docs).</li>
+<li>Token counts are miner-reported and execution is unattested (repo docs).</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Hold a permit and set weights. Only the team&#x27;s burn weight is in use today.</p><ul>
+<li>Six of 64 permit slots are held; the team has not said who runs the other five (chain, 2026-10-30).</li>
+<li>One permit holder has not set weights for about 3.5 days (chain, 2026-10-30).</li>
+</ul></section></div>
+<h2 id="sn-x0">How scoring is set up</h2>
+<ul class="v2-list">
+<li>A signed report per epoch (about 72 minutes) is public: 50 exist, 2026-10-26 to 2026-10-29, none newer at the 2026-10-30 check.</li>
+<li>Each miner and model is scored on decode speed 50%, first-token time 35%, reliability 10% and ping 5%, all multiplied by reliability (policy v3). The weights are logged, never sent.</li>
+</ul>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-neutral">Neutral</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">low confidence, as of 2026-10-30. Not financial advice.</span></div>
+<p class="v2-thesis">The pool is mid-sized (rank 51 of 128) and price is up 20% in 30 days, mostly after the handover news. Miner emission is burned and usage is a team claim.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.003664 TAO per alpha</dd></div><div><dt>Pool</dt><dd>8,460 TAO, rank 51</dd></div><div><dt>Price, 30 days</dt><dd>+20%, 2026-09-28 to 2026-10-30</dd></div><div><dt>Net flow, 30 days</dt><dd>+716 TAO, 2026-09-30 to 2026-10-30</dd></div><div><dt>Miner pay</dt><dd>No independent miner is paid (miner side burned)</dd></div><div><dt>Miner pay outside top 5</dt><dd>No independent miner is paid (miner side burned)</dd></div><div><dt>Code activity</dt><dd>last commit 2026-10-27; 23 commits in 30 days; no releases</dd></div></dl>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>716 TAO net inflow in 30 days; scoring code added in a week</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>Miner emission is burned; no mining date</li>
+<li>Measurement rests on the team&#x27;s own gateway</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> Bullish: miner weights enabled with independent token checks, or named customers. Bearish: outflows once the burn hope passes unmet.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-similar">Similar subnets</h2>
+<div class="v2-sim"><p>By pool size this is <strong>rank 6 of 11</strong> among the subnets grouped as <em>inference</em> (what they mainly sell). Pool and price as of 2026-10-30 to 2026-10-31, price in TAO per alpha; the barrier is the easiest miner role.</p><div class="scroll"><table class="v2-table"><thead><tr><th>#</th><th>Subnet</th><th>Pool</th><th>Price</th><th>Miner barrier</th></tr></thead><tbody><tr><td>4</td><td><a href="/bittensor-docs/subnets/95.html">Actual</a> <span class="muted">SN95</span></td><td>23,661 TAO</td><td>0.03172</td><td><span class="v2-barrier b-high">High</span></td></tr><tr><td>5</td><td><a href="/bittensor-docs/subnets/114.html">SOMA</a> <span class="muted">SN114</span></td><td>9,320 TAO</td><td>0.01753</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr class="me" aria-current="true"><td>6</td><td>DaniLabs <span class="muted">SN2, this page</span></td><td>8,460 TAO</td><td>0.003664</td><td><span class="v2-barrier b-high">High</span></td></tr><tr><td>7</td><td><a href="/bittensor-docs/subnets/46.html">Instant</a> <span class="muted">SN46</span></td><td>7,474 TAO</td><td>0.002745</td><td><span class="v2-barrier b-high">High</span></td></tr><tr><td>8</td><td><a href="/bittensor-docs/subnets/92.html">REAX</a> <span class="muted">SN92</span></td><td>3,142 TAO</td><td>0.02077</td><td><span class="v2-barrier b-medium">Medium</span></td></tr></tbody></table></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-30</span> <span class="muted">(Bittensor chain read-only queries)</span> The owner hotkey changed on 2026-10-26; other settings and the emission split did not. Pool 8,460 TAO, up from 8,269 TAO on 2026-10-26.</li>
+<li><span class="when">2026-10-29</span> <span class="muted">(#danilabs, api.danilabs.ai)</span> Team: mining is &#x27;coming soon&#x27;; a lean team still talking with business partners. The newest public report ended this day and lists one miner with no requests.</li>
+<li><span class="when">2026-10-27</span> <span class="muted">(GitHub DaniLabsAI/subnet)</span> The validator repo added scoring of signed gateway reports and a reliability gate (23 commits in 30 days). Weights are only logged.</li>
+<li><span class="when">2026-10-26</span> <span class="muted">(#danilabs)</span> The team announced its validator live on Finney (uid 14), burn staying at 100% while it tests, and welcomed a new AI engineer.</li>
+<li><span class="when">2026-10-16</span> <span class="muted">(#danilabs)</span> DaniLabs introduced itself as the next chapter of SN2; Inference Labs said the timing was not right to keep running it. The old repo was archived on 2026-10-20.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Mining is not open: the team says &#x27;soon&#x27; (2026-10-29), gives no date, and the miner kit is private. Follow #danilabs and the X account.</li>
+<li>Validators: the repo runs an observer and a scorer that only log; weight submission is off. Onboarding is in a private chat (team, 2026-10-22).</li>
+<li>Distrust old DSperse instructions and &#x27;Dsperse wallet&#x27; sites: chat warns of wallet-phrase scams.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>All weight on the owner uid is one configuration read (2026-10-30); the burn&#x27;s end date is the team&#x27;s hope.</li>
+<li>Measurements come from DaniLabs&#x27; own gateway; a signature proves origin, not correct output. The newest report ended 2026-10-29 11:52 UTC, about 19 hours before the check; the reason is unknown.</li>
+<li>Who runs the other five permit holders, and whether old DSperse software still runs, is unknown.</li>
+<li>Disputes about the new lead&#x27;s earlier project, and Inference Labs&#x27; proof counts, were not investigated.</li>
+<li>Service, platform and miner-kit repos are private; the site&#x27;s Docs and Sign in pages and the model API need an account, so prices and usage are not visible.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://danilabs.ai/" rel="noopener noreferrer">DaniLabs site</a></li>
+<li><a href="https://github.com/DaniLabsAI/subnet" rel="noopener noreferrer">Validator repo</a></li>
+<li><a href="https://github.com/DaniLabsAI/subnet/blob/main/docs/validator-reports.md" rel="noopener noreferrer">Report setup and scoring policy</a></li>
+<li><a href="https://api.danilabs.ai/v1/validator/reports/latest" rel="noopener noreferrer">Latest signed validator report (public JSON)</a></li>
+<li><a href="https://x.com/danilabsai" rel="noopener noreferrer">DaniLabs on X</a></li>
+<li><a href="https://github.com/inference-labs-inc/subnet-2" rel="noopener noreferrer">Former DSperse repo (archived)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 5 sources</summary>
+<ul>
+<li><strong>msg</strong> #danilabs (SN2), 2026-10-16 to 2026-10-29</li>
+<li><strong>repo</strong> DaniLabsAI/subnet@31fe534 (2026-10-27): README.md, docs/validator-reports.md, docs/operator-pilot.md, src/danilabs_validator/{reports,burn}.py</li>
+<li><strong>repo</strong> inference-labs-inc/subnet-2@5019f7b (2026-10-20, archived): README.md</li>
+<li><strong>web</strong> https://danilabs.ai/ and the public report API on api.danilabs.ai (2026-10-30)</li>
+<li><strong>web</strong> Chain read at block 9395109 (2026-10-30 07:21Z UTC): dossier, refresh since 2026-10-26, snapshot, price 2026-09-30 to 2026-10-30</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/1.html"><small>← Previous</small>SN1 Apex</a><a rel="next" href="/bittensor-docs/subnets/3.html"><small>Next →</small>SN3 Teutonic</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-30. Site built 2026-10-31. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

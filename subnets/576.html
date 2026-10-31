@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Microtensor (SN576) | Bittensor Subnet Docs</title>
+<meta name="description" content="Testnet-only network that pays for verified small-model systems; miners run the tests, validators replay them.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h0">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>576</span><div>
+<h1>Microtensor <span class="muted">SN576</span></h1>
+<p class="tagline">Testnet-only network that pays for verified small-model systems; miners run the tests, validators replay them.</p>
+<span class="st s-transitioning">transitioning</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl0"><b>0<small>/day</small></b><span>last 7 d</span></li><li class="pl2"><b>0.61<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>19<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-23</b><span>last chat</span></li><li class="pw"><b>1,147</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Shipping</b><span>code activity</span></li><li class="pw"><b>47</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-10-30</b><span>last commit</span></li><li class="pw"><b>2026-09-18</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>specialised small language models (verified inference)</dd>
+<dt>Status</dt><dd>Testnet only as of 2026-10-31: mainnet has no netuid 576, and the team has named no slot or date since it said on 2026-09-25 it was still looking for one. It is still building: the subnet and arenas repos changed on 2026-10-30, while the channel has had no team post since 2026-10-21.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-31</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Docs vs code vs chain</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>a small model tuned for one task can match frontier quality at lower cost; the network measures this on hidden tests.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>netuid 576 exists on the test network only (since 2026-09-23); mainnet has no 576 (2026-10-31).</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>since 2026-10-29 miners run the tests on their own GPU and upload signed transcripts; validators replay them on CPU.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>5 neurons, 2 validator permits, no uid earns incentive; one validator has not set weights since registration (2026-10-31).</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>miners need a 24 GB-class GPU; validators need a CPU box and team-granted relay access; the licence is proprietary.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Fine-tunes the arena&#x27;s base model, builds harness, router and escalation, and runs the evaluation on its own GPU.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-caution">GPU needed</li><li class="fl fl-unk">Paid service unknown</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>GPU of an accepted profile: RTX 4090 (P1) today; A100, H100, 2x T4 and CPU profiles are defined</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>Team relay token with a spend cap for frontier repair calls; who funds it is not documented</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Testnet registration burn 0.0005 test TAO (2026-10-31); a submission fee set per arena</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Fine-tune a small model, write harness and router, run a Docker job; code must replay exactly</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Replays miner transcripts on CPU, grades them and sets weights; needs relay access granted by the team.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-bad">Permissioned</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>One CPU box: 8 cores, 32 GB RAM, 200 GB NVMe; Ubuntu 22.04 or 24.04, Docker 27+</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None; relay access and a token are granted by the team (no price stated)</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Testnet registration burn 0.0005 test TAO (2026-10-31); smallest permit holder&#x27;s stake not read</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Docker compose, a hotkey and an X25519 key; the loop must be up at Freeze 2 and for the 6 h grading window</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div><div class="v2-role"><h3>Inference miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Serves certified systems to customers through the team&#x27;s gateway; paid on metered usage plus a serving pool.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-caution">GPU needed</li><li class="fl fl-good">No paid service</li><li class="fl fl-unk">Access unknown</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>One 24 GB GPU per held system (RTX 4090, L4, A10G or better); 8 cores, 32 GB RAM, 100 GB NVMe</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None stated; a Hugging Face token only for gated model repositories</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>1 TAO collateral to the pool coldkey; testnet registration burn 0.0005 test TAO (2026-10-31)</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Docker 27+, NVIDIA Container Toolkit, CUDA 12; admitted after about 60 validator probes</dd></div></dl><a class="v2-more" href="#sn-role-2">Full requirements</a></div></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>Microtensor pays miners for small language models fine-tuned for one narrow task (context compression, page parsing, SQL), shipped with a router and an escalation path, and measures their quality on hidden tests. It lost its mainnet slot in September 2026 and now runs a redesigned version as netuid 576 on the test network while it looks for a new slot.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Each arena fixes one base model. A miner fine-tunes it and adds a harness, a router (predicts when the small model is right) and an escalation path (repairs doubtful answers through a frontier model on the team&#x27;s relay), then commits a digest on chain. In the evaluation window it runs the hidden items on its own GPU and uploads a signed transcript of every call; its code must replay exactly.</p></div><div><h3>Validators</h3><p>Validators replay each transcript on CPU, requiring every recorded call to match, grade it once labels are released and set weights; the published score is the stake-weighted median of their reports. GPU checkers re-run at least 200 sampled calls and need an exact token match; a confirmed mismatch means a ban.</p></div><div><h3>Incentive</h3><p>Miner emission is split across five pools (model, harness, router, escalation, whole system); the top five in a pool get 40, 25, 15, 12 and 8 percent, and an empty pool is burned. The README says 20% per pool; the serving docs set up to 10% aside first (18% per pool). Testnet settings only.</p></div></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Fine-tunes the arena&#x27;s base model, builds harness, router and escalation, and runs the evaluation on its own GPU.</p><ul>
+<li>Two Hugging Face repositories per arena: artifact (harness, router, escalation) and model weights.</li>
+<li>min_compute.yml still names netuid 92 and an RTX 3090 minimum; it predates the move (2026-09-05). Licence: proprietary, participation only.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Replays miner transcripts on CPU, grades them and sets weights; needs relay access granted by the team.</p><ul>
+<li>Spot checking is a separate GPU duty (a P1, P2, P3 or K card, NVIDIA Container Toolkit); the owner runs one checker per profile.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-2"><h3>Inference miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Serves certified systems to customers through the team&#x27;s gateway; paid on metered usage plus a serving pool.</p><ul>
+<li>Pay: 95% of metered billing plus a serving pool (10% of arena emission under 5,000 USD monthly billing, 5% under 50,000, 2% above).</li>
+</ul></section></div>
+<h2 id="sn-x0">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Who runs the evaluation</td><td>docs/mechanism.md and miner_setup.md: validators run each submission on their own GPUs</td><td>Code: commit 9b874a6 (2026-10-29) removed the validator-run path; README and miner.md say miners run it</td><td>2026-10-31</td></tr></tbody></table></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-30</span> <span class="muted">(GitHub microtensor-subnet, microtensor-arenas)</span> Serving pay was documented, validator setup cut to one CPU box, the README rewritten as a research-style paper, and each arena now names one base model.</li>
+<li><span class="when">2026-10-29</span> <span class="muted">(GitHub microtensor-subnet)</span> Evaluation moved from validators to miners: miners run the hidden items and upload signed transcripts; validators replay them on CPU.</li>
+<li><span class="when">2026-09-24</span> <span class="muted">(#576 microtensor)</span> The team announced the network live on testnet as netuid 576; on 2026-09-25 it said it was still looking for a mainnet slot. Its last channel post is dated 2026-10-21.</li>
+<li><span class="when">2026-09-19</span> <span class="muted">(#576 microtensor)</span> The team said the earlier mainnet slot was lost after the coordinator&#x27;s hotkey was pruned and the slot&#x27;s owner moved on.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Treat this as testnet work: netuid 576 exists on the test network only (testnet wallet and TAO).</li>
+<li>Miners: start from the miner template, pick an arena (ctx_compress is live on testnet), fine-tune its base model and check it with mt check-model.</li>
+<li>Commit the digest on chain, run mt miner run in the evaluation window and upload before Freeze 2; test with mt miner replay first.</li>
+<li>Validators and inference miners: follow docs/validator_setup.md or docs/inference_miner.md; validators must ask the team for relay access.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Testnet only: mainnet has no netuid 576 (2026-10-31), and no slot or date was named. Nothing here covers mainnet participation.</li>
+<li>The mechanism was rewritten on 2026-10-29; older repo files and September chat describe the old validator-run flow.</li>
+<li>Testnet (2026-10-31): 5 neurons, no uid with incentive. The chain tool reports emissions off, yet 295 alpha went out last epoch (97.6% to uid 0); not reconciled. Who runs the neurons is unknown.</li>
+<li>Quality and cost claims are the team&#x27;s; no usage or revenue is visible. The slot loss is from team posts and a moderator note elsewhere, not checked on chain.</li>
+<li>The channel has no discussion of the new mechanism, so participant experience is undocumented. The docs site was not read (client-rendered); the repo docs were.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/microtensor-io/microtensor-subnet" rel="noopener noreferrer">GitHub (subnet)</a></li>
+<li><a href="https://github.com/microtensor-io/microtensor-arenas" rel="noopener noreferrer">GitHub (arena definitions)</a></li>
+<li><a href="https://github.com/microtensor-io/microtensor-miner-template" rel="noopener noreferrer">GitHub (miner template)</a></li>
+<li><a href="https://www.microtensor.cloud" rel="noopener noreferrer">Project site</a></li>
+<li><a href="https://www.microtensor.cloud/docs/certified-inference" rel="noopener noreferrer">Docs</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 4 sources</summary>
+<ul>
+<li><strong>repo</strong> microtensor-io/microtensor-subnet @97f25f3 (2026-10-30): README, docs/{mechanism,miner,miner_setup,validator_setup,inference_miner}.md, min_compute.yml, scoring/pools.py, serving/pools.py; microtensor-arenas @595cb09 and microtensor-miner-template @8e4f02e (2026-10-30) READMEs</li>
+<li><strong>msg</strong> #576 microtensor, 2026-09-15 to 2026-10-23 (newest team post 2026-10-21); #92 pinned note 2026-09-21 naming Microtensor as the previous occupant of netuid 92</li>
+<li><strong>web</strong> Chain reads 2026-10-31: mainnet subnet 576 absent at block 9400514; test network at block 8338959: registered 2026-09-23, 5 neurons, 2 validator permits, no incentive, validator weight ages 18,109 and 272,784 blocks (the second equals the slot&#x27;s age); earlier test reads 2026-10-21 (1 neuron) and 2026-10-26 (3 neurons)</li>
+<li><strong>web</strong> Repo pace on 2026-10-31: subnet repo last commit 2026-10-30, 65 commits in 30 days (47 code), last release 2026-09-18; links returned 200</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/554.html"><small>← Previous</small>SN554 Sentinel</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-31. Site built 2026-10-31. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

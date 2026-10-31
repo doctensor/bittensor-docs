@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ChipForge (SN108) | Bittensor Subnet Docs</title>
+<meta name="description" content="Miners design AI-accelerator chips in Verilog; validators score them with open EDA tools and pay each new record.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h12">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>108</span><div>
+<h1>ChipForge <span class="muted">SN108</span></h1>
+<p class="tagline">Miners design AI-accelerator chips in Verilog; validators score them with open EDA tools and pay each new record.</p>
+<span class="st s-transitioning">transitioning</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>7.7<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>18<small>/day</small></b><span>days 8-30</span></li><li class="pl2"><b>0.62<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-31</b><span>last chat</span></li><li class="pw"><b>1,182</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Shipping</b><span>code activity</span></li><li class="pw"><b>57</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-10-31</b><span>last commit</span></li><li class="pw"><b>none</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>hardware design (chip design)</dd>
+<dt>Status</dt><dd>Between contests: Quest 001 closed on 2026-10-15 and all weight has been burned since 2026-10-16. Quest 2 software merged on 2026-10-31; no start date.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-31</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Payout and scoring rules</a></li><li><a href="#sn-x1">Docs vs code vs chain</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-similar">Similar subnets</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>miners design small AI chips (NPUs) in Verilog; validators score correctness, speed and area.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>no miner is paid now; all 5 validators put 100% of weight on UID 0, the owner&#x27;s hotkey (2026-10-31).</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>even in a contest only 10% of weight is meant for miners; the rest is burned to UID 0.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>Quest 2 validators need a dedicated 16-core, 32 GiB RAM, 300 GiB disk machine and a team key.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>Quest 2 starts &#x27;within days&#x27; (2026-10-27); one team server decides winners and payouts.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Designs the chip in Verilog or SystemVerilog and submits it for scoring.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>Quest 2 full local test: 16 cores, 32 GiB RAM, 300 GiB disk; smaller machines run quick checks only</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None required</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>0.05 TAO to register (2026-10-31); no stake</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Chip-design skill (Verilog, synthesis); Docker toolchain</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Runs the team&#x27;s evaluation server, scores designs and sets weights.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-bad">Permissioned</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>Dedicated x86-64 machine: 16 cores, 32 GiB RAM, 300 GiB disk (EC2 c7a.4xlarge or better)</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>Secret key issued by the team (not paid)</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>0.05 TAO to register; chain stake threshold 1,000 TAO (2026-10-31)</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Docker; EDA server plus validator code</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-neutral">Neutral</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">low confidence, as of 2026-10-31. Not financial advice.</span></div><p>Small pool, no miner pay; the 30-day gain is all from week one. <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>ChipForge pays miners to design AI-accelerator chips in Verilog; validators score them with open tools. Run by the Tatsu team, it was subnet 84 until deregistered on 2026-05-01 and returned as subnet 108 on 2026-09-20. Its first contest here, Quest 001, closed on 2026-10-15.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Miners download a challenge package, design and test locally, then submit a signed zip of Verilog or SystemVerilog. Winning designs are shown to registered hotkeys 18 hours after the win, or sooner if overtaken.</p></div><div><h3>Validators</h3><p>Validators run the team&#x27;s evaluation server. Since 2026-10-30 their software installs the signed evaluator itself and no longer picks winners: a team-run challenge server decides the records and sends the payout schedule they follow.</p></div><div><h3>Incentive</h3><p>Each new best design is a &#x27;record&#x27;: it must beat the previous best by a margin, wait out a probation, then is paid for a fixed window; up to three records share the pay. Only a tenth of validator weight is meant for miners; the rest goes to UID 0.</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-10-31, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-caution">Whitelisted</span>Validators need a secret key from the team; 5 permits are held, none outside that route is documented.</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">80.3%</span>80.3% of last-epoch emission is on UID 0 (100% of incentive, about 61% of dividends); owner cut 18%; Burn.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">1 uid</span><span class="v2-sx muted">top 5 hold 100% of incentive.</span> One uid earns incentive: UID 0, the owner&#x27;s own hotkey. No independent miner is paid.</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Converged</span>All 5 validators put 100% on UID 0; with no contest running that is expected, not proof of copying.</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-caution">Partial</span>Validator and server code are public (MIT on the subnet repo); the Quest 2 evaluator is a privately built signed zip.</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Designs the chip in Verilog or SystemVerilog and submits it for scoring.</p><ul>
+<li>Live rules (2026-10-31): 1 submission per hotkey, 60 minutes apart; Quest 001 allowed 5.</li>
+<li>Quest 001&#x27;s score to beat rose from under 50 to about 2,294 in nine days: expect competition.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Runs the team&#x27;s evaluation server, scores designs and sets weights.</p><ul>
+<li>Five hold permits and all set weights within the last tempo (2026-10-31); UID 0 holds about 61% of validator dividends.</li>
+<li>One design at a time, about 3 hours each on the minimum machine (the guide also says 1.5 to 2 hours).</li>
+</ul></section></div>
+<h2 id="sn-x0">Payout and scoring rules</h2>
+<p>Live rules as of 2026-10-31; each quest has its own scoring settings.</p>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Rule</th><th>Value</th></tr></thead><tbody><tr><td>Margin to beat the best score</td><td>5% (20% at launch)</td></tr><tr><td>Record needs</td><td>Two validators agree within 0.01%</td></tr><tr><td>Probation, then paid window</td><td>24 hours, then 24 hours</td></tr><tr><td>Places and shares</td><td>Up to 3: 1 / 0.35 / 0.12</td></tr><tr><td>Miner share of weight</td><td>10%; the rest to UID 0</td></tr><tr><td>Quest 001 score</td><td>Speed gain^0.7 / area^0.3; outputs bit-exact; power not scored</td></tr></tbody></table></div>
+<h2 id="sn-x1">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Miner payout</td><td>White paper: winner takes all, no burn</td><td>Code: 10% of weight to up to 3 records; 90% burned</td><td>2026-10-31</td></tr><tr><td>Validator machine</td><td>Requirements doc: 16 cores, 32 GB, 100 GB SSD</td><td>Code: Quest 2 guide: 300 GiB disk, one design at a time</td><td>2026-10-31</td></tr><tr><td>Roadmap</td><td>White paper: NPU contest by February 2026</td><td>Chat: first NPU contest opened 2026-10-06</td><td>2026-10-31</td></tr></tbody></table></div>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-neutral">Neutral</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">low confidence, as of 2026-10-31. Not financial advice.</span></div>
+<p class="v2-thesis">Over 30 days the price is up 8% and net flow is +155 TAO, all in the first week; since the 2026-10-08 peak the price fell 60% and net flow is -187 TAO. The pool is 121st of 128 and no miner is paid. The team is shipping Quest 2 code; no revenue is shown.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.004796 TAO per alpha</dd></div><div><dt>Pool</dt><dd>530 TAO, rank 121</dd></div><div><dt>Price, 30 days</dt><dd>+8%, 2026-10-01 to 2026-10-31; peak on 2026-10-08</dd></div><div><dt>Net flow, 30 days</dt><dd>+155 TAO, 2026-10-01 to 2026-10-31</dd></div><div><dt>Miner pay</dt><dd>No independent miner is paid (miner side burned)</dd></div><div><dt>Code activity</dt><dd>last commit 2026-10-31; 25 commits in 30 days; no releases</dd></div></dl>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>Quest 2 validator and server code shipped on 2026-10-30 and 2026-10-31.</li>
+<li>A new contest restarts miner pay at once.</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>No miner paid since 2026-10-16; at most 10% of weight is for miners.</li>
+<li>Net outflow in 3 of 4 weeks since the peak; two team dates missed.</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> A Quest 2 launch with a public specification and real payouts would improve the view; another slip would worsen it.</p>
+<p class="muted">Since the last pass: Was bearish on 2026-10-28 from a 7-day read; the 30-day read and shipped Quest 2 code make it neutral.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-similar">Similar subnets</h2>
+<div class="v2-sim"><p>By pool size this is <strong>rank 6 of 8</strong> among the subnets grouped as <em>other</em> (what they mainly sell). Pool and price as of 2026-10-28 to 2026-10-31, price in TAO per alpha; the barrier is the easiest miner role.</p><div class="scroll"><table class="v2-table"><thead><tr><th>#</th><th>Subnet</th><th>Pool</th><th>Price</th><th>Miner barrier</th></tr></thead><tbody><tr><td>4</td><td><a href="/bittensor-docs/subnets/72.html">StreetVision (NATIX) / chillyshort</a> <span class="muted">SN72</span></td><td>6,164 TAO</td><td>0.002113</td><td><span class="v2-barrier b-high">High</span></td></tr><tr><td>5</td><td><a href="/bittensor-docs/subnets/74.html">Gittensor</a> <span class="muted">SN74</span></td><td>5,632 TAO</td><td>0.002882</td><td><span class="v2-barrier b-high">High</span></td></tr><tr class="me" aria-current="true"><td>6</td><td>ChipForge <span class="muted">SN108, this page</span></td><td>530 TAO</td><td>0.004796</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>7</td><td><a href="/bittensor-docs/subnets/16.html">Unnamed subnet</a> <span class="muted">SN16</span></td><td>338 TAO</td><td>0.001009</td><td><span class="v2-barrier b-unknown">Unknown</span></td></tr><tr><td>8</td><td><a href="/bittensor-docs/subnets/70.html">Unnamed subnet (reset 2026-10-26)</a> <span class="muted">SN70</span></td><td>226 TAO</td><td>0.00421</td><td><span class="v2-barrier b-unknown">Unknown</span></td></tr></tbody></table></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-31</span> <span class="muted">(GitHub TatsuProject, 2026-10-29 to 2026-10-31; team status page and rules feed, 2026-10-31)</span> Quest 2 software merged: validators install the signed evaluator and follow the server&#x27;s payout schedule; the live rules now need two validators to agree on a record. No challenge is open; no start date is public.</li>
+<li><span class="when">2026-10-27</span> <span class="muted">(#chipforge, 2026-10-16 to 2026-10-30)</span> The team said Quest 2 starts within days; earlier dates (2026-10-23 to 26) passed. Miners were still asking on 2026-10-30.</li>
+<li><span class="when">2026-10-15</span> <span class="muted">(#chipforge, 2026-10-15; team status page, 2026-10-31)</span> Quest 001 closed: 129 submissions, 52 miners, 21 winning records; the last paid window ended on 2026-10-16.</li>
+<li><span class="when">2026-09-20</span> <span class="muted">(#chipforge, 2026-05-01 and 2026-09-25; chain registration dates of slots 84 and 108)</span> Returned as subnet 108, a new registration, after subnet 84 was deregistered on 2026-05-01.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Register a hotkey on subnet 108 (0.05 TAO on 2026-10-31) and clone ChipForge_SN108; the README covers installation.</li>
+<li>Check the team&#x27;s public status page for an active challenge; none is open on 2026-10-31.</li>
+<li>When one is open, download its package with the miner tool, design in Verilog, score locally and submit the signed zip (up to 50 MB).</li>
+<li>For Quest 2, plan a 16-core, 32 GiB RAM, 300 GiB disk test machine (EDA server guide).</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Nothing is paid between contests; the Quest 2 date is a team estimate and its specification is not public.</li>
+<li>UID 0 is the owner&#x27;s own hotkey; what its validator dividends (about 61%) do was not traced.</li>
+<li>Winners, payouts and leaderboard figures come from the team&#x27;s own server.</li>
+<li>Open-source designs, fabricated chips and reinvested revenue are team statements; no revenue, customers or tape-out preparation were found.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/TatsuProject/ChipForge_SN108" rel="noopener noreferrer">GitHub (subnet code)</a></li>
+<li><a href="https://github.com/TatsuProject/chipforge_eda_server" rel="noopener noreferrer">GitHub (EDA server; Quest 2 setup guide)</a></li>
+<li><a href="https://github.com/TatsuProject/chipforge-challenges" rel="noopener noreferrer">GitHub (2025 RISC-V challenge archive)</a></li>
+<li><a href="https://github.com/TatsuProject/chipforge-mcu" rel="noopener noreferrer">GitHub (open microcontroller from earlier competitions)</a></li>
+<li><a href="https://www.chipforge.io/" rel="noopener noreferrer">Project site</a></li>
+<li><a href="https://www.chipforge.io/leaderboard" rel="noopener noreferrer">Leaderboard</a></li>
+<li><a href="https://docs.chipforge.io/" rel="noopener noreferrer">Docs and white paper (older than the live rules)</a></li>
+<li><a href="https://github.com/TatsuProject/ChipForge_SN108/blob/master/docs/ChipForge%20-%20Technical%20Architecture.pdf" rel="noopener noreferrer">Technical architecture PDF (October 2025, RISC-V era)</a></li>
+<li><a href="https://api.chipforge.io/api/v1/public/rules" rel="noopener noreferrer">Live rules</a></li>
+<li><a href="https://api.chipforge.io/api/v1/challenges/quest_001_npu/download" rel="noopener noreferrer">Quest 001 package (archived; specification and evaluator, public download)</a></li>
+<li><a href="https://api.chipforge.io/api/v1/public/snapshot" rel="noopener noreferrer">Live status snapshot</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 11 sources</summary>
+<ul>
+<li><strong>repo</strong> TatsuProject/ChipForge_SN108@620fa4b (2026-10-31): README.md, docs/validator_requirements.md, .env.example, neurons/validator.py, neurons/validator_utils/*, miner_cli.py, git history; payout code unchanged in substance since 2026-10-17, validator rewrite 2026-10-29 to 2026-10-30</li>
+<li><strong>repo</strong> TatsuProject/chipforge_eda_server@ada84fb (2026-10-31): README.md (Quest 2 requirements, validator and miner sections), v2-evaluator/EVALUATOR_ZIP.md; chipforge-challenges 9168dcc and chipforge-mcu 041c719 unchanged (heads checked 2026-10-31)</li>
+<li><strong>web</strong> Team public feeds api.chipforge.io/api/v1/public/rules, /snapshot, /challenges and /reveals (fetched 2026-10-20, 2026-10-21, 2026-10-23, 2026-10-27, 2026-10-28, 2026-10-31 10:17Z and 10:58Z; /rules changed between the last two: 1 submission per hotkey with a 60-minute cooldown, a record needs two validators, split evaluation); live path /api/v1/challenges/active</li>
+<li><strong>web</strong> Quest 001 package, public download (read 2026-10-23 and 2026-10-27): evaluator gateway/weights.json and openlane/fom_config.json</li>
+<li><strong>web</strong> Chain read at block 9403155 (2026-10-31 10:10Z UTC): SN108 (ChipForge): registered 2026-09-20, tempo 360, 169 of 256 uids, commit-reveal on; emission weights burn/recycle/owner/validator/miner = 0/0/18/41/41 % (stored, same values as the chain default), RecycleOrBurn = Burn; uids under the owner hotkey or owner coldkey hold 100 % of incentive and 80.32 % of last-epoch emission (a floor); 5 validators have weight rows, on average 100 % of weight goes to uid 0. Compared with block 9378501 (2026-10-28 00:00Z): no setting changed in 33 checked items, pool 554.32 -&gt; 529.64 TAO</li>
+<li><strong>web</strong> Shared snapshot of all subnets at block 9403155 (2026-10-31 10:10Z): pool rank 121 of 128 (root excluded), 0.027 % of all subnet pools, price rank 53 of 128, age 40.5 days</li>
+<li><strong>web</strong> Chain read at block 9403155 (2026-10-31 10:10Z): price SN108, 6 samples every 7d from block 9187155 (2026-10-01 09:53Z): price 0.004442 -&gt; 0.004796 TAO per alpha (+8.0%), pool TAO 509.7 -&gt; 529.6; over the 5 intervals where the pool change equals flow + protocol: net user flow +155.0 TAO (staked minus unstaked), protocol flow -135.1 TAO, gross volume 27028.9 TAO.</li>
+<li><strong>web</strong> Chain read at block 9403155: subnet 84 exists, registered 2026-05-01 01:03Z (block 8085297) under a different owner than subnet 108. Earlier chain reads: blocks 9335231 to 9335256 (2026-10-21), 9342911 (2026-10-23), 9377951 (2026-10-27) and 9378491 (2026-10-27 23:58Z)</li>
+<li><strong>web</strong> https://www.chipforge.io/ and https://docs.chipforge.io/ (fetched 2026-10-21, 2026-10-27 and 2026-10-31: home page, white paper incentive and roadmap pages, API reference page list); technical architecture PDF in the subnet repository (read 2026-10-27)</li>
+<li><strong>msg</strong> #chipforge pinned announcements 2025-08-22 to 2026-10-06</li>
+<li><strong>msg</strong> #chipforge, team and miner discussion 2025-08-22 to 2026-10-31 (whole channel history read on 2026-10-27, including the 2026-04-30 to 2026-05-01 deregistration posts; new messages through 2026-10-31 04:33Z)</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/107.html"><small>← Previous</small>SN107 Minos</a><a rel="next" href="/bittensor-docs/subnets/110.html"><small>Next →</small>SN110 Green Compute</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-31. Site built 2026-10-31. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

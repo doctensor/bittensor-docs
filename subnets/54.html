@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Yanez (SN54) | Bittensor Subnet Docs</title>
+<meta name="description" content="Miners make synthetic face and voice data to test liveness checks; half of miner-side reward goes to one partner hotkey.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h18">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>54</span><div>
+<h1>Yanez <span class="muted">SN54</span></h1>
+<p class="tagline">Miners make synthetic face and voice data to test liveness checks; half of miner-side reward goes to one partner hotkey.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>15<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>14<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>10<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-31</b><span>last chat</span></li><li class="pw"><b>4,454</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Shipping</b><span>code activity</span></li><li class="pw"><b>23</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-10-27</b><span>last commit</span></li><li class="pw"><b>none</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>synthetic identity data (face, voice) for liveness and KYC testing</dd>
+<dt>Status</dt><dd>Active on 2026-10-28: the team ships and answers daily; the reward split changed on 2026-10-27.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-28</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">How scoring works</a></li><li><a href="#sn-x1">Who actually earns</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li>Miners make synthetic faces, screen replays and cloned voices that test the team&#x27;s liveness checks.</li><li>Half of miner-side reward goes to one team-linked partner hotkey; the rest is split by team-run scoring.</li><li>17 of 309 listed miners score above zero; pay arrives weeks after the work.</li><li>Cheap to join (about 0.0006 TAO) but needs a GPU; price is down 22% in two weeks and no usage figures exist.</li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Generates face variations, a screen replay and a cloned voice each round.</p><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>GPU with 8 GB+ VRAM, 16 GB RAM, 80 GB disk (docs)</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>Free Hugging Face token; no paid API required (team: heavy use $324-367 a month)</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>About 0.0006 TAO registration burn (2026-10-28); no stake</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Python 3.10+, open port 8091, pm2; pay arrives weeks later</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Relays challenges and team scores and sets weights; in practice team-controlled.</p><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>CPU only: 2-4 cores, 8 GB RAM, 20 GB disk (docs)</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>Team grading service and image server; no fee or key documented</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>At least 1,000 stake for a permit (chain-wide floor, 2026-10-28)</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Python, wandb; about one hour per round</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div><div class="v2-role"><h3>Partner / referrer <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Brings real verified ID-app users and earns referral alpha through UID 14.</p><dl class="v2-needs"><div class="v2-need n-no"><dt>Hardware</dt><dd>None</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>Team-issued referral code (wallet-signed message)</dd></div><div class="v2-need n-unk"><dt>Stake / fees</dt><dd>Not documented</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Sign a message with a coldkey; real verified users needed</dd></div></dl><a class="v2-more" href="#sn-role-2">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">low confidence, as of 2026-10-28. Not financial advice.</span></div><p>Down 22% in two weeks on slowing net outflow; usage unverified. <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>Yanez pays miners for synthetic identity data: face variations (including fake screen replays meant to fool the team&#x27;s liveness detector) and cloned voices. The team says the data helped it ship its Passive Liveness v3 check; it also sells an ID app and an approval service for AI agents.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Miners run the repository&#x27;s miner on a GPU. Validators send a seed face and ask for six synthetic variations: two backgrounds, three combined lighting, expression and pose edits, and a synthetic screen replay showing a named device. Since 2026-10-19 miners also clone a reference voice reading a set prompt.</p></div><div><h3>Validators</h3><p>Validators send the challenges, pass submissions to a grading service the team runs, and set weights. Nine hold permits and all rank the partner hotkey first. Manual review, similarity checks and the final reputation score are the team&#x27;s; validators mostly relay.</p></div><div><h3>Incentive</h3><p>Emission splits 18% owner, 49% validators, 33% miners (18/41/41 before 2026-10-27). The miner side goes about half to the partner hotkey (UID 14) and half to data miners, with nothing burned (it was 35/35/30). Of the data-miner half, about 10% is live image grading and 90% a reputation score.</p></div></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Generates face variations, a screen replay and a cloned voice each round.</p><ul>
+<li>Base model FLUX.2 Klein 4B (FLUX.1 Kontext optional); accept the licences.</li>
+<li>The screen replay counts only if it breaks the team&#x27;s liveness check.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Relays challenges and team scores and sets weights; in practice team-controlled.</p><ul>
+<li>Only 9 hotkeys hold permits; the owner hotkey holds 83% of dividends and 37% of staked alpha.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-2"><h3>Partner / referrer <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Brings real verified ID-app users and earns referral alpha through UID 14.</p><ul>
+<li>Pay: 1 alpha per verified user, 1 when the user registers an agent, 10 at 20 Pulse transactions (team, 2026-10-22).</li>
+</ul></section></div>
+<h2 id="sn-x0">How scoring works</h2>
+<ul class="v2-list">
+<li>Face: five variations (up to 30 points) and a screen replay (up to 6); full marks need identity kept, the prompt followed and the liveness check broken. Voice: up to 5 points, right words and speaker similarity 0.6+.</li>
+<li>Face and voice count half each in the reputation score; duplicate checks can cut it.</li>
+</ul>
+<h2 id="sn-x1">Who actually earns</h2>
+<ul class="v2-list">
+<li>17 of 309 listed hotkeys score above zero (59 on 2026-10-23); the top one holds 24% of the score, the top ten 94%.</li>
+<li>In Phase 4 Cycle 5 the team penalised 172 of 199 scored hotkeys for similar images; several hotkeys lost more.</li>
+<li>By arithmetic, each of the four miner slots after the partner earns about 75 alpha (about 0.35 TAO) a day.</li>
+</ul>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">low confidence, as of 2026-10-28. Not financial advice.</span></div>
+<p class="v2-thesis">Price fell 22% in 14 days on 1,103 TAO of net outflow, mostly in the first week; the last week was -148 TAO, but the last day was -305 after +272. Half of miner pay goes to one partner hotkey and usage claims come only from the team. The 30-day flow was not read.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.00467 TAO per alpha (57th highest of 128)</dd></div><div><dt>Pool</dt><dd>8,694 TAO (49th of 128; 0.43% of all pools)</dd></div><div><dt>Price, 14 days</dt><dd>-21.7% (0.005962 to 0.004670)</dd></div><div><dt>Net user flow, 14 days</dt><dd>-1,103 TAO (-955, then -148)</dd></div><div><dt>Last day</dt><dd>price -6.7%, net flow -305 TAO</dd></div></dl>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>Ships often: Passive Liveness v3, Gate, Pulse, a repository update on 2026-10-27.</li>
+<li>Weekly outflow slowed from -955 to -148 TAO.</li>
+<li>Burn ended; the team expects more TAO into the pool (not yet seen).</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>Net outflow two weeks running, with price down.</li>
+<li>Half of miner pay goes to one hotkey; few miners earn.</li>
+<li>No revenue, usage or buyback figure; scoring is team-run.</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> A published usage, revenue or buyback figure, or inflow with a rising price, would turn it neutral; a bigger partner share or renewed outflow, more bearish.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-28</span> <span class="muted">(#54-yanez, 2026-10-28)</span> Miners asked how duplicate images are detected and for a voice-task dashboard; no team reply yet.</li>
+<li><span class="when">2026-10-27</span> <span class="muted">(#54-yanez, 2026-10-27; repository)</span> The team announced the new split (validators 41 to 49%, miners 41 to 33%, burn ended) and reviewed Phase 4 Cycle 5: over 300,000 images penalised for similarity.</li>
+<li><span class="when">2026-10-26</span> <span class="muted">(#54-yanez, 2026-10-26)</span> Team tips: voice needs speaker similarity above 0.6 and the right words; face variations need identity above 0.7 and the prompt followed.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Check the economics first: most listed miners earn nothing, pay arrives weeks later, and scores decay 0.05 per allocation.</li>
+<li>Prepare a GPU (8 GB+ VRAM), 16 GB RAM, 80 GB disk, a free Hugging Face token with licences accepted, and open port 8091.</li>
+<li>Run scripts/miner/setup.sh, set HF_TOKEN and FLUX_DEVICE, then start neurons/miner.py with --netuid 54 under pm2.</li>
+<li>Use one hotkey (similar data across hotkeys is penalised) and test screen replays against the team&#x27;s liveness check, one call per hotkey every 5 minutes.</li>
+<li>For voice, implement generate_voice_clone in MIID/miner/voice_generator.py and follow the 18-token prompt in the code, not the 15 in docs/miner.md.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Miner pay figures conflict: the team says miners keep about 1,033 alpha a day, while docs/scoring.md raises their share of total emission from 14.35% to 16.5%.</li>
+<li>Scoring, review and the liveness check run on team servers; chain weights are validator opinions, not payouts.</li>
+<li>Who controls UID 14 and how much of its share reaches partners is not shown; the team denies self-mining. The owner hotkey holds 83% of dividends; who benefits is unread.</li>
+<li>docs/miner.md still lists a 15-token voice prompt (code: 18); the date of the split change on chain is not pinned.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://tao-ui-dashboard.yanez.ai/" rel="noopener noreferrer">Dashboard and leaderboard (team)</a></li>
+<li><a href="https://www.yanez.ai/" rel="noopener noreferrer">Yanez website</a></li>
+<li><a href="https://docs.yanez.ai/" rel="noopener noreferrer">Yanez docs (Gate and Pulse)</a></li>
+<li><a href="https://github.com/yanez-compliance/MIID-subnet" rel="noopener noreferrer">Repository (MIT, main last changed 2026-10-27)</a></li>
+<li><a href="https://github.com/yanez-compliance/MIID-subnet/blob/main/docs/miner.md" rel="noopener noreferrer">Miner guide</a></li>
+<li><a href="https://github.com/yanez-compliance/MIID-subnet/blob/main/docs/validator.md" rel="noopener noreferrer">Validator guide</a></li>
+<li><a href="https://github.com/yanez-compliance/MIID-subnet/blob/main/docs/scoring.md" rel="noopener noreferrer">Scoring rules (docs/scoring.md)</a></li>
+<li><a href="https://github.com/yanez-compliance/MIID-subnet/blob/main/MIID/validator/reward.py" rel="noopener noreferrer">Reward logic (reward.py)</a></li>
+<li><a href="https://github.com/yanez-compliance/MIID-subnet/blob/main/MIID/datasets/reputation.py" rel="noopener noreferrer">Reputation snapshot and decay code (reputation.py)</a></li>
+<li><a href="https://github.com/yanez-compliance/MIID-subnet/blob/main/docs/Yanez%20Identity%20Generation%20Bittensor%20Subnet.pdf" rel="noopener noreferrer">Phase specs and cycle updates, Phase 2 to Phase 5 (PDF)</a></li>
+<li><a href="https://docs.yanez.ai/pulse/" rel="noopener noreferrer">Pulse, the team&#x27;s agent-authorization product (docs)</a></li>
+<li><a href="https://github.com/yanez-compliance/MIID-subnet/blob/main/sign_massge/SIGN_MESSAGE.md" rel="noopener noreferrer">How to sign the message for referral codes</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 9 sources</summary>
+<ul>
+<li><strong>repo</strong> yanez-compliance/MIID-subnet at 753cf5a (2026-10-27, MIT, no releases or tags): README.md, docs/miner.md, docs/validator.md, docs/scoring.md (new), MIID/validator/reward.py, MIID/utils/config.py, miner_api/api_white_paper.md; the PDFs listed above were read on 2026-10-23 and are unchanged, except a new Face Variation Reward System_2.pdf (4.9 MB), not read.</li>
+<li><strong>web</strong> Chain read at block 9381938 (2026-10-28 11:27Z UTC): SN54 (Yanez): registered 2025-01-20, tempo 360, 256 of 256 uids, commit-reveal on; emission weights burn/recycle/owner/validator/miner = 0/0/18/49/33 %, RecycleOrBurn = Burn; uids under the owner hotkey or owner coldkey hold 0.51 % of incentive and 42 % of last-epoch emission (a floor); 9 validators have weight rows, on average 0 % of weight goes to uid 0. Incentive: 131 uids nonzero, top uid (14) 52.2 %, top 5 65.1 %.</li>
+<li><strong>web</strong> Chain read at block 9381537 (2026-10-28 10:07Z UTC), compared with block 9342501 (2026-10-23 00:00Z UTC): SN54: emission split burn/recycle/owner/validator/miner 0/0/18/41/41 -&gt; 0/0/18/49/33 %; pool 8887.77 -&gt; 8694.45 TAO; 0 of 33 settings differ.</li>
+<li><strong>web</strong> Chain read at block 9381614 (2026-10-28 10:22Z): SN54 stake by coldkey: 1428 coldkeys hold 3314285.973 alpha on 440 hotkeys (90.611% of the chain&#x27;s staked total); top coldkey 18.441%, top 5 35.836%, top 10 52.194%; owner coldkey 0.028%; 38.357% of the stake sits on validator-permit hotkeys; 9 hotkeys&#x27; stake rows were not fully read (9.389% of the staked total unattributed).</li>
+<li><strong>web</strong> Chain read at block 9381537 (2026-10-28 10:07Z): price SN54, 8 samples every 1d from block 9331137 (2026-10-21 10:07Z): price 0.004845 -&gt; 0.004670 TAO per alpha (-3.6%), pool TAO 8847.5 -&gt; 8694.5; over the 7 intervals where the pool change equals flow + protocol: net user flow -152.1 TAO (staked minus unstaked), protocol flow -1.0 TAO, gross volume 6259.7 TAO.</li>
+<li><strong>web</strong> Chain read at block 9381614 (2026-10-28 10:22Z): price SN54, 3 samples every 7d from block 9280814 (2026-10-14 10:06Z): price 0.005962 -&gt; 0.004670 TAO per alpha (-21.7%), pool TAO 9799.9 -&gt; 8694.5; over the 2 intervals where the pool change equals flow + protocol: net user flow -1102.8 TAO (staked minus unstaked), protocol flow -2.6 TAO, gross volume 15248.9 TAO.</li>
+<li><strong>web</strong> Chain read at block 9381537 (2026-10-28 10:07Z): shared snapshot over 129 subnets: SN54 pool 8694.45 TAO (49th of 128 non-root, 0.43% of all pools, median 6501), price rank 57th of 128.</li>
+<li><strong>web</strong> https://yanez-post-proc.duckdns.org/leaderboard/top-miners and https://miners-stats.yanezcompliance.net/miners_stats (team public feeds, read 2026-10-28 10:0x UTC; stats timestamp 2026-10-28T09:12); https://docs.yanez.ai/ (read 2026-10-28).</li>
+<li><strong>msg</strong> #54-yanez 2026-03-04 to 2026-10-28 (pinned posts, team announcements, all messages 2026-09-24 on; last message read 2026-10-28 06:26 UTC)</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/53.html"><small>← Previous</small>SN53 engy</a><a rel="next" href="/bittensor-docs/subnets/55.html"><small>Next →</small>SN55 NIOME</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-28. Site built 2026-10-31. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

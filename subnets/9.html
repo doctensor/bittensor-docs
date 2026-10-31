@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IOTA (SN9) | Bittensor Subnet Docs</title>
+<meta name="description" content="Distributed LLM pretraining across pooled, unreliable machines; Mac owners join through the Train at Home app.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h15">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>9</span><div>
+<h1>IOTA <span class="muted">SN9</span></h1>
+<p class="tagline">Distributed LLM pretraining across pooled, unreliable machines; Mac owners join through the Train at Home app.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl4"><b>3.3<small>/day</small></b><span>last 7 d</span></li><li class="pl4"><b>4.1<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>9.5<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-31</b><span>last chat</span></li><li class="pw"><b>21,153</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>No repo</b><span>code activity</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>distributed training</dd>
+<dt>Status</dt><dd>Active: the team answered in chat on 2026-10-29. Runs stalled for days in October; blocked runs were relaunched on 2026-10-26.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-30</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Where miner rewards go</a></li><li><a href="#sn-x1">Docs vs code vs chain</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-similar">Similar subnets</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>trains an LLM in layers across everyday machines; Mac owners join through the Train at Home app.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>a private team orchestrator assigns work and scores miners; validators only pass its scores on to the chain.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>all miner incentive sits on 3 of 256 UIDs; 12% of it goes to the owner UID and is burned (2026-10-30).</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>about 4,800 TAO net left the pool in 30 days (price -8.5%); the pool still ranks 8th of 128.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>needs an Apple Silicon Mac with 16 GB RAM, no stake. Runs stalled in October; SDK and pilots are unverified.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Runs one layer of a training run on a Mac via Train at Home; paid through a payout wallet.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-unk">GPU unknown</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>Apple Silicon Mac (macOS only), 16 GB RAM, 10 to 30 GB free disk; fast, stable upload (docs)</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None (no API keys or subscriptions)</dd></div><div class="v2-need n-no"><dt>Stake / fees</dt><dd>No stake. Paid via a team payout wallet (team says); chain burn 0.0005 TAO (2026-10-30)</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Install the app and press Start; expect queues, stalls and frequent app updates</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Runs the team&#x27;s scoring code and sets the orchestrator&#x27;s miner scores as weights.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-unk">GPU unknown</li><li class="fl fl-good">No paid service</li><li class="fl fl-unk">Access unknown</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>A GPU is likely (the example config sets DEVICE=cuda); no specs stated (repo)</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None found; the example config has a Hugging Face token (repo)</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Registration burn 0.0005 TAO; permit stake threshold 1,000 TAO (chain, 2026-10-30)</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Python service from start_validators.sh (port 8081 by default); effort not stated</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-10-30. Not financial advice.</span></div><p>Pool ranks 8th of 128, but about 4,800 TAO net left in 30 days and usage is unverified. <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>IOTA, run by Macrocosmos, pretrains language models by splitting one model into layers across many ordinary, unreliable machines. Miners earn emissions for verified work. Most small participants join through the Train at Home app (Apple Silicon Macs only); the team&#x27;s orchestrator controls assignments and scoring.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>The orchestrator gives each miner one layer of a training run. The miner computes forward and backward passes, uploads its weights at set points and downloads the merged weights. Runs come in Iron, Bronze, Silver and Gold tiers; the slowest or lowest-scoring miners can be dropped.</p></div><div><h3>Validators</h3><p>A thin client: it downloads scoring code from the orchestrator, runs the tasks it is given and sets the orchestrator&#x27;s miner scores as chain weights. Per the docs, scores check forward-pass activations over about a day.</p></div><div><h3>Incentive</h3><p>A miner&#x27;s weight is its share of its run&#x27;s score, scaled by the run&#x27;s burn factor; unearned emission is burned. Chain split (2026-10-30): 18% owner, 41% validators, 41% miners. The team says Train at Home pay flows through a payout wallet in proportion to work done; the chain cannot confirm this.</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-10-30, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-unk">Unknown</span>13 hotkeys hold permits (1,000 TAO threshold); whether the team&#x27;s orchestrator admits outsiders is not documented.</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">6.2%</span>6.15% of last-epoch emission is on the owner UID (burned); the owner cut is 18% and RecycleOrBurn is Burn.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">3 uids</span><span class="v2-sx muted">top 5 hold 100% of incentive.</span> Three UIDs share all miner incentive (80% / 12% / 8%); eleven UIDs earn validator dividends.</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Converged</span>All 11 validators with weights rank the same UID first; they pass on one team score: concentration, not copying.</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-caution">Partial</span>Miner and validator clients are public with no licence shown; scoring code is served by the team&#x27;s private orchestrator.</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Runs one layer of a training run on a Mac via Train at Home; paid through a payout wallet.</p><ul>
+<li>Docs: Linux planned, Windows unsupported; keep the Mac plugged in, reconnects may drop rewards.</li>
+<li>Community helper (2026-10-23, not in the docs): 24 GB RAM recommended, 200 Mbit/s upload minimum; the slowest uploaders are dropped each epoch.</li>
+<li>Team post (2026-06-23): pay needs a successful weight upload and is forfeited if a run&#x27;s loss breaks.</li>
+<li>Users report queue resets and an M4 crash (GitHub issues 224, 226, 227).</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Runs the team&#x27;s scoring code and sets the orchestrator&#x27;s miner scores as weights.</p><ul>
+<li>Scoring functions come from the orchestrator and are not in the public repo; the repo guide gives no hardware or stake figures.</li>
+<li>Whether the orchestrator accepts outside validators is not documented.</li>
+</ul></section></div>
+<h2 id="sn-x0">Where miner rewards go</h2>
+<p>All miner incentive sits on three of 256 UID slots (2026-10-30). The owner UID&#x27;s share moved from 0% (10-24) to 32% (10-28) and 12% (10-30).</p>
+<div class="scroll"><table class="v2-table"><thead><tr><th>UID</th><th>Share of miner incentive</th><th>What the chain shows</th></tr></thead><tbody><tr><td>171</td><td>80.1%</td><td>Registered 2026-08-28; every validator ranks it first; holder unknown</td></tr><tr><td>209 (owner)</td><td>12.3%</td><td>Owner key; burned, about 5% of all emission</td></tr><tr><td>Third UID</td><td>about 7.6%</td><td>The remainder; holder unknown</td></tr></tbody></table></div>
+<h2 id="sn-x1">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Miner hardware</td><td>Train at Home docs: Apple Silicon Mac only; Linux planned, Windows no</td><td>Code: README recommends a 16 GB CUDA GPU on Ubuntu 22.04 and lists a 1.5B, 3-layer run</td><td>2026-10-30</td></tr></tbody></table></div>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-10-30. Not financial advice.</span></div>
+<p class="v2-thesis">Money has left every week for a month and the price is down 8.5%, while the pool is still large. The team ships and answers complaints quickly, but customers are only claimed and all miner pay sits on three UIDs.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.02319 TAO per alpha</dd></div><div><dt>Pool</dt><dd>52,502 TAO, rank 8</dd></div><div><dt>Price, 30 days</dt><dd>-8.5%, 2026-09-30 to 2026-10-30</dd></div><div><dt>Net flow, 30 days</dt><dd>-4,823 TAO, 2026-09-30 to 2026-10-30</dd></div><div><dt>Miner pay</dt><dd>About 60 TAO per day over 3 paid uids (gross)</dd></div><div><dt>Code activity</dt><dd>last commit 2026-10-15; 4 commits in 30 days</dd></div></dl>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>Blocked runs relaunched and patched within a day (2026-10-26); new app 2026-10-29</li>
+<li>Release tags in October</li>
+<li>SDK and three pilots promised (team claim)</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>Net outflow in each of the last five weeks</li>
+<li>Stalls, queue resets, missing payouts reported</li>
+<li>Pay on 3 UIDs; claims unverified</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> Named customer usage or an SDK release with positive flows would improve the view; new stalls or more outflow would worsen it.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-similar">Similar subnets</h2>
+<div class="v2-sim"><p>By pool size this is <strong>rank 2 of 14</strong> among the subnets grouped as <em>training</em> (what they mainly sell). Pool and price as of 2026-10-30 to 2026-10-31, price in TAO per alpha; the barrier is the easiest miner role.</p><div class="scroll"><table class="v2-table"><thead><tr><th>#</th><th>Subnet</th><th>Pool</th><th>Price</th><th>Miner barrier</th></tr></thead><tbody><tr><td>1</td><td><a href="/bittensor-docs/subnets/120.html">Affine</a> <span class="muted">SN120</span></td><td>74,303 TAO</td><td>0.04141</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr class="me" aria-current="true"><td>2</td><td>IOTA <span class="muted">SN9, this page</span></td><td>52,502 TAO</td><td>0.02319</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>3</td><td><a href="/bittensor-docs/subnets/56.html">Gradients</a> <span class="muted">SN56</span></td><td>49,207 TAO</td><td>0.01452</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>4</td><td><a href="/bittensor-docs/subnets/97.html">Ingot</a> <span class="muted">SN97</span></td><td>10,847 TAO</td><td>0.01213</td><td><span class="v2-barrier b-high">High</span></td></tr><tr><td>5</td><td><a href="/bittensor-docs/subnets/37.html">Aurelius</a> <span class="muted">SN37</span></td><td>7,048 TAO</td><td>0.002611</td><td><span class="v2-barrier b-medium">Medium</span></td></tr></tbody></table></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-30</span> <span class="muted">(chain)</span> The owner UID takes 12% of miner incentive and burns it; it took 32% on 10-28 and none on 10-24. No setting changed.</li>
+<li><span class="when">2026-10-29</span> <span class="muted">(#iota, GitHub issues 227, 228)</span> Staff said a new Train at Home app version is out and asked miners to update. Users filed issues on an M4 crash and rejected weight uploads.</li>
+<li><span class="when">2026-10-27</span> <span class="muted">(GitHub)</span> Tags v4.13.9 and v4.13.10 were created on the same public commit as v4.13.7; public code is unchanged since 2026-10-15.</li>
+<li><span class="when">2026-10-26</span> <span class="muted">(#iota)</span> After days without runs, the team said blocked Iron runs were relaunched, exploits would be purged and a patch was released.</li>
+<li><span class="when">2026-10-19</span> <span class="muted">(#iota)</span> Team focus: a major SDK release and three customer pilots in October; no buyback or token redesign promised.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Check your Mac: Apple Silicon, 16 GB RAM minimum, 10 to 30 GB free disk, fast stable internet.</li>
+<li>Download Train at Home from the IOTA website and press Start; no account needed.</li>
+<li>Paste your public coldkey address into the app to receive rewards; it never asks for private keys.</li>
+<li>Expect a queue; keep the Mac plugged in and update the app when asked.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Scoring code is private, so per-miner scoring comes from the docs, not code.</li>
+<li>The chain shows where weight points, not who is paid; the top incentive UID changed at least five times from June to October 2026.</li>
+<li>Runs stall often; users report queue resets and, in September, missing payouts. Token economics are undocumented.</li>
+<li>Team performance claims (100B model, 5x faster merging) and the three pilots are unverified.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://iota.macrocosmos.ai/" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://github.com/macrocosm-os/IOTA" rel="noopener noreferrer">GitHub</a></li>
+<li><a href="https://docs.macrocosmos.ai/subnets/subnet-9-iota" rel="noopener noreferrer">Subnet docs</a></li>
+<li><a href="https://docs.macrocosmos.ai/subnets/subnet-9-iota/scoring-rewards-and-kicking" rel="noopener noreferrer">Scoring, rewards and kicking</a></li>
+<li><a href="https://docs.macrocosmos.ai/product-and-services/tah" rel="noopener noreferrer">Train at Home docs</a></li>
+<li><a href="https://arxiv.org/abs/2507.17766" rel="noopener noreferrer">Technical primer (arXiv 2507.17766)</a></li>
+<li><a href="https://www.trainathome.ai/en/guide" rel="noopener noreferrer">Community Train at Home guide (unofficial)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 11 sources</summary>
+<ul>
+<li><strong>repo</strong> macrocosm-os/IOTA at commit ed0fecb (2026-10-15, v4.13.7; tags v4.13.9 and v4.13.10 on the same commit): README, docs/VALIDATOR_README.md, src/miner/README.md, src/validator README and example config, validator weight setting</li>
+<li><strong>web</strong> docs.macrocosmos.ai: subnets/subnet-9-iota, scoring-rewards-and-kicking, product-and-services/tah and hardware-requirements, re-read 2026-10-30 (unchanged since 2026-10-28)</li>
+<li><strong>web</strong> iota.macrocosmos.ai home, /how-iota-works and /sdk (still coming soon), 2026-10-30</li>
+<li><strong>web</strong> api.github.com/repos/macrocosm-os/IOTA: tags, issues 219, 223, 224, 226, 227, 228 with comments, pull request 225, read 2026-10-30 and re-read at 05:35Z (HEAD still ed0fecb, no new issue or comment)</li>
+<li><strong>msg</strong> #iota 2026-09-09 to 2026-10-29, plus pinned posts of 2025-05-27 and 2026-06-23; re-checked 2026-10-30 05:35Z, no message after 2026-10-29 11:59</li>
+<li><strong>web</strong> Chain read at block 9394363 (2026-10-30 04:52Z UTC): SN9 (iota): registered 2023-10-14, tempo 360, 256 of 256 uids, commit-reveal off; emission weights burn/recycle/owner/validator/miner = 0/0/18/41/41 % (stored, same values as the chain default), RecycleOrBurn = Burn; uids under the owner hotkey or owner coldkey hold 12.3 % of incentive and 6.15 % of last-epoch emission (a floor); 11 validators have weight rows, on average 0 % of weight goes to uid 0.</li>
+<li><strong>web</strong> Chain read at block 9394363 (2026-10-30 04:52Z UTC), compared with block 9378501 (2026-10-28 00:00Z UTC): SN9: no setting changed in 33 checked items; emission split unchanged; pool 52866.82 -&gt; 52501.75 TAO.</li>
+<li><strong>web</strong> Chain read at block 9394482 (2026-10-30 05:16Z UTC), compared with block 9392901 (2026-10-30 00:00Z UTC): SN9: no setting changed in 33 checked items; emission split unchanged; pool 52703.82 -&gt; 52503.1 TAO.</li>
+<li><strong>web</strong> Chain read at block 9394363 (2026-10-30 04:52Z): price SN9, 6 samples every 7d from block 9178363 (2026-09-30 04:35Z): price 0.025355 -&gt; 0.023190 TAO per alpha (-8.5%), pool TAO 54179.2 -&gt; 52501.7; over the 5 intervals where the pool change equals flow + protocol: net user flow -4822.7 TAO (staked minus unstaked), protocol flow +3145.2 TAO, gross volume 30427.4 TAO.</li>
+<li><strong>web</strong> Chain read at block 9394363 (2026-10-30 04:52Z): shared snapshot over 129 subnets of name, SubnetOwner, Tempo, Burn, SubnetworkN, MaxAllowedUids, SubnetEmissionEnabled, price, tao_in, alpha_in, age_days.</li>
+<li><strong>web</strong> Earlier chain samples of netuid 9 incentive concentration: ten blocks from 8310845 (2026-06-01) to 9354845 (2026-10-24), and block 9381938 (2026-10-28 11:27Z)</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/8.html"><small>← Previous</small>SN8 Vanta</a><a rel="next" href="/bittensor-docs/subnets/10.html"><small>Next →</small>SN10 Pareton</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-30. Site built 2026-10-31. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

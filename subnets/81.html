@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reliquary (SN81) | Bittensor Subnet Docs</title>
+<meta name="description" content="Decentralized LLM post-training: GPU miners generate reinforcement-learning data for a team-run trainer of a 9B model.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h15">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>81</span><div>
+<h1>Reliquary <span class="muted">SN81</span></h1>
+<p class="tagline">Decentralized LLM post-training: GPU miners generate reinforcement-learning data for a team-run trainer of a 9B model.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl4"><b>6.4<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>10<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>11<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-31</b><span>last chat</span></li><li class="pw"><b>2,353</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Shipping</b><span>code activity</span></li><li class="pw"><b>898</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-10-28</b><span>last commit</span></li><li class="pw"><b>none</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>decentralized LLM post-training</dd>
+<dt>Status</dt><dd>As of 2026-10-28 the RL run on the 9B Teutonic model is live (checkpoint 70 that day). The pod failed twice on 2026-10-27 and about five pay periods paid nothing; outage pay went live on 2026-10-28.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-28</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Environments and prices</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li>What it does: miners generate RL answers; the team trains the 9B Teutonic model and posts a public checkpoint about every hour.</li><li>Pay: per verified token, but 58% of miner-side incentive is burned on the owner slot (2026-10-28; 54-76% since 10-23).</li><li>Main risk: one team-run trainer and validator; the trainer pod failed twice on 2026-10-27 and miners report unstable earnings.</li><li>To join: miners need a 24 GB+ GPU and the 0.0005 TAO registration; validators need a permit and read access to team storage.</li><li>Demand: no customer or revenue evidence; the website calls data generation early access and RL on demand not yet open.</li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Generates RL answers for leased prompts; paid per verified token.</p><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>GPU, 24 GB+ VRAM; 32 GB RAM, 50 GB disk (older guide)</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None (docs: only outbound HTTPS; the team runs the sandboxes)</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>0.0005 TAO registration burn (2026-10-28)</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Python 3.11, CUDA 12, vLLM; time not documented</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator (weight-only) <span class="v2-barrier b-high">High barrier</span></h3><p>Replays the team&#x27;s pay archives into chain weights.</p><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>CPU box, 4 GB RAM, no GPU (docs)</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>Read credentials for the team&#x27;s R2 storage; docs do not say how to get them</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Validator permit needed; minimum stake not documented</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Linux, Docker 24+ and Compose, about 5 minutes (docs)</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div><div class="v2-role"><h3>Data buyer <span class="v2-barrier b-high">High barrier</span></h3><p>Requests training data from the team; RL and evaluation services are not open.</p><dl class="v2-needs"><div class="v2-need n-no"><dt>Hardware</dt><dd>None</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>Quote per configuration; no public price</dd></div><div class="v2-need n-unk"><dt>Stake / fees</dt><dd>Not documented</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Request early access; approval needed</dd></div></dl><a class="v2-more" href="#sn-role-2">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-neutral">Neutral</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">low confidence, as of 2026-10-28. Not financial advice.</span></div><p>Mid-size pool (rank 29 of 128), mild net outflow, active team; over half of miner incentive burns and no customer use is verified. <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>Reliquary (SN81) trains language models on Bittensor. Independent GPU miners generate answers for reinforcement learning (RL), the team&#x27;s validator grades them and its trainer improves the 9B Teutonic model; checkpoints are public. The team plans to sell data and RL as a service; no customer use is verified.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Run mine-async. The miner leases prompts from the team validator in the environments you pick (see the table below), writes 16 answers per prompt on the latest checkpoint and must submit every leased group. The validator recomputes each token; matches of 0.90 or better are paid. The team&#x27;s sandboxes grade agentic tasks.</p></div><div><h3>Validators</h3><p>The team runs the only trainer and grader (the owner&#x27;s slot): it issues leases, audits groups, trains on groups that are neither all right nor all wrong, and publishes signed checkpoints. Other validators are weight-only: they replay the team&#x27;s pay archives into chain weights.</p></div><div><h3>Incentive</h3><p>Pay is matched tokens times an environment price that adjusts toward each environment&#x27;s target share. A 72-minute period pays at most the task cap (0.8 on the pay board). Emission splits 18% owner, 41% validators, 41% miners; the miner-side incentive that lands on the owner slot is burned: 58% on 2026-10-28, 76% after the 2026-10-27 outage. The other 79 earning miners shared about 1,020 alpha a day, about 5 TAO (calculated at the pool price).</p></div></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Generates RL answers for leased prompts; paid per verified token.</p><ul>
+<li>A 24 GB card cannot hold the 9B model&#x27;s default 262,144-token context; set a shorter one.</li>
+<li>The hardware lines above come from the older Qwen3-4B guide.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator (weight-only) <span class="v2-barrier b-high">High barrier</span></h3><p>Replays the team&#x27;s pay archives into chain weights.</p><ul>
+<li>7 UIDs held permits on 2026-10-28; all gave their top weight to the owner slot.</li>
+<li>The trainer role (A100 40 GB+, 64 GB RAM, storage write access) is core-team only.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-2"><h3>Data buyer <span class="v2-barrier b-high">High barrier</span></h3><p>Requests training data from the team; RL and evaluation services are not open.</p><ul>
+<li>RL on demand and evaluation are not open yet; no customer evaluation has run (website, 2026-10-28).</li>
+</ul></section></div>
+<h2 id="sn-x0">Environments and prices</h2>
+<p>Team pay board, 2026-10-28 11:17 UTC; targets and prices shift often.</p>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Environment</th><th>Target share</th><th>Pay per 1M tokens (% of cap)</th></tr></thead><tbody><tr><td>Software engineering</td><td>23%</td><td>0.61</td></tr><tr><td>Terminal</td><td>18%</td><td>0.61</td></tr><tr><td>Competitive code</td><td>12%</td><td>0.15</td></tr><tr><td>Hard math</td><td>21%</td><td>0.17</td></tr><tr><td>DAPO math</td><td>22%</td><td>0.30</td></tr><tr><td>EnvScaler tools</td><td>3%</td><td>0.50</td></tr><tr><td>Instruction following</td><td>1%</td><td>0.58</td></tr></tbody></table></div>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-neutral">Neutral</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">low confidence, as of 2026-10-28. Not financial advice.</span></div>
+<p class="v2-thesis">The price fell 3.2% in the week to 2026-10-28 on 254 TAO of net outflow (1.6% of the pool). The team ships daily, but 58% of miner incentive burns and no customer revenue is verified.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.004898 TAO per alpha</dd></div><div><dt>Pool</dt><dd>16,060 TAO (rank 29 of 128)</dd></div><div><dt>7-day price move</dt><dd>-3.2%</dd></div><div><dt>7-day net flow</dt><dd>-254 TAO (out 5 of 7 days)</dd></div><div><dt>30-day flow</dt><dd>not read</dd></div><div><dt>Miner incentive burned</dt><dd>58% (2026-10-28)</dd></div></dl>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>70 public checkpoints in under 6 days; open weights and code.</li>
+<li>Pay fixes shipped within days of miner complaints.</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>58% of miner-side incentive burns; others share about 5 TAO a day.</li>
+<li>One team-run trainer; pod failed twice on 2026-10-27.</li>
+<li>No customer, revenue or evaluation results yet.</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> Bullish: net inflow plus published evaluation gains or a paying customer. Bearish: long outages, miners leaving, a heavier burn.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-28</span> <span class="muted">(#81-reliquary; GitHub)</span> Outage pay went live: held leases are extended and pay continues while the trainer is down. Evaluation checks moved to forced sampling; base-checkpoint evaluations restarted.</li>
+<li><span class="when">2026-10-27</span> <span class="muted">(#81-reliquary)</span> Evaluation jobs announced for every RL checkpoint (8 benchmarks); no results seen yet.</li>
+<li><span class="when">2026-10-27</span> <span class="muted">(#81-reliquary; team pay board)</span> Training pod lost twice (down about 4 hours the second time); about five pay periods paid nothing.</li>
+<li><span class="when">2026-10-25</span> <span class="muted">(GitHub)</span> Pay rules reworked: price controller with carry-over (the run had burned 67% of its cap in two days), and the minimum-incentive floor removed so small GPUs are no longer cut to zero.</li>
+<li><span class="when">2026-10-23</span> <span class="muted">(#81-reliquary)</span> Team ran its own declared miners (an A6000 and an H200) to measure hardware.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Skip the README and docs/mining.md (earlier Qwen3-4B task); use the launch post and the draft async design doc.</li>
+<li>Check the pay board and run monitor before renting GPUs; prices and targets change often.</li>
+<li>Register a hotkey on netuid 81 (0.0005 TAO).</li>
+<li>Run mine-async from the latest main with a context length that fits your card; keep bf16 weights (team tests: fp8 about 0.96 match, 4-bit 0.86, floor 0.90).</li>
+<li>Validators: run the weight-only Docker image once you hold a permit and the team&#x27;s read-only credentials.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Figures are single readings (2026-10-28). The burned share moved between 54% and 76% in five days; which pay switches are live is inferred from the pay board, not the deployed config.</li>
+<li>The async run is documented only in a launch post and a draft design doc; the README is out of date.</li>
+<li>Team validator job routes returned HTTP 503 and the dashboard network view is stale since 2026-10-21: SFT-data and evaluation caps and results are unknown.</li>
+<li>The pay board is a bare IP over plain HTTP.</li>
+<li>The team&#x27;s own miners (earnings not read) and the SN3 link to Teutonic are unverified; the promised revenue-funded burn has no code or revenue.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/reliquadotai/reliquary" rel="noopener noreferrer">GitHub</a></li>
+<li><a href="https://github.com/reliquadotai/reliquary/blob/main/docs/rl-async-design.md" rel="noopener noreferrer">Async RL design (draft)</a></li>
+<li><a href="https://github.com/reliquadotai/reliquary/blob/main/docs/mining.md" rel="noopener noreferrer">Mining guide (describes the earlier Qwen3-4B RL)</a></li>
+<li><a href="https://github.com/reliquadotai/reliquary/blob/main/docs/validating.md" rel="noopener noreferrer">Validator guide</a></li>
+<li><a href="https://www.reliqua.ai" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://app.reliqua.ai/monitoring/run" rel="noopener noreferrer">Run monitor</a></li>
+<li><a href="https://app.reliqua.ai/monitoring/miner" rel="noopener noreferrer">Miner monitor</a></li>
+<li><a href="https://huggingface.co/ReliquaryForge/Teutonic-I-Reliquary-SFT" rel="noopener noreferrer">Teutonic SFT model (Hugging Face)</a></li>
+<li><a href="https://huggingface.co/ReliquaryForge/Teutonic-I-Reliquary-RL" rel="noopener noreferrer">Teutonic RL checkpoints (Hugging Face, latest only)</a></li>
+<li><a href="http://62.238.81.36:8000/rl/pay" rel="noopener noreferrer">RL pay board (team validator, plain HTTP)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 6 sources</summary>
+<ul>
+<li><strong>repo</strong> reliquadotai/reliquary@8f24b14 (2026-10-28): README.md, docs/mining.md, docs/validating.md, docs/rl-async-design.md, reliquary/constants.py, reliquary/cli/main.py; commits 35782a5, 27339e7, 14970ec, 9a96a51, 21d7f86, 85aa2a7, c976bef, fc7a1b8, 5f49179, PR 422 and 430</li>
+<li><strong>web</strong> Team validator /rl/pay and /rl/checkpoint read 2026-10-28 11:17 UTC (period 23236, checkpoint version 70 published 10:04 UTC; /health returned 503); reliqua.ai home page; app.reliqua.ai dashboard and its public JSON API (runs, miners, network); Hugging Face API for ReliquaryForge/Teutonic-I-Reliquary-RL</li>
+<li><strong>web</strong> Chain read at block 9381874 (2026-10-28 11:14Z UTC): SN81 (Reliquary): registered 2025-03-25, tempo 360, 256 of 256 uids, commit-reveal on; emission weights burn/recycle/owner/validator/miner = 0/0/18/41/41 % (stored, same values as the chain default), RecycleOrBurn = Burn; uids under the owner hotkey or owner coldkey hold 57.79 % of incentive and 32.76 % of last-epoch emission (a floor); 7 validators have weight rows, on average 0 % of weight goes to uid 0.</li>
+<li><strong>web</strong> Chain refresh read at block 9378699 (2026-10-28 00:39Z) from block 9342501 (2026-10-23): 1 of 33 checked settings differed (the registration burn, which moves with demand); emission split unchanged; pool 16296.76 -&gt; 16088.51 TAO.</li>
+<li><strong>web</strong> Chain read at block 9378774 (2026-10-28 00:54Z): price SN81, 8 samples every 1d from block 9328374 (2026-10-21 00:42Z): price 0.005076 -&gt; 0.004915 TAO per alpha (-3.2%), pool TAO 16347.2 -&gt; 16088.3; net user flow -254.3 TAO, protocol -4.5 TAO, gross volume 4059.3 TAO. Pool rank 29 of 128 by TAO in pool (shared snapshot, block 9381461, 2026-10-28 09:52Z).</li>
+<li><strong>msg</strong> #81-reliquary 2026-10-23 to 2026-10-28 02:12; earlier 2026-09-12 to 2026-10-23</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/80.html"><small>← Previous</small>SN80 OpenRoboto</a><a rel="next" href="/bittensor-docs/subnets/83.html"><small>Next →</small>SN83 CliqueAI</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-28. Site built 2026-10-31. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>engy (SN53) | Bittensor Subnet Docs</title>
+<meta name="description" content="Paid LLM inference gateway: miners serve billed traffic and the team&#x27;s own validator signs the weights.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h11">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>53</span><div>
+<h1>engy <span class="muted">SN53</span></h1>
+<p class="tagline">Paid LLM inference gateway: miners serve billed traffic and the team&#x27;s own validator signs the weights.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl4"><b>4.4<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>9.2<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>46<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-30</b><span>last chat</span></li><li class="pw"><b>4,082</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Shipping</b><span>code activity</span></li><li class="pw"><b>7</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-10-28</b><span>last commit</span></li><li class="pw"><b>2026-08-22</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>inference (verified LLM serving)</dd>
+<dt>Status</dt><dd>Live, weekly epochs: epoch 19 signed 2026-10-28, epoch 20 open; last repo commit 2026-10-28 (12 commits in 30 days).</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-30</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Traffic by model, week to 2026-10-28</a></li><li><a href="#sn-x1">Who controls scoring</a></li><li><a href="#sn-x2">Burn and alpha holders</a></li><li><a href="#sn-x3">Docs vs code vs chain</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-similar">Similar subnets</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>buyers pay per token through one API; 18M requests, $44k settled in the week to 2026-10-28.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>up to about 35% of emission goes to the team&#x27;s slots; all 14 weight-setters rank one uid first.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>one hotkey served 94% of DeepSeek V4.1 Flash tokens (86% of all); its operator is unpublished.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>mining needs datacenter GPUs (H200 or 8 x H100) and gives the team SSH access.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>selling paused this week (net flow -160 TAO), but 30-day net flow is -4,055 TAO.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-high">High barrier</span></h3><p>Runs a GPU box on the team&#x27;s image; the gateway sends it paid requests.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-caution">GPU needed</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>Datacenter GPUs: one H200 for DeepSeek V4.1 Flash, 8 x H100 for GLM-5.3-flash (team).</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None. A gateway key is claimed with the miner hotkey.</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Registration burn 0.0005 TAO (2026-10-29); no stake documented.</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Boot one Docker image, declare model and SSH port; the team verifies.</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-medium">Medium barrier</span></h3><p>The master validator is the team&#x27;s; outside validators copy its signed weights.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>CPU-only Linux host with Docker; no GPU, no inbound ports.</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None.</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Validator permit needed; stake-weight threshold 1,000 (chain, 2026-10-29).</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Docker compose with two wallet names (repo runbook).</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-neutral">Neutral</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-10-29. Not financial advice.</span></div><p>Selling paused: net flow about zero and price +3% this week, after a 22% fall from the 10-13 high. <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>engy sells LLM inference on subnet 53. Buyers call one OpenAI- and Anthropic-compatible API with prepaid billing; GPU miners serve open models such as Kimi K3, GLM and DeepSeek. The team&#x27;s master validator scores the work and signs the weights other validators copy.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Miners boot the team&#x27;s Docker image on a GPU host with a gateway key and declare a model and SSH port; the team verifies and activates the box. The gateway sends buyer requests round-robin to workers with room.</p></div><div><h3>Validators</h3><p>The master validator is the owner hotkey: it scores miners from the gateway log, samples requests for verification (per the team) and signs one result per 7-day epoch. Outside validators on a CPU check the signature and resubmit it about every 24 minutes.</p></div><div><h3>Incentive</h3><p>A miner&#x27;s score is the dollar value of its billed work in a 7-day epoch (docs: tokens times a team rate), applied on chain the next epoch. Split: 18% owner, 41% validators, 41% miners, none burned.</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-10-29, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-good">Open</span>17 uids hold permits and the light validator is open to any permit holder; only the team&#x27;s signed vector counts.</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">20.2%</span>20.2% of last-epoch emission goes to the owner&#x27;s master hotkey; configured owner cut 18%; RecycleOrBurn is Burn.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">29 uids</span><span class="v2-sx muted">top 5 hold 59.8% of incentive.</span> 29 uids earn; the top 5 hold 59.8% of incentive.</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Converged</span>All 14 validators with weights rank uid 86 first; the repo says light validators resubmit the team&#x27;s signed vector.</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-caution">Partial</span>Miner and light-validator code are public, no licence file; the master scorer is not.</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-high">High barrier</span></h3><p>Runs a GPU box on the team&#x27;s image; the gateway sends it paid requests.</p><ul>
+<li>The image accepts only the team&#x27;s SSH key; touching the box counts as cheating (team, 2026-09-27).</li>
+<li>A miner said on 2026-10-22 SSH access blocks container hosts without nested Docker.</li>
+<li>Team, 2026-10-27: start with one node; a large DeepSeek V4.1 Flash cluster may not pay.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-medium">Medium barrier</span></h3><p>The master validator is the team&#x27;s; outside validators copy its signed weights.</p><ul>
+<li>2026-10-29: 17 uids hold permits, 12 updated weights in the last 72 minutes.</li>
+<li>The master hotkey takes 40% of validator dividends, the top five 92%.</li>
+</ul></section></div>
+<h2 id="sn-x0">Traffic by model, week to 2026-10-28</h2>
+<p>Team data, signed epoch 19.</p>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Model</th><th>Share of value</th><th>Tokens</th></tr></thead><tbody><tr><td>Kimi K3</td><td>48.7%</td><td>21B</td></tr><tr><td>GLM-5.2</td><td>25.7%</td><td>45B</td></tr><tr><td>DeepSeek V4.1 Flash</td><td>14.4%</td><td>668B</td></tr><tr><td>GLM-5.3</td><td>8.3%</td><td>11B</td></tr><tr><td>Five others</td><td>2.9%</td><td>34B</td></tr></tbody></table></div>
+<h2 id="sn-x1">Who controls scoring</h2>
+<ul class="v2-list">
+<li>The master validator is the owner hotkey; outside validators cannot change its vector, and the chain result equals it.</li>
+<li>Owner cut 18% plus about 16.6% as master-slot dividends: up to about 35% of emission.</li>
+</ul>
+<h2 id="sn-x2">Burn and alpha holders</h2>
+<ul class="v2-list">
+<li>All 25 burns on the team&#x27;s page match chain events: 25,287 alpha for about 813 TAO, 2026-08-12 to 10-25; that revenue funds them is the team&#x27;s claim.</li>
+<li>Chain: the top coldkey holds 28.6% of staked alpha, the top two 38.6%; the owner-alpha lock is not visible.</li>
+</ul>
+<h2 id="sn-x3">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Verification</td><td>README: no TEEs or trusted hardware</td><td>Chat: team and onboarding docs describe TEE boxes</td><td>2026-10-29</td></tr><tr><td>Scoring formula</td><td>One-pager: score = tokens x team rate</td><td>Chain: weights equal the signed epoch; scores are dollar work</td><td>2026-10-29</td></tr><tr><td>Gates</td><td>One-pager: fail under 99% accepted, over 1% cheats</td><td>Code: live signed gates are 95% and 5%</td><td>2026-10-28</td></tr><tr><td>Miner hardware</td><td>MINER.md: 4 x RTX 4090</td><td>Chat: docs are legacy; 8 x H100 for GLM-5.3-flash</td><td>2026-10-16</td></tr></tbody></table></div>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-neutral">Neutral</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-10-29. Not financial advice.</span></div>
+<p class="v2-thesis">Users sold a net 4,055 TAO over 30 days but this week shows no net selling. Team data says requests doubled in epoch 19, all 25 burns are real and code is shipping. Scoring and verification stay with the team, so value is hard to call.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.03313 TAO per alpha</dd></div><div><dt>Pool</dt><dd>38,325 TAO, rank 11</dd></div><div><dt>Price, 30 days</dt><dd>-1%, 2026-09-29 to 2026-10-29</dd></div><div><dt>Net flow, 30 days</dt><dd>-4,055 TAO, 2026-09-29 to 2026-10-29</dd></div><div><dt>Miner pay</dt><dd>2.76 TAO per day on average (80.0 TAO per day over 29 uids)</dd></div><div><dt>Miner pay outside top 5</dt><dd>1.34 TAO per day on average (32.1 TAO per day over 24 uids)</dd></div><div><dt>Code activity</dt><dd>last commit 2026-10-28; 12 commits in 30 days; last release 2026-08-22</dd></div></dl>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>Net flow about zero, price +3% this week.</li>
+<li>Team data: requests doubled in epoch 19; code is shipping.</li>
+<li>All 25 buyback burns confirmed on chain.</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>Net outflow of 4,055 TAO over 30 days; top two coldkeys hold 38.6% of alpha.</li>
+<li>Team-signed weights, no audit verdicts, no team reply to miners&#x27; routing questions.</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> Bullish: net inflow with the price holding, or independent proof of verification. Bearish: outflow returns or settled value falls.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-similar">Similar subnets</h2>
+<div class="v2-sim"><p>By pool size this is <strong>rank 1 of 11</strong> among the subnets grouped as <em>inference</em> (what they mainly sell). Pool and price as of 2026-10-29 to 2026-10-31, price in TAO per alpha; the barrier is the easiest miner role.</p><div class="scroll"><table class="v2-table"><thead><tr><th>#</th><th>Subnet</th><th>Pool</th><th>Price</th><th>Miner barrier</th></tr></thead><tbody><tr class="me" aria-current="true"><td>1</td><td>engy <span class="muted">SN53, this page</span></td><td>38,322 TAO</td><td>0.03312</td><td><span class="v2-barrier b-high">High</span></td></tr><tr><td>2</td><td><a href="/bittensor-docs/subnets/28.html">SayGM (gm)</a> <span class="muted">SN28</span></td><td>29,168 TAO</td><td>0.03315</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>3</td><td><a href="/bittensor-docs/subnets/14.html">Cacheon</a> <span class="muted">SN14</span></td><td>25,728 TAO</td><td>0.009401</td><td><span class="v2-barrier b-high">High</span></td></tr><tr><td>4</td><td><a href="/bittensor-docs/subnets/95.html">Actual</a> <span class="muted">SN95</span></td><td>23,661 TAO</td><td>0.03172</td><td><span class="v2-barrier b-high">High</span></td></tr><tr><td>5</td><td><a href="/bittensor-docs/subnets/114.html">SOMA</a> <span class="muted">SN114</span></td><td>9,320 TAO</td><td>0.01753</td><td><span class="v2-barrier b-medium">Medium</span></td></tr></tbody></table></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-28</span> <span class="muted">(provider.engy.ai epochs)</span> Epoch 19 signed: 18.0M requests, about $44k settled. Epoch 20 had 29 active miners by 10-29.</li>
+<li><span class="when">2026-10-28</span> <span class="muted">(#53-engy)</span> A miner with traffic in epoch 19 got none in epoch 20 and asked if routing is equal; another waited 13 minutes for provisioning. No team reply.</li>
+<li><span class="when">2026-10-22</span> <span class="muted">(#53-engy)</span> DeepSeek V4.1 Flash buyer price cut to 20% of the official rate; onboarding moved to the dashboard flow.</li>
+<li><span class="when">2026-09-18</span> <span class="muted">(#53-engy)</span> After a community critique, the team said centralised scoring is by design and promised governance docs.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Plan hardware: one H200 for DeepSeek V4.1 Flash, 8 x H100 for GLM-5.3-flash (team).</li>
+<li>Register a miner hotkey on SN53, log in at provider.engy.ai and claim a gateway key.</li>
+<li>Boot ghcr.io/hanlinai/engy-golden-serve:prod with only that key as ENGY_MINER_KEY.</li>
+<li>Declare the model and an SSH port the team can reach; wait for activation.</li>
+<li>Leave the box untouched. To validate instead, run the repo&#x27;s CPU-only light validator with a permit hotkey.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>The master scorer is not public, and its published formula does not reproduce the signed scores.</li>
+<li>Verification is unseen (no audit verdicts in epochs 17 to 19), and which hotkeys are the team&#x27;s own is unpublished.</li>
+<li>Usage and revenue are team data; dashboard and signed counts differ (37 vs 36 miners). No licence file.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://engy.ai" rel="noopener noreferrer">Website and API</a></li>
+<li><a href="https://provider.engy.ai/epochs" rel="noopener noreferrer">Provider dashboard (epochs, miners)</a></li>
+<li><a href="https://provider.engy.ai/dashboard/docs" rel="noopener noreferrer">Worker onboarding guide</a></li>
+<li><a href="https://provider.engy.ai/buyback" rel="noopener noreferrer">Buyback and burn page</a></li>
+<li><a href="https://github.com/hanlinai/engy" rel="noopener noreferrer">GitHub</a></li>
+<li><a href="https://github.com/hanlinai/engy/blob/main/docs/SN53_ONE_PAGER.md" rel="noopener noreferrer">SN53 one-pager</a></li>
+<li><a href="https://github.com/hanlinai/engy/blob/main/docs/VALIDATOR.md" rel="noopener noreferrer">Light validator guide</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 11 sources</summary>
+<ul>
+<li><strong>repo</strong> hanlinai/engy@34b8ef3 (2026-10-28, still the newest commit on 2026-10-30; the two commits since ed84d0b touch only miner/tee_miner.py and one test, so README and docs/ read at ed84d0b still match): README, docs/VALIDATOR.md, docs/MINER.md, docs/SN53_ONE_PAGER.md</li>
+<li><strong>web</strong> https://provider.engy.ai/api/subnet/v1/epoch/latest (epoch 19 signed result, read 2026-10-28, 2026-10-29 and 2026-10-30: identical)</li>
+<li><strong>web</strong> https://provider.engy.ai/epochs, /buyback and /dashboard/docs (read 2026-10-29 and 2026-10-30; the buyback list is unchanged, 25 entries)</li>
+<li><strong>web</strong> Chain read at block 9392590 (2026-10-29 22:57Z UTC): SN53 (engy): registered 2024-11-06, tempo 360, 256 of 256 uids, commit-reveal on; emission weights burn/recycle/owner/validator/miner = 0/0/18/41/41 % (stored, same values as the chain default), RecycleOrBurn = Burn; uids under the owner hotkey or owner coldkey hold 0 % of incentive and 20.21 % of last-epoch emission (a floor); 14 validators have weight rows, on average 0 % of weight goes to uid 0.</li>
+<li><strong>web</strong> Chain read at block 9392590 (2026-10-29 22:57Z UTC), compared with block 9378501 (2026-10-28 00:00Z UTC): SN53: no setting changed in 33 checked items; emission split unchanged; pool 37943.81 -&gt; 38324.73 TAO.</li>
+<li><strong>web</strong> Chain read at block 9392969 (2026-10-30 00:13Z UTC), compared with block 9385701 (2026-10-29 00:00Z UTC): SN53: no setting changed in 33 checked items; emission split unchanged; pool 38373.44 -&gt; 38278.65 TAO.</li>
+<li><strong>web</strong> Chain read at block 9392590 (2026-10-29 22:57Z): price SN53, 6 samples every 7d from block 9176590 (2026-09-29 22:40Z): price 0.033557 -&gt; 0.033126 TAO per alpha (-1.3%), pool TAO 37555.1 -&gt; 38324.7; over the 5 intervals where the pool change equals flow + protocol: net user flow -4055.4 TAO (staked minus unstaked), protocol flow +4825.0 TAO, gross volume 285485.1 TAO.</li>
+<li><strong>web</strong> Chain read at block 9392669 (2026-10-29 23:13Z): price SN53, 8 samples every 1d from block 9342269 (2026-10-22 23:13Z): price 0.032072 -&gt; 0.033120 TAO per alpha (+3.3%), pool TAO 37491.0 -&gt; 38321.7; over the 7 intervals where the pool change equals flow + protocol: net user flow -159.6 TAO, protocol flow +990.2 TAO, gross volume 48477.0 TAO.</li>
+<li><strong>web</strong> Chain read at block 9392590 (2026-10-29 22:57Z): SN53 stake by coldkey: 3833 coldkeys hold 4264688.646 alpha on 213 hotkeys (100.0% of the chain&#x27;s staked total); top coldkey 28.615%, top 5 46.8%, top 10 53.826%; owner coldkey 3.856%; 48.034% of the stake sits on validator-permit hotkeys.</li>
+<li><strong>web</strong> Chain read at block 9392590 (2026-10-29 22:57Z): shared snapshot over 129 subnets: SN53 pool rank 11 and price rank 8 of 128. Chain events at the 25 blocks listed on the buyback page (8830493 to 9357759, 2026-08-12 to 2026-10-25): AlphaBurned and AddStakeBurn on netuid 53 total 25287.332 alpha for 812.80 TAO, each equal to the page&#x27;s amount.</li>
+<li><strong>msg</strong> #53-engy 2026-04-30 to 2026-10-29</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/51.html"><small>← Previous</small>SN51 Lium</a><a rel="next" href="/bittensor-docs/subnets/54.html"><small>Next →</small>SN54 Yanez</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-30. Site built 2026-10-31. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

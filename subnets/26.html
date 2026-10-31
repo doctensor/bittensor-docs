@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Perturb (SN26) | Bittensor Subnet Docs</title>
+<meta name="description" content="Adversarial-robustness subnet: no outside miner has been paid since 2026-10-22, all incentive sits on the owner&#x27;s uid.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h14">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>26</span><div>
+<h1>Perturb <span class="muted">SN26</span></h1>
+<p class="tagline">Adversarial-robustness subnet: no outside miner has been paid since 2026-10-22, all incentive sits on the owner&#x27;s uid.</p>
+<span class="st s-unclear">unclear</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl4"><b>3.1<small>/day</small></b><span>last 7 d</span></li><li class="pl4"><b>4.3<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>6.9<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-31</b><span>last chat</span></li><li class="pw"><b>5,227</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>No repo</b><span>code activity</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>adversarial robustness (image classifier attacks and adversarial training)</dd>
+<dt>Status</dt><dd>On chain, 100% of incentive has sat on the owner&#x27;s own uid since 2026-10-22 and still did on 2026-10-30; no outside miner is paid. The team API stopped that day, the last team post is 2026-10-20 and no reason has been given.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-30</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Payout history</a></li><li><a href="#sn-x1">Docs vs code vs chain</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-similar">Similar subnets</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>No outside miner has been paid since 2026-10-22; all incentive sits on the owner&#x27;s own uid (checked 2026-10-30).</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>Miners fool a fixed image classifier with invisible changes, or fine-tune it; attacks feed a public dataset.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>Price down 38%, net 321 TAO out in 30 days to 2026-10-30; pool 1,306 TAO, rank 113 of 128.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>a paid scan product is coming; no team post since 2026-10-20, team API stopped 2026-10-22.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>Joining costs 0.1 TAO; miners can use a CPU, validators need a GPU and a team API key.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Alters a team-supplied image every 2 minutes so the classifier misreads it.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-unk">Paid service unknown</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>CPU-only minimum (4 vCPU, 16 GB RAM); GPU with 8+ GB VRAM recommended (README)</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>Hippius or R2 storage account for uploads; price not documented</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Registration burn 0.1 TAO (2026-10-30); no stake</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Python 3.10+, Node 18+, env file; only a basic PGD attack ships</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Scores submissions, ranks miners from all reports and sets weights.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-caution">GPU needed</li><li class="fl fl-good">No paid service</li><li class="fl fl-unk">Access unknown</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>NVIDIA GPU 12+ GB VRAM, 8 vCPU, 32 GB RAM (README minimum)</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>Team-issued API key (how to get one not documented); free Hugging Face token</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Burn 0.1 TAO (2026-10-30); permit threshold 1,000 TAO on chain, README says 10,000</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Python 3.10+, Node 18+; env file with wallet, API key, token</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div><div class="v2-role"><h3>Training-track miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Fine-tunes the classifier and commits it on chain for a daily 20% prize.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-caution">GPU needed</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>One 24-48 GB GPU (training README)</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>Free Hugging Face token; no other paid service named</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Burn 0.1 TAO (2026-10-30); no stake</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Run train.py, then submit.py</dd></div></dl><a class="v2-more" href="#sn-role-2">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-10-30. Not financial advice.</span></div><p>Bearish: miners unpaid since 2026-10-22, team silent, price down 38% in 30 days. <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>Perturb is an adversarial-robustness subnet: miners fool a fixed image classifier with changes too small to see, or fine-tune it to resist them. The team plans paid robustness scans. Since 2026-10-22 no outside miner is paid and the team has not said why.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Scanning: every 2 minutes a team API posts an image; miners have 40 seconds to alter it so the classifier changes its answer. Training: miners fine-tune the classifier and commit it on chain. The task feed has been frozen since 2026-10-22.</p></div><div><h3>Validators</h3><p>Validators score each submission locally, share reports through the team API and set weights from the stake-weighted mean rank; daily they test each committed model. The two that set weights lately put everything on uid 0.</p></div><div><h3>Incentive</h3><p>Per the code, miner pay is 80% scanning (top 3 get 75, 20 and 5%) and 20% to one daily model winner; a burn rate from the team API sends a share to uid 0, the owner&#x27;s.</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-10-30, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-unk">Unknown</span>Needs a team-issued API key (how to get one not documented); 5 permits, 3 with weights.</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">93.8%</span>93.79% of last-epoch emission is on the owner&#x27;s uid; owner cut 18%, RecycleOrBurn is Burn.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">1 uid</span><span class="v2-sx muted">top 5 hold 100% of incentive.</span> One uid has incentive: the owner&#x27;s, at 100%.</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Converged</span>Two of three weight-setters put all weight on uid 0; concentration, not copying.</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-caution">Partial</span>Code is public on GitHub without a licence; last commit 2026-10-03.</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Alters a team-supplied image every 2 minutes so the classifier misreads it.</p><ul>
+<li>40 seconds per task; any gate failure scores 0. Pay was the top 3 by consensus rank; none since 2026-10-22.</li>
+<li>scripts/miner.env.example ships NETUID=1: set it to 26.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Scores submissions, ranks miners from all reports and sets weights.</p><ul>
+<li>The Hugging Face account must have accepted the gated ImageNet-1k terms.</li>
+<li>The two recent weight-setters, one not owner-linked, put 100% on uid 0 (2026-10-30).</li>
+</ul></section><section class="v2-rdetail" id="sn-role-2"><h3>Training-track miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Fine-tunes the classifier and commits it on chain for a daily 20% prize.</p><ul>
+<li>Must beat the original&#x27;s score by more than 0.005; the evaluation feed has been frozen since 2026-10-23.</li>
+</ul></section></div>
+<h2 id="sn-x0">Payout history</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Dates read (about 00:00 UTC)</th><th>On owner&#x27;s uid</th><th>Team said</th></tr></thead><tbody><tr><td>2026-09-20</td><td>0%</td><td>-</td></tr><tr><td>09-22, 09-30, 10-04</td><td>90%</td><td>09-21: emissions cut to 10%</td></tr><tr><td>10-05, 10-12, 10-19, 10-20</td><td>0%</td><td>10-04: 100% emission live</td></tr><tr><td>2026-10-22 on</td><td>100%</td><td>Nothing found</td></tr></tbody></table></div>
+<h2 id="sn-x1">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Miner rewards</td><td>Top 3 scanners and a daily model winner get paid</td><td>Chain: no miner paid; all incentive on the owner&#x27;s uid</td><td>2026-10-30</td></tr><tr><td>Burn rate</td><td>Code: uid 0 gets the API&#x27;s burn rate; the API says 0</td><td>Chain: uid 0 holds 100%, which needs burn rate 1</td><td>2026-10-30</td></tr></tbody></table></div>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-10-30. Not financial advice.</span></div>
+<p class="v2-thesis">The price fell 38% and a net 321 TAO left in 30 days, mostly before the burn began on 2026-10-22; stake on the owner&#x27;s hotkey fell by about 135,000 alpha on 10-19 and 10-20 too. Since 10-22 no outside miner is paid and the team is silent. Product and buyback claims are team statements.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.001443 TAO per alpha</dd></div><div><dt>Pool</dt><dd>1,306 TAO, rank 113</dd></div><div><dt>Price, 30 days</dt><dd>-38%, 2026-09-28 to 2026-10-30</dd></div><div><dt>Net flow, 30 days</dt><dd>-321 TAO, 2026-09-30 to 2026-10-30</dd></div><div><dt>Miner pay</dt><dd>No independent miner is paid (miner side burned)</dd></div><div><dt>Miner pay outside top 5</dt><dd>None: no independent miner is paid</dd></div><div><dt>Code activity</dt><dd>last commit 2026-10-03; 4 commits in 30 days; no releases</dd></div></dl>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>Scan product with prices is on the site (untested).</li>
+<li>Price already down 38%; pool ranks 113 of 128.</li>
+<li>An earlier 90% burn ended within two weeks.</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>All incentive on the owner&#x27;s uid since 10-22; no team post since 10-20.</li>
+<li>Team API, dataset and repo are frozen.</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> A stated reason, payouts to several miners and live feeds would turn it neutral; more silence or outflow points down.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-similar">Similar subnets</h2>
+<div class="v2-sim"><p>By pool size this is <strong>rank 6 of 6</strong> among the subnets grouped as <em>security</em> (what they mainly sell). Pool and price as of 2026-10-30 to 2026-10-31, price in TAO per alpha; the barrier is the easiest miner role.</p><div class="scroll"><table class="v2-table"><thead><tr><th>#</th><th>Subnet</th><th>Pool</th><th>Price</th><th>Miner barrier</th></tr></thead><tbody><tr><td>2</td><td><a href="/bittensor-docs/subnets/61.html">RedTeam</a> <span class="muted">SN61</span></td><td>10,832 TAO</td><td>0.006444</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr><td>3</td><td><a href="/bittensor-docs/subnets/32.html">It&#x27;s AI</a> <span class="muted">SN32</span></td><td>6,586 TAO</td><td>0.00249</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>4</td><td><a href="/bittensor-docs/subnets/104.html">TAOStatus</a> <span class="muted">SN104</span></td><td>5,837 TAO</td><td>0.004021</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr><td>5</td><td><a href="/bittensor-docs/subnets/87.html">Provenonce (Proof of Assurance)</a> <span class="muted">SN87</span></td><td>1,500 TAO</td><td>0.003282</td><td><span class="v2-barrier b-high">High</span></td></tr><tr class="me" aria-current="true"><td>6</td><td>Perturb <span class="muted">SN26, this page</span></td><td>1,306 TAO</td><td>0.001443</td><td><span class="v2-barrier b-medium">Medium</span></td></tr></tbody></table></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-30</span> <span class="muted">(chain, project API, #26-perturb)</span> Incentive still 100% on the owner&#x27;s uid; feeds and repo unchanged. Members ask in chat whether it is dead or a scam.</li>
+<li><span class="when">2026-10-22</span> <span class="muted">(chain, project API, #26-perturb)</span> Owner swapped its uid-0 hotkey; by 14:39 UTC its validator sent 100% of incentive to uid 0. The team API stopped at about 17:42 UTC.</li>
+<li><span class="when">2026-10-20</span> <span class="muted">(#26-perturb)</span> A team member said the launch was days away: the last team message in the channel.</li>
+<li><span class="when">2026-10-20</span> <span class="muted">(chain, price series)</span> Stake on the owner&#x27;s uid-0 hotkey fell by about 135,000 alpha, 10-19 to 10-20 (all stakers counted); the pool lost about 200 TAO, 10-19 to 10-21.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Check first whether anyone is paid (only the owner&#x27;s uid since 2026-10-22), then register a hotkey on subnet 26 (burn 0.1 TAO on 2026-10-30).</li>
+<li>Miner: set wallet, NETUID 26 and storage keys in scripts/miner.env, then run scripts/run_miner.sh. Training track: follow training/README.md.</li>
+<li>Validator: ask the team for an API key, then fill scripts/validator.env and run scripts/run_validator.sh.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Unexplained: why the incentive moved, why the owner swapped its hotkey on 10-22 and why the team API stopped. A deliberate burn, a fault and hand-set weights look alike.</li>
+<li>&#x27;Burned&#x27; rests on the RecycleOrBurn setting: the incentive lands on the owner&#x27;s uid. Owner holdings are a floor.</li>
+<li>Tasks, reports and the burn rate come from team-run services; past burn rates are not archived.</li>
+<li>The scan service (Basic 99 USD per scan) and the 100T and 500T alpha buybacks are unverified. Members suspect near-identical top scores mean self-mining; nothing is concluded.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://www.perturbai.io/whitepaper" rel="noopener noreferrer">Whitepaper (v3.0, October 2026)</a></li>
+<li><a href="https://www.perturbai.io/" rel="noopener noreferrer">Project site</a></li>
+<li><a href="https://leaderboard.perturbai.io/" rel="noopener noreferrer">Leaderboard</a></li>
+<li><a href="https://github.com/0xsigurd/Perturb" rel="noopener noreferrer">GitHub repo</a></li>
+<li><a href="https://github.com/0xsigurd/Perturb/blob/main/training/README.md" rel="noopener noreferrer">Training track guide (repo)</a></li>
+<li><a href="https://huggingface.co/datasets/perturb-ai/efficientnet-v2-l-adv-dataset" rel="noopener noreferrer">Adversarial dataset (Hugging Face)</a></li>
+<li><a href="https://api.perturbai.io/api/v1/burn-rate" rel="noopener noreferrer">Burn rate feed (team API)</a></li>
+<li><a href="https://api.perturbai.io/training/evaluations" rel="noopener noreferrer">Training evaluations feed (team API)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 6 sources</summary>
+<ul>
+<li><strong>repo</strong> 0xsigurd/Perturb at 0dad954 (2026-10-03, still the head on 2026-10-30): README.md, training/README.md, scripts/*.env.example, neurons/validator.py (weight setting, burn rate), perturbnet/{constants,emissions,model_evaluation,api_client,metagraph_utils}.py</li>
+<li><strong>msg</strong> #26-perturb, 2026-05-06 to 2026-10-30 (pinned posts 05-07, 07-01, 07-22; team posts 09-11 to 10-20; none from the team after 10-20)</li>
+<li><strong>web</strong> Chain read at block 9394748 (2026-10-30 06:09Z UTC): SN26 (Perturb): registered 2026-05-06, tempo 360, 256 of 256 uids, commit-reveal on; emission weights burn/recycle/owner/validator/miner = 0/0/18/41/41 % (stored, same values as the chain default), RecycleOrBurn = Burn; uids under the owner hotkey or owner coldkey hold 100 % of incentive and 93.79 % of last-epoch emission (a floor); 3 validators have weight rows, on average 66.7 % of weight goes to uid 0.</li>
+<li><strong>web</strong> Chain reads on 2026-10-30 (uid 0, uid 143, uid 152, weights of all validators, change check since 2026-10-25, all-subnet snapshot for the pool rank); uid 0 read at about 00:00 UTC on 2026-09-20, 09-22, 09-30, 10-04, 10-05, 10-12, 10-19, 10-20 (also 23:59 UTC); uid 0 again at block 9394914 (2026-10-30 06:42Z); price series 2026-09-28 to 2026-10-30; earlier reads 2026-10-22 to 10-25</li>
+<li><strong>web</strong> https://www.perturbai.io/ home page and /whitepaper (v3.0, read 2026-10-21, 10-25 and 10-30)</li>
+<li><strong>web</strong> api.perturbai.io: /api/v1/task, /api/v1/burn-rate, /training/evaluations (public GETs, read 2026-10-21, 10-25 and 10-30; hotkeys not used); Hugging Face dataset feed (last modified 2026-10-22)</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/25.html"><small>← Previous</small>SN25 UR</a><a rel="next" href="/bittensor-docs/subnets/28.html"><small>Next →</small>SN28 SayGM (gm)</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-30. Site built 2026-10-31. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

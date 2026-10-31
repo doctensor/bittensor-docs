@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>REAX (SN92) | Bittensor Subnet Docs</title>
+<meta name="description" content="Decision-model inference: miners serve pinned small models, validators re-check answers; contests pause after Oct 30.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h20">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>92</span><div>
+<h1>REAX <span class="muted">SN92</span></h1>
+<p class="tagline">Decision-model inference: miners serve pinned small models, validators re-check answers; contests pause after Oct 30.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>54<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>39<small>/day</small></b><span>days 8-30</span></li><li class="pl3"><b>0.72<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-31</b><span>last chat</span></li><li class="pw"><b>1,313</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Shipping</b><span>code activity</span></li><li class="pw"><b>101</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-10-29</b><span>last commit</span></li><li class="pw"><b>2026-10-29</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>Decision-model inference and model competitions</dd>
+<dt>Status</dt><dd>As of 2026-10-30 mining pays (240 miners in the team feed). On 2026-10-29 the team said both contests pause after the 10-30 slots.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-30</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">What changes on 2026-10-30</a></li><li><a href="#sn-x1">Docs vs code vs chain</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-similar">Similar subnets</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>customers call decision models through decisionmodels.io; no traffic or revenue figure is public.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>244 uids earn; gross average about 0.2 TAO a day each, before costs, at the 2026-10-30 price.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>both contests pause after 2026-10-30; inference gets 40% of miner pay and unpaid shares burn.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>easy to join with Docker, one NVIDIA GPU (24 GB+) and an open port; a self-check must pass.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>the owner hotkey (team validator) takes 95.5% of dividends; price -34% in 7 days, +16% in the last day.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Inference miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Serves a pinned model on its own hardware; paid for verified speed and volume.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-caution">GPU needed</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>GPU 24 GB+ (s1-fast), 48 GB+ (s1-pro from 10-30), 8 GB (s1-lite) or CPU only</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None (mammoth-1 weights are public)</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Registration burn 0.5 TAO on 2026-10-30; new UID immune about 24 h</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Docker with NVIDIA toolkit, one open port, self-check; hours</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Re-computes miner answers on its own model copy and sets weights.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-caution">GPU needed</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>GPU 80-96 GB for the s1-pro reference model (docs); 8 cores, 32 GB RAM</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Permit (chain stake threshold 1,000 TAO); registration burn 0.5 TAO</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Docker, two reference model servers, upgrade each release; a day</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div><div class="v2-role"><h3>Contest entrant <span class="v2-barrier b-high">High barrier</span></h3><p>Submits a faster engine image or a fine-tuned model (up to 36B); both tracks pause after 2026-10-30.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-caution">GPU needed</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>A GPU to build and test; the team measures engines on an RTX PRO 6000 (96 GB)</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>A registered hotkey holds each entry (burn 0.5 TAO on 2026-10-30)</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Weeks of engineering or training; open-source licence needed for an award</dd></div></dl><a class="v2-more" href="#sn-role-2">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-neutral">Neutral</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">low confidence, as of 2026-10-30. Not financial advice.</span></div><p>Price fell 34% in a week of net selling, then rose 16% in a day; usage is team-stated only <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>REAX is run by a German company that also sells a decision-model API. A decision model is a small AI model that answers one narrow, typed question fast. Miners serve pinned models; validators re-check the answers. Half of miner pay goes to two contests that the team says pause after the 2026-10-30 slots; inference pay is meant to follow customer demand.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Inference miners serve one pinned model behind a signed endpoint (pools s1-fast, s1-pro, s1-lite). Pay rises with verified throughput up to a per-hotkey cap. Contest miners submit an engine image or a fine-tuned model of up to 36B.</p></div><div><h3>Validators</h3><p>The team validator sends each miner 8 items about every two minutes and recomputes some on its own model copy. Wrong answers or swapped models score zero; speed is a fifth of the score. Three more permit holders set weights.</p></div><div><h3>Incentive</h3><p>Chain split: 18% owner, 41% validators, 41% miners; nothing burned. The miner part was 50% inference, 20% engine contest, 30% model contest. From 2026-10-30 inference gets 40% and unpaid shares are burned (team, FAQ 3.4).</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-10-30, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-good">Open</span>4 permit holders set weights; the team validator is the owner hotkey. Permit stake threshold 1,000 TAO.</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">47.7%</span>Owner hotkey (the team validator) takes 47.7% of emission, 95.5% of dividends; owner cut 18%; RecycleOrBurn is Burn.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">244 uids</span><span class="v2-sx muted">top 5 hold 31.5% of incentive.</span> 244 uids earn; the top 5 hold 31.5% of incentive, the top uid 13.1%.</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Converged</span>All 4 validators put their top weight on uid 62; a deterministic scorer makes honest validators agree too.</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-good">Open</span>Miner and validator are public (MIT); the team validator reports a newer version than the latest public release.</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Inference miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Serves a pinned model on its own hardware; paid for verified speed and volume.</p><ul>
+<li>Only exact pinned weights count. Needs 4 cores, 32 GB RAM and a public IP.</li>
+<li>48 GB cards are allowed for mammoth-1 once your self-check passes (team).</li>
+<li>s1-cpu (CPU only, capped at 4 decisions/s) is in the code but no longer a listed pool.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Re-computes miner answers on its own model copy and sets weights.</p><p class="muted">No further detail found in the sources.</p></section><section class="v2-rdetail" id="sn-role-2"><h3>Contest entrant <span class="v2-barrier b-high">High barrier</span></h3><p>Submits a faster engine image or a fine-tuned model (up to 36B); both tracks pause after 2026-10-30.</p><ul>
+<li>After the pause starts, a champion&#x27;s pay runs out over 7 days, then keep-alive (team).</li>
+</ul></section></div>
+<h2 id="sn-x0">What changes on 2026-10-30</h2>
+<ul class="v2-list">
+<li>09:00 UTC: s1-pro moves from Rune to mammoth-1 (one NVIDIA GPU, 48 GB or more); a miner kit with a self-check is out.</li>
+<li>14:30 and 16:30 UTC: last engine and generalist crowning slots; both contests then pause.</li>
+<li>From next week (team): inference pay follows customer demand in announced steps.</li>
+</ul>
+<h2 id="sn-x1">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Burn from 2026-10-30</td><td>FAQ 3.4: inference 40%, unpaid shares burned</td><td>Code: public repo has no 40% setting, burn default 0; chain not due yet</td><td>2026-10-30</td></tr><tr><td>Per-hotkey speed caps</td><td>Team feed: 1,280/s (s1-fast), 320/s (s1-pro)</td><td>Code: 2,560/s and 640/s since release post7</td><td>2026-10-30</td></tr><tr><td>Validator version</td><td>Team feed: post8.4</td><td>Code: newest public release is post8.1 (2026-10-27)</td><td>2026-10-30</td></tr></tbody></table></div>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-neutral">Neutral</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">low confidence, as of 2026-10-30. Not financial advice.</span></div>
+<p class="v2-thesis">The week was weak (net user flow -453 TAO, price -34%), but the last day brought +281 TAO of net inflow and +16%; the chain does not say why. Usage cannot be verified, so no valuation call.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.02077 TAO per alpha</dd></div><div><dt>Pool</dt><dd>3,142 TAO, rank 95 of 128</dd></div><div><dt>Price, 30 days</dt><dd>not read (20 days old); 2026-10-23 to 2026-10-30: -33.5%</dd></div><div><dt>Net flow, 30 days</dt><dd>not read; 2026-10-23 to 2026-10-30: -453 TAO (last day +281)</dd></div><div><dt>Miner pay</dt><dd>0.205 TAO per day on average (50.1 TAO per day over 244 uids)</dd></div><div><dt>Miner pay outside top 5</dt><dd>0.144 TAO per day on average (34.3 TAO per day over 239 uids outside the top 5)</dd></div><div><dt>Code activity</dt><dd>last commit 2026-10-29; 115 commits in 30 days; last release 2026-10-29</dd></div></dl>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>Team ships weekly; burned shares mean less alpha for sale</li>
+<li>Last day: net inflow, price +16%, pool rank 98 to 95</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>Net user outflow of 453 TAO over 7 days; owner alpha is sold regularly</li>
+<li>Usage is team-only, and miner pay falls as the contests pause</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> Days of net inflow after the burn, or a published traffic or revenue figure, point to bullish; miners leaving, to bearish.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-similar">Similar subnets</h2>
+<div class="v2-sim"><p>By pool size this is <strong>rank 8 of 11</strong> among the subnets grouped as <em>inference</em> (what they mainly sell). Pool and price as of 2026-10-30 to 2026-10-31, price in TAO per alpha; the barrier is the easiest miner role.</p><div class="scroll"><table class="v2-table"><thead><tr><th>#</th><th>Subnet</th><th>Pool</th><th>Price</th><th>Miner barrier</th></tr></thead><tbody><tr><td>6</td><td><a href="/bittensor-docs/subnets/2.html">DaniLabs</a> <span class="muted">SN2</span></td><td>8,460 TAO</td><td>0.003664</td><td><span class="v2-barrier b-high">High</span></td></tr><tr><td>7</td><td><a href="/bittensor-docs/subnets/46.html">Instant</a> <span class="muted">SN46</span></td><td>7,474 TAO</td><td>0.002745</td><td><span class="v2-barrier b-high">High</span></td></tr><tr class="me" aria-current="true"><td>8</td><td>REAX <span class="muted">SN92, this page</span></td><td>3,142 TAO</td><td>0.02077</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>9</td><td><a href="/bittensor-docs/subnets/96.html">Verathos</a> <span class="muted">SN96</span></td><td>2,215 TAO</td><td>0.003138</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>10</td><td><a href="/bittensor-docs/subnets/31.html">Recall</a> <span class="muted">SN31</span></td><td>1,694 TAO</td><td>0.003529</td><td><span class="v2-barrier b-high">High</span></td></tr></tbody></table></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-29</span> <span class="muted">(#92-reax, FAQ 3.4)</span> Team announced the next phase: both contests pause after Friday&#x27;s slots, inference pay follows demand from next week, unpaid shares burn.</li>
+<li><span class="when">2026-10-29</span> <span class="muted">(#92-reax, live page)</span> Thursday&#x27;s generalist slot ran into a playoff after a team disk problem; the live page lists a champion at 46.3 on eval v5.1, award not yet approved.</li>
+<li><span class="when">2026-10-28</span> <span class="muted">(#92-reax)</span> Team said a bit under half of the operator&#x27;s alpha goes to a tax reserve, a smaller part to running costs, the rest stays staked.</li>
+<li><span class="when">2026-10-28</span> <span class="muted">(#92-reax, GitHub release)</span> Validator release post8.1 went live; the generalist base-model list was reordered and an extra slot added for 10-30.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Read the miner FAQ (version 3.4) and docs/MINER.md; the README is older than the code.</li>
+<li>Check the live registration fee (0.5 TAO on 2026-10-30) and pick the pool that fits your GPU.</li>
+<li>Run the pinned model server and miner and pass the self-check (mammoth-1: use the 2026-10-29 kit).</li>
+<li>Expect lower, changing pay after 2026-10-30.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Control is concentrated: the team validator (also the owner hotkey) earns about 96% of dividends; contest items and award approvals are the team&#x27;s. The owner coldkey holder is not named.</li>
+<li>Rules change weekly and some rulings were reversed after protests; the team calls shares and pauses its decisions, not promises.</li>
+<li>Demand is team-stated only; no traffic or revenue figure is public.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://reax.co" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://reax.co/competitions/faq/" rel="noopener noreferrer">Miner FAQ (the team&#x27;s stated rules reference)</a></li>
+<li><a href="https://reax.co/competitions/rules/" rel="noopener noreferrer">Competition rules</a></li>
+<li><a href="https://reax.co/mining/" rel="noopener noreferrer">How mining works</a></li>
+<li><a href="https://reax.co/faq/" rel="noopener noreferrer">General FAQ</a></li>
+<li><a href="https://reax.co/competitions/live/" rel="noopener noreferrer">Competitions and live evaluation queue</a></li>
+<li><a href="https://reax.co/miners/" rel="noopener noreferrer">Miner leaderboard (JSON feed behind it: /data/miners/latest.json)</a></li>
+<li><a href="https://github.com/reaxlabs/reax-subnet" rel="noopener noreferrer">Subnet repo (miner, validator, docs)</a></li>
+<li><a href="https://github.com/reaxlabs/reax-subnet/blob/main/CHANGELOG.md" rel="noopener noreferrer">Changelog</a></li>
+<li><a href="https://github.com/reaxlabs/reax-miner-kit" rel="noopener noreferrer">Miner install kit</a></li>
+<li><a href="https://github.com/reaxlabs/reax-engine" rel="noopener noreferrer">Engine competition reference</a></li>
+<li><a href="https://reax.dev/" rel="noopener noreferrer">Developer docs</a></li>
+<li><a href="https://decisionmodels.io/" rel="noopener noreferrer">Customer product (Decision Models)</a></li>
+<li><a href="https://github.com/reaxlabs/reax-subnet/blob/main/docs/EVAL-V5.md" rel="noopener noreferrer">Eval v5 spec (model contest)</a></li>
+<li><a href="https://github.com/reaxlabs/reax-subnet/blob/main/docs/ENGINE-COMPETITION-V2.md" rel="noopener noreferrer">Engine contest 2.0 spec</a></li>
+<li><a href="https://github.com/reaxlabs/reax-subnet/blob/main/docs/hardware.md" rel="noopener noreferrer">Hardware by pool</a></li>
+<li><a href="https://github.com/reaxlabs/reax-subnet/releases/tag/v1.2.0-rc11.post8.1-kit1" rel="noopener noreferrer">Miner kit release with mammoth-1 self-check</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 8 sources</summary>
+<ul>
+<li><strong>repo</strong> reaxlabs/reax-subnet main 0db24fd (2026-10-29, miner kit 1 on top of 1.2.0rc11.post8.1 f811bf6): README, CHANGELOG, docs/hardware.md, MINER.md, VALIDATOR.md, EMISSIONS.md, ENGINE-COMPETITION-V2.md, EVAL-V5.md; MIT licence</li>
+<li><strong>web</strong> https://reax.co/competitions/faq/ (version 3.4, change log dated 2026-10-29), /competitions/rules/ and /competitions/live/ (read 2026-10-28 and 2026-10-30)</li>
+<li><strong>web</strong> https://reax.co/data/miners/latest.json (team validator feed, read 2026-10-30 00:48 UTC: 240 miners listed, pools s1-fast 70, s1-pro 107, s1-lite 63; validator version 1.2.0rc11.post8.4) and /data/miners/eval-live.json (2026-10-30 00:51 UTC)</li>
+<li><strong>web</strong> https://decisionmodels.io/ home and pricing (read 2026-10-30: s1-fast USD 0.019 per 1M input tokens, s1-pro USD 0.080, output free)</li>
+<li><strong>web</strong> Chain read at block 9393153 (2026-10-30 00:50Z UTC): SN92 (REAX): registered 2026-10-09, tempo 360, 256 of 256 uids, commit-reveal on; emission weights burn/recycle/owner/validator/miner = 0/0/18/41/41 % (stored, same values as the chain default), RecycleOrBurn = Burn; the owner hotkey uid holds 0 % of incentive, 95.47 % of dividends and 47.73 % of last-epoch emission (a floor); 4 validators have weight rows, on average 0 % of weight goes to uid 0; 244 uids with incentive (top 5: 31.5 %); registration burn 0.5 TAO; no setting changed since 2026-10-28 except the registration burn</li>
+<li><strong>web</strong> Chain read at block 9393153 (2026-10-30 00:50Z): price SN92, 8 samples every 1d from block 9342753 (2026-10-23 00:50Z): price 0.031243 -&gt; 0.020767 TAO per alpha (-33.5%), pool TAO 2892.6 -&gt; 3142.2; over the 7 intervals where the pool change equals flow + protocol: net user flow -452.7 TAO (staked minus unstaked), protocol flow +702.2 TAO, gross volume 19690.1 TAO; last day: price +16.2%, net user flow +280.7 TAO, volume 6726.6 TAO</li>
+<li><strong>web</strong> Shared chain snapshot at block 9393153 (2026-10-30 00:50Z), 129 subnets: SN92 pool 3142.2 TAO = rank 95 of 128 (root excluded), 0.157 % of all pool TAO, price rank 16</li>
+<li><strong>msg</strong> #92-reax, 2026-09-21 to 2026-10-29 (all team posts since 10-15 read; newest message re-checked 2026-10-30 00:51 UTC)</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/91.html"><small>← Previous</small>SN91 Cascade</a><a rel="next" href="/bittensor-docs/subnets/93.html"><small>Next →</small>SN93 Bitcast</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-30. Site built 2026-10-31. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

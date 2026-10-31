@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tag101 (SN101) | Bittensor Subnet Docs</title>
+<meta name="description" content="Miners tag X posts with three short labels; scores depend on how closely tags match other miners&#x27; tags and the post.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h11">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>101</span><div>
+<h1>Tag101 <span class="muted">SN101</span></h1>
+<p class="tagline">Miners tag X posts with three short labels; scores depend on how closely tags match other miners&#x27; tags and the post.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl4"><b>4.1<small>/day</small></b><span>last 7 d</span></li><li class="pl4"><b>4.0<small>/day</small></b><span>days 8-30</span></li><li class="pl3"><b>0.95<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-30</b><span>last chat</span></li><li class="pw"><b>986</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Shipping</b><span>code activity</span></li><li class="pw"><b>2</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-10-14</b><span>last commit</span></li><li class="pw"><b>none</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>social post tagging (semantic labels for X posts)</dd>
+<dt>Status</dt><dd>Active on 2026-10-30: tasks run and all 8 validators set weights within 72 minutes. Miners dispute reward sharing; the team posted on 10-30 for the first time since 10-20; no repo commit since 10-14.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-30</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Who earns</a></li><li><a href="#sn-x1">Who sets the weights</a></li><li><a href="#sn-x2">Docs vs code vs chain</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-similar">Similar subnets</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>243 of 256 UIDs earn, but nine coldkeys (wallets) held 99% of miner incentive on 2026-10-26; the largest ran 125 UIDs.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>the owner&#x27;s validator holds 57.9% of staked alpha and takes 63.8% of validator dividends (2026-10-30).</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>a miner needs a small CPU server and, by default, an OpenAI key; no GPU.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>tags will feed a trend and search product (SignalFeed); usage is not visible on chain.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>net outflow of 157 TAO and price down 11% in the 30 days to 2026-10-30.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-low">Low barrier</span></h3><p>Return up to 3 short tags per X post.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-caution">Paid service needed</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>CPU only: 2 cores, 8 GB RAM, 20 GB SSD; no GPU</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>OpenAI API key for the stock miner; cost not stated</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Burn 0.0356 TAO (2026-10-30), varies with demand; no stake</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Docker or PM2, Python 3.12, wallet, open port, public IP</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Send posts to miners, score answers, set weights.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>CPU only: 4 cores, 16 GB RAM, 30 GB SSD, 100/20 Mbps; no GPU</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None: no API keys; posts come from the team&#x27;s server</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Burn 0.0356 TAO; permit needs top-64 stake and 1,000 TAO (smallest holder not read)</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Docker or PM2; keep the repo current, releases have been breaking</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-10-30. Not financial advice.</span></div><p>Bearish: money is leaving and rewards sit with a few keys; usage cannot be checked yet. <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>Tag101 tags X posts. Validators send posts from a team-run database to miners, who return up to three short tags. No tag is &#x27;right&#x27;, so rewards depend on how a miner&#x27;s tags compare with other miners&#x27; tags and the post. The team plans to sell the tags as trend and search signals via SignalFeed (sign-in needed).</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>A validator sends each miner an X post about every 15 minutes; the miner returns up to 3 short tags, using an OpenAI-compatible model (the stock miner) or its own logic.</p></div><div><h3>Validators</h3><p>Validators score answers with a shared scorer: all tags on a post are grouped into clusters, and a tag scores higher when different miners back it and it fits the post. Scores are averaged over 24 hours and become weights.</p></div><div><h3>Incentive</h3><p>A miner&#x27;s reward depends on the others&#x27; answers by design. Emission splits 18% owner, 41% validators, 41% miners. A 90% weight share to UID 0 was switched off in code on 2026-10-08; the chain agrees.</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-10-30, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-good">Open</span>7 of 8 permit holders are not the owner&#x27;s hotkey and all set weights; the task server&#x27;s admission rule is undocumented.</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">31.9%</span>UID 0: 0% of incentive, 31.95% of emission as validator dividends; owner cut 18%, RecycleOrBurn Burn.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">243 uids</span><span class="v2-sx muted">top 5 hold 2.5% of incentive.</span> 243 UIDs earn; the top five hold 2.5%. Nine coldkeys held 99% of miner incentive on 2026-10-26.</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Converged</span>6 of 8 validators top-weight UID 136; shared scoreboards build agreement in, so it is no proof of quality.</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-caution">Partial</span>Miner and validator code are public; the repo has no licence file.</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-low">Low barrier</span></h3><p>Return up to 3 short tags per X post.</p><ul>
+<li>The README lets a miner swap in its own solver; a member reported flooding by one UID (2026-10-15).</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Send posts to miners, score answers, set weights.</p><ul>
+<li>8 UIDs hold permits, 7 not the owner&#x27;s hotkey; the task server signs requests but its admission rule is not documented.</li>
+</ul></section></div>
+<h2 id="sn-x0">Who earns</h2>
+<ul class="v2-list">
+<li>243 of 248 miner UIDs earn something; the best earns 0.6%, the top five 2.5% (2026-10-30). On 2026-10-26 one coldkey held 125 UIDs and 67.6% of miner incentive; nine held 230 UIDs and 99.0%.</li>
+<li>A member&#x27;s review links the eight smaller coldkeys to one funder (not tested here). On 10-30 the team said smaller groups still score high; a member asked which independent UID does and had no answer yet.</li>
+</ul>
+<h2 id="sn-x1">Who sets the weights</h2>
+<ul class="v2-list">
+<li>The owner&#x27;s wallet holds 57.9% of staked alpha, all on its validator (UID 0), which takes 63.8% of dividends (2026-10-30).</li>
+<li>Validators use a blend of shared scoreboards only if it covers over half of validator stake; the owner&#x27;s validator holds about 85% of validator-hotkey alpha, so a blend largely follows it.</li>
+</ul>
+<h2 id="sn-x2">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Miner endpoints</td><td>Team: validators learn a miner&#x27;s address on chain or by self-report</td><td>Chain: 14 of 256 UIDs had an endpoint on chain; others use team announcements</td><td>2026-10-26</td></tr><tr><td>Owner&#x27;s validator</td><td>Chat: it weights differently from independent validators</td><td>Chain: UID 0 and five others share the top target (UID 136); two differ</td><td>2026-10-30</td></tr></tbody></table></div>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-10-30. Not financial advice.</span></div>
+<p class="v2-thesis">Users withdrew a net 157 TAO in 30 days and the price fell 11%. Most miner incentive sat with nine coldkeys and the owner&#x27;s validator holds most validator stake. Usage and revenue are team claims only, so no valuation call.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.00336 TAO per alpha</dd></div><div><dt>Pool</dt><dd>3,439 TAO, rank 92</dd></div><div><dt>Price, 30 days</dt><dd>-11%, 2026-09-28 to 2026-10-30</dd></div><div><dt>Net flow, 30 days</dt><dd>-157 TAO, 2026-09-30 to 2026-10-30</dd></div><div><dt>Miner pay</dt><dd>0.041 TAO per day on average (9.87 TAO per day over 243 uids)</dd></div><div><dt>Miner pay outside top 5</dt><dd>0.040 TAO per day on average (9.63 TAO per day over 238 uids outside the top 5)</dd></div><div><dt>Code activity</dt><dd>last commit 2026-10-14; 4 commits in 30 days; no releases</dd></div></dl>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>The team shipped 1.1.0 and 1.1.1 in October; tasks and weights keep flowing</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>Net outflow in all five intervals; 93.5 TAO left in the week to 2026-10-28</li>
+<li>A few keys take almost all miner pay</li>
+<li>Usage and revenue unverified; roadmap items 2 to 4 only planned</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> Bullish: independent miners earning a real share or verifiable SignalFeed revenue. Bearish: more outflow or concentration.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-similar">Similar subnets</h2>
+<div class="v2-sim"><p>By pool size this is <strong>rank 7 of 7</strong> among the subnets grouped as <em>data</em> (what they mainly sell). Pool and price as of 2026-10-30, price in TAO per alpha; the barrier is the easiest miner role.</p><div class="scroll"><table class="v2-table"><thead><tr><th>#</th><th>Subnet</th><th>Pool</th><th>Price</th><th>Miner barrier</th></tr></thead><tbody><tr><td>3</td><td><a href="/bittensor-docs/subnets/33.html">ReadyAI</a> <span class="muted">SN33</span></td><td>11,842 TAO</td><td>0.003039</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr><td>4</td><td><a href="/bittensor-docs/subnets/22.html">Desearch</a> <span class="muted">SN22</span></td><td>7,357 TAO</td><td>0.002873</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr><td>5</td><td><a href="/bittensor-docs/subnets/45.html">AlphaRidge</a> <span class="muted">SN45</span></td><td>5,992 TAO</td><td>0.002236</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>6</td><td><a href="/bittensor-docs/subnets/111.html">Claims</a> <span class="muted">SN111</span></td><td>5,409 TAO</td><td>0.003974</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr class="me" aria-current="true"><td>7</td><td>Tag101 <span class="muted">SN101, this page</span></td><td>3,439 TAO</td><td>0.00336</td><td><span class="v2-barrier b-low">Low</span></td></tr></tbody></table></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-30</span> <span class="muted">(#101-tag101, GitHub)</span> Team&#x27;s first post since 10-20: no single right tag, clustering is only part of scoring, no clear exploitation seen; minor fixes not public yet.</li>
+<li><span class="when">2026-10-28</span> <span class="muted">(#101-tag101)</span> A member asked the team to review concerns that large miner groups form their own clusters and near-duplicate tags dodge the duplicate penalty.</li>
+<li><span class="when">2026-10-23</span> <span class="muted">(#101-tag101, on-chain)</span> A member&#x27;s on-chain review claimed two parties hold nearly all miner UIDs; the largest&#x27;s 125 UIDs were confirmed on 10-26.</li>
+<li><span class="when">2026-10-08</span> <span class="muted">(#101-tag101, GitHub commits)</span> Version 1.1.0: three-part scorer, corpus leasing, hardened weight setting, 90% burn off; 1.1.1 followed on 10-14.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Register a hotkey on netuid 101 (burn 0.0356 TAO on 2026-10-30; a new UID replaces another and is protected for about a day).</li>
+<li>Clone github.com/tag101-ai/tag101, install Python 3.12 and run pip install -e . in a virtual environment.</li>
+<li>Copy deploy/miner.docker.example (PM2 files are alongside), fill in wallet, port, public IP and OPENAI_API_KEY, then build and start with the README&#x27;s docker_node commands.</li>
+<li>Validators use validator.docker.example. Use the status link below to check your miner is being asked.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>A chain key shows no person: who runs the nine coldkeys is unknown.</li>
+<li>Scores depend on other miners by design; only identical token sets are penalised, so one-token variants count separately.</li>
+<li>The coldkey grouping dates from 2026-10-26; a member put the leader at 117 UIDs on 10-28 (not checked).</li>
+<li>Tasks and miner announcements run through a team server; validator versions and SignalFeed usage are not visible.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/tag101-ai/tag101" rel="noopener noreferrer">GitHub (tag101-ai/tag101)</a></li>
+<li><a href="https://tag101.ai/" rel="noopener noreferrer">Project site</a></li>
+<li><a href="https://signalfeed.tag101.ai/" rel="noopener noreferrer">SignalFeed product site (sign-in needed)</a></li>
+<li><a href="https://crawler.tag101.ai/miners/task-answer-status/latest?miner_uid=N" rel="noopener noreferrer">Miner task-answer status API (replace N with your UID)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 9 sources</summary>
+<ul>
+<li><strong>repo</strong> tag101-ai/tag101@c3d788b (2026-10-14, still the remote HEAD on 2026-10-30): README.md, min_compute.yml, deploy/*.example, miner.py, validator.py, chain/{settings,weights,scoreboard,private_axons}.py, tasks/framework/client.py, tasks/sn101_reference/core/scoring/*, commit log</li>
+<li><strong>msg</strong> #101-tag101, 2026-05-19 to 2026-10-30 (team posts 06-13, 06-17, 06-25, 07-02, 07-03, 07-31, 08-13, 10-09, 10-14, 10-20, 10-30; member posts 10-21 to 10-30 incl. the 10-23 review and the 10-28 concerns)</li>
+<li><strong>web</strong> Chain read at block 9398253 (2026-10-30 17:50Z UTC): SN101 (Tag101): registered 2025-05-02, tempo 360, 256 of 256 uids, commit-reveal on; emission weights burn/recycle/owner/validator/miner = 0/0/18/41/41 % (stored, same values as the chain default), RecycleOrBurn = Burn; uids under the owner hotkey or owner coldkey hold 0 % of incentive and 31.95 % of last-epoch emission (a floor); 8 validators have weight rows, on average 0 % of weight goes to uid 0.</li>
+<li><strong>web</strong> Chain read at block 9398253 (2026-10-30 17:50Z UTC), compared with block 9364101 (2026-10-26 00:00Z UTC): SN101: no setting changed in 33 checked items; Burn differs (moves with demand); emission split unchanged; pool 3474.82 -&gt; 3438.84 TAO.</li>
+<li><strong>web</strong> Chain read at block 9398253 (2026-10-30 17:50Z): price SN101, 6 samples every 7d from block 9182253 (2026-09-30 17:33Z): price 0.003766 -&gt; 0.003360 TAO per alpha (-10.8%), pool TAO 3609.9 -&gt; 3438.8; over the 5 intervals where the pool change equals flow + protocol: net user flow -156.6 TAO (staked minus unstaked), protocol flow -14.4 TAO, gross volume 1002.0 TAO. The page&#x27;s 30-day price move (-11%, from 2026-09-28) comes from the project&#x27;s price file, which also holds earlier reads.</li>
+<li><strong>web</strong> Chain read at block 9398329 (2026-10-30 18:05Z): SN101 stake by coldkey: 811 coldkeys hold 1573264.688 alpha on 1314 hotkeys (97.921% of the chain&#x27;s staked total); top coldkey 57.859%, top 5 72.29%, top 10 81.195%; owner coldkey 57.859%; 67.664% of the stake sits on validator-permit hotkeys; 4 hotkeys&#x27; stake rows were not fully read (2.079% of the staked total unattributed), shares are of what was read.</li>
+<li><strong>web</strong> Chain read at block 9398329 (2026-10-30 18:05Z): snapshot of all 129 pools by pool TAO: SN101 pool 3438.88 TAO, rank 92 of 128 non-root pools.</li>
+<li><strong>web</strong> Counts-only chain reads at block 9366526 (2026-10-26 08:05Z UTC) with the project&#x27;s chainlib: UIDs grouped by coldkey, registration blocks and the axon ip/port set per UID (no addresses printed); not repeated on 2026-10-30</li>
+<li><strong>web</strong> https://tag101.ai/ (home page and roadmap) and https://signalfeed.tag101.ai/ (landing page), read 2026-10-30; https://crawler.tag101.ai/miners/task-answer-status/latest?miner_uid=1 (public GET, read 2026-10-30; hotkey field not used)</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/100.html"><small>← Previous</small>SN100 Cortex</a><a rel="next" href="/bittensor-docs/subnets/102.html"><small>Next →</small>SN102 Connito</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-30. Site built 2026-10-31. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

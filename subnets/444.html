@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Safeguard (SN444) | Bittensor Subnet Docs</title>
+<meta name="description" content="Testnet-only AI safety red-teaming: miners probe AI services through a relay, validators audit the transcripts.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h12">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>444</span><div>
+<h1>Safeguard <span class="muted">SN444</span></h1>
+<p class="tagline">Testnet-only AI safety red-teaming: miners probe AI services through a relay, validators audit the transcripts.</p>
+<span class="st s-quiet">quiet</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl0"><b>0<small>/day</small></b><span>last 7 d</span></li><li class="pl1"><b>0.09<small>/day</small></b><span>days 8-30</span></li><li class="pl0"><b>0<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-09</b><span>last chat</span></li><li class="pw"><b>7</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Quiet</b><span>code activity</span></li><li class="pw"><b>0</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-05-07</b><span>last commit</span></li><li class="pw"><b>none</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>AI safety red-teaming (adversarial probing and auditing as a service)</dd>
+<dt>Status</dt><dd>Quiet and testnet only (2026-10-31): the team&#x27;s last chat post is 2026-04-13 and both repos stopped on 2026-05-07. &#x27;Quiet&#x27; is an inference from missing activity, not a team statement.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-31</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Docs vs code vs chain</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>testnet only. Netuids 444 and 445 are not registered on mainnet (2026-10-31), and no mainnet date was ever given.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>no testnet neuron earns incentive; the freshest validator weight stamp is about 26 days old (2026-10-31).</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>quiet. Both repos last changed 2026-05-07 and the team&#x27;s last chat post is 2026-04-13.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>other subnets will buy safety scores. Only the team&#x27;s own demo client is described; no outside user is seen.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>easy to try on testnet: Python on a small server plus a Chutes LLM key, no GPU.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-low">Low barrier</span></h3><p>Runs an attacker agent that probes a target AI service through the validator&#x27;s relay and reports a transcript with a severity estimate.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-caution">Paid service needed</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-no"><dt>Hardware</dt><dd>No GPU: python:3.11-slim image; a publicly reachable address is needed</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>Chutes API key for the attacker and judge LLM (DeepSeek-V3 by default); price not stated</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Testnet registration burn 0.0005 testnet TAO (2026-10-31); no mainnet slot exists</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Python 3.11 or Docker, a wallet and a .env file; Kubernetes notes in the repo</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-low">Low barrier</span></h3><p>Dispatches probes through registered target relays, audits each transcript in tiers and sets miner weights once per tempo.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-caution">Paid service needed</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-no"><dt>Hardware</dt><dd>No GPU in the repo: python:3.11-slim, SQLite by default, Postgres optional</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>Chutes API key for the LLM judges (DeepSeek-V3-0324); optional Hugging Face endpoint for Tier 0</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Burn 0.0005 testnet TAO (2026-10-31); permit stake floor 0, smallest holder not read</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Python 3.11 or Docker, a wallet, stake, run_validator.sh and a registered target relay</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>Safeguard is meant to be a market for AI safety testing. Miners run adversarial agents that probe a target AI service through a relay; validators audit the conversations, and other subnets could use the safety score to scale their own rewards. It exists only on testnet.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Miners run a probe agent and commit its address to chain. Each task names a target relay and one safety concern. The miner holds a multi-turn adversarial conversation with the target through the validator&#x27;s relay, so every turn carries a provenance commitment, and returns the transcript with its own severity estimate. People can also review hard cases the validator routes to them.</p></div><div><h3>Validators</h3><p>The validator (a Django app meant to replace an older validator.py) finds miners from chain commitments, sends probes to registered targets and checks each transcript&#x27;s provenance; without valid relay commitments the score is zero. It audits with an optional HarmBench classifier (off by default), a lighter classifier and an LLM judge, and routes big disagreements with the miner&#x27;s claim to human review.</p></div><div><h3>Incentive</h3><p>Per probe: the audit score (at least 0.05), plus up to 0.1 from the miner&#x27;s own claim, plus up to 0.15 for matched detection cues, capped at 1. Contributions add up per miner each tempo (the 360-block reward cycle) and weights follow in proportion; if nobody earned anything, all weight goes to the owner UID, which burns it. A second track splits weight equally among human-review miners. On testnet no neuron has incentive (2026-10-31).</p></div></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-low">Low barrier</span></h3><p>Runs an attacker agent that probes a target AI service through the validator&#x27;s relay and reports a transcript with a severity estimate.</p><ul>
+<li>Reference miner (separate safeguard-miner repo): a FastAPI server on port 8090; without the Chutes key its prober and scorer return nothing.</li>
+<li>Human review (HITL_ENABLED, on by default) queues validator-routed cases at /ui/hitl; the dashboard is open unless an admin password is set.</li>
+<li>No licence file in the miner repo (the validator repo is MIT).</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-low">Low barrier</span></h3><p>Dispatches probes through registered target relays, audits each transcript in tiers and sets miner weights once per tempo.</p><ul>
+<li>Nine neurons hold validator permits out of 64 slots (2026-10-31); setup is register, then stake, with btcli.</li>
+<li>It needs a registered target relay to probe; the only target described is the team&#x27;s own demo.</li>
+<li>The README says an earlier validator crash went unnoticed for hours on testnet and a rival hotkey could have captured most emissions (undated).</li>
+</ul></section></div>
+<h2 id="sn-x0">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Demo client subnet 445</td><td>README: testnet soft launch on 444 and 445; 445 is the demo client</td><td>Chain: 445 registered 2026-04-04 with 6 neurons, no emission start, token flag off, pool about 1 TAO</td><td>2026-10-31</td></tr></tbody></table></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-31</span> <span class="muted">(testnet and mainnet chain reads, GitHub, chat archive)</span> Testnet 444 still has 9 neurons, none earning, and no validator updated weights since 2026-10-27. Mainnet has neither netuid; repos unchanged.</li>
+<li><span class="when">2026-10-09</span> <span class="muted">(#safeguard)</span> A moderator asked people to stop posting greetings and GIFs. No team reply followed.</li>
+<li><span class="when">2026-05-07</span> <span class="muted">(GitHub (Safeguard-Subnet and safeguard-miner commits))</span> Last commit in both repos (audit-reasoning and miner-rationale fields). The newest experiment on the project site finished the next day.</li>
+<li><span class="when">2026-04-13</span> <span class="muted">(#safeguard)</span> The project site was linked in the channel. This is the last team post in the archive.</li>
+<li><span class="when">2026-04-06</span> <span class="muted">(#safeguard)</span> The repo was announced in the channel: safety auditing for other subnets, a demo client subnet (445) on testnet, and AI or human-review mining.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Create a wallet and register a hotkey on testnet netuid 444 with btcli (--network test).</li>
+<li>Get a Chutes API key; the miner and the validator both use it for attacker and judge models.</li>
+<li>Miner: clone safeguard-miner, pip install -e ., fill .env from env.example (key, wallet, network test, netuid 444), run python miner.py; its address must be reachable.</li>
+<li>Validator: in the Safeguard-Subnet repo run bash run_validator.sh (defaults to testnet 444); it also starts an API on port 9090.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Testnet only: no mainnet economics are described and testnet TAO has no market value.</li>
+<li>All 9 testnet neurons hold validator permits but none earns; every weight stamp is 26+ days old, most about 205 (2026-10-31). A stamp can be a registration time, so no validator is proven to have run lately.</li>
+<li>Whether any testnet miner or validator still runs is unknown, and the team has not said the project stopped.</li>
+<li>The repo holds two validators with different scoring (legacy validator.py and the Django one); which one testnet used is unknown, and the weight vectors were not read.</li>
+<li>The README links DESIGN.md, a whitepaper and a demo-client folder that are not in the repo, so the design rationale and the client payment model (future work) cannot be read.</li>
+<li>The site&#x27;s probe counts are undated team figures about its own demo targets, labelled research outputs, not a certification. The site answers over plain HTTP only.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/MichaelTrestman/Safeguard-Subnet" rel="noopener noreferrer">GitHub (validator, Safeguard-Subnet)</a></li>
+<li><a href="https://github.com/MichaelTrestman/safeguard-miner" rel="noopener noreferrer">GitHub (reference miner, safeguard-miner)</a></li>
+<li><a href="http://project-safeguard.ai/" rel="noopener noreferrer">Project site (plain HTTP)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 6 sources</summary>
+<ul>
+<li><strong>repo</strong> Safeguard-Subnet@ef0550c (2026-05-07): README.md, ETHICS.md, RELAY_PROTOCOL_V2.md, env.example, vali-django/ (README, Dockerfile, settings, validator/audit.py, loop.py, harmbench_classifier.py), validator.py</li>
+<li><strong>repo</strong> safeguard-miner@42eaeee (2026-05-07): README.md, Dockerfile, pyproject.toml, env.example</li>
+<li><strong>msg</strong> #safeguard 2026-04-06 to 2026-10-09 (the channel&#x27;s whole history, 7 messages; nothing newer on 2026-10-31)</li>
+<li><strong>web</strong> http://project-safeguard.ai/ and its /models/, /stats/ and /experiments/ pages (read 2026-10-21; front page headers 2026-10-31)</li>
+<li><strong>web</strong> Mainnet chain reads of netuids 444 and 445 at block 9400804 (2026-10-31): both report exists False; earlier reads 2026-10-21 and 2026-10-27 agree</li>
+<li><strong>web</strong> Testnet chain reads at block 8339250 (2026-10-31): subnet 444, subnet 445, uids 444; compared with the 2026-10-27 read at block 8313638 (every weight age moved by exactly the block difference)</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/427.html"><small>← Previous</small>SN427 Dinobets</a><a rel="next" href="/bittensor-docs/subnets/450.html"><small>Next →</small>SN450 Engram</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-31. Site built 2026-10-31. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

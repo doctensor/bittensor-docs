@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sentinel (SN554) | Bittensor Subnet Docs</title>
+<meta name="description" content="Testnet-only subnet where miners answer agent database queries from AMD SEV-SNP enclaves with chip-signed proofs.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h14">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>554</span><div>
+<h1>Sentinel <span class="muted">SN554</span></h1>
+<p class="tagline">Testnet-only subnet where miners answer agent database queries from AMD SEV-SNP enclaves with chip-signed proofs.</p>
+<span class="st s-transitioning">transitioning</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl0"><b>0<small>/day</small></b><span>last 7 d</span></li><li class="pl0"><b>0<small>/day</small></b><span>days 8-30</span></li><li class="pl2"><b>0.17<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-09-10</b><span>last chat</span></li><li class="pw"><b>10</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Shipping</b><span>code activity</span></li><li class="pw"><b>9</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-10-17</b><span>last commit</span></li><li class="pw"><b>none</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>confidential compute (attested AI-agent access to databases)</dd>
+<dt>Status</dt><dd>Testnet only as of 2026-10-31: mainnet has no netuid 554, and the team has named no slot since 2026-09-10 (&quot;no slot yet&quot;). The last repo commit is 2026-10-17, the channel has been silent since 2026-09-10, and no testnet validator has set weights for about 2.5 days. The status is close to quiet.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-31</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Docs vs code vs chain</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>agents use a database credential they never see; miners prove with an AMD chip signature what code booted.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>netuid 554 exists on the test network only (since 2026-08-30); mainnet has no netuid 554 (2026-10-31).</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>no validator has set weights since about 2026-10-28 and no uid earns incentive (testnet, 2026-10-31).</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>miners need an AMD SEV-SNP cloud VM (about $30 a month on spot); validators need an always-on Linux box, no GPU.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>the proof covers the booted image, not the app; the README&#x27;s slashing is not in the code (2026-10-31).</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-low">Low barrier</span></h3><p>Runs a database-query tool (MCP server) in an AMD SEV-SNP confidential VM and answers validator challenges with chip-signed proofs.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-caution">Paid service needed</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>AMD SEV-SNP confidential VM (Google Cloud n2d-standard-2); no GPU</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>Cloud VM, about $30 a month on GCP spot (docs); testnet miners can be subsidised</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Testnet registration burn 0.0005 test TAO (2026-10-31); no collateral in code</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Python venv, btcli, VM provision script, systemd service; measurement must match TESTNET.md</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-low">Low barrier</span></h3><p>Challenges miners with a fresh nonce, verifies the chip attestation offline, scores five axes and sets weights.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>Always-on Linux box, no GPU or confidential hardware; free-tier e2-micro is enough (docs)</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None; a free-tier cloud VM covers it (docs)</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Testnet burn 0.0005 test TAO (2026-10-31); a permit needs stake (amount not stated)</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Python venv, hotkey on netuid 554, measurements from TESTNET.md, systemd (about 30 min, guide)</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>Sentinel is a testnet subnet whose miners run database-query tools inside AMD SEV-SNP confidential VMs, so an AI agent can use a database credential it never sees. Validators check each reply&#x27;s AMD chip signature offline and compare answers across miners. The team says there are no emissions, and the subnet has been idle on chain since about 2026-10-28.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Each miner runs an MCP server in an AMD SEV-SNP confidential VM. A Key Broker releases the database credential only to an enclave that proved it booted an approved image. Every reply is chip-signed and bound to the validator&#x27;s nonce. There is no model to train.</p></div><div><h3>Validators</h3><p>Validators send each miner the same query with a fresh nonce and verify the attestation against a pinned AMD root. Scoring code: attestation 40 percent, latency 30, correctness 20, cache hygiene 5, nonce discipline 5. Attestation, hygiene and nonce are gates; correctness is majority agreement and gates only with three or more verified miners.</p></div><div><h3>Incentive</h3><p>Yuma Consensus with a timelock commit. The team says the testnet has no emissions; the stated reason to run a node is to test the design.</p></div></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-low">Low barrier</span></h3><p>Runs a database-query tool (MCP server) in an AMD SEV-SNP confidential VM and answers validator challenges with chip-signed proofs.</p><ul>
+<li>One tool, a Postgres query tool, read-only by default. No wallet key goes on the VM. Two launch measurements are approved (host firmware changes the value).</li>
+<li>TESTNET.md (2026-09-24) says mock miners; the 2026-10-04 results doc and README say real enclaves, all run by the team.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-low">Low barrier</span></h3><p>Challenges miners with a fresh nonce, verifies the chip attestation offline, scores five axes and sets weights.</p><ul>
+<li>A laptop does not work: it sleeps, and past the 5,000-block activity cutoff (about 16 h 40 m, guide) a validator is inactive and its miners fall to zero incentive.</li>
+<li>Weights without a validator permit are rejected; permits go to the top validators by stake. 2 of 64 slots are held (2026-10-31).</li>
+</ul></section></div>
+<h2 id="sn-x0">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Slashing</td><td>README: miners post slashable TAO collateral; failed attestation is slashed on chain</td><td>Code: no collateral or slashing logic outside tests and docs; the roadmap puts it in the mainnet phase</td><td>2026-10-31</td></tr><tr><td>Round interval</td><td>README: validators challenge every 360 blocks (about 72 minutes)</td><td>Code: run_validator.py defaults to 22 minutes; the validator guide agrees</td><td>2026-10-31</td></tr><tr><td>Weights on chain</td><td>Site: validator and miner registered, weights landing on chain</td><td>Chain: the freshest validator weight update is about 2.5 days old; no uid has incentive</td><td>2026-10-31</td></tr></tbody></table></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-31</span> <span class="muted">(Bittensor chain reads)</span> Idle: the freshest validator weight update is from about 2026-10-28, the other from about 2026-10-18; no uid has incentive and no neuron is flagged active.</li>
+<li><span class="when">2026-10-21</span> <span class="muted">(Bittensor testnet chain read)</span> Testnet: one validator had set weights 20 minutes earlier; 3 uids had non-zero incentive.</li>
+<li><span class="when">2026-10-17</span> <span class="muted">(GitHub)</span> Last repo commit (the outage write-up); 20 commits from 2026-10-01, none since.</li>
+<li><span class="when">2026-10-09</span> <span class="muted">(GitHub (docs/results.md))</span> The production miner&#x27;s chip stopped and a watchdog rebooted the host; a kernel upgrade left the launch measurement unchanged.</li>
+<li><span class="when">2026-10-04</span> <span class="muted">(GitHub (docs/results.md))</span> Three real-hardware miners, all the project&#x27;s. One with edited query code passed attestation but was zeroed by cross-miner agreement, the first live firing of the correctness gate.</li>
+<li><span class="when">2026-09-10</span> <span class="muted">(#sentinel)</span> Launch posts: what it does, miner and validator needs, the stated limit that the measurement does not cover the application, no emissions. Mainnet: no slot yet, testnet first.</li>
+<li><span class="when">2026-08-30</span> <span class="muted">(Bittensor testnet chain read and GitHub)</span> Registered on the Bittensor testnet as netuid 554 (the docs say 2026-08-29, the chain 2026-08-30).</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Read the known-limitation section of docs/mining.md: the proof covers the booted image, not the application.</li>
+<li>Clone the repo, make a Python venv, install requirements.txt, and register a hotkey on netuid 554 with btcli on --network test (burn about 0.0005 test TAO).</li>
+<li>Miner: run deploy/provision-gcp.sh, read the measurement with scripts/run_miner.py --print-measurement and compare it with TESTNET.md.</li>
+<li>Miner: put the hotkey address and measurement in /etc/sentinel/miner.env and start the sentinel-miner service.</li>
+<li>Validator: use an always-on Linux box and stake the hotkey for a permit. Dry-run scripts/run_validator.py --once --dry-run, then run it with one --measurement per value in TESTNET.md.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Testnet only, no mainnet netuid 554 (2026-10-31). The team says there are no emissions, so no price or emission figures are given; the chain&#x27;s emission flag (off) and a non-zero last-epoch figure were not interpreted.</li>
+<li>The testnet has been idle since about 2026-10-28 and no team message explains it. Weight vectors were not read.</li>
+<li>The proof covers the booted image, not the application: on 2026-10-04 a miner with edited code passed attestation and only cross-miner agreement caught it.</li>
+<li>The correctness check needs three verified miners; the 2026-10-04 test used three on one chip, all the project&#x27;s. No outside testnet node is established.</li>
+<li>The 100-percent detection benchmark is the project&#x27;s own simulation (site: 900 challenges, results doc: 1000) and excludes a miner it calls undetectable.</li>
+<li>The inherited payment gateway was not examined; the README says no design partners yet. The repo is under an individual&#x27;s account; the site&#x27;s claims were not tested.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/Ayoshiss/sentinel-subnet" rel="noopener noreferrer">GitHub (sentinel-subnet)</a></li>
+<li><a href="https://sentinelsubnet.com" rel="noopener noreferrer">Project site</a></li>
+<li><a href="https://github.com/Ayoshiss/sentinel-subnet/blob/0b876b2/TESTNET.md" rel="noopener noreferrer">Testnet facts and approved measurements (TESTNET.md)</a></li>
+<li><a href="https://github.com/Ayoshiss/sentinel-subnet/blob/0b876b2/docs/mining.md" rel="noopener noreferrer">Miner guide</a></li>
+<li><a href="https://github.com/Ayoshiss/sentinel-subnet/blob/0b876b2/docs/validating.md" rel="noopener noreferrer">Validator guide</a></li>
+<li><a href="https://github.com/Ayoshiss/sentinel-subnet/blob/0b876b2/docs/results.md" rel="noopener noreferrer">Validator results and hardware tests</a></li>
+<li><a href="https://x.com/sentinelsubnet" rel="noopener noreferrer">X (sentinelsubnet)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 8 sources</summary>
+<ul>
+<li><strong>repo</strong> sentinel-subnet repository @0b876b2 (last commit 2026-10-17, MIT, no releases): README.md, TESTNET.md, ROADMAP.md, measurements.json, docs/mining.md, docs/validating.md, docs/results.md, deploy/provision-validator-gcp.sh</li>
+<li><strong>repo</strong> sentinel-subnet @0b876b2: sentinel/validating/scoring.py (axis weights and gates), sentinel/validating/evaluator.py (three-miner threshold for the correctness gate), scripts/run_validator.py (22-minute default); a search for collateral and slash in code outside tests and docs found none (re-checked 2026-10-31)</li>
+<li><strong>msg</strong> #sentinel 2026-09-10 (the only messages in the archive for this channel; nothing newer, checked 2026-10-31)</li>
+<li><strong>web</strong> https://sentinelsubnet.com (HTTP 200, read 2026-10-31)</li>
+<li><strong>web</strong> GitHub repository page and API for sentinel-subnet, 2026-10-31: head 0b876b2, not archived, 20 commits since 2026-10-01, no release</li>
+<li><strong>web</strong> Bittensor mainnet chain read, netuid 554 absent, 2026-10-31 (mainnet block 9401141)</li>
+<li><strong>web</strong> Bittensor testnet chain reads, netuid 554 parameters, identity, validator permits, weight ages and incentive, 2026-10-31 (testnet blocks 8339586 and 8339722, about 27 minutes apart: the weight ages grew by exactly the block difference, so no validator set weights in between)</li>
+<li><strong>web</strong> Bittensor testnet chain read, netuid 554 neuron aggregates, 2026-10-21 (testnet blocks about 8273082 to 8273088)</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/498.html"><small>← Previous</small>SN498 Data Annotation (CanopyMRV)</a><a rel="next" href="/bittensor-docs/subnets/576.html"><small>Next →</small>SN576 Microtensor</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-31. Site built 2026-10-31. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

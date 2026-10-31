@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ditto (SN118) | Bittensor Subnet Docs</title>
+<meta name="description" content="Two paid contests: agent memory harnesses scored on DittoBench, and generators that write the benchmark&#x27;s test cases.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h10">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>118</span><div>
+<h1>Ditto <span class="muted">SN118</span></h1>
+<p class="tagline">Two paid contests: agent memory harnesses scored on DittoBench, and generators that write the benchmark&#x27;s test cases.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>50<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>30<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>141<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-31</b><span>last chat</span></li><li class="pw"><b>14,893</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>No repo</b><span>code activity</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>AI agent memory</dd>
+<dt>Status</dt><dd>Active: DittoBench v14 has scored since 2026-10-28 and the repository shipped 32 releases in three days. Half of the miner pool is still burned.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-10-31</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">How the contests score</a></li><li><a href="#sn-x1">Where the emission goes</a></li><li><a href="#sn-x2">Docs vs code vs chain</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-similar">Similar subnets</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>two paid contests, agent memory harnesses and generators that write the benchmark&#x27;s test cases.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>half of the miner pool is burned (owner&#x27;s slot); agent miners get 35% of it, generators 15%.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>the team&#x27;s platform runs screening, scoring and the ledger; validators follow it.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>miners need a hotkey and 0.05 TAO per upload; a scored harness gets 8 GiB RAM and 2 CPUs.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>paying plans exist; no usage or revenue figure is published.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner (agent) <span class="v2-barrier b-low">Low barrier</span></h3><p>Builds a memory-and-tools harness and competes on DittoBench.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>Dev machine; scored runs give 8 GiB RAM, 2 CPUs</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None; practice uses local Ollama or an optional OpenRouter key</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>0.05 TAO per upload; 0.0005 TAO registration</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Rust, Go, Python, Docker</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Miner (generator) <span class="v2-barrier b-low">Low barrier</span></h3><p>Writes a Go program that generates benchmark test packs.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>Normal computer; 1 CPU, 1 GiB, 60 s per seed</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>0.05 TAO per upload; 0.0005 TAO registration</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Go 1.23, starter kit v4</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Runs agents and generator rounds; sets weights from the ledger.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>Linux, 4+ vCPU, 32 GB RAM, 160 GB disk</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None; inference goes through the platform</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Validator permit; 1,000 TAO chain stake threshold; 0.0005 TAO registration</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Docker, Compose v2, Git</dd></div></dl><a class="v2-more" href="#sn-role-2">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-neutral">Neutral</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-10-31. Not financial advice.</span></div><p>Neutral: 30-day outflow of 1,303 TAO, but the last two days brought 356 TAO back. <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>Ditto pays miners for open-source memory for AI agents. Agent miners upload a Docker harness that DittoBench scores on tool use and memory recall; generator miners upload programs that write the benchmark&#x27;s test cases. The team also sells a Ditto assistant (Free, $19, $97 plans).</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Agents upload a Docker memory-and-tools harness; generators upload a Go program that makes test packs. Each upload costs 0.05 TAO (one-hour cooldown). A leader&#x27;s source goes public after 48 hours; building on it is allowed, an unchanged copy is not.</p></div><div><h3>Validators</h3><p>A team-run screener reviews each agent; an inconclusive review waits for a person. Validators run agents in a no-network sandbox with one locked model (gpt-oss-20b), grade without an LLM judge, run generator rounds and set weights from the team platform&#x27;s ledger.</p></div><div><h3>Incentive</h3><p>Scores come from DittoBench v14 (live since 2026-10-28). The owner&#x27;s uid 0 holds 50% of incentive and all 11 validators with weights favour it: that is the burn. The owner changed the split before (70% burn on 2026-10-14).</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-10-31, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-good">Open</span>13 uids hold permits; any permitted hotkey can validate, but work and the ledger come from the team&#x27;s platform.</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">53.2%</span>Owner cut 18%; owner uid 0 holds 53.2% of emission (50.1% of incentive); RecycleOrBurn is Burn.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">11 uids</span><span class="v2-sx muted">top 5 hold 85.1% of incentive.</span> 11 uids earn incentive; the top five hold 85.1%, and the first is the owner&#x27;s burned slot.</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Converged</span>All 11 validators with weights put their top weight on uid 0; one shared ledger, so concentration, not copying.</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-good">Open</span>MIT-licensed monorepo with validator, screener, scorer and starter kits (Omni Aura LLC).</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner (agent) <span class="v2-barrier b-low">Low barrier</span></h3><p>Builds a memory-and-tools harness and competes on DittoBench.</p><ul>
+<li>Practice needs Rust 1.85+, Go 1.23+ and Ollama; uploading needs Python 3.12+ and uv.</li>
+<li>Scored runs: 8 cases at once, no network (limits: docs/RUNTIME-ENVELOPE.md).</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Miner (generator) <span class="v2-barrier b-low">Low barrier</span></h3><p>Writes a Go program that generates benchmark test packs.</p><ul>
+<li>No network or model; output must be byte-identical on a re-run; 50% or more overlap with another owner&#x27;s output is rejected.</li>
+<li>28 generators scored in 7 days; top scores 0.28 to 0.39.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-2"><h3>Validator <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Runs agents and generator rounds; sets weights from the ledger.</p><ul>
+<li>Smaller hosts: 80 GB disk and 16 GB RAM for 4 slots.</li>
+<li>10 of 13 permit holders set weights within one tempo.</li>
+<li>Dividends go to 11 uids; the owner&#x27;s slot takes 56%.</li>
+</ul></section></div>
+<h2 id="sn-x0">How the contests score</h2>
+<ul class="v2-list">
+<li>Agents: the leader keeps the crown unless beaten by the larger of 0.007 and a statistical band; each owner counts once; the top five split their pool 50/20/13/10/7%. The top v14 score is 0.950.</li>
+<li>Generators: a round per epoch (about 72 minutes) against the top five agents; a case earns credit when some but not all agents solve it. The top five split 40/25/15/12/8%.</li>
+</ul>
+<h2 id="sn-x1">Where the emission goes</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Slice</th><th>Share</th><th>Goes to</th></tr></thead><tbody><tr><td>Burn</td><td>50% of the miner pool (about 20% of all emission)</td><td>Owner&#x27;s uid 0, burned</td></tr><tr><td>Agent contest</td><td>35% of the pool</td><td>Top five agents</td></tr><tr><td>Generator contest</td><td>15% of the pool</td><td>Top five generators</td></tr></tbody></table></div>
+<h2 id="sn-x2">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Upload fee</td><td>MINER.md: 0.1 TAO</td><td>Code: the live terms ask 0.05 TAO</td><td>2026-10-31</td></tr><tr><td>Burn and curve</td><td>MINER.md: 65/14/10/7/4, nothing burned while miners are eligible</td><td>Chain: owner slot holds 50.1% of incentive; curve is 50/20/13/10/7</td><td>2026-10-31</td></tr></tbody></table></div>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-neutral">Neutral</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-10-31. Not financial advice.</span></div>
+<p class="v2-thesis">The price fell 38% in 30 days, yet the last two days brought 356 TAO back. The team ships daily and both contests grew, but half the miner pool is burned and no usage or revenue is published, so the price cannot be matched against evidence.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.004557 TAO per alpha</dd></div><div><dt>Pool</dt><dd>5,064 TAO, rank 85</dd></div><div><dt>Price, 30 days</dt><dd>-38%, 2026-10-01 to 2026-10-31</dd></div><div><dt>Net flow, 30 days</dt><dd>-1,303 TAO, 2026-10-01 to 2026-10-31</dd></div><div><dt>Miner pay</dt><dd>0.61 TAO per day on average (6.7 TAO per day over 11 uids)</dd></div><div><dt>Miner pay outside top 5</dt><dd>0.33 TAO per day on average (2.0 TAO per day over 6 uids)</dd></div><div><dt>Code activity</dt><dd>last commit 2026-10-31; 631 commits in 30 days</dd></div></dl>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>Daily shipping and fast chat answers</li>
+<li>Both contests grew since 2026-10-28: 22 agents, 28 generators</li>
+<li>356 TAO net inflow in the last two days</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>Half the miner pool burned; owner takes 56% of dividends</li>
+<li>Team-run platform; screening still strands agents</li>
+<li>No published usage or revenue</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> Several net-inflow weeks and a smaller burn would turn it bullish; renewed weekly outflows, bearish.</p>
+<p class="muted">Since the last pass: Was bearish on 2026-10-28; now neutral: 30-day flow is still -1,303 TAO, but the last two days brought +356 TAO.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-similar">Similar subnets</h2>
+<div class="v2-sim"><p>By pool size this is <strong>rank 4 of 8</strong> among the subnets grouped as <em>agents</em> (what they mainly sell). Pool and price as of 2026-10-29 to 2026-10-31, price in TAO per alpha; the barrier is the easiest miner role.</p><div class="scroll"><table class="v2-table"><thead><tr><th>#</th><th>Subnet</th><th>Pool</th><th>Price</th><th>Miner barrier</th></tr></thead><tbody><tr><td>2</td><td><a href="/bittensor-docs/subnets/15.html">ORO</a> <span class="muted">SN15</span></td><td>13,478 TAO</td><td>0.01873</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr><td>3</td><td><a href="/bittensor-docs/subnets/121.html">sundae_bar</a> <span class="muted">SN121</span></td><td>5,447 TAO</td><td>0.003433</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr class="me" aria-current="true"><td>4</td><td>Ditto <span class="muted">SN118, this page</span></td><td>5,064 TAO</td><td>0.004557</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr><td>5</td><td><a href="/bittensor-docs/subnets/71.html">Leadpoet</a> <span class="muted">SN71</span></td><td>4,902 TAO</td><td>0.00379</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>6</td><td><a href="/bittensor-docs/subnets/98.html">NeverPlayAlone</a> <span class="muted">SN98</span></td><td>4,522 TAO</td><td>0.002107</td><td><span class="v2-barrier b-low">Low</span></td></tr></tbody></table></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-10-31</span> <span class="muted">(changelog)</span> Release v0.416.4 is out: 32 releases since 2026-10-28, mostly screener, validator and scoring fixes.</li>
+<li><span class="when">2026-10-30</span> <span class="muted">(#ditto, changelog)</span> A v14 grader bug (multi-word answers read as fragments) is fixed from the next bench version; the team says no accepted score was affected.</li>
+<li><span class="when">2026-10-30</span> <span class="muted">(DittoBench public feed)</span> Another 2,000 alpha went by hand to a credits wallet (7,000 since 2026-10-21); the public feed shows the source as incomplete.</li>
+<li><span class="when">2026-10-28</span> <span class="muted">(#ditto)</span> Validators ignored the new ledger for about 12 hours (agents missing a validator signature, then a heartbeat gap); fixed by 13:54 UTC.</li>
+<li><span class="when">2026-10-28</span> <span class="muted">(#ditto)</span> DittoBench v14 went live at 01:28 UTC; the top score has since reached 0.950.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Agents: work in miners/dittobench-starter-kit, rehearse with scripts/local-rehearsal.py --bench-version 14, then ditto verify, upload and status.</li>
+<li>Generators: start from miners/dittobench-generator-starter-kit and pass the offline qualification.</li>
+<li>Validators: follow docs/VALIDATOR.md with a hotkey that holds a validator permit.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>The owner sets the burn and split and changed them repeatedly in October; the docs lag the live values.</li>
+<li>The team runs screening, scoring and the ledger; rulings were reversed many times and 25 agents were still under review on 2026-10-31.</li>
+<li>Members allege that top agents hard-code benchmark phrases and that a team-linked miner validates (the team denies this); neither is verified.</li>
+<li>Unknown: Ditto&#x27;s usage and revenue, what 7,000 alpha sent to a credits wallet funds, the smallest permit holder&#x27;s stake.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/ditto-assistant/ditto-subnet" rel="noopener noreferrer">GitHub (subnet monorepo)</a></li>
+<li><a href="https://github.com/ditto-assistant/ditto-subnet/blob/main/docs/MINER.md" rel="noopener noreferrer">Miner guide</a></li>
+<li><a href="https://github.com/ditto-assistant/ditto-subnet/blob/main/docs/VALIDATOR.md" rel="noopener noreferrer">Validator guide</a></li>
+<li><a href="https://github.com/ditto-assistant/ditto-subnet/blob/main/docs/RUNTIME-ENVELOPE.md" rel="noopener noreferrer">Harness limits (runtime envelope)</a></li>
+<li><a href="https://github.com/ditto-assistant/ditto-subnet/blob/main/research/dittobench-datagen/docs/generator-competition.md" rel="noopener noreferrer">Generator competition design doc</a></li>
+<li><a href="https://github.com/ditto-assistant/ditto-subnet/tree/main/miners/dittobench-generator-starter-kit" rel="noopener noreferrer">Generator starter kit</a></li>
+<li><a href="https://dittobench.ai" rel="noopener noreferrer">Leaderboard (DittoBench)</a></li>
+<li><a href="https://dittobench.ai/generators" rel="noopener noreferrer">Generator board</a></li>
+<li><a href="https://heyditto.ai/" rel="noopener noreferrer">Ditto website</a></li>
+<li><a href="https://discord.gg/qNKYZEMpkD" rel="noopener noreferrer">Discord (from the chain identity)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 5 sources</summary>
+<ul>
+<li><strong>repo</strong> ditto-assistant/ditto-subnet at v0.416.4 (2026-10-31): README, docs/MINER.md, VALIDATOR.md, RUNTIME-ENVELOPE.md, starter kits, datagen docs, LICENSE, CHANGELOG.md</li>
+<li><strong>web</strong> dittobench.ai public API: leaderboard, treasury allocation, manual treasury movements, submission terms, benchmark rollout, generator board and rounds, activity feed, fetched 2026-10-31 03:48 UTC</li>
+<li><strong>web</strong> Chain read at block 9401217 (2026-10-31 03:43Z UTC): SN118 (Ditto) price 0.004557 TAO per alpha, pool 5,064.3 TAO, rank 85 of 128; 30-day change -37.8% with net user outflow of 1,303 TAO; no setting changed since 2026-10-28; owner-controlled uids hold 50.07% of incentive (dossier at block 9401141).</li>
+<li><strong>web</strong> heyditto.ai (product and plans), 2026-10-31</li>
+<li><strong>msg</strong> #ditto, 2026-10-14 to 2026-10-31</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/117.html"><small>← Previous</small>SN117 EveryFrame</a><a rel="next" href="/bittensor-docs/subnets/119.html"><small>Next →</small>SN119 CapabilityForge Next</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-10-31. Site built 2026-10-31. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>
