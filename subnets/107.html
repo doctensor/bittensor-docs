@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Minos (SN107) | Bittensor Subnet Docs</title>
+<meta name="description" content="Miners tune DNA variant-calling settings on fresh synthetic genomes; validators re-run each config and score it.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h5">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>107</span><div>
+<h1>Minos <span class="muted">SN107</span></h1>
+<p class="tagline">Miners tune DNA variant-calling settings on fresh synthetic genomes; validators re-run each config and score it.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>13<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>15<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>48<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-11-02</b><span>last chat</span></li><li class="pw"><b>5,401</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Shipping</b><span>code activity</span></li><li class="pw"><b>2</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-11-05</b><span>last commit</span></li><li class="pw"><b>2026-09-04</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>genomics (variant calling)</dd>
+<dt>Status</dt><dd>Rounds and rewards run as usual (chain, 2026-11-07); validator code changed 2026-11-06; no IM2 or app date.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-11-07</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Docs vs code vs chain</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-similar">Similar subnets</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>miners tune open variant-calling tools; validators score each config on a fresh synthetic genome every 72 minutes.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>the round&#x27;s top miner gets 80% of incentive; 20 uids earn; nothing is burned; the owner&#x27;s validator earns 39%.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>miners need a CPU box, Docker and 0.99 TAO; validators a bigger server and a permit (optional ComputeHorde runner since 11-06).</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>price down 29% in 30 days on net outflow; a two-day rebound faded; pool ranks 23rd of 128.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>IM2 and an app are coming, IM2 starting near 10% of emission; neither is public or dated.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-low">Low barrier</span></h3><p>Runs a variant caller with tuned settings on each round&#x27;s genome and submits the config.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>CPU only: 4+ cores (8 advised), 8-16 GB RAM, 60 GB SSD, Docker</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None required; an AI assistant subscription is optional (docs)</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>0.99 TAO registration burn (2026-11-07); no stake</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Script install plus Docker; several rounds before first pay</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Re-runs miner configs, scores them with hap.py and sets weights; the platform assigns who scores whom.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-unk">Access unknown</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>8+ cores (16 advised), 32 GB RAM (64 advised), 100 GB SSD, Docker; no GPU</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None required; server rental only</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>0.99 TAO burn; a permit needs 1,000+ TAO stake (chain floor); 8 of 64 permit slots held</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Script install; about 15 GB of Docker images</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-11-07. Not financial advice.</span></div><p>Price down 29% in 30 days on net outflow; the 2026-11-02 rebound has faded; revenue unverified. <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>Minos pays miners for tuning the settings of open DNA variant-calling tools (GATK, DeepVariant, bcftools) to find the most real mutations with the fewest false ones. Every 72 minutes the platform issues a fresh synthetic genome; validators score submitted configs on it against the hidden answers.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Each round a miner downloads the new alignment file, runs one of the three tools and submits its config, after committing a hash of it on chain. Every value must stay inside the published ranges.</p></div><div><h3>Validators</h3><p>Validators get tasks and truth data from the team&#x27;s platform, re-run configs in Docker and score them with hap.py. Each scores a primary range of miners by stake rank, pulls peers&#x27; scores for the rest and sets weights. The team sets scoring version and reward shares through a public config and releases truth files after each round.</p></div><div><h3>Incentive</h3><p>The round&#x27;s top miner gets 80% of weight; ranks 2 to 20 share the other 20%, each 0.9 times the one above; nothing is burned. Only one hotkey per coldkey is paid and a miner needs scores in 5 of the last 20 rounds. Scoring is 70% core accuracy, 30% germline.</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-11-07, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-unk">Unknown</span>No whitelist documented; the platform assigns tasks, so access is unverified. 8 of 64 permit slots held.</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">38.8%</span>Owner uid 0 gets 38.8% of emission, all as validator dividends (a floor). Cut 18%; nothing burned.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">20 uids</span><span class="v2-sx muted">top 5 hold 88% of incentive.</span> 20 uids earn: the round&#x27;s winner takes about 80% of incentive, ranks 2 to 20 share the rest.</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Converged</span>8 of 8 validators put 80% on uid 6 (winner of the 2026-11-06 20:36Z round); shared task data make this expected.</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-good">Open</span>Miner and validator code and the round selector are MIT-licensed; the team&#x27;s platform service is not public.</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-low">Low barrier</span></h3><p>Runs a variant caller with tuned settings on each round&#x27;s genome and submits the config.</p><ul>
+<li>Repo minimum: 4 cores at 2.5 GHz, 8 GB RAM (16 GB for DeepVariant), x86_64, Docker 24+; about 7 GB of images. A GPU only speeds up DeepVariant.</li>
+<li>Miners say winning configs need heavy per-round search; no cost is documented.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Re-runs miner configs, scores them with hap.py and sets weights; the platform assigns who scores whom.</p><ul>
+<li>Repo minimum: 8 cores at 2.5 GHz, 32 GB RAM, 100 GB SSD; no whitelist documented.</li>
+<li>PR 41 (merged 2026-11-06) adds an opt-in ComputeHorde SDK runner; containers still run locally for now, and 1 CPU, 4 GB is the stated goal.</li>
+</ul></section></div>
+<h2 id="sn-x0">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Winner share</td><td>2026-08-31 notice and code default: 90%</td><td>Chain: winner 90% on 2026-09-01, about 80% since 09-09; live config 0.8</td><td>2026-11-07</td></tr><tr><td>Out-of-range values</td><td>docs/parameter_ranges.md: &#x27;rejected, not clamped&#x27;</td><td>Chat: owner says the platform resets them to API defaults first</td><td>2026-10-29</td></tr><tr><td>Allowed ranges</td><td>Public endpoint ranges</td><td>Code: validator code allows wider bounds for 36 of 66 shared parameters</td><td>2026-10-27</td></tr><tr><td>Tools</td><td>Docs: GATK, DeepVariant or bcftools</td><td>Code: team platform stats: GATK won all 17 wins in 7 days; DeepVariant (17 entries) and bcftools (13) none</td><td>2026-11-07</td></tr><tr><td>Validators</td><td>Platform stats: 12 connected validators</td><td>Chain: 8 permits; platform list has 7 (6 active; uid 2 missing) plus 6 entries without a uid</td><td>2026-11-07</td></tr></tbody></table></div>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-11-07. Not financial advice.</span></div>
+<p class="v2-thesis">Holders sold in all 5 intervals: 0.0391 to 0.0277 TAO per alpha. A two-day rebound (+850 TAO, 2026-11-02 to 11-04) gave way to three net-out days (-250 TAO).</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.02773 TAO per alpha</dd></div><div><dt>Pool</dt><dd>19,481 TAO, rank 23</dd></div><div><dt>Price, 30 days</dt><dd>-29%, 2026-10-08 to 2026-11-07</dd></div><div><dt>Net flow, 30 days</dt><dd>-5,526 TAO, 2026-10-08 to 2026-11-07</dd></div><div><dt>Miner pay</dt><dd>4.08 TAO per day on average (81.6 TAO per day over 20 uids)</dd></div><div><dt>Miner pay outside top 5</dt><dd>0.653 TAO per day on average (9.79 TAO per day over 15 uids)</dd></div><div><dt>Code activity</dt><dd>4 commits in 30 days; PR 41 merged 2026-11-06; last release 2026-09-04</dd></div></dl>
+<div class="v2-trend"><h3>Trend</h3><div class="v2-tbody"><figure class="v2-tfig"><svg class="v2-spark down" viewBox="0 0 240 56" role="img" aria-label="Price in TAO per alpha, 2026-09-28 to 2026-11-07: 0.04159 to 0.02773, -33.3%"><polyline points="5.0,5.0 22.2,7.4 33.8,8.3 39.5,8.4 45.2,9.4 51.0,13.3 62.5,15.6 74.0,22.3 79.8,14.0 85.5,18.5 91.2,17.1 102.8,20.8 114.2,22.6 120.0,27.1 125.8,24.6 131.5,30.2 143.0,31.2 154.5,32.4 160.2,34.8 166.0,36.5 171.8,37.5 177.5,37.3 183.2,46.4 189.0,49.4 194.8,50.9 200.5,51.0 206.2,50.9 212.0,43.3 217.8,43.1 223.5,43.4 235.0,43.8"/><circle cx="235.0" cy="43.8" r="3"/></svg><figcaption><strong>Price</strong> <span class="down">-33.3%</span> <span class="muted">0.04159 to 0.02773 TAO per alpha, 2026-09-28 to 2026-11-07</span></figcaption></figure><dl class="v2-tfacts"><div><dt>Net flow, 30 days</dt><dd><span class="down">-5,526 TAO</span> <span class="muted">2026-10-08 to 2026-11-07</span></dd></div><div><dt>Verdict history</dt><dd><ol class="v2-vh"><li><span class="muted">2026-11-03</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-04</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-05</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-07</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li></ol></dd></div></dl></div></div>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>No burn; 41% of emission goes to miners; 10 different uids won rounds in 7 days.</li>
+<li>Net inflow of 468 TAO in 7 days (out on 5 of 7 days); app and IM2 promised (undated).</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>Net outflow in all 5 intervals; price down 29%.</li>
+<li>Platform and the owner&#x27;s validator hold most control.</li>
+<li>No verified customers, revenue or IM2 date.</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> Weeks of net inflow plus an IM2 date or named paying users would turn it bullish; a renewed burn, bearish.</p>
+<p class="muted">Since the last pass: Still bearish: the rebound has faded; 30-day outflow is 5,526 TAO.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-similar">Similar subnets</h2>
+<div class="v2-sim"><p>By pool size this is <strong>rank 2 of 5</strong> among the subnets grouped as <em>science</em> (what they mainly sell). Pool and price as of 2026-11-07, price in TAO per alpha; the barrier is the easiest miner role.</p><div class="scroll"><table class="v2-table"><thead><tr><th>#</th><th>Subnet</th><th>Pool</th><th>Price</th><th>Miner barrier</th></tr></thead><tbody><tr><td>1</td><td><a href="/bittensor-docs/subnets/68.html">NOVA</a> <span class="muted">SN68</span></td><td>40,636 TAO</td><td>0.01737</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr class="me" aria-current="true"><td>2</td><td>Minos <span class="muted">SN107, this page</span></td><td>19,481 TAO</td><td>0.02773</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr><td>3</td><td><a href="/bittensor-docs/subnets/18.html">Zeus</a> <span class="muted">SN18</span></td><td>9,616 TAO</td><td>0.003554</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>4</td><td><a href="/bittensor-docs/subnets/55.html">NIOME</a> <span class="muted">SN55</span></td><td>5,984 TAO</td><td>0.002214</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>5</td><td><a href="/bittensor-docs/subnets/116.html">Carbon</a> <span class="muted">SN116</span></td><td>1,725 TAO</td><td>0.03117</td><td><span class="v2-barrier b-medium">Medium</span></td></tr></tbody></table></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-11-07</span> <span class="muted">(mcp.theminos.ai public stats, 2026-11-07)</span> Platform, 7 days: GATK won all 17 decided rounds; 10 uids won, uid 6 (new 2026-11-04) five; 52 miners active.</li>
+<li><span class="when">2026-11-06</span> <span class="muted">(GitHub minos_subnet PR 41, 2026-11-07)</span> PR 41 merged: opt-in ComputeHorde SDK runner for validators; local Docker stays the default.</li>
+<li><span class="when">2026-10-31</span> <span class="muted">(#minos, 2026-10-31)</span> Owner: IM2&#x27;s emission share is not final; plan is to start near 10% and raise it, perhaps by which earns more. IM2 is meant to run on a miner&#x27;s agent.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Clone minos_subnet, run bash install.sh and read the README (newer than the docs site).</li>
+<li>Run bash start-miner.sh --demo (no wallet) for the exact validator score on a sample, then --practice.</li>
+<li>Read the live config and parameter-ranges endpoints before tuning; keep every value in range.</li>
+<li>Register a hotkey on subnet 107 and run bash start-miner.sh; expect several rounds before pay.</li>
+<li>Validators: bash start-validator.sh, with a validator permit and the server specs above.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>The team&#x27;s platform sets rewards, tasks, truth data and validator assignments. Hashes, a public task selector and post-round truth files let miners check parts; validator logs stay private.</li>
+<li>Copying, multi-UID and self-mining accusations (2026-10-16 to 10-30) stay unresolved. Winner uid 3 shares a coldkey with uid 69 (last week 73 and 42 each shared one); alone this proves nothing.</li>
+<li>IM2, custom algorithms, the app&#x27;s release and commercial pilots are chat statements only; no public IM2 code, date or revenue was found.</li>
+<li>#minos after 2026-11-01 was not read (archive down).</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://theminos.ai" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://docs.theminos.ai/overview" rel="noopener noreferrer">Docs</a></li>
+<li><a href="https://github.com/minos-protocol/minos_subnet" rel="noopener noreferrer">GitHub (subnet code)</a></li>
+<li><a href="https://github.com/minos-protocol/minos_round_selector" rel="noopener noreferrer">GitHub (round selector)</a></li>
+<li><a href="https://api.theminos.ai/scoring/network-config" rel="noopener noreferrer">Live network config</a></li>
+<li><a href="https://api.theminos.ai/scoring/parameter-ranges" rel="noopener noreferrer">Parameter ranges</a></li>
+<li><a href="https://x.com/theminos_ai" rel="noopener noreferrer">X account</a></li>
+<li><a href="https://api.theminos.ai/verification/task-window" rel="noopener noreferrer">Task window (round draws, hashes)</a></li>
+<li><a href="https://github.com/minos-protocol/minos_subnet/blob/main/docs/parameter_ranges.md" rel="noopener noreferrer">Parameter ranges (repo doc)</a></li>
+<li><a href="https://github.com/minos-protocol/minos_subnet/blob/main/docs/miner_features.md" rel="noopener noreferrer">Miner features (repo doc)</a></li>
+<li><a href="https://github.com/minos-protocol/minos_subnet/blob/main/docs/chsdk.md" rel="noopener noreferrer">ComputeHorde runner (repo doc)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 13 sources</summary>
+<ul>
+<li><strong>repo</strong> minos-protocol/minos_subnet@745e33b (merge of PR 41, 2026-11-06; MIT licence; HEAD 745e33b on 2026-11-07; read at 4b3c094: README.md, neurons/README.md, min_compute.yml, docs/verification.md, docs/hap_py_docker.md, docs/miner_features.md, docs/parameter_ranges.md, docs/scoring.md, docs/architecture.md, templates/tool_params.py, utils/weight_tracking.py; PR 41 diff via GitHub compare 4b3c094...745e33b: docs/chsdk.md, templates/_common.py, .env.validator.example, requirements-chsdk.txt)</li>
+<li><strong>repo</strong> minos-protocol/minos_round_selector@ef7e722 README.md (2026-09-02; MIT licence, HEAD unchanged on 2026-11-07)</li>
+<li><strong>web</strong> https://api.theminos.ai/scoring/network-config (fetched 2026-11-07: winner_weight 0.8, dust_top_n 20, dust_decay 0.9, 5 of 20 rounds; same values as 2026-11-05) and /verification/task-window (fetched 2026-11-07; 1,299 draws made), /scoring/parameter-ranges (fetched 2026-10-28)</li>
+<li><strong>web</strong> https://theminos.ai and https://docs.theminos.ai (all 10 page links 200 on 2026-11-07; the docs site predates commit-reveal and scoring v2)</li>
+<li><strong>msg</strong> #minos pinned announcements 2026-03-15 to 2026-09-08</li>
+<li><strong>msg</strong> #minos 2026-08-24 to 2026-11-01 (owner posts and miner discussion, incl. the replies of 2026-10-29 and 2026-10-31 and the 2026-10-30 app update) and the owner&#x27;s posts 2026-08-30 to 2026-09-08</li>
+<li><strong>web</strong> https://github.com/minos-protocol/minos_subnet/pull/41 and the repo&#x27;s release and pull request lists (GitHub, 2026-11-07): opened 2026-10-26 from a fork, merged 2026-11-06 00:54Z by the minos-protocol account, no reviews or comments (1 commit, 9 files, +1,136 -0; docs/chsdk.md says Minos defaults to CONTAINER_RUNNER=native); newest release v0.3.0 (2026-09-04)</li>
+<li><strong>web</strong> Chain read at block 9450694 (2026-11-07 00:40Z UTC): SN107 (Minos): registered 2026-02-02, tempo 360, 100 of 100 uids, commit-reveal on; emission weights burn/recycle/owner/validator/miner = 0/0/18/41/41 % (stored, same values as the chain default), RecycleOrBurn = Burn; uids under the owner hotkey or owner coldkey hold 0 % of incentive and 38.8 % of last-epoch emission (a floor); 8 validators have weight rows, on average 0 % of weight goes to uid 0. Incentive: 20 uids, top uid 6 80.0 % at block 9450770 (uid 36 at 9450694); all 8 validators put 80 % on uid 6 at 9450770 (6 of 8 at 9450694, 2 on uid 36); the 10 winner uids (6, 3, 93, 36, 23, 5, 86, 71, 89, 80) and validator uids 2 and 43 read at block 9450770 (winner coldkeys: only uids 3 and 69 share one).</li>
+<li><strong>web</strong> Chain read at block 9450770 (2026-11-07 00:55Z UTC), compared with block 9436092 (2026-11-05 00:00Z UTC): SN107: no setting changed in 33 checked items; emission split unchanged; pool 19443.76 -&gt; 19480.95 TAO.</li>
+<li><strong>web</strong> Chain read at block 9450770 (2026-11-07 00:55Z): price SN107, 6 samples every 7d from block 9234770 (2026-10-08 00:36Z): price 0.039110 -&gt; 0.027726 TAO per alpha (-29.1%), pool TAO 20916.4 -&gt; 19481.0; over the 5 intervals where the pool change equals flow + protocol: net user flow -5525.7 TAO (staked minus unstaked), protocol flow +4090.3 TAO, gross volume 49442.3 TAO. Daily samples 2026-10-31 to 2026-11-07: price SN107, 8 samples every 1d from block 9400370 (2026-10-31 00:53Z): price 0.025300 -&gt; 0.027726 TAO per alpha (+9.6%), pool TAO 18238.1 -&gt; 19481.0; over the 7 intervals where the pool change equals flow + protocol: net user flow +467.8 TAO (staked minus unstaked), protocol flow +775.1 TAO, gross volume 5724.8 TAO. Net flow by day (to 00:55Z): 2026-11-03 +410.2, 11-04 +439.5, 11-05 -42.9, 11-06 -112.1, 11-07 -95.1 TAO.</li>
+<li><strong>web</strong> Chain read at block 9450770 (2026-11-07 00:55Z UTC): shared snapshot over 129 subnets (pool rank 23 of 128 excluding root, 19,481.0 TAO); StakeThreshold 1000 TAO (global) from the dossier.</li>
+<li><strong>web</strong> https://mcp.theminos.ai public read-only tools (aggregates, fetched 2026-11-07 00:58Z UTC; platform-reported, not chain): 7 days to 2026-11-07, 18 finalized rounds, 17 with a revealed winner: GATK 971 submissions and 17 wins, DeepVariant 17 and bcftools 13 with none; 10 uids won (their hotkeys equal the chain&#x27;s hotkeys at those uids); 606 miners registered, 52 active, 12 validators connected; validator overview now available: 13 entries, 6 active, 7 with a chain uid; 72 minutes between rounds.</li>
+<li><strong>web</strong> Chain reads of incentive at blocks 8968700 (about 2026-09-01), 8990000 (2026-09-03), 9005000 (about 2026-09-06) and 9026000 (about 2026-09-09): top-uid share 90.2%, 100% (burn), 80.8% (burn), 79.6%.</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/106.html"><small>← Previous</small>SN106 Nodexo</a><a rel="next" href="/bittensor-docs/subnets/108.html"><small>Next →</small>SN108 ChipForge</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-11-07. Site built 2026-11-07. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

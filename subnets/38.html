@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ChronoLLM (SN38) | Bittensor Subnet Docs</title>
+<meta name="description" content="Miners train small language models that know only one cutoff year, so financial backtests cannot peek at the future.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h2">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>38</span><div>
+<h1>ChronoLLM <span class="muted">SN38</span></h1>
+<p class="tagline">Miners train small language models that know only one cutoff year, so financial backtests cannot peek at the future.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>18<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>12<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>13<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-11-02</b><span>last chat</span></li><li class="pw"><b>2,907</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Shipping</b><span>code activity</span></li><li class="pw"><b>4</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-11-02</b><span>last commit</span></li><li class="pw"><b>none</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>language models (time-consistent training)</dd>
+<dt>Status</dt><dd>Round 19 (2010) is open with 14 entries. Price down 74% in 30 days and 15% in the last week.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-11-07</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Product and customers</a></li><li><a href="#sn-x1">Recent rounds</a></li><li><a href="#sn-x2">Docs vs code vs chain</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-similar">Similar subnets</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>miners train language models (up to 2.2B parameters) for one cutoff year, a new year each week.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>finance and research teams are the intended buyers; no paying customer is public.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>price down 74% in 30 days on net outflow, 15% in the last week; pool rank 85 of 128.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>top 10 entries share miner pay (52% to first); the owner&#x27;s validator takes 42% of emission.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>mining needs a GPU; validating needs a rented H200 and a team-approved enclave image.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Trains a model for the round&#x27;s year, publishes it on Hugging Face and registers it on chain by Monday 12:00 UTC.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-caution">GPU needed</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>GPU for training (size not documented); model up to 2.2B parameters, 8 GB</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None required (free Hugging Face account; Phala Cloud only for the optional self-test)</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>0.74 TAO registration burn (2026-11-07); no stake mentioned in the docs</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Clean pre-cutoff data, training, weekly resubmission</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Runs the weekly enclave evaluation and sets weights; in practice the owner&#x27;s slot does this.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-caution">GPU needed</li><li class="fl fl-caution">Paid service needed</li><li class="fl fl-bad">Permissioned</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>NVIDIA H200 GPU and 150 GB disk, in a Phala Cloud enclave</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>Phala Cloud H200 rental and an OpenAI API key (prices not documented)</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Docs: &#x27;sufficient stake&#x27;; chain: a permit needs 1,000 TAO; 0.74 TAO registration burn</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Phala CLI deployment of a Docker image; runs weekly, then exits</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-11-07. Not financial advice.</span></div><p>Down 74% in 30 days, 15% in a week; a big holder left the top 30; usage unverified. <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>ChronoLLM pays miners to train language models that know only what was public up to a chosen year, so finance and research teams can backtest without hindsight. Each weekly round covers one year, walking back toward 1999 (2010 now). CrunchDAO has run the subnet since June 2026.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Each week miners train a model for the round&#x27;s year and register it on chain; everything resets each round. Models may be up to 2.2B parameters.</p></div><div><h3>Validators</h3><p>A secure enclave fetches a private dataset and rejects copies, earliest entry first. A leak test checks that a model knows its own period but not later ones; the best 30 then duel on about 650 fresh prompts judged by an OpenAI model.</p></div><div><h3>Incentive</h3><p>Score is 30% leak test plus 70% duel win rate; failing any check scores zero. The top 10 share miner pay on a steep curve. Emission splits 18% owner, 41% validators, 41% miners; about 84% of validator pay goes to the owner&#x27;s slot.</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-11-07, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-caution">Whitelisted</span>The team&#x27;s backend serves private data only to an approved enclave image; 11 of 64 slots hold permits.</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">41.8%</span>Owner uid 0 gets 41.8% of emission as dividends (a floor); its key holds 48.8% of the stake read. Cut 18%.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">10 uids</span><span class="v2-sx muted">top 5 hold 96.4% of incentive.</span> 10 uids earn; the first takes 52%, ranks 6 to 10 share under 4%.</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Converged</span>All 6 weight setters rank uid 158 first; one team-run evaluation, so that is expected.</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-good">Open</span>Miner and validator code are MIT-licensed; the dataset and the team&#x27;s backend are private.</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Trains a model for the round&#x27;s year, publishes it on Hugging Face and registers it on chain by Monday 12:00 UTC.</p><ul>
+<li>Any Hugging Face causal-LM architecture; custom ones need a reviewed pull request.</li>
+<li>Optional self-test: pass or fail on a sample dataset, 12 calls per day, CPU only.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Runs the weekly enclave evaluation and sets weights; in practice the owner&#x27;s slot does this.</p><ul>
+<li>The private dataset comes from the team&#x27;s backend, which refuses unapproved enclave images (allowed 2026-10-28: dstack-0.5.12).</li>
+</ul></section></div>
+<h2 id="sn-x0">Product and customers</h2>
+<ul class="v2-list">
+<li>The site sells models back to 1999; how its 72B demo relates to the 2.2B subnet models is not documented.</li>
+<li>The site promises free model downloads; the project&#x27;s Hugging Face page lists no models.</li>
+</ul>
+<h2 id="sn-x1">Recent rounds</h2>
+<p>The same three entries (158, 160, 202) took places 1 to 3 in rounds 17 and 18.</p>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Round</th><th>Vintage</th><th>Entries</th><th>Passed leak test</th><th>Paid</th></tr></thead><tbody><tr><td>17</td><td>2012</td><td>78</td><td>11 (13 before)</td><td>10</td></tr><tr><td>18</td><td>2011</td><td>52</td><td>11</td><td>10</td></tr><tr><td>19</td><td>2010</td><td>14 so far</td><td>-</td><td>-</td></tr></tbody></table></div>
+<h2 id="sn-x2">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Years per round</td><td>Miner guide: one model per year (2013 to 2024)</td><td>Code: each round names one vintage (2010 now)</td><td>2026-11-07</td></tr><tr><td>Leak score</td><td>README: leak is a pass/fail gate</td><td>Code: leak counts 30% of the score since round 15</td><td>2026-11-07</td></tr></tbody></table></div>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-11-07. Not financial advice.</span></div>
+<p class="v2-thesis">Net outflow was 5,248 TAO over 30 days and 381 TAO in the last week, 465 of it in the last day. Staked alpha fell by about 64,600, near the second-largest holder&#x27;s former stake.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.005079 TAO per alpha</dd></div><div><dt>Pool</dt><dd>4,882 TAO, rank 85</dd></div><div><dt>Price, 30 days</dt><dd>-74%, 2026-10-08 to 2026-11-07</dd></div><div><dt>Net flow, 30 days</dt><dd>-5,248 TAO, 2026-10-08 to 2026-11-07</dd></div><div><dt>Miner pay</dt><dd>1.50 TAO per day on average (15.0 TAO per day over 10 uids)</dd></div><div><dt>Miner pay outside top 5</dt><dd>0.108 TAO per day on average (0.539 TAO per day over 5 uids outside the top 5)</dd></div><div><dt>Code activity</dt><dd>last commit 2026-11-02; 4 commits in 30 days; no releases</dd></div></dl>
+<div class="v2-trend"><h3>Trend</h3><div class="v2-tbody"><figure class="v2-tfig"><svg class="v2-spark down" viewBox="0 0 240 56" role="img" aria-label="Price in TAO per alpha, 2026-09-28 to 2026-11-07: 0.02096 to 0.005079, -75.8%"><polyline points="5.0,8.3 22.2,6.6 33.8,6.7 39.5,5.0 45.2,16.0 51.0,13.4 62.5,12.1 74.0,12.1 79.8,11.9 85.5,14.2 91.2,14.9 102.8,12.3 114.2,10.4 120.0,10.5 125.8,11.8 131.5,11.8 137.2,11.6 143.0,15.4 154.5,27.0 160.2,26.8 166.0,26.5 171.8,26.2 177.5,42.7 183.2,48.4 189.0,48.5 194.8,48.5 200.5,48.8 206.2,48.4 212.0,47.8 217.8,47.8 223.5,48.7 235.0,51.0"/><circle cx="235.0" cy="51.0" r="3"/></svg><figcaption><strong>Price</strong> <span class="down">-75.8%</span> <span class="muted">0.02096 to 0.005079 TAO per alpha, 2026-09-28 to 2026-11-07</span></figcaption></figure><dl class="v2-tfacts"><div><dt>Net flow, 30 days</dt><dd><span class="down">-5,248 TAO</span> <span class="muted">2026-10-08 to 2026-11-07</span></dd></div><div><dt>Verdict history</dt><dd><ol class="v2-vh"><li><span class="muted">2026-11-03</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-04</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-05</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-07</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li></ol></dd></div></dl></div></div>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>Weekly rounds continue (52 entries in round 18)</li>
+<li>The owner slot&#x27;s stake kept rising after the key swap</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>Net outflow in four of five weeks; no customer or revenue named</li>
+<li>The owner&#x27;s validator takes 41%; one evaluator decides</li>
+<li>Entries fell from 78 to 52 in one round; round 19 opened with 10 (21 to 25 before)</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> Weeks of net inflow, the promised early-November product or outside validators would improve it; a missed launch or a disputed round would worsen it.</p>
+<p class="muted">Since the last pass: Still bearish: a 17% one-day fall ended the flat week; a large holder dropped out of view.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-similar">Similar subnets</h2>
+<div class="v2-sim"><p>By pool size this is <strong>rank 12 of 19</strong> among the subnets grouped as <em>training</em> (what they mainly sell). Pool and price as of 2026-11-07, price in TAO per alpha; the barrier is the easiest miner role.</p><div class="scroll"><table class="v2-table"><thead><tr><th>#</th><th>Subnet</th><th>Pool</th><th>Price</th><th>Miner barrier</th></tr></thead><tbody><tr><td>10</td><td><a href="/bittensor-docs/subnets/65.html">TPN (True Performance Network)</a> <span class="muted">SN65</span></td><td>6,145 TAO</td><td>0.002571</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>11</td><td><a href="/bittensor-docs/subnets/125.html">Refinery</a> <span class="muted">SN125</span></td><td>5,038 TAO</td><td>0.002348</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr class="me" aria-current="true"><td>12</td><td>ChronoLLM <span class="muted">SN38, this page</span></td><td>4,882 TAO</td><td>0.005079</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>13</td><td><a href="/bittensor-docs/subnets/127.html">Zils</a> <span class="muted">SN127</span></td><td>3,439 TAO</td><td>0.00299</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>14</td><td><a href="/bittensor-docs/subnets/102.html">Connito</a> <span class="muted">SN102</span></td><td>3,171 TAO</td><td>0.004688</td><td><span class="v2-barrier b-medium">Medium</span></td></tr></tbody></table></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-11-07</span> <span class="muted">(chain)</span> The price fell 17% in one day on a 465 TAO net outflow; the second-largest holder (67,747 alpha on 11-05) left the top 30 holders read.</li>
+<li><span class="when">2026-11-06</span> <span class="muted">(leaderboard API)</span> Round 19 still has 14 entries; two were updated with new model versions on 11-06.</li>
+<li><span class="when">2026-11-03</span> <span class="muted">(chain, #chronos)</span> The owner and validator coldkey swap (announced 2026-10-28; the price fell 49% in 24 hours) went through at 08:16 UTC.</li>
+<li><span class="when">2026-11-02</span> <span class="muted">(GitHub)</span> The copy check now compares vocabularies by token text; a new validator image shipped the same day.</li>
+<li><span class="when">2026-10-21</span> <span class="muted">(#chronos)</span> The team targets paid pilots in Q4 2026 or Q1 2027 and a public product in early November.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Read docs/miner.md and check the live round page for the vintage year.</li>
+<li>Train a model of at most 2.2B parameters on pre-cutoff data; upload it to Hugging Face as safetensors.</li>
+<li>Optionally run the self-test, then register a hotkey on subnet 38.</li>
+<li>Pin the model to a commit SHA, submit before Monday 12:00 UTC and make the repository public within an hour.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>The evaluation data, backend and config are team-run with no change log, and the owner&#x27;s slot posted the results of rounds 13 to 16; a zero score cannot say why.</li>
+<li>Copy checks: the reshuffled-vocabulary gap closed on 2026-11-02; an edited file keeps its earlier timestamp (confirmed bug), and the duplicate-weights check is skipped if the backend errors.</li>
+<li>Fairness and self-mining accusations (2026-10-12, 2026-10-29) are unresolved; the team gave no reason for the price falls. Customer claims are chat statements. Chat after 2026-11-02 was not read (archive down).</li>
+<li>History: the slot (registered 2026-01-09) was Colosseum&#x27;s; CrunchDAO took over on 2026-06-10.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/chronollm/sn38" rel="noopener noreferrer">GitHub</a></li>
+<li><a href="https://github.com/chronollm/sn38/blob/main/docs/miner.md" rel="noopener noreferrer">Miner guide</a></li>
+<li><a href="https://github.com/chronollm/sn38/blob/main/docs/validator.md" rel="noopener noreferrer">Validator guide</a></li>
+<li><a href="https://chronollm.com/" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://leaderboard.chronollm.com/" rel="noopener noreferrer">Leaderboard</a></li>
+<li><a href="https://api.chronollm.com/config" rel="noopener noreferrer">Live evaluation config</a></li>
+<li><a href="https://api.chronollm.com/rounds/current" rel="noopener noreferrer">Current round</a></li>
+<li><a href="https://arxiv.org/abs/2502.21206" rel="noopener noreferrer">Paper: Chronologically Consistent Large Language Models (arXiv)</a></li>
+<li><a href="https://arxiv.org/abs/2510.11677" rel="noopener noreferrer">Paper: Instruction Tuning Chronologically Consistent Language Models (arXiv)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 13 sources</summary>
+<ul>
+<li><strong>repo</strong> chronollm/sn38@7b8d4f3 (2026-11-02, still head on 2026-11-07): README.md, docs/miner.md, docs/validator.md and the validator, enclave client, backend client, model store, leak, dedup, quality and results code (MIT licence); pull request 31 merged 2026-11-02, pull requests 13 and 30 open</li>
+<li><strong>web</strong> https://api.chronollm.com/config and /rounds/current (read 2026-11-07; config identical to 2026-10-27)</li>
+<li><strong>web</strong> https://leaderboard.chronollm.com public API: /rounds/current, /years, /submissions (round 19 re-read, two entries changed) and /eval/results for rounds 1 to 18 (read 2026-11-07; round 19 results not yet public)</li>
+<li><strong>web</strong> Hugging Face dataset chronollm/backup (last modified 2026-11-02) and the chronollm organisation page (no public models; read 2026-11-07)</li>
+<li><strong>web</strong> https://chronollm.com home page including the pricing section (read 2026-11-07, text unchanged since 2026-10-27)</li>
+<li><strong>web</strong> Chain read at block 9450857 (2026-11-07 01:13Z UTC): SN38 (ChronoLLM): registered 2026-01-09, tempo 1440, 256 of 256 uids, commit-reveal off; emission weights burn/recycle/owner/validator/miner = 0/0/18/41/41 % (stored, same values as the chain default), RecycleOrBurn = Burn; uids under the owner hotkey or owner coldkey hold 0 % of incentive and 41.76 % of last-epoch emission (a floor); 6 validators have weight rows, on average 0 % of weight goes to uid 0.</li>
+<li><strong>web</strong> Chain read at block 9450857 (2026-11-07 01:13Z UTC), compared with block 9436092 (2026-11-05 00:00Z UTC): SN38: no setting changed in 33 checked items; emission split unchanged; pool 5299.86 -&gt; 4881.63 TAO.</li>
+<li><strong>web</strong> Chain read at block 9450857 (2026-11-07 01:13Z): price SN38, 6 samples every 7d from block 9234857 (2026-10-08 00:54Z): price 0.019579 -&gt; 0.005079 TAO per alpha (-74.1%), pool TAO 8639.0 -&gt; 4881.6; over the 5 intervals where the pool change equals flow + protocol: net user flow -5248.2 TAO (staked minus unstaked), protocol flow +1490.9 TAO, gross volume 35162.8 TAO.</li>
+<li><strong>web</strong> Chain read at block 9450857 (2026-11-07 01:13Z): price SN38, 8 samples every 1d from block 9400457 (2026-10-31 01:11Z): price 0.005997 -&gt; 0.005079 TAO per alpha (-15.3%), pool TAO 5240.1 -&gt; 4881.6; over the 7 intervals where the pool change equals flow + protocol: net user flow -380.6 TAO (staked minus unstaked), protocol flow +22.1 TAO, gross volume 9096.9 TAO.</li>
+<li><strong>web</strong> Chain read at block 9450857 (2026-11-07 01:13Z): shared snapshot over 129 subnets of name, SubnetOwner, Tempo, Burn, SubnetworkN, MaxAllowedUids, SubnetEmissionEnabled, price, tao_in, alpha_in, age_days (pool rank 85 of 128 excluding root); StakeThreshold 1000 TAO (global) from the dossier.</li>
+<li><strong>web</strong> Chain read at block 9450857 (2026-11-07 01:13Z): SN38 stake by coldkey: 870 coldkeys hold 736169.525 alpha on 105 hotkeys (69.829% of the chain&#x27;s staked total); top coldkey 48.83%, top 5 66.786%, top 10 76.518%; owner coldkey 48.83%; 76.653% of the stake sits on validator-permit hotkeys; 6 hotkeys&#x27; stake rows were not fully read (30.171% of the staked total unattributed), shares are of what was read. Top 30 list read at the same block. Second-largest holder: 100000 alpha on 2026-11-04 20:09Z, 50041 at block 9439130 (2026-11-05 10:07Z), 67747 at block 9442730 (22:07Z), not in the top 30 now (30th holds 2532). Total staked alpha 1118858 (2026-11-05 22:07Z) and 1054249 now. Owner slot (uid 0): hotkey alpha 357690 on 2026-11-05 and 359728 now, last weight set 2026-11-02 16:11Z.</li>
+<li><strong>msg</strong> #chronos pinned announcements 2026-06-10 to 2026-10-14</li>
+<li><strong>msg</strong> #chronos, miner and team discussion 2026-03-23 to 2026-10-30</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/37.html"><small>← Previous</small>SN37 Aurelius</a><a rel="next" href="/bittensor-docs/subnets/39.html"><small>Next →</small>SN39 Pending (former Basilica slot)</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-11-07. Site built 2026-11-07. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

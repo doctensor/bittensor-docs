@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VidAIO (SN85) | Bittensor Subnet Docs</title>
+<meta name="description" content="Video-AI subnet where miners enter code competitions; a result pays the top places for two weeks.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h19">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>85</span><div>
+<h1>VidAIO <span class="muted">SN85</span></h1>
+<p class="tagline">Video-AI subnet where miners enter code competitions; a result pays the top places for two weeks.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>9.0<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>8.3<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>9.5<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-11-02</b><span>last chat</span></li><li class="pw"><b>5,239</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Shipping</b><span>code activity</span></li><li class="pw"><b>8</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-11-03</b><span>last commit</span></li><li class="pw"><b>2026-11-03</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>video processing (code competitions: compression, removal, interpolation, upscaling)</dd>
+<dt>Status</dt><dd>Paying: upscaling 004 (crown) to 2026-11-17 15:13 UTC. Compression 005 takes entries to 2026-11-14 (1 so far); its result is not before 2026-11-17.</dd>
+<dt>Confidence</dt><dd>high</dd>
+<dt>Researched</dt><dd>2026-11-07</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Competitions so far</a></li><li><a href="#sn-x1">Licence and training-data rules</a></li><li><a href="#sn-x2">Docs vs code vs chain</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-similar">Similar subnets</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>miners submit private code; the team scores it on hidden clips.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>5 miners share about 12 TAO a day to 2026-11-17; the winner (UID 164) takes 89.55%.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>entry needs 500 alpha staked (about 2.1 TAO) and a private repo; the team&#x27;s GPU runs it.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>the owner hotkey takes 97.6% of validator dividends; outside validators mostly copy the team&#x27;s weights.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>winners earn licensing fees; none paid yet. Market view: bearish.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>the 004 winner&#x27;s code, weights and training scripts are public under MIT.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Writes a video-processing program and enrolls it in a competition; the team runs it on its own GPU.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-unk">GPU unknown</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-unk"><dt>Hardware</dt><dd>Not documented for development; the entry runs on the team&#x27;s L40S.</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None required; a private GitHub repo invited to the team&#x27;s read-only account.</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>500 alpha staked (about 2.1 TAO, read once at enrollment) plus a 0.0005 TAO registration burn.</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Weeks of model work; Docker, a pinned repo, licence files.</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Outside validators run a thin image that copies the team&#x27;s signed weights; the team does the scoring.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-unk">Paid service unknown</li><li class="fl fl-bad">Permissioned</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>Linux x86-64, Docker, a few CPU cores, persistent disk.</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>Archive-capable chain endpoint; S3 credentials issued by the team.</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>A validator permit (7 hotkeys hold one; the threshold is chain state) and fees.</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Docker image pinned by digest; team onboarding for S3 access.</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-11-07. Not financial advice.</span></div><p>Bearish: 502 TAO left in two days, 30-day flow is -2,286 TAO, price -31%; no revenue is published. <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>VidAIO (SN85) is a video-processing subnet from the team behind vidaio.io. Miners enter competitions with private code that the team runs on hidden clips; the best results share miner emissions for two weeks.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>A miner submits code, not outputs: a private GitHub repo with a Dockerfile providing /app/run.sh. The team builds it and runs it in a sealed sandbox on 16 hidden clips committed by hash. Entries sharing a coldkey, IP, GitHub account or outputs count once.</p></div><div><h3>Validators</h3><p>A team-run authority runs every entry and publishes one signed log per epoch (about 72 minutes), anchoring its hash on chain. Other validators check the log and submit its weights unchanged.</p></div><div><h3>Incentive</h3><p>Scores are per-clip means; removal, interpolation and upscaling credit only gains over a free baseline, and the last two give 30% to speed. A first place above the crown bar pays the top five 90/4/3/2/1; otherwise entries above the podium bar share 50/24/13/8/5. Between results half goes to a licensing treasury, half to the owner hotkey (a burn, per the team).</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-11-07, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-caution">Whitelisted</span>Thin validators need team-issued S3 access; 7 permits, 4 set weights.</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">48.8%</span>48.8% of emission, 97.6% of dividends; owner cut 18% on top; RecycleOrBurn = Burn.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">6 uids</span><span class="v2-sx muted">top 5 hold 99.5% of incentive.</span> 6 uids earn: five competition miners (UID 164 at 89.6%) and the treasury (0.5%).</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Converged</span>3 of 4 validators put their top weight on UID 164; a fixed scorer makes that expected.</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-good">Open</span>Miner and validator repos are MIT with the scoring code; what actually runs is unverifiable.</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Writes a video-processing program and enrolls it in a competition; the team runs it on its own GPU.</p><ul>
+<li>Sandbox for 004 and 005: one L40S, 32 CPU, 64 GiB, no network, 4 clips per 1-hour batch, image up to 20 GB.</li>
+<li>Own code under Apache-2.0 or MIT; downloads must be hash-pinned. A failed run, timeout or oversize output zeroes the 4-clip batch.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Outside validators run a thin image that copies the team&#x27;s signed weights; the team does the scoring.</p><ul>
+<li>It checks the signed log against its on-chain anchor and does not recompute scores; the README says this is not an independent audit.</li>
+</ul></section></div>
+<h2 id="sn-x0">Competitions so far</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Competition</th><th>Entries</th><th>Paid window</th><th>Outcome</th></tr></thead><tbody><tr><td>Compression 001c</td><td>14</td><td>09-27 to 10-04</td><td>Crown</td></tr><tr><td>Object removal 002</td><td>30</td><td>10-04 to 10-11</td><td>Crown</td></tr><tr><td>Interpolation 003</td><td>30</td><td>10-20 to 11-03</td><td>Podium, 2 paid</td></tr><tr><td>Upscaling 004</td><td>35 (31 built)</td><td>11-03 to 11-17</td><td>Crown, 5 paid</td></tr><tr><td>Compression 005</td><td>1 so far</td><td>not before 11-17</td><td>Open to 11-14; bars 0.75 / 0.60</td></tr></tbody></table></div>
+<h2 id="sn-x1">Licence and training-data rules</h2>
+<ul class="v2-list">
+<li>Code, weights and training data must allow commercial use (own footage, CC0, CC BY, CC BY-SA are fine; LTX-2.x outputs are not). Training data cannot be verified.</li>
+<li>The 004 winner&#x27;s released archive (77 files, 194 MB): MIT code, four own fine-tuned weight files, training scripts and clip lists, and a LICENSES.md for third-party parts; no training data.</li>
+</ul>
+<h2 id="sn-x2">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Alpha held by the owner hotkey</td><td>Team census: 95.0% of listed alpha on UID 0</td><td>Chain: the hotkey holds 110,647 alpha (4.9%); the census counts inherited stake</td><td>2026-11-07</td></tr><tr><td>Inference mining pays</td><td>README, MINING.md and vidaio.io/subnet describe paid mining</td><td>Code: inference shares 0 since 2026-09-27; Chain: 5 competition miners and the treasury earn</td><td>2026-11-07</td></tr></tbody></table></div>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-11-07. Not financial advice.</span></div>
+<p class="v2-thesis">Net outflow was 2,286 TAO in 30 days: +267 TAO in the six days to 11-05, then 502 TAO out in two days (price -8%).</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.004209 TAO per alpha</dd></div><div><dt>Pool</dt><dd>11,671 TAO, rank 39 of 128</dd></div><div><dt>Price, 30 days</dt><dd>-31%, 2026-10-08 to 2026-11-07</dd></div><div><dt>Net flow, 30 days</dt><dd>-2,286 TAO, 2026-10-08 to 2026-11-07</dd></div><div><dt>Miner pay</dt><dd>12.4 TAO per day, 5 paid miners (window 004)</dd></div><div><dt>Code activity</dt><dd>last commit 2026-11-03; 6 commits in 30 days; release 2026-11-03</dd></div></dl>
+<div class="v2-trend"><h3>Trend</h3><div class="v2-tbody"><figure class="v2-tfig"><svg class="v2-spark down" viewBox="0 0 240 56" role="img" aria-label="Price in TAO per alpha, 2026-09-28 to 2026-11-07: 0.005506 to 0.004209, -23.6%"><polyline points="5.0,25.1 22.2,15.8 33.8,5.0 39.5,20.1 45.2,20.5 56.8,20.0 62.5,17.8 74.0,18.5 79.8,19.9 85.5,18.5 97.0,12.0 102.8,23.0 114.2,27.2 120.0,29.9 125.8,29.2 137.2,26.7 143.0,31.9 154.5,41.9 160.2,42.2 166.0,43.3 171.8,44.3 177.5,43.4 183.2,42.1 189.0,49.6 194.8,47.9 200.5,47.9 206.2,43.1 212.0,43.5 217.8,43.8 229.2,48.5 235.0,51.0"/><circle cx="235.0" cy="51.0" r="3"/></svg><figcaption><strong>Price</strong> <span class="down">-23.6%</span> <span class="muted">0.005506 to 0.004209 TAO per alpha, 2026-09-28 to 2026-11-07</span></figcaption></figure><dl class="v2-tfacts"><div><dt>Net flow, 30 days</dt><dd><span class="down">-2,286 TAO</span> <span class="muted">2026-10-08 to 2026-11-07</span></dd></div><div><dt>Verdict history</dt><dd><ol class="v2-vh"><li><span class="muted">2026-11-03</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-04</span> <span class="st s-neutral">Neutral</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-06</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-07</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li></ol></dd></div></dl></div></div>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>Net inflow of +267 TAO in the six days to 11-05.</li>
+<li>Five independent miners paid; 35 entries in 004; winner&#x27;s code public; release 0.6.0 on 11-03.</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>Price -31% and -2,286 TAO in 30 days (502 TAO in the last two); no revenue or licensing payment published.</li>
+<li>Owner hotkey takes 97.6% of dividends; the winner takes 89.55% on about 7.2 TAO of stake.</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> Revenue, a buyback, a licensing payment or a week of inflow would help; another week of outflow would hurt.</p>
+<p class="muted">Since the last pass: Was neutral on 2026-11-04; bearish since 11-06.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-similar">Similar subnets</h2>
+<div class="v2-sim"><p>By pool size this is <strong>rank 4 of 8</strong> among the subnets grouped as <em>media</em> (what they mainly sell). Pool and price as of 2026-11-06 to 2026-11-07, price in TAO per alpha; the barrier is the easiest miner role.</p><div class="scroll"><table class="v2-table"><thead><tr><th>#</th><th>Subnet</th><th>Pool</th><th>Price</th><th>Miner barrier</th></tr></thead><tbody><tr><td>2</td><td><a href="/bittensor-docs/subnets/17.html">404-GEN</a> <span class="muted">SN17</span></td><td>22,094 TAO</td><td>0.006467</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>3</td><td><a href="/bittensor-docs/subnets/93.html">Bitcast</a> <span class="muted">SN93</span></td><td>21,967 TAO</td><td>0.01489</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr class="me" aria-current="true"><td>4</td><td>VidAIO <span class="muted">SN85, this page</span></td><td>11,671 TAO</td><td>0.004209</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>5</td><td><a href="/bittensor-docs/subnets/117.html">EveryFrame</a> <span class="muted">SN117</span></td><td>4,628 TAO</td><td>0.006439</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr><td>6</td><td><a href="/bittensor-docs/subnets/69.html">Herald</a> <span class="muted">SN69</span></td><td>3,471 TAO</td><td>0.004991</td><td><span class="v2-barrier b-high">High</span></td></tr></tbody></table></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-11-07</span> <span class="muted">(chain)</span> UID 50, paid 67% in window 003, now holds no alpha and lost its permit; the owner hotkey&#x27;s alpha fell 12% since 11-06.</li>
+<li><span class="when">2026-11-03</span> <span class="muted">(vidaio.io)</span> Upscaling 004 applied: UID 164 won (0.241, 0.0007 ahead of second) and takes 89.55% to 11-17.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Read docs/MINING.md and your competition&#x27;s manifest on vidaio.io/competitions (stake floor, bars, dates).</li>
+<li>Register a hotkey on netuid 85 and hold 500 alpha at enrollment (checked once, nothing locked); stay registered through the payout window or the share burns.</li>
+<li>Build a private repo from an examples/competition_contenders template with LICENSE and LICENSES.md, hash-pinned downloads and the team&#x27;s read-only GitHub account invited.</li>
+<li>Run scripts/competition_precheck.py with --commercial, score the practice pack with score_practice.py, then enroll once with scripts/competition_enroll.py (no edit or cancel).</li>
+<li>Validators: use the thin-validator image and ask the team for S3 credentials, in the channel, not DMs; beware fake team accounts.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>The team runs scoring, sandboxes, enrollment and the anchor; the code is mirrored, but what runs and the hidden clips cannot be checked.</li>
+<li>No revenue, customer or buyback figure exists; the payouts page still says &#x27;Licensing payments: none yet&#x27;.</li>
+<li>Competition 003&#x27;s hidden clips were promised after the result; none is linked 18 days later.</li>
+<li>Payouts are narrow: window 004 pays 5 of 30 ranked entries, the winner 89.55% for a 0.0007 lead; gaps between windows burn half of miner emission.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://vidaio.io" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://vidaio.io/competitions" rel="noopener noreferrer">Competitions dashboard (current window, payouts)</a></li>
+<li><a href="https://vidaio.io/competitions/payouts" rel="noopener noreferrer">Payouts (current window, windows and gaps)</a></li>
+<li><a href="https://vidaio.io/competitions/sn85-compression-005" rel="noopener noreferrer">Competition 005: streaming compression (open)</a></li>
+<li><a href="https://vidaio.io/competitions/sn85-upscaling-004" rel="noopener noreferrer">Competition 004: video upscaling (result)</a></li>
+<li><a href="https://vidaio.io/competitions/guide" rel="noopener noreferrer">How to enter</a></li>
+<li><a href="https://vidaio.io/competitions/results" rel="noopener noreferrer">Past results</a></li>
+<li><a href="https://github.com/vidAio-subnet/miner-vidaio" rel="noopener noreferrer">Miner repo (rules in docs/MINING.md)</a></li>
+<li><a href="https://github.com/vidAio-subnet/validator-vidaio" rel="noopener noreferrer">Thin validator repo</a></li>
+<li><a href="https://github.com/vidAio-subnet/vidaio-subnet" rel="noopener noreferrer">Legacy subnet repo (before 2026-09)</a></li>
+<li><a href="https://github.com/vidAio-subnet/miner-vidaio/blob/main/docs/vidaio-whitepaper.pdf" rel="noopener noreferrer">Whitepaper v1.0 (2026-09; payout rules since changed)</a></li>
+<li><a href="https://s3.hippius.com/vidaio-sn85-evidence/finalized/epoch=26190/log.json" rel="noopener noreferrer">Example public epoch log (26190)</a></li>
+<li><a href="https://discord.gg/pZMJyJm8Vx" rel="noopener noreferrer">Project Discord (linked from vidaio.io)</a></li>
+<li><a href="https://github.com/vidAio-subnet/miner-vidaio/releases/tag/practice-pack-005" rel="noopener noreferrer">Compression practice pack (competition 005)</a></li>
+<li><a href="https://vidaio.io/competitions/faq" rel="noopener noreferrer">Reason codes (why an entry fails or is zeroed)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 8 sources</summary>
+<ul>
+<li><strong>repo</strong> vidAio-subnet/miner-vidaio@1de4ed3 (2026-11-03, release 0.6.0): README, docs/vidaio-whitepaper.pdf, docs/MINING.md, config/default.yaml, vidaio/scoring/{interpolation_formula,upscaling_faithful_formula,removal_formula,compression,config}.py, vidaio/competition/economic_result.py, vidaio/audit/store.py, scripts/competition_enroll.py, vidaio/authority and vidaio/competition/orchestrator (listed); heads unchanged on 2026-11-07 (compare a23626e...1de4ed3, 11 files); tags practice-pack-001 to 005</li>
+<li><strong>repo</strong> vidAio-subnet/validator-vidaio@7a264a5 (2026-11-03; head unchanged 2026-11-07): README, compare b7fc939...7a264a5 (14 files); vidAio-subnet/vidaio-subnet (legacy, fea3779)</li>
+<li><strong>web</strong> https://s3.hippius.com/vidaio-sn85-evidence/finalized/epoch=26190/log.json (created 2026-11-07 04:26 UTC, close block 9451822, same weights as epochs 26145 and 26167, census UID 0 = 95.0% of listed alpha) and earlier epoch logs (read 2026-10-21 to 2026-11-07)</li>
+<li><strong>web</strong> https://vidaio.io/competitions, /payouts, /guide, /faq, /results, /sn85-upscaling-004, /sn85-compression-005, /subnet and /api/hub/v1/{competitions,payouts,competitions/sn85-upscaling-004/results,competitions/sn85-interpolation-003b/results} (read 2026-10-23 to 2026-11-07; on 2026-11-07 the competitions, 005 and results reads matched 11-06, and /payouts still showed as_of 2026-11-03 23:06 UTC)</li>
+<li><strong>web</strong> https://s3.hippius.com/vidaio-sn85-evidence/released/submission_archive/ba/ea/baeae7ae... (digest baeae7aeb78e..., 194,416,640 bytes, released 2026-11-03): uncompressed tar of 77 files, listed by byte-range reads on 2026-11-06; read LICENSE, LICENSES.md and README.md; weights (29-67 MB each) not downloaded</li>
+<li><strong>msg</strong> #85-vidaio 2025-02-24 to 2026-11-02; chat after 2026-11-02 not read (archive hung on 2026-11-07)</li>
+<li><strong>web</strong> Chain read at block 9451723 (2026-11-07 04:06Z UTC): SN85 (Vidaio): registered 2025-04-01, tempo 360, 256 of 256 uids, commit-reveal on; emission weights burn/recycle/owner/validator/miner = 0/0/18/41/41 % (stored, same values as the chain default), RecycleOrBurn = Burn; uids under the owner hotkey or owner coldkey hold 0 % of incentive and 48.82 % of last-epoch emission (a floor); 4 validators have weight rows, on average 0 % of weight goes to uid 0. 7 validator permits, 4 with weight rows; incentive on 6 uids (uid 164 89.6 %).</li>
+<li><strong>web</strong> Chain read at block 9451723 (2026-11-07 04:06Z UTC), compared with block 9443292 (2026-11-06 00:00Z UTC): SN85: no setting changed in 33 checked items; emission split unchanged; pool 11846.98 -&gt; 11670.63 TAO. Chain read at block 9451723 (2026-11-07 04:06Z): price SN85, 6 samples every 7d from block 9235723 (2026-10-08 03:47Z): price 0.006063 -&gt; 0.004209 TAO per alpha (-30.6%), pool TAO 13906.5 -&gt; 11670.6; over the 5 intervals where the pool change equals flow + protocol: net user flow -2285.7 TAO (staked minus unstaked), protocol flow +49.8 TAO, gross volume 74694.6 TAO. A 1-day step read (2026-10-30 to 11-07) shows net user flow -235.1 TAO over 8 intervals, of which -502.0 TAO in the last two days. Snapshot of 129 subnets: pool rank 39 of 128, price rank 63. UID reads (block 9451823-9451915): hotkey alpha UID 0 110,647, UID 164 1,718, UID 50 0 (permit lost), UID 130 4,000, UID 111 13,405, UID 230 5,671.</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/83.html"><small>← Previous</small>SN83 CliqueAI</a><a rel="next" href="/bittensor-docs/subnets/87.html"><small>Next →</small>SN87 Provenonce (Proof of Assurance)</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-11-07. Site built 2026-11-07. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EveryFrame (SN117) | Bittensor Subnet Docs</title>
+<meta name="description" content="Miners serve AI media jobs with their own provider keys; since 11-03 the unused share goes to a treasury wallet">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h3">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>117</span><div>
+<h1>EveryFrame <span class="muted">SN117</span></h1>
+<p class="tagline">Miners serve AI media jobs with their own provider keys; since 11-03 the unused share goes to a treasury wallet</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>23<small>/day</small></b><span>last 7 d</span></li><li class="pl4"><b>3.5<small>/day</small></b><span>days 8-30</span></li><li class="pl3"><b>1.7<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-11-02</b><span>last chat</span></li><li class="pw"><b>344</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Shipping</b><span>code activity</span></li><li class="pw"><b>108</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-11-03</b><span>last commit</span></li><li class="pw"><b>2026-11-03</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>AI video and image serving</dd>
+<dt>Status</dt><dd>As of 2026-11-07 26 miners served jobs in 24 hours, no commit since 11-03; treasury uid 156 holds 77% of incentive, owner uids none.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-11-07</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Work against the miner pool</a></li><li><a href="#sn-x1">Docs vs code vs chain</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-similar">Similar subnets</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>miners serve Studio&#x27;s AI media jobs with their own provider keys; no GPU.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>treasury-wallet uid 156 holds 77.3% of incentive (uids 156 and 157 alternate); owner uids hold 0% of incentive and emission.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>Apache-2.0; miner v0.9.6 and validator v0.8.4 (11-03) still current, no commit in 4 days.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>price +146% in 30 days, -12.7% since 11-04 on 301 TAO of net outflow; the jump&#x27;s cause is unknown.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>3,516 requests and 26 miners in 24 hours; miners were paid 26% of the pool (work plus surcharge).</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-low">Low barrier</span></h3><p>Serves AI jobs with your own provider keys in a cloud worker.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-caution">Paid service needed</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-no"><dt>Hardware</dt><dd>No GPU; everycli on Linux or macOS, worker on a rented Phala VM (1 vCPU, 2 GiB)</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>Phala Cloud hosting plus provider API usage; a discount cuts your reward, not the provider bill</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>0.05 TAO registration burn (2026-11-07); no minimum stake documented</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Install everycli, run the setup wizard; time not stated</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Checks the owner&#x27;s signed accounting and submits weights.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-unk">Paid service unknown</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-no"><dt>Hardware</dt><dd>No GPU; small Linux box or container, 1 GB memory</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>Finney archive RPC access; cost not stated</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Above the 1,000 TAO permit threshold (chain); 0.05 TAO burn</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Docker image, init, wallet mount; time not stated</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-neutral">Neutral</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">low confidence, as of 2026-11-07. Not financial advice.</span></div><p>Alpha price up 146% in 30 days, 12.7% below 11-04; usage still small <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>EveryFrame (SN117) serves EveryFrame Studio, an AI video, image and audio studio that resells models such as Seedance and Veo. Miners run no models: they use their own provider keys in an approved worker inside a confidential VM on Phala Cloud. The team runs the coordinator and accounting.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Miners deploy the approved worker with everycli, using their own Phala Cloud and provider accounts, and post a discount per model; the coordinator assigns jobs from those offers. The worker calls the provider and signs a receipt; an operator approves each job.</p></div><div><h3>Validators</h3><p>The owner side publishes a signed accounting report per 361-block window and an assignment naming the report to score and the unused-share target. Validators run the public Docker image, verify signatures and submit weights; they do not check customer payment.</p></div><div><h3>Incentive</h3><p>Pool in dollars = alpha emitted x miner share (33%) x alpha price. A miner&#x27;s weight is its approved work (plus surcharge) over the larger of the pool and total work. The unused rest goes to one uid per epoch: an owner uid until 11-03, then one of two treasury-wallet uids picked by a public seed.</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-11-07, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-good">Open</span>Open by stake: 11 permits held, 1,000 TAO threshold; all score the owner&#x27;s signed accounting feed.</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">0%</span>Owner uids hold 0% of emission and incentive; owner uid 0 stopped setting weights.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">26 uids</span><span class="v2-sx muted">top 5 hold 90.7% of incentive.</span> 26 uids earn incentive; treasury-wallet uid 156 holds 77.3%, the other 25 share 22.7%.</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Converged</span>6 of 7 validators with weights put 68-79% on treasury uid 157; one puts 68% on owner uid 0.</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-good">Open</span>Miner and validator are Apache-2.0; the job coordinator is not public.</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-low">Low barrier</span></h3><p>Serves AI jobs with your own provider keys in a cloud worker.</p><ul>
+<li>Jobs need operator approval; treasury uids are not independent miners (docs). An open PR adds Miner Terms: you secure provider resale permissions.</li>
+<li>Pay on 2026-11-07: the 25 other earning uids share about 3.5 TAO a day before costs (chain); swings by epoch (3.7 on 11-06).</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Checks the owner&#x27;s signed accounting and submits weights.</p><ul>
+<li>Weights follow the owner&#x27;s signed assignment per chain epoch; the treasury pick needs v0.8.0 or newer (repo).</li>
+<li>11 of 64 slots are held; 6 have not set weights for over 5 tempos, incl. owner uid 0 and both treasury uids (chain).</li>
+</ul></section></div>
+<h2 id="sn-x0">Work against the miner pool</h2>
+<p>Miners&#x27; pay in the signed feed (work plus surcharge) against the miner pool&#x27;s dollar value.</p>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Dates (UTC)</th><th>Pool</th><th>Paid to miners</th><th>Share of pool</th></tr></thead><tbody><tr><td>2026-11-03 to 11-04</td><td>$4,069</td><td>$764</td><td>18.8%</td></tr><tr><td>2026-11-04 to 11-05</td><td>$4,833</td><td>$1,148</td><td>23.7%</td></tr><tr><td>2026-11-05 to 11-06</td><td>$3,846</td><td>$974</td><td>25.3%</td></tr><tr><td>2026-11-06 to 11-07</td><td>$4,232</td><td>$1,104</td><td>26.1%</td></tr></tbody></table></div>
+<h2 id="sn-x1">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Validator scoring</td><td>Docs: validators recompute weights from the shared signed feed</td><td>Chain: validators put 68-79% on treasury uid 157; incentive sits on uid 156 now</td><td>2026-11-07</td></tr><tr><td>Validator version</td><td>Docs (reviewed 10-31): v0.5.1</td><td>Code: v0.8.4 (11-03) still the latest</td><td>2026-11-07</td></tr><tr><td>Unused share</td><td>Repo: burn rotation among owner uids (v0.6.0)</td><td>Chain: since epoch 26124 the pick alternates between treasury uids 156 and 157; owner uids hold 0%</td><td>2026-11-07</td></tr><tr><td>Treasury</td><td>Docs: not mentioned; team site: contest prizes</td><td>Chain: 6,283 alpha on uids 156 and 157, no payout listed; team API still at epoch 26143</td><td>2026-11-07</td></tr></tbody></table></div>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-neutral">Neutral</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">low confidence, as of 2026-11-07. Not financial advice.</span></div>
+<p class="v2-thesis">Inflow and 26 miners in 24 hours are real, but price runs ahead of evidence: miners got 26% of the pool, the treasury kept about 74%.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.006439 TAO per alpha</dd></div><div><dt>Pool</dt><dd>4,628 TAO, rank 87</dd></div><div><dt>Price, 30 days</dt><dd>+146%, 2026-10-08 to 2026-11-07</dd></div><div><dt>Net flow, 30 days</dt><dd>+1,716 TAO, 2026-10-08 to 2026-11-07</dd></div><div><dt>Miner pay</dt><dd>about 3.5 TAO per day over 25 uids outside the treasury uid</dd></div><div><dt>Code activity</dt><dd>last commit 2026-11-03; 148 commits in 30 days on 2 repos</dd></div></dl>
+<div class="v2-trend"><h3>Trend</h3><div class="v2-tbody"><figure class="v2-tfig"><svg class="v2-spark up" viewBox="0 0 240 56" role="img" aria-label="Price in TAO per alpha, 2026-09-28 to 2026-11-07: 0.002788 to 0.006439, +131.0%"><polyline points="5.0,43.9 16.5,44.5 22.2,44.3 33.8,44.3 45.2,44.3 56.8,45.0 62.5,45.2 68.2,45.0 74.0,45.1 85.5,44.5 97.0,45.1 102.8,45.2 108.5,47.3 114.2,48.3 125.8,48.4 137.2,48.3 143.0,48.5 148.8,50.4 154.5,50.8 166.0,50.5 177.5,51.0 183.2,50.9 189.0,43.9 194.8,24.2 206.2,5.0 217.8,5.7 223.5,13.3 229.2,15.8 235.0,16.6"/><circle cx="235.0" cy="16.6" r="3"/></svg><figcaption><strong>Price</strong> <span class="up">+131.0%</span> <span class="muted">0.002788 to 0.006439 TAO per alpha, 2026-09-28 to 2026-11-07</span></figcaption></figure><dl class="v2-tfacts"><div><dt>Net flow, 30 days</dt><dd><span class="up">+1,716 TAO</span> <span class="muted">2026-10-08 to 2026-11-07</span></dd></div><div><dt>Verdict history</dt><dd><ol class="v2-vh"><li><span class="muted">2026-11-04</span> <span class="st s-neutral">Neutral</span> <span class="st v-unclear">Unclear</span> <span class="muted">low confidence</span></li><li><span class="muted">2026-11-05</span> <span class="st s-neutral">Neutral</span> <span class="st v-unclear">Unclear</span> <span class="muted">low confidence</span></li><li><span class="muted">2026-11-06</span> <span class="st s-neutral">Neutral</span> <span class="st v-unclear">Unclear</span> <span class="muted">low confidence</span></li><li><span class="muted">2026-11-07</span> <span class="st s-neutral">Neutral</span> <span class="st v-unclear">Unclear</span> <span class="muted">low confidence</span></li></ol></dd></div></dl></div></div>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>Net inflow +1,716 TAO in 30 days; 26 miners served jobs in 24 hours</li>
+<li>Miner pay rose from 18.8% of the pool (11-03) to 26.1% (11-07)</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>Treasury uids hold 77% of incentive; their 6,283 alpha shows no payout</li>
+<li>Usage figures are the team&#x27;s own; no commit in 4 days</li>
+<li>Net outflow of 301 TAO since 11-04; the price jump&#x27;s cause is unknown</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> Up: treasury payouts listed, or miners paid above 35% of the pool. Down: outflow past 1,000 TAO or miners paid under 15%.</p>
+<p class="muted">Since the last pass: Unchanged from 2026-11-06: treasury alpha up 50%, no payout.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-similar">Similar subnets</h2>
+<div class="v2-sim"><p>By pool size this is <strong>rank 5 of 8</strong> among the subnets grouped as <em>media</em> (what they mainly sell). Pool and price as of 2026-11-06 to 2026-11-07, price in TAO per alpha; the barrier is the easiest miner role.</p><div class="scroll"><table class="v2-table"><thead><tr><th>#</th><th>Subnet</th><th>Pool</th><th>Price</th><th>Miner barrier</th></tr></thead><tbody><tr><td>3</td><td><a href="/bittensor-docs/subnets/93.html">Bitcast</a> <span class="muted">SN93</span></td><td>21,967 TAO</td><td>0.01489</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr><td>4</td><td><a href="/bittensor-docs/subnets/85.html">VidAIO</a> <span class="muted">SN85</span></td><td>11,671 TAO</td><td>0.004209</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr class="me" aria-current="true"><td>5</td><td>EveryFrame <span class="muted">SN117, this page</span></td><td>4,628 TAO</td><td>0.006439</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr><td>6</td><td><a href="/bittensor-docs/subnets/69.html">Herald</a> <span class="muted">SN69</span></td><td>3,471 TAO</td><td>0.004991</td><td><span class="v2-barrier b-high">High</span></td></tr><tr><td>7</td><td><a href="/bittensor-docs/subnets/115.html">MoirAI</a> <span class="muted">SN115</span></td><td>3,248 TAO</td><td>0.002182</td><td><span class="v2-barrier b-unknown">Unknown</span></td></tr></tbody></table></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-11-07</span> <span class="muted">(team site; chain)</span> Studio home changed since 11-02: now &#x27;live&#x27; (was &#x27;prelaunch&#x27;) and lists AI Film Contests, prizes paid on chain from the treasury wallet; no prize pool or date yet.</li>
+<li><span class="when">2026-11-07</span> <span class="muted">(team API; chain)</span> Treasury API shows no new work epoch since 26143; the signed feed runs on.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Check demand first in the dashboard and signed epoch feed.</li>
+<li>Register a hotkey (0.05 TAO burn), open a Phala Cloud account with a workspace token, fund a provider account.</li>
+<li>Install everycli (v0.9.6), run setup with an hourly ceiling, deploy, then post a discount per model; an open PR adds terms acceptance.</li>
+<li>Validators: Docker image (repo v0.8.4, docs v0.5.1), a permit-holding hotkey and an archive RPC.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Weights are validator opinions, not payouts: the treasury&#x27;s 6,283 alpha lists no payout; contest prizes have no amount or date.</li>
+<li>The operator runs accounting and job approval; the coordinator is private, and the TEE shows which image ran, not that the provider did the work.</li>
+<li>Usage and revenue come only from the team, which says buybacks will follow, with no amount or date.</li>
+<li>The price jumps have no known cause. Not shown: who holds the treasury coldkey (not owner-linked), why owner uid 0 stopped on 11-05, whether uid 7 is the team&#x27;s own validator.</li>
+<li>Team chat after 2026-11-01 was unreadable (archive down); newer posts may change this page.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/everyframe-studio/everyframe-miner" rel="noopener noreferrer">Miner repo (GitHub)</a></li>
+<li><a href="https://github.com/everyframe-studio/everyframe-validator" rel="noopener noreferrer">Validator repo (GitHub)</a></li>
+<li><a href="https://docs.everyframe.studio/mining/" rel="noopener noreferrer">Mining docs</a></li>
+<li><a href="https://docs.everyframe.studio/mining/rewards/" rel="noopener noreferrer">Rewards and emissions docs</a></li>
+<li><a href="https://docs.everyframe.studio/validators/" rel="noopener noreferrer">Validator docs</a></li>
+<li><a href="https://subnet.everyframe.studio/" rel="noopener noreferrer">Subnet site and dashboard</a></li>
+<li><a href="https://everyframe.studio/" rel="noopener noreferrer">EveryFrame Studio</a></li>
+<li><a href="https://everyframe.studio/contests/" rel="noopener noreferrer">AI Film Contests (team site)</a></li>
+<li><a href="https://subnet.everyframe.studio/dashboard/api/treasury" rel="noopener noreferrer">Treasury data (team API)</a></li>
+<li><a href="https://subnet.everyframe.studio/mainnet/v1/validator/epochs/26188.json" rel="noopener noreferrer">Accounting feed, epoch 26188</a></li>
+<li><a href="https://subnet.everyframe.studio/mainnet/v1/validator/allocations/26197.json" rel="noopener noreferrer">Assignment feed, chain epoch 26197</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 8 sources</summary>
+<ul>
+<li><strong>msg</strong> #117-everyframe, 2026-09-21 to 2026-11-01 (archive unreachable on 2026-11-02, 2026-11-04, 2026-11-05, 2026-11-06 and 2026-11-07)</li>
+<li><strong>repo</strong> everyframe-studio/everyframe-validator@789f1ee (checked 2026-11-07, no commit since 2026-11-03; v0.8.4; README, PROTOCOL.md, TREASURY-WALLET.md, release notes v0.5.1 to v0.8.4)</li>
+<li><strong>repo</strong> everyframe-studio/everyframe-miner@ffdbae1 (checked 2026-11-07, no commit on the main branch since 2026-11-03; v0.9.6; release notes v0.8.4 to v0.9.6; open PRs #67 to #69)</li>
+<li><strong>web</strong> https://docs.everyframe.studio/mining/ , /mining/rewards/ and /validators/ (re-read 2026-11-07, byte-identical to 2026-11-06: mining pages reviewed 2026-11-03, validator pages 2026-10-31; earlier reads 2026-10-21 to 2026-11-06)</li>
+<li><strong>web</strong> https://subnet.everyframe.studio/ (home page unchanged since 2026-11-06), its dashboard data (24 hour view generated 2026-11-07 13:07Z at finalized block 9454414, 7 day view 12:56Z at 9454363), treasury data endpoint (read 2026-11-07 13:07Z at chain head 9454427 and again 13:34Z at 9454552: active since epoch 26115, work epochs 26124 to 26143 and latest chain epoch 26152 as on 2026-11-06, payouts empty), signed epoch feed epochs 26100 to 26188 (26157 not published) and assignment feed 26123 to 26197 (26166 not published; read 2026-11-06 and 2026-11-07)</li>
+<li><strong>web</strong> https://everyframe.studio/ home page (read 2026-11-07 13:10Z) and /contests/ (read 2026-11-07 13:11Z and 13:34Z, same text)</li>
+<li><strong>web</strong> Chain read at block 9454419 (2026-11-07 13:05Z UTC): SN117 (everyframe.studio): registered 2025-06-05, tempo 360, 185 of 256 uids, commit-reveal on; emission weights burn/recycle/owner/validator/miner = 0/0/33/34/33 %, RecycleOrBurn = Recycle; uids under the owner hotkey or owner coldkey hold 0 % of incentive and 0 % of last-epoch emission (a floor); 7 validators have weight rows, on average 9.7 % of weight goes to uid 0. Chain read at block 9454419 (2026-11-07 13:05Z UTC), compared with block 9443292 (2026-11-06 00:00Z UTC): SN117: no setting changed in 33 checked items; SubnetworkN differs (moves with demand); emission split unchanged; pool 4628.74 -&gt; 4627.87 TAO. Uids 0, 3, 7, 11, 13, 21, 58, 156 and 157 and the weight rows of all permit holders read at the same block; uids 156 and 157 sit under coldkey tag 990d62, the treasury coldkey named in the validator repo (sha256 tag match).</li>
+<li><strong>web</strong> Chain read at block 9454419 (2026-11-07 13:05Z): price SN117, 6 samples every 7d from block 9238419 (2026-10-08 12:46Z): price 0.002617 -&gt; 0.006439 TAO per alpha (+146.0%), pool TAO 2924.9 -&gt; 4627.9; over the 5 intervals where the pool change equals flow + protocol: net user flow +1715.9 TAO (staked minus unstaked), protocol flow -12.9 TAO, gross volume 46782.0 TAO. Chain read at block 9454419 (2026-11-07 13:05Z): price SN117, 7 samples every 12h from block 9432819 (2026-11-04 13:05Z): price 0.007373 -&gt; 0.006439 TAO per alpha (-12.7%), pool TAO 4916.1 -&gt; 4627.9; over the 6 intervals where the pool change equals flow + protocol: net user flow -301.2 TAO (staked minus unstaked), protocol flow +12.9 TAO, gross volume 12068.3 TAO. Pool rank 87 of 128 from the shared snapshot at block 9454419.</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/116.html"><small>← Previous</small>SN116 Carbon</a><a rel="next" href="/bittensor-docs/subnets/118.html"><small>Next →</small>SN118 Ditto</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-11-07. Site built 2026-11-07. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

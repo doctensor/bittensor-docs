@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Connito (SN102) | Bittensor Subnet Docs</title>
+<meta name="description" content="Miners train small add-on experts beside a frozen Qwen3.6 model; validators rank them against the base model.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h18">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>102</span><div>
+<h1>Connito <span class="muted">SN102</span></h1>
+<p class="tagline">Miners train small add-on experts beside a frozen Qwen3.6 model; validators rank them against the base model.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl4"><b>5.1<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>23<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>8.3<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-11-02</b><span>last chat</span></li><li class="pw"><b>3,660</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Shipping</b><span>code activity</span></li><li class="pw"><b>79</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-10-30</b><span>last commit</span></li><li class="pw"><b>2026-10-30</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>decentralized model training</dd>
+<dt>Status</dt><dd>Active: a round every 1.75 hours. On 2026-11-07 the owner UID holds 25% of incentive; the miners paid on 11-06 earn nothing now.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-11-07</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Reward split on 2026-11-07</a></li><li><a href="#sn-x1">Docs vs code vs chain</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-similar">Similar subnets</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>miners train a small add-on to a frozen Qwen3.6 model each 1.75-hour round; the best one starts the next.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>UID 0 holds 25.0% of incentive; three miners hold about 20% each, one 14.7%, two under 0.2%.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>none of 11-06&#x27;s earners is paid now; six outside uids get about 10.4 TAO a day (gross); one coldkey holds 40%.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>mining needs a 48 GB GPU; validating needs a place on the owner&#x27;s whitelist (6 permit holders).</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>customers submit training tasks; 11 public requests, 1 in training, no named payer.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Trains a small residual expert each round and posts two on-chain commits.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-caution">GPU needed</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>GPU with 48 GB VRAM (A6000 or L40S class); RAM 32 GB min, 64 GB advised; SSD 100 GB min</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None (free Hugging Face read token)</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Registration burn 0.022 TAO on 2026-11-07; no stake documented</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Python 3.10+, CUDA 12.x, wallet, Hugging Face login</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Scores submissions against the frozen base and sets weights.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-caution">GPU needed</li><li class="fl fl-good">No paid service</li><li class="fl fl-bad">Permissioned</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>One 48 GB GPU, about 62 GiB RAM, 100 GB free disk, driver 570+</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None (optional Weights &amp; Biases key)</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>1,000 TAO permit threshold plus a place on the owner&#x27;s whitelist</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Docker with NVIDIA runtime; auto-updating image</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div><div class="v2-role"><h3>Task requester <span class="v2-barrier b-unknown">Barrier unknown</span></h3><p>Submits a task to be trained for (open since 2026-10-26).</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-unk">Paid service unknown</li><li class="fl fl-unk">Access unknown</li></ul><dl class="v2-needs"><div class="v2-need n-no"><dt>Hardware</dt><dd>None</dd></div><div class="v2-need n-unk"><dt>API tokens / subscriptions</dt><dd>Not documented</dd></div><div class="v2-need n-unk"><dt>Stake / fees</dt><dd>Not documented; the first slots used an invite code</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>A task description on connito.ai/train</dd></div></dl><a class="v2-more" href="#sn-role-2">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-neutral">Neutral</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-11-07. Not financial advice.</span></div><p>Price down 15% in 30 days, up 8% in 7; the owner UID stays at 25% and outside miner pay is 10.4 TAO a day. <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>Connito trains one shared language model in the open. A frozen Qwen3.6 base stays fixed; each round miners train a small add-on expert and validators keep the best. Since 2026-10-30 a second validator grades answers to customer task prompts, worth 15% of rewards.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Each round a miner downloads the latest winning add-on, trains a new residual expert (about 250 MB), uploads it to Hugging Face and posts two on-chain commits.</p></div><div><h3>Validators</h3><p>The training validator loads each submission onto the frozen base and measures gain on the task data, any loss rise on general C4 text (above 0.02 scores zero) and how often the new gate fires (target about 20%). A team-run prompt validator has an automated judge grade answers to private prompts.</p></div><div><h3>Incentive</h3><p>Each round the top three miners with a positive score earn rank points (2.25, 1.5, 1.0); a rolling average sets the loss weights: 98% to the best qualified miners (up to three), 2% to the next five.</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-11-07, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-caution">Whitelisted</span>6 permit holders; the code also needs the owner&#x27;s whitelist; the team runs the prompt validator.</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">34.9%</span>UID 0 holds 34.9% of emission and 25.0% of incentive; owner cut 18%, RecycleOrBurn is Burn (25% of miner side withheld).</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">7 uids</span><span class="v2-sx muted">top 5 hold 99.7% of incentive.</span> 7 uids paid incl. UID 0 (25.0%); the top 5 hold 99.7%; three miners near 20%; leaders change fast.</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Converged</span>4 of 5 weight-setters use 7 targets; UID 176 uses 12; one team scorer, so not proof of copying.</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-caution">Partial</span>MIT repo has miner and loss validator code; prompt validator, judge and prompts are not public.</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Trains a small residual expert each round and posts two on-chain commits.</p><ul>
+<li>Team figure (2026-10-14): the reference miner peaks near 39.5 GB GPU memory.</li>
+<li>None of 11-06&#x27;s earners is paid now; the new ones registered 2026-11-03 to 11-06.</li>
+<li>Only the first committer of a model is ranked in the prompt share (team).</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Scores submissions against the frozen base and sets weights.</p><ul>
+<li>6 permit holders, 5 with weights set; two online (UID 0, vtrust 1.0; UID 176, 0.85).</li>
+<li>The prompt mix (20% of weights) is off by default; it needs the prompt validator&#x27;s hotkey and a rules hash.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-2"><h3>Task requester <span class="v2-barrier b-unknown">Barrier unknown</span></h3><p>Submits a task to be trained for (open since 2026-10-26).</p><ul>
+<li>1 request in training, 10 queued; pricing and payment are not published.</li>
+</ul></section></div>
+<h2 id="sn-x0">Reward split on 2026-11-07</h2>
+<p>Four validators use 7 targets; UID 176 uses 12.</p>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Share</th><th>Goes to</th><th>Decided by</th></tr></thead><tbody><tr><td>39.9%</td><td>Two miners, 20% each (uids 178, 169), one coldkey, registered 2026-11-06</td><td>All five; UID 176 gives uid 169 24%</td></tr><tr><td>20.1%</td><td>One miner (uid 214, registered 2026-11-03)</td><td>All five weight-setters</td></tr><tr><td>14.7%</td><td>One miner (uid 64, registered 2026-11-04)</td><td>Four of five; UID 176 gives it 0.06%</td></tr><tr><td>25.0%</td><td>UID 0 (owner): the documented fixed share</td><td>All five weight-setters</td></tr><tr><td>0.3%</td><td>Two uids (129, 184)</td><td>Training validator, next-five group</td></tr></tbody></table></div>
+<h2 id="sn-x1">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Owner&#x27;s share</td><td>Docs: UID 0 receives a fixed 25%; it is not destroyed</td><td>Chain: UID 0 holds 25.0% of incentive; Burn withholds 25% of the miner side</td><td>2026-11-07</td></tr><tr><td>Training data</td><td>Prerequisites page names a math dataset</td><td>Chat: team said PubMed 80%, C4 20%</td><td>2026-11-02</td></tr><tr><td>Prompt mix</td><td>Guide: 15% to prompt winners</td><td>Chain: three miners hold about 20% each; code: mix off by default</td><td>2026-11-07</td></tr></tbody></table></div>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-neutral">Neutral</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-11-07. Not financial advice.</span></div>
+<p class="v2-thesis">Net flow is -134 TAO over 30 days (4% of the pool); the +328 TAO day of 2026-11-03 is mostly reversed. Earners change within days; demand evidence is team-side.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.004688 TAO per alpha</dd></div><div><dt>Pool</dt><dd>3,171 TAO, rank 97 of 128</dd></div><div><dt>Price, 30 days</dt><dd>-15%, 2026-10-08 to 2026-11-07</dd></div><div><dt>Net flow, 30 days</dt><dd>-134 TAO, 2026-10-08 to 2026-11-07</dd></div><div><dt>Miner pay</dt><dd>10.4 TAO per day over 6 outside uids (too few for an average)</dd></div><div><dt>Code activity</dt><dd>last commit 2026-10-30; 134 commits in 30 days; last release 2026-10-30</dd></div></dl>
+<div class="v2-trend"><h3>Trend</h3><div class="v2-tbody"><figure class="v2-tfig"><svg class="v2-spark down" viewBox="0 0 240 56" role="img" aria-label="Price in TAO per alpha, 2026-09-28 to 2026-11-07: 0.006338 to 0.004688, -26.0%"><polyline points="5.0,5.0 22.2,21.6 33.8,16.4 39.5,18.0 45.2,25.9 51.0,28.0 62.5,20.4 74.0,13.3 79.8,19.2 85.5,22.1 91.2,15.8 102.8,24.0 114.2,25.2 120.0,23.2 125.8,26.3 131.5,28.6 143.0,45.9 154.5,49.1 160.2,48.8 166.0,47.8 171.8,45.9 177.5,50.1 183.2,50.8 189.0,51.0 194.8,50.4 200.5,47.0 206.2,22.2 212.0,28.6 217.8,39.0 223.5,38.5 235.0,42.9"/><circle cx="235.0" cy="42.9" r="3"/></svg><figcaption><strong>Price</strong> <span class="down">-26.0%</span> <span class="muted">0.006338 to 0.004688 TAO per alpha, 2026-09-28 to 2026-11-07</span></figcaption></figure><dl class="v2-tfacts"><div><dt>Net flow, 30 days</dt><dd><span class="down">-134 TAO</span> <span class="muted">2026-10-08 to 2026-11-07</span></dd></div><div><dt>Verdict history</dt><dd><ol class="v2-vh"><li><span class="muted">2026-11-03</span> <span class="st s-neutral">Neutral</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-04</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-06</span> <span class="st s-neutral">Neutral</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-07</span> <span class="st s-neutral">Neutral</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li></ol></dd></div></dl></div></div>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>Price +8% and net flow +187 TAO over the last 7 days.</li>
+<li>Task cycles keep running; cycle 1386 results are out.</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>Every earner of 11-06 is unpaid now; one coldkey holds 40% of incentive.</li>
+<li>No named paying customer; last code commit 2026-10-30.</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> A stated reason for the earner churn, named paying requests, or UID 0 moving off 25%.</p>
+<p class="muted">Since the last pass: Unchanged from 2026-11-06; the 30-day flow fell from -12 to -134 TAO.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-similar">Similar subnets</h2>
+<div class="v2-sim"><p>By pool size this is <strong>rank 14 of 19</strong> among the subnets grouped as <em>training</em> (what they mainly sell). Pool and price as of 2026-11-06 to 2026-11-07, price in TAO per alpha; the barrier is the easiest miner role.</p><div class="scroll"><table class="v2-table"><thead><tr><th>#</th><th>Subnet</th><th>Pool</th><th>Price</th><th>Miner barrier</th></tr></thead><tbody><tr><td>12</td><td><a href="/bittensor-docs/subnets/38.html">ChronoLLM</a> <span class="muted">SN38</span></td><td>4,882 TAO</td><td>0.005079</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>13</td><td><a href="/bittensor-docs/subnets/127.html">Zils</a> <span class="muted">SN127</span></td><td>3,439 TAO</td><td>0.00299</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr class="me" aria-current="true"><td>14</td><td>Connito <span class="muted">SN102, this page</span></td><td>3,171 TAO</td><td>0.004688</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>15</td><td><a href="/bittensor-docs/subnets/119.html">CapabilityForge Next</a> <span class="muted">SN119</span></td><td>3,005 TAO</td><td>0.002165</td><td><span class="v2-barrier b-unknown">Unknown</span></td></tr><tr><td>16</td><td><a href="/bittensor-docs/subnets/91.html">Cascade</a> <span class="muted">SN91</span></td><td>2,987 TAO</td><td>0.003845</td><td><span class="v2-barrier b-high">High</span></td></tr></tbody></table></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-11-07</span> <span class="muted">(Chain)</span> Uids 214, 178 and 169 hold about 20% each and uid 64 14.7%; uids 178 and 169 registered on 2026-11-06.</li>
+<li><span class="when">2026-11-07</span> <span class="muted">(Chain)</span> Uids 144 and 2 of 11-06 were re-registered by new hotkeys; uids 230, 26 and 14 earn nothing.</li>
+<li><span class="when">2026-11-06</span> <span class="muted">(dataless-api.connito.ai, 2026-11-07)</span> Cycle 1386 results published (2 of 2 prompts passed); cycle 1387 is open; 11 public requests.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Read the miner guides at doc.connito.ai (prerequisites, prompt evaluation).</li>
+<li>Check for a 48 GB GPU, 32-64 GB RAM, Python 3.10+, CUDA 12.x and a Hugging Face read token.</li>
+<li>Register a hotkey on SN102 (about 0.02 TAO on 2026-11-07; the cost moves with demand).</li>
+<li>Download the pinned Qwen3.6-35B-A3B revision (about 72 GB) and run release v0.7.2.</li>
+<li>Post both on-chain commits inside the windows the phase API shows.</li>
+<li>For the prompt share, keep your model on Hugging Face until results are published.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>The prompt validator, judge and prompts are not public, so 15% of rewards rests on grading outsiders cannot check.</li>
+<li>Earners change within days; why is unconfirmed, and team chat after 2026-11-01 is unread.</li>
+<li>Earner coldkeys run 10 to 27 uids and one holds 40% of incentive; one operator per coldkey is our reading.</li>
+<li>Phase lengths and the whitelist come from owner-run services; README docs links return 404.</li>
+<li>Fairness of top miners is disputed in chat; the team&#x27;s re-run has no posted result.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/Connito-AI/Connito" rel="noopener noreferrer">GitHub (subnet)</a></li>
+<li><a href="https://github.com/Connito-AI/expert-hunter" rel="noopener noreferrer">GitHub (Expert Hunter proposals)</a></li>
+<li><a href="https://connito.ai/" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://connito.ai/train" rel="noopener noreferrer">Submit a training task</a></li>
+<li><a href="https://doc.connito.ai/miner/prerequisites/" rel="noopener noreferrer">Miner docs</a></li>
+<li><a href="https://doc.connito.ai/miner/prompt-evaluation/" rel="noopener noreferrer">Prompt evaluation guide</a></li>
+<li><a href="https://dashboard.connito.ai/" rel="noopener noreferrer">Dashboard</a></li>
+<li><a href="https://cycle-api.connito.ai/get_phase" rel="noopener noreferrer">Phase API</a></li>
+<li><a href="https://x.com/ConnitoAI" rel="noopener noreferrer">X (project announcements)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 8 sources</summary>
+<ul>
+<li><strong>repo</strong> Connito-AI/Connito@f54dda5 (tag v0.7.2, 2026-10-30), MIT; connito/validator (evaluator, round_groups, prompt_blend, chain_submitter), shared/chain.py and config.py, docs/miner-validation-group-promotion.md and docs/validator-docker-operators.md, read 2026-10-31 to 2026-11-04; no newer commit on 2026-11-07</li>
+<li><strong>repo</strong> Connito-AI/expert-hunter@3b26095 (2026-09-23)</li>
+<li><strong>web</strong> Chain read at block 9451179 (2026-11-07 02:17Z UTC): SN102 (ConnitoAI): registered 2026-03-28, tempo 360, 256 of 256 uids, commit-reveal off; emission weights burn/recycle/owner/validator/miner = 0/0/18/41/41 % (stored), RecycleOrBurn = Burn; no setting changed in 33 checked items since block 9443292 (2026-11-06 00:00Z) except the registration burn; uids under the owner hotkey or owner coldkey hold 25.0 % of incentive and 34.91 % of last-epoch emission (a floor); 5 validators have weight rows, on average 25.0 % of weight goes to uid 0. Incentive on 7 uids, top 5 hold 99.7 %; permits 6.</li>
+<li><strong>web</strong> Chain read at block 9451179 (2026-11-07 02:17Z): weights set by validator uid 0: uid 0 25.0 %, uids 214 / 178 / 169 20.06 / 19.97 / 19.97 %, uid 64 14.7 %, uids 129 / 184 0.16 / 0.14 %; uids 0, 85, 91, 171 have 7 targets, uid 176 has 12 (uid 0 25.0 %, uids 169 / 214 / 178 23.98 / 20.06 / 19.97 %, uids 193 / 145 6.02 / 4.52 %). Uid reads at blocks 9451179 and 9451255 (2026-11-07 02:17Z and about 02:33Z): uid 214 registered 2026-11-03 13:01Z, uid 64 2026-11-04 06:54Z, uid 129 2026-11-05 08:33Z, uids 178, 169, 184 on 2026-11-06 06:33Z, 12:33Z and 13:21Z, all without permits; their coldkeys run 23, 27, 14 (uids 178, 169, 129) and 10 uids; uids 144, 2 (re-registered 2026-11-06), 230, 26, 14 earn 0; shared snapshot over 129 subnets for pool and price rank.</li>
+<li><strong>web</strong> Chain read at block 9451179 (2026-11-07 02:17Z): price SN102, 6 samples every 7d from block 9235179 (2026-10-08 01:58Z): price 0.005520 -&gt; 0.004688 TAO per alpha (-15.1%), pool TAO 3383.6 -&gt; 3171.4; over the 5 intervals where the pool change equals flow + protocol: net user flow -134.1 TAO (staked minus unstaked), protocol flow -78.1 TAO, gross volume 16512.7 TAO. Daily samples 2026-10-31 to 2026-11-07: price +8.4 %, net user flow +187.4 TAO (2026-11-03: +328.3 TAO).</li>
+<li><strong>web</strong> https://doc.connito.ai/miner/prompt-evaluation/ and /miner/prerequisites/, https://connito.ai/train (read 2026-10-31 and 2026-11-02); https://dataless-api.connito.ai/v1/prompt-cycle (cycle 1387, cutoff block 9455055), /v1/requests (11 requests, two pages) and the training request&#x27;s iterations (iteration 17 = cycle 1386) (2026-11-07)</li>
+<li><strong>web</strong> https://dashboard-api-v2.connito.ai/api/v2/validator-status (public dashboard API, read 2026-11-07 02:32 UTC); https://cycle-api.connito.ai/get_phase (cycle 18036, Submission phase, 2026-11-07)</li>
+<li><strong>msg</strong> #102-connito-ai 2026-03-30 to 2026-11-01 (archive unreachable on 2026-11-07)</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/101.html"><small>← Previous</small>SN101 Tag101</a><a rel="next" href="/bittensor-docs/subnets/104.html"><small>Next →</small>SN104 TAOStatus</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-11-07. Site built 2026-11-07. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

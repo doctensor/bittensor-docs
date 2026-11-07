@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>InfiniteQuant (SN89) | Bittensor Subnet Docs</title>
+<meta name="description" content="Miners post trade calls graded on public prices; since 2026-11-05 half of emission waits on a hosted-agent contest.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h23">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>89</span><div>
+<h1>InfiniteQuant <span class="muted">SN89</span></h1>
+<p class="tagline">Miners post trade calls graded on public prices; since 2026-11-05 half of emission waits on a hosted-agent contest.</p>
+<span class="st s-transitioning">transitioning</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl4"><b>4.7<small>/day</small></b><span>last 7 d</span></li><li class="pl4"><b>2.7<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>7.0<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-11-02</b><span>last chat</span></li><li class="pw"><b>1,383</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Shipping</b><span>code activity</span></li><li class="pw"><b>75</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-11-06</b><span>last commit</span></li><li class="pw"><b>2026-11-04</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>trading signals / prediction markets</dd>
+<dt>Status</dt><dd>HF and Markets ended 2026-11-05; the Agent share (50%) still burns on UID 0 and the Agent board is gone.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-11-07</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">What changed on 2026-11-05</a></li><li><a href="#sn-x1">Where the old shares went</a></li><li><a href="#sn-x2">The Agent contest</a></li><li><a href="#sn-x3">New on the team site (11-06)</a></li><li><a href="#sn-x4">Docs vs code vs chain</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-similar">Similar subnets</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>since 2026-11-05 miner emission is LF 30%, Agent 50%, referrers 20%; HF and Markets are gone.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>the Agent share still burns (UID 0 holds 62.6% of incentive); the Agent board, 0 of 115 qualified on 11-05, is gone.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>a miner needs no GPU, a free team feed token and 0.025 TAO; wins pay only after an 8-day warmup.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>it sells signals by API and challenges; its own SN8 book showed -$69,653 on $1M (data of 10-15).</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>price -2.8% and net outflow 62 TAO in 30 days. Markets vault releases reported stalled since 10-21 (GitHub #41).</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-low">Low barrier</span></h3><p>Send encrypted long/short calls; HF ended 2026-11-05; the Agent route needs the team&#x27;s hosted IQ Agent.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-no"><dt>Hardware</dt><dd>No GPU (no GPU library in the code); CPU specs not stated</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None required; a free feed token comes from the team&#x27;s Telegram bot</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Burn 0.025 TAO (2026-11-07); README says about 0.05</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Python 3.10 and btcli, or the team&#x27;s Telegram bot; 8-day warmup</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Grade calls on public prices and set weights; the repo expects one authoritative validator.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-no"><dt>Hardware</dt><dd>No GPU (no GPU library in the code); CPU specs not stated</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None: no market-data key is needed (README)</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Burn 0.025 TAO; permit needs top-64 stake and 1,000 TAO</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Python 3.10; pull master (agent books due 2026-11-09)</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-11-07. Not financial advice.</span></div><p>Bearish: 62.6% of main-mechanism incentive burns, Markets payouts are reported stuck, no Agent qualifier is shown. <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>SN89 pays miners who show skill at calling price direction; validators grade the calls on public prices. The team says it trades the signals and sells them by API and challenges. Half of miner emission waits on its hosted Agent contest.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>LF miners seal a call (pair and direction) under a 15-minute timelock and post its hash on chain, up to 3 a day. HF ended 2026-11-05; Agent accounts are hosted by the team.</p></div><div><h3>Validators</h3><p>Validators open the commitments after the timelock and grade each call on public prices: take-profit first wins, stop-loss first loses.</p></div><div><h3>Incentive</h3><p>Mechanism 0 gets 80% of emission, mechanism 1 (referrers) 20%; mechanism 0 pays LF 37.5% and Agent 62.5%. A miner qualifies with 8+ decisive calls beating a coin flip at about 90% confidence; weight is qualified wins times a tier (1.0x at 55% to 2.0x at 70%), fading over 30 days. Copying is penalised.</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-11-07, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-good">Open</span>8 of 10 permit holders set weights, the owner&#x27;s UID 0 included; UID 42 takes 72% of dividends.</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">31.6%</span>UID 0 shows 31.65% of emission, mainly a 62.6% incentive share the chain burns; owner cut 18%, RecycleOrBurn Burn.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">236 uids</span><span class="v2-sx muted">top 5 hold 72.2% of incentive.</span> 236 UIDs earn on the main mechanism; the top five hold 72.2%, 62.6% of it the owner&#x27;s UID 0 (burned).</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Converged</span>8 of 8 validators rank UID 0 first; a replayable scorer makes honest validators agree, so it proves little.</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-good">Open</span>Miner and validator code are public under MIT; hosted-account payouts and the vault release path are not documented.</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-low">Low barrier</span></h3><p>Send encrypted long/short calls; HF ended 2026-11-05; the Agent route needs the team&#x27;s hosted IQ Agent.</p><ul>
+<li>LF: 3 calls a day; miners that called in the last 3 days get dust weight.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Grade calls on public prices and set weights; the repo expects one authoritative validator.</p><ul>
+<li>8 of 10 permit holders set weights, all ranking UID 0 first; UID 42 takes 72% of dividends.</li>
+</ul></section></div>
+<h2 id="sn-x0">What changed on 2026-11-05</h2>
+<p>Share of miner emission, from the code&#x27;s schedule.</p>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Contest</th><th>Before</th><th>2026-11-05</th><th>2026-11-09 08:00 UTC</th></tr></thead><tbody><tr><td>LF</td><td>30%</td><td>30%</td><td>30%</td></tr><tr><td>HF</td><td>30%</td><td>Ended</td><td>-</td></tr><tr><td>Markets</td><td>20%</td><td>Discontinued</td><td>-</td></tr><tr><td>Agent</td><td>-</td><td>50%, LF-graded, burned</td><td>50%, agent books</td></tr><tr><td>Referrers</td><td>20%</td><td>20%</td><td>20%</td></tr></tbody></table></div>
+<h2 id="sn-x1">Where the old shares went</h2>
+<ul class="v2-list">
+<li>Chain: UID 0 holds 62.6% of main-mechanism incentive (25.0% on 11-04), the burned Agent share. Vault seat UID 37 went to a new registrant on 11-06; entity UID 39 rose to 0.55% (10 alpha a day, cause not stated).</li>
+<li>Code: IQ Markets stopped taking bets on 2026-11-04 and its share ended 11-05.</li>
+<li>Chain: the referrer mechanism has 17 earning UIDs (40 on 11-04), the top one 26.3%; why is not stated.</li>
+<li>GitHub issue #41 (open since 2026-10-23, no team reply by 11-07): no vault release on chain since 2026-10-21.</li>
+</ul>
+<h2 id="sn-x2">The Agent contest</h2>
+<ul class="v2-list">
+<li>Code: only accounts of the one allow-listed IQ entity (UID 39) enter, hosted in the team&#x27;s IQ Agent; the chain sees one UID.</li>
+<li>Team page, 11-05: 115 agents, none qualified (40 decisive calls, 55% floor), the best had 5; the board is gone on 11-06. At 3 calls a day nobody reaches 40 before 11-09, so the share burns until then.</li>
+<li>Code: from 2026-11-09 08:00 UTC it pays agent books: leverage books (0.25 per pair, 1.0 gross, 8% drawdown eliminates) earn weekly high-water gains; 0 books showed on 11-05.</li>
+<li>Code: the entity needs a 40,000 alpha bond; the IQ Fund LP coldkey held 44,798 on 11-04.</li>
+</ul>
+<h2 id="sn-x3">New on the team site (11-06)</h2>
+<ul class="v2-list">
+<li>IQ Challenges sells simulated $50,000 or $100,000 accounts with weekly USDT payouts: the $100,000 pass is $944, or $629 paid in SN89 tokens. No sales show on chain.</li>
+<li>Signal Performance (data stamp 2026-10-15): 432 closed live SN8 trades, 52% won, -$69,653 on $1M since go-live.</li>
+</ul>
+<h2 id="sn-x4">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Emission split</td><td>Team page: LF 30, HF 0, recruiters 20 (no Agent line)</td><td>Code: LF 30, Agent 50, referrers 20; chain: UID 0 62.6%</td><td>2026-11-07</td></tr><tr><td>First agent-book pay</td><td>README: 2026-11-09 08:00 UTC</td><td>Code: go-live checklist, example dates: 11-23</td><td>2026-11-07</td></tr></tbody></table></div>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-11-07. Not financial advice.</span></div>
+<p class="v2-thesis">Net outflow was 62 TAO in 30 days on a 6,057 TAO pool, price -2.8%: not a price call. The Agent share burns on UID 0, Markets payouts are reported stuck, and the team&#x27;s own SN8 book was down $69,653 on 10-15. Sales are team claims.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.002906 TAO per alpha</dd></div><div><dt>Pool</dt><dd>6,057 TAO, rank 69</dd></div><div><dt>Price, 30 days</dt><dd>-2.8%, 2026-10-08 to 2026-11-07</dd></div><div><dt>Net flow, 30 days</dt><dd>-62 TAO, 2026-10-08 to 2026-11-07</dd></div><div><dt>Miner pay</dt><dd>not computed (2 mechanisms)</dd></div><div><dt>Code activity</dt><dd>last commit 2026-11-06; 93 commits (75 code) in 30 days; no releases</dd></div></dl>
+<div class="v2-trend"><h3>Trend</h3><div class="v2-tbody"><figure class="v2-tfig"><svg class="v2-spark down" viewBox="0 0 240 56" role="img" aria-label="Price in TAO per alpha, 2026-09-28 to 2026-11-07: 0.003018 to 0.002906, -3.7%"><polyline points="5.0,15.5 16.5,5.0 22.2,9.1 33.8,19.0 45.2,22.1 56.8,26.3 62.5,24.0 68.2,28.2 74.0,25.6 85.5,21.2 97.0,24.0 102.8,21.5 108.5,27.2 114.2,30.1 125.8,34.2 137.2,36.7 143.0,31.0 148.8,31.3 154.5,6.6 166.0,27.2 177.5,32.0 183.2,34.8 189.0,33.6 194.8,37.7 206.2,42.1 217.8,45.3 223.5,47.8 229.2,50.0 235.0,51.0"/><circle cx="235.0" cy="51.0" r="3"/></svg><figcaption><strong>Price</strong> <span class="down">-3.7%</span> <span class="muted">0.003018 to 0.002906 TAO per alpha, 2026-09-28 to 2026-11-07</span></figcaption></figure><dl class="v2-tfacts"><div><dt>Net flow, 30 days</dt><dd><span class="down">-62 TAO</span> <span class="muted">2026-10-08 to 2026-11-07</span></dd></div><div><dt>Verdict history</dt><dd><ol class="v2-vh"><li><span class="muted">2026-11-04</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-05</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-06</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-07</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li></ol></dd></div></dl></div></div>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>The team ships: 75 code commits in 30 days</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>Net outflow of 62 TAO in 30 days (4 of 5 weekly intervals out)</li>
+<li>UID 0 burn 62.6% of incentive; Markets payouts reported stuck since 10-21</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> Bullish: agent-book payouts reaching hosted accounts after 11-09. Bearish: more burn or outflow.</p>
+<p class="muted">Since the last pass: Unchanged since 2026-11-06.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-similar">Similar subnets</h2>
+<div class="v2-sim"><p>By pool size this is <strong>rank 9 of 11</strong> among the subnets grouped as <em>trading</em> (what they mainly sell). Pool and price as of 2026-11-07, price in TAO per alpha; the barrier is the easiest miner role.</p><div class="scroll"><table class="v2-table"><thead><tr><th>#</th><th>Subnet</th><th>Pool</th><th>Price</th><th>Miner barrier</th></tr></thead><tbody><tr><td>7</td><td><a href="/bittensor-docs/subnets/6.html">Numinous</a> <span class="muted">SN6</span></td><td>7,238 TAO</td><td>0.002165</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr><td>8</td><td><a href="/bittensor-docs/subnets/79.html">MVTRX</a> <span class="muted">SN79</span></td><td>6,827 TAO</td><td>0.002931</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr class="me" aria-current="true"><td>9</td><td>InfiniteQuant <span class="muted">SN89, this page</span></td><td>6,057 TAO</td><td>0.002906</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr><td>10</td><td><a href="/bittensor-docs/subnets/123.html">MANTIS</a> <span class="muted">SN123</span></td><td>5,580 TAO</td><td>0.002256</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr><td>11</td><td><a href="/bittensor-docs/subnets/88.html">Investing88</a> <span class="muted">SN88</span></td><td>5,526 TAO</td><td>0.002414</td><td><span class="v2-barrier b-low">Low</span></td></tr></tbody></table></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-11-06</span> <span class="muted">(chain)</span> Chain: UID 37 (Markets vault seat) re-registered at 13:58Z; permit holders fell from 11 to 10.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Use Python 3.10, clone the repo and install requirements.txt.</li>
+<li>Register a hotkey on netuid 89 with btcli (burn 0.025 TAO on 11-07).</li>
+<li>Send /token to the team&#x27;s Telegram signals bot and export it as SN89_FEED_TOKEN.</li>
+<li>Run neurons/miner.py for LF calls. Expect 8 days at dust weight; call at least every 3 days.</li>
+<li>Hosted routes: the team&#x27;s Telegram bot (infinitequant.app/how-to-mine) runs a miner for you; IQ Agent payout terms are undocumented.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Chain figures are validator outputs on 2026-11-07, not payouts; chat after 2026-11-01 was not read.</li>
+<li>The Agent burn is on chain; agent-book pay (code 11-09, checklist example 11-23) and the entity bond are code only.</li>
+<li>Usage, sales and the team&#x27;s own trading are team claims; rules change almost daily.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/DeltaCompute24/InfiniteQuant-Subnet" rel="noopener noreferrer">GitHub</a></li>
+<li><a href="https://infinitequant.app/signals-program" rel="noopener noreferrer">Signals program</a></li>
+<li><a href="https://infinitequant.app/challenges" rel="noopener noreferrer">IQ Challenges</a></li>
+<li><a href="https://infinitequant.app/agent" rel="noopener noreferrer">IQ Agent</a></li>
+<li><a href="https://infinitequant.app/how-to-mine" rel="noopener noreferrer">How to mine</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 8 sources</summary>
+<ul>
+<li><strong>repo</strong> DeltaCompute24/InfiniteQuant-Subnet @e323bb9 (2026-11-06 03:59Z, still the head on 2026-11-07): README.md (banner of 2026-11-04), sn89_signals config (COMP_WEIGHTS_HISTORY, agent books and entity settings), agent_books.py, deploy/agent-books/GO-LIVE.md; commits 819c6b8, e323bb9 and those of 2026-11-04; last commit 2026-11-06, 93 commits (75 code) in 30 days, no releases (one backup tag)</li>
+<li><strong>web</strong> Chain read at block 9454914 (2026-11-07 14:44Z UTC): SN89 (InfiniteQuant): registered 2025-04-09, tempo 360, 256 of 256 uids, 2 mechanisms (uids / weights below = mechanism 0), commit-reveal on; emission weights burn/recycle/owner/validator/miner = 0/0/18/41/41 % (stored, same values as the chain default), RecycleOrBurn = Burn; uids under the owner hotkey or owner coldkey hold 62.64 % of incentive and 31.65 % of last-epoch emission (a floor); 8 validators have weight rows, on average 62.5 % of weight goes to uid 0.</li>
+<li><strong>web</strong> Chain read at block 9454914 (2026-11-07 14:44Z UTC), compared with block 9443292 (2026-11-06 00:00Z UTC): SN89: no setting changed in 33 checked items; emission split unchanged; pool 6060.8 -&gt; 6056.95 TAO.</li>
+<li><strong>web</strong> Chain read at block 9454914 (2026-11-07 14:44Z): SN89 uids on both mechanisms: mechanism 0 has 236 uids with incentive, top uid 0 at 62.64 %, top five 72.2 % (owner&#x27;s uids 62.64 % of incentive, MinerBurned 50.02 % of the miner side = 20.51 % of subnet emission); mechanism 1 has 17, top uid 143 at 26.3 %, top five 77.8 %; 8 of 10 permit holders set weights, all ranking uid 0 first (average 62.5 % to uid 0), 2 permit holders over 5 tempos stale; uid 42 holds 71.96 % of dividends; uid 39 (the entity) 0.55 % (rank 22, 10.37 alpha a day, was 0.393 % rank 26); uid 37 was registered at block 9447486 (2026-11-06 13:58Z) by a hotkey whose coldkey holds three other uids, incentive 0.003 %; at block 9447400 (2026-11-06 13:41Z) it held the earlier hotkey (registered 2026-10-15, permit True, incentive 0.0).</li>
+<li><strong>web</strong> Chain read at block 9409668 (2026-11-01 07:53Z): SN89 incentive, dividends and weights on both mechanisms; the 8 weight-setting UIDs (0, 42, 47, 77, 116, 137, 163, 255) all put 24.9% of weight on UID 0; UID 37 incentive at blocks 9371301 (2026-10-27 00:00Z) 25.02%, 9374901 (2026-10-27 12:00Z) 11.78%, 9378501 (2026-10-28 00:00Z) 11.78%, 9385701 (2026-10-29 00:00Z) 0.05%, and at 9430283 0.05%</li>
+<li><strong>web</strong> Chain read at block 9454914 (2026-11-07 14:44Z): price SN89, 6 samples every 7d from block 9238914 (2026-10-08 14:25Z): price 0.002991 -&gt; 0.002906 TAO per alpha (-2.8%), pool TAO 6128.9 -&gt; 6057.0; over the 5 intervals where the pool change equals flow + protocol: net user flow -62.5 TAO (staked minus unstaked), protocol flow -9.4 TAO, gross volume 2716.7 TAO. Shared snapshot of block 9454914: pool rank 69 of 128.</li>
+<li><strong>web</strong> infinitequant.app pages read 2026-11-07: signals-program (LF 856 traders, HF 234; the Agent board not shown), challenges, how-to-mine, swarm (updated 14:50Z, 2,190 closed trades as on 11-06), signal-performance (data stamp 2026-10-15), recruiters, docs; markets shows the home page; counts only, no handles kept; GitHub issue #41 on the repo (opened 2026-10-23, one follow-up 2026-10-24, still open and unanswered on 2026-11-07)</li>
+<li><strong>msg</strong> #89 chat 2026-08-16 to 2026-11-01 and pinned posts, including the team announcement of 2026-10-29; archive unreachable (HTTP 502) on 2026-11-02 and 2026-11-04 and reads that timed out on 2026-11-05, 2026-11-06 and 2026-11-07, nothing newer read</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/88.html"><small>← Previous</small>SN88 Investing88</a><a rel="next" href="/bittensor-docs/subnets/90.html"><small>Next →</small>SN90 KubeTEE</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-11-07. Site built 2026-11-07. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

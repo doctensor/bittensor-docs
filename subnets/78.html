@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UMI (SN78) | Bittensor Subnet Docs</title>
+<meta name="description" content="Miners submit sign-language (ASL) to English models; those that meet a public baseline share the reward.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h18">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>78</span><div>
+<h1>UMI <span class="muted">SN78</span></h1>
+<p class="tagline">Miners submit sign-language (ASL) to English models; those that meet a public baseline share the reward.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>42<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>13<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>9.6<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-11-02</b><span>last chat</span></li><li class="pw"><b>1,165</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Shipping</b><span>code activity</span></li><li class="pw"><b>593</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-11-06</b><span>last commit</span></li><li class="pw"><b>2026-09-27</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>sign language (ASL) to English translation</dd>
+<dt>Status</dt><dd>Cohort 7 rewards are live (55 slots paid). Cohort 8 is being scored; cohort 9 is open to new models.</dd>
+<dt>Confidence</dt><dd>high</dd>
+<dt>Researched</dt><dd>2026-11-07</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Docs vs code vs chain</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-similar">Similar subnets</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>miners train ASL-to-English models; those meeting a public baseline share the miner reward, best scores first.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>miners get 53.75% of emission (41% until 2026-10-27); 55 of 129 cohort 7 models earn, the top one 5.9%; joining costs 0.375 TAO.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>it runs the evaluators and the rules; a speed factor of up to 15% applies from cohort 8, now being scored.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>a demo and apps exist; no customers or revenue are verified on chain or in code.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner (public model) <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Trains an ASL-to-English model and submits it as a licensed bundle.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-unk">GPU unknown</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-unk"><dt>Hardware</dt><dd>Not documented for training; evaluation runs on CPU only, no GPU</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None (your own training compute and data)</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>0.375 TAO registration burn (2026-11-07)</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Python 3.10 to 3.14, FFmpeg, uv; signed upload of a licensed bundle</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Re-derives the team&#x27;s certified cohort rows and sets the shared weight vector on chain.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>8+ CPU cores, 16 GiB RAM, 100 GiB disk, no GPU; Ubuntu 24.04+ or Debian 12+</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None required; an authenticated RPC provider (for example a Taostats key) is optional</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>A permit (5 held) and the chain-wide 1,000 TAO minimum stake to set weights; 0.375 TAO to register</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Supervisor installer on Podman 4.3+ (x86_64 or arm64)</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div><div class="v2-role"><h3>Endpoint miner (closed) <span class="v2-barrier b-high">High barrier</span></h3><p>Live-endpoint track from cohort 5; closed since cohort 6.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-unk">GPU unknown</li><li class="fl fl-unk">Paid service unknown</li><li class="fl fl-bad">Permissioned</li></ul><dl class="v2-needs"><div class="v2-need n-unk"><dt>Hardware</dt><dd>Not documented</dd></div><div class="v2-need n-unk"><dt>API tokens / subscriptions</dt><dd>Not documented</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>0.375 TAO registration burn (2026-11-07)</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Closed: only models are paid</dd></div></dl><a class="v2-more" href="#sn-role-2">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-11-07. Not financial advice.</span></div><p>Down 67% in 30 days on about 590 TAO net outflow, 171 TAO of it in two days; usage and revenue unverified. <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>UMI pays miners for models that turn American Sign Language (ASL) video into English text. Team-run evaluators score each model on held-out clips; models near or above a public baseline share the miner pool by score band.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Miners submit an offline Python model bundle that turns video into English text, on CPU, with a permitted license. Only models are paid. A model qualifies within 1% of the reference model&#x27;s score.</p></div><div><h3>Validators</h3><p>A team coordinator issues the test clips and two team-run evaluators score them. Permit holders re-derive the published rows and set weights: five hold permits and four set weights in the last epoch.</p></div><div><h3>Incentive</h3><p>Emission splits 30.75% owner, 15.5% validators, 53.75% miners. Scores fall into 2.5-point bands; each lower band or rank earns 0.85 times the one above. A model within 0.01 points of a better one counts once; unallocated share is burned.</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-11-07, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-good">Open</span>Any permit holder can run the team-signed supervisor; permits need 1,000+ TAO stake; UIDs 0 and 54 are the team&#x27;s.</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">0.1%</span>0.08% of last-epoch emission on owner slot 0 (the burn destination); the 30.75% owner cut is paid outside the slots.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">55 uids</span><span class="v2-sx muted">top 5 hold 24% of incentive.</span> 55 of 256 slots earn; the top 5 hold 24.0% of incentive and slot 210 alone 5.9%.</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Converged</span>4 of 5 weight rows peak on slot 210; a public scorer makes honest validators agree (copying not measured).</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-good">Open</span>Miner client, validator supervisor and the live intake service are public in one repo under Apache-2.0.</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner (public model) <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Trains an ASL-to-English model and submits it as a licensed bundle.</p><ul>
+<li>Cohort 7: 55 of 129 models earn; top score 43.8% against a 35.8% baseline.</li>
+<li>Bundles run offline: up to 16 GiB, 4,096 files, 600 s per clip.</li>
+<li>NC-trained models need a CC BY-NC-SA 4.0 release under terms v2; the status API list omits it.</li>
+<li>Cohorts open one at a time; cohort 9 takes new models now.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Re-derives the team&#x27;s certified cohort rows and sets the shared weight vector on chain.</p><ul>
+<li>Four of five holders earn dividends; one holds 53%.</li>
+<li>Repo docs name UIDs 0 and 54 as the team&#x27;s own; the owner says one coordinator posts the rows.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-2"><h3>Endpoint miner (closed) <span class="v2-barrier b-high">High barrier</span></h3><p>Live-endpoint track from cohort 5; closed since cohort 6.</p><p class="muted">No further detail found in the sources.</p></section></div>
+<h2 id="sn-x0">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Score bands</td><td>Docs: open-competition page says five-point bands</td><td>Code: 2.5-point bands (public API); chain shares match</td><td>2026-11-07</td></tr><tr><td>Rewards</td><td>Status API: rewards_active is false</td><td>Chain: 55 slots earn; 54 match the rule within 0.03 points</td><td>2026-11-07</td></tr><tr><td>Speed factor</td><td>Owner: up to 15% from cohort 8</td><td>Code: 0.85 to 1.15 multiplier on CPU time; cohort 8 scoring, chain still pays cohort 7</td><td>2026-11-07</td></tr><tr><td>Licences</td><td>Docs: NC-trained models need a CC BY-NC-SA 4.0 release (terms v2; ASL STEM Wiki now allowed)</td><td>Code: status policy still lists MIT, Apache-2.0, CC-BY-4.0, CC-BY-SA-4.0 only</td><td>2026-11-07</td></tr><tr><td>Unpaid selected model (UID 7)</td><td>Docs: a changed hotkey holds the row; a signed amendment can route it to the burn UID</td><td>Chain: UID 7&#x27;s hotkey (registered 2026-10-30) differs from the certified one; UID 0 holds 0.16%; cause unconfirmed</td><td>2026-11-07</td></tr><tr><td>Parent baseline</td><td>Owner: any declared parent is fine; the baseline is a score bar</td><td>Chat: a miner saw a rejection; the owner says the older API does it</td><td>2026-11-02</td></tr></tbody></table></div>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-11-07. Not financial advice.</span></div>
+<p class="v2-thesis">Price fell 67% in 30 days on 589 TAO of net outflow (69% of today&#x27;s pool). Selling slowed to -60 TAO from 10-30 to 11-05, then returned: -171 TAO and -31% in two days, the lowest reading in 30 days. Cause unknown; no customers or revenue are verified.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.00126 TAO per alpha</dd></div><div><dt>Pool</dt><dd>852 TAO, rank 118</dd></div><div><dt>Price, 30 days</dt><dd>-67%, 2026-10-08 to 2026-11-07</dd></div><div><dt>Net flow, 30 days</dt><dd>-589 TAO, 2026-10-08 to 2026-11-07</dd></div><div><dt>Miner pay</dt><dd>0.089 TAO per day on average (4.87 TAO per day over 55 uids)</dd></div><div><dt>Miner pay outside top 5</dt><dd>0.074 TAO per day on average over 50 uids</dd></div><div><dt>Code activity</dt><dd>last commit 2026-11-06; 797 commits in 30 days</dd></div></dl>
+<div class="v2-trend"><h3>Trend</h3><div class="v2-tbody"><figure class="v2-tfig"><svg class="v2-spark down" viewBox="0 0 240 56" role="img" aria-label="Price in TAO per alpha, 2026-09-28 to 2026-11-07: 0.003674 to 0.001264, -65.6%"><polyline points="5.0,22.3 10.8,25.5 22.2,25.0 33.8,5.0 39.5,11.0 45.2,12.4 51.0,20.0 62.5,20.9 74.0,23.0 79.8,22.0 85.5,24.5 91.2,23.9 97.0,24.6 102.8,25.9 114.2,30.2 120.0,31.8 125.8,32.9 131.5,38.9 137.2,40.2 143.0,42.3 154.5,43.4 160.2,45.1 166.0,43.9 171.8,38.4 177.5,36.5 183.2,37.8 189.0,43.1 194.8,43.2 200.5,42.9 206.2,43.8 212.0,43.2 217.8,44.1 223.5,45.1 235.0,51.0"/><circle cx="235.0" cy="51.0" r="3"/></svg><figcaption><strong>Price</strong> <span class="down">-65.6%</span> <span class="muted">0.003674 to 0.001264 TAO per alpha, 2026-09-28 to 2026-11-07</span></figcaption></figure><dl class="v2-tfacts"><div><dt>Net flow, 30 days</dt><dd><span class="down">-589 TAO</span> <span class="muted">2026-10-08 to 2026-11-07</span></dd></div><div><dt>Verdict history</dt><dd><ol class="v2-vh"><li><span class="muted">2026-11-03</span> <span class="st s-neutral">Neutral</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-04</span> <span class="st s-neutral">Neutral</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-05</span> <span class="st s-neutral">Neutral</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-07</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li></ol></dd></div></dl></div></div>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>Miner share of emission up from 41% to 53.75%.</li>
+<li>Cohort 7 drew 129 entries, up from 103; cohort 8 has 152.</li>
+<li>Team ships daily; cohort 8 scoring is under way.</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>Small pool (rank 118); price down 67% in 30 days.</li>
+<li>Team-run scoring; cohort 8 not yet paid.</li>
+<li>No verified customers or revenue.</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> Several weeks of net inflow would lift it to neutral, a named paying use to bullish; scoring disputes would deepen it.</p>
+<p class="muted">Since the last pass: Neutral on 2026-11-05; bearish now: selling returned (-171 TAO in two days).</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-similar">Similar subnets</h2>
+<div class="v2-sim"><p>By pool size this is <strong>rank 19 of 19</strong> among the subnets grouped as <em>training</em> (what they mainly sell). Pool and price as of 2026-11-06 to 2026-11-07, price in TAO per alpha; the barrier is the easiest miner role.</p><div class="scroll"><table class="v2-table"><thead><tr><th>#</th><th>Subnet</th><th>Pool</th><th>Price</th><th>Miner barrier</th></tr></thead><tbody><tr><td>15</td><td><a href="/bittensor-docs/subnets/119.html">CapabilityForge Next</a> <span class="muted">SN119</span></td><td>3,005 TAO</td><td>0.002165</td><td><span class="v2-barrier b-unknown">Unknown</span></td></tr><tr><td>16</td><td><a href="/bittensor-docs/subnets/91.html">Cascade</a> <span class="muted">SN91</span></td><td>2,987 TAO</td><td>0.003845</td><td><span class="v2-barrier b-high">High</span></td></tr><tr><td>17</td><td><a href="/bittensor-docs/subnets/100.html">Cortex</a> <span class="muted">SN100</span></td><td>2,183 TAO</td><td>0.002943</td><td><span class="v2-barrier b-high">High</span></td></tr><tr><td>18</td><td><a href="/bittensor-docs/subnets/40.html">Ralph</a> <span class="muted">SN40</span></td><td>1,196 TAO</td><td>0.001686</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr class="me" aria-current="true"><td>19</td><td>UMI <span class="muted">SN78, this page</span></td><td>852 TAO</td><td>0.001264</td><td><span class="v2-barrier b-medium">Medium</span></td></tr></tbody></table></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-11-07</span> <span class="muted">(api.umi.vision, repo, 2026-11-07)</span> Cohort 8 scoring started on 2026-11-06 (4 of 149 models fully evaluated by 2026-11-07); cohort 9 opened to new models. 330 submissions accepted; main gained 38 commits.</li>
+<li><span class="when">2026-11-04</span> <span class="muted">(repo, api.umi.vision, 2026-11-04)</span> Licence terms v2 merged: ASL STEM Wiki data is allowed on the non-commercial route.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Register a hotkey on subnet 78 (0.375 TAO burn on 2026-11-07).</li>
+<li>Read &#x27;What miners should run now&#x27; in the repo; only models are paid.</li>
+<li>Install the model client (Python 3.10 to 3.14, FFmpeg, uv); rerun it for each cohort and client release.</li>
+<li>Download the reference model from the results API (the cohort 7 winner is the baseline); build an offline bundle: one entry point, declared training data, matching license.</li>
+<li>Sign and upload to the open cohort (9) before its cutoff; the first receipt says pending, so query admission.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Evaluation is team-run (two evaluators, one coordinator); cohort 6 was re-scored once after a complaint.</li>
+<li>Near-copies of a better model earn once they are over 0.01 points apart; miners say this pays copies of the baseline.</li>
+<li>Unverified: buyback funding, paid translators, customers, revenue. Training hardware is not documented.</li>
+<li>Team chat after 2026-11-01 was not read (archive down); cohort dates may have moved.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://www.umi.vision" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://bitsign.umi.vision" rel="noopener noreferrer">Live demo of the cohort 5 model</a></li>
+<li><a href="https://github.com/Umi-BitSign/umi" rel="noopener noreferrer">GitHub (subnet)</a></li>
+<li><a href="https://github.com/Umi-BitSign/umi-reference-model" rel="noopener noreferrer">GitHub (public reference model)</a></li>
+<li><a href="https://github.com/Umi-BitSign/umi/blob/main/docs/CURRENT_MINER_OPERATION.md" rel="noopener noreferrer">What miners should run now</a></li>
+<li><a href="https://github.com/Umi-BitSign/umi/blob/main/docs/contributors/models.md" rel="noopener noreferrer">Model contribution requirements</a></li>
+<li><a href="https://github.com/Umi-BitSign/umi/blob/main/docs/miners/model.md" rel="noopener noreferrer">Model submission guide</a></li>
+<li><a href="https://github.com/Umi-BitSign/umi/blob/main/docs/miners/connection.md" rel="noopener noreferrer">Miner connection guide</a></li>
+<li><a href="https://github.com/Umi-BitSign/umi/blob/main/docs/PERMANENT_VALIDATOR_SUPERVISOR.md" rel="noopener noreferrer">Validator supervisor (requirements)</a></li>
+<li><a href="https://github.com/Umi-BitSign/umi/blob/main/docs/OPEN_COMPETITION.md" rel="noopener noreferrer">Open competition and rewards (older rules)</a></li>
+<li><a href="https://github.com/Umi-BitSign/umi/blob/main/docs/reference/competition-results-api.md" rel="noopener noreferrer">Public results API guide</a></li>
+<li><a href="https://github.com/Umi-BitSign/umi/blob/main/whitepaper/README.md" rel="noopener noreferrer">Whitepaper</a></li>
+<li><a href="https://api.umi.vision/v1/competition/status" rel="noopener noreferrer">Live competition status (API)</a></li>
+<li><a href="https://api.umi.vision/v1/competition/cohorts" rel="noopener noreferrer">Cohort catalog (API)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 8 sources</summary>
+<ul>
+<li><strong>repo</strong> Umi-BitSign/umi@0034e70 (Apache-2.0), 2026-11-07 (38 commits past 3e7f69c: CPU-time speed measurement, one-cohort-at-a-time intake, history read scheduling): docs/contributors/models.md, docs/MODEL_CONTRIBUTION_TERMS_NC_V2.md, docs/operators/settlement.md, docs/competition/launch.md, docs/miners/model.md, docs/operators/evaluation.md, docs/validators/successor-upgrade.md, docs/reference/competition-results-api.md, docs/CURRENT_MINER_OPERATION.md, docs/PERMANENT_VALIDATOR_SUPERVISOR.md, README.md, docs/OPEN_COMPETITION.md</li>
+<li><strong>web</strong> api.umi.vision (public, read 2026-11-07): competition status (330 accepted submissions, baseline sequence 3 = the cohort 7 winner, admission open, policy 9 unchanged and CC BY-NC-SA 4.0 not in its licence list, rewards_active false), cohort 7 model results (all 129 rows re-read, identical to 2026-11-05), cohort 8 to 10 progress (cohort 8 in its request phase, model evaluation 4 of 149, intake certification 152 of 152, closed to new models; cohort 9 certified 131 of 131 and open to new models; cohort 10 certified 123 of 123, waiting for cohort 9) and the cohort 8 history (preparation closed at block 9447781); owner posts in #umi 2026-10-28 to 2026-11-01 (cohort 7 result, cohort 8 intake, baseline handoff); licensing note (public gist linked in #umi, 2026-10-28)</li>
+<li><strong>web</strong> Chain read at block 9451008 (2026-11-07 01:43Z UTC): SN78 (Umi): registered 2026-04-14, tempo 360, 256 of 256 uids, commit-reveal off; emission weights burn/recycle/owner/validator/miner = 0/0/30.75/15.5/53.75 %, RecycleOrBurn = Burn; uids under the owner hotkey or owner coldkey hold 0.16 % of incentive and 0.08 % of last-epoch emission (a floor); 5 validators have weight rows, on average 6.5 % of weight goes to uid 0. Incentive on 55 uids, top 5 hold 24.0%.</li>
+<li><strong>web</strong> Chain read at block 9451008 (2026-11-07 01:43Z UTC), compared with block 9436092 (2026-11-05 00:00Z UTC): SN78: no setting changed in 33 checked items; emission split unchanged; pool 1027.63 -&gt; 852.07 TAO.</li>
+<li><strong>web</strong> Chain read at block 9451008 (2026-11-07 01:43Z): price SN78, 6 samples every 7d from block 9235008 (2026-10-08 01:24Z): price 0.003819 -&gt; 0.001264 TAO per alpha (-66.9%), pool TAO 1472.3 -&gt; 852.1; over the 5 intervals where the pool change equals flow + protocol: net user flow -588.8 TAO (staked minus unstaked), protocol flow -31.5 TAO, gross volume 10010.4 TAO. Daily samples 2026-10-30 to 2026-11-07: price -39.1%, net user flow -230.17 TAO (-59.59 over the six days to 11-05, then -52.55 and -118.04).</li>
+<li><strong>web</strong> Chain read at block 9451008 (2026-11-07 01:43Z): shared snapshot over 129 subnets (pool rank 118 of 128 non-root, pool 852.1 TAO); dossier (5 permits, 5 weight rows, emission 4,972.19 alpha per day, miner pay: miner pool = alpha per day x 53.75 / (53.75 + 15.5) x price); the full incentive vector is identical to the one compared per uid with a replay of the public cohort 7 reward rule on 2026-11-02 (largest difference 0.026 points over 54 uids) and to the 2026-11-04 and 2026-11-05 reads. Per-uid reads of uids 7, 119 and 210: the hotkey tags of 119 and 210 match the certified cohort 7 rows, the tag of uid 7 does not (registered 2026-10-30; its coldkey tag also holds two other uids).</li>
+<li><strong>msg</strong> #umi pinned announcements 2026-09-03 to 2026-09-18</li>
+<li><strong>msg</strong> #umi, team and miner discussion 2026-10-01 to 2026-11-01 (23:41Z; later chat not read, archive down)</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/77.html"><small>← Previous</small>SN77 Liquidity</a><a rel="next" href="/bittensor-docs/subnets/79.html"><small>Next →</small>SN79 MVTRX</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-11-07. Site built 2026-11-07. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

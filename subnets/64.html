@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chutes (SN64) | Bittensor Subnet Docs</title>
+<meta name="description" content="Serverless AI inference on confidential-compute GPUs from miners; some inference now runs off-network.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h16">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>64</span><div>
+<h1>Chutes <span class="muted">SN64</span></h1>
+<p class="tagline">Serverless AI inference on confidential-compute GPUs from miners; some inference now runs off-network.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>33<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>10<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>18<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-11-02</b><span>last chat</span></li><li class="pw"><b>37,499</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Shipping</b><span>code activity</span></li><li class="pw"><b>4</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-10-15</b><span>last commit</span></li><li class="pw"><b>2026-10-15</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>serverless inference and GPU compute</dd>
+<dt>Status</dt><dd>Active through 2026-11-07. Miner and TEE repos last changed 2026-10-15; the validator/API repo was archived about 2026-10-29 and trails live scoring.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-11-07</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Shift to off-network inference</a></li><li><a href="#sn-x1">Docs vs code vs chain</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>pay-per-token inference (18 models, 10 on miners&#x27; confidential GPUs); subscriptions ended.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>largest pool of 128 subnets (10%); 30-day net selling -11,558 TAO; a 3-day net-buying run ended 11-06.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>mining needs an Intel TDX server; only 8-GPU H200, B200 and RTX Pro 6000 builds are validated.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>standard inference is moving off-network; its revenue is not linked to the chain.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>17 of 256 miners are paid (top five 64.7%); 14 validators share a top miner; 3 hold 85% of dividends.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-high">High barrier</span></h3><p>Supply TDX-confidential GPU servers; pay follows compute time.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-caution">GPU needed</li><li class="fl fl-unk">Paid service unknown</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>Intel TDX server (validated: 8-GPU H200, B200, RTX Pro 6000), Ubuntu 26.04; plus a 4-core, 32 GB control server</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>Intel PCCS API key (price not stated); otherwise none documented</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Registration burn 0.0005 TAO (2026-11-07); no minimum stake documented</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Advanced: TDX host, confidential VM, Kubernetes control plane</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>The operator&#x27;s platform sets weights; outsiders delegate or run the auditor.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-unk">GPU unknown</li><li class="fl fl-unk">Paid service unknown</li><li class="fl fl-bad">Permissioned</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>Auditor: 16+ cores, 64 GB RAM, 1 TB NVMe. Full platform: Kubernetes, Postgres, GPUs</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>Archive node (or pruning 60000); full platform adds S3 storage, TLS certificate</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>1,000 TAO stake threshold for a permit (chain); the team&#x27;s take is 0%</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Auditor: Docker, 8+ hour first sync. Full platform: Kubernetes expertise</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div><div class="v2-role"><h3>API user <span class="v2-barrier b-low">Low barrier</span></h3><p>Pay per token for hosted models, or deploy custom chutes.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-caution">Paid service needed</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-no"><dt>Hardware</dt><dd>None</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>Pay-as-you-go per token (card or TAO)</dd></div><div class="v2-need n-no"><dt>Stake / fees</dt><dd>None</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>An API key; OpenAI-compatible endpoint</dd></div></dl><a class="v2-more" href="#sn-role-2">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-11-07. Not financial advice.</span></div><p>Largest pool; 30-day net selling; the 3-day net-buying run ended. <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>Chutes is a hosted inference service with an OpenAI-compatible API for open-source models. Miners supply GPU servers that run it in confidential virtual machines, and the operator, Chutes Global Corp, routes the traffic.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Miners run one control server plus GPU hosts, each a confidential virtual machine (Intel TDX seals it from its host) proven by hardware attestation. A scheduler, gepetto, picks which chutes (apps) to run, serving new ones first for a bounty.</p></div><div><h3>Validators</h3><p>The validator is the operator&#x27;s API platform: it routes requests to miners and records audit data. All 14 weight-setting validators put their top weight on the same miner on 2026-11-07, which fits relaying one team result. They sit under 13 coldkeys: three hotkeys take 85% of dividends, about 45% of counted stake was delegated in via parent hotkeys (read 2026-11-03), and the chain does not name who runs the two largest non-owner ones; the second also validates on subnets 32, 43 and 48. The public API repo, archived about 2026-10-29, trails live scoring; the team plans a new public repo. A public score feed and an auditor let anyone recompute scores.</p></div><div><h3>Incentive</h3><p>A miner&#x27;s weight is its share of compute units over the last day; the public score feed matches this within 0.2 points. Units are running time times a GPU multiplier with bonuses, which the team retuned on 2026-10-28 and 10-29 (not visible in the repo). Emission splits 18% owner, 41% validators, 41% miners, none burned. 17 of 256 UIDs are paid (top five 64.7%); the owner&#x27;s validator UID takes about 11%.</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-11-07, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-bad">Owner only</span>The operator&#x27;s platform computes scores; 14 hotkeys share one top miner; outsiders delegate or run the auditor.</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">10.8%</span>Owner UID earns 10.85% of emission as dividends; configured owner cut 18%; RecycleOrBurn is Burn.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">17 uids</span><span class="v2-sx muted">top 5 hold 64.7% of incentive.</span> 17 miners have incentive; the top five hold 64.7%.</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Converged</span>All 14 weight-setters share one top miner: fits relaying one team result (a shared scorer also converges).</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-caution">Partial</span>Miner, TEE and audit repos are public; validator repo archived and behind live scoring; miner repo lacks a licence.</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-high">High barrier</span></h3><p>Supply TDX-confidential GPU servers; pay follows compute time.</p><ul>
+<li>Register one UID, no axon; add each GPU server with the miner CLI.</li>
+<li>Bare metal or VMs with unique static IPs (no Runpod or Vast); RAM per GPU at least its VRAM.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>The operator&#x27;s platform sets weights; outsiders delegate or run the auditor.</p><ul>
+<li>The README advises delegating to the team&#x27;s validator via a child hotkey; miners choose which validator gets their servers.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-2"><h3>API user <span class="v2-barrier b-low">Low barrier</span></h3><p>Pay per token for hosted models, or deploy custom chutes.</p><p class="muted">No further detail found in the sources.</p></section></div>
+<h2 id="sn-x0">Shift to off-network inference</h2>
+<ul class="v2-list">
+<li>Since 2026-10-26 extra models run off-network, unpaid by emissions (8 of 18 catalog models are not confidential).</li>
+</ul>
+<h2 id="sn-x1">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Scoring window</td><td>7 days</td><td>Code: 1 day, hourly; live scores fit 1-day sums</td><td>2026-11-07</td></tr><tr><td>Metrics</td><td>Four weighted</td><td>Code: compute units only; live scores equal compute share</td><td>2026-11-07</td></tr><tr><td>Validator code</td><td>Team: open source</td><td>Code: repo archived about 2026-10-29; bonuses retuned off-repo</td><td>2026-11-07</td></tr><tr><td>GPU advice</td><td>A10, T4 and up</td><td>Code: TEE guide validates 8-GPU H200, B200, RTX Pro 6000</td><td>2026-11-07</td></tr></tbody></table></div>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-11-07. Not financial advice.</span></div>
+<p class="v2-thesis">Users sold on net in all five weekly steps (-11,558 TAO in 30 days); a three-day net-buying run (+939 TAO) ended with -1,119 TAO on the last day. Usage figures are the team&#x27;s own.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.06743 TAO per alpha</dd></div><div><dt>Pool</dt><dd>200,941 TAO, rank 1</dd></div><div><dt>Price, 30 days</dt><dd>-3.8%, 2026-10-08 to 2026-11-07</dd></div><div><dt>Net flow, 30 days</dt><dd>-11,558 TAO, 2026-10-08 to 2026-11-07</dd></div><div><dt>Miner pay</dt><dd>11.7 TAO per day on average (199 TAO per day over 17 uids)</dd></div><div><dt>Miner pay outside top 5</dt><dd>5.84 TAO per day on average (70.1 TAO per day over 12 uids)</dd></div><div><dt>Code activity</dt><dd>last commit 2026-10-15; 4 commits in 30 days</dd></div></dl>
+<div class="v2-trend"><h3>Trend</h3><div class="v2-tbody"><figure class="v2-tfig"><svg class="v2-spark down" viewBox="0 0 240 56" role="img" aria-label="Price in TAO per alpha, 2026-09-28 to 2026-11-07: 0.07065 to 0.06743, -4.6%"><polyline points="5.0,12.0 22.2,14.3 33.8,14.0 39.5,5.0 45.2,7.1 51.0,14.7 62.5,21.7 74.0,19.8 79.8,24.6 85.5,28.5 91.2,35.9 102.8,38.7 114.2,42.2 120.0,45.9 125.8,50.8 131.5,45.2 137.2,47.5 143.0,39.2 148.8,37.7 154.5,31.3 160.2,40.8 166.0,45.2 171.8,44.8 177.5,44.3 183.2,43.7 189.0,45.1 194.8,45.8 200.5,44.7 206.2,47.8 212.0,51.0 217.8,46.1 223.5,37.6 235.0,43.9"/><circle cx="235.0" cy="43.9" r="3"/></svg><figcaption><strong>Price</strong> <span class="down">-4.6%</span> <span class="muted">0.07065 to 0.06743 TAO per alpha, 2026-09-28 to 2026-11-07</span></figcaption></figure><dl class="v2-tfacts"><div><dt>Net flow, 30 days</dt><dd><span class="down">-11,558 TAO</span> <span class="muted">2026-10-08 to 2026-11-07</span></dd></div><div><dt>Verdict history</dt><dd><ol class="v2-vh"><li><span class="muted">2026-11-03</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-04</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-05</span> <span class="st s-neutral">Neutral</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-07</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li></ol></dd></div></dl></div></div>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>Largest pool; price down only 3.8% in 30 days; protocol inflow offsets 83% of the outflow.</li>
+<li>Live product; public scores match the chain; 17 miners paid.</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>Net selling in all 5 weekly steps (-11,558 TAO), and -1,119 TAO on the last day.</li>
+<li>Validator repo archived; revenue page removed.</li>
+<li>Standard inference now runs off-network.</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> Weeks of net inflow, a usage or revenue figure, or a public validator repo: bullish; renewed outflow or more work leaving the network: bearish.</p>
+<p class="muted">Since the last pass: Neutral on 2026-11-05 after three net-buying days; the next day sold 1,119 TAO, so bearish again, weakly (flat price).</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-11-04</span> <span class="muted">(chutes.ai news)</span> Team article: seven more models (GLM-5.3, Kimi K2.7 Code and others) join the catalog, from $0.30 per million input tokens.</li>
+<li><span class="when">2026-10-30</span> <span class="muted">(#chutes)</span> Team: validator code will move to a new public repo; revenue page removed.</li>
+<li><span class="when">2026-10-29</span> <span class="muted">(#chutes)</span> Private, integrated-subnet and TEE-private bonuses raised from 1.5 to 2.25 (team; not in the public repo).</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Check the host guide: Ubuntu 26.04, an Intel TDX server, an Intel PCCS API key, a validated 8-GPU layout.</li>
+<li>Provision one non-GPU control server (4 cores, 32 GB) with the miner repo&#x27;s Ansible and Helm.</li>
+<li>Register one hotkey with btcli subnet register --netuid 64; announce no axon.</li>
+<li>On each GPU host, run the sek8s host setup and launch the confidential VM.</li>
+<li>Add each VM with chutes-miner add-node (name, validator hotkey, hourly cost, GPU, API addresses).</li>
+<li>Tune gepetto; run chutes-miner tee start-maintenance before reboots.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Production validator code is unconfirmed: repo archived, bonuses retuned off-repo; live scores match its formula.</li>
+<li>Chain figures are a snapshot (2026-11-07); weights are opinions, not payouts; miner pay is gross emission.</li>
+<li>Team chat after 2026-11-01 was not read (archive offline).</li>
+<li>Usage, revenue and stake-lock claims are the team&#x27;s own and unverified.</li>
+<li>Whether smaller or non-validated TDX servers are accepted is not documented.</li>
+<li>Parallax participation is undocumented; its report is AI-generated.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://chutes.ai" rel="noopener noreferrer">Website and API</a></li>
+<li><a href="https://chutes.ai/pricing" rel="noopener noreferrer">Pricing</a></li>
+<li><a href="https://chutes.ai/docs/miner-resources/overview" rel="noopener noreferrer">Miner documentation</a></li>
+<li><a href="https://chutes.ai/docs/miner-resources/miner-maintenance" rel="noopener noreferrer">Miner maintenance guide (older k3s flow)</a></li>
+<li><a href="https://github.com/chutesai/sek8s/tree/main/host-tools" rel="noopener noreferrer">TEE host setup guide</a></li>
+<li><a href="https://chutes.ai/news/were-expanding-our-model-catalog-with-glm-deepseek-qwen-and-kimi" rel="noopener noreferrer">Model catalog expansion article (2026-11-04)</a></li>
+<li><a href="https://chutes.ai/news/democratizing-intelligence-building-an-open-source-ai-lab-on-a-decentralized-network" rel="noopener noreferrer">Open model-lab article (2026-10-22)</a></li>
+<li><a href="https://github.com/chutesai" rel="noopener noreferrer">GitHub organization</a></li>
+<li><a href="https://github.com/chutesai/chutes-miner" rel="noopener noreferrer">Miner repo</a></li>
+<li><a href="https://github.com/chutesai/sek8s" rel="noopener noreferrer">TEE host and guest tooling</a></li>
+<li><a href="https://github.com/chutesai/chutes-api" rel="noopener noreferrer">Validator and API repo</a></li>
+<li><a href="https://github.com/chutesai/chutes-audit" rel="noopener noreferrer">Auditor</a></li>
+<li><a href="https://parallax.chutes.ai/" rel="noopener noreferrer">Parallax</a></li>
+<li><a href="https://api.chutes.ai/miner/scores" rel="noopener noreferrer">Public miner scores (JSON)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 10 sources</summary>
+<ul>
+<li><strong>repo</strong> chutesai/chutes-api main 3b5609f (2026-09-03, archived about 2026-10-29): README.md, metasync/shared.py, metasync/constants.py, api/constants.py, api/chute/util.py; full history read back to 2024-10-29: commits aa31ae5 (2025-11-09), 802ed30 (2026-04-20), e03b342 (2026-04-24); head re-checked 2026-11-07, unchanged</li>
+<li><strong>repo</strong> chutesai/chutes-miner main 44c6603 (2026-10-10): README.md (requirements, RAM, ports), chutes-miner-cli tee_maintenance.py; head re-checked 2026-11-07, unchanged</li>
+<li><strong>repo</strong> chutesai/sek8s main 3a74f23 (2026-10-15): host-tools/README.md (validated topologies), docs/end-to-end-miner.md; release v1.5.0 (2026-10-11); head re-checked 2026-11-07, unchanged</li>
+<li><strong>repo</strong> chutesai/chutes-audit main 3498917 (2026-09-14): README.md (machine specs, sync), audit.py; head re-checked 2026-11-07, unchanged</li>
+<li><strong>web</strong> chutes.ai llms.txt, docs/miner-resources/overview and scoring, model catalog at llm.chutes.ai/v1/models, public feeds api.chutes.ai/miner/scores and /chutes/utilization (all fetched 2026-11-07); news articles of 2026-10-22, 2026-10-28 and 2026-11-04; pricing page; parallax.chutes.ai</li>
+<li><strong>web</strong> Chain read at block 9450933 (2026-11-07 01:28Z UTC): SN64 (Chutes): registered 2024-12-21, tempo 360, 256 of 256 uids, commit-reveal off; emission weights burn/recycle/owner/validator/miner = 0/0/18/41/41 % (stored, same values as the chain default), RecycleOrBurn = Burn; uids under the owner hotkey or owner coldkey hold 0 % of incentive and 10.85 % of last-epoch emission (a floor); 14 validators have weight rows, on average 0 % of weight goes to uid 0.</li>
+<li><strong>web</strong> Chain read at block 9450933 (2026-11-07 01:28Z): price SN64, 6 samples every 7d from block 9234933 (2026-10-08 01:09Z): price 0.070122 -&gt; 0.067432 TAO per alpha (-3.8%), pool TAO 202954.3 -&gt; 200941.2; over the 5 intervals where the pool change equals flow + protocol: net user flow -11558.4 TAO (staked minus unstaked), protocol flow +9545.4 TAO, gross volume 61438.5 TAO.</li>
+<li><strong>web</strong> Chain read at block 9450933 (2026-11-07 01:28Z): shared snapshot over 129 subnets of name, SubnetOwner, Tempo, Burn, SubnetworkN, MaxAllowedUids, SubnetEmissionEnabled, price, tao_in, alpha_in, age_days.</li>
+<li><strong>web</strong> Chain read at block 9425010 (2026-11-03 11:03Z UTC, not repeated on 2026-11-04; local copy of the checker: the hosted API has no `parents` command yet): 14 of 17 SN64 validator-permit hotkeys have parent hotkeys; they hold 1,568,368 alpha themselves and are counted for about 2,817,171 alpha, 1,261,234 of it from parents.</li>
+<li><strong>msg</strong> #64 chutes, 2026-10-02 to 2026-11-01</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/63.html"><small>← Previous</small>SN63 Enigma</a><a rel="next" href="/bittensor-docs/subnets/65.html"><small>Next →</small>SN65 TPN (True Performance Network)</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-11-07. Site built 2026-11-07. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>404-GEN (SN17) | Bittensor Subnet Docs</title>
+<meta name="description" content="Miners write Python that turns images into Three.js code with OpenAI models; each round&#x27;s winner takes all miner reward.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h23">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>17</span><div>
+<h1>404-GEN <span class="muted">SN17</span></h1>
+<p class="tagline">Miners write Python that turns images into Three.js code with OpenAI models; each round&#x27;s winner takes all miner reward.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>11<small>/day</small></b><span>last 7 d</span></li><li class="pl4"><b>6.4<small>/day</small></b><span>days 8-30</span></li><li class="pl4"><b>2.6<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-11-01</b><span>last chat</span></li><li class="pw"><b>7,817</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Shipping</b><span>code activity</span></li><li class="pw"><b>1,015</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-11-07</b><span>last commit</span></li><li class="pw"><b>2026-11-02</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>3D generation (Three.js code from images, closed-source models)</dd>
+<dt>Status</dt><dd>Round 3 generation is open (24 h from 2026-11-07 08:00Z); round 2&#x27;s winner holds the seat. Chat had 157 messages in 30 days.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-11-07</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Docs vs code vs chain</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-similar">Similar subnets</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>Miners write Python that calls OpenAI models to turn a picture into Three.js 3D code; the round winner takes all miner reward.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>One uid holds 100% of miner incentive; round 2&#x27;s winner took the seat 2026-11-07 08:00Z, weights had not moved at 08:14Z.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>Joining needs an OpenAI key or ChatGPT plan (up to $5 per prompt) and a 100-alpha lock; no GPU or compiler needed.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>Pool is 22,094 TAO (rank 21); the price fell 22.1% and a net 3,111 TAO left in 30 days to 2026-11-07.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>Round 3 drew 67 entries (round 2: 54, round 1: 34); round 2&#x27;s winner passed both checks; 3 of 6 audits failed (repo gone).</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Writes a public Python program that turns each prompt image into one Three.js module.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-caution">Paid service needed</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-no"><dt>Hardware</dt><dd>No GPU or Docker. Linux x86_64 or macOS 13+ arm64, Python 3.13, Git (guide, 2026-11-07)</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>OpenAI API key or ChatGPT plan; nominal cap $5 and 60 calls per prompt</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Lock 100 alpha per hotkey (about 0.65 TAO); registration burn 0.0005 TAO (2026-11-07)</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Python repo with main.py; commit fixed on chain before prompts; 24 h to generate each round</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Runs a weights-setter that copies the team&#x27;s published leader onto the chain; the team runs the judging.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-no"><dt>Hardware</dt><dd>No GPU. A small always-on server with Python 3.11+ and PM2 (weights-setter README)</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None found (a GitHub token and a Discord alert hook are optional)</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Registration burn 0.0005 TAO; permit stake threshold 1,000 TAO (chain, 2026-11-07)</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>PM2 service that reads the public state repo; sets weights every 30 minutes by default</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-neutral">Neutral</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-11-07. Not financial advice.</span></div><p>Mixed: outflow almost stopped and round 3 drew more entries, but 3,111 TAO left in 30 days. <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>404-GEN is a competition subnet run by the 404 team. A miner&#x27;s Python program sends a picture to OpenAI models through a team-run recording service and gets back Three.js code for the object. Each round&#x27;s best program wins all miner rewards.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Each round a miner fixes a public repo and commit on chain. Once prompts and a seed are published, the program runs on 128 images through the team&#x27;s recording witness pod and saves one Three.js module per image within 24 hours.</p></div><div><h3>Validators</h3><p>The team&#x27;s judge duels renders with a vision-language model, in submission order: an entry must beat the leader by 7% to qualify, then the current holder by 7% to take over; the last holder wins. A winner needs a replay of its recorded calls and a source audit; a repo that returns 404 fails.</p></div><div><h3>Incentive</h3><p>The leader gets all miner weight until beaten. Split: owner 18%, validators 41%, miners 41%, nothing burned.</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-11-07, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-good">Open</span>Any permit holder can set weights, but the weights-setter follows the team&#x27;s published winner; the team judges.</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">7.3%</span>7.3% of last-epoch emission sits on the owner&#x27;s uid as dividends; the owner cut is 18% and RecycleOrBurn is Burn.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">1 uid</span><span class="v2-sx muted">top 5 hold 100% of incentive.</span> One uid earns all miner incentive (100%); ten uids earn validator dividends.</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Converged</span>All 10 validators with weights put their top weight on one uid; that is concentration, not proof of copying.</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-good">Open</span>Subnet and base-miner code are MIT-licensed on GitHub; entries must keep their repos public.</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Writes a public Python program that turns each prompt image into one Three.js module.</p><ul>
+<li>Each round has 128 images; output is one self-contained Three.js module per image (no imports, assets or randomness).</li>
+<li>Repos must stay public through audits and after a win (team rule, 2026-10-26).</li>
+<li>The team can add allowed models during a round (guide, 2026-11-07).</li>
+<li>The Pod takes 32 simultaneous captures; an optional setting runs 1 to 8 proof contexts, using more memory (SDK docs, 2026-11-07).</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Runs a weights-setter that copies the team&#x27;s published leader onto the chain; the team runs the judging.</p><ul>
+<li>The repo does not say outsiders can run the judge, replay or audit steps.</li>
+</ul></section></div>
+<h2 id="sn-x0">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Leader weight decay</td><td>README: leader weight decays to a floor</td><td>Code: no decay; leader weight is 1.0 for all 5 entries</td><td>2026-11-07</td></tr><tr><td>Replay and audit</td><td>README: a validator replays calls; both checks must pass</td><td>Code: approvals are hand commits; round 1: 4 of 4 passed; round 2: winner passed both, 3 of 6 audits failed (repo 404)</td><td>2026-11-07</td></tr><tr><td>Leader results</td><td>README: the operator generates the leader&#x27;s results each round</td><td>Code: a manual launcher run by the operator each round (docs/manual-leader-generation.md)</td><td>2026-11-07</td></tr></tbody></table></div>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-neutral">Neutral</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-11-07. Not financial advice.</span></div>
+<p class="v2-thesis">The price fell 22.1% in 30 days and a net 3,111 TAO (12.5% of the pool) left, but only 58 TAO in the last three days. Round 3 has 67 entries against 54. Usage and revenue are team statements only.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.006467 TAO per alpha</dd></div><div><dt>Pool</dt><dd>22,094 TAO, rank 21</dd></div><div><dt>Price, 30 days</dt><dd>-22.1%, 2026-10-08 to 2026-11-07</dd></div><div><dt>Net flow, 30 days</dt><dd>-3,111 TAO, 2026-10-08 to 2026-11-07</dd></div><div><dt>Miner pay</dt><dd>About 19.0 TAO per day to the one paid uid (gross)</dd></div><div><dt>Miner pay outside top 5</dt><dd>None: only one uid is paid</dd></div><div><dt>Code activity</dt><dd>last commit 2026-11-06; 7 commits in 30 days on main; last release 2026-11-02</dd></div></dl>
+<div class="v2-trend"><h3>Trend</h3><div class="v2-tbody"><figure class="v2-tfig"><svg class="v2-spark down" viewBox="0 0 240 56" role="img" aria-label="Price in TAO per alpha, 2026-09-28 to 2026-11-07: 0.009025 to 0.006467, -28.3%"><polyline points="5.0,5.0 16.5,8.0 22.2,14.7 33.8,15.7 39.5,15.9 45.2,16.2 56.8,16.9 62.5,18.4 74.0,17.7 79.8,20.1 85.5,20.1 97.0,20.7 102.8,22.8 114.2,33.4 120.0,33.3 125.8,33.3 137.2,33.3 143.0,33.2 154.5,33.6 160.2,33.8 166.0,34.1 177.5,40.2 183.2,39.9 194.8,39.3 200.5,39.3 206.2,44.9 212.0,49.9 223.5,50.6 229.2,50.8 235.0,51.0"/><circle cx="235.0" cy="51.0" r="3"/></svg><figcaption><strong>Price</strong> <span class="down">-28.3%</span> <span class="muted">0.009025 to 0.006467 TAO per alpha, 2026-09-28 to 2026-11-07</span></figcaption></figure><dl class="v2-tfacts"><div><dt>Net flow, 30 days</dt><dd><span class="down">-3,111 TAO</span> <span class="muted">2026-10-08 to 2026-11-07</span></dd></div><div><dt>Verdict history</dt><dd><ol class="v2-vh"><li><span class="muted">2026-11-03</span> <span class="st s-neutral">Neutral</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-05</span> <span class="st s-neutral">Neutral</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-06</span> <span class="st s-neutral">Neutral</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-07</span> <span class="st s-neutral">Neutral</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li></ol></dd></div></dl></div></div>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>Round 3: 67 entries (round 2: 54, round 1: 34); round 2&#x27;s winner passed replay and source audit.</li>
+<li>Outflow nearly stopped: 58 TAO in three days against 1,127 TAO in the week.</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>Net outflow in all five weekly samples; price down 22.1% in 30 days.</li>
+<li>One hotkey takes all miner reward; 17 of 54 round 2 entries delivered nothing; 3 of 6 audited repos are gone.</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> Two weeks of net inflow, or checks without hand commits, would point up; outflow back above about 150 TAO a day, or fewer round 4 entries, down.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-similar">Similar subnets</h2>
+<div class="v2-sim"><p>By pool size this is <strong>rank 2 of 8</strong> among the subnets grouped as <em>media</em> (what they mainly sell). Pool and price as of 2026-11-06 to 2026-11-07, price in TAO per alpha; the barrier is the easiest miner role.</p><div class="scroll"><table class="v2-table"><thead><tr><th>#</th><th>Subnet</th><th>Pool</th><th>Price</th><th>Miner barrier</th></tr></thead><tbody><tr><td>1</td><td><a href="/bittensor-docs/subnets/44.html">Score</a> <span class="muted">SN44</span></td><td>63,976 TAO</td><td>0.0323</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr class="me" aria-current="true"><td>2</td><td>404-GEN <span class="muted">SN17, this page</span></td><td>22,094 TAO</td><td>0.006467</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>3</td><td><a href="/bittensor-docs/subnets/93.html">Bitcast</a> <span class="muted">SN93</span></td><td>21,967 TAO</td><td>0.01489</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr><td>4</td><td><a href="/bittensor-docs/subnets/85.html">VidAIO</a> <span class="muted">SN85</span></td><td>11,671 TAO</td><td>0.004209</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>5</td><td><a href="/bittensor-docs/subnets/117.html">EveryFrame</a> <span class="muted">SN117</span></td><td>4,628 TAO</td><td>0.006439</td><td><span class="v2-barrier b-low">Low</span></td></tr></tbody></table></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-11-07</span> <span class="muted">(GitHub 404-active-competition and chain read)</span> Round 3 generation opened at 08:00Z with 67 entries; round 2&#x27;s winner took the seat. Chain weights had not moved 14 minutes later.</li>
+<li><span class="when">2026-11-06</span> <span class="muted">(GitHub 404-active-competition and 404-gen-subnet)</span> Round 2 closed at 13:42Z; the winner passed replay and source audit (hand-recorded). Main got a render cache.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Follow the miner guide&#x27;s quickstart: install the SDK wheels, start from the team&#x27;s base-miner repo.</li>
+<li>Register a hotkey on subnet 17 and lock 100 alpha for it from your coldkey.</li>
+<li>Add your OpenAI key (or a Codex login); fix your repo and full commit on chain before prompts come out.</li>
+<li>Take prompts and seed from the state repo; run them through the witness pod within 24 hours.</li>
+<li>Validators: run the weights-setter from the subnet repo.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>The competition began on 2026-10-28; rules changed on 2026-11-02 and 2026-11-03 (four-day rounds).</li>
+<li>Replay and audit passes are hand-made commits; who runs them is not documented. My replay of the matches named round 2&#x27;s winner (entry 46 of 54, margin 0.0703); the round closed earlier than guessed.</li>
+<li>The paid uid&#x27;s coldkey also has an entrant hotkey, so it looks like a competitor&#x27;s, not the team&#x27;s. The hotkey rose 294 alpha while about 3,270 was credited in 27 hours; where the rest goes is not shown.</li>
+<li>The duel prompts, source-audit service, witness server code and the 2026-11-06 gateway refactor were not read in detail.</li>
+<li>Team chat after 2026-10-31 was unavailable (archive timed out 2026-11-07); newer team statements may be missing.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/404-Repo/404-gen-subnet" rel="noopener noreferrer">GitHub (subnet code)</a></li>
+<li><a href="https://github.com/404-Repo/404-gen-subnet/tree/main/miner-reference" rel="noopener noreferrer">Miner guide</a></li>
+<li><a href="https://github.com/404-Repo/404-active-competition" rel="noopener noreferrer">GitHub (live competition state)</a></li>
+<li><a href="https://github.com/404-Repo/404-base-miner-gpt" rel="noopener noreferrer">Base miner</a></li>
+<li><a href="https://competitions-viewer.subnet404.xyz/" rel="noopener noreferrer">Round dashboard (shared by team)</a></li>
+<li><a href="https://www.404.xyz" rel="noopener noreferrer">404 website</a></li>
+<li><a href="https://game.404.xyz/" rel="noopener noreferrer">Game platform and game jam</a></li>
+<li><a href="https://discord.gg/404gen" rel="noopener noreferrer">404 community Discord</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 5 sources</summary>
+<ul>
+<li><strong>repo</strong> 404-Repo/404-gen-subnet@0211d8d (checked 2026-11-07; main = merged release of 2026-11-02 plus #83 Witness render cache and gateway / Pod runtime split, #78-#79 gateway and renderer fixes and deployment record, #80-#81 neutral-lighting grids and deployment record, #82 opt-in concurrent native proofs): README.md and docs/manual-leader-generation.md (2026-11-03 / 2026-11-05 checks), docs/witness-server-release-plan.md, compare 3fbb72e...0211d8d (1 commit, 113 files: witness gateway, server worker and shared witness modules; no change under miner-reference), compare b94b2fe...3fbb72e (3 commits, 15 files: witness-client README and native pool, miner-runtime batch.py and pyproject, shared render.py), compare 64d6abd...b94b2fe (miner-reference/README.md, witness-client/README.md, witness-gateway/README.md and PODS.md, pod_gateway auth / settings / server, render-service-js post-validate), judge-service round_runner.py, match_execution.py, timeline.py; commits on weights-setter, judge-service, round-manager</li>
+<li><strong>repo</strong> 404-Repo/404-active-competition@ce6e89b (checked 2026-11-07): config.json, state.json, leader.json, rounds/1 (matches_matrix, submissions), rounds/2 (winner, schedule and its commit list, seed, submissions, matches_matrix, validation_requests, validation_results, source_audit and their commit authors: audits and replay were recorded by hand on 2026-11-05 and 2026-11-06), rounds/3 (schedule, seed, submissions); 404-Repo/404-base-miner-gpt@f9876fb (checked 2026-11-02); 404-Repo/404-competition-2 (2026-10-26): leader.json, rounds/58</li>
+<li><strong>web</strong> Chain read at block 9452963 (2026-11-07 08:14Z UTC): SN17 (404—GEN): registered 2024-04-28, tempo 360, 256 of 256 uids, commit-reveal on; emission weights burn/recycle/owner/validator/miner = 0/0/18/41/41 % (stored, same values as the chain default), RecycleOrBurn = Burn; uids under the owner hotkey or owner coldkey hold 0 % of incentive and 7.33 % of last-epoch emission (a floor); 10 validators have weight rows, on average 0 % of weight goes to uid 0. Chain read at block 9452963 (2026-11-07 08:14Z UTC), compared with block 9443292 (2026-11-06 00:00Z UTC): SN17: no setting changed in 33 checked items; emission split unchanged; pool 22106.68 -&gt; 22093.87 TAO. Chain read at block 9452963 (2026-11-07 08:14Z): price SN17, 6 samples every 7d from block 9236963 (2026-10-08 07:55Z): price 0.008301 -&gt; 0.006467 TAO per alpha (-22.1%), pool TAO 24803.5 -&gt; 22093.9; over the 5 intervals where the pool change equals flow + protocol: net user flow -3110.6 TAO (staked minus unstaked), protocol flow +400.9 TAO, gross volume 7295.6 TAO. Daily read, 7 intervals 2026-10-31 08:12Z to 2026-11-07 08:14Z: net user flow +52.6 / -453.8 / -198.4 / -468.4 / -12.1 / -26.5 / -19.9 TAO (-1,126.5 in total). Pool rank 21 of 128, price rank 45: snapshot at block 9452963. uid 126 at block 9452963: hotkey alpha 800.65 (507.07 at block 9444970), incentive 100%; its hotkey tag matches the previous leader.json entry and the coldkey&#x27;s uid 29 matches a round entrant (hash tags compared, no address stored). Weights re-read returned the same host block (9452963).</li>
+<li><strong>web</strong> GitHub releases feed of 404-gen-subnet (last release 2026-11-02, checked 2026-11-07); link checks 2026-11-07 (8 links, all HTTP 200; status codes only, competition viewer, 404.xyz and game site not re-read)</li>
+<li><strong>msg</strong> #17 404-gen, 2026-10-23 to 2026-10-31 (chat archive timed out on 2026-11-07; nothing newer was read)</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/16.html"><small>← Previous</small>SN16 Unnamed subnet</a><a rel="next" href="/bittensor-docs/subnets/18.html"><small>Next →</small>SN18 Zeus</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-11-07. Site built 2026-11-07. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

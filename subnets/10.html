@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pareton (SN10) | Bittensor Subnet Docs</title>
+<meta name="description" content="Miners patch vLLM or SGLang for a set model and GPU; the fastest verified patch earns.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h22">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>10</span><div>
+<h1>Pareton <span class="muted">SN10</span></h1>
+<p class="tagline">Miners patch vLLM or SGLang for a set model and GPU; the fastest verified patch earns.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>12<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>9.1<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>16<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-11-02</b><span>last chat</span></li><li class="pw"><b>1,561</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Shipping</b><span>code activity</span></li><li class="pw"><b>41</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-11-03</b><span>last commit</span></li><li class="pw"><b>none</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>inference optimization</dd>
+<dt>Status</dt><dd>A Muse Spark campaign pays one outside miner; 60% of the miner side burns; round 4 ended a 53-hour gap.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-11-07</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Campaigns so far</a></li><li><a href="#sn-x1">The open campaign</a></li><li><a href="#sn-x2">Docs vs code vs chain</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-similar">Similar subnets</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>Miners submit patches that speed up one model on one GPU setup; only the leader earns.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>one campaign leader (UID 196) holds 39.5% of incentive; 60.5% of the miner side still burns (2026-11-07).</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>the open campaign is Muse Spark Open 816B on 8x H200 (SGLang), opened 2026-11-03, 0.2 TAO fee per patch.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>no paying customer on 2026-09-04; later partner claims are unverified.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-high">High barrier</span></h3><p>Writes a patch that speeds up the campaign&#x27;s pinned engine and commits it on chain with a fee.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-caution">GPU needed</li><li class="fl fl-caution">Paid service needed</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>8x H200 for the open campaign (the Kimi K3 campaigns needed 8x B300)</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>GPU rental; no API keys documented</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Registration burn 0.0005 TAO; patch fee 0.2 TAO now (0.1 to 0.35 before), not refunded</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Engine and kernel tuning skill; Docker and a Python CLI</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Sets weights: copies the team&#x27;s vector with a script, or runs its own full benchmark stack.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-no"><dt>Hardware</dt><dd>No GPU. Copy path: a small server; own stack: VPS, 8 vCPU, 16 GB, 200 GB</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>Copy path: none. Own stack: GPU pods, Postgres, S3, Hugging Face and GHCR tokens</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Permit: 1,000 TAO stake and a top-64 place; registration burn 0.0005 TAO</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Copy path: one script. Own stack: Postgres, 3 services, Docker</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-neutral">Neutral</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-overvalued">Overvalued</span></span><span class="v2-conf muted">medium confidence, as of 2026-11-07. Not financial advice.</span></div><p>A campaign is open and pays one miner; price down 33%, 2,931 TAO net out in 30 days. <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>Pareton (SN10) pays miners to speed up open-source AI model serving. The team pins a model, GPU setup and engine; miners submit patches, scored in rounds, and the leader holds until beaten by 1 percent. One campaign is open; no paying customer is shown.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Write a git patch against the campaign&#x27;s pinned commit, upload it and record its hash on chain with the repo&#x27;s CLI, which pays the fee. Patches stay private unless a campaign opts into a delayed reveal.</p></div><div><h3>Validators</h3><p>The team&#x27;s watcher builds each patch in a pinned container, benchmarks it against the leader on one rented pod and checks answer quality. Score: speedup per prompt-length tier minus a failed-prompt penalty; a challenger must win by 1 percent. Other validators copy the team&#x27;s weights.</p></div><div><h3>Incentive</h3><p>Emission splits 18 percent owner, 41 validators, 41 miners. The team&#x27;s weights pay the seated leader of an open campaign 40 percent of the weight, falling to 0 over about 28 days from the round the leader won (a new win restarts it), and burn the rest through the owner&#x27;s UID (now 39.7 leader, 60.3 burned). With no open campaign all miner reward burns; validators still earn dividends.</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-11-07, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-good">Open</span>Any hotkey with a permit (1,000 TAO stake, top 64) can set weights; 13 of 14 weight setters send the team&#x27;s split.</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">43.4%</span>43.39% of last-epoch emission sits on the owner&#x27;s UID (burn plus dividends); owner cut 18%, RecycleOrBurn is Burn.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">2 uids</span><span class="v2-sx muted">top 5 hold 100% of incentive.</span> Two uids have incentive: the owner&#x27;s burn UID (60.5%) and one outside miner (39.5%); 14 uids earn dividends.</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Converged</span>All 14 put their top weight on UID 201 (13 split 60 / 40 with UID 196): concentration, not proof of copying.</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-good">Open</span>Apache-2.0 repo holds the validator, benchmark and miner CLI; submitted patches stay private by default.</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-high">High barrier</span></h3><p>Writes a patch that speeds up the campaign&#x27;s pinned engine and commits it on chain with a fee.</p><ul>
+<li>Pull the public baseline image by digest; a local rebuild scores differently. Use --dry-run; avoid --timelock, which never reveals.</li>
+<li>You keep the copyright, but a commit lets Pareton run, change, ship and publish the patch; no royalty.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Sets weights: copies the team&#x27;s vector with a script, or runs its own full benchmark stack.</p><ul>
+<li>The team runs the validator that decides leaders (UID 201, the owner&#x27;s UID).</li>
+<li>15 hotkeys hold permits and 14 set weights: 13 follow the team&#x27;s 60 / 40 split, one sends all to UID 201 (2026-11-07).</li>
+</ul></section></div>
+<h2 id="sn-x0">Campaigns so far</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Date</th><th>Workload</th><th>Fee in TAO</th></tr></thead><tbody><tr><td>2026-08-28</td><td>Qwen3.8-27B FP8, 1x H200 (vLLM; SGLang from 09-10)</td><td>0.1</td></tr><tr><td>2026-09-16 to 09-21</td><td>Qwen3.8-27B NVFP4, 4x RTX 5090 (three launches)</td><td>0.15</td></tr><tr><td>2026-10-06</td><td>Qwen3.8-27B FP8, 1x RTX PRO 6000</td><td>0.1</td></tr><tr><td>2026-10-14</td><td>Kimi K3, 8x B300 (closed 2026-10-19)</td><td>0.35</td></tr><tr><td>2026-10-21</td><td>Kimi K3 relaunch, long traces (closed 2026-10-28)</td><td>0.35</td></tr><tr><td>2026-11-03 (open)</td><td>Muse Spark Open 816B, 8x H200 (SGLang); UID 196 leads since 11-04</td><td>0.2</td></tr></tbody></table></div>
+<h2 id="sn-x1">The open campaign</h2>
+<ul class="v2-list">
+<li>Goal: 10% faster completion at 16 concurrent requests, time to first token within 2x stock; patches are private, with an obfuscation scan and an LLM review.</li>
+<li>Rounds: four complete, the last on 11-06 (seven entries); leader score 0.37, then 0.57, 0.59 and 0.60. Three newer patches wait.</li>
+</ul>
+<h2 id="sn-x2">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Commit-reveal</td><td>Docs say it is on</td><td>Chain: the flag is off</td><td>2026-11-07</td></tr><tr><td>Scoring rule</td><td>Docs: median per-prompt speedup</td><td>Code: tier speedup minus a failure penalty, 2x first-token cap</td><td>2026-11-07</td></tr><tr><td>Patch review gates</td><td>Docs: no mention</td><td>Code: both gates are on for the open Muse campaign (API manifest)</td><td>2026-11-07</td></tr></tbody></table></div>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-neutral">Neutral</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-overvalued">Overvalued</span></span><span class="v2-conf muted">medium confidence, as of 2026-11-07. Not financial advice.</span></div>
+<p class="v2-thesis">One outside miner earns about 5.0 TAO a day, but 60% of the miner side burns, the team sets pay and users sold a net 2,931 TAO in 30 days. Rounds resumed on 11-06; no paying customer is shown.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.004279 TAO per alpha</dd></div><div><dt>Pool</dt><dd>13,485 TAO, rank 33 of 128</dd></div><div><dt>Price, 30 days</dt><dd>-33%, 2026-10-08 to 2026-11-07</dd></div><div><dt>Net flow, 30 days</dt><dd>-2,931 TAO, 2026-10-08 to 2026-11-07</dd></div><div><dt>Miner pay</dt><dd>One independent miner earns 5.0 TAO per day; the miner side is 12.6 TAO per day, 60.5% burned</dd></div><div><dt>Code activity</dt><dd>last commit 2026-11-03; 73 commits in 30 days; no releases</dd></div></dl>
+<div class="v2-trend"><h3>Trend</h3><div class="v2-tbody"><figure class="v2-tfig"><svg class="v2-spark down" viewBox="0 0 240 56" role="img" aria-label="Price in TAO per alpha, 2026-09-28 to 2026-11-07: 0.006244 to 0.004279, -31.5%"><polyline points="5.0,9.4 22.2,11.5 33.8,10.7 39.5,11.1 45.2,10.7 56.8,5.0 62.5,9.7 74.0,12.1 79.8,11.6 85.5,15.0 97.0,17.2 102.8,22.2 114.2,31.1 120.0,33.3 125.8,33.6 137.2,32.9 143.0,43.9 154.5,43.1 160.2,44.9 166.0,42.0 177.5,46.3 183.2,46.0 189.0,47.2 194.8,47.6 200.5,48.7 206.2,46.6 212.0,47.0 217.8,49.8 229.2,51.0 235.0,50.9"/><circle cx="235.0" cy="50.9" r="3"/></svg><figcaption><strong>Price</strong> <span class="down">-31.5%</span> <span class="muted">0.006244 to 0.004279 TAO per alpha, 2026-09-28 to 2026-11-07</span></figcaption></figure><dl class="v2-tfacts"><div><dt>Net flow, 30 days</dt><dd><span class="down">-2,931 TAO</span> <span class="muted">2026-10-08 to 2026-11-07</span></dd></div><div><dt>Verdict history</dt><dd><ol class="v2-vh"><li><span class="muted">2026-11-03</span> <span class="st s-bearish">Bearish</span> <span class="st v-overvalued">Overvalued</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-04</span> <span class="st s-neutral">Neutral</span> <span class="st v-overvalued">Overvalued</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-06</span> <span class="st s-neutral">Neutral</span> <span class="st v-overvalued">Overvalued</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-07</span> <span class="st s-neutral">Neutral</span> <span class="st v-overvalued">Overvalued</span> <span class="muted">medium confidence</span></li></ol></dd></div></dl></div></div>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>A campaign pays an outside miner (UID 196, 39.5% of incentive)</li>
+<li>Round 4 ran on 11-06; 7 hotkeys sent 18 patches in all</li>
+<li>Open Apache-2.0 code and API; 73 commits in 30 days</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>Net outflow in every weekly step (-255 TAO in the last 7 days); lowest price reading in 30 days</li>
+<li>Team sets pay; 13 of 14 validators copy it</li>
+<li>60% of miner reward burns; no commit since 11-03; no paying customer shown</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> A paying customer, steady net inflow or more earning miners would improve it; another round gap or full burn would worsen it.</p>
+<p class="muted">Since the last pass: Neutral since 11-04, unchanged: rounds resumed on 11-06, but outflow, burn and team-set pay remain.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-similar">Similar subnets</h2>
+<div class="v2-sim"><p>By pool size this is <strong>rank 5 of 13</strong> among the subnets grouped as <em>inference</em> (what they mainly sell). Pool and price as of 2026-11-06 to 2026-11-07, price in TAO per alpha; the barrier is the easiest miner role.</p><div class="scroll"><table class="v2-table"><thead><tr><th>#</th><th>Subnet</th><th>Pool</th><th>Price</th><th>Miner barrier</th></tr></thead><tbody><tr><td>3</td><td><a href="/bittensor-docs/subnets/14.html">Cacheon</a> <span class="muted">SN14</span></td><td>25,563 TAO</td><td>0.009237</td><td><span class="v2-barrier b-high">High</span></td></tr><tr><td>4</td><td><a href="/bittensor-docs/subnets/95.html">Actual</a> <span class="muted">SN95</span></td><td>22,698 TAO</td><td>0.02919</td><td><span class="v2-barrier b-high">High</span></td></tr><tr class="me" aria-current="true"><td>5</td><td>Pareton <span class="muted">SN10, this page</span></td><td>13,484 TAO</td><td>0.004279</td><td><span class="v2-barrier b-high">High</span></td></tr><tr><td>6</td><td><a href="/bittensor-docs/subnets/114.html">SOMA</a> <span class="muted">SN114</span></td><td>9,435 TAO</td><td>0.01712</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>7</td><td><a href="/bittensor-docs/subnets/2.html">DaniLabs</a> <span class="muted">SN2</span></td><td>8,787 TAO</td><td>0.003953</td><td><span class="v2-barrier b-high">High</span></td></tr></tbody></table></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-11-06</span> <span class="muted">(platform API)</span> Round 4 ran after a 53-hour gap: seven entries, and UID 196 won again with a new patch (score 0.60), which restarted its pay decay.</li>
+<li><span class="when">2026-11-05</span> <span class="muted">(platform API)</span> Five more patches arrived within 10 hours (7 hotkeys in all) and waited 9 to 18 hours for round 4 to start.</li>
+<li><span class="when">2026-11-05</span> <span class="muted">(openkernelchallenge.dev, #10-pareton)</span> The kernel contest site closed its kernel track at 00:00 PT; final standings come before the serving track opens on Nov 10, the team&#x27;s target.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Read the open campaign&#x27;s manifest in the API: pinned commit, allowed paths, model, GPUs, scoring rule, fee.</li>
+<li>Pull the public baseline image by digest; benchmark your patch on matching GPUs.</li>
+<li>Run the miner CLI with --dry-run, then submit; builds take hours.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>The team sets pay: all 14 weight setters rank the owner&#x27;s UID first (2026-11-07).</li>
+<li>Idle gaps burn all miner reward (2026-10-19 to 10-21, 10-28 to 11-04).</li>
+<li>Partner and speedup claims (Engy, a Leadpoet pilot, a tokenised SN10 on Base) are unverified.</li>
+<li>Chat after 2026-11-02 was not read (archive down).</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/Pareton-ai/pareton" rel="noopener noreferrer">GitHub</a></li>
+<li><a href="https://pareton.ai" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://www.pareton.ai/docs" rel="noopener noreferrer">Docs</a></li>
+<li><a href="https://www.pareton.ai/docs/miner" rel="noopener noreferrer">Miner docs</a></li>
+<li><a href="https://www.pareton.ai/docs/validator" rel="noopener noreferrer">Validator docs</a></li>
+<li><a href="https://www.pareton.ai/dashboard" rel="noopener noreferrer">Dashboard</a></li>
+<li><a href="https://api.pareton.ai/v1/campaigns" rel="noopener noreferrer">Campaign API</a></li>
+<li><a href="https://api.pareton.ai/v1/weights" rel="noopener noreferrer">Published weight vector</a></li>
+<li><a href="https://www.pareton.ai/docs/platform/validators-and-emissions" rel="noopener noreferrer">Emissions doc</a></li>
+<li><a href="https://github.com/Pareton-ai/pareton/blob/main/docs/auditor.md" rel="noopener noreferrer">Weight setter guide</a></li>
+<li><a href="https://www.pareton.ai/docs/policies/submitting" rel="noopener noreferrer">Submitting a patch (policy)</a></li>
+<li><a href="https://openkernelchallenge.dev/" rel="noopener noreferrer">Muse Spark kernel contest</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 7 sources</summary>
+<ul>
+<li><strong>repo</strong> Pareton-ai/pareton@ed6526d (main, merge of PR #217 on 2026-11-03 13:05Z; checked 2026-11-07; compare e975c28...ed6526d = 31 commits, 3 files net; ed6526d...main identical on 2026-11-07): README.md, config.py, bench/score.py, bench/longform.py, weights/build.py, round/rank.py, campaign/engine.py, campaign/seed.py, ops/seed-sglang-muse-spark-open-h200-okc.sh, tests/test_seed.py, images/baseline-sglang-okc, docs/auditor.md, fixtures/campaigns/sglang_muse_spark_open_h200_okc, PR #214, #215 and #217; Apache-2.0; branch claude/project-thread-01wl64 not re-read</li>
+<li><strong>web</strong> https://api.pareton.ai/v1/campaigns (open, closed and archived), /v1/campaigns/&lt;id&gt;/rounds, /leader, /score-progress and /submissions (counts and scores only), /v1/weights (computed at block 9451209, with breakdown) and /v1/stats, read 2026-11-07, 2026-11-06, 2026-11-04, 2026-11-03, 2026-11-02, 2026-10-31 and 2026-10-28</li>
+<li><strong>web</strong> Chain read at block 9451407 (2026-11-07 03:03Z UTC): SN10 (Pareton): registered 2024-05-02, tempo 360, 256 of 256 uids, commit-reveal off; emission weights burn/recycle/owner/validator/miner = 0/0/18/41/41 % (stored, same values as the chain default), RecycleOrBurn = Burn; uids under the owner hotkey or owner coldkey hold 60.5 % of incentive and 43.39 % of last-epoch emission (a floor); 14 validators have weight rows, on average 0 % of weight goes to uid 0. 15 permit holders of 64 slots, permit stake threshold 1000 TAO. Chain read at block 9451407 (2026-11-07 03:03Z UTC), compared with block 9443292 (2026-11-06 00:00Z UTC): SN10: no setting changed in 33 checked items; emission split unchanged; pool 13477.99 -&gt; 13484.5 TAO. Chain read at block 9451483 (2026-11-07 03:18Z): SN10 uid 196 registered 2026-11-03 18:37Z, incentive 39.502% (rank 2), validator permit False, hotkey owner-linked False, coldkey owner-linked False.</li>
+<li><strong>web</strong> Chain read at block 9451483 (2026-11-07 03:18Z): price SN10, 6 samples every 7d from block 9235483 (2026-10-08 02:59Z): price 0.006379 -&gt; 0.004279 TAO per alpha (-32.9%), pool TAO 16460.3 -&gt; 13484.5; over the 5 intervals where the pool change equals flow + protocol: net user flow -2930.9 TAO (staked minus unstaked), protocol flow -44.9 TAO, gross volume 28542.6 TAO. Pool rank 33 of 128 subnets (root excluded) and price rank 60 from the shared snapshot at block 9451407 (2026-11-07 03:03Z).</li>
+<li><strong>web</strong> https://www.pareton.ai/docs: miner overview, submission, evidence, rewards; validator overview, setup, set weights from our API; platform campaigns, dynamic workloads, validators-and-emissions, rounds-and-leaders; policies submitting and website; public API; read 2026-10-23, 2026-10-28, 2026-10-31, 2026-11-02, 2026-11-03, 2026-11-04, 2026-11-06 and 2026-11-07 (8 pages re-read on 11-07, text unchanged)</li>
+<li><strong>web</strong> https://openkernelchallenge.dev/ (Muse Spark Open Kernel Challenge schedule, serving track and partners), read 2026-10-31, 2026-11-02, 2026-11-03, 2026-11-04, 2026-11-06 and 2026-11-07 (page and script bundle byte-identical to 11-06; news items of 11-02, 11-03 and 11-05: kernel rule notes, serving track moved to open 11-10, serving leaderboard private, kernel track closed 11-05 00:00 PT; first read 11-04)</li>
+<li><strong>msg</strong> #10-pareton 2026-01-28 to 2026-11-02 (archive unreachable on 2026-11-07)</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/9.html"><small>← Previous</small>SN9 IOTA</a><a rel="next" href="/bittensor-docs/subnets/11.html"><small>Next →</small>SN11 TrajectoryRL</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-11-07. Site built 2026-11-07. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

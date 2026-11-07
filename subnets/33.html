@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ReadyAI (SN33) | Bittensor Subnet Docs</title>
+<meta name="description" content="ReadyAI tags data for a paid API and is moving to agent-skill tasks; 25% of miner pay is now burned.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h15">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>33</span><div>
+<h1>ReadyAI <span class="muted">SN33</span></h1>
+<p class="tagline">ReadyAI tags data for a paid API and is moving to agent-skill tasks; 25% of miner pay is now burned.</p>
+<span class="st s-transitioning">transitioning</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>8.1<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>7.1<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>9.7<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-11-02</b><span>last chat</span></li><li class="pw"><b>7,582</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Shipping</b><span>code activity</span></li><li class="pw"><b>1</b><span>code commit in 30 d</span></li><li class="pw"><b>2026-10-27</b><span>last commit</span></li><li class="pw"><b>2024-07-26</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>data tagging, enrichment and agent-skill generation</dd>
+<dt>Status</dt><dd>Team says conversation tasks are under half and shrinking toward skill tasks (2026-10-31). Since 2026-10-27, 25% of miner pay is burned.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-11-07</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Task mix and fairness dispute</a></li><li><a href="#sn-x1">Burns, revenue and buybacks (team data)</a></li><li><a href="#sn-x2">Skill Store 33</a></li><li><a href="#sn-x3">Docs vs code vs chain</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-similar">Similar subnets</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>a paid Jobs API sells tagged data, about 280 USDC a day; not visible on chain.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>since 2026-10-27, 25% of miner pay is burned; validators get 49%, miners 33%, owner 18%.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>tagging gives way to skill tasks; Skill Store 33 is live, but only 13 of its 61,000+ skills come from SN33.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>on 2026-10-23, 11 wallets held 239 of 256 uids and 97% of incentive; a shared operator is disputed.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>miners need a CPU and an OpenAI key; validators need team-issued keys, so validating is not open.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-low">Low barrier</span></h3><p>Answers tagging and skill tasks with its own LLM; paid by rank.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-caution">Paid service needed</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>CPU, 8 GB RAM, 20 GB disk (README); min_compute.yml disagrees</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>OpenAI key always required (embeddings); Anthropic, OpenRouter or Chutes overrides in README; spend not stated</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Registration burn 0.0336 TAO (2026-11-07); all 256 slots full</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Python, git, one open public port; setup time not stated</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Scores miners from whole conversations and sets weights; needs team-issued keys.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-caution">Paid service needed</li><li class="fl fl-bad">Permissioned</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>CPU, 8 GB RAM, 20 GB disk (README, as miner)</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>OpenAI key, W&amp;B key, team Conversation Server key</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Burn 0.0336 TAO; permit threshold 1,000 TAO; server key needs a minimum stake (not stated)</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Team hands out the commitment key; update on each release</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">low confidence, as of 2026-11-07. Not financial advice.</span></div><p>Outflow in 4 of 5 intervals, price -19% in 30 days; last 7 days flat <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>ReadyAI (SN33; the repo is still called Conversation Genome Project) turns raw content into tagged, structured data. Miners tag text; validators score them against tags built from the whole content. The team sells the output through a paid Jobs API and is shifting the subnet to agent-skill tasks.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Miners answer tasks with their own LLM. In conversation tagging a miner gets one masked window of up to 10 lines and returns topical tags. The team&#x27;s server picks which task types go out (the code has six).</p></div><div><h3>Validators</h3><p>A validator fetches task bundles from the team&#x27;s server, splits each into up to 5 tasks, sends each to 6 random miners and scores replies against tags built from the whole conversation. Since release 2.39.77 tasks go out in random order.</p></div><div><h3>Incentive</h3><p>Tags score by embedding similarity to the reference, with penalties. Skill tasks score 60% on how well the tests cover up to 3 sampled sections and 40% on how well they match the skill; an LLM judge must accept a test (none is run), and the score halves for under 5 tests or near-duplicates. Weights are rank-based; since 2026-10-27, 25% of weight goes to the owner uid and is burned.</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-11-07, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-caution">Whitelisted</span>7 validators set weights now, but validators need a team-issued server key and commitment key.</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">12.7%</span>Owner uid 81 gets 12.65% of emission (25.4% of incentive); owner cut 18%; RecycleOrBurn is Burn.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">248 uids</span><span class="v2-sx muted">top 5 hold 27.1% of incentive.</span> 248 uids earn; the top 5 hold 27.1% of incentive, 25.4% of it the burn uid; the other 243 about 0.3% each.</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Converged</span>All 7 validators with recent weights rank uid 81 (the burn target) first; a deterministic scorer makes them agree too.</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-good">Open</span>Miner and validator code are public (MIT); task supply and validator keys come from team-run servers.</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-low">Low barrier</span></h3><p>Answers tagging and skill tasks with its own LLM; paid by rank.</p><p class="muted">No further detail found in the sources.</p></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Scores miners from whole conversations and sets weights; needs team-issued keys.</p><ul>
+<li>The owner&#x27;s own validator (uid 81) holds a permit but has not set weights since it registered on 2025-02-13.</li>
+</ul></section></div>
+<h2 id="sn-x0">Task mix and fairness dispute</h2>
+<ul class="v2-list">
+<li>Team, 2026-10-29/31: conversation tasks are under half and will shrink toward almost all skill tasks; no date or split.</li>
+<li>Participants say an operator with many slots can stitch a conversation&#x27;s windows together; code: windows overlap by 2 lines and share enrichment cards. Not tested.</li>
+</ul>
+<h2 id="sn-x1">Burns, revenue and buybacks (team data)</h2>
+<ul class="v2-list">
+<li>Dashboard, 2026-10-08 to 11-06: about 8,311 USDC and 6,019 jobs; last 7 days -8%, almost all from 11-06 (134 USDC, half the norm).</li>
+<li>Team: 75% of revenue funds buybacks; chain confirms 9.2 TAO (2026-07-21) and 17.07 TAO (2026-09-12); none announced since.</li>
+<li>Miner burn: 90% from 2025-12-03 (called temporary), lifted 2026-06-30, back at 25% on 2026-10-27.</li>
+</ul>
+<h2 id="sn-x2">Skill Store 33</h2>
+<ul class="v2-list">
+<li>Live by 2026-10-30: a free catalog of 61,000+ agent skills with an MCP search server.</li>
+<li>Almost all are imported from public GitHub; 13 come from SN33 (1 on 10-30). &#x27;Verified&#x27; (200+ skills) comes from the store&#x27;s own sandbox tests, not subnet scores.</li>
+</ul>
+<h2 id="sn-x3">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Burn scope</td><td>Team: 25% of tagging-task incentive is burned</td><td>Code: 25% of the whole weight vector goes to the owner uid</td><td>2026-11-07</td></tr><tr><td>Miner hardware</td><td>README: CPU, 8 GB RAM and 20 GB disk are enough</td><td>Code: min_compute.yml lists a GPU spec (A100) and a CPU spec</td><td>2026-11-07</td></tr><tr><td>Conversation share</td><td>Team: under half of miner tasks, shrinking</td><td>Chat: a participant counted 56% of tasks this month (unverified)</td><td>2026-10-29</td></tr><tr><td>Webpage task input</td><td>README: the miner gets the page&#x27;s Markdown</td><td>Code: first 1,000 page characters plus 1 to 3 search snippets per query</td><td>2026-11-07</td></tr></tbody></table></div>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">low confidence, as of 2026-11-07. Not financial advice.</span></div>
+<p class="v2-thesis">Net flow was negative in four of five intervals (-1,262 TAO, 10% of the pool) and the price fell 19%, but weekly outflow shrank (-769 to -200) and the last 7 days netted -4. Usage is unverified.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.003044 TAO per alpha</dd></div><div><dt>Pool</dt><dd>11,852 TAO, rank 38</dd></div><div><dt>Price, 30 days</dt><dd>-19%, 2026-10-08 to 2026-11-07</dd></div><div><dt>Net flow, 30 days</dt><dd>-1,262 TAO, 2026-10-08 to 2026-11-07</dd></div><div><dt>Miner pay</dt><dd>0.022 TAO per day on average (5.38 TAO per day over 248 uids)</dd></div><div><dt>Miner pay outside top 5</dt><dd>0.022 TAO per day on average (5.25 TAO per day over 243 uids outside the top 5)</dd></div><div><dt>Code activity</dt><dd>last commit 2026-10-27; 2 commits in 30 days; last GitHub release 2024-07-26</dd></div></dl>
+<div class="v2-trend"><h3>Trend</h3><div class="v2-tbody"><figure class="v2-tfig"><svg class="v2-spark down" viewBox="0 0 240 56" role="img" aria-label="Price in TAO per alpha, 2026-09-28 to 2026-11-07: 0.004019 to 0.003044, -24.3%"><polyline points="5.0,8.5 16.5,10.1 22.2,11.4 33.8,14.4 39.5,14.8 45.2,5.0 56.8,16.1 62.5,20.2 74.0,23.5 79.8,24.5 85.5,23.9 97.0,27.0 102.8,38.1 114.2,39.8 120.0,40.4 125.8,42.1 137.2,42.9 143.0,43.5 154.5,43.0 160.2,46.6 166.0,46.8 177.5,47.3 183.2,48.2 194.8,47.4 200.5,47.7 206.2,51.0 212.0,42.0 223.5,45.0 229.2,45.5 235.0,47.8"/><circle cx="235.0" cy="47.8" r="3"/></svg><figcaption><strong>Price</strong> <span class="down">-24.3%</span> <span class="muted">0.004019 to 0.003044 TAO per alpha, 2026-09-28 to 2026-11-07</span></figcaption></figure><dl class="v2-tfacts"><div><dt>Net flow, 30 days</dt><dd><span class="down">-1,262 TAO</span> <span class="muted">2026-10-08 to 2026-11-07</span></dd></div><div><dt>Verdict history</dt><dd><ol class="v2-vh"><li><span class="muted">2026-11-03</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">low confidence</span></li><li><span class="muted">2026-11-05</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">low confidence</span></li><li><span class="muted">2026-11-06</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">low confidence</span></li><li><span class="muted">2026-11-07</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">low confidence</span></li></ol></dd></div></dl></div></div>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>Team ships: split, burn, random order merged 2026-10-27</li>
+<li>Jobs API revenue near 277 USDC a day (team data)</li>
+<li>Weekly outflow shrank from -769 to -200 TAO; last 7 days -4</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>Net outflow in 4 of 5 intervals; price -19%</li>
+<li>Usage is team-stated; 11 wallets held 97% of incentive (2026-10-23)</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> Weeks of net inflow, public store usage with more SN33 skills, or incentive spreading to independent miners point to bullish.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-similar">Similar subnets</h2>
+<div class="v2-sim"><p>By pool size this is <strong>rank 3 of 8</strong> among the subnets grouped as <em>data</em> (what they mainly sell). Pool and price as of 2026-11-06 to 2026-11-07, price in TAO per alpha; the barrier is the easiest miner role.</p><div class="scroll"><table class="v2-table"><thead><tr><th>#</th><th>Subnet</th><th>Pool</th><th>Price</th><th>Miner barrier</th></tr></thead><tbody><tr><td>1</td><td><a href="/bittensor-docs/subnets/13.html">Data Universe</a> <span class="muted">SN13</span></td><td>16,724 TAO</td><td>0.003917</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr><td>2</td><td><a href="/bittensor-docs/subnets/43.html">Graphite</a> <span class="muted">SN43</span></td><td>12,289 TAO</td><td>0.003955</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr class="me" aria-current="true"><td>3</td><td>ReadyAI <span class="muted">SN33, this page</span></td><td>11,852 TAO</td><td>0.003044</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr><td>4</td><td><a href="/bittensor-docs/subnets/54.html">Yanez</a> <span class="muted">SN54</span></td><td>9,362 TAO</td><td>0.00537</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>5</td><td><a href="/bittensor-docs/subnets/22.html">Desearch</a> <span class="muted">SN22</span></td><td>7,226 TAO</td><td>0.00277</td><td><span class="v2-barrier b-low">Low</span></td></tr></tbody></table></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-11-01</span> <span class="muted">(#33-ready)</span> A participant asked to drop enrichment cards or give both sides the same window; the team will consider it.</li>
+<li><span class="when">2026-10-27</span> <span class="muted">(#33-ready, GitHub PR 139, chain)</span> Emission split moved to 33 miners / 49 validators / 18 owner. The team announced it with PR 139 (25% burn, random order, version 2.39.77).</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Clone the repo, copy env.example to .env and add an OpenAI key (the W&amp;B key is for validators).</li>
+<li>Open your miner port to the internet; a closed port is the usual reason for no requests.</li>
+<li>Test on testnet (netuid 138) with the README miner command; it checks setup only.</li>
+<li>Register on netuid 33 (burn 0.0336 TAO on 2026-11-07) and start the miner; low scorers are replaced.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>The 11-wallet concentration is from 2026-10-23, not re-read; the chain cannot show a shared operator.</li>
+<li>Revenue, customers, the 75% buyback share, Skill Store counts and skill benchmarks are team statements.</li>
+<li>Chat after 2026-11-02 was unreadable (archive down); later team posts are missing.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/afterpartyai/bittensor-conversation-genome-project" rel="noopener noreferrer">GitHub (miner and validator code)</a></li>
+<li><a href="https://github.com/afterpartyai/bittensor-conversation-genome-project/pull/139" rel="noopener noreferrer">Pull request 139 (25% burn, random order)</a></li>
+<li><a href="https://readyai.ai/" rel="noopener noreferrer">Website and Jobs API dashboard</a></li>
+<li><a href="https://ss33.ai/" rel="noopener noreferrer">Skill Store 33 (agent skills catalog)</a></li>
+<li><a href="https://github.com/afterpartyai/llms_txt_store" rel="noopener noreferrer">llms.txt dataset repository</a></li>
+<li><a href="https://huggingface.co/ReadyAi/datasets" rel="noopener noreferrer">Hugging Face datasets</a></li>
+<li><a href="https://wandb.ai/afterparty/conversationgenome/table" rel="noopener noreferrer">Weights and Biases score table</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 9 sources</summary>
+<ul>
+<li><strong>msg</strong> #33-ready, 2026-06-09 to 2026-11-02 (team posts of 2025-12-03, 2026-06-30 and 2026-10-27; threads of 2026-10-28 to 2026-11-01), plus pinned posts 2025-10-09 to 2026-09-07</li>
+<li><strong>repo</strong> afterpartyai/bittensor-conversation-genome-project@37b4474 (2026-10-27, version 2.39.77, still the head on 2026-11-07): README, env.example, min_compute.yml, neurons/validator.py and neurons/miner.py, miner, task, task_bundle (webpage, skill) and scoring_mechanism code, prompts, utils/constants.py; PR 139</li>
+<li><strong>web</strong> Chain read at block 9452707 (2026-11-07 07:23Z UTC): SN33 (ReadyAI): registered 2024-05-12, tempo 360, 256 of 256 uids, commit-reveal off; emission weights burn/recycle/owner/validator/miner = 0/0/18/49/33 %, RecycleOrBurn = Burn; uids under the owner hotkey or owner coldkey hold 25.38 % of incentive and 12.65 % of last-epoch emission (a floor); 8 validators have weight rows, on average 0.3 % of weight goes to uid 0. Shared snapshot over 129 subnets at the same block: pool rank 38 of 128. Uid 81 read at the same block: registered 2025-02-13, no weights set since registration.</li>
+<li><strong>web</strong> Chain read at block 9452707 (2026-11-07 07:23Z): price SN33, 6 samples every 7d from block 9236707 (2026-10-08 07:04Z): price 0.003741 -&gt; 0.003044 TAO per alpha (-18.6%), pool TAO 13113.9 -&gt; 11852.2; over the 5 intervals where the pool change equals flow + protocol: net user flow -1262.1 TAO (staked minus unstaked), protocol flow +0.4 TAO, gross volume 10913.1 TAO.</li>
+<li><strong>web</strong> Chain read at block 9452707 (2026-11-07 07:23Z): price SN33, 8 samples every 1d from block 9402307 (2026-10-31 07:21Z): price 0.003048 -&gt; 0.003044 TAO per alpha (-0.1%), pool TAO 11859.0 -&gt; 11852.2; over the 7 intervals where the pool change equals flow + protocol: net user flow -4.3 TAO (staked minus unstaked), protocol flow -2.5 TAO, gross volume 3839.6 TAO.</li>
+<li><strong>web</strong> Chain read at blocks 9376461 (2026-10-27 17:12Z) and 9376476 (17:15Z): SN33 emission weights burn/recycle/owner/validator/miner 0/0/18/41/41 %, then 0/0/18/49/33 %</li>
+<li><strong>web</strong> Chain read 2026-10-23 (aggregates only): coldkey grouping and uid ages; decoded add_stake_burn extrinsics on netuid 33 at blocks 8670960 (9.2 TAO) and 9048873 (17.07 TAO)</li>
+<li><strong>web</strong> https://readyai.ai/ (home, /docs, /dashboard) and https://ss33.ai/ (home, about, how it works, FAQ, MCP, publishers pages, blog post of 2026-10-30) read 2026-11-06, readyai.ai home re-read 2026-11-07 (unchanged); ss33.ai did not answer on 2026-11-07; other page links checked 2026-11-07; the usage data file d1uanw9ey92azd.cloudfront.net/sn33-api-usage.js (generated 2026-11-07 00:00Z) read 2026-11-07</li>
+<li><strong>web</strong> huggingface.co/api/datasets?author=ReadyAi (2 datasets, last modified 2025-06-19 and 2025-09-29)</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/32.html"><small>← Previous</small>SN32 It&#x27;s AI</a><a rel="next" href="/bittensor-docs/subnets/34.html"><small>Next →</small>SN34 Yugos (BitMind)</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-11-07. Site built 2026-11-07. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

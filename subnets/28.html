@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SayGM (gm) (SN28) | Bittensor Subnet Docs</title>
+<meta name="description" content="AI model gateway: miners resell Claude, GPT and open-model API capacity from TEE workers; the team&#x27;s files set pay.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h4">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>28</span><div>
+<h1>SayGM (gm) <span class="muted">SN28</span></h1>
+<p class="tagline">AI model gateway: miners resell Claude, GPT and open-model API capacity from TEE workers; the team&#x27;s files set pay.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>13<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>11<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>13<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-11-02</b><span>last chat</span></li><li class="pw"><b>7,914</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Shipping</b><span>code activity</span></li><li class="pw"><b>74</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-11-06</b><span>last commit</span></li><li class="pw"><b>2026-11-06</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>inference gateway (resold LLM API capacity)</dd>
+<dt>Status</dt><dd>Live: epoch 26,180 (2026-11-07) billed about $433 of an $853 miner pool across 128 miners.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-11-07</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Where the emission goes</a></li><li><a href="#sn-x1">Docs vs code vs chain</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-similar">Similar subnets</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>customers get Claude, GPT and open models below list price; revenue is not visible on chain.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>miners resell their own provider keys through a team-approved worker on a rented Phala VM; no GPU.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>the affiliate pool holds 65% of incentive, the owner&#x27;s validator 75% of dividends; 127 UIDs earn (2026-11-07).</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>the gateway, registry and epoch finalizer are closed; validators copy the finalizer&#x27;s files unchecked.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>newest miner release is v0.5.22 (2026-11-06, Phala KMS from the registry); validator repo untouched since 2026-09-05.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Resells provider API capacity through a team-approved worker on a rented Phala VM and earns the spread plus emission.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-caution">Paid service needed</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-no"><dt>Hardware</dt><dd>No GPU. A rented Phala VM: 2 vCPU / 4 GiB (default) or 1 vCPU / 2 GiB (README)</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>Funded Phala Cloud account plus provider API keys you may resell; Phala price not documented</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Registration burn 0.1973 TAO (2026-11-07, the floor; moves with demand); no stake needed</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Install gmcli and the Phala CLI, run gmcli init (login, keys, deploy); time not documented</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Runs the public validator that copies the team&#x27;s epoch files into chain weights.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-no"><dt>Hardware</dt><dd>No GPU. A small Docker host; size not stated (stateless container)</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None (public bucket, no credentials)</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Registration burn 0.1973 TAO (2026-11-07); permit needs the 1,000 TAO network stake threshold (chain)</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Docker compose, copy .env.mainnet to .env, set the hotkey seed; minutes (README)</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-11-07. Not financial advice.</span></div><p>Price -22% in 8 days; 4,392 TAO left the pool, 1,264 of it in the last day. <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>SayGM is an AI model gateway (api.saygm.com) compatible with the OpenAI, Anthropic and Gemini SDKs, paid by prepaid credit. Miners resell their own provider API capacity at a discount from a worker on a rented confidential VM. The team runs the gateway and the files that set pay; validators copy them. Mainnet launch: 2026-06-23.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>A miner installs gmcli, logs in through Taostats, adds its own provider API keys (Anthropic, OpenAI, Google and others) and deploys the team-approved worker to a Phala confidential VM; the registry checks the image hashes. The miner lists models at a discount to the gateway price and keeps the spread over upstream cost.</p></div><div><h3>Validators</h3><p>The team runs a closed gateway, registry and epoch finalizer. Each epoch (361 blocks, about 72 minutes) the finalizer posts usage and prices to a public bucket. The public validator turns each miner&#x27;s billed value into a share of the miner pool and sets weights, without checking the files&#x27; hashes or signatures.</p></div><div><h3>Incentive</h3><p>A miner&#x27;s weight is its billed value divided by the pool: 360 alpha times 41% times the alpha price. Emission splits 18% owner, 41% validators, 41% miners, none burned or recycled. The unused rest of the pool goes to an affiliate-pool miner (UID 157).</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-11-07, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-good">Open</span>Open: anyone with permit-level stake can run the public validator; 11 hold permits.</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">37.6%</span>Owner UID holds 37.6% of last-epoch emission (75.1% of dividends); configured owner cut 18%, RecycleOrBurn is Burn.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">127 uids</span><span class="v2-sx muted">top 5 hold 80% of incentive.</span> 127 UIDs earn incentive; the top 5 hold 80.0%: the affiliate-pool UID alone holds 64.7%.</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Converged</span>10 of 10 validators top-weight UID 157 (affiliate pool); they copy the team&#x27;s files, so this is expected.</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-good">Open</span>Open: miner and validator repos are public under Apache-2.0; the gateway, registry and finalizer are not.</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Resells provider API capacity through a team-approved worker on a rented Phala VM and earns the spread plus emission.</p><ul>
+<li>Anyone can register; the registry admits the worker image, not the person. Run v0.5.22 (versions before v0.5.11 lost traffic on 2026-10-26).</li>
+<li>Epoch 26,180: Anthropic 35%, Moonshot 35%, OpenAI 18% of billed value; median discount 31%; top seller 5%.</li>
+<li>Gross pay at the 2026-11-07 price: about 0.59 TAO a day on average over 127 paid UIDs, 0.12 outside the top 5, before costs.</li>
+<li>Miner terms put resale rights for provider accounts on the miner.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Runs the public validator that copies the team&#x27;s epoch files into chain weights.</p><ul>
+<li>11 hotkeys hold permits and 10 set weights; the owner&#x27;s validator holds 75.1% of dividends (2026-11-07).</li>
+</ul></section></div>
+<h2 id="sn-x0">Where the emission goes</h2>
+<ul class="v2-list">
+<li>Billed traffic is paid first: epoch 26,180 billed $433 of an $853 miner pool (team&#x27;s public files).</li>
+<li>The unbilled rest (14% to 65% in sampled epochs since 11-05; 49% in 26,180) goes to the affiliate-pool miner (contract live since 2026-10-06), which pays referrers in alpha.</li>
+<li>Buybacks (team figures): cycle 02 burned about $104k of $515k miner emissions (20.3%); the chain shows one 10,771 alpha burn on 2026-10-16.</li>
+</ul>
+<h2 id="sn-x1">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Unclaimed pool</td><td>Validator README and config send the leftover to the owner UID</td><td>Chain: owner UID gets 0.1% of incentive; UID 157 (affiliate pool) holds 64.7%</td><td>2026-11-07</td></tr></tbody></table></div>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-11-07. Not financial advice.</span></div>
+<p class="v2-thesis">Price -22% in 8 days, outflow speeding up, billed share dipping, 65% of incentive on one UID.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.02542 TAO per alpha</dd></div><div><dt>Pool</dt><dd>25,757 TAO, rank 16</dd></div><div><dt>Price, 30 days</dt><dd>+7%, 2026-10-08 to 2026-11-07</dd></div><div><dt>Net flow, 30 days</dt><dd>-2,458 TAO, 2026-10-08 to 2026-11-07</dd></div><div><dt>Miner pay</dt><dd>0.59 TAO a day on average (75 TAO a day over 127 paid UIDs)</dd></div><div><dt>Miner pay outside top 5</dt><dd>0.12 TAO a day on average (15 TAO a day over 122 UIDs)</dd></div><div><dt>Code activity</dt><dd>last commit 2026-11-06; 94 commits in 30 days; v0.5.22</dd></div></dl>
+<div class="v2-trend"><h3>Trend</h3><div class="v2-tbody"><figure class="v2-tfig"><svg class="v2-spark up" viewBox="0 0 240 56" role="img" aria-label="Price in TAO per alpha, 2026-09-28 to 2026-11-07: 0.02067 to 0.02542, +23.0%"><polyline points="5.0,50.9 10.8,51.0 22.2,48.5 33.8,47.6 39.5,46.2 45.2,48.9 51.0,44.6 62.5,40.1 74.0,41.5 79.8,38.0 85.5,33.6 91.2,20.9 102.8,16.7 114.2,9.4 120.0,7.4 125.8,13.7 131.5,5.0 143.0,17.1 154.5,20.2 160.2,23.5 166.0,14.8 171.8,14.6 177.5,13.2 183.2,15.9 189.0,11.9 194.8,11.9 200.5,16.9 206.2,18.6 212.0,20.7 217.8,24.2 229.2,28.4 235.0,35.6"/><circle cx="235.0" cy="35.6" r="3"/></svg><figcaption><strong>Price</strong> <span class="up">+23.0%</span> <span class="muted">0.02067 to 0.02542 TAO per alpha, 2026-09-28 to 2026-11-07</span></figcaption></figure><dl class="v2-tfacts"><div><dt>Net flow, 30 days</dt><dd><span class="down">-2,458 TAO</span> <span class="muted">2026-10-08 to 2026-11-07</span></dd></div><div><dt>Verdict history</dt><dd><ol class="v2-vh"><li><span class="muted">2026-11-03</span> <span class="st s-neutral">Neutral</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-04</span> <span class="st s-neutral">Neutral</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-06</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-07</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li></ol></dd></div></dl></div></div>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>Price +7% in 30 days, from the 10-08 low; 101 to 148 miners billed per sampled epoch.</li>
+<li>Team said on 11-01 that Opus demand runs ahead of supply.</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>Outflow in four of five weekly intervals: 2,458 TAO net; 1,264 in the last day.</li>
+<li>Billed share of the pool fell to 35% and 51% in the last two epochs (65 to 86% before).</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> Bullish: billed share above 70% and outflow stopping, or revenue confirmed outside the team&#x27;s files. Bearish: more outflow or concentration.</p>
+<p class="muted">Since the last pass: Bearish, unchanged: outflow rose and billed value dipped.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-similar">Similar subnets</h2>
+<div class="v2-sim"><p>By pool size this is <strong>rank 2 of 13</strong> among the subnets grouped as <em>inference</em> (what they mainly sell). Pool and price as of 2026-11-06 to 2026-11-07, price in TAO per alpha; the barrier is the easiest miner role.</p><div class="scroll"><table class="v2-table"><thead><tr><th>#</th><th>Subnet</th><th>Pool</th><th>Price</th><th>Miner barrier</th></tr></thead><tbody><tr><td>1</td><td><a href="/bittensor-docs/subnets/53.html">engy</a> <span class="muted">SN53</span></td><td>36,502 TAO</td><td>0.02966</td><td><span class="v2-barrier b-high">High</span></td></tr><tr class="me" aria-current="true"><td>2</td><td>SayGM (gm) <span class="muted">SN28, this page</span></td><td>25,758 TAO</td><td>0.02542</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>3</td><td><a href="/bittensor-docs/subnets/14.html">Cacheon</a> <span class="muted">SN14</span></td><td>25,563 TAO</td><td>0.009237</td><td><span class="v2-barrier b-high">High</span></td></tr><tr><td>4</td><td><a href="/bittensor-docs/subnets/95.html">Actual</a> <span class="muted">SN95</span></td><td>22,698 TAO</td><td>0.02919</td><td><span class="v2-barrier b-high">High</span></td></tr><tr><td>5</td><td><a href="/bittensor-docs/subnets/10.html">Pareton</a> <span class="muted">SN10</span></td><td>13,484 TAO</td><td>0.004279</td><td><span class="v2-barrier b-high">High</span></td></tr></tbody></table></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-11-07</span> <span class="muted">(chain)</span> Price 22% down in 8 days; net outflow of 1,264 TAO in the last day.</li>
+<li><span class="when">2026-11-07</span> <span class="muted">(public epoch files)</span> Billed share of the miner pool fell to 35% and 51% in epochs 26,179 and 26,180.</li>
+<li><span class="when">2026-11-06</span> <span class="muted">(GitHub)</span> Miner release v0.5.22: new workers use the Phala KMS root the registry lists.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Miners: open a funded Phala Cloud account and install the Phala CLI.</li>
+<li>Have provider API keys you may resell; read the miner terms first.</li>
+<li>Install gmcli and run gmcli init: it registers your hotkey on netuid 28, logs in, adds provider keys and deploys (the docs suggest a testnet run first, netuid 482).</li>
+<li>Declare a discount per model; run the current release (v0.5.22) and set up gmcli notifications.</li>
+<li>Validators: copy .env.mainnet to .env, set the hotkey seed, run docker compose up -d --build.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Gateway, registry and finalizer are closed and validators do not check the files: usage and revenue figures are the team&#x27;s.</li>
+<li>The affiliate contract was not read on chain; per the litepaper its admin can upgrade it without a delay.</li>
+<li>For Claude, GPT and Gemini the provider still sees the prompt; only -TEE model ids are confidential end to end (site).</li>
+<li>Slot history: registered 2025-02-07 as a meme subnet, taken over by a stake-majority validator group on 2025-02-25; owner coldkey changed in 2025-05, 2026-04 and 2026-05 (chain).</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://saygm.com" rel="noopener noreferrer">Website and API</a></li>
+<li><a href="https://docs.saygm.com" rel="noopener noreferrer">Docs</a></li>
+<li><a href="https://docs.saygm.com/mining/overview/" rel="noopener noreferrer">Mining docs</a></li>
+<li><a href="https://saygm.com/llms.txt" rel="noopener noreferrer">Machine-readable overview (llms.txt)</a></li>
+<li><a href="https://saygm.com/miners" rel="noopener noreferrer">Miner dashboard (epochs, models, miners)</a></li>
+<li><a href="https://saygm.com/buybacks" rel="noopener noreferrer">Buybacks</a></li>
+<li><a href="https://saygm.com/affiliates/litepaper" rel="noopener noreferrer">Affiliate pool litepaper</a></li>
+<li><a href="https://github.com/taostat/gm-miner" rel="noopener noreferrer">Miner repo (gmcli and worker image)</a></li>
+<li><a href="https://github.com/taostat/gm-validator" rel="noopener noreferrer">Validator repo</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 10 sources</summary>
+<ul>
+<li><strong>repo</strong> taostat/gm-miner (checked 2026-11-07, v0.5.22, head e5ad9c8, no commit after 2026-11-06 17:57Z): commit log, releases feed and compare v0.5.18...79b64a6 (10 commits, 21 files) and 79b64a6...e5ad9c8 (2 commits, 18 files: gmcli deploy, KMS roots, dependency checks, tests); README and LICENSE as read on 2026-10-31</li>
+<li><strong>repo</strong> taostat/gm-validator@6993bb2 (2026-09-05): README, .env.mainnet, docker-compose.yml, LICENSE; still the newest commit on 2026-11-07</li>
+<li><strong>web</strong> Chain read at block 9451572 (2026-11-07 03:36Z UTC): SN28 (SayGM): registered 2025-02-07, tempo 360, 256 of 256 uids, commit-reveal on; emission weights burn/recycle/owner/validator/miner = 0/0/18/41/41 % (stored, same values as the chain default), RecycleOrBurn = Burn; uids under the owner hotkey or owner coldkey hold 0.08 % of incentive and 37.57 % of last-epoch emission (a floor); 10 validators have weight rows, on average 0.4 % of weight goes to uid 0. Incentive: 127 uids earn, top 1 (UID 157) 64.7%, top 5 80.0%; all 10 validators with weight rows put their top weight on UID 157 (49.2% of their weight in the first rows read).</li>
+<li><strong>web</strong> Chain read at block 9451572 (2026-11-07 03:36Z): UID 157 registered 2026-10-06 (incentive 64.65%, permit, no weights set since registration, alpha stake 19,712); UID 108 registered 2026-11-01 (incentive 0.0% now, was 17.2% on 11-06; no permit, no other uid under its coldkey); UID 38 not re-read.</li>
+<li><strong>web</strong> Chain read at block 9451572 (2026-11-07 03:36Z): price SN28, 6 samples every 7d from block 9235572 (2026-10-08 03:17Z): price 0.023717 -&gt; 0.025423 TAO per alpha (+7.2%), pool TAO 24104.5 -&gt; 25757.5; over the 5 intervals where the pool change equals flow + protocol: net user flow -2457.8 TAO (staked minus unstaked), protocol flow +4110.7 TAO, gross volume 234615.3 TAO. Daily samples 2026-10-30 to 11-07: price -22.4%, net user flow -4,392 TAO over 8 days, -1,264 TAO in the last day. Pool rank 16 of 128 by TAO in pool (shared snapshot, same block).</li>
+<li><strong>web</strong> Chain read at block 9404742 (2026-10-31 15:28Z): SN28 registered 4 times, latest on 2025-02-07 22:36Z; owner coldkey changed on 2025-05-03, 2026-04-08 and 2026-05-26, owner hotkey on 2026-06-08; chain identity set to &#x27;gm&#x27; on 2026-04-15 and to &#x27;SayGM&#x27; on 2026-09-02; sampled every 14 days.</li>
+<li><strong>web</strong> Chain events at block 9296823 (2026-10-16 15:28Z): one AlphaBurned on netuid 28 of 10,771.23 alpha; MinBurn change at block 9378095 (2026-10-27 22:38Z), 0.1 -&gt; 0.1973 TAO.</li>
+<li><strong>web</strong> Public epoch files https://gm-mainnet.s3.gra.io.cloud.ovh.net/v1/finalized/ (epochs 25965 to 26180, read 2026-10-31, 11-02, 11-03, 11-04, 11-06 and 11-07; epoch 26180 finalized 2026-11-07 03:00Z)</li>
+<li><strong>web</strong> https://saygm.com/buybacks, /llms.txt, /miners and https://docs.saygm.com/mining/overview/ (read 2026-11-06); /affiliates/litepaper (last fully read 2026-10-23) and /security/privacy/ (read 2026-10-31)</li>
+<li><strong>msg</strong> #28-gm 2026-10-23 to 2026-11-02; channel history 2025-02-25 to 2026-06-10 (archive search); chat after 2026-11-02 not read (archive down on 2026-11-04, 11-06 and 11-07)</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/26.html"><small>← Previous</small>SN26 Perturb</a><a rel="next" href="/bittensor-docs/subnets/29.html"><small>Next →</small>SN29 Hotfloat</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-11-07. Site built 2026-11-07. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

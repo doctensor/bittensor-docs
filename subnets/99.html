@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Thirty Spokes (SN99) | Bittensor Subnet Docs</title>
+<meta name="description" content="Miners trained a routing model that handed tasks to LLMs; the subnet was removed from the chain on 2026-11-06.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h21">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>99</span><div>
+<h1>Thirty Spokes <span class="muted">SN99</span></h1>
+<p class="tagline">Miners trained a routing model that handed tasks to LLMs; the subnet was removed from the chain on 2026-11-06.</p>
+<span class="st s-quiet">quiet</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl3"><b>1.6<small>/day</small></b><span>last 7 d</span></li><li class="pl3"><b>0.83<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>11<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-30</b><span>last chat</span></li><li class="pw"><b>1,148</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Quiet</b><span>code activity</span></li><li class="pw"><b>0</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-09-15</b><span>last commit</span></li><li class="pw"><b>none</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>model routing / orchestration</dd>
+<dt>Status</dt><dd>Removed from the chain on 2026-11-06 (lowest stored price of the 118 subnets past the 60-day protection); netuid 99 was created again 5 minutes later under another owner. Last owner post 2026-09-17, last commit 2026-09-15, last public result 2026-10-01. Checked 2026-11-07.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-11-07</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Product side</a></li><li><a href="#sn-x1">Where the king&#x27;s pay goes</a></li><li><a href="#sn-x2">Docs vs code vs chain</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-similar">Similar subnets</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>SN99 was removed on 2026-11-06: lowest stored price of the 118 subnets past the 60-day protection for new ones.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>netuid 99 was created again 5 minutes later by ck:3a2c51; 2026-11-07: 43 uids, a flat 254 TAO pool, no emission, no name or repo.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>the old pool ended at 313 TAO (-26% in 2 days), price 0.000631 TAO per alpha, 38% below 2026-10-07.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>every duel is published, yet the store ends at window 84 (2026-10-01); the repo is unchanged since 2026-09-15.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>the page below describes the old subnet as read on 2026-11-05; its register steps do not apply to the new holder.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-high">High barrier</span></h3><p>Trains and submits a full fine-tune of the pinned routing model.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-caution">GPU needed</li><li class="fl fl-caution">Paid service needed</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>GPU training compute for a 35B model, amount not stated; ~70 GB disk</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>Own OpenRouter credit; docs floor estimate $0.25 to $17 per window</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>0.5 TAO registration burn (2026-11-05) plus about 0.01 TAO fees</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Python 3.12, uv, btcli 11; upload ~70 GB (hours)</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>The owner runs the only validator and sets weights.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-caution">GPU needed</li><li class="fl fl-caution">Paid service needed</li><li class="fl fl-bad">Permissioned</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>GPU serving host plus a separate Docker sandbox host; sizes not stated</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>OpenRouter key, Cloudflare R2 bucket, Hugging Face token</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>0.5 TAO registration burn; permit needs 1,000 TAO stake (global rule)</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Own serving, sandbox and R2 hosts; guide written for the owner only</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-11-07. Not financial advice.</span></div><p>Subnet removed 2026-11-06 as the lowest-priced older one; pool down 26% in the two days before. <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>Thirty Spokes was a model-routing subnet. Miners trained a &#x27;conductor&#x27;, a fine-tune of Qwen3.6-35B-A3B, that hands agentic tasks to OpenRouter models, and one owner-run validator duelled each challenger against the king. Public results stopped at 2026-10-01. On 2026-11-06 the chain removed its slot; netuid 99 now belongs to a different owner.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>A miner submits full weights on the pinned architecture (about 70 GB, bf16, no adapters). The &#x27;conductor&#x27; picks an OpenRouter model for each agentic task and never writes the answer; worker calls run on the miner&#x27;s own key.</p></div><div><h3>Validators</h3><p>One owner-run validator replays the king and each challenger on the same fresh slice of HLE and LiveCodeBench tasks, scoring quality minus a measured price. A challenger needs a paired gain above 0.05 plus three robustness checks. Each window publishes a reveal.</p></div><div><h3>Incentive</h3><p>Documented: king 85%, five ex-kings 5, 4, 3, 2 and 1%, unfilled slots burn to uid 0. On chain (2026-11-05): 85.0% on uid 25, 15.0% on uid 18, the former king. The owner hotkey earns 86.6% of dividends; owner cut 18%.</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-11-05, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-bad">Owner only</span>Design is one owner-run validator; two outside hotkeys set the same weights, the owner&#x27;s earns 86.6% of dividends.</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">43.3%</span>Owner hotkey holds 43.3% of last-epoch emission (all dividends); owner cut set at 18%, RecycleOrBurn is Burn.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">2 uids</span><span class="v2-sx muted">top 5 hold 100% of incentive.</span> King (85%) and ex-king (15%) earn; neither has set weights. The king&#x27;s pay moves to uid 229 daily.</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Converged</span>All 3 weight-setters put 85% on uid 25, as on the old slate; one owner-run scorer makes that expected, not a check.</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-good">Open</span>MIT repo with miner, validator and owner tools; last commit 2026-09-15, the live validator goes beyond it on one point.</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-high">High barrier</span></h3><p>Trains and submits a full fine-tune of the pinned routing model.</p><ul>
+<li>Pinned base Qwen/Qwen3.6-35B-A3B, bf16; the hotkey must be ed25519; one submission per hotkey, ever.</li>
+<li>Queue depth is 6; three submissions have waited in the public queue since 2026-09-24.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>The owner runs the only validator and sets weights.</p><ul>
+<li>Design: one validator run by the owner (whitepaper D1); outsiders can only check the published reveals.</li>
+<li>Chain: 4 permits, 3 set weights (owner and two outside hotkeys), all 85% on uid 25.</li>
+</ul></section></div>
+<h2 id="sn-x0">Product side</h2>
+<ul class="v2-list">
+<li>Team says: routing is also sold as an OpenAI-compatible gateway; no usage figure or customer is visible anywhere.</li>
+</ul>
+<h2 id="sn-x1">Where the king&#x27;s pay goes</h2>
+<ul class="v2-list">
+<li>Chain: each day the king&#x27;s stake moves to uid 229&#x27;s hotkey: 2,634.7 alpha (2.9 TAO) on 2026-11-05; the largest was 33,623 alpha (41.3 TAO) on 10-29.</li>
+<li>Chain: uid 229, an outside validator with about a third of staked alpha (keys on at least seven other subnets), sells some: 1,832.5 alpha went for 2.0 TAO 4.7 hours after the 11-05 move. The seller is not named; this shows where the pay goes, not who runs either uid.</li>
+</ul>
+<h2 id="sn-x2">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Who gets the 15% slot</td><td>Five ex-kings share 5, 4, 3, 2, 1%; the rest burns to uid 0</td><td>Chain: uid 0 until 2026-09-24, then one ex-king (uid 18)</td><td>2026-11-05</td></tr><tr><td>How a king is crowned</td><td>Docs and code: by winning a duel</td><td>Chain: uid 25 registered 2026-09-23, paid 85% from 09-24; reveal cites the owner, no duel</td><td>2026-11-05</td></tr><tr><td>Duels per window</td><td>Docs: six per 24-hour window</td><td>Code: three per window, depth 6</td><td>2026-11-05</td></tr></tbody></table></div>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-11-07. Not financial advice.</span></div>
+<p class="v2-thesis">The slot was removed with the pool at 313 TAO after net outflows in four of five weekly intervals. Price fell 38% in 30 days and 45% in the last two; the chain&#x27;s own price average ranked it last among older subnets. Nothing here values the new holder.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.000631 TAO per alpha, last sample 2026-11-06</dd></div><div><dt>Pool</dt><dd>313 TAO, last sample before removal</dd></div><div><dt>Price, 30 days</dt><dd>-38%, 2026-10-07 to 2026-11-06</dd></div><div><dt>Net flow, 30 days</dt><dd>+7 TAO, 2026-10-07 to 2026-11-06</dd></div><div><dt>Registration</dt><dd>removed 2026-11-06 13:00 UTC; new owner 13:05</dd></div></dl>
+<div class="v2-trend"><h3>Trend</h3><div class="v2-tbody"><figure class="v2-tfig"><svg class="v2-spark down" viewBox="0 0 240 56" role="img" aria-label="Price in TAO per alpha, 2026-09-28 to 2026-11-06: 0.001346 to 0.000631, -53.1%"><polyline points="5.0,29.6 16.8,34.5 22.7,35.1 40.4,39.9 46.3,39.4 58.1,39.3 64.0,40.4 81.7,41.9 87.6,24.6 99.4,5.0 105.3,19.4 122.9,19.5 128.8,18.7 140.6,26.6 146.5,26.6 164.2,31.7 170.1,32.2 181.9,32.5 193.7,38.2 205.5,35.2 211.4,35.3 217.3,36.0 223.2,36.6 229.1,37.0 235.0,51.0"/><circle cx="235.0" cy="51.0" r="3"/></svg><figcaption><strong>Price</strong> <span class="down">-53.1%</span> <span class="muted">0.001346 to 0.000631 TAO per alpha, 2026-09-28 to 2026-11-06</span></figcaption></figure><dl class="v2-tfacts"><div><dt>Net flow, 30 days</dt><dd><span class="up">+7.4 TAO</span> <span class="muted">2026-10-07 to 2026-11-06</span></dd></div><div><dt>Verdict history</dt><dd><ol class="v2-vh"><li><span class="muted">2026-11-04</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-05</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-06</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-07</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li></ol></dd></div></dl></div></div>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>Net user flow was +7 TAO over 30 days, after +188 TAO in one week.</li>
+<li>Rules, code and reveals were public.</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>Removed as the lowest-priced older subnet; four of five flow intervals were net outflows.</li>
+<li>No public duel since 2026-10-01, no owner post since 2026-09-17.</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> A statement from the team on where the project continues, or a new subnet from it, would change the view.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-similar">Similar subnets</h2>
+<div class="v2-sim"><p>By pool size this is <strong>rank 12 of 13</strong> among the subnets grouped as <em>inference</em> (what they mainly sell). Pool and price as of 2026-11-06 to 2026-11-07, price in TAO per alpha; the barrier is the easiest miner role.</p><div class="scroll"><table class="v2-table"><thead><tr><th>#</th><th>Subnet</th><th>Pool</th><th>Price</th><th>Miner barrier</th></tr></thead><tbody><tr><td>9</td><td><a href="/bittensor-docs/subnets/92.html">REAX</a> <span class="muted">SN92</span></td><td>4,380 TAO</td><td>0.0288</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>10</td><td><a href="/bittensor-docs/subnets/96.html">Verathos</a> <span class="muted">SN96</span></td><td>2,147 TAO</td><td>0.002948</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>11</td><td><a href="/bittensor-docs/subnets/31.html">Recall</a> <span class="muted">SN31</span></td><td>1,685 TAO</td><td>0.003457</td><td><span class="v2-barrier b-high">High</span></td></tr><tr class="me" aria-current="true"><td>12</td><td>Thirty Spokes <span class="muted">SN99, this page</span></td><td>313 TAO</td><td>0.000631</td><td><span class="v2-barrier b-high">High</span></td></tr><tr><td>13</td><td><a href="/bittensor-docs/subnets/70.html">Fugal</a> <span class="muted">SN70</span></td><td>288 TAO</td><td>0.006788</td><td><span class="v2-barrier b-high">High</span></td></tr></tbody></table></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-11-07</span> <span class="muted">(chain; GitHub; store; website)</span> Netuid 99, now another subnet: 43 uids, no emission, flat 254 TAO pool; its one active validator is the old uid 229 hotkey, seen on other subnets too.</li>
+<li><span class="when">2026-11-06</span> <span class="muted">(chain)</span> SN99 removed 13:00 UTC with a new registration queued; netuid 99 created again 5 minutes later under owner ck:3a2c51.</li>
+<li><span class="when">2026-10-01</span> <span class="muted">(store)</span> Window 84, the last public reveal: no duels, same slate since window 51.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Do not register on netuid 99 for Thirty Spokes: the slot belongs to another owner whose rules are not read here.</li>
+<li>Check the team&#x27;s site and the public store for a new subnet before spending anything.</li>
+<li>Read this page as a record of the old subnet as of 2026-11-05.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Everything below the summary was read on 2026-11-05, before the removal; the new holder of netuid 99 is known only from its chain record.</li>
+<li>The live validator went beyond the published code (owner-set crown, 15% to an ex-king); the last commit is 2026-09-15.</li>
+<li>The team&#x27;s own account of the removal is not read, and chat after 2026-10-30 was not read (archive down).</li>
+<li>Who owns the new subnet is unknown (no identity, name or repo); its uid 1 is the old uid 229 hotkey, active on other subnets too.</li>
+<li>Who sold uid 229&#x27;s stake, and where the TAO went, was never read.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://www.thirtyspokes.ai/" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://www.thirtyspokes.ai/docs/mining" rel="noopener noreferrer">Mining guide</a></li>
+<li><a href="https://www.thirtyspokes.ai/docs/koth" rel="noopener noreferrer">Mechanism docs</a></li>
+<li><a href="https://www.thirtyspokes.ai/docs/bittensor" rel="noopener noreferrer">Bittensor integration docs</a></li>
+<li><a href="https://www.thirtyspokes.ai/dashboard" rel="noopener noreferrer">Console</a></li>
+<li><a href="https://github.com/ThirtySpokes99/thirtyspokes" rel="noopener noreferrer">GitHub</a></li>
+<li><a href="https://store.thirtyspokes.ai/v3/latest.json" rel="noopener noreferrer">Public results store (latest window)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 13 sources</summary>
+<ul>
+<li><strong>msg</strong> #thirtyspokes-99, whole channel 2026-07-07 to 2026-10-30 (1,155 messages; owner posts 2026-07-21 to 2026-09-17, none after; miner questions and pings through 10-30; later posts not read, the chat archive returned HTTP 502 on 2026-11-03 and 2026-11-04 and gave no answer in 60 s on 2026-11-05)</li>
+<li><strong>repo</strong> ThirtySpokes99/thirtyspokes@439a718 (2026-09-15): README.md, docs/MINER.md, VALIDATOR.md, WHITEPAPER.md, .env.example, src/thirtyspokes/v3/ duel.py, config.py, emissions.py, validator.py; git ls-remote 2026-11-05: HEAD still 439a718</li>
+<li><strong>web</strong> https://www.thirtyspokes.ai/ and its docs pages mining, koth, bittensor, economics, anti-cheat and dashboard, read 2026-10-26, 2026-10-30, 2026-11-01, 2026-11-03, 2026-11-04 and 2026-11-05 (text unchanged, page checksums identical)</li>
+<li><strong>web</strong> Team public results store store.thirtyspokes.ai/v3/ latest.json, queue.json and reveal files for windows 1, 2, 6 to 10, 12 to 17 and 48 to 84, read 2026-10-26, 2026-10-30, 2026-11-01, 2026-11-03, 2026-11-04 and 2026-11-05 (hotkeys not copied; latest.json still window 84, reveal 85 not found, queue.json unchanged since 2026-09-24)</li>
+<li><strong>web</strong> Chain read at block 9438895 (2026-11-05 09:20Z UTC): SN99 (Thirty Spokes): registered 2026-07-07, tempo 360, 256 of 256 uids, commit-reveal on; emission weights burn/recycle/owner/validator/miner = 0/0/18/41/41 % (stored, same values as the chain default), RecycleOrBurn = Burn; uids under the owner hotkey or owner coldkey hold 0 % of incentive and 43.29 % of last-epoch emission (a floor); 3 validators have weight rows, on average 0 % of weight goes to uid 0. Chain read at block 9438895 (2026-11-05 09:20Z UTC), compared with block 9428894 (2026-11-04 00:00Z UTC): SN99: no setting changed in 33 checked items; emission split unchanged; pool 425.91 -&gt; 413.03 TAO. Incentive unchanged: uid 25 85.0%, uid 18 15.0%; uid 0 dividends 86.575%, emission 43.287%; 4 validator permits, 3 set weights, all 85% on uid 25 (block 9438895). Stake moves, 2026-11-05: uid 25 hotkey stake 2,648.517 alpha at block 9437191 (03:39Z) and 13.842 at block 9437198 (03:41Z); events in between: stake moved at block 9437195 and transferred between coldkeys at block 9437200 for 2,634.675 alpha (2,923,637,838 rao TAO); uid 229 hotkey stake 181,206.198 -&gt; 183,840.873 alpha over blocks 9437191..9437199 (+2,634.675). 2026-10-29: uid 25 35,519.221 -&gt; 1,895.753 and uid 229 83,571.261 -&gt; 117,194.729 at block 9392460 (33,623.468 alpha, 41.29 TAO). Sale, 2026-11-05: block 9438598 removed 1,832.527 alpha for 2.023 TAO on netuid 99; uid 229 hotkey stake 183,994.959 (block 9438593) -&gt; 182,161.509 (block 9438600).</li>
+<li><strong>web</strong> Chain read at block 9438895 (2026-11-05 09:20Z): price SN99, 6 samples every 7d from block 9222895 (2026-10-06 09:01Z): price 0.001029 -&gt; 0.001099 TAO per alpha (+6.8%), pool TAO 398.6 -&gt; 413.0; over the 5 intervals where the pool change equals flow + protocol: net user flow +58.1 TAO (staked minus unstaked), protocol flow -43.7 TAO, gross volume 5742.0 TAO. Pool rank 122 of 128 non-root pools from the snapshot at block 9438895.</li>
+<li><strong>web</strong> Chain read at block 9439046 (2026-11-05 09:50Z): SN99 stake by coldkey: 374 coldkeys hold 448255.389 alpha on 68 hotkeys (81.8% of the chain&#x27;s staked total); top coldkey 45.35%, top 5 78.597%, top 10 90.611%; owner coldkey 45.35%; 74.507% of the stake sits on validator-permit hotkeys; 4 hotkeys&#x27; stake rows were not fully read (18.2% of the staked total unattributed), shares are of what was read.</li>
+<li><strong>web</strong> Chain read at block 9447202 (2026-11-06 13:02Z UTC) vs block 9436092: SN99 NOT registered (refresh); registration bisect: last registered block 9447193, first gone 9447194</li>
+<li><strong>web</strong> Chain read of subnet 99 at block 9447727: owner ck:3a2c51, registered at block 9447220 (2026-11-06 13:05Z), 2 neurons, subtoken off, burn 0.4747 TAO</li>
+<li><strong>web</strong> Chain read at block 9447202 (2026-11-06 13:02Z): price SN99, 6 samples every 7d from block 9231202: price 0.001021 -&gt; 0.000631 TAO per alpha (-38.2%), pool 397.1 -&gt; 313.1 TAO, net user flow +7.4 TAO over 5 intervals</li>
+<li><strong>web</strong> Chain events of netuid 99, blocks 9447194..9447220 (read 2026-11-07): NetworkRemoved at 9447194 (13:00Z) with one register_network call and NetworkRegistrationQueued in that block; SubnetIdentityRemoved 9447219; NetworkDissolveCleanupCompleted and NetworkAdded at 9447220 (13:05Z)</li>
+<li><strong>web</strong> Chain read at block 9447193 (2026-11-06 13:00Z): stored SubnetMovingPrice of all 128 subnets: SN99 0.000921, lowest of the 118 aged 60 days or more (next SN26 0.001471); SN35 0.000602 was 55.6 days old; NetworkImmunityPeriod 432000 blocks = 60 days</li>
+<li><strong>web</strong> Chain read at block 9455593 (2026-11-07 17:00Z UTC): SN99: registered 2026-11-06, tempo 360, 43 of 256 uids, commit-reveal on, subtoken off, pool 253.8 TAO, price 0.004189, no emission; uid 0 (owner) 100% incentive, uid 1 (hk:f32af8 / ck:1ab6ad, registered 9447225) sets all weight on uid 0; no chain identity</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/98.html"><small>← Previous</small>SN98 NeverPlayAlone</a><a rel="next" href="/bittensor-docs/subnets/100.html"><small>Next →</small>SN100 Cortex</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-11-07. Site built 2026-11-07. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

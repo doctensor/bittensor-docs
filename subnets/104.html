@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TAOStatus (SN104) | Bittensor Subnet Docs</title>
+<meta name="description" content="Miners lend LLM keys or submit security-audit agents sold per audit; on chain one UID holds nearly all miner incentive.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h8">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>104</span><div>
+<h1>TAOStatus <span class="muted">SN104</span></h1>
+<p class="tagline">Miners lend LLM keys or submit security-audit agents sold per audit; on chain one UID holds nearly all miner incentive.</p>
+<span class="st s-transitioning">transitioning</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl4"><b>3.9<small>/day</small></b><span>last 7 d</span></li><li class="pl4"><b>2.5<small>/day</small></b><span>days 8-30</span></li><li class="pl3"><b>0.98<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-11-02</b><span>last chat</span></li><li class="pw"><b>144</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Shipping</b><span>code activity</span></li><li class="pw"><b>1</b><span>code commit in 30 d</span></li><li class="pw"><b>2026-10-10</b><span>last commit</span></li><li class="pw"><b>none</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>LLM key pooling and security-audit agents</dd>
+<dt>Status</dt><dd>As of 2026-11-07 the team ships code and runs a marketplace, but outside miners earn almost nothing on chain.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-11-07</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Where the rewards go</a></li><li><a href="#sn-x1">How security scoring works</a></li><li><a href="#sn-x2">Docs vs code vs chain</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-similar">Similar subnets</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>UID 11 holds 99.6-100% of miner incentive, is not owner-linked; its stake fell 13,700 alpha on 11-06, matching a recycle.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>the owner&#x27;s validator earns about half of emission as dividends and weights UID 11 at 99.65-100%.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>this is bootstrapping; a baseline for active outside miners is planned.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>31 commits in 30 days on main, newest 11-06; miners submit one agent.py; no GPU needed.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>customers pay about $5 in TAO per audit; the marketplace shows 12 audits, all on one agent.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner (security agents) <span class="v2-barrier b-low">Low barrier</span></h3><p>Writes an agent that finds and proves web flaws; listed agents are sold per audit.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>CPU only; 2 cores, 2 GB RAM, 5 GB SSD (min_compute.yml)</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None stated; the agent runs offline in the sandbox</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>0.5 TAO to register (2026-11-07); no stake or permit needed</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>A Python agent; public IP and an open port</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Miner (LLM keys) <span class="v2-barrier b-low">Low barrier</span></h3><p>Lends 5 distinct LLM API keys, encrypted, for the team&#x27;s platform.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-caution">Paid service needed</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>CPU only; 2 cores, 2 GB RAM, 5 GB SSD (min_compute.yml)</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>5 paid LLM API keys; spend not stated</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>0.5 TAO to register (2026-11-07); no stake stated</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Python; keys in MASXAI_LLM_KEYS_JSON</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Sets weights per track; the LLM-key track needs a team-issued token.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-bad">Permissioned</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>CPU only; 2 cores, 4 GB RAM, 10 GB disk (min_compute.yml)</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>Team-issued backend token for the LLM-key track</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Permit stake threshold 1,000 TAO; 0.5 TAO to register (2026-11-07)</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Python, Docker; docs name gVisor on a KVM VPS</dd></div></dl><a class="v2-more" href="#sn-role-2">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-11-07. Not financial advice.</span></div><p>A shipping team, but outside miners earn almost nothing on chain and usage is small. <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>TAOstatus (SN104) pays miners on two tracks: lending LLM API keys, or submitting security-testing agents that a marketplace sells per audit. On chain, nearly all miner incentive sits on one unexplained UID; the team calls this bootstrapping.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Two tracks, each needing its own hotkey. Security: submit one agent.py (a Docker image also works) that finds and proves web flaws; agents scoring 0.8 or more can be listed on the marketplace. LLM keys: hand over 5 distinct API keys, encrypted, for the team&#x27;s platform.</p></div><div><h3>Validators</h3><p>Security: runs each agent in an offline sandbox against a random flaw class and replays the exploit. LLM keys: relays keys to the team&#x27;s closed backend and scores reliability, speed and volume.</p></div><div><h3>Incentive</h3><p>Emission splits 5% to the LLM-key track and 95% to security.</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-11-07, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-caution">Whitelisted</span>LLM-key validation needs a team-issued backend token; 16 hold permits, 2 set weights in the last 72 minutes.</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">50%</span>Owner-linked UID 25 holds about 50% of emission as dividends; owner cut 18%, RecycleOrBurn is Recycle.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">2 uids</span><span class="v2-sx muted">top 5 hold 100% of incentive.</span> UID 11 holds all LLM-key and 99.6% of security incentive; UID 51, the team&#x27;s reference miner, gets the other 0.4%.</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Diverse</span>Validators pick different top UIDs (8 LLM-key rows, 11 security); only 2 updated recently, one is the owner&#x27;s.</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-good">Open</span>MIT repo holds miner and validator code; the key-verifying backend and the deployed settings are private.</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner (security agents) <span class="v2-barrier b-low">Low barrier</span></h3><p>Writes an agent that finds and proves web flaws; listed agents are sold per audit.</p><ul>
+<li>Run neurons/security_miner.py with MASXAI_SECURITY_AGENT_SCRIPT set to your agent.py; it serves an encrypted copy.</li>
+<li>Listing bar: an average of 0.8 over all five flaw classes (one class alone caps at 0.2); hardcoding or endpoint spraying scores 0 (team, 2026-10-28).</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Miner (LLM keys) <span class="v2-barrier b-low">Low barrier</span></h3><p>Lends 5 distinct LLM API keys, encrypted, for the team&#x27;s platform.</p><ul>
+<li>Scored on reliability 50%, speed 25%, volume 25%; the track gets 5% of emission; the verifying backend is closed.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-2"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Sets weights per track; the LLM-key track needs a team-issued token.</p><ul>
+<li>16 hotkeys hold permits; 8 have LLM-key weight rows and 11 security rows (2026-11-07).</li>
+</ul></section></div>
+<h2 id="sn-x0">Where the rewards go</h2>
+<ul class="v2-list">
+<li>UID 11 (registered 2026-10-23) holds 100% of LLM-key and 99.57% of security incentive; it never set weights and is not owner-linked.</li>
+<li>UID 25 (owner-linked validator) holds 0% incentive but about 50% of emission as dividends, and weights UID 11 almost entirely.</li>
+<li>UIDs 47 and 7 earn nothing since 11-05, when the owner&#x27;s validator dropped them. UID 51, the team&#x27;s reference miner, has 0.35% of security weight and earned 0.43% on most reads, 0.0% on 11-05.</li>
+<li>Alpha was recycled on 2026-10-24 (2,348), about 10-28 (6,000), 2026-11-02 (13,800) and 2026-11-06 (13,700); the last two match drops in UID 11&#x27;s hotkey stake, since regrown to about 3,000.</li>
+</ul>
+<h2 id="sn-x1">How security scoring works</h2>
+<ul class="v2-list">
+<li>Each round tests one random flaw class (SQL injection, command injection, file inclusion, IDOR or SSRF). A run scores 0.5 for the planted secret, 0.8 if the exploit replays, 1.0 for the exact endpoint, up to 40% less for over 1,000 requests.</li>
+<li>A miner&#x27;s score is the average over all five classes; a class not retested for 2 hours counts as 0. Scoring on confirmed paid audits instead is off by default.</li>
+</ul>
+<h2 id="sn-x2">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Submission</td><td>Docs: container images</td><td>Code: one agent.py accepted since 2026-10-28</td><td>2026-11-07</td></tr><tr><td>Burn</td><td>Code default: all weight to burn UID 25</td><td>Chain: UID 11 has 99.6-100%, UID 25 none</td><td>2026-11-07</td></tr><tr><td>Security weights</td><td>Team: follow confirmed paid audits</td><td>Code: off by default; so is a 95/5 audit blend added 11-04</td><td>2026-11-07</td></tr><tr><td>Sandbox</td><td>Docs: sandbox and replay not built</td><td>Code: both are in main</td><td>2026-11-07</td></tr></tbody></table></div>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-11-07. Not financial advice.</span></div>
+<p class="v2-thesis">A shipping team and live marketplace, but nearly all miner incentive goes to one unexplained UID and alpha is concentrated.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.003992 TAO per alpha</dd></div><div><dt>Pool</dt><dd>5,832 TAO, rank 74</dd></div><div><dt>Price, 30 days</dt><dd>-3.1%, 2026-10-08 to 2026-11-07</dd></div><div><dt>Net flow, 30 days</dt><dd>-54 TAO, 2026-10-08 to 2026-11-07</dd></div><div><dt>Miner pay</dt><dd>not computed (2 mechanisms)</dd></div><div><dt>Alpha holders</dt><dd>top 2 of 505 coldkeys hold 65% (2026-11-07)</dd></div><div><dt>Code activity</dt><dd>last commit 2026-11-06 (main); 31 commits in 30 days; no releases</dd></div></dl>
+<div class="v2-trend"><h3>Trend</h3><div class="v2-tbody"><figure class="v2-tfig"><svg class="v2-spark down" viewBox="0 0 240 56" role="img" aria-label="Price in TAO per alpha, 2026-09-28 to 2026-11-07: 0.004159 to 0.003992, -4.0%"><polyline points="5.0,5.0 16.5,5.0 22.2,5.6 33.8,9.7 45.2,7.8 56.8,15.2 62.5,15.7 68.2,16.0 74.0,16.3 85.5,17.1 97.0,17.7 102.8,16.3 108.5,24.0 114.2,25.7 125.8,27.0 137.2,26.8 143.0,24.0 148.8,25.4 154.5,43.0 166.0,43.0 177.5,42.2 183.2,42.2 189.0,42.5 194.8,43.3 206.2,47.1 217.8,46.3 223.5,49.3 229.2,51.0 235.0,51.0"/><circle cx="235.0" cy="51.0" r="3"/></svg><figcaption><strong>Price</strong> <span class="down">-4.0%</span> <span class="muted">0.004159 to 0.003992 TAO per alpha, 2026-09-28 to 2026-11-07</span></figcaption></figure><dl class="v2-tfacts"><div><dt>Net flow, 30 days</dt><dd><span class="down">-54 TAO</span> <span class="muted">2026-10-08 to 2026-11-07</span></dd></div><div><dt>Verdict history</dt><dd><ol class="v2-vh"><li><span class="muted">2026-11-04</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-05</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-06</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-07</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li></ol></dd></div></dl></div></div>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>31 commits in 30 days on main, newest 2026-11-06.</li>
+<li>Marketplace lists 8 agents, one with 4 confirmed audits.</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>99.6-100% of miner incentive on one non-owner UID.</li>
+<li>Owner&#x27;s validator takes about half of emission; two coldkeys hold 65% of alpha.</li>
+<li>Net outflow of 54 TAO in 30 days.</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> Incentive reaching several outside miners would lift it; the same split after bootstrapping would lower it.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-similar">Similar subnets</h2>
+<div class="v2-sim"><p>By pool size this is <strong>rank 4 of 6</strong> among the subnets grouped as <em>security</em> (what they mainly sell). Pool and price as of 2026-11-06 to 2026-11-07, price in TAO per alpha; the barrier is the easiest miner role.</p><div class="scroll"><table class="v2-table"><thead><tr><th>#</th><th>Subnet</th><th>Pool</th><th>Price</th><th>Miner barrier</th></tr></thead><tbody><tr><td>2</td><td><a href="/bittensor-docs/subnets/61.html">RedTeam</a> <span class="muted">SN61</span></td><td>9,883 TAO</td><td>0.005327</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr><td>3</td><td><a href="/bittensor-docs/subnets/32.html">It&#x27;s AI</a> <span class="muted">SN32</span></td><td>6,604 TAO</td><td>0.002501</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr class="me" aria-current="true"><td>4</td><td>TAOStatus <span class="muted">SN104, this page</span></td><td>5,832 TAO</td><td>0.003992</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr><td>5</td><td><a href="/bittensor-docs/subnets/87.html">Provenonce (Proof of Assurance)</a> <span class="muted">SN87</span></td><td>1,366 TAO</td><td>0.002724</td><td><span class="v2-barrier b-high">High</span></td></tr><tr><td>6</td><td><a href="/bittensor-docs/subnets/26.html">Perturb</a> <span class="muted">SN26</span></td><td>1,325 TAO</td><td>0.001485</td><td><span class="v2-barrier b-medium">Medium</span></td></tr></tbody></table></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-11-07</span> <span class="muted">(web)</span> The most-audited agent&#x27;s marketplace rating fell from 98 to 88.</li>
+<li><span class="when">2026-11-06</span> <span class="muted">(chain, GitHub)</span> UID 11&#x27;s stake was recycled again (13,700 alpha); a commit on main lets validators confirm blind command injection.</li>
+<li><span class="when">2026-11-05</span> <span class="muted">(chain)</span> The owner&#x27;s validator dropped UIDs 47 and 7 from LLM-key weights.</li>
+<li><span class="when">2026-11-04</span> <span class="muted">(GitHub)</span> Three commits on main add an optional 95/5 benchmark-plus-audit score blend, off by default.</li>
+<li><span class="when">2026-10-30</span> <span class="muted">(#104-taostatus)</span> Team called the skew bootstrapping and planned a baseline for active miners.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Register a hotkey on netuid 104 (0.5 TAO on 2026-11-07), one per track.</li>
+<li>Security: write agent.py with an agent_main(ctx) entry point (reference: ref_agent.py in the repo).</li>
+<li>Set MASXAI_SECURITY_AGENT_SCRIPT and run neurons/security_miner.py with a public IP and open port.</li>
+<li>LLM keys: set 5 distinct keys in MASXAI_LLM_KEYS_JSON and run neurons/miner.py (MINER.md).</li>
+<li>Check who holds incentive on the metagraph before spending money.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>The default branch (dev) stops at 2026-10-10; work happens on main.</li>
+<li>Usage is a team claim; the closed backend, payment flow and whitepaper were not read.</li>
+<li>Slot from 2025-05-09, owner key unchanged; a July 2026 chat message says the team leases it (unconfirmed).</li>
+<li>Chat after 2026-10-30 was unreadable on 2026-11-07; later team replies are unchecked.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/taostatus/taostatus-subnet" rel="noopener noreferrer">GitHub</a></li>
+<li><a href="https://taostatus.com/" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://docs.taostatus.com/" rel="noopener noreferrer">Docs</a></li>
+<li><a href="https://taostatus.com/methodology" rel="noopener noreferrer">Methodology</a></li>
+<li><a href="https://marketplace.taostatus.com/" rel="noopener noreferrer">Security agent marketplace</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 5 sources</summary>
+<ul>
+<li><strong>repo</strong> taostatus/taostatus-subnet@8e5a413 (main, 2026-11-06): README.md, MINER.md, VALIDATOR.md, SECURITY_VALIDATOR.md, min_compute.yml, .env.example, masxai/constants.py, neurons/security_miner.py, masxai/scoring.py, secqurityVali/reward.py and category_scores.py, template/base/validator.py, neurons/security_validator.py, git log; GitHub compare e1bce17...85265b9 (3 commits of 2026-11-04: masxai/constants.py, neurons/security_validator.py, three test files); GitHub compare 85265b9...8e5a413 (1 commit of 2026-11-06 17:39Z: secqurityVali/job.py, replay.py, sandbox_entry.py, template/base/validator.py, scripts/clean_runsc_mon.sh); main 8e5a413 and dev 529f713 on 2026-11-07 (git ls-remote: 44 lines, 20 branch heads; GitHub commits list for main: 31 commits since 2026-10-08, newest 2026-11-06)</li>
+<li><strong>msg</strong> #104-taostatus, 2026-09-07 to 2026-10-30 (the chat archive returned 502 or hung on 2026-11-02 to 2026-11-07, so newer messages were not read); the two earlier channels of this slot in the archive, 2025-05-09 to 2026-09-07</li>
+<li><strong>web</strong> taostatus.com home, /methodology and /pricing and docs.taostatus.com home, fetched 2026-11-07 15:45Z: same md5 as the 2026-11-05 copies (eb31be4a / e650ca82 / 7b45c50f / c56249f1), so unchanged; marketplace.taostatus.com (server-rendered cards): 8 listings, ratings 95 x5, 89 (shown &#x27;In use&#x27;), 88, 86 (2026-11-06: 98 x1, 95 x5, 89, 86), benchmarks up on every listing, track record unchanged (one listing 12 audits / 7 issues / 4 confirmed, seven 0 / 0 / 0), all active Nov 7</li>
+<li><strong>web</strong> Chain read at block 9455206 (2026-11-07 15:42Z UTC): SN104 (TAOstatus): registered 2025-05-09, tempo 360, 64 of 64 uids, 2 mechanisms (uids / weights below = mechanism 0), commit-reveal on; emission weights burn/recycle/owner/validator/miner = 0/0/18/41/41 % (stored, same values as the chain default), RecycleOrBurn = Recycle; uids under the owner hotkey or owner coldkey hold 0 % of incentive and 49.96 % of last-epoch emission (a floor); 8 validators have weight rows, on average 12.5 % of weight goes to uid 0. Chain read at block 9455206 (2026-11-07 15:42Z UTC), compared with block 9443292 (2026-11-06 00:00Z UTC): SN104: no setting changed in 33 checked items; emission split unchanged; pool 5830.56 -&gt; 5832.23 TAO. Chain read at block 9455206 (2026-11-07 15:42Z): price SN104, 6 samples every 7d from block 9239206 (2026-10-08 15:23Z): price 0.004120 -&gt; 0.003992 TAO per alpha (-3.1%), pool TAO 5893.8 -&gt; 5832.2; over the 5 intervals where the pool change equals flow + protocol: net user flow -54.1 TAO (staked minus unstaked), protocol flow -7.5 TAO, gross volume 300.5 TAO. Pool rank 74 of 128 non-root pools from the shared snapshot at block 9455131. Chain read at block 9455206 (2026-11-07 15:42Z): SN104 stake by coldkey: 505 coldkeys hold 2973304.7 alpha on 266 hotkeys (97.927% of the chain&#x27;s staked total); top coldkey 35.745%, top 5 87.456%, top 10 92.852%; owner coldkey 5.835%; 72.546% of the stake sits on validator-permit hotkeys; 8 hotkeys&#x27; stake rows were not fully read (2.073% of the staked total unattributed), shares are of what was read. At block 9455206 (2026-11-07 15:42Z): UID 25 (owner validator) weights, mechanism 0 = 100% UID 11; mechanism 1 = 99.65% UID 11, 0.35% UID 51 (both unchanged since 11-05); its last weight update was at block 9455042. Incentive: mechanism 0 one uid nonzero, UID 11 100.0%; mechanism 1 UID 11 99.568%, UID 51 0.432% (11-06: same; 11-05 08:14Z: 100.0% / 0.0%); dividends two uids nonzero, UID 25 99.921%. Mechanism 1 weight rows from 11 validators, 11 different top UIDs; mechanism 0 rows from 8. RECYCLE: events AlphaRecycled over blocks 9448158..9448223 finds one event at block 9448171 (about 2026-11-06 16:15Z) of 13,700 alpha on netuid 104 (addresses masked by the tool); UID 11 hotkey stake 13,717.08 at block 9448158 and 164.07 at block 9448223 (the 13,700 drop plus one epoch step of about 147), 13,276.10 at block 9446853 on 11-06 and 2,956.93 at block 9455206, regrowing about 145 alpha per tempo; matched by amount and window, the event does not show the hotkey.</li>
+<li><strong>web</strong> Chain reads on 2026-10-21 and 2026-10-26 (earlier passes): hyperparameters, lifecycle and identity history of netuid 104; recycle event of block 9354621</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/102.html"><small>← Previous</small>SN102 Connito</a><a rel="next" href="/bittensor-docs/subnets/105.html"><small>Next →</small>SN105 Beam</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-11-07. Site built 2026-11-07. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

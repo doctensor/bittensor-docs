@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Yugos (BitMind) (SN34) | Bittensor Subnet Docs</title>
+<meta name="description" content="Yugos: miners train routers that pick the AI model, provider and effort for each request; the top three are paid.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h22">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>34</span><div>
+<h1>Yugos (BitMind) <span class="muted">SN34</span></h1>
+<p class="tagline">Yugos: miners train routers that pick the AI model, provider and effort for each request; the top three are paid.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>42<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>24<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>14<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-11-02</b><span>last chat</span></li><li class="pw"><b>8,848</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Shipping</b><span>code activity</span></li><li class="pw"><b>79</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-11-03</b><span>last commit</span></li><li class="pw"><b>2026-09-16</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>inference routing (previously deepfake and AI-media detection)</dd>
+<dt>Status</dt><dd>Active. The v0.2.0 contest, open since 2026-11-02, has had 6 champions, the latest on 2026-11-04; no date for the next contest.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-11-07</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">The v0.2.0 contest (live)</a></li><li><a href="#sn-x1">Docs vs code vs chain</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>miners train a router, a small model that picks the AI model, provider and effort for each request.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>seats pay 85/10/5, as on the dashboard; the top two seats share one coldkey.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>a new evaluation reserves $300 (actual use billed); usage and revenue are unpublished.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>validators only relay the team&#x27;s signed result; they never run miner code or grade answers.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>10 of 137 v0.2.0 attempts failed a private wording check; rules change often.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Trains and submits a router that picks a provider, model and effort per request.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-unk">GPU unknown</li><li class="fl fl-caution">Paid service needed</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>Training not documented; evaluator gives a router 2 vCPU, 16 GiB RAM, A10 GPU; CPU-only routers possible (team)</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>Card payment per evaluation ($300 reserved; completed runs median $48); own provider keys for tests</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Burn 0.5 TAO to register (2026-11-07); $0.50 minimum payment, $300 reserved per evaluation</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Python 3.11+, yugos tools; training time not documented</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Relays the team&#x27;s signed champion list into weights; no grading, no miner code.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-unk">GPU unknown</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-unk"><dt>Hardware</dt><dd>Not documented; it only fetches a signed result</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None (no provider keys)</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Burn 0.5 TAO to register (2026-11-07); a permit needs stake above the 1,000 TAO chain-wide threshold</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Python 3.11+, yugos package, persistent disk (PM2 optional)</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-neutral">Neutral</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">low confidence, as of 2026-11-07. Not financial advice.</span></div><p>Pool rank 12; price flat in 30 days after a one-day exit on 2026-11-01; usage and revenue not public. <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>BitMind ran SN34 as a detector-versus-generator contest for AI-made media. Since 2026-10-22 it is Yugos: miners train a router that picks the provider, model and effort for each request, scored on quality, cost and time by a benchmark the team hosts. The team also sells routing as an API at yugos.ai.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>A miner submits a trained router (model.py, model.safetensors, models.json). It returns one model choice per turn, which must come from the trained weights; keyword rules, lookup tables and prompt edits are banned. A compliance review and a private wording check run before grading. A hotkey may submit 3 new ZIPs per 24 hours.</p></div><div><h3>Validators</h3><p>Validators fetch the team&#x27;s signed result, check its hash and age, map champion hotkeys to UIDs and set weights. Grading, cost and time are measured in the team&#x27;s hosted service.</p></div><div><h3>Incentive</h3><p>A challenger must beat the reigning champion on the same questions (chat 40%, math and code 35%, agentic 25%): net value, meaning extra correct answers minus extra spend and time, must clear quality gates and a bound above 0.2. The champion gets 85%, the previous one 10%, the one before 5%; one hotkey can hold two seats.</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-11-07, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-good">Open</span>Anyone staking above 1,000 TAO can get a permit; 7 hold one, and an owner-linked uid takes 96% of dividends.</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">47.9%</span>Owner cut 18%, RecycleOrBurn is Recycle; the owner-linked validator uid holds 47.88% of emission (a floor).</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">3 uids</span><span class="v2-sx muted">top 5 hold 100% of incentive.</span> 3 uids earn: 85%, 10% and 5% of incentive, the seat split.</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Converged</span>All 5 validators with weight rows put their top weight on uid 42; 2 permit holders have not set weights in 5+ tempos.</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-caution">Partial</span>Miner and validator code are public but the repo has no licence file; grading runs in the team&#x27;s closed service.</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Trains and submits a router that picks a provider, model and effort per request.</p><ul>
+<li>Package up to 24 GiB and 4,096 files; no network or provider keys when it runs.</li>
+<li>Hosted runs take hours from submission to result (median 5.9 h) with no per-question results.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Relays the team&#x27;s signed champion list into weights; no grading, no miner code.</p><ul>
+<li>On 2026-11-07, 5 of 7 permit holders had weight rows, all topping uid 42; 2 had not set weights for over 5 tempos. Four of the five weight setters are not owner-linked; uid 72&#x27;s keys also validate on over ten other subnets.</li>
+</ul></section></div>
+<h2 id="sn-x0">The v0.2.0 contest (live)</h2>
+<p>Opened 2026-11-02 on pack v0.2.0 with no champion.</p>
+<ul class="v2-list">
+<li>Every entrant runs the same 2,642 questions (1,438 public, 1,204 private); each evaluation reserves $300.</li>
+<li>By 2026-11-06 17:53 UTC: 137 attempts by 36 hotkeys; 127 completed and 10 rejected by the wording check.</li>
+<li>Six champions: three on 2026-11-03 and three on 2026-11-04 (latest 13:25 UTC, net value 1.65).</li>
+<li>The wording check rejects a run whose model choices change over 20 points under rewording (95% confidence).</li>
+</ul>
+<h2 id="sn-x1">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Testnet</td><td>Guides list testnet subnet 169</td><td>Chain: testnet SN169 exists (since 2024-06-04, no name, other owner key); chat: no testnet (2026-10-22)</td><td>2026-11-05</td></tr><tr><td>Funding</td><td>Miner guide: $0.50 minimum; agent guide: about $100 lock</td><td>Code: miner guide reserves $300 for v0.2.0 (2026-11-02); chat reported a $200 hold on 2026-10-29</td><td>2026-11-07</td></tr><tr><td>Seat split</td><td>Docs: first champion 100%, then 90/10, then 85/10/5</td><td>Chain: uid 42 85%, uid 129 10%, uid 128 5% on 2026-11-07</td><td>2026-11-07</td></tr></tbody></table></div>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-neutral">Neutral</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">low confidence, as of 2026-11-07. Not financial advice.</span></div>
+<p class="v2-thesis">Price is flat over 30 days. Of the -2,155 TAO net outflow in 8 days, -1,621 left on 2026-11-01 alone; every day since was net out too, -290 TAO in five days. Usage is unpublished.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.01208 TAO per alpha (26th highest of 128)</dd></div><div><dt>Pool</dt><dd>35,750 TAO, rank 12</dd></div><div><dt>Price, 30 days</dt><dd>-0.3%, 2026-10-08 to 2026-11-07</dd></div><div><dt>Net flow, 30 days</dt><dd>-1,063 TAO, 2026-10-08 to 2026-11-07</dd></div><div><dt>Miner pay</dt><dd>35.6 TAO per day over 3 paid uids (too few for an average)</dd></div><div><dt>Code activity</dt><dd>last commit 2026-11-03; 114 commits in 30 days; no releases</dd></div></dl>
+<div class="v2-trend"><h3>Trend</h3><div class="v2-tbody"><figure class="v2-tfig"><svg class="v2-spark up" viewBox="0 0 240 56" role="img" aria-label="Price in TAO per alpha, 2026-09-28 to 2026-11-07: 0.01188 to 0.01208, +1.7%"><polyline points="5.0,50.0 22.2,51.0 33.8,50.7 39.5,49.0 45.2,48.9 51.0,45.7 62.5,44.5 74.0,43.6 79.8,42.2 85.5,41.2 91.2,44.5 102.8,44.7 114.2,44.8 120.0,43.8 125.8,46.8 131.5,46.6 143.0,42.6 154.5,41.9 160.2,5.0 166.0,15.2 171.8,11.9 177.5,9.1 183.2,14.7 189.0,17.5 194.8,18.2 200.5,43.0 206.2,43.7 212.0,42.7 217.8,44.4 223.5,45.7 235.0,45.4"/><circle cx="235.0" cy="45.4" r="3"/></svg><figcaption><strong>Price</strong> <span class="up">+1.7%</span> <span class="muted">0.01188 to 0.01208 TAO per alpha, 2026-09-28 to 2026-11-07</span></figcaption></figure><dl class="v2-tfacts"><div><dt>Net flow, 30 days</dt><dd><span class="down">-1,063 TAO</span> <span class="muted">2026-10-08 to 2026-11-07</span></dd></div><div><dt>Verdict history</dt><dd><ol class="v2-vh"><li><span class="muted">2026-11-03</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">low confidence</span></li><li><span class="muted">2026-11-04</span> <span class="st s-neutral">Neutral</span> <span class="st v-unclear">Unclear</span> <span class="muted">low confidence</span></li><li><span class="muted">2026-11-05</span> <span class="st s-neutral">Neutral</span> <span class="st v-unclear">Unclear</span> <span class="muted">low confidence</span></li><li><span class="muted">2026-11-07</span> <span class="st s-neutral">Neutral</span> <span class="st v-unclear">Unclear</span> <span class="muted">low confidence</span></li></ol></dd></div></dl></div></div>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>Team ships: 114 commits in 30 days (79 code).</li>
+<li>36 hotkeys entered the v0.2.0 contest in 5 days.</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>30-day net flow -1,063 TAO; out on every one of the last 8 days.</li>
+<li>No usage or revenue figures; each evaluation reserves $300.</li>
+<li>Rewards reach three hotkeys under two coldkeys; an owner-linked validator takes about 48% of emission.</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> Bullish: several net-inflow days or published usage or revenue. Bearish: outflow resuming or fewer entrants.</p>
+<p class="muted">Since the last pass: Unchanged (neutral). Net -290 TAO in the five days since the 2026-11-01 exit; no yugos commit since 2026-11-03.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-11-07</span> <span class="muted">(yugos.ai docs, 2026-11-07)</span> The quickstart now says to add credit first (top-ups from $10); the 10-requests-a-day free tier seen on 2026-11-02 is no longer listed.</li>
+<li><span class="when">2026-11-07</span> <span class="muted">(competition dashboard and chain, 2026-11-07)</span> No new champion since 2026-11-04 13:25 UTC; attempts per day fell from 41 (11-03) to 21 (11-06).</li>
+<li><span class="when">2026-11-03</span> <span class="muted">(BitMind-AI/yugos docs and code, 2026-11-03)</span> Miners may declare one fallback model in models.json; it is called once if the chosen model&#x27;s provider fails (pull request 47).</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Check the dashboard and team channel first: the v0.2.0 contest is live, rules change fast.</li>
+<li>Install the yugos package (Python 3.11+); start from examples/starter-router and replace its fixed choice with weight-driven routing.</li>
+<li>Train the router (its choices must survive rewording), list every allowed provider and model in models.json, and test locally with your own keys.</li>
+<li>Register a hotkey on SN34 (0.5 TAO burn on 2026-11-07), then yugos pack and yugos submit; fund the run on the linked card page ($300 reserved).</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Grading, compliance and wording checks run in the team&#x27;s closed service; validators do not re-grade.</li>
+<li>Dashboard spend is what miners paid, not what they earn; weights are opinions, not payouts.</li>
+<li>Support is thin: stuck runs and locked escrow were reported on 2026-10-28 to 2026-10-30; the team wants questions in the channel.</li>
+<li>#mind after 2026-11-01 was not read (archive down).</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/BitMind-AI/yugos" rel="noopener noreferrer">Yugos GitHub</a></li>
+<li><a href="https://github.com/BitMind-AI/yugos/blob/main/docs/miner.md" rel="noopener noreferrer">Yugos miner guide</a></li>
+<li><a href="https://github.com/BitMind-AI/yugos/blob/main/docs/scoring.md" rel="noopener noreferrer">Yugos scoring doc</a></li>
+<li><a href="https://github.com/BitMind-AI/yugos/blob/main/docs/validator.md" rel="noopener noreferrer">Yugos validator guide</a></li>
+<li><a href="https://competition.yugos.ai/" rel="noopener noreferrer">Competition dashboard</a></li>
+<li><a href="https://www.yugos.ai/" rel="noopener noreferrer">Yugos product site</a></li>
+<li><a href="https://www.yugos.ai/docs" rel="noopener noreferrer">Yugos API docs</a></li>
+<li><a href="https://github.com/BitMind-AI/bitmind-subnet" rel="noopener noreferrer">GitHub (legacy subnet code)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 7 sources</summary>
+<ul>
+<li><strong>repo</strong> BitMind-AI/yugos@cf12b64 (2026-11-03 21:27 UTC, version 0.4.0, no releases): README.md, llms.txt, docs/miner.md, models.md, scoring.md, validator.md and packages/yugos (competition/, validator.py, inspect_engine/failures.py) read at 8ec1726 (2026-11-01); the one later commit (pull request 47, fallback model) changed docs/miner.md, docs/models.md and the packager and was re-read; scoring.md and validator.md are unchanged since; main still at cf12b64 on 2026-11-07 (no commit for over 3 days)</li>
+<li><strong>repo</strong> BitMind-AI/bitmind-subnet@5fd9672 (2026-09-28) and BitMind-AI/gasbench through v0.11.4 (2026-10-13): no changes on main; neither archived</li>
+<li><strong>web</strong> https://competition.yugos.ai/ and its public JSON /api/competition (scope current and history), read 2026-11-07 01:42 UTC: pack competition-v0.2.0, 137 attempts by 36 hotkeys, seats 85/10/5, 5 unfinished runs without verified membership</li>
+<li><strong>web</strong> https://www.yugos.ai, /docs, /docs/errors, /docs/routing and /docs/support, read 2026-11-07 about 01:45 UTC (earlier read 2026-11-02): the quickstart says to add credit in Billing first (top-ups from $10) and uses the model id yugos; the free tier listed on 2026-11-02 (10 requests per day) is not in the quickstart, though the errors page still mentions a free allowance; a command-line tool for coding agents is described; no usage, customer or revenue figure</li>
+<li><strong>msg</strong> #mind, team and miner discussion 2026-10-21 to 2026-11-01 20:58 UTC (about 640 messages) and pinned announcements 2026-01-22 to 2026-10-29</li>
+<li><strong>web</strong> Chain read at block 9450933 (2026-11-07 01:28Z UTC): SN34 (Yugos): registered 2024-07-29, tempo 360, 256 of 256 uids, commit-reveal on; emission weights burn/recycle/owner/validator/miner = 0/0/18/41/41 % (stored), RecycleOrBurn = Recycle; no setting changed in 33 checked items since block 9436092 (2026-11-05 00:00Z); incentive 3 uids, top uid 42 at 85.0 %; owner-linked uid 135 holds 47.88 % of emission (a floor, the only owner-linked uid) and 95.8 % of dividends; 7 permits, 5 with weight rows, all 85 % on uid 42. Seat hotkeys read at the same block: uid 42 85 %, uid 129 10 %, uid 128 5 %; the first two share one coldkey. Weight setters are uids 47, 72, 134, 135 and 197; uid 72 matches the keys of a validator also listed on more than ten other subnets in earlier subnet notes (hash tags compared, no addresses stored; not re-read on 2026-11-07). Testnet read (2026-11-05): subnet 169 exists (registered 2024-06-04, no name set, 256 neurons).</li>
+<li><strong>web</strong> Chain read at block 9450933 (2026-11-07 01:28Z): price SN34, 6 samples every 7d from block 9234933 (2026-10-08 01:09Z): price 0.012121 -&gt; 0.012082 TAO per alpha (-0.3%), pool TAO 35430.4 -&gt; 35750.4; net user flow -1062.73 TAO. Daily samples 2026-10-30 to 2026-11-07: price -9.8%, net user flow -2154.73 TAO, out on 8 of 8 days (2026-11-01 to 11-02 sample: -1620.80 TAO). Shared snapshot at the same block: pool rank 12 and price rank 26 of 128 excluding root.</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/33.html"><small>← Previous</small>SN33 ReadyAI</a><a rel="next" href="/bittensor-docs/subnets/36.html"><small>Next →</small>SN36 Weir</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-11-07. Site built 2026-11-07. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

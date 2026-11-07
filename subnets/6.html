@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Numinous (SN6) | Bittensor Subnet Docs</title>
+<meta name="description" content="Graph forecasting: miners send daily sealed forecasts of company deals and ties that the news will later report.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h18">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>6</span><div>
+<h1>Numinous <span class="muted">SN6</span></h1>
+<p class="tagline">Graph forecasting: miners send daily sealed forecasts of company deals and ties that the news will later report.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>17<small>/day</small></b><span>last 7 d</span></li><li class="pl4"><b>6.0<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>8.6<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-11-02</b><span>last chat</span></li><li class="pw"><b>6,820</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Shipping</b><span>code activity</span></li><li class="pw"><b>1</b><span>code commit in 30 d</span></li><li class="pw"><b>2026-10-29</b><span>last commit</span></li><li class="pw"><b>none</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>graph forecasting</dd>
+<dt>Status</dt><dd>The graph competition has run since 2026-10-22. Incentive was burned until 2026-10-27; on 2026-11-07 it is spread over 151 miners.</dd>
+<dt>Confidence</dt><dd>high</dd>
+<dt>Researched</dt><dd>2026-11-07</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Rounds and judging</a></li><li><a href="#sn-x1">Who earns</a></li><li><a href="#sn-x2">Docs vs code vs chain</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-similar">Similar subnets</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>miners send sealed daily forecasts about company deals; no agents or sandboxes any more.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>151 of 256 uids earn incentive (top one 6.7%); the 25 top seats sit on 20 coldkeys, one holds 14.1%.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>validators check signatures and arithmetic; the team&#x27;s backend judges the news and is not public.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>mining needs Python and a registered hotkey (0.2 TAO burn); validating needs the team&#x27;s approval.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>about 7% of 8,350 judged statements are correct; most of the rest fail on form, not on the news.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-low">Low barrier</span></h3><p>Send sealed daily forecasts of company relationships the news will report.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-no"><dt>Hardware</dt><dd>None (Python 3.11+ on any computer)</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None required; research tools are your choice</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>0.2 TAO registration burn (2026-11-07); no stake</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Install numi, register a hotkey, send forecasts daily</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Verify forecasts, compute credits daily and set weights; the team&#x27;s backend judges.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-bad">Permissioned</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>2 CPU, 4 GB RAM, 20 GB SSD, Docker</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>Team validator list (free); no paid service</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>0.2 TAO burn; docs ask 10,000 TAO; chain permit threshold 1,000 TAO</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Docker Compose; ask the team to list your hotkey first</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-neutral">Neutral</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-fair">Fairly valued</span></span><span class="v2-conf muted">medium confidence, as of 2026-11-07. Not financial advice.</span></div><p>Mixed: 151 miners earn, but flow turned negative and the judge is unchecked. <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>Numinous is a graph forecasting subnet. Each day the team publishes 50 questions about companies in a knowledge graph built from the news. Miners send statements about relationships the news will report, such as one company acquiring another; a statement earns credit when the team&#x27;s judge finds a later news event showing it happened.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Miners use the numi tool: read the open round, check what the graph already holds, and send one sealed forecast per question before midnight UTC; sending again before then replaces it. A forecast is a bundle of statements (company, relation, company). Repeating what the graph held counts as wrong; probabilities are not scored.</p></div><div><h3>Validators</h3><p>Validators run no miner code. They pull closed rounds and opened forecasts with the team&#x27;s verdicts, check hashes and signatures, compute credits daily at 15:00 UTC and set weights from 16:00 UTC. The team&#x27;s backend judges; validators check the maths, not the verdicts.</p></div><div><h3>Incentive</h3><p>A forecast earns its statements judged correct in the last 30 days divided by the square root of their number; one news event pays a miner once. The top 25 miners share 98% of weight by credits squared; 2% is spread by rank over everyone with credits, so ranks 26 and below hold about 0.6%.</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-11-07, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-caution">Whitelisted</span>The team&#x27;s backend serves data only to listed validator hotkeys; 17 permit holders on chain.</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">0%</span>Owner uids hold 0% of last-epoch emission; configured owner cut 18%; RecycleOrBurn is Burn.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">151 uids</span><span class="v2-sx muted">top 5 hold 30.5% of incentive.</span> 151 uids earn incentive; the top five hold 30.5%.</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Converged</span>All 10 validators put their top weight on one uid; a fixed formula makes honest validators agree.</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-good">Open</span>Miner tool and validator are public (MIT); the graph, judge and question generation are not in the repo.</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-low">Low barrier</span></h3><p>Send sealed daily forecasts of company relationships the news will report.</p><ul>
+<li>All 25 top seats registered by 2026-10-23; credits count for 30 days, and the team says new miners can still earn (2026-10-28).</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Verify forecasts, compute credits daily and set weights; the team&#x27;s backend judges.</p><ul>
+<li>Chain, 2026-11-07: 10 of 17 permit holders set weights (the same 151-miner vector); 7 are silent: the owner uid, four validators for 66 to 83 days, two top miners that never set any.</li>
+</ul></section></div>
+<h2 id="sn-x0">Rounds and judging</h2>
+<ul class="v2-list">
+<li>Judged so far (2026-11-07): 591 statements correct, 7,759 not. In every round with a correct statement one company holds at least half: 126 of the 143 in 10-30 are one Marvell question, 35 of the 44 in 10-31 one Salesforce question. Forecasts stay open 30 days (first close 2026-11-22).</li>
+<li>Why &#x27;not correct&#x27;: 40% repeat what the graph held, 33% name a standing state, 14% leave a party unnamed, 9% were already public. Only 15 say no news event followed.</li>
+</ul>
+<h2 id="sn-x1">Who earns</h2>
+<ul class="v2-list">
+<li>Four miners tie on 4.00 credits at ranks 25 to 28: rank 25 holds 2.07% of weight, ranks 26 to 28 about 0.013% each.</li>
+<li>The 25 top seats sit on 20 coldkeys (chain): one holds ranks 1, 9 and 25 (14.1% of weight), another four seats (8.8%) with identical results. 61 of the 151 earners share a result with another uid; in 11 of those 17 groups all sit on one coldkey.</li>
+</ul>
+<h2 id="sn-x2">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>How often statements are judged</td><td>Miner guide: checked every day</td><td>Chat: re-checked every 3 days for 30 days</td><td>2026-10-29</td></tr><tr><td>Early &#x27;not correct&#x27; verdicts</td><td>Scoring doc: &#x27;no new event&#x27; only at the horizon end</td><td>Chat: 15 already-public statements got that label by hand; the data lists 15</td><td>2026-11-07</td></tr></tbody></table></div>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-neutral">Neutral</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-fair">Fairly valued</span></span><span class="v2-conf muted">medium confidence, as of 2026-11-07. Not financial advice.</span></div>
+<p class="v2-thesis">Mid-sized pool (rank 56 of 128), price down 6% in a month, at its low.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.002165 TAO per alpha</dd></div><div><dt>Pool</dt><dd>7,238 TAO, rank 56</dd></div><div><dt>Price, 30 days</dt><dd>-6%, 2026-10-08 to 2026-11-07</dd></div><div><dt>Net flow, 30 days</dt><dd>-218 TAO, 2026-10-08 to 2026-11-07</dd></div><div><dt>Miner pay</dt><dd>0.042 TAO per day on average (6.37 TAO per day over 151 uids)</dd></div><div><dt>Miner pay outside top 5</dt><dd>0.030 TAO per day on average (4.43 TAO per day over 146 uids outside the top 5)</dd></div><div><dt>Code activity</dt><dd>last commit 2026-10-29; 4 commits in 30 days; no releases</dd></div></dl>
+<div class="v2-trend"><h3>Trend</h3><div class="v2-tbody"><figure class="v2-tfig"><svg class="v2-spark down" viewBox="0 0 240 56" role="img" aria-label="Price in TAO per alpha, 2026-09-28 to 2026-11-07: 0.002273 to 0.002165, -4.8%"><polyline points="5.0,16.5 16.5,17.7 22.2,12.9 33.8,8.6 39.5,11.7 51.0,11.1 56.8,8.6 62.5,6.5 68.2,5.0 74.0,6.2 79.8,5.9 91.2,15.6 102.8,19.5 108.5,51.0 114.2,24.1 120.0,31.3 131.5,31.9 137.2,40.4 143.0,44.3 148.8,30.1 154.5,24.4 160.2,18.6 171.8,24.7 177.5,43.1 183.2,42.5 189.0,39.8 194.8,33.7 200.5,32.5 206.2,32.8 212.0,32.2 217.8,29.2 223.5,34.4 229.2,39.2 235.0,49.2"/><circle cx="235.0" cy="49.2" r="3"/></svg><figcaption><strong>Price</strong> <span class="down">-4.8%</span> <span class="muted">0.002273 to 0.002165 TAO per alpha, 2026-09-28 to 2026-11-07</span></figcaption></figure><dl class="v2-tfacts"><div><dt>Net flow, 30 days</dt><dd><span class="down">-218 TAO</span> <span class="muted">2026-10-08 to 2026-11-07</span></dd></div><div><dt>Verdict history</dt><dd><ol class="v2-vh"><li><span class="muted">2026-11-04</span> <span class="st s-neutral">Neutral</span> <span class="st v-fair">Fairly valued</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-05</span> <span class="st s-neutral">Neutral</span> <span class="st v-fair">Fairly valued</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-06</span> <span class="st s-neutral">Neutral</span> <span class="st v-fair">Fairly valued</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-07</span> <span class="st s-neutral">Neutral</span> <span class="st v-fair">Fairly valued</span> <span class="muted">medium confidence</span></li></ol></dd></div></dl></div></div>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>Paid uids rose from 52 (2026-10-30) to 151</li>
+<li>Late verdicts arrive: the 11-02 round went from 0 to 19 correct statements.</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>7.1% of judged statements correct; none in 1,877 verdicts of rounds 11-03 to 11-06</li>
+<li>Net flow -218 TAO in 30 days (-80 in two days); revenue and buybacks are team claims</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> Bullish: verifiable revenue, an independent judge check or later rounds paying. Bearish: more outflows or hand fixes.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-similar">Similar subnets</h2>
+<div class="v2-sim"><p>By pool size this is <strong>rank 7 of 11</strong> among the subnets grouped as <em>trading</em> (what they mainly sell). Pool and price as of 2026-11-07, price in TAO per alpha; the barrier is the easiest miner role.</p><div class="scroll"><table class="v2-table"><thead><tr><th>#</th><th>Subnet</th><th>Pool</th><th>Price</th><th>Miner barrier</th></tr></thead><tbody><tr><td>5</td><td><a href="/bittensor-docs/subnets/30.html">Endure</a> <span class="muted">SN30</span></td><td>8,836 TAO</td><td>0.00367</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr><td>6</td><td><a href="/bittensor-docs/subnets/21.html">AdTAO</a> <span class="muted">SN21</span></td><td>8,606 TAO</td><td>0.004369</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr class="me" aria-current="true"><td>7</td><td>Numinous <span class="muted">SN6, this page</span></td><td>7,238 TAO</td><td>0.002165</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr><td>8</td><td><a href="/bittensor-docs/subnets/79.html">MVTRX</a> <span class="muted">SN79</span></td><td>6,827 TAO</td><td>0.002931</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr><td>9</td><td><a href="/bittensor-docs/subnets/89.html">InfiniteQuant</a> <span class="muted">SN89</span></td><td>6,057 TAO</td><td>0.002906</td><td><span class="v2-barrier b-low">Low</span></td></tr></tbody></table></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-11-07</span> <span class="muted">(chain reads, team data)</span> The 11-02 round now has 19 correct statements; 11-03 to 11-06 have none; net flow -80 TAO in two days.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Read the miner setup guide in the repo (Python 3.11 or newer) and install the numi tool with pip install -e .</li>
+<li>Register a hotkey on subnet 6 (0.2 TAO burn on 2026-11-07). Testnet is netuid 155 (--env test).</li>
+<li>Set your wallet and hotkey in environment variables, then run numi round to see the open round and deadline.</li>
+<li>Use numi entities and numi graph to see what the graph holds, write the forecast JSON, check it with numi validate, send it with numi submit --question &lt;id&gt;.</li>
+<li>Follow verdicts with numi forecasts and the public leaderboard.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Rewards rest on the team&#x27;s judge; its model and prompts are not published; 15 verdicts were hand-fixed.</li>
+<li>Only the rounds of 2026-10-28 to 11-02 have paid since 10-27; none of 11-03 to 11-06. A true forecast pays only if the team&#x27;s pipeline finds the event.</li>
+<li>The geopolitics graph announced for 2026-10-23 is still &#x27;coming soon&#x27;; all questions seen are about large companies; the graph upgrade due the week of 11-02 had not shown by 11-07.</li>
+<li>Chat about agents is outdated; the miner guide&#x27;s exit-code table still says the first forecast counts. Chat after 2026-10-31 was unreadable.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/numinouslabs/numinous" rel="noopener noreferrer">GitHub</a></li>
+<li><a href="https://github.com/numinouslabs/numinous/blob/main/docs/miner-setup.md" rel="noopener noreferrer">Miner setup guide</a></li>
+<li><a href="https://github.com/numinouslabs/numinous/blob/main/docs/scoring-system.md" rel="noopener noreferrer">Scoring system</a></li>
+<li><a href="https://github.com/numinouslabs/numinous/blob/main/docs/validator-setup.md" rel="noopener noreferrer">Validator setup guide</a></li>
+<li><a href="https://leaderboard.numinouslabs.io/" rel="noopener noreferrer">Leaderboard (weights, calls, rounds, graph)</a></li>
+<li><a href="https://api.numinouslabs.io/api/v3/dkg/board" rel="noopener noreferrer">Public results: current board</a></li>
+<li><a href="https://eversight.numinouslabs.io/" rel="noopener noreferrer">Eversight (team&#x27;s prediction-market analysis product)</a></li>
+<li><a href="https://numinouslabs.io/" rel="noopener noreferrer">Website</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 10 sources</summary>
+<ul>
+<li><strong>repo</strong> numinouslabs/numinous at c2af8c2 (2026-10-29; no newer commit on 2026-11-07, git ls-remote and GitHub API): README, CHANGELOG 4.0.0, docs (miner, scoring, validator), validator scoring and weight code, LICENSE (MIT), read 2026-10-30 to 2026-11-01</li>
+<li><strong>msg</strong> #numinous 2026-09-24 to 2026-10-31 (archive gave no answer within 60 s on 2026-11-07)</li>
+<li><strong>web</strong> Team results data api.numinouslabs.io/api/v3/dkg (/rounds and /rounds/{id} for all 17 rounds, read 2026-11-07 about 11:38 UTC; /board scored 2026-11-06 15:00Z, posted 15:04Z, read 11:38 UTC); the board&#x27;s weights recomputed with docs/scoring-system.md for all 151 miners (exact match, largest difference 3e-20); leaderboard.numinouslabs.io page header</li>
+<li><strong>web</strong> Chain read at block 9453947 (2026-11-07 11:31Z UTC): SN6 (Numinous): registered 2024-06-20, tempo 360, 256 of 256 uids, commit-reveal on; emission weights burn/recycle/owner/validator/miner = 0/0/18/41/41 % (stored, same values as the chain default), RecycleOrBurn = Burn; uids under the owner hotkey or owner coldkey hold 0 % of incentive and 0 % of last-epoch emission (a floor); 10 validators have weight rows, on average 0 % of weight goes to uid 0.</li>
+<li><strong>web</strong> Chain read at block 9453947 (2026-11-07 11:31Z UTC), compared with block 9443292 (2026-11-06 00:00Z UTC): SN6: no setting changed in 33 checked items; emission split unchanged; pool 7292.64 -&gt; 7238.24 TAO.</li>
+<li><strong>web</strong> Chain reads of incentive and weights at blocks 9326545 to 9407743 (2026-10-20 to 2026-11-01), including blocks 9376405, 9377005, 9377905, 9378505 and 9382105 (2026-10-27 17:00Z to 2026-10-28 12:00Z UTC); dossier and weights at block 9453947 (2026-11-07 11:31Z UTC): 10 of 10 validators with weight rows give their top weight to uid 160 and all send 151 targets</li>
+<li><strong>web</strong> Chain read at block 9453947 (2026-11-07 11:31Z): price SN6, 6 samples every 7d from block 9237947 (2026-10-08 11:12Z): price 0.002306 -&gt; 0.002165 TAO per alpha (-6.1%), pool TAO 7464.7 -&gt; 7238.2; over the 5 intervals where the pool change equals flow + protocol: net user flow -217.6 TAO (staked minus unstaked), protocol flow -8.8 TAO, gross volume 5212.3 TAO.; pool rank 56 of 128 from the shared snapshot at the same block 9453947</li>
+<li><strong>web</strong> Chain read at block 9453947 (2026-11-07 11:31Z): price SN6, 12 samples every 1d from block 9374747 (2026-10-27 11:29Z): price 0.002199 -&gt; 0.002165 TAO per alpha (-1.6%), pool TAO 7293.1 -&gt; 7238.2; over the 11 intervals where the pool change equals flow + protocol: net user flow -52.9 TAO (staked minus unstaked), protocol flow -2.0 TAO, gross volume 1363.0 TAO.</li>
+<li><strong>web</strong> Chain reads of uid 6 U for the 25 top board uids and for one uid of each of the 17 identical-result groups, block 9453947 (2026-11-07 11:31Z UTC): coldkey tags (25 seats on 20 coldkeys, none linked to the owner), other uids on the same coldkey, registration dates (newest seat 2026-10-23)</li>
+<li><strong>web</strong> Chain read of validator permits at block 9454001 (2026-11-07, local copy of the checker; the hosted one has no &#x27;permits&#x27; command yet): 17 permit rows, 7 silent (never set or 5 tempos or older), 16 coldkeys</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/5.html"><small>← Previous</small>SN5 Hone</a><a rel="next" href="/bittensor-docs/subnets/7.html"><small>Next →</small>SN7 Allways</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-11-07. Site built 2026-11-07. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

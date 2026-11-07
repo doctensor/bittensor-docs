@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Weir (SN36) | Bittensor Subnet Docs</title>
+<meta name="description" content="GPU rental marketplace: miners list GPUs, renters pay by the hour. Started 2026-11-04; the team runs validation.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h12">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>36</span><div>
+<h1>Weir <span class="muted">SN36</span></h1>
+<p class="tagline">GPU rental marketplace: miners list GPUs, renters pay by the hour. Started 2026-11-04; the team runs validation.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl4"><b>2.9<small>/day</small></b><span>last 7 d</span></li><li class="pl2"><b>0.61<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>15<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-11-02</b><span>last chat</span></li><li class="pw"><b>915</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Shipping</b><span>code activity</span></li><li class="pw"><b>4</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-11-06</b><span>last commit</span></li><li class="pw"><b>none</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>GPU compute marketplace</dd>
+<dt>Status</dt><dd>As of 2026-11-07: 86 of 256 slots; nine uids share miner incentive, the top one 24%; the pool fell from 422 to 373 TAO since 11-05.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-11-07</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Cards, weights and fees</a></li><li><a href="#sn-x1">Who earns today</a></li><li><a href="#sn-x2">Docs vs code vs chain</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-similar">Similar subnets</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>renters get GPU machines by the hour; miners list H100 to RTX 4090 cards and earn rent plus emission.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>86 of 256 slots; nine uids share miner incentive (top one 24%); the owner&#x27;s uid 0 takes 72% of dividends.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>reviews can skip a miner&#x27;s 14-day wait (11-05); on 11-06 idle pay got a price floor and a fee top-up.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>each GPU needs a one-time 3.7 to 10 TAO activation fee, and idle pay starts after 14 days of passed checks.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>renters use the site. On chain, three uids split exactly the 20% rented pool; revenue is not visible.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Lists GPU machines from the supported cards; earns rent plus emission once checks have passed.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-caution">GPU needed</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>NVIDIA GPU from the list (RTX 4090 to H100), Ubuntu 22.04 or 24.04, Docker, Sysbox, disk 1.5x VRAM, public IP</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None; a payout address for USDT or USDC rent</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>0.3 TAO registration burn (2026-11-04) plus a one-time 3.7 to 10 TAO activation fee per GPU</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>NVIDIA container toolkit, Sysbox, node install and self-test; open ports 8091 and 42000-42999</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Closed in practice: nodes answer only the owner&#x27;s key, and scoring needs files the Weir platform writes.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-bad">Permissioned</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>CPU server that recomputes check rows; no GPU stated</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>Platform and rentals files written by Weir; how outsiders get them is not documented</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Permit needs 1,000 TAO stake (chain rule); registration burn 0.3 TAO (2026-11-04)</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>One command in the README; nodes must also allow your hotkey to challenge them</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-neutral">Neutral</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">low confidence, as of 2026-11-07. Not financial advice.</span></div><p>Pool 373 TAO (rank 123 of 128); price +150% in 5 days but -18% since 11-06; nine uids share miner pay. <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>Weir is a GPU rental marketplace. Miners list GPU machines, a validator checks each card, and renters pay by the hour on weircompute.com. Miners earn rent in USDT or USDC plus emission.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>A miner runs a node on a GPU machine and announces it on chain. The validator sends each card a random matrix job to answer within a time limit; a wrong answer zeroes the miner for 24 hours.</p></div><div><h3>Validators</h3><p>Every 5 minutes the validator calls each node, recomputes random rows on its CPU, and sets weights from passed cards and platform rental hours.</p></div><div><h3>Incentive</h3><p>Of the miner share, 20% goes to rented GPUs (settled hours x card weight) and up to 80% to idle verified GPUs after 14 days of passed checks. The rest goes to a reserve hotkey. Rent is paid on top: 95%, weekly. Since 2026-11-05 a manual review can skip the 14 days or count disputed GPUs (up to 64 per model).</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-11-07, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-bad">Owner only</span>Nodes answer only the Weir validator key by default; outside permit holders cannot run the checks.</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">36.1%</span>Owner uid 0 takes 36% of last-epoch emission as dividends; owner cut 18%.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">9 uids</span><span class="v2-sx muted">top 5 hold 74.3% of incentive.</span> Nine uids earn, none owner-linked on chain; five earn the pay of 64 GPUs of one card model.</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Converged</span>3 of 4 validators give uid 74 the top weight (24%): concentration, not proof of copying.</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-caution">Partial</span>Miner and validator code is public, no licence; the rental platform is not.</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Lists GPU machines from the supported cards; earns rent plus emission once checks have passed.</p><ul>
+<li>Arithmetic at today&#x27;s emission, before costs and rent: an idle RTX 4090 earns about 2.1 alpha a day (0.022 TAO), an H100 about 8.3 (0.088 TAO).</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Closed in practice: nodes answer only the owner&#x27;s key, and scoring needs files the Weir platform writes.</p><ul>
+<li>5 uids hold permits; dividends go to the owner&#x27;s uid 0 (72%), uid 1 (27%) and uid 44 (about 1%).</li>
+</ul></section></div>
+<h2 id="sn-x0">Cards, weights and fees</h2>
+<p>Only these cards earn; one-time fee per GPU.</p>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Card</th><th>Weight</th><th>Activation fee (TAO)</th></tr></thead><tbody><tr><td>H100 80GB</td><td>4.0</td><td>10.0</td></tr><tr><td>A100 80GB</td><td>2.5</td><td>7.8</td></tr><tr><td>A800 80GB</td><td>2.4</td><td>7.6</td></tr><tr><td>A100 40GB</td><td>1.8</td><td>6.1</td></tr><tr><td>A800 40GB</td><td>1.7</td><td>5.9</td></tr><tr><td>RTX 5090</td><td>1.3</td><td>4.7</td></tr><tr><td>RTX 4090 48GB</td><td>1.2</td><td>4.4</td></tr><tr><td>RTX 4090 24GB</td><td>1.0</td><td>3.7</td></tr></tbody></table></div>
+<h2 id="sn-x1">Who earns today</h2>
+<ul class="v2-list">
+<li>Uid 74 takes 24%, exactly what the eight others leave: the code&#x27;s rule for the reserve hotkey. The chain does not name it.</li>
+<li>Uids 78 to 82 (registered 2026-11-05) earn 18.06, 11.29, 10.84, 8.13 and 7.68%: the pay of 64 GPUs each of H100, A100 80GB, A800 80GB, A100 40GB and A800 40GB, the cap for reviewed GPUs.</li>
+<li>Uids 61, 65 and 83 earn 10.14, 8.45 and 1.41%: together exactly 20.0%, the code&#x27;s rented pool, shared by settled rental hours. Uid 83 (registered 11-05) is new in it and took 7% off each of the others. The hours file is private.</li>
+</ul>
+<h2 id="sn-x2">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Cost to start</td><td>README: weights and a 14-day wait, no fee</td><td>Code: every GPU needs a 3.7 to 10 TAO fee</td><td>2026-11-07</td></tr><tr><td>Idle pay start</td><td>README: after 14 days of passed checks</td><td>Chain: five new uids earned within 12 hours</td><td>2026-11-07</td></tr><tr><td>Renter isolation</td><td>Site: a full VM, not a container</td><td>Code: README says a Sysbox container per rental</td><td>2026-11-07</td></tr></tbody></table></div>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-neutral">Neutral</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">low confidence, as of 2026-11-07. Not financial advice.</span></div>
+<p class="v2-thesis">Net inflow is about 150 TAO and price is up 150% in five days, but 46 TAO left on 11-06 and the pool is thin (3,500 TAO traded in 373). Pay reaches nine uids; rental volume is unverified.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.01059 TAO per alpha</dd></div><div><dt>Pool</dt><dd>373 TAO, rank 123</dd></div><div><dt>Price, 30 days</dt><dd>+150%, 2026-11-02 to 2026-11-07 (5 days old)</dd></div><div><dt>Net flow, 30 days</dt><dd>+149.6 TAO, 2026-11-02 to 2026-11-07</dd></div><div><dt>Miner pay</dt><dd>31.2 TAO per day over 9 paid uids</dd></div><div><dt>Code activity</dt><dd>last commit 2026-11-06; 6 commits in 30 days</dd></div></dl>
+<div class="v2-trend"><h3>Trend</h3><div class="v2-tbody"><figure class="v2-tfig"><svg class="v2-spark up" viewBox="0 0 240 56" role="img" aria-label="Price in TAO per alpha, 2026-11-02 to 2026-11-07: 0.004247 to 0.01059, +149.4%"><polyline points="5.0,51.0 51.0,51.0 97.0,11.6 143.0,5.0 235.0,19.7"/><circle cx="235.0" cy="19.7" r="3"/></svg><figcaption><strong>Price</strong> <span class="up">+149.4%</span> <span class="muted">0.004247 to 0.01059 TAO per alpha, 2026-11-02 to 2026-11-07</span></figcaption></figure><dl class="v2-tfacts"><div><dt>Verdict history</dt><dd><ol class="v2-vh"><li><span class="muted">2026-11-03</span> <span class="st s-unclear">Unclear</span> <span class="st v-unclear">Unclear</span> <span class="muted">low confidence</span></li><li><span class="muted">2026-11-04</span> <span class="st s-neutral">Neutral</span> <span class="st v-unclear">Unclear</span> <span class="muted">low confidence</span></li><li><span class="muted">2026-11-06</span> <span class="st s-neutral">Neutral</span> <span class="st v-unclear">Unclear</span> <span class="muted">low confidence</span></li><li><span class="muted">2026-11-07</span> <span class="st s-neutral">Neutral</span> <span class="st v-unclear">Unclear</span> <span class="muted">low confidence</span></li></ol></dd></div></dl></div></div>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>Net inflow of about 150 TAO; pay reaches nine uids; three split the rented pool, which fits real rentals.</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>The rented pool pays 20% at any volume and the review file is private, so usage and revenue stay unverified.</li>
+<li>Net selling of 46 TAO on 11-06; price is 22% below the 11-05 high.</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> Rental volume or revenue shown, or the review rules published, would turn it bullish; more net outflow, bearish.</p>
+<p class="muted">Since the last pass: Still neutral (2026-11-06): inflow outweighs the 46 TAO sold on 11-06; the rented pool is now split by three uids.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-similar">Similar subnets</h2>
+<div class="v2-sim"><p>By pool size this is <strong>rank 14 of 14</strong> among the subnets grouped as <em>compute</em> (what they mainly sell). Pool and price as of 2026-11-06 to 2026-11-07, price in TAO per alpha; the barrier is the easiest miner role.</p><div class="scroll"><table class="v2-table"><thead><tr><th>#</th><th>Subnet</th><th>Pool</th><th>Price</th><th>Miner barrier</th></tr></thead><tbody><tr><td>10</td><td><a href="/bittensor-docs/subnets/105.html">Beam</a> <span class="muted">SN105</span></td><td>4,840 TAO</td><td>0.005199</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>11</td><td><a href="/bittensor-docs/subnets/128.html">ByteLeap</a> <span class="muted">SN128</span></td><td>4,051 TAO</td><td>0.002797</td><td><span class="v2-barrier b-high">High</span></td></tr><tr><td>12</td><td><a href="/bittensor-docs/subnets/94.html">Cathedral</a> <span class="muted">SN94</span></td><td>2,139 TAO</td><td>0.003907</td><td><span class="v2-barrier b-high">High</span></td></tr><tr><td>13</td><td><a href="/bittensor-docs/subnets/47.html">GPUForge</a> <span class="muted">SN47</span></td><td>940 TAO</td><td>0.001542</td><td><span class="v2-barrier b-high">High</span></td></tr><tr class="me" aria-current="true"><td>14</td><td>Weir <span class="muted">SN36, this page</span></td><td>373 TAO</td><td>0.01059</td><td><span class="v2-barrier b-medium">Medium</span></td></tr></tbody></table></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-11-06</span> <span class="muted">(GitHub)</span> Idle pay needs a price of at least half the card&#x27;s cap; a card switch owes the fee difference.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Check the card is on the list (Ubuntu 22.04 or 24.04, NVIDIA driver, Docker). Register a hotkey on SN36 (0.3 TAO burn).</li>
+<li>Install the NVIDIA container toolkit and Sysbox, then the node from the repo.</li>
+<li>Pay the activation fee per GPU from the coldkey, or in USDT or USDC through Weir (site docs, not the README).</li>
+<li>Run the self-test with a payout address, start the node and announce its address on chain; idle pay follows 14 days of passed checks.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Five days old. The rented pool pays a fixed 20% to whoever has settled hours, so it shows rentals exist, not how many; revenue is not visible.</li>
+<li>The owner share (36%) is a floor. Reviews come from a platform file only Weir writes.</li>
+<li>The README says rental stats are not signed yet. Chat after 2026-11-02 was unreadable; older SN36 material (Epago) is another project.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://weircompute.com" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://weircompute.com/docs/network" rel="noopener noreferrer">Providers and Subnet 36 (docs)</a></li>
+<li><a href="https://github.com/weircompute/weir-subnet" rel="noopener noreferrer">GitHub</a></li>
+<li><a href="https://x.com/weircompute" rel="noopener noreferrer">X</a></li>
+<li><a href="https://t.me/+qmO92A3EUt5hYWMx" rel="noopener noreferrer">Telegram</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 6 sources</summary>
+<ul>
+<li><strong>web</strong> Chain read at block 9451823 (2026-11-07 04:26Z UTC): SN36 (Weir): registered 2026-11-02, tempo 360, 86 of 256 uids, commit-reveal on; emission weights burn/recycle/owner/validator/miner = 0/0/18/41/41 % (stored, same values as the chain default), RecycleOrBurn = Burn; uids under the owner hotkey or owner coldkey hold 0 % of incentive and 36.13 % of last-epoch emission (a floor); 4 validators have weight rows, on average 25 % of weight goes to uid 0. Uid reads (uids 0, 1, 61, 65, 74, 83) and weight rows (all validators; uid 0 with targets) at the same block, tags only; pool rank 123 of 128 non-root pools and price rank 30 from the shared snapshot at block 9451823.</li>
+<li><strong>web</strong> Chain read at block 9451823 (2026-11-07 04:26Z UTC), compared with block 9443292 (2026-11-06 00:00Z UTC): SN36: no setting changed in 33 checked items; emission split unchanged; pool 412.1 -&gt; 373.21 TAO.</li>
+<li><strong>web</strong> Chain read at block 9451823 (2026-11-07 04:26Z): price SN36, 6 samples every 1d from block 9420600 (2026-11-02 20:21Z): price 0.004247 -&gt; 0.010594 TAO per alpha (+149.5%), pool TAO 236.2 -&gt; 373.2; over the 5 intervals where the pool change equals flow + protocol: net user flow +149.6 TAO (staked minus unstaked), protocol flow -12.6 TAO, gross volume 3498.0 TAO.</li>
+<li><strong>repo</strong> weircompute/weir-subnet@62afca9 (2026-11-06 04:14Z): README, validator/scoring.py, validator.py, codes.py (compare 6d24cb3...62afca9, 2 commits, 8 files; earlier compare 4529bb6...6d24cb3); 6 commits in 30 days, no release, no licence file.</li>
+<li><strong>web</strong> weircompute.com home, pricing, security, developers, docs and docs/network pages, read 2026-11-04 23:45 UTC; re-read 2026-11-07 04:3x UTC, text unchanged; docs pages renting, billing, refunds, adding-funds, connecting, accounts and support read 2026-11-07 (renter side only).</li>
+<li><strong>msg</strong> #36 chat not read after 2026-11-02 (archive unreachable on 2026-11-07).</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/34.html"><small>← Previous</small>SN34 Yugos (BitMind)</a><a rel="next" href="/bittensor-docs/subnets/37.html"><small>Next →</small>SN37 Aurelius</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-11-07. Site built 2026-11-07. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

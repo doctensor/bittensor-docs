@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bitsec (SN60) | Bittensor Subnet Docs</title>
+<meta name="description" content="AI agents hunt smart-contract bugs in weekly rounds; two winners are paid and half the miner share burns.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h12">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>60</span><div>
+<h1>Bitsec <span class="muted">SN60</span></h1>
+<p class="tagline">AI agents hunt smart-contract bugs in weekly rounds; two winners are paid and half the miner share burns.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>30<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>17<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>9.7<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-11-02</b><span>last chat</span></li><li class="pw"><b>6,332</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Shipping</b><span>code activity</span></li><li class="pw"><b>17</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-11-02</b><span>last commit</span></li><li class="pw"><b>2026-10-22</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>AI security auditing (smart-contract bug finding)</dd>
+<dt>Status</dt><dd>Round v3.1.17 closed on 2026-11-03 and is paid; no new round was open on 2026-11-07.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-11-07</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Last round (v3.1.17)</a></li><li><a href="#sn-x1">What the score rewards</a></li><li><a href="#sn-x2">Where the emission goes</a></li><li><a href="#sn-x3">Docs vs code vs chain</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>miners submit AI agents that hunt serious smart-contract bugs; weekly rounds score them on audit-contest projects.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>the owner uid holds 50% of incentive and it burns; two agents are paid, 77% and 23% of the rest.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>only recall counts (top reports are about 95% false); the best score rose from 0.24 to 0.86 as the project set changed.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>docs ask for 32 GB RAM, Docker and your own Chutes or OpenRouter key; no GPU.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>users withdrew a net 851 TAO in 30 days and the price fell 24%; the last nine days were flat.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Builds an AI agent that finds high and critical bugs; paid only if it ranks in the top two.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-caution">Paid service needed</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>32 GB RAM, 512 GB SSD recommended; no GPU</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>Chutes or OpenRouter key (your cost); price not documented</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>0.0005 TAO to register (2026-11-07)</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Docker, uv, Python 3.13; register on the team&#x27;s platform by email</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Runs and scores agents; weights follow the team&#x27;s payout list.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-caution">Paid service needed</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>32 GB RAM, 512 GB SSD, Docker; no GPU</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>Chutes key for scoring runs; price not documented</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>0.0005 TAO to register; 1,000 TAO minimum stake to set weights</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Docker, Python 3.11; register with the team (email, name, wallet)</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-11-07. Not financial advice.</span></div><p>Net outflow of 851 TAO and price -24% in 30 days, but flat for nine days; the view stays bearish. <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>Bitsec (SN60) pays miners for AI agents that find high and critical bugs in smart-contract code. Each week validators run private agents in sandboxes on audit-contest projects and the top two are paid.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>A miner submits one Python agent that reads a codebase, calls a language model and returns vulnerabilities. A screener rejects unsafe code, copies, memorised answers and steering toward known benchmark solutions.</p></div><div><h3>Validators</h3><p>Validators pull platform jobs and run each agent in a Docker sandbox three times on every project, matching findings to expected ones with a language model. A project passes at two of three runs with every expected finding matched; the score is the mean of the best three validators.</p></div><div><h3>Incentive</h3><p>Rounds close on Mondays at about 15:00 UTC. The platform publishes the payout list (50% burn, then 77/23 for the top two accounts&#x27; best agents) and validators set weights to it. Ties break on score, then passes, then true positives.</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-11-07, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-good">Open</span>Setting weights needs 1,000 TAO stake; scoring jobs need a platform account (self-serve command).</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">25%</span>Owner uid holds 25.0% of emission and 50% of incentive (burned); owner cut 18%, RecycleOrBurn = Burn.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">3 uids</span><span class="v2-sx muted">top 5 hold 100% of incentive.</span> Three uids earn: the owner uid (50%) and the two uids paid for the latest round (38.5% and 11.5%).</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Converged</span>All 11 validators with weights set the same vector (owner 50%, then 38.5% and 11.5%) from the public payout list.</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-good">Open</span>Miner baseline and validator are public (MIT); the platform that sets payouts is closed.</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Builds an AI agent that finds high and critical bugs; paid only if it ranks in the top two.</p><ul>
+<li>Several submissions per round and several hotkeys per miner are allowed for now (team, 2026-10-20).</li>
+<li>A run takes up to 30 minutes in the sandbox on the miner&#x27;s own key.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Runs and scores agents; weights follow the team&#x27;s payout list.</p><ul>
+<li>Four validators scored v3.1.17; TAO.com has 23 agents pending, none finished.</li>
+<li>15 uids hold a permit (16 on 2026-11-06); 11 set weights within the last tempo, 4 not for over five tempos.</li>
+</ul></section></div>
+<h2 id="sn-x0">Last round (v3.1.17)</h2>
+<ul class="v2-list">
+<li>Closed 2026-11-03 at 16:00 UTC, a day late: 794 submitted, 23 scored. Best 0.857 (6 of 7 projects on each of three validators); v3.1.16&#x27;s was 0.238.</li>
+<li>Five of seven projects are new and the seven hold 28 expected findings against 43. On the two shared projects the best agent passed 16 of 24 runs, up from 6 (different agents, reworded texts). Why scores rose is not shown.</li>
+<li>Paid: the best agents of the top two accounts, 7599 (0.857) and 7543 (0.810; most passes of the ties), on uids 201 and 105 (234 and 251 on 2026-10-23).</li>
+<li>Scores kept moving after the round showed finished: five agents rose (7357 0.714 to 0.810, 7636 0.762 to 0.810); the paid two did not change.</li>
+</ul>
+<h2 id="sn-x1">What the score rewards</h2>
+<ul class="v2-list">
+<li>Only recall counts: a project passes when every expected finding is found, so precision is unused and the leading agents&#x27; reports were 94-96% false positives (up to 80 findings a run).</li>
+</ul>
+<h2 id="sn-x2">Where the emission goes</h2>
+<ul class="v2-list">
+<li>Chain split: 18% owner, 41% validators, 41% miners. The owner&#x27;s uid holds 50.0% of miner incentive, burned: about 20.5% of all emission.</li>
+<li>The two paid agents share about 4.4 TAO a day (77/23; our arithmetic). The burn was about 35% on 2026-09-23 and 50% by 2026-10-21; no announcement found.</li>
+</ul>
+<h2 id="sn-x3">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Evaluation projects</td><td>Docs: the evaluation set is known during submission.</td><td>Chat: team said on 2026-10-30 it picks a random 7 before evaluation; 5 of 7 changed since v3.1.16.</td><td>2026-11-07</td></tr><tr><td>Benchmark answers</td><td>Docs: ground truth is human auditors&#x27; findings.</td><td>Code: five solved findings removed 10-30, restored 11-02 16:55 UTC, removed again 18:03; 112 of 121 texts reworded.</td><td>2026-11-07</td></tr><tr><td>Hardware</td><td>Docs: 32 GB RAM and 512 GB SSD, no GPU.</td><td>Code: min_compute.yml lists a GPU (A100); template text, no local model runs.</td><td>2026-11-07</td></tr></tbody></table></div>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-11-07. Not financial advice.</span></div>
+<p class="v2-thesis">A mid-sized pool (70th of 128) that shrank 13% in 30 days: a net 851 TAO left and the price fell 24%, most of it before 10-29.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.002965 TAO per alpha</dd></div><div><dt>Pool</dt><dd>6,011 TAO, rank 70</dd></div><div><dt>Price, 30 days</dt><dd>-24%, 2026-10-08 to 2026-11-07</dd></div><div><dt>Net flow, 30 days</dt><dd>-851 TAO, 2026-10-08 to 2026-11-07</dd></div><div><dt>Miner pay</dt><dd>4.4 TAO per day, 2 independent miners (owner uid excluded)</dd></div><div><dt>Miner pay outside top 5</dt><dd>None (2 miners paid)</dd></div><div><dt>Code activity</dt><dd>last commit 2026-11-02; 14 commits in 30 days; no releases</dd></div></dl>
+<div class="v2-trend"><h3>Trend</h3><div class="v2-tbody"><figure class="v2-tfig"><svg class="v2-spark down" viewBox="0 0 240 56" role="img" aria-label="Price in TAO per alpha, 2026-09-28 to 2026-11-07: 0.004271 to 0.002965, -30.6%"><polyline points="5.0,5.8 22.2,11.9 33.8,12.7 39.5,15.3 45.2,16.8 51.0,15.6 62.5,14.3 74.0,10.6 79.8,8.7 85.5,5.0 91.2,12.2 102.8,20.1 114.2,19.0 120.0,23.3 125.8,20.3 131.5,26.1 143.0,32.3 154.5,35.2 160.2,33.3 166.0,33.3 171.8,39.1 177.5,46.4 183.2,51.0 189.0,45.6 194.8,45.0 200.5,48.9 206.2,46.2 212.0,45.6 217.8,47.4 229.2,46.7 235.0,46.2"/><circle cx="235.0" cy="46.2" r="3"/></svg><figcaption><strong>Price</strong> <span class="down">-30.6%</span> <span class="muted">0.004271 to 0.002965 TAO per alpha, 2026-09-28 to 2026-11-07</span></figcaption></figure><dl class="v2-tfacts"><div><dt>Net flow, 30 days</dt><dd><span class="down">-851 TAO</span> <span class="muted">2026-10-08 to 2026-11-07</span></dd></div><div><dt>Verdict history</dt><dd><ol class="v2-vh"><li><span class="muted">2026-11-03</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-04</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-06</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-07</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li></ol></dd></div></dl></div></div>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>The team ships; net buying on four of the last five days (+93 TAO).</li>
+<li>Public agent pages let anyone check a score.</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>Half the miner share burns; two agents are paid.</li>
+<li>Net outflow in three of five weekly intervals; revenue questions unanswered since 2026-10-11.</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> Weeks of net inflow, stable and documented evaluation-project selection and a checkable revenue figure.</p>
+<p class="muted">Since the last pass: Unchanged since 2026-11-06: nine flat days are not yet a turn.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-11-07</span> <span class="muted">(Bitsec round feed)</span> Agent 7355 was re-scored (0.714 to 0.762) though all its runs ended 2026-11-04; payouts are unchanged.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Clone Bitsec-AI/sandbox, follow the docs&#x27; miner guide, install Docker and uv.</li>
+<li>Set INFERENCE_API_KEY; edit miner/agent.py so agent_main returns a vulnerabilities list.</li>
+<li>Register with ./bitsec.py miner create (email, name, wallet), test on the public practice projects and submit while a round is open.</li>
+<li>Validators: install Docker and Python 3.11, set CHUTES_API_KEY, run ./bitsec.py validator create, then validator run.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>The platform code is closed and picks the winners; burn share, payout split and project choice have changed before and can again.</li>
+<li>Miner claims of leaked or steered benchmarks and a malicious agent 7050 are unverified.</li>
+<li>Revenue, client and buyback questions (asked 2026-10-11 and 2026-10-31) went unanswered; Sentios claims come from the team.</li>
+<li>Chat after 2026-11-02 was not read (archive down): the late round, the revert and the score jump are unexplained.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://docs.bitsec.ai/" rel="noopener noreferrer">Docs</a></li>
+<li><a href="https://github.com/Bitsec-AI/sandbox" rel="noopener noreferrer">GitHub (sandbox)</a></li>
+<li><a href="https://github.com/Bitsec-AI/scabench" rel="noopener noreferrer">GitHub (ScaBench benchmark)</a></li>
+<li><a href="https://bitsec.ai/" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://bitsec.ai/leaderboard" rel="noopener noreferrer">Leaderboard</a></li>
+<li><a href="https://sentios.io/" rel="noopener noreferrer">Sentios</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 8 sources</summary>
+<ul>
+<li><strong>repo</strong> Bitsec-AI/sandbox@4a45339 (2026-11-02, build 65; still the head on 2026-11-07): validator/curated-highs-only-2025-08-08.json (commits fafc36f, 0f9d7b9, 135974a, 1699c74), validator/manager.py, evaluator.py (PASS only at detection_rate 1), scorer.py, top_agents.py, min_compute.yml, LICENSE; the platform side is closed</li>
+<li><strong>repo</strong> Bitsec-AI/scabench@ed078ed (2026-10-26; still the head on 2026-11-07)</li>
+<li><strong>web</strong> https://docs.bitsec.ai/ home, /miner/, /validator/, /incentive-mechanism/, /changelog/, /platform/, /inference-proxy/ and /agent-evaluation/ (all eight fetched again 2026-11-07 and unchanged since 2026-11-03; newest changelog entry v3.1, 2026-05)</li>
+<li><strong>web</strong> Public team feeds bitsec.ai/api/analytics, /api/agents/top-with-burn/, /api/jobs/leaderboard, /api/projects/sets, /api/agents/count and /api/analytics/validators (read 2026-11-07 03:04 UTC; compared with the 2026-11-06 reads); /scores of agents 7599, 7543, 7600, 7357, 7352, 7636 and 7355 and /detail of agent 7355; the payout list&#x27;s hotkeys compared only as sha256 tags with the chain&#x27;s</li>
+<li><strong>msg</strong> #60-bitsec 2026-08-04 to 2026-11-02 01:15 UTC (queried again 2026-11-02 03:44 UTC; on 2026-11-07 the archive did not answer within 60 s, so nothing newer was read)</li>
+<li><strong>web</strong> Chain read at block 9451331 (2026-11-07 02:47Z UTC): SN60 (Bitsec.ai): registered 2025-01-27, tempo 360, 256 of 256 uids, commit-reveal on; emission weights burn/recycle/owner/validator/miner = 0/0/18/41/41 % (stored, same values as the chain default), RecycleOrBurn = Burn; uids under the owner hotkey or owner coldkey hold 50 % of incentive and 25 % of last-epoch emission (a floor); 11 validators have weight rows, on average 0 % of weight goes to uid 0. Chain read at block 9451331 (2026-11-07 02:47Z UTC), compared with block 9443292 (2026-11-06 00:00Z UTC): SN60: no setting changed in 33 checked items; emission split unchanged; pool 5993.89 -&gt; 6010.92 TAO. Addresses masked.</li>
+<li><strong>web</strong> Chain read at block 9451407 (2026-11-07 03:03Z): shared snapshot over 128 non-root subnets: SN60 pool 6010.8 TAO = rank 70 of 128 (0.302% of all non-root pools), price rank 88. Weights of the 11 validators with rows (hosted weights read): each sets uid 113 50.0%, uid 201 38.5%, uid 105 11.5%. Uid 201 and uid 105 hotkey tags equal the tags of the payout list hotkeys of agents 7599 and 7543.</li>
+<li><strong>web</strong> Chain read at block 9451331 (2026-11-07 02:47Z): price SN60, 6 samples every 7d from block 9235331 (2026-10-08 02:28Z): price 0.003891 -&gt; 0.002965 TAO per alpha (-23.8%), pool TAO 6881.0 -&gt; 6010.9; over the 5 intervals where the pool change equals flow + protocol: net user flow -850.8 TAO (staked minus unstaked), protocol flow -19.3 TAO, gross volume 27960.8 TAO.</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/58.html"><small>← Previous</small>SN58 Attune</a><a rel="next" href="/bittensor-docs/subnets/61.html"><small>Next →</small>SN61 RedTeam</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-11-07. Site built 2026-11-07. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

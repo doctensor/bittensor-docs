@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cascade (SN91) | Bittensor Subnet Docs</title>
+<meta name="description" content="Miners write synthetic-data generators; the one that trains the best time-series forecaster holds the throne.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h13">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>91</span><div>
+<h1>Cascade <span class="muted">SN91</span></h1>
+<p class="tagline">Miners write synthetic-data generators; the one that trains the best time-series forecaster holds the throne.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>16<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>10<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>22<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-11-02</b><span>last chat</span></li><li class="pw"><b>2,355</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Shipping</b><span>code activity</span></li><li class="pw"><b>231</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-11-07</b><span>last commit</span></li><li class="pw"><b>2026-09-27</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>time-series foundation models (competition on synthetic training data)</dd>
+<dt>Status</dt><dd>Active on 2026-11-06: v2 open since 2026-10-30; the first v2 king (uid 220, 11-04) holds; 45% of incentive still burns.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-11-07</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Key numbers</a></li><li><a href="#sn-x1">Docs vs code vs chain</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-similar">Similar subnets</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>the miner whose synthetic-data generator trains the best forecaster is king and takes the largest pay share.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>the first v2 king (uid 220) still holds on 2026-11-06 with 50% of incentive; 45% burns, 5% goes to the old king (uid 31).</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>Ephemeris, a paid forecasting API, is live; it shows no usage figure.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>an entry rents an 8-GPU pod; docs say about $60-125 a run (up to $210), plus 0.1 TAO.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>of 39 v2 entries in the feed, 25 trained and 9 failed (8 on key faults); none is running.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-high">High barrier</span></h3><p>Writes a 32-channel synthetic-data generator and pays for one rented multi-GPU run per entry.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-caution">GPU needed</li><li class="fl fl-caution">Paid service needed</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>Rented 8xH100 or 8xH200 pod per entry (the only mainnet layouts); no GPU to own</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>GPU-rental key (Lium); docs: about $60-95 per 8xH100 leg, $125 per 8xH200 leg</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>0.1 TAO to register (2026-11-06); team says it will drop; no stake</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Python and the cascade CLI; days to weeks tuning a generator</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Checks the owner&#x27;s signed training record, scores private windows and sets weights.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-unk">Paid service unknown</li><li class="fl fl-bad">Permissioned</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>CPU-only host for a satellite validator</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>Owner-issued storage keys; a full evaluator needs a Hippius account (cost not documented)</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Stake above 1,000 TAO for a permit (chain, 2026-11-06); 0.1 TAO to register</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Python, pinned bittensor 11.3.0, the exact release config; upgrade on owner notice</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">low confidence, as of 2026-11-06. Not financial advice.</span></div><p>Down 15% in 30 days, up 6% on the last day on net buying: still bearish. <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>Cascade trains time-series forecasting models by making the training data the competition. Miners write synthetic-data generators; the owner&#x27;s trainer trains each one, validators score the result on private real-world data, and the best generator holds the throne.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>A miner writes a generator: Python code, fully set by its seed, that streams synthetic series (v2: exactly 32 channels). The operator&#x27;s CPU machines generate the data; the miner pays for one rented GPU training run.</p></div><div><h3>Validators</h3><p>The owner&#x27;s trainer trains each entry and signs the record; validators check it and score private held-out windows. A challenger must beat the king by a bar that falls with the king&#x27;s tenure; v2 adds a public-benchmark gate.</p></div><div><h3>Incentive</h3><p>King of the hill. A new v2 king starts at 50% of the miner-side weight while eras are random-init (first 7 days), gains 10 points per passed check up to 95%, and the last former king keeps 5% for about 5 days; unclaimed weight burns.</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-11-06, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-caution">Whitelisted</span>A permit needs 1,000 TAO stake, but only the owner&#x27;s trainer record is trusted.</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">39.5%</span>Uid 0 (owner) holds 39.5% of emission, mostly the burn; owner cut 18%.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">3 uids</span><span class="v2-sx muted">top 5 hold 100% of incentive.</span> 3 uids earn: the king 50.0%, the burn uid 45.0% and the old king 5.0%.</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Converged</span>8 of 8 rows identical (50/45/5 to uids 220, 0, 31). Concentration, not copying.</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-good">Open</span>Miner, validator and trainer code are public under the MIT licence.</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-high">High barrier</span></h3><p>Writes a 32-channel synthetic-data generator and pays for one rented multi-GPU run per entry.</p><ul>
+<li>Default pods stay under the operator&#x27;s caps ($40 an hour, about $110 a leg); plan for up to $105 (8xH100) or $210 (8xH200).</li>
+<li>Drained Lium keys stopped some evals (2026-10-31); a $30 waste cap followed.</li>
+<li>A pod that went dark cost one miner $56 (2026-11-05); dark hosts are now quarantined for 24 h.</li>
+<li>One entry per hotkey per round (about 3 hours).</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Checks the owner&#x27;s signed training record, scores private windows and sets weights.</p><ul>
+<li>Satellite validators replay the owner&#x27;s signed receipts and never re-score; a full evaluator and the owner&#x27;s main validator need a GPU.</li>
+<li>On 2026-11-06, 9 uids held a permit and 8 had set weights within a tempo; the king (uid 220) holds one but has never set weights.</li>
+</ul></section></div>
+<h2 id="sn-x0">Key numbers</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Item</th><th>Value</th></tr></thead><tbody><tr><td>Emission split</td><td>Owner 18%, validators 41%, miners 41% (chain, 2026-11-06)</td></tr><tr><td>Model</td><td>1.23B-parameter mixture-of-experts, trained from scratch for 7 days (docs)</td></tr></tbody></table></div>
+<h2 id="sn-x1">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Launch and first king</td><td>Docs: lane A starts 2026-10-30 12:00 UTC</td><td>Chain: first king took weights 2026-11-04, about 03:00 UTC; still king on 2026-11-06</td><td>2026-11-06</td></tr><tr><td>GPU providers</td><td>Docs: multi-GPU pods rent on Lium only (MINER.md line 701)</td><td>Code: the same file lists Lium, Shadeform, Vast.ai and Runpod keys (lines 121, 513-515)</td><td>2026-11-06</td></tr><tr><td>Leg cost and speed</td><td>Docs to 2026-10-31: about 2.3 h, $42 a run</td><td>Code: docs now say about $60-125 a leg; 25 legs took a median 4.2 h from training start to settlement wait</td><td>2026-11-06</td></tr></tbody></table></div>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">low confidence, as of 2026-11-06. Not financial advice.</span></div>
+<p class="v2-thesis">Down 15% in 30 days (167 TAO net selling) and 6.5% this week; the last day&#x27;s 6% bounce came with 99 TAO of buying and the king holds, but the shared coldkey, 45% burn and unproven usage still weigh.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.003845 TAO per alpha</dd></div><div><dt>Pool</dt><dd>2,987 TAO, rank 99</dd></div><div><dt>Price, 30 days</dt><dd>-15%, 2026-10-07 to 2026-11-06</dd></div><div><dt>Net flow, 30 days</dt><dd>-167 TAO, 2026-10-07 to 2026-11-06</dd></div><div><dt>Miner pay</dt><dd>about 6.23 TAO a day over 2 earners</dd></div><div><dt>Code activity</dt><dd>last commit 2026-11-06; 277 commits in 30 days (231 code); no release since 2026-09-27</dd></div></dl>
+<div class="v2-trend"><h3>Trend</h3><div class="v2-tbody"><figure class="v2-tfig"><svg class="v2-spark down" viewBox="0 0 240 56" role="img" aria-label="Price in TAO per alpha, 2026-09-28 to 2026-11-06: 0.004742 to 0.003845, -18.9%"><polyline points="5.0,26.4 22.7,20.4 28.6,5.0 40.4,17.5 46.3,24.0 52.2,27.8 58.1,31.1 64.0,18.4 69.9,16.8 81.7,21.5 87.6,25.7 93.5,24.9 99.4,28.9 105.3,34.1 111.2,38.2 122.9,41.3 128.8,45.2 134.7,46.9 140.6,46.4 146.5,49.0 152.4,49.8 164.2,38.5 170.1,33.5 176.0,25.9 181.9,36.0 187.8,32.9 193.7,40.8 199.6,34.9 205.5,34.7 211.4,36.4 217.3,43.0 223.2,47.3 229.1,51.0 235.0,46.2"/><circle cx="235.0" cy="46.2" r="3"/></svg><figcaption><strong>Price</strong> <span class="down">-18.9%</span> <span class="muted">0.004742 to 0.003845 TAO per alpha, 2026-09-28 to 2026-11-06</span></figcaption></figure><dl class="v2-tfacts"><div><dt>Net flow, 30 days</dt><dd><span class="down">-167 TAO</span> <span class="muted">2026-10-07 to 2026-11-06</span></dd></div><div><dt>Verdict history</dt><dd><ol class="v2-vh"><li><span class="muted">2026-11-03</span> <span class="st s-neutral">Neutral</span> <span class="st v-unclear">Unclear</span> <span class="muted">low confidence</span></li><li><span class="muted">2026-11-04</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">low confidence</span></li><li><span class="muted">2026-11-05</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">low confidence</span></li><li><span class="muted">2026-11-06</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">low confidence</span></li></ol></dd></div></dl></div></div>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>Daily commits; v2 king holds since 2026-11-04.</li>
+<li>Miner pay about 6.2 TAO a day, ten times 11-03.</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>Net outflow on 4 of the last 7 days; down 15% in 30 days.</li>
+<li>Both earners share a coldkey; 45% burns.</li>
+<li>No verified usage; 9 of 39 entries failed.</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> Weeks of net inflow, a second independent earner or visible paying use: bullish. A failed king check or more outflow: more bearish.</p>
+<p class="muted">Since the last pass: Unchanged (bearish since 2026-11-04): the 11-06 bounce does not end the 30-day downtrend.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-similar">Similar subnets</h2>
+<div class="v2-sim"><p>By pool size this is <strong>rank 16 of 19</strong> among the subnets grouped as <em>training</em> (what they mainly sell). Pool and price as of 2026-11-06 to 2026-11-07, price in TAO per alpha; the barrier is the easiest miner role.</p><div class="scroll"><table class="v2-table"><thead><tr><th>#</th><th>Subnet</th><th>Pool</th><th>Price</th><th>Miner barrier</th></tr></thead><tbody><tr><td>14</td><td><a href="/bittensor-docs/subnets/102.html">Connito</a> <span class="muted">SN102</span></td><td>3,171 TAO</td><td>0.004688</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>15</td><td><a href="/bittensor-docs/subnets/119.html">CapabilityForge Next</a> <span class="muted">SN119</span></td><td>3,005 TAO</td><td>0.002165</td><td><span class="v2-barrier b-unknown">Unknown</span></td></tr><tr class="me" aria-current="true"><td>16</td><td>Cascade <span class="muted">SN91, this page</span></td><td>2,987 TAO</td><td>0.003845</td><td><span class="v2-barrier b-high">High</span></td></tr><tr><td>17</td><td><a href="/bittensor-docs/subnets/100.html">Cortex</a> <span class="muted">SN100</span></td><td>2,183 TAO</td><td>0.002943</td><td><span class="v2-barrier b-high">High</span></td></tr><tr><td>18</td><td><a href="/bittensor-docs/subnets/40.html">Ralph</a> <span class="muted">SN40</span></td><td>1,196 TAO</td><td>0.001686</td><td><span class="v2-barrier b-medium">Medium</span></td></tr></tbody></table></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-11-06</span> <span class="muted">(GitHub main (b315f07 to c296851), 2026-11-05 to 2026-11-06)</span> Five commits: a fresh v2b image-decoupling vote (no validator signalled the earlier names, per the commit) with direct quantile-head scoring, and an hourly retry of the init pointer whose failure on 2026-10-31 left king checks deferring.</li>
+<li><span class="when">2026-11-05</span> <span class="muted">(Team queue feed and GitHub commit ddb6af1, 2026-11-05)</span> A funded pod went dark for 49 minutes; the miner lost $56, and the entry has since finished.</li>
+<li><span class="when">2026-11-04</span> <span class="muted">(Chain; GitHub king sync (af00b03), 2026-11-04)</span> A v2 king (uid 220) took 50% of validator weight; the burned share fell from 95% to 47%.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Read the v2 miner intro and FAQ; v2 is open.</li>
+<li>Clone the repo, pip install -e &#x27;.[hippius,chain,generation]&#x27;, and commit only through the cascade CLI.</li>
+<li>Write a 32-channel generator, run cascade verify, then cascade iterate (scores you and the king on one pool).</li>
+<li>Register a hotkey on netuid 91 (0.1 TAO), set a Lium key budgeted for the plan-for cost, then cascade submit --yes and cascade status --watch.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>The first v2 king and the old king (uid 31) share one coldkey with 16 of 256 uids; a coldkey is not one person.</li>
+<li>The owner trains, signs and holds the private windows, and has used that power (a king removed 2026-09-28); cascade-audit trusts the recorded scores.</li>
+<li>All 8 weight-setters submit the same row, so chain data cannot show independent scoring.</li>
+<li>The first v2 king came four days after launch; 9 of 39 feed entries failed; kings&#x27; benchmark gains are unverified.</li>
+<li>Chat after 2026-11-01 was not read.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/TensorLink-AI/cascade" rel="noopener noreferrer">GitHub: cascade (code, docs, chain.toml)</a></li>
+<li><a href="https://github.com/TensorLink-AI/cascade/blob/main/docs/MINER.md" rel="noopener noreferrer">Miner guide (quickstart, verdict rules, rewards)</a></li>
+<li><a href="https://github.com/TensorLink-AI/cascade/blob/main/docs/MINER_V2_INCENTIVE_INTRO.md" rel="noopener noreferrer">What changes for miners in v2</a></li>
+<li><a href="https://github.com/TensorLink-AI/cascade/blob/main/docs/V2_FAQ.md" rel="noopener noreferrer">v2 FAQ</a></li>
+<li><a href="https://github.com/TensorLink-AI/cascade/blob/main/agent.md" rel="noopener noreferrer">Competition introduction (agent.md)</a></li>
+<li><a href="https://github.com/TensorLink-AI/cascade/blob/main/AGENTS.md" rel="noopener noreferrer">Instructions for coding agents (AGENTS.md)</a></li>
+<li><a href="https://github.com/TensorLink-AI/cascade/blob/main/docs/INTERFACE.md" rel="noopener noreferrer">Submission contract (INTERFACE.md)</a></li>
+<li><a href="https://github.com/TensorLink-AI/cascade/blob/main/docs/VALIDATOR.md" rel="noopener noreferrer">Validator guide</a></li>
+<li><a href="https://dashboard.cascadesub.net/" rel="noopener noreferrer">Public dashboard</a></li>
+<li><a href="https://s3.hippius.com/cascade-manifests/index.html" rel="noopener noreferrer">Manifest dashboard and receipt index</a></li>
+<li><a href="https://www.cascade.industries/" rel="noopener noreferrer">Cascade site (on-chain identity)</a></li>
+<li><a href="https://huggingface.co/datasets/Tensor-Link/cascade-eval-pool" rel="noopener noreferrer">Retired eval windows (Hugging Face dataset)</a></li>
+<li><a href="https://ephemeris.cascade.industries/" rel="noopener noreferrer">Ephemeris (forecasting API and MCP)</a></li>
+<li><a href="https://ephemeris.cascade.industries/pricing" rel="noopener noreferrer">Ephemeris pricing and models</a></li>
+<li><a href="https://x.com/cascade_sn91" rel="noopener noreferrer">Team X account (linked in chat)</a></li>
+<li><a href="https://t.me/cascade_sn91" rel="noopener noreferrer">Team Telegram group (linked in chat)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 5 sources</summary>
+<ul>
+<li><strong>repo</strong> TensorLink-AI/cascade@c296851 (main, 2026-11-06 22:03 UTC; the five commits after ddb6af1 read through the GitHub compare: chain.toml +20/-10, docs/OPERATOR.md +44/-18, DEC-CA-0067 +157/-12, consensus and trainer code; docs/MINER.md unchanged since the +2 lines of 355fa93): README.md, chain.toml (v2 section), docs/MINER.md (lines 121, 513-515, 701), docs/MINER_V2_INCENTIVE_INTRO.md, docs/V2_FAQ.md, docs/OPERATOR.md, docs/AUDIT.md, decisions/DEC-CA-0067, champions/archive/13-5CMfsDbJuEft/PROVENANCE.json (king sync af00b03, 2026-11-04 04:40 UTC: reign 13, uid 220), commits b315f07, 5c19fa9, 1c8f6c4, 2504dd0, c296851, 469812e, e91e02f, 3238b56, 62ea735, 355fa93, 00a1170, ddb6af1 and the earlier 13 commits 8b29a30..3202de8; MIT licence; REPO line (repo_numbers.py 91): last commit 2026-11-06 22:03 UTC, 277 commits and 231 code commits in 30 days, last release 2026-09-27</li>
+<li><strong>web</strong> Chain read at block 9450411 (2026-11-06 23:43Z UTC): SN91 (cascade): registered 2026-02-27, tempo 360, 256 of 256 uids, commit-reveal on; emission weights burn/recycle/owner/validator/miner = 0/0/18/41/41 % (stored, same values as the chain default), RecycleOrBurn = Burn; uids under the owner hotkey or owner coldkey hold 45.0 % of incentive and 39.5 % of last-epoch emission (a floor); 9 permits, 8 validators have weight rows and all 8 put 50 % on uid 220, 45 % on uid 0, 5 % on uid 31 (uid 139 joined them since 2026-11-05). Hosted dossier, refresh (no setting changed since 2026-11-05, block 9436092), weights and uid reads at that block: uid 220 incentive 50.0 %, uid 31 5.0 % (both ck:9b19a3, 16 uids on that coldkey); uid 220 holds a permit and has never set weights; pool rank 99 of 128 from the shared snapshot of the same block.</li>
+<li><strong>web</strong> Chain read at block 9450411 (2026-11-06 23:43Z): price SN91, 6 samples every 7d from block 9234411 (2026-10-07 23:24Z): price 0.004530 -&gt; 0.003845 TAO per alpha (-15.1%), pool TAO 3170.7 -&gt; 2987.1; over the 5 intervals where the pool change equals flow + protocol: net user flow -167.0 TAO (staked minus unstaked), protocol flow -16.6 TAO, gross volume 16933.2 TAO. Chain read at block 9450411: price SN91, 8 samples every 1d from block 9400011 (2026-10-30 23:42Z): price 0.004111 -&gt; 0.003845 TAO per alpha (-6.5%), pool TAO 3088.3 -&gt; 2987.1; over the 7 intervals: net user flow -71.3 TAO, protocol flow -29.8 TAO, gross volume 4703.7 TAO.</li>
+<li><strong>web</strong> dashboard.cascadesub.net/status/chain.json and submissions.cascadesub.net/v1/queue (both fetched 2026-11-07 00:19 UTC): the team&#x27;s public status and queue feeds (the queue keeps the latest 44 entries; 39 since reveal block 9,395,700: 25 done, 9 failed (8 key faults, 1 payer_account), 5 withdrawn, none running; &#x27;done&#x27; is the leg state, not a verdict); ephemeris.cascade.industries home and pricing re-read 2026-11-07 (CLI ephemeris-cli 0.5.1, no usage figure); all 16 page links answered 200 on 2026-11-07</li>
+<li><strong>msg</strong> #cascade, all messages from 2026-07-09 to 2026-11-01 11:21 UTC (newest message; the chat archive did not answer within 60 s on 2026-11-07, last read 2026-11-02 00:30 UTC), and pinned posts</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/90.html"><small>← Previous</small>SN90 KubeTEE</a><a rel="next" href="/bittensor-docs/subnets/92.html"><small>Next →</small>SN92 REAX</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-11-07. Site built 2026-11-07. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

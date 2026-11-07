@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ingot (SN97) | Bittensor Subnet Docs</title>
+<meta name="description" content="Miners shrink Qwen3.8-27B to 1.75 bits; the copy closest to the original is crowned, and five kings share the pay.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h7">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>97</span><div>
+<h1>Ingot <span class="muted">SN97</span></h1>
+<p class="tagline">Miners shrink Qwen3.8-27B to 1.75 bits; the copy closest to the original is crowned, and five kings share the pay.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>12<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>12<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>15<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-11-02</b><span>last chat</span></li><li class="pw"><b>28,870</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Shipping</b><span>code activity</span></li><li class="pw"><b>101</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-11-06</b><span>last commit</span></li><li class="pw"><b>none</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>model quantization competition</dd>
+<dt>Status</dt><dd>Third design on this netuid after Distil and Albedo: FP8 from 2026-10-16, 1.75-bit q2 from 2026-10-22; rules changed 2026-10-30 and 2026-11-04.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-11-07</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Does closer mean better?</a></li><li><a href="#sn-x1">Docs vs code vs chain</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-similar">Similar subnets</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>miners compress Qwen3.8-27B to 1.75 bits; a copy 3% closer to the original by KL than the king takes the crown.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>the newest five kings get 20% of miner weights each for five days; none crowned since 11-05, so shares lapse from 11-07.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>the five paid kings sit on four coldkeys that hold 129 of 256 uids; so do all 20 checkable q2 kings.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>kings trail the original by 8-26 points on both agent tests; XXVII is the best of eleven.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-high">High barrier</span></h3><p>Builds a ternary GGUF closer to the original than the king and uploads it for one scored duel.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-caution">GPU needed</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>GPU: one 96 GB card to quantize; 2 x 96 GB or an H200 to train (team).</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None. Reference and genesis models are free downloads.</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Registration burn about 0.05 TAO, the floor (2026-11-07); no stake.</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Training skill; the repo&#x27;s PyTorch kit helps; upload is three CLI commands.</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>In practice team-run: it evaluates every entry on its own GPU box and sets weights.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-caution">GPU needed</li><li class="fl fl-caution">Paid service needed</li><li class="fl fl-bad">Permissioned</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>One box of 8 x RTX PRO 6000 (96 GB) with 1 TB RAM: the team&#x27;s.</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>Cloud storage tokens, a search index and a database.</dd></div><div class="v2-need n-unk"><dt>Stake / fees</dt><dd>Not documented.</dd></div><div class="v2-need n-unk"><dt>Setup effort</dt><dd>Not documented: no guide for outside validators.</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-11-07. Not financial advice.</span></div><p>Bearish: 1,771 TAO net outflow in 30 days, price down 25%; no king crowned since 11-05. <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>Ingot is a contest to compress one open model. Miners submit a 1.75-bit copy of Qwen3.8-27B; the copy whose answers stay closest to the full-precision original is crowned king. The Dendrite team runs all scoring.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Miners shrink the reference model into a ternary file (each weight is -1, 0 or +1 with a shared scale). Genesis, the starting file, is Prism ML&#x27;s Ternary Bonsai 2; an entry is genesis with your own weights, no larger, uploaded privately and published only if it wins.</p></div><div><h3>Validators</h3><p>The team&#x27;s validator draws 800 samples per eval (agent runs, reasoning puzzles, science, math), has the reference model answer, then has king and challenger read it and measures each one&#x27;s drift: KL divergence of next-word probabilities. Identical files are rejected.</p></div><div><h3>Incentive</h3><p>A challenger becomes king at once if its KL is 3% lower than the king&#x27;s. The newest five kings, across all rounds, get 20% of miner weights each for five days; a share nobody fills goes to uid 0 and is burned.</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-11-07, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-bad">Owner only</span>The team&#x27;s box scores every entry; no guide exists for outside validators.</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">41.6%</span>Owner cut 18%, unfilled share burns; the owner&#x27;s uid 0 takes 41.6% of emission as validator dividends.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">5 uids</span><span class="v2-sx muted">top 5 hold 100% of incentive.</span> Five king uids hold all incentive, 20% each, on four coldkeys (about 20%, 10%, 10%, 10% of emission).</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Converged</span>All 3 weight-setters put the same five uids on top; one scorer feeds all, so agreement is expected.</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-caution">Partial</span>Miner and validator code are public in one repo, but it has no licence file.</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-high">High barrier</span></h3><p>Builds a ternary GGUF closer to the original than the king and uploads it for one scored duel.</p><ul>
+<li>One .gguf, no larger than genesis (7.2 GB); its metadata and 851 tensors stay, ternary codes only.</li>
+<li>One scored duel per hotkey; a failed validation returns an attempt (3 maximum); a duplicate file spends the hotkey.</li>
+<li>Many hotkeys mean more tries: the king coldkeys hold 66, 40, 15 and 8 uids, none owner-linked (our reading).</li>
+<li>Kit (2026-11-06): miner/ternary loads a king in PyTorch, trains it across a node&#x27;s GPUs and packs a valid file; the team says its loop does not yet improve a king.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>In practice team-run: it evaluates every entry on its own GPU box and sets weights.</p><ul>
+<li>Three hotkeys hold permits (owner uid 0 and two outside coldkeys) and set identical five-uid weights; who runs the evaluator is unknown.</li>
+</ul></section></div>
+<h2 id="sn-x0">Does closer mean better?</h2>
+<p>Winning means closeness to the original, not better answers. Team feed (2026-11-05, unverified): original, start file, kings XVII to XXVII:</p>
+<ul class="v2-list">
+<li>Terminal-Bench 2.1: 71.9; 50.6; 46.1 to 58.4. SWE-bench Multilingual: 71.3; 58.0; 55.3 to 63.7. GPQA Diamond: 85.4; 77.8; 74.2 to 78.3.</li>
+<li>tau3 Banking: 41.2; 28.9; 22.7 to 38.1. MATH-500: 98.0; 96.4; 96.8 to 98.0.</li>
+<li>XXVII tops eleven kings on Terminal-Bench (58.4) and SWE-bench (63.7), 7.8 and 5.7 over the start file; the rest stay within 7 points of it.</li>
+</ul>
+<h2 id="sn-x1">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Win rule, draw</td><td>Docs: KL 3% lower than the king&#x27;s; 800 samples (terminal 300, swe 250, other 250)</td><td>Code: KL_MARGIN 0.03 and the same 800; src/ untouched by the 2 newer commits</td><td>2026-11-07</td></tr><tr><td>Miner kit</td><td>Repo: kit to load, train and pack a q2 file; its loop does not yet improve a king</td><td>Chain: no crown since 11-05; one challenger has run, and lost</td><td>2026-11-07</td></tr></tbody></table></div>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-11-07. Not financial advice.</span></div>
+<p class="v2-thesis">Net outflow in four of five steps (about 17% of the pool) and 350 TAO in the last 7 days; the day to 11-07 was the first inflow of the week (+42 TAO). One challenger has run since XXVII&#x27;s crowning, and no user of the models is named.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.01142 TAO per alpha</dd></div><div><dt>Pool</dt><dd>10,695 TAO, rank 42</dd></div><div><dt>Price, 30 days</dt><dd>-25%, 2026-10-08 to 2026-11-07</dd></div><div><dt>Net flow, 30 days</dt><dd>-1,771 TAO, 2026-10-08 to 2026-11-07</dd></div><div><dt>Miner pay</dt><dd>about 34 TAO per day over the 5 king uids (about 7 each)</dd></div><div><dt>Code activity</dt><dd>last commit 2026-11-06; 101 commits in 30 days; no releases</dd></div></dl>
+<div class="v2-trend"><h3>Trend</h3><div class="v2-tbody"><figure class="v2-tfig"><svg class="v2-spark down" viewBox="0 0 240 56" role="img" aria-label="Price in TAO per alpha, 2026-09-28 to 2026-11-07: 0.0159 to 0.01142, -28.2%"><polyline points="5.0,12.0 22.2,5.0 33.8,9.6 39.5,9.2 45.2,11.8 51.0,16.7 62.5,18.3 74.0,20.0 79.8,19.6 85.5,26.3 91.2,31.8 102.8,40.6 114.2,35.3 120.0,36.6 125.8,38.8 131.5,37.6 143.0,36.8 148.8,41.3 154.5,42.8 160.2,43.4 166.0,43.5 171.8,40.4 177.5,39.8 183.2,43.9 189.0,44.0 194.8,44.0 200.5,46.2 206.2,46.6 212.0,46.4 217.8,48.7 223.5,51.0 235.0,50.0"/><circle cx="235.0" cy="50.0" r="3"/></svg><figcaption><strong>Price</strong> <span class="down">-28.2%</span> <span class="muted">0.0159 to 0.01142 TAO per alpha, 2026-09-28 to 2026-11-07</span></figcaption></figure><dl class="v2-tfacts"><div><dt>Net flow, 30 days</dt><dd><span class="down">-1,771 TAO</span> <span class="muted">2026-10-08 to 2026-11-07</span></dd></div><div><dt>Verdict history</dt><dd><ol class="v2-vh"><li><span class="muted">2026-11-03</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-04</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-05</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-07</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li></ol></dd></div></dl></div></div>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>Team ships (101 commits in 30 days, a new miner kit); 27 q2 kings in 14 days; XXVII leads on both agent tests.</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>Kings trail the original by 8-26 points on agent tests; the paid kings share four coldkeys.</li>
+<li>One eval in 41 hours; unless a king is crowned, XXIII&#x27;s share lapses 11-07 16:30Z and the rest by 11-10.</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> Bullish: a new king, a named customer, outside validators or a week of net inflow. Bearish: another redesign or no challengers.</p>
+<p class="muted">Since the last pass: Still bearish as on 2026-11-05: outflow went on and challengers thinned; one inflow day is not a turn.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-similar">Similar subnets</h2>
+<div class="v2-sim"><p>By pool size this is <strong>rank 7 of 19</strong> among the subnets grouped as <em>training</em> (what they mainly sell). Pool and price as of 2026-11-07, price in TAO per alpha; the barrier is the easiest miner role.</p><div class="scroll"><table class="v2-table"><thead><tr><th>#</th><th>Subnet</th><th>Pool</th><th>Price</th><th>Miner barrier</th></tr></thead><tbody><tr><td>5</td><td><a href="/bittensor-docs/subnets/1.html">Apex</a> <span class="muted">SN1</span></td><td>22,116 TAO</td><td>0.006047</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>6</td><td><a href="/bittensor-docs/subnets/81.html">Reliquary</a> <span class="muted">SN81</span></td><td>16,798 TAO</td><td>0.005357</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr class="me" aria-current="true"><td>7</td><td>Ingot <span class="muted">SN97, this page</span></td><td>10,695 TAO</td><td>0.01142</td><td><span class="v2-barrier b-high">High</span></td></tr><tr><td>8</td><td><a href="/bittensor-docs/subnets/37.html">Aurelius</a> <span class="muted">SN37</span></td><td>7,053 TAO</td><td>0.002614</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>9</td><td><a href="/bittensor-docs/subnets/20.html">Witness</a> <span class="muted">SN20</span></td><td>6,401 TAO</td><td>0.002281</td><td><span class="v2-barrier b-medium">Medium</span></td></tr></tbody></table></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-11-06</span> <span class="muted">(GitHub)</span> Miner kit added to the repo (miner/ternary). In the team&#x27;s own run from XXVII, held-out KL rose 7.5% at the higher rate.</li>
+<li><span class="when">2026-11-06</span> <span class="muted">(team dashboard)</span> Eval 328 (uid 110) lost: its KL was 7.9% above King XXVII&#x27;s; the only eval since 2026-11-05 09:28Z.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Clone the repo; in the miner env template set your keys and netuid 97.</li>
+<li>Register with &#x27;ingot register&#x27; (burn about 0.05 TAO on 2026-11-07).</li>
+<li>Quantize or retrain from the q2 genesis file, keeping its header and tensor layout (miner/ternary can load and pack it).</li>
+<li>Run &#x27;ingot check-model --path model.gguf&#x27; until every check passes.</li>
+<li>Run &#x27;ingot submit-private --path model.gguf&#x27;; one scored duel per hotkey (about 45 minutes; queue empty).</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>The contest changed four times since 2026-10-16; the team promised notice before q2 ends but gave no date (chat after 2026-11-02 unread).</li>
+<li>The team scores everything on its own box; outside validators have no guide and three permit holders send identical weights.</li>
+<li>KL scores of different kings are not comparable: each challenger gets its own 800-sample draw.</li>
+<li>Benchmarks are the team&#x27;s own, in two settings since 2026-10-31. No licence file.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://www.theingot.ai/" rel="noopener noreferrer">Website and dashboard</a></li>
+<li><a href="https://github.com/DendriteLabs/ingot" rel="noopener noreferrer">GitHub</a></li>
+<li><a href="https://huggingface.co/dendriteholdings/Ingot-genesis-27B-Q2" rel="noopener noreferrer">Genesis model (q2)</a></li>
+<li><a href="https://huggingface.co/datasets/dendriteholdings/ingot_corpus" rel="noopener noreferrer">Dataset</a></li>
+<li><a href="https://huggingface.co/dendriteholdings" rel="noopener noreferrer">Hugging Face organisation (kings)</a></li>
+<li><a href="https://huggingface.co/prism-ml/Ternary-Bonsai-2-27B-gguf" rel="noopener noreferrer">Starting model (Bonsai 2)</a></li>
+<li><a href="https://x.com/IngotSubnet" rel="noopener noreferrer">Team X account</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 9 sources</summary>
+<ul>
+<li><strong>repo</strong> DendriteLabs/ingot@6702d97 (2026-11-06): 2 commits since aeddd50 read by GitHub compare (file list; patches of llms.txt, README.md, miner/ternary/README.md, train.py and pyproject.toml); rule change b7ff725 of 2026-11-04 and the 2026-11-05 box commits read earlier; 101 commits in 30 days</li>
+<li><strong>web</strong> https://www.theingot.ai/api/state.json (read 2026-11-07 02:24Z; kings, reign, queue, 200 evals), /api/evals/328.json (800 sample rows), /api/benchmarks.json (updated 2026-11-05 14:40Z, same at the read) and /api/noise.json</li>
+<li><strong>web</strong> Chain read at block 9451179 (2026-11-07 02:17Z UTC): SN97 (Ingot): registered 2026-03-13, tempo 360, 256 of 256 uids, commit-reveal off; emission weights burn/recycle/owner/validator/miner = 0/0/18/41/41 % (stored, same values as the chain default), RecycleOrBurn = Burn; uids under the owner hotkey or owner coldkey hold 0 % of incentive and 41.57 % of last-epoch emission (a floor); 3 validators have weight rows, on average 0 % of weight goes to uid 0. At the same block: 3 validator permits, 3 weight rows (top target uid 8), incentive on 5 uids at 20.0% each, uid 0 (owner hotkey) 41.6% of last-epoch emission as dividends, registration burn 0.05 TAO.</li>
+<li><strong>web</strong> Chain read at block 9451179 (2026-11-07 02:17Z UTC), compared with block 9436092 (2026-11-05 00:00Z UTC): SN97: no setting changed in 33 checked items; Burn differs (moves with demand); emission split unchanged; pool 10688.56 -&gt; 10695.21 TAO.</li>
+<li><strong>web</strong> Chain read at block 9451179: coldkey and hotkey tags of the uids of the 21 q2 kings whose hotkey was still at its uid on 2026-11-05 and of validators 0, 28 and 219 (uid command): four coldkeys hold the five paid kings (66, 40, 15 and 8 uids), none owner-linked; 20 of the 21 kings&#x27; hotkeys are still at their uid, all 20 under those four coldkeys; King III&#x27;s uid was re-registered on 2026-11-05 23:35Z to a hotkey on another coldkey; the other 6 kings&#x27; hotkeys had left their uid by 2026-11-05 and were not re-read</li>
+<li><strong>web</strong> Shared snapshot of all subnets at block 9451179 (2026-11-07 02:17Z): pool rank 42 of 128 subnets (root excluded)</li>
+<li><strong>web</strong> Chain read at block 9451179 (2026-11-07 02:17Z): price SN97, 6 samples every 7d from block 9235179 (2026-10-08 01:58Z): price 0.015187 -&gt; 0.011418 TAO per alpha (-24.8%), pool TAO 11434.0 -&gt; 10695.2; over the 5 intervals where the pool change equals flow + protocol: net user flow -1770.7 TAO (staked minus unstaked), protocol flow +1031.9 TAO, gross volume 23299.5 TAO. And 8 samples every 1d from block 9400779 (2026-10-31 02:15Z): price 0.012120 -&gt; 0.011418 TAO per alpha (-5.8%), pool TAO 10831.6 -&gt; 10695.2; over the 7 intervals where the pool change equals flow + protocol: net user flow -349.9 TAO (staked minus unstaked), protocol flow +213.4 TAO, gross volume 2278.8 TAO.</li>
+<li><strong>web</strong> https://huggingface.co/api/models/dendriteholdings/Ingot-XXVII-27B-Q2 and sibling model pages (downloads read 2026-11-07 02:26); link check of the page&#x27;s seven linksZ</li>
+<li><strong>msg</strong> #97-ingot 2026-10-31 to 2026-11-02 02:51Z (13 messages, whole window read in pass 3); the archive timed out on 2026-11-07, later chat unread</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/96.html"><small>← Previous</small>SN96 Verathos</a><a rel="next" href="/bittensor-docs/subnets/98.html"><small>Next →</small>SN98 NeverPlayAlone</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-11-07. Site built 2026-11-07. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

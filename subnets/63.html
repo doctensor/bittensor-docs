@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Enigma (SN63) | Bittensor Subnet Docs</title>
+<meta name="description" content="Prize subnet: first valid RSA or quantum-circuit solver wins the pool; winning code goes open source">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h9">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>63</span><div>
+<h1>Enigma <span class="muted">SN63</span></h1>
+<p class="tagline">Prize subnet: first valid RSA or quantum-circuit solver wins the pool; winning code goes open source</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl4"><b>3.1<small>/day</small></b><span>last 7 d</span></li><li class="pl4"><b>6.1<small>/day</small></b><span>days 8-30</span></li><li class="pl4"><b>4.7<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-31</b><span>last chat</span></li><li class="pw"><b>906</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Shipping</b><span>code activity</span></li><li class="pw"><b>4</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-10-27</b><span>last commit</span></li><li class="pw"><b>none</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>cryptography and quantum prize challenges</dd>
+<dt>Status</dt><dd>Active on 2026-11-07: 11 of 13 milestones solved. The 580-bit RSA milestone ($10,000) has 0 submissions; the 560-bit prize was paid on 2026-11-02.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-11-07</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Milestones</a></li><li><a href="#sn-x1">Prize payouts</a></li><li><a href="#sn-x2">Terms before you submit</a></li><li><a href="#sn-x3">Docs vs code vs chain</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-similar">Similar subnets</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>11 prize milestones solved since June 2026 ($157,500); winners are released as open source.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>the miner half of emission (about 12 TAO a day) goes to treasury sinks; no miner is paid by weight.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>a miner needs a CPU box and a 0.1 TAO fee per try; the hard part is the solver.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>no licence revenue yet; a licensing deal is only being explored.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>emission was switched off 2026-09-02 to 2026-09-09; the team blames an outside party.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-low">Low barrier</span></h3><p>Writes a solver for an open milestone; only the first solution to pass validation wins.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-no"><dt>Hardware</dt><dd>No GPU; 1 core, 8 GB RAM, 100 GB SSD</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Burn 0.0005 TAO (2026-11-07); 0.1 TAO per submission</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Docker and Python</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Runs submitted solvers, sets weights on the sinks and votes on payouts; the team whitelists voters.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-caution">GPU needed</li><li class="fl fl-good">No paid service</li><li class="fl fl-bad">Permissioned</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>GPU with 96 GB VRAM, 26 cores, 96 GB RAM, 50 GB SSD</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None named</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Stake 1,000 TAO to set weights; burn 0.0005 TAO; 0.5-1 TAO EVM gas</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Docker buildx, NVIDIA toolkit, EVM wallet, admin whitelisting</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-neutral">Neutral</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">low confidence, as of 2026-11-07. Not financial advice.</span></div><p>Price is down 22% since 10-29 as the prize-win inflow reverses; revenue is unproven. <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>Enigma (SN63), run by qBitTensor Labs, is a prize subnet. It posts hard problems: factor large RSA numbers (with Terra Quantum) or find the hidden peak of an obfuscated quantum circuit (with BlueQubit). The first valid solution wins the prize and is released as open source; miner emission funds the prize pool, not per-miner pay.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Build a Docker solver, test it with the repo&#x27;s workbench, then submit the zip with the mine-enigma CLI or the web form; the CLI also pays the TAO fee on chain. The solver runs on the validator&#x27;s machine (4 hour limit). The first solution to pass all validation runs wins; validators take one submission at a time (team, 2026-10-30).</p></div><div><h3>Validators</h3><p>Validators fetch submissions, check the fee proof and run each solution in Docker (no network) on a 96 GB GPU box. A winner must succeed in 3 runs (5 for level 4). Validators also vote on prize payouts; 11 hold permits and 9 set weights (2026-11-07).</p></div><div><h3>Incentive</h3><p>Validators point weight at one of 5 treasury sink hotkeys, named by the team platform; on 2026-11-07 100% of incentive sat on one (uid 28). The miner share (41% of emission, about 2,940 alpha or 12 TAO a day) piles up in the vault and pays prizes; the owner takes 18% and validators 41%.</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-11-07, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-caution">Whitelisted</span>The treasury admin whitelists voters and miners serve 3 trusted validators; 9 of 11 permit holders set weights.</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">0%</span>Owner uid holds 0.0% of emission (floor); owner cut 18%, RecycleOrBurn Burn; the owner hotkey is the burn sink.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">12 uids</span><span class="v2-sx muted">top 5 hold 100% of incentive.</span> 12 uids hold incentive, 100% of it on one treasury sink (uid 28); prizes, not per-miner pay.</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Converged</span>All 9 weight setters top-weight a treasury sink (uid 28 or 87); the platform names it, so agreement is by design.</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-good">Open</span>Miner and validator code is public (MIT); the platform that names sinks and judges wins is closed.</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-low">Low barrier</span></h3><p>Writes a solver for an open milestone; only the first solution to pass validation wins.</p><ul>
+<li>Submit with the mine-enigma CLI or the web form (the 560-bit winner used the web wallet). The 0.1 TAO fee was about $23 on 2026-11-07.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Runs submitted solvers, sets weights on the sinks and votes on payouts; the team whitelists voters.</p><ul>
+<li>Voting needs the treasury admin to whitelist your EVM address; miners offer work only to 3 hard-coded validator hotkeys unless overridden (code).</li>
+<li>One hotkey holds 66% of dividends (chain, 2026-11-07; 92% on 11-06); it sent the 560-bit payout on 2026-11-02 (governor page). A second holds 17%.</li>
+</ul></section></div>
+<h2 id="sn-x0">Milestones</h2>
+<ul class="v2-list">
+<li>Breaking RSA: 7 of 9 solved, $100,000 in prizes (latest: 560-bit, 2026-10-27). Open, with 0 submissions each: 580-bit ($10,000, live since 2026-10-30) and 1024-bit ($250,000, since 2026-09-01).</li>
+<li>Hardening Quantum Proof: levels 1 to 4 solved, $57,500; the next level waits on BlueQubit. 262 submissions in total.</li>
+</ul>
+<h2 id="sn-x1">Prize payouts</h2>
+<ul class="v2-list">
+<li>A prize is fixed in SN63 alpha (560-bit: 14,340 alpha for $20k, about 61 TAO at today&#x27;s price); paying it needs a validator vote (60% approval, 50% quorum, about 3 days, 1 day timelock).</li>
+<li>Thirteen payouts have executed. Nine matched milestones 4 to 7 days after the win (by 2026-10-23); the 560-bit prize (won 2026-10-27) was paid on 2026-11-02. The 480-bit vote failed on 2026-07-06; the team paid from its own wallet.</li>
+</ul>
+<h2 id="sn-x2">Terms before you submit</h2>
+<ul class="v2-list">
+<li>Every submission assigns the author&#x27;s own components to qBitTensor Labs; winners are released under AGPL-3.0 and the lab may license them commercially. Unclaimed prizes are forfeited after 90 days.</li>
+</ul>
+<h2 id="sn-x3">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Pool cap</td><td>Team: pools will be capped, overflow burned</td><td>Chain: the burn sink gets no weight</td><td>2026-11-07</td></tr><tr><td>Total paid out</td><td>Site: $157,500 (adds every solved prize)</td><td>Chain: 13 payouts to 11-02; team API lists none for 560-bit</td><td>2026-11-07</td></tr></tbody></table></div>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-neutral">Neutral</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">low confidence, as of 2026-11-07. Not financial advice.</span></div>
+<p class="v2-thesis">Price is up 7% in 30 days and net flow is +388 TAO, but one week (+2,117 TAO, 10-22 to 10-29) supplied it; 1,479 TAO has left since.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.004228 TAO per alpha</dd></div><div><dt>Pool</dt><dd>11,238 TAO, rank 41</dd></div><div><dt>Price, 30 days</dt><dd>+7%, 2026-10-08 to 2026-11-07</dd></div><div><dt>Net flow, 30 days</dt><dd>+388 TAO, 2026-10-08 to 2026-11-07</dd></div><div><dt>Miner pay</dt><dd>None by weight; about 12.4 TAO per day goes to the treasury sinks</dd></div></dl>
+<div class="v2-trend"><h3>Trend</h3><div class="v2-tbody"><figure class="v2-tfig"><svg class="v2-spark up" viewBox="0 0 240 56" role="img" aria-label="Price in TAO per alpha, 2026-09-28 to 2026-11-07: 0.004108 to 0.004228, +2.9%"><polyline points="5.0,42.1 16.5,43.2 22.2,45.1 33.8,44.9 39.5,46.0 45.2,46.0 56.8,46.1 62.5,46.2 74.0,45.5 79.8,46.2 85.5,44.3 97.0,46.7 102.8,48.9 114.2,49.8 120.0,49.8 125.8,51.0 137.2,51.0 143.0,50.6 154.5,28.0 160.2,15.5 166.0,5.0 177.5,7.4 183.2,8.9 194.8,19.1 200.5,26.7 206.2,30.8 212.0,32.0 223.5,27.6 229.2,27.7 235.0,39.0"/><circle cx="235.0" cy="39.0" r="3"/></svg><figcaption><strong>Price</strong> <span class="up">+2.9%</span> <span class="muted">0.004108 to 0.004228 TAO per alpha, 2026-09-28 to 2026-11-07</span></figcaption></figure><dl class="v2-tfacts"><div><dt>Net flow, 30 days</dt><dd><span class="up">+388 TAO</span> <span class="muted">2026-10-08 to 2026-11-07</span></dd></div><div><dt>Verdict history</dt><dd><ol class="v2-vh"><li><span class="muted">2026-11-03</span> <span class="st s-neutral">Neutral</span> <span class="st v-unclear">Unclear</span> <span class="muted">low confidence</span></li><li><span class="muted">2026-11-05</span> <span class="st s-neutral">Neutral</span> <span class="st v-unclear">Unclear</span> <span class="muted">low confidence</span></li><li><span class="muted">2026-11-06</span> <span class="st s-neutral">Neutral</span> <span class="st v-unclear">Unclear</span> <span class="muted">low confidence</span></li><li><span class="muted">2026-11-07</span> <span class="st s-neutral">Neutral</span> <span class="st v-unclear">Unclear</span> <span class="muted">low confidence</span></li></ol></dd></div></dl></div></div>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>11 of 13 milestones solved, 580-bit live</li>
+<li>30-day net flow still positive (+388 TAO)</li>
+<li>560-bit prize paid</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>No licence revenue; deal only explored</li>
+<li>70% of the 10-29 inflow is out</li>
+<li>580-bit and 1024-bit have 0 submissions</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> Bullish: a signed licensing deal or paying sponsors. Bearish: 30-day net flow turning negative, another emission halt, or a pool cap that burns emission.</p>
+<p class="muted">Since the last pass: Unchanged (neutral), weaker: the 11-05 inflow reversed; 70% of the 10-29 inflow is out.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-similar">Similar subnets</h2>
+<div class="v2-sim"><p>By pool size this is <strong>rank 1 of 6</strong> among the subnets grouped as <em>security</em> (what they mainly sell). Pool and price as of 2026-11-06 to 2026-11-07, price in TAO per alpha; the barrier is the easiest miner role.</p><div class="scroll"><table class="v2-table"><thead><tr><th>#</th><th>Subnet</th><th>Pool</th><th>Price</th><th>Miner barrier</th></tr></thead><tbody><tr class="me" aria-current="true"><td>1</td><td>Enigma <span class="muted">SN63, this page</span></td><td>11,238 TAO</td><td>0.004228</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr><td>2</td><td><a href="/bittensor-docs/subnets/61.html">RedTeam</a> <span class="muted">SN61</span></td><td>9,883 TAO</td><td>0.005327</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr><td>3</td><td><a href="/bittensor-docs/subnets/32.html">It&#x27;s AI</a> <span class="muted">SN32</span></td><td>6,604 TAO</td><td>0.002501</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>4</td><td><a href="/bittensor-docs/subnets/104.html">TAOStatus</a> <span class="muted">SN104</span></td><td>5,832 TAO</td><td>0.003992</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr><td>5</td><td><a href="/bittensor-docs/subnets/87.html">Provenonce (Proof of Assurance)</a> <span class="muted">SN87</span></td><td>1,366 TAO</td><td>0.002724</td><td><span class="v2-barrier b-high">High</span></td></tr></tbody></table></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-11-02</span> <span class="muted">(qbittensorlabs.com governor page)</span> The 560-bit prize (14,340 alpha) was paid 5.8 days after the win; the team API still lists none.</li>
+<li><span class="when">2026-10-30</span> <span class="muted">(#63-enigma; qbittensorlabs.com)</span> 580-bit RSA milestone went live ($10,000; 0 submissions on 11-07). Team: first means the first to pass all validation runs; earlier solutions on the site may be built on.</li>
+<li><span class="when">2026-10-27</span> <span class="muted">(#63-enigma; qbittensorlabs.com)</span> 560-bit RSA milestone won ($20k, 30 submissions).</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Check the team site for open milestones (580-bit and 1024-bit) and prizes; the repo README lags it.</li>
+<li>Clone qbittensor-labs/enigma, run pip install -e . and read the workbench README; past winners&#x27; solvers are public.</li>
+<li>Build a Docker solver and test it with enigma-workbench test &lt;challenge&gt; --solution &lt;dir&gt;; it mirrors the validator and is the only free test.</li>
+<li>Register a hotkey on netuid 63 (burn 0.0005 TAO), run the miner and submit with mine-enigma; the 0.1 TAO fee is paid after the upload.</li>
+<li>Validators: follow VALIDATORS.md and ask the treasury admin to whitelist you.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Chain figures are one block (2026-11-07); the emission sink rotates between 5 hotkeys (uid 28 now, uid 87 on 11-06), so they show where weight sits, not intent.</li>
+<li>The pool cap looks off only because the burn sink got no weight (10-23, 10-30, 10-31); validators&#x27; settings are not public.</li>
+<li>Team-site dollar figures are team-reported; vault and committed-wallet alpha last read 2026-10-23.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/qbittensor-labs/enigma" rel="noopener noreferrer">GitHub</a></li>
+<li><a href="https://www.qbittensorlabs.com/enigma" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://www.qbittensorlabs.com/enigma/challenges/breaking-rsa" rel="noopener noreferrer">Breaking RSA challenge page</a></li>
+<li><a href="https://www.qbittensorlabs.com/enigma/challenges/peaked-circuits" rel="noopener noreferrer">Hardening Quantum Proof challenge page</a></li>
+<li><a href="https://www.qbittensorlabs.com/enigma/treasury" rel="noopener noreferrer">Treasury (config, balances, payouts)</a></li>
+<li><a href="https://www.qbittensorlabs.com/enigma/validators" rel="noopener noreferrer">Validators and execution limits (team site)</a></li>
+<li><a href="https://www.qbittensorlabs.com/enigma/rules" rel="noopener noreferrer">Competition rules</a></li>
+<li><a href="https://github.com/qbittensor-labs/breaking-rsa-solutions" rel="noopener noreferrer">Breaking RSA winning solutions</a></li>
+<li><a href="https://github.com/qbittensor-labs/hqp-solutions" rel="noopener noreferrer">Hardening Quantum Proof winning solutions</a></li>
+<li><a href="https://www.qbittensorlabs.com/news/emission-updates-and-whats-next" rel="noopener noreferrer">Team article on the emission halt and what is next</a></li>
+<li><a href="https://www.qbittensorlabs.com/next" rel="noopener noreferrer">Upcoming changes (team site)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 7 sources</summary>
+<ul>
+<li><strong>repo</strong> qbittensor-labs/enigma@9913c93 (2026-10-27, version 2.1.10, checked 2026-11-07): README.md, VALIDATORS.md, VOTING.md, min_compute.yml, neurons/validator.py, qbittensor/miner/README.md, qbittensor/utils/{treasury_cap,treasury_sinks,burn_sinks,trusted_validators}.py; hqp-solutions@9573dce (2026-10-05); breaking-rsa-solutions@b24036d (2026-09-02)</li>
+<li><strong>msg</strong> #63-enigma, 2026-07-06 and 2026-09-02 to 2026-11-02 (the chat archive was unavailable on 2026-11-07)</li>
+<li><strong>web</strong> Chain read at block 9452595 (2026-11-07 07:00Z UTC): SN63 (Enigma): registered 2025-02-08, tempo 360, 256 of 256 uids, commit-reveal on; emission weights burn/recycle/owner/validator/miner = 0/0/18/41/41 % (stored, same values as the chain default), RecycleOrBurn = Burn; uids under the owner hotkey or owner coldkey hold 0 % of incentive and 0 % of last-epoch emission (a floor); 9 validators have weight rows, on average 0 % of weight goes to uid 0.</li>
+<li><strong>web</strong> Chain read at block 9452595 (2026-11-07 07:00Z): price SN63, 6 samples every 7d from block 9236595 (2026-10-08 06:41Z): price 0.003957 -&gt; 0.004228 TAO per alpha (+6.9%), pool TAO 10787.3 -&gt; 11238.3; over the 5 intervals where the pool change equals flow + protocol: net user flow +387.8 TAO (staked minus unstaked), protocol flow +63.1 TAO, gross volume 30244.7 TAO. Last 3 days (6h steps from 2026-11-04 07:00Z): price -5.6%, net user flow -328.5 TAO; the +230 TAO net inflow of one 6-hour step on 11-05 was offset by net outflows in two 6-hour steps on 11-06 (-245 and -253 TAO). Pool rank 41 of 128 ranked subnets from the shared snapshot at block 9452595 (2026-11-07 07:00Z).</li>
+<li><strong>web</strong> Chain read at block 9452595 (2026-11-07 07:00Z UTC), compared with block 9443292 (2026-11-06 00:00Z UTC): SN63: no setting changed in 33 checked items; emission split unchanged; pool 11798.27 -&gt; 11238.3 TAO.</li>
+<li><strong>web</strong> Chain read at block 9030000 (2026-09-09 12:39Z): SN63 registered 2025-02-08 23:56Z (block 4885578); the netuid was registered 3 times, latest replacing the registration of 2025-01-30 01:38Z; owner coldkey changed 0 time(s); owner hotkey changed 0 time(s); SubnetEmissionEnabled now True, flipped 2 time(s) (last 2026-09-09 12:16Z, block 9029889); chain identity changed 0 time(s); sampled every 1d over current registration, a change reverted inside one step is not seen. Flag flips on SN63: block 8979964 (2026-09-02 13:39Z) True -&gt; False; block 9029889 (2026-09-09 12:16Z) False -&gt; True; another subnet&#x27;s flag flipped back on in the same block.</li>
+<li><strong>web</strong> https://www.qbittensorlabs.com/enigma and its Breaking RSA and Hardening Quantum Proof pages, /enigma/rules (updated 2026-07-14), /enigma/treasury and the governor page (14 proposals, read 2026-11-05), /news, /next and /news/emission-updates-and-whats-next, plus the site&#x27;s public challenges list (milestones, prizes, submission counts), plus /enigma/validators, read 2026-10-21 to 2026-11-07 (public challenges list, 2026-11-07; governor page, 2026-11-05)</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/62.html"><small>← Previous</small>SN62 Ridges</a><a rel="next" href="/bittensor-docs/subnets/64.html"><small>Next →</small>SN64 Chutes</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-11-07. Site built 2026-11-07. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

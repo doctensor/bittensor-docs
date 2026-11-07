@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>REAX (SN92) | Bittensor Subnet Docs</title>
+<meta name="description" content="Decision-model inference: miners serve pinned small models, validators re-check answers; contests paused after Oct 30.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h20">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>92</span><div>
+<h1>REAX <span class="muted">SN92</span></h1>
+<p class="tagline">Decision-model inference: miners serve pinned small models, validators re-check answers; contests paused after Oct 30.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>49<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>41<small>/day</small></b><span>days 8-30</span></li><li class="pl3"><b>0.72<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-11-02</b><span>last chat</span></li><li class="pw"><b>1,332</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Shipping</b><span>code activity</span></li><li class="pw"><b>101</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-11-04</b><span>last commit</span></li><li class="pw"><b>2026-10-29</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>Decision-model inference and model competitions</dd>
+<dt>Status</dt><dd>As of 2026-11-07 mining pays (242 miners in the feed), but 62% of the miner part is burned.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-11-07</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Contest pause and the burned share</a></li><li><a href="#sn-x1">Docs vs code vs chain</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-similar">Similar subnets</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>customers call decision models through decisionmodels.io; no traffic or revenue figure is public.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>203 uids earn about 0.13 TAO a day each, gross; the price is up 58% since 6 Nov, mostly one buy.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>the owner uid&#x27;s burned share of incentive rose from 17% on 5 Nov to 62% on 7 Nov; no other uid holds over 1%.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>contests paused, no restart date; champion pay runs out by day 7.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>join with Docker, one NVIDIA GPU (24 GB+, 48 GB+ for s1-pro) and an open port; a self-check must pass.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Inference miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Serves a pinned model on its own hardware; paid for verified speed and volume.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-caution">GPU needed</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>GPU 24 GB+ (s1-fast), 48 GB+ (s1-pro), 8 GB (s1-lite) or CPU only</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None (mammoth-1 weights are public)</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Registration burn 0.70 TAO on 2026-11-07 (floor 0.5); new UID immune about 24 h</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Docker with NVIDIA toolkit, one open port, self-check; hours</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Re-computes miner answers on its own model copy and sets weights.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-caution">GPU needed</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>GPU 80-96 GB for the s1-pro reference model (docs, not updated for mammoth-1); 8 cores, 32 GB RAM</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Permit (chain stake threshold 1,000 TAO); registration burn 0.70 TAO</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Docker, two reference model servers, upgrade each release; a day</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div><div class="v2-role"><h3>Contest entrant <span class="v2-barrier b-high">High barrier</span></h3><p>Submitted an engine image or a fine-tuned model; both tracks paused, no restart date.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-caution">GPU needed</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>A GPU to build and test; the team measures engines on an RTX PRO 6000 (96 GB)</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>A registered hotkey holds each entry (burn 0.70 TAO on 2026-11-07)</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Weeks of engineering or training; open-source licence needed for an award</dd></div></dl><a class="v2-more" href="#sn-role-2">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-neutral">Neutral</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">low confidence, as of 2026-11-07. Not financial advice.</span></div><p>One 6-hour buy lifted the price 47%; burned share now 62% <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>REAX is run by a German company that also sells a decision-model API. A decision model is a small AI model that answers one narrow, typed question fast. Miners serve pinned models; validators re-check the answers. Both contests are paused (team).</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Inference miners serve one pinned model behind a signed endpoint (pools s1-fast, s1-pro, s1-lite). Pay rises with verified throughput up to a per-hotkey cap. Contest miners submitted an engine image or a fine-tuned model; both tracks are paused.</p></div><div><h3>Validators</h3><p>The team validator sends each miner 8 items about every two minutes and recomputes some itself. Wrong answers or swapped models score zero; speed is a fifth of the score. Three more permit holders set weights.</p></div><div><h3>Incentive</h3><p>Chain split: 26% owner (18% until 2026-10-30), 41% validators, 33% miners. Team rule: of the miner part inference gets 30% (40% until 2 Nov), the engine contest 20%, the generalist contest 30%; unpaid shares are burned.</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-11-07, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-good">Open</span>4 permits, all set weights; the team validator is the owner hotkey. Stake threshold 1,000 TAO.</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">78.7%</span>Owner hotkey (the team validator) takes 78.7% of emission, 95.7% of dividends; owner cut 26%; RecycleOrBurn is Burn.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">203 uids</span><span class="v2-sx muted">top 5 hold 65.4% of incentive.</span> 203 uids earn (169 an hour earlier); the top 5 hold 65.4% of incentive, 61.8% of it on the owner uid (burned).</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Converged</span>All 4 validators top-weight the owner uid (61-62%; 55-59% on 6 Nov); a deterministic scorer makes honest ones agree.</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-good">Open</span>Miner and validator are public (MIT); the team validator runs a newer build than the latest public release.</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Inference miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Serves a pinned model on its own hardware; paid for verified speed and volume.</p><ul>
+<li>Only exact pinned weights count. Needs 4 cores, 32 GB RAM and a public IP.</li>
+<li>Validators probe around the clock: a GPU shared with other work loses pay (team).</li>
+<li>Team: capacity exceeds demand; capacity above a demand target goes unpaid.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Re-computes miner answers on its own model copy and sets weights.</p><p class="muted">No further detail found in the sources.</p></section><section class="v2-rdetail" id="sn-role-2"><h3>Contest entrant <span class="v2-barrier b-high">High barrier</span></h3><p>Submitted an engine image or a fine-tuned model; both tracks paused, no restart date.</p><ul>
+<li>A champion&#x27;s pay runs in full 3 days from its award approval, then falls to zero by day 7 (team).</li>
+<li>A 300-item dev set with answers is public (eval-v5/devset-v1).</li>
+</ul></section></div>
+<h2 id="sn-x0">Contest pause and the burned share</h2>
+<ul class="v2-list">
+<li>Both contests paused since 2026-10-30, not closed. The owner uid, which gets the burned part, rose from 17% of incentive on 5 Nov 00:07Z to 55% on 6 Nov and 62% on 7 Nov.</li>
+<li>Uids 83, 114, 240 and 18, which held 10-12% each on 5 Nov, have all fallen to a floor of 0.04-0.23%. Cause unconfirmed; it fits the FAQ run-out (zero by day 7).</li>
+<li>Chain: owner share 26% (was 18%), miners 33% (was 41%) since 2026-10-30; the team says the extra 8 points are locked (one 230.55 alpha lock on chain).</li>
+</ul>
+<h2 id="sn-x1">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Burn and lock</td><td>FAQ 3.8: unpaid shares burned; chat: 8 owner points locked</td><td>Chain: 26/41/33 split; 62% of miner part withheld (17% on 11-05)</td><td>2026-11-07</td></tr><tr><td>Inference share and notice</td><td>FAQ 3.8: 30%; changes need 24 h notice, a new inference model none</td><td>Chain: no direct read; repo docs agree (11-04)</td><td>2026-11-07</td></tr><tr><td>Per-hotkey speed caps</td><td>Team feed: 1,280/s and 320/s</td><td>Code: 2,560/s and 640/s; FAQ 3.5 agrees</td><td>2026-11-07</td></tr><tr><td>Validator version</td><td>Team feed: post8.14</td><td>Code: newest public release is post8.1 (10-29)</td><td>2026-11-07</td></tr></tbody></table></div>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-neutral">Neutral</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">low confidence, as of 2026-11-07. Not financial advice.</span></div>
+<p class="v2-thesis">Price 0.0287: +2% over 14 days, +58% since 6 Nov, mostly one 6-hour buy of 790 TAO. No valuation call.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.0287 TAO per alpha</dd></div><div><dt>Pool</dt><dd>4,375 TAO, rank 90 of 128</dd></div><div><dt>Price, 30 days</dt><dd>not read; 2026-10-24 to 2026-11-07: +2%</dd></div><div><dt>Net flow, 30 days</dt><dd>not read; 2026-10-24 to 2026-11-07: +513 TAO</dd></div><div><dt>Miner pay</dt><dd>0.128 TAO per day on average (26.1 TAO per day over 203 uids)</dd></div><div><dt>Miner pay outside top 5</dt><dd>0.119 TAO per day on average (23.6 TAO per day over 198 uids outside the top 5)</dd></div><div><dt>Code activity</dt><dd>last commit 2026-11-04; 116 commits in 30 days; last release 2026-10-29</dd></div></dl>
+<div class="v2-trend"><h3>Trend</h3><div class="v2-tbody"><figure class="v2-tfig"><svg class="v2-spark up" viewBox="0 0 240 56" role="img" aria-label="Price in TAO per alpha, 2026-10-09 to 2026-11-07: 0.004516 to 0.0288, +537.7%"><polyline points="5.0,51.0 12.9,51.0 28.8,51.0 44.7,33.6 52.6,13.9 68.4,9.0 76.4,5.0 84.3,13.3 100.2,14.8 108.1,19.5 124.0,23.9 131.9,24.8 139.8,29.4 147.8,31.0 155.7,33.7 163.6,30.6 171.6,30.7 179.5,26.7 187.4,27.4 195.3,27.8 203.3,28.6 219.1,29.8 227.1,33.9 235.0,20.7"/><circle cx="235.0" cy="20.7" r="3"/></svg><figcaption><strong>Price</strong> <span class="up">+537.7%</span> <span class="muted">0.004516 to 0.0288 TAO per alpha, 2026-10-09 to 2026-11-07</span></figcaption></figure><dl class="v2-tfacts"><div><dt>Verdict history</dt><dd><ol class="v2-vh"><li><span class="muted">2026-11-03</span> <span class="st s-neutral">Neutral</span> <span class="st v-unclear">Unclear</span> <span class="muted">low confidence</span></li><li><span class="muted">2026-11-05</span> <span class="st s-neutral">Neutral</span> <span class="st v-unclear">Unclear</span> <span class="muted">low confidence</span></li><li><span class="muted">2026-11-06</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">low confidence</span></li><li><span class="muted">2026-11-07</span> <span class="st s-neutral">Neutral</span> <span class="st v-unclear">Unclear</span> <span class="muted">low confidence</span></li></ol></dd></div></dl></div></div>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>14-day net inflow +513 TAO; pool rank 94 to 90</li>
+<li>566 coldkeys; top 10 hold 37% of stake read (47% on 6 Nov)</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>The other seven 6-hour intervals of 48 h net -138 TAO</li>
+<li>Burned share 62% of the miner part; 60 of 242 miners degraded or failing</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> Up: published usage or revenue, a contest restart, a lower burned share, inflow without one big buy. Down: the 6 Nov gain given back, more failing miners, a higher burned share.</p>
+<p class="muted">Since the last pass: Moved from bearish: the 6 Nov outflow reversed (+790 TAO in 6 hours; 14-day flow +513 TAO); burned share and miner health got worse.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-similar">Similar subnets</h2>
+<div class="v2-sim"><p>By pool size this is <strong>rank 9 of 13</strong> among the subnets grouped as <em>inference</em> (what they mainly sell). Pool and price as of 2026-11-06 to 2026-11-07, price in TAO per alpha; the barrier is the easiest miner role.</p><div class="scroll"><table class="v2-table"><thead><tr><th>#</th><th>Subnet</th><th>Pool</th><th>Price</th><th>Miner barrier</th></tr></thead><tbody><tr><td>7</td><td><a href="/bittensor-docs/subnets/2.html">DaniLabs</a> <span class="muted">SN2</span></td><td>8,787 TAO</td><td>0.003953</td><td><span class="v2-barrier b-high">High</span></td></tr><tr><td>8</td><td><a href="/bittensor-docs/subnets/46.html">Instant</a> <span class="muted">SN46</span></td><td>8,105 TAO</td><td>0.003227</td><td><span class="v2-barrier b-high">High</span></td></tr><tr class="me" aria-current="true"><td>9</td><td>REAX <span class="muted">SN92, this page</span></td><td>4,380 TAO</td><td>0.0288</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>10</td><td><a href="/bittensor-docs/subnets/96.html">Verathos</a> <span class="muted">SN96</span></td><td>2,147 TAO</td><td>0.002948</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>11</td><td><a href="/bittensor-docs/subnets/31.html">Recall</a> <span class="muted">SN31</span></td><td>1,685 TAO</td><td>0.003457</td><td><span class="v2-barrier b-high">High</span></td></tr></tbody></table></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-11-07</span> <span class="muted">(chain, repo)</span> Owner uid incentive 62%; uids 18, 83, 114, 240 at a floor; main unchanged since 11-04; open pull requests: draft vLLM backend, GB10 router change.</li>
+<li><span class="when">2026-11-06</span> <span class="muted">(chain)</span> One 6-hour window: +790 TAO net inflow and price +47%, then flat; cause not read.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Read the miner FAQ (version 3.8) and docs/MINER.md; the README is older than the code.</li>
+<li>Check the live registration fee (0.70 TAO on 2026-11-07) and pick the pool that fits your GPU.</li>
+<li>Run the pinned model server and miner and pass the self-check.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Control is concentrated: the team validator (owner hotkey) earns about 96% of dividends.</li>
+<li>Rules change weekly and docs lag chat; chat after 2 Nov 09:00 UTC was not read (archive down).</li>
+<li>Demand is team-stated only; no traffic or revenue is public.</li>
+<li>Burn and lock logic is not in the public repo.</li>
+<li>Miner pay is gross; the per-uid chain vector would give about 12% more.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://reax.co" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://reax.co/competitions/faq/" rel="noopener noreferrer">Miner FAQ (the team&#x27;s stated rules reference)</a></li>
+<li><a href="https://reax.co/competitions/rules/" rel="noopener noreferrer">Competition rules</a></li>
+<li><a href="https://reax.co/mining/" rel="noopener noreferrer">How mining works</a></li>
+<li><a href="https://reax.co/faq/" rel="noopener noreferrer">General FAQ</a></li>
+<li><a href="https://reax.co/competitions/live/" rel="noopener noreferrer">Competitions and live evaluation queue</a></li>
+<li><a href="https://reax.co/miners/" rel="noopener noreferrer">Miner leaderboard (JSON feed behind it: /data/miners/latest.json)</a></li>
+<li><a href="https://github.com/reaxlabs/reax-subnet" rel="noopener noreferrer">Subnet repo (miner, validator, docs)</a></li>
+<li><a href="https://github.com/reaxlabs/reax-subnet/blob/main/CHANGELOG.md" rel="noopener noreferrer">Changelog</a></li>
+<li><a href="https://github.com/reaxlabs/reax-miner-kit" rel="noopener noreferrer">Miner install kit</a></li>
+<li><a href="https://github.com/reaxlabs/reax-engine" rel="noopener noreferrer">Engine competition reference</a></li>
+<li><a href="https://reax.dev/" rel="noopener noreferrer">Developer docs</a></li>
+<li><a href="https://decisionmodels.io/" rel="noopener noreferrer">Customer product (Decision Models)</a></li>
+<li><a href="https://github.com/reaxlabs/reax-subnet/blob/main/docs/EVAL-V5.md" rel="noopener noreferrer">Eval v5 spec (model contest)</a></li>
+<li><a href="https://github.com/reaxlabs/reax-subnet/blob/main/docs/ENGINE-COMPETITION-V2.md" rel="noopener noreferrer">Engine contest 2.0 spec</a></li>
+<li><a href="https://github.com/reaxlabs/reax-subnet/blob/main/docs/hardware.md" rel="noopener noreferrer">Hardware by pool</a></li>
+<li><a href="https://github.com/reaxlabs/reax-subnet/releases/tag/v1.2.0-rc11.post8.1-kit1" rel="noopener noreferrer">Miner kit release with mammoth-1 self-check</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 10 sources</summary>
+<ul>
+<li><strong>repo</strong> reaxlabs/reax-subnet main 0c1efcc (2026-11-04, a DESIGN-POOLS doc commit on top of 1.2.0rc11.post8.1 kit 1 0db24fd of 2026-10-29; no code change or tag since, checked 2026-11-07; the side branches and pull requests 4 and 8 are unmerged): README, CHANGELOG, docs/hardware.md, MINER.md, VALIDATOR.md, EMISSIONS.md, ENGINE-COMPETITION-V2.md, EVAL-V5.md, DESIGN-POOLS.md, eval-v5/devset-v1; MIT licence</li>
+<li><strong>web</strong> https://reax.co/competitions/faq/ (version 3.8, updated 2026-11-04 11:45 UTC, re-read 2026-11-07), /competitions/rules/ and /competitions/live/ (read 2026-10-28 to 2026-11-07)</li>
+<li><strong>web</strong> https://reax.co/data/miners/latest.json (team validator feed, read 2026-11-07 05:55 UTC: 242 miners in pools, s1-fast 77, s1-pro 67, s1-lite 87, s1-cpu 11; ok 138, degraded 36, failing 24, offline 44, not serving 10; availability 24 h 73%; validator version 1.2.0rc11.post8.14)</li>
+<li><strong>web</strong> Chain read at block 9452269 (2026-11-07 05:55Z UTC): SN92 (REAX): registered 2026-10-09, tempo 360, 256 of 256 uids, commit-reveal on; emission weights burn/recycle/owner/validator/miner = 0/0/26/41/33 %, RecycleOrBurn = Burn; uids under the owner hotkey or owner coldkey hold 61.79 % of incentive and 78.7 % of last-epoch emission (a floor); 4 validators have weight rows, on average 0 % of weight goes to uid 0. 203 uids with incentive (top 5: 65.4%); registration burn 0.702 TAO; WeightsVersionKey 0; the only setting changed since 2026-11-07 00:00Z is Burn (moves with demand; 33 items, block 9450492).</li>
+<li><strong>web</strong> Chain reads at block 9452014 (2026-11-07 05:04Z) and 9452269 (05:55Z): SN92 uid 3 (owner hotkey) incentive 61.60 % then 61.79 %, dividends 95.69 %; uid 18 0.041 %; uid 240 0.113 % (validator permit gone); uids 83 and 114 0.228 % each. Owner uid incentive at earlier blocks: 17.27 % (9436128, 2026-11-05 00:07Z), 56.65 % (9441528, 18:07Z), 54.94 % (9444120, 2026-11-06 02:45Z); weights (block 9452090): all 4 setters put 61.4-61.7 % on uid 3</li>
+<li><strong>web</strong> Chain read at block 9452269 (2026-11-07 05:55Z): price SN92, 9 samples every 6h from block 9437869 (2026-11-05 05:55Z): price 0.021725 -&gt; 0.028735 TAO per alpha (+32.3%), pool TAO 3747.2 -&gt; 4375.4; over the 8 intervals where the pool change equals flow + protocol: net user flow +652.1 TAO (staked minus unstaked), protocol flow -23.9 TAO, gross volume 22517.7 TAO. Chain read at block 9452090 (2026-11-07 05:19Z): price SN92, 3 samples every 7d from block 9351290 (2026-10-24 05:17Z): price 0.028205 -&gt; 0.028799 TAO per alpha (+2.1%), pool TAO 2915.2 -&gt; 4379.6; over the 2 intervals where the pool change equals flow + protocol: net user flow +513.2 TAO (staked minus unstaked), protocol flow +951.3 TAO, gross volume 55400.2 TAO.</li>
+<li><strong>web</strong> Chain read at block 9452090 (2026-11-07 05:19Z): SN92 stake by coldkey: 566 coldkeys hold 195478.201 alpha on 283 hotkeys (72.47% of the chain&#x27;s staked total); top coldkey 8.727%, top 5 27.319%, top 10 36.714%; owner coldkey 2.433%; 32.305% of the stake sits on validator-permit hotkeys; 3 hotkeys&#x27; stake rows were not fully read (27.53% of the staked total unattributed), shares are of what was read. Shared snapshot at block 9452269 (2026-11-07 05:55Z), 128 pools (root excluded): SN92 pool 4375.4 TAO = rank 90 of 128.</li>
+<li><strong>web</strong> Chain events read, block 9403214 (2026-10-31 10:22Z): one StakeLocked event on SN92, 230.55 alpha; holder not shown in the masked read</li>
+<li><strong>msg</strong> #92-reax, 2026-10-31 00:10 to 2026-11-02 08:59 UTC (all 42 messages read); the chat archive did not answer on 2026-11-03, 2026-11-05, 2026-11-06 or 2026-11-07 (HTTP 502, then timeouts), so later chat was not read</li>
+<li><strong>web</strong> https://api.github.com/repos/reaxlabs/reax-subnet/pulls?state=all (read 2026-11-07 06:00 UTC: pull request 9 merged 2026-11-04; 4 (fork, GB10 router change) and 8 (draft, external vLLM backend) open; 1 and 3 closed in October)</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/91.html"><small>← Previous</small>SN91 Cascade</a><a rel="next" href="/bittensor-docs/subnets/93.html"><small>Next →</small>SN93 Bitcast</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-11-07. Site built 2026-11-07. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Zeus (SN18) | Bittensor Subnet Docs</title>
+<meta name="description" content="Miners forecast hourly wind, solar and temperature up to 15 days ahead and earn by beating rivals against ERA5 data.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h6">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>18</span><div>
+<h1>Zeus <span class="muted">SN18</span></h1>
+<p class="tagline">Miners forecast hourly wind, solar and temperature up to 15 days ahead and earn by beating rivals against ERA5 data.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl2"><b>0.57<small>/day</small></b><span>last 7 d</span></li><li class="pl3"><b>1.3<small>/day</small></b><span>days 8-30</span></li><li class="pl4"><b>4.9<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-29</b><span>last chat</span></li><li class="pw"><b>4,175</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Shipping</b><span>code activity</span></li><li class="pw"><b>1</b><span>code commit in 30 d</span></li><li class="pw"><b>2026-10-15</b><span>last commit</span></li><li class="pw"><b>2026-09-07</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>weather and environmental forecasting</dd>
+<dt>Status</dt><dd>Active: 29 uids earn incentive and 10 of 12 permit holders set weights (2026-11-07). One repo commit in 30 days (2026-10-15); the forecast dataset was updated on 2026-11-07.</dd>
+<dt>Confidence</dt><dd>high</dd>
+<dt>Researched</dt><dd>2026-11-07</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Docs vs code vs chain</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-similar">Similar subnets</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>Miners forecast 4 weather variables at 48 hours and 15 days; the best forecast per challenge wins most reward.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>29 uids earn incentive, the top 5 take 95.6%; 9 of 10 validators put their top weight on uid 224 (2026-11-07).</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>No GPU is needed to run a miner or validator; a GPU helps to train a model. Validators need a free Copernicus key.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>Pool 9,616 TAO (rank 46); price -9% and a net 444 TAO out over 30 days to 2026-11-07, 137 in the last 6 days.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>ZEUS PRO forecasts sell from $99 a month (public price list); sales are not visible on chain.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Trains a weather model and answers forecast challenges, committing a hash first.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-no"><dt>Hardware</dt><dd>No GPU to run (docs); GPU to train. 4+ CPU cores, 16 GB RAM, 10 GB disk (min_compute.yml)</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None found; ERA5 history is free from Copernicus</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Registration burn 1.0 TAO (2026-11-07); no minimum stake</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Python 3.11 with Conda, open port; weeks of model training to compete</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Sends challenges, scores forecasts against ERA5 and sets weights on chain.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-no"><dt>Hardware</dt><dd>No GPU. 2+ cores, 8 GB RAM minimum; docs advise 16 GB and a fast internet link</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>Copernicus CDS API key (free account); a self-made proxy key</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Registration burn 1.0 TAO (2026-11-07); permit stake threshold 1,000 TAO (chain)</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>pm2 service from a .env file, two open ports; about an hour</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-neutral">Neutral</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-11-07. Not financial advice.</span></div><p>Quiet: price slipping on a net outflow, four miners hold 92% of incentive. <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>Zeus, built by Ørpheus AI, is a weather-forecasting subnet. Miners submit hourly forecasts, validators score them against ERA5 reanalysis data once real values exist, and most emission goes to the miners that win the most head-to-head comparisons.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Miners run their own models, usually trained on public ERA5 history, and forecast four variables (2 m temperature, 100 m wind, surface solar radiation) on a 0.25 degree global grid at 48 hours and 15 days. Before the real values are known the miner commits a hash of its forecast on chain, so it cannot copy a rival; the validator later checks the full forecast against the hash.</p></div><div><h3>Validators</h3><p>Validators wait for the real ERA5 values, then score each miner&#x27;s error (mean of RMSE and MAE) weighted by area and by a per-cell map the team added on 2026-08-25 (wind and solar capacity, population for temperature). About 80% of each map&#x27;s weight sits on 1% of cells; 36% is in the Germany box, 44% in the rest of Europe. Bad shapes, non-finite values, negative solar radiation and near-copies of another miner (not checked for solar radiation) are penalised.</p></div><div><h3>Incentive</h3><p>Eight challenges (four variables times two horizons) carry fixed weights. In each, the miner with the best win rate over its last 4 (48 h) or 8 (15 d) scored challenges takes 95% of the weight; the rest falls on a sliding scale. Until 2026-10-16 average rank decided. Validators also send a burn share, set by a team service, to owner uid 84.</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-11-07, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-good">Open</span>Any hotkey with a permit (1,000 TAO stake) can set weights; 12 hold one, 10 do. The burn share comes from a team API.</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">31.4%</span>31.37% of last-epoch emission sits on owner uid 84, mostly dividends; owner cut 18%, RecycleOrBurn is Burn.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">29 uids</span><span class="v2-sx muted">top 5 hold 95.6% of incentive.</span> 29 uids earn incentive; the top 5 hold 95.6% and the top uid 38.4%; burn uid 84 holds 0.33%.</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Converged</span>9 of 10 validators top-weight uid 224 (30-39%); uid 236 puts 42.6% on uid 141. A shared rule makes honest ones agree.</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-good">Open</span>Miner and validator code are public on GitHub under the MIT licence.</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Trains a weather model and answers forecast challenges, committing a hash first.</p><ul>
+<li>Winning means beating the best rival per challenge: the top 5 uids take 95.6% of incentive (2026-11-07).</li>
+<li>Gross pay: about 10.5 TAO per day over 29 uids, 0.36 on average.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Sends challenges, scores forecasts against ERA5 and sets weights on chain.</p><ul>
+<li>12 hotkeys hold permits out of 64 slots; 10 set weights within one tempo, 2 have not for over 5 tempos (2026-11-07).</li>
+<li>Owner uid 84 holds 62.4% of dividends; the dashboard names Zeus (uid 56), Yuma and Crucible Labs.</li>
+</ul></section></div>
+<h2 id="sn-x0">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>How weights are set</td><td>README, Mining and Validating guides: rolling average of ranks</td><td>Code: win rate per challenge since 2026-10-16 (repo HEAD)</td><td>2026-11-07</td></tr><tr><td>Burn share</td><td>Team said in May it averaged about 50%</td><td>Chain: uid 84 holds 0.33% of incentive (0.03% on 11-06); the team&#x27;s uid 56 gives it 0.33% of its weight</td><td>2026-11-07</td></tr></tbody></table></div>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-neutral">Neutral</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-11-07. Not financial advice.</span></div>
+<p class="v2-thesis">The price is 9% lower in 30 days after a net 444 TAO outflow, 137 TAO of it in the last 6 days. A price list exists ($99 a month); sales and users are the team&#x27;s claim.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.003554 TAO per alpha</dd></div><div><dt>Pool</dt><dd>9,616 TAO, rank 46</dd></div><div><dt>Price, 30 days</dt><dd>-9%, 2026-10-08 to 2026-11-07</dd></div><div><dt>Net flow, 30 days</dt><dd>-444 TAO, 2026-10-08 to 2026-11-07</dd></div><div><dt>Miner pay</dt><dd>0.360 TAO per day on average (10.5 TAO per day over 29 uids)</dd></div><div><dt>Miner pay outside top 5</dt><dd>0.018 TAO per day on average (0.427 TAO per day over 24 uids outside the top 5)</dd></div><div><dt>Code activity</dt><dd>last commit 2026-10-15; 1 commit in 30 days; last release 2026-09-07</dd></div></dl>
+<div class="v2-trend"><h3>Trend</h3><div class="v2-tbody"><figure class="v2-tfig"><svg class="v2-spark down" viewBox="0 0 240 56" role="img" aria-label="Price in TAO per alpha, 2026-09-28 to 2026-11-07: 0.003661 to 0.003554, -2.9%"><polyline points="5.0,40.6 16.5,5.0 22.2,9.0 28.0,10.9 39.5,27.4 45.2,34.8 51.0,35.9 56.8,31.9 62.5,18.1 68.2,20.7 79.8,38.9 85.5,32.6 91.2,30.6 97.0,41.3 102.8,46.5 108.5,34.7 120.0,36.3 125.8,35.2 131.5,35.1 137.2,35.3 143.0,34.3 148.8,36.2 160.2,35.5 166.0,38.3 171.8,38.8 177.5,40.9 183.2,39.5 189.0,40.8 194.8,40.8 200.5,41.5 206.2,38.3 212.0,47.9 217.8,42.9 223.5,47.3 229.2,51.0 235.0,50.0"/><circle cx="235.0" cy="50.0" r="3"/></svg><figcaption><strong>Price</strong> <span class="down">-2.9%</span> <span class="muted">0.003661 to 0.003554 TAO per alpha, 2026-09-28 to 2026-11-07</span></figcaption></figure><dl class="v2-tfacts"><div><dt>Net flow, 30 days</dt><dd><span class="down">-444 TAO</span> <span class="muted">2026-10-08 to 2026-11-07</span></dd></div><div><dt>Verdict history</dt><dd><ol class="v2-vh"><li><span class="muted">2026-11-04</span> <span class="st s-neutral">Neutral</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-05</span> <span class="st s-neutral">Neutral</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-06</span> <span class="st s-neutral">Neutral</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-07</span> <span class="st s-neutral">Neutral</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li></ol></dd></div></dl></div></div>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>Open code, named outside validators, a public price list.</li>
+<li>Price -3.1% in 6 days; net inflow on 3 of the last 4 days.</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>Net outflow of 444 TAO in 30 days, 137 TAO of it in the last 6 days.</li>
+<li>Four miners take 92% of incentive.</li>
+<li>Usage and revenue are team statements only.</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> Verified paying users or a reward update would point up; continued outflow or a validator outage, down.</p>
+<p class="muted">Since the last pass: Verdict unchanged since 2026-11-01; a 423 TAO outflow week entered the 30-day window.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-similar">Similar subnets</h2>
+<div class="v2-sim"><p>By pool size this is <strong>rank 3 of 5</strong> among the subnets grouped as <em>science</em> (what they mainly sell). Pool and price as of 2026-11-07, price in TAO per alpha; the barrier is the easiest miner role.</p><div class="scroll"><table class="v2-table"><thead><tr><th>#</th><th>Subnet</th><th>Pool</th><th>Price</th><th>Miner barrier</th></tr></thead><tbody><tr><td>1</td><td><a href="/bittensor-docs/subnets/68.html">NOVA</a> <span class="muted">SN68</span></td><td>40,636 TAO</td><td>0.01737</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>2</td><td><a href="/bittensor-docs/subnets/107.html">Minos</a> <span class="muted">SN107</span></td><td>19,481 TAO</td><td>0.02773</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr class="me" aria-current="true"><td>3</td><td>Zeus <span class="muted">SN18, this page</span></td><td>9,616 TAO</td><td>0.003554</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>4</td><td><a href="/bittensor-docs/subnets/55.html">NIOME</a> <span class="muted">SN55</span></td><td>5,984 TAO</td><td>0.002214</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>5</td><td><a href="/bittensor-docs/subnets/116.html">Carbon</a> <span class="muted">SN116</span></td><td>1,725 TAO</td><td>0.03117</td><td><span class="v2-barrier b-medium">Medium</span></td></tr></tbody></table></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-11-07</span> <span class="muted">(chain; Hugging Face)</span> The top miners changed: uid 224 fell from 56.6% to 38.4%, uid 150 (no weights set) took 22.9%, uid 141 14.8%; uid 236 alone top-weights uid 141.</li>
+<li><span class="when">2026-10-16</span> <span class="muted">(#zeus; GitHub)</span> Weights moved from average rank to win rate.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Read the mining guide in the repo: wallet, registration on subnet 18, commit-then-reveal.</li>
+<li>Start from the default miner; it already commits a hash on chain and reveals later.</li>
+<li>Train on public ERA5 data; a GPU speeds training, inference runs on about 4 CPU cores and 16 GB RAM.</li>
+<li>Match the required forecast shape and keep the exact compressed bytes you committed; a hash mismatch is a penalty.</li>
+<li>Watch the dashboard (delivery and scores per miner) and Discord: scoring rules changed several times since August 2026.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Burn: a team API outsiders cannot read sets the share; the real level shows only on chain (table above).</li>
+<li>Benchmark, user and revenue claims are the team&#x27;s own. The public dataset names a miner and rank per forecast; how they are chosen is unstated.</li>
+<li>The forecast dataset resumed on 2026-11-06 after a pause from 10-28 and updated on 11-07; files were not hash-checked.</li>
+<li>Miners questioned fairness in chat (self-mining, anonymous top miners); not audited.</li>
+<li>Chat after 2026-10-29 was unreadable on 2026-11-07; a team reply is unchecked.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/Orpheus-AI/Zeus" rel="noopener noreferrer">GitHub</a></li>
+<li><a href="https://www.zeussubnet.com/" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://dashboard.zeussubnet.com/" rel="noopener noreferrer">Miner performance dashboard</a></li>
+<li><a href="https://github.com/Orpheus-AI/Zeus/blob/main/docs/Mining.md" rel="noopener noreferrer">Mining guide</a></li>
+<li><a href="https://github.com/Orpheus-AI/Zeus/blob/main/docs/Validating.md" rel="noopener noreferrer">Validator guide</a></li>
+<li><a href="https://huggingface.co/orpheus-zeus" rel="noopener noreferrer">Public forecast dataset (Hugging Face)</a></li>
+<li><a href="https://www.zeussubnet.com/pricing" rel="noopener noreferrer">Pricing</a></li>
+<li><a href="https://docs.zeussubnet.com/docs/introduction" rel="noopener noreferrer">API documentation</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 7 sources</summary>
+<ul>
+<li><strong>repo</strong> Orpheus-AI/Zeus @76a79dd (2026-10-15, still HEAD on 2026-11-07, GitHub API): README.md, docs/Mining.md, docs/Validating.md, min_compute.yml, LICENSE, zeus/validator/{constants,reward,weight_setter,burn_manager,challenge_spec}.py, zeus/utils/config.py, zeus/validator/metrics.py, zeus/data/weights/*.npz</li>
+<li><strong>web</strong> zeussubnet.com home, pricing, company and llms-full (read 2026-11-03; pricing and company text identical on 2026-11-07) and /edge (2026-11-07, only the rolling dates changed; waitlist claim: desks at 4 of Europe&#x27;s top 10 energy trading houses); dashboard.zeussubnet.com public API (validators, metagraph; read 2026-11-07); huggingface.co/orpheus-zeus dataset API (2026-11-07: forecasts dataset last changed 2026-11-07 14:31Z, 2,140 files; bittensor-complete 2026-11-03, 5,539 files)</li>
+<li><strong>web</strong> Chain read at block 9455671 (2026-11-07 17:15Z UTC): SN18 (Zeus): registered 2023-10-30, tempo 1800, 257 of 257 uids, commit-reveal on; emission weights burn/recycle/owner/validator/miner = 0/0/18/41/41 % (stored, same values as the chain default), RecycleOrBurn = Burn; uids under the owner hotkey or owner coldkey hold 0.33 % of incentive and 31.37 % of last-epoch emission (a floor); 10 validators have weight rows, on average 0 % of weight goes to uid 0. weights 18 --all at block 9455671: 10 of 12 permit holders have weight rows; 9 put their top weight on uid 224 (30.5-38.8%), uid 236 (49 targets) on uid 141 (42.59%, then uid 56 30.0%, uid 85 16.03%, uid 224 8.06%). At block 9455839 (17:49Z): uid 56 weights uid 224 38.01%, uid 150 22.90%, uids 98 and 141 15.35% each, uid 85 4.03%, burn uid 84 0.33%; uid 150 (registered 2026-06-13, no weights set since, permit, incentive 22.909%, rank 2, no other uid under its coldkey); owner uid 84 incentive 0.334% (rank 6), dividends 62.401%, emission 31.366%. Dashboard metagraph (17:28Z) incentive: uid 224 38.4%, uid 150 22.91%, uid 98 15.5%, uid 141 14.76%, uid 85 4.07%.</li>
+<li><strong>web</strong> Chain read at block 9455671 (2026-11-07 17:15Z UTC), compared with block 9443292 (2026-11-06 00:00Z UTC): SN18: no setting changed in 33 checked items; emission split unchanged; pool 9600.82 -&gt; 9615.78 TAO.</li>
+<li><strong>web</strong> Chain read at block 9455671 (2026-11-07 17:15Z): price SN18, 6 samples every 7d from block 9239671 (2026-10-08 16:56Z): price 0.003918 -&gt; 0.003554 TAO per alpha (-9.3%), pool TAO 10056.8 -&gt; 9615.8; over the 5 intervals where the pool change equals flow + protocol: net user flow -444.3 TAO (staked minus unstaked), protocol flow +3.3 TAO, gross volume 9926.0 TAO. By interval: -422.72, +196.70, -50.53, -131.95, -35.84 TAO (the last interval is 2 days); 1-day read from 2026-10-30: net -128.36 TAO over 8 days, -136.70 over the last 6 (2026-11-01 to 11-07).</li>
+<li><strong>web</strong> Chain read at block 9455671 (2026-11-07 17:15Z): shared snapshot over 129 subnets of name, owner, tempo, burn, uids, price and pool sizes: SN18 pool 9615.8 TAO, rank 46 among 128 non-root pools (price rank 77).</li>
+<li><strong>msg</strong> #zeus (channel 18), 2026-05-20 to 2026-10-29, including team posts of 2026-08-21, 2026-08-25, 2026-09-02, 2026-09-07, 2026-10-16, 2026-10-20, 2026-10-23 and 2026-10-26; chat archive timed out on 2026-11-07 (nothing after 2026-10-29 read)</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/17.html"><small>← Previous</small>SN17 404-GEN</a><a rel="next" href="/bittensor-docs/subnets/19.html"><small>Next →</small>SN19 blockmachine</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-11-07. Site built 2026-11-07. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>
