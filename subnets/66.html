@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Conjectures.io (SN66) | Bittensor Subnet Docs</title>
+<meta name="description" content="Pays bounties for Lean-verified proofs of open maths problems, plus contests for faster code proven correct in Lean.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h6">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>66</span><div>
+<h1>Conjectures.io <span class="muted">SN66</span></h1>
+<p class="tagline">Pays bounties for Lean-verified proofs of open maths problems, plus contests for faster code proven correct in Lean.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>11<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>20<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>23<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-11-02</b><span>last chat</span></li><li class="pw"><b>2,118</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Shipping</b><span>code activity</span></li><li class="pw"><b>256</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-11-11</b><span>last commit</span></li><li class="pw"><b>2026-11-12</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>formal mathematics and verified software optimisation</dd>
+<dt>Status</dt><dd>Active through 2026-11-12: maths bounties and the Tensor kernels contest are open. Ninja coding-agent subnet until 2026-07-28.</dd>
+<dt>Confidence</dt><dd>high</dd>
+<dt>Researched</dt><dd>2026-11-12</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">How bounties are priced</a></li><li><a href="#sn-x1">How Tensor kernels is scored</a></li><li><a href="#sn-x2">Docs vs code vs chain</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>40 open maths problems solved, about 189,000 alpha paid in bounties (not on chain); 10,054 alpha of it since 2026-11-10.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>maths miners need no registration, only AI tools, 0.25 TAO per attempt and chat logs.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>80% of incentive goes to one team-run treasury neuron; the rest to Tensor kernels champions.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>price down 27% in 30 days on 945 TAO of net selling, 200 TAO of it in one day (2026-11-11).</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner (maths board) <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Finds a Lean proof or counterexample, pays a fee per attempt, submits with chat logs.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-caution">Paid service needed</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>Ordinary computer (hour-long Lean build)</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>AI tokens (cost not documented)</dd></div><div class="v2-need n-no"><dt>Stake / fees</dt><dd>No stake; 0.25 TAO per attempt</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Python 3.12+ CLI; the proof is research work</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Miner (Tensor kernels contest) <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Submits one proved Lean file of 19 kernels; the team times it.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>Linux for the full local check; no GPU mentioned</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None required</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Fresh SN66 registration (burn 0.0269 TAO) per submission</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Clone the repo and run setup; builds take minutes</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Permits exist, but the team runs the check and weights follow its treasury.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-unk">GPU unknown</li><li class="fl fl-unk">Paid service unknown</li><li class="fl fl-bad">Permissioned</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>Linux host with Landlock for the sandbox (docs)</dd></div><div class="v2-need n-unk"><dt>API tokens / subscriptions</dt><dd>Not documented</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Permit stake threshold not read; registration burn 0.0269 TAO</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Heavy: Lean checkout and sandbox</dd></div></dl><a class="v2-more" href="#sn-role-2">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-fair">Fairly valued</span></span><span class="v2-conf muted">medium confidence, as of 2026-11-12. Not financial advice.</span></div><p>Down 27% in a month and at its low; selling resumed on 2026-11-11; no revenue. <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>Conjectures.io pays alpha bounties for the first Lean proof or counterexample of an open maths conjecture that the Lean kernel accepts and a human approves. A second track, Tensor kernels (live since 2026-11-10, replacing TorchLean), pays the fastest proved Lean tensor kernels.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Pick an open problem (269 have live bounties), write a Lean proof or counterexample, check it free, then pay one credit and submit with your AI chat logs. Tensor kernels miners submit one proved Kernel.lean.</p></div><div><h3>Validators</h3><p>The team runs the check: a sandbox builds each submission with the Lean kernel, then a human reviews the chat logs. All 10 permit holders set weights, all topping one treasury neuron.</p></div><div><h3>Incentive</h3><p>Bounties come from a team treasury (93,721 alpha on 2026-11-12) filled by about 80% of validator weight; the other 20% goes to Tensor kernels champions.</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-11-12, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-bad">Owner only</span>The team runs the check and payouts; all 10 permit holders put their top weight on its treasury neuron.</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">18.9%</span>Owner key neuron holds 18.9% of emission (floor); configured owner cut 18%, the rest burned.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">8 uids</span><span class="v2-sx muted">top 5 hold 95.1% of incentive.</span> 8 uids earn; 80% goes to one team treasury neuron, the rest to contest champions.</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Converged</span>All 10 validators with weights top the treasury neuron; a fixed rule, not independent scoring.</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-caution">Partial</span>Validator, miner and contest repos are public on GitHub; no licence file found.</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner (maths board) <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Finds a Lean proof or counterexample, pays a fee per attempt, submits with chat logs.</p><ul>
+<li>No hotkey: use the website or CLI; rewards go to a payout wallet you set.</li>
+<li>Use CLI 0.2.4 or newer (chat-log terms v6).</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Miner (Tensor kernels contest) <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Submits one proved Lean file of 19 kernels; the team times it.</p><ul>
+<li>Timed on the required CPU environments; limits 960 s build, 1200 s benchmark, 3600 s per run.</li>
+<li>Champions register a new hotkey per entry. The seven earners sit under three coldkeys (98, 49 and 8 of 256 uids); overall champion 9.9% of incentive, each board 1.6%.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-2"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Permits exist, but the team runs the check and weights follow its treasury.</p><ul>
+<li>Their other weight goes to Tensor kernels champions.</li>
+</ul></section></div>
+<h2 id="sn-x0">How bounties are priced</h2>
+<ul class="v2-list">
+<li>A new problem starts at 2.5% of the free treasury and rises to 12.5% over 15 days, locked on submission: about 2,343 alpha on day one and 11,715 at 15 days.</li>
+<li>A proof with non-compliant chat logs waits for compliant ones before paying (team, 2026-10-28).</li>
+<li>Proofs approved before chat-log intake opened (2026-10-13) can earn a log bonus: alpha worth USD 500 (Erdős) or 250.</li>
+</ul>
+<h2 id="sn-x1">How Tensor kernels is scored</h2>
+<ul class="v2-list">
+<li>One Kernel.lean holds 19 kernels. Seven boards (overall plus six model families) each time your entry against their champion. To win: 0.97x its time or better, a solid gain, no cell over 10% slower (contest repo defaults).</li>
+<li>The champion takes the board’s share of the 20% contest share: overall 50%, each model board 8.3%; the API pays only the current champion.</li>
+<li>Each timing pass runs in a fresh process; a baseline kernel is timed for reference only.</li>
+</ul>
+<h2 id="sn-x2">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Credit price</td><td>Validator README: pays exactly 0.5 TAO</td><td>Code: live catalogue quotes 0.25 TAO</td><td>2026-11-12</td></tr><tr><td>Where weights go</td><td>Validator docs: treasury gets 100% every epoch</td><td>Chain: 9 of 10 validators give it 80%, one 100%</td><td>2026-11-12</td></tr><tr><td>Treasury balance</td><td>Team API: 93,353 alpha</td><td>Chain: one coldkey, the treasury neuron&#x27;s own, holds the same amount</td><td>2026-11-12</td></tr><tr><td>Entry size limit</td><td>Contest and validator docs: 1 MiB by default, 4 MiB ceiling</td><td>Code: live team API still shows 256,000 bytes</td><td>2026-11-12</td></tr></tbody></table></div>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-fair">Fairly valued</span></span><span class="v2-conf muted">medium confidence, as of 2026-11-12. Not financial advice.</span></div>
+<p class="v2-thesis">Net selling took 14% of the pool’s TAO in 30 days, 207 TAO of it in the last two days. The team ships and paid out again; payouts cannot be traced.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.002143 TAO per alpha</dd></div><div><dt>Pool</dt><dd>5,707 TAO, rank 72</dd></div><div><dt>Price, 30 days</dt><dd>-27%, 2026-10-13 to 2026-11-12</dd></div><div><dt>Net flow, 30 days</dt><dd>-945 TAO, 2026-10-13 to 2026-11-12</dd></div><div><dt>Miner pay</dt><dd>6.31 TAO per day over 8 paid uids (too few for an average)</dd></div><div><dt>Code activity</dt><dd>miner CLI 0.2.4, validator release 2026-11-12; 204 validator commits in 30 days</dd></div></dl>
+<div class="v2-trend"><h3>Trend</h3><div class="v2-tbody"><figure class="v2-tfig"><svg class="v2-spark down" viewBox="0 0 240 56" role="img" aria-label="Price in TAO per alpha, 2026-09-27 to 2026-11-14: 0.003458 to 0.0021, -39.3%"><polyline points="5.0,5.9 9.8,8.4 24.2,10.0 29.0,8.1 38.5,5.0 43.3,9.1 48.1,15.9 52.9,20.6 57.7,21.7 62.5,21.9 72.1,22.3 76.9,23.4 81.7,21.3 91.2,32.9 96.0,34.4 100.8,33.2 110.4,37.5 115.2,35.0 120.0,35.0 124.8,38.1 129.6,37.2 139.2,38.4 144.0,38.2 148.8,38.0 153.5,38.2 158.3,39.9 163.1,39.6 172.7,40.6 177.5,39.0 182.3,38.3 187.1,39.0 191.9,43.3 196.7,45.0 201.5,44.2 206.2,43.8 215.8,44.3 220.6,48.6 225.4,49.6 230.2,48.8 235.0,51.0"/><circle cx="235.0" cy="51.0" r="3"/></svg><figcaption><strong>Price</strong> <span class="down">-39.3%</span> <span class="muted">0.003458 to 0.0021 TAO per alpha, 2026-09-27 to 2026-11-14</span></figcaption></figure><dl class="v2-tfacts"><div><dt>Net flow, 30 days</dt><dd><span class="down">-664 TAO</span> <span class="muted">2026-10-15 to 2026-11-14</span></dd></div><div><dt>Verdict history</dt><dd><ol class="v2-vh"><li><span class="muted">2026-11-08</span> <span class="st s-bearish">Bearish</span> <span class="st v-fair">Fairly valued</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-09</span> <span class="st s-bearish">Bearish</span> <span class="st v-fair">Fairly valued</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-10</span> <span class="st s-bearish">Bearish</span> <span class="st v-fair">Fairly valued</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-12</span> <span class="st s-bearish">Bearish</span> <span class="st v-fair">Fairly valued</span> <span class="muted">medium confidence</span></li></ol></dd></div></dl></div></div>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>40 certified solves; 10,054 alpha paid since 2026-11-10</li>
+<li>Tensor kernels live: 55 promotions in 38 hours</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>945 TAO net outflow in 30 days (200 in one day); no revenue</li>
+<li>80% of incentive on one team-run neuron; no payout trace</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> Net inflow, a dated first revenue or a larger miner share would move it toward neutral.</p>
+<p class="muted">Since the last pass: Bearish since 2026-10-27, unchanged.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-11-12</span> <span class="muted">(Tensor kernels API)</span> Tensor kernels, TorchLean’s successor, is live: 55 promotions on 7 boards by 32 hotkeys since 2026-11-10.</li>
+<li><span class="when">2026-11-12</span> <span class="muted">(validator, miner repos)</span> Chat-log terms v6 and miner CLI 0.2.4 drop all claim and correction deadlines.</li>
+<li><span class="when">2026-11-12</span> <span class="muted">(team API, repo)</span> 40 solves certified, 189,392 alpha paid. 306 problems, 269 with live bounties.</li>
+<li><span class="when">2026-11-11</span> <span class="muted">(chain)</span> The treasury neuron (uid 121) lost its validator permit between 2026-11-10 19:36Z and 2026-11-11 07:36Z; permits 11 to 10.</li>
+<li><span class="when">2026-10-31</span> <span class="muted">(#conjectures)</span> Imperial College London Mathathon planned for 22-26 November (team statement).</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Create an account on conjectures.io or install the miner CLI, then run conjectures tasks sync and conjectures tasks challenge &lt;task&gt;.</li>
+<li>Write the proof in Main.lean, then run conjectures build and the free local checks.</li>
+<li>Keep your AI chat logs, buy a credit (0.25 TAO), upload the logs, submit, and set a payout wallet.</li>
+<li>Tensor kernels: register a hotkey on SN66 (one submission each), clone the contest repo, follow MANUAL.md, run miner/submit.py.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Payouts depend on a team treasury and manual review; its balance matches the chain, but payouts were not traced.</li>
+<li>No revenue yet (owner, 2026-10-13); the plan is to sell AI chat logs, which the team keeps private.</li>
+<li>Solve counts come from the team&#x27;s own API; the chain identity still lists the old Ninja repo. Beware of support DMs.</li>
+<li>A coldkey is not one person; none of the champion coldkeys is linked to the owner.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://conjectures.io" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://conjectures.io/problems" rel="noopener noreferrer">Problems</a></li>
+<li><a href="https://conjectures.io/how-it-works" rel="noopener noreferrer">How it works</a></li>
+<li><a href="https://conjectures.io/faq" rel="noopener noreferrer">FAQ</a></li>
+<li><a href="https://conjectures.io/results" rel="noopener noreferrer">Results</a></li>
+<li><a href="https://conjectures.io/roadmap" rel="noopener noreferrer">Roadmap</a></li>
+<li><a href="https://conjectures.io/status" rel="noopener noreferrer">System status</a></li>
+<li><a href="https://conjectures.io/competitions/tensor-kernels" rel="noopener noreferrer">Tensor kernels contest</a></li>
+<li><a href="https://conjectures.io/competitions/floatlib" rel="noopener noreferrer">FloatLib results</a></li>
+<li><a href="https://conjectures.io/blog/deflate-competition-results" rel="noopener noreferrer">DEFLATE results blog post</a></li>
+<li><a href="https://github.com/conjectures-io" rel="noopener noreferrer">GitHub organisation</a></li>
+<li><a href="https://github.com/conjectures-io/conjectures-miner" rel="noopener noreferrer">Miner CLI</a></li>
+<li><a href="https://github.com/conjectures-io/conjectures-validator" rel="noopener noreferrer">Validator</a></li>
+<li><a href="https://github.com/conjectures-io/conjectures-tasks" rel="noopener noreferrer">Task pool</a></li>
+<li><a href="https://github.com/conjectures-io/conjectures-contribution" rel="noopener noreferrer">Contribution repo</a></li>
+<li><a href="https://github.com/conjectures-io/conjectures-optimisation-float-kernels" rel="noopener noreferrer">Contest repo (Tensor kernels)</a></li>
+<li><a href="https://github.com/google-deepmind/formal-conjectures" rel="noopener noreferrer">Formal Conjectures (statement source)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 12 sources</summary>
+<ul>
+<li><strong>repo</strong> conjectures-io/conjectures-validator@24444ff README.md, docs/SUBNET.md (unchanged since 2026-11-10), docs/TENSOR_KERNELS_API.md, docs/trajectories/chat-log-terms-v6.md, docs/policies/submission-terms-v13.md (2026-11-12; GitHub compare 3dcd096...24444ff: 16 commits, 42 files; releases v2026.11.10.2, v2026.11.12 and v2026.11.12.2; git ls-remote of all five repos re-run 10:55Z: heads unchanged)</li>
+<li><strong>repo</strong> conjectures-io/conjectures-optimisation-float-kernels@6804fad README.md (Tensor kernels, 19 kernels), docs/BENCHMARKING.md, main branch since 2026-11-10 (2026-11-12; head moved from 93951e0, compare status diverged, 61 commits; the older MANUAL.md, validator/ and weight-setter files were read on 2026-11-04 and not re-read)</li>
+<li><strong>repo</strong> conjectures-io/conjectures-miner@77545bd README.md, pyproject.toml (2026-11-12; GitHub compare 1b1dd75...77545bd: 2 commits, 6 files, CLI 0.2.4, chat-log terms without deadlines); validator commit 0b4e3fc (2026-10-21, removed the redaction attestation from the chat-log terms)</li>
+<li><strong>repo</strong> conjectures-io/conjectures-tasks@91e6059 (2026-11-12; GitHub compare 4a10571...91e6059: 2 commits, 300 files, 20 reviewed Erdős main targets added; not yet in the API catalogue)</li>
+<li><strong>web</strong> conjectures.io /v1/competitions, /v1/competitions/tensor-kernels (boards, champions, limits), the TorchLean archive routes and public read API /v1/results/stats, /v1/catalog/meta, /v1/system/status (fetched 2026-11-12 07:47Z; champions 07:49Z); /competitions/tensor-kernels page 200 (2026-11-12); re-read 10:46Z: results/stats, catalog/meta (treasury 93,721.278 alpha), system/status, /v1/competitions (Tensor kernels queue depth 3, was 0) and the seven champion boards (still 55 promotions, newest 07:46:53Z)</li>
+<li><strong>web</strong> Chain read at block 9488768 (2026-11-12 07:36Z UTC): SN66 (conjectures): registered 2025-02-19, tempo 360, 256 of 256 uids, commit-reveal off; emission weights burn/recycle/owner/validator/miner = 0/0/18/41/41 % (stored, same values as the chain default), RecycleOrBurn = Burn; uids under the owner hotkey or owner coldkey hold 0 % of incentive and 18.89 % of last-epoch emission (a floor); 10 validators have weight rows, on average 0 % of weight goes to uid 0. Weights at the same block: 10 validators have weight rows, 9 with 80.0% on uid 121 and one with 100%; validator uid 0 row: uid 121 80%, uid 134 10%, uids 15, 132, 150, 162, 252, 255 1.67% each. The 10 permit holders equal the 10 weight setters (storage ValidatorPermit). Incentive: 8 uids earn, top uid 121 80.3%. Re-read at block 9489685 (2026-11-12 10:39Z, hosted dossier and weights --all): same 10 permit holders and weight rows, incentive unchanged (8 uids, top uid 121 80.3%), pool 5,707.6 TAO, price 0.002143; registration burn 0.026949 TAO (0.008790 at block 9488768).</li>
+<li><strong>web</strong> Chain read at block 9488768 (2026-11-12 07:36Z UTC), compared with block 9472088 (2026-11-10 00:00Z UTC): SN66: no setting changed in 33 checked items; Burn differs (moves with demand); emission split unchanged; pool 5915.0 -&gt; 5707.41 TAO.</li>
+<li><strong>web</strong> Chain read at block 9489685 (2026-11-12 10:39Z): SN66 stake by coldkey: 1306 coldkeys hold 2306862.981 alpha on 279 hotkeys (89.21% of the chain&#x27;s staked total); top coldkey 25.737%, top 5 44.162%, top 10 53.071%; owner coldkey 25.737%; 66.075% of the stake sits on validator-permit hotkeys; 22 hotkeys&#x27; stake rows were not fully read (10.79% of the staked total unattributed), shares are of what was read. Tag compare (no addresses stored): the coldkey of uid 121 holds 93,721.278 alpha at block 9489685 (10:39Z); the team API balance was 93,721.278 at 10:46Z (93,353.009 at 07:47Z, 368.3 alpha less; the earlier chain read, 07:36Z, matched that figure too).</li>
+<li><strong>web</strong> Chain read at block 9489685 (2026-11-12 10:39Z): price SN66, 6 samples every 7d from block 9273685 (2026-10-13 10:20Z): price 0.002934 -&gt; 0.002143 TAO per alpha (-27.0%), pool TAO 6667.5 -&gt; 5707.6; over the 5 intervals where the pool change equals flow + protocol: net user flow -944.8 TAO (staked minus unstaked), protocol flow -15.2 TAO, gross volume 13404.9 TAO. Pool rank 72 of 128 from the shared snapshot at the same block; a 1-day step over the last four days (10:39Z to 10:39Z): net flow -3, -2, -200, -6 TAO per day.</li>
+<li><strong>web</strong> Chain reads (hosted uid command, blocks 9488768 and 9488844, 2026-11-12 07:36Z and 07:51Z): uids 134 (overall champion, registered 2026-11-11 16:13Z), 150 (resnet), 252 (normalized_mlp), 15 (mixer), 132 (mlp), 255 (mobilenet), 162 (recurrent, the champion before 07:46Z), 121 (treasury), 227 (top dividend earner). Champion hotkeys from the team champions API compared by sha256 tag, no addresses stored. other_uids_same_coldkey gives 97 other uids for ck:0b0a18 (uids 134, 150, 252), 48 for ck:ea934b at uid 15 (block 9488768) and 49 at uid 132 (block 9488844: uid 103 is listed in the later read only) and 7 for ck:9a386e (uids 162, 255); no uid read is owner-linked. Uid 121 re-read with --block at 9477968 (2026-11-10 19:36Z: permit, 100% of incentive, hotkey alpha 7,234.946), 9481568 (11-11 07:36Z: no permit, 81.0%, hotkey alpha 0.0), 9485168 and 9486968 (80.3%). The current recurrent champion (promoted 07:46:53Z) was not mapped to a uid.</li>
+<li><strong>web</strong> EdSource, Caltech Mathathon reworked after backlash (2026-09-30)</li>
+<li><strong>msg</strong> #conjectures pinned posts 2026-07-28 and 2026-08-05; #conjectures 2026-08-06 to 2026-10-31 (team announcements, the 2026-10-28 TorchLean launch post, the 2026-10-31 chat-log and Mathathon answers); #announce 2026-10-19 (the archive did not answer on 2026-11-12 (timed out): nothing read after 2026-11-02)</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/65.html"><small>← Previous</small>SN65 TPN (True Performance Network)</a><a rel="next" href="/bittensor-docs/subnets/67.html"><small>Next →</small>SN67 Harnyx</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-11-12. Site built 2026-11-14. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

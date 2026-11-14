@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Allways (SN7) | Bittensor Subnet Docs</title>
+<meta name="description" content="Native cross-chain swaps: miners deliver the asset and post collateral, validators verify, a Solana program settles.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h1">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>7</span><div>
+<h1>Allways <span class="muted">SN7</span></h1>
+<p class="tagline">Native cross-chain swaps: miners deliver the asset and post collateral, validators verify, a Solana program settles.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl2"><b>0.43<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>8.3<small>/day</small></b><span>days 8-30</span></li><li class="pl3"><b>1.7<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-11-02</b><span>last chat</span></li><li class="pw"><b>1,388</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Shipping</b><span>code activity</span></li><li class="pw"><b>34</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-10-24</b><span>last commit</span></li><li class="pw"><b>2026-10-21</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>cross-chain swaps / settlement</dd>
+<dt>Status</dt><dd>Swaps have stopped (none in 7 days and none since 2026-11-04 per the team&#x27;s API) and the chain shows 100% of incentive on the owner slot.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-11-13</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Docs vs code vs chain</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-similar">Similar subnets</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>users swap native assets across chains in one transfer; a miner delivers the other asset and risks its collateral.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>the owner slot holds 100% of incentive; no miner outside it earns anything (2026-11-13).</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>its API shows no swap in 7 days (July weeks: USD 24-35k, 35+ miners); the last was 2026-11-04.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>an open pull request rebuilds the validator (105 commits, last push 2026-10-27); main and test are unchanged since 2026-10-24.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Post a rate and collateral per swap direction, then deliver the destination asset on time.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>Docker, 2 CPUs, 4 GB RAM; no GPU (docs)</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None required: a free Helius key is enough for Solana RPC (docs)</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>0.15 TAO burn (2026-11-13); SOL collateral, about 0.1 SOL minimum (team, 2026-09-04); 0.02 SOL per new wallet</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Guided CLI (alw miner init); funds in each asset you deliver; a hardened hot-wallet server</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Verify both legs of each swap, vote the outcome on Solana and set Bittensor weights.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-caution">Paid service needed</li><li class="fl fl-bad">Permissioned</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>Docker, 2 CPUs, 4 GB RAM; no GPU; own finney lite node advised (docs)</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>Paid Solana RPC (Helius Developer, USD 49 a month at least) and a keyed Ethereum RPC (docs)</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Permit stake (1,000 TAO global threshold, 2026-11-13); 0.15 TAO burn; Solana key whitelisted by the admin</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Admin whitelists your Solana key; bind your hotkey (permanent); run Docker; keep the Solana keypair funded</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-fair">Fairly valued</span></span><span class="v2-conf muted">medium confidence, as of 2026-11-13. Not financial advice.</span></div><p>Weak economics: no independent miner earns and no swap has run in 7 days. <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>Allways lets a user swap one native asset for another with one transfer from their own wallet; a miner delivers the other asset against posted collateral. Validators verify and slash failures; a Solana program settles swaps and Bittensor handles registration, scoring and emission.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>A miner posts a rate per direction backed by collateral (SOL on Solana, or a TAO bond in a Bittensor vault). It must deliver within 10 minutes by default; a miss slashes collateral to the user and adds a lifetime strike.</p></div><div><h3>Validators</h3><p>Validators are whitelisted by the contract admin; they run the reservation draw and vote each outcome on Solana.</p></div><div><h3>Incentive</h3><p>A miner&#x27;s reward per direction is its eligibility (at most 2 lifetime timeouts, a fill in the last 12 hours) times the direction&#x27;s pool times a blend of 65% crown time and 35% share of fills. Since 2026-10-21 each pool is scaled by min(1, 2 x 24-hour swap fees / miners&#x27; 24-hour emission); the rest goes to the owner slot (UID 53).</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-11-13, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-caution">Whitelisted</span>The contract admin whitelists validators; 13 permit holders on chain, 12 set weights.</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">50%</span>Owner uids hold 50.0% of last-epoch emission and 100% of incentive; owner cut 18%; RecycleOrBurn is Recycle.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">1 uid</span><span class="v2-sx muted">top 5 hold 100% of incentive.</span> 1 uid earns incentive: the owner slot (100%). The two recent miners, uids 32 and 120, read 0%.</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Converged</span>All 12 validators with weights put their top weight on the owner slot; a fixed scorer makes honest validators agree.</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-good">Open</span>Miner, validator and Solana program are public (MIT); the team&#x27;s API code was not found.</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Post a rate and collateral per swap direction, then deliver the destination asset on time.</p><ul>
+<li>A locked TAO bond cannot be withdrawn on demand.</li>
+<li>A missed deadline slashes 110% of the swap value.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Verify both legs of each swap, vote the outcome on Solana and set Bittensor weights.</p><ul>
+<li>The admin whitelists each validator&#x27;s Solana key (up to 16 in code); unlisted validators do not influence outcomes.</li>
+<li>13 permit holders on chain (2026-11-13); 12 set weights, all with their top weight on the owner slot.</li>
+</ul></section></div>
+<h2 id="sn-x0">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Collateral ramp</td><td>Miner docs: collateral below full size is punished convexly</td><td>Code: capacity = min(1, collateral / required) to the power 1.0, so linear</td><td>2026-11-13</td></tr><tr><td>Share of emission miners can earn</td><td>Team (2026-07-28): miners can earn 100% of emission</td><td>Chain: 100% of incentive sits on the owner slot, which the chain withholds</td><td>2026-11-13</td></tr></tbody></table></div>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-fair">Fairly valued</span></span><span class="v2-conf muted">medium confidence, as of 2026-11-13. Not financial advice.</span></div>
+<p class="v2-thesis">Pool rank 80 of 128; price -0.4%, net flow +7 TAO in 30 days (-16 in 10 days). With no swap fees for 7 days, the miner share is recycled.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.002282 TAO per alpha</dd></div><div><dt>Pool</dt><dd>5,383 TAO, rank 80</dd></div><div><dt>Price, 30 days</dt><dd>-0.4%, 2026-10-14 to 2026-11-13</dd></div><div><dt>Net flow, 30 days</dt><dd>+7 TAO, 2026-10-14 to 2026-11-13</dd></div><div><dt>Miner pay</dt><dd>none: no uid besides the owner slot earns</dd></div><div><dt>Code activity</dt><dd>main and test: last commit 2026-10-24, 35 commits in 30 days, release 2026-10-21; rebuild branch pushed 2026-10-27</dd></div></dl>
+<div class="v2-trend"><h3>Trend</h3><div class="v2-tbody"><figure class="v2-tfig"><svg class="v2-spark down" viewBox="0 0 240 56" role="img" aria-label="Price in TAO per alpha, 2026-09-28 to 2026-11-13: 0.002437 to 0.002282, -6.4%"><polyline points="5.0,13.7 15.0,16.4 20.0,5.1 30.0,8.9 40.0,9.9 45.0,10.7 50.0,10.8 55.0,10.7 60.0,11.1 65.0,10.1 75.0,10.7 80.0,34.1 85.0,35.7 90.0,37.8 95.0,48.3 100.0,50.7 105.0,51.0 115.0,48.6 120.0,50.4 125.0,50.4 130.0,46.5 135.0,46.5 145.0,46.7 150.0,47.0 155.0,43.4 160.0,41.6 165.0,29.1 170.0,33.0 175.0,36.5 180.0,35.9 185.0,36.2 190.0,37.2 195.0,5.0 200.0,24.2 205.0,27.8 210.0,29.1 215.0,37.2 220.0,37.4 225.0,30.9 230.0,36.5 235.0,36.9"/><circle cx="235.0" cy="36.9" r="3"/></svg><figcaption><strong>Price</strong> <span class="down">-6.4%</span> <span class="muted">0.002437 to 0.002282 TAO per alpha, 2026-09-28 to 2026-11-13</span></figcaption></figure><dl class="v2-tfacts"><div><dt>Net flow, 30 days</dt><dd><span class="up">+6.7 TAO</span> <span class="muted">2026-10-14 to 2026-11-13</span></dd></div><div><dt>Verdict history</dt><dd><ol class="v2-vh"><li><span class="muted">2026-11-08</span> <span class="st s-bearish">Bearish</span> <span class="st v-fair">Fairly valued</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-09</span> <span class="st s-bearish">Bearish</span> <span class="st v-fair">Fairly valued</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-11</span> <span class="st s-bearish">Bearish</span> <span class="st v-fair">Fairly valued</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-13</span> <span class="st s-bearish">Bearish</span> <span class="st v-fair">Fairly valued</span> <span class="muted">medium confidence</span></li></ol></dd></div></dl></div></div>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>Pool held between 5.3k and 5.5k TAO at every sample in 30 days; no run on the pool</li>
+<li>An open validator rebuild targets about 90% fewer Solana RPC calls (PR estimate)</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>No miner outside the owner slot earns; the team&#x27;s API lists no active miner</li>
+<li>No swap in 7 days (the last was 2026-11-04), against USD 24-35k in July weeks</li>
+<li>A one-hour buy of +63 to +150 TAO on 11-05, then -140 TAO in one hour 11 hours later; two exploit halts in October</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> Bullish if daily swap volume nears the roughly USD 58k that unlocks full miner pay. Bearish if outflows return or another exploit halts the network.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-similar">Similar subnets</h2>
+<div class="v2-sim"><p>By pool size this is <strong>rank 2 of 3</strong> among the subnets grouped as <em>infrastructure</em> (what they mainly sell). Pool and price as of 2026-11-13, price in TAO per alpha; the barrier is the easiest miner role.</p><div class="scroll"><table class="v2-table"><thead><tr><th>#</th><th>Subnet</th><th>Pool</th><th>Price</th><th>Miner barrier</th></tr></thead><tbody><tr><td>1</td><td><a href="/bittensor-docs/subnets/19.html">blockmachine</a> <span class="muted">SN19</span></td><td>29,417 TAO</td><td>0.00811</td><td><span class="v2-barrier b-high">High</span></td></tr><tr class="me" aria-current="true"><td>2</td><td>Allways <span class="muted">SN7, this page</span></td><td>5,383 TAO</td><td>0.002282</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>3</td><td><a href="/bittensor-docs/subnets/122.html">CookingTAO</a> <span class="muted">SN122</span></td><td>1,108 TAO</td><td>0.002634</td><td><span class="v2-barrier b-high">High</span></td></tr></tbody></table></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-11-13</span> <span class="muted">(on-chain read; Allways public API)</span> The owner slot holds 100% of incentive. The API shows no swap in 7 days; it showed 1 (USD 23) on 11-11.</li>
+<li><span class="when">2026-11-04</span> <span class="muted">(Allways public API; on-chain read; GitHub entrius/allways)</span> The API&#x27;s last swap: uid 120 on 2026-11-04. Both read 0% incentive; the code requires a fill in the last 12 hours. No swap of any status has been created since.</li>
+<li><span class="when">2026-10-27</span> <span class="muted">(GitHub entrius/allways)</span> Repo: open pull request #793 rebuilds the validator in event-fed components; program v17 adds an on-chain fee counter.</li>
+<li><span class="when">2026-10-21</span> <span class="muted">(#allways; GitHub entrius/allways)</span> v3.7.3 resumed the network after a second exploit (2026-10-20; only the first miner hit was reimbursed).</li>
+<li><span class="when">2026-10-14</span> <span class="muted">(Allways public API; #allways)</span> The team&#x27;s API shows 348 swaps (about USD 256k) in one day, 86% from one address.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Check recent swap volume in the team&#x27;s public API first: no miner outside the owner slot earned on 2026-11-13.</li>
+<li>Prepare a Bittensor wallet, a funded Solana keypair, a free Solana RPC key and a signing key per asset you deliver.</li>
+<li>Run alw miner init, then alw doctor; follow the on-chain order the guide gives (deposit, bind, register, bond, start, post quotes).</li>
+<li>Validators: hold a permit, fund a Solana keypair, buy a paid Solana RPC and ask the contract admin to whitelist your key.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Incident causes (2026-10-14 to 10-20) are the team&#x27;s account; no source says what the 10-14 swaps were.</li>
+<li>Usage numbers come from the team&#x27;s own API (all swap rows, read 2026-11-13) and its July posts; neither was independently checked.</li>
+<li>Low miner pay is arithmetic on sourced numbers, matching the chain in size; no validator&#x27;s own share was read.</li>
+<li>Docs lag code: the incentive page omits the fee-scaled pool; vote threshold and stake split were not read.</li>
+<li>The unmerged validator rebuild may change the code described here (only its core formulas were compared). Why uids 32 and 120 read 0% is inferred from code. Chat after 2026-10-30 was not read (archive down).</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/entrius/allways" rel="noopener noreferrer">GitHub</a></li>
+<li><a href="https://docs.all-ways.io/" rel="noopener noreferrer">Docs</a></li>
+<li><a href="https://docs.all-ways.io/miner.html" rel="noopener noreferrer">Miner guide</a></li>
+<li><a href="https://docs.all-ways.io/validator.html" rel="noopener noreferrer">Validator guide</a></li>
+<li><a href="https://docs.all-ways.io/incentive.html" rel="noopener noreferrer">Incentive docs</a></li>
+<li><a href="https://all-ways.io/" rel="noopener noreferrer">Dashboard</a></li>
+<li><a href="https://api.all-ways.io/swagger" rel="noopener noreferrer">API (Swagger)</a></li>
+<li><a href="https://all-ways.io/llms.txt" rel="noopener noreferrer">Agent quickstart</a></li>
+<li><a href="https://allways.venturalabs.ai/" rel="noopener noreferrer">Allways Access (Ventura Labs web app)</a></li>
+<li><a href="https://x.com/allways_io" rel="noopener noreferrer">X</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 6 sources</summary>
+<ul>
+<li><strong>repo</strong> entrius/allways README.md, allways/constants.py, allways/validator/scoring.py, Solana program sources and git log: branch test at 090567b (2026-10-24); main and tag release-20261021-195318 at d455a52 (2026-10-21); main, test and validator-rebuild heads re-checked 2026-11-13, unchanged; pull request #793 (head 4b7c2b9, 2026-10-27) read 2026-11-02, still open 2026-11-13; eligibility, scoring and program sources read 2026-11-04</li>
+<li><strong>web</strong> docs.all-ways.io home, miner, validator, incentive and swap-guide pages; all-ways.io/llms.txt; allways.venturalabs.ai (read 2026-10-30, byte-identical again 2026-11-13; docs unchanged since 2026-10-26)</li>
+<li><strong>web</strong> Allways public API api.all-ways.io /health, /stats, /prices and /swaps (all 4,102 rows, 3,931 completed), read 2026-11-13 about 08:30 UTC, newest row unchanged since 2026-11-04; July figures are team posts</li>
+<li><strong>msg</strong> #allways 2025-11-10 to 2026-10-30 (whole channel read 2026-10-30; newer messages not read: the chat archive was unreachable on 2026-11-13); former-occupant channel SubVortex 2025-11-05 to 2025-11-10; team daily post of 2026-10-14</li>
+<li><strong>web</strong> Chain read at block 9496190 (2026-11-13 08:20Z UTC): SN7 (Allways): registered 2024-03-24, tempo 360, 256 of 256 uids, commit-reveal on; emission weights burn/recycle/owner/validator/miner = 0/0/18/41/41 % (stored, same values as the chain default), RecycleOrBurn = Recycle; uids under the owner hotkey or owner coldkey hold 100 % of incentive and 50 % of last-epoch emission (a floor); 12 validators have weight rows, on average 0 % of weight goes to uid 0.</li>
+<li><strong>web</strong> Chain read at block 9496190 (2026-11-13 08:20Z): price SN7, 6 samples every 7d from block 9280190 (2026-10-14 08:01Z): price 0.002290 -&gt; 0.002282 TAO per alpha (-0.4%), pool TAO 5392.5 -&gt; 5383.2; over the 5 intervals where the pool change equals flow + protocol: net user flow +6.7 TAO (staked minus unstaked), protocol flow -16.0 TAO, gross volume 3908.1 TAO. Pool rank 80 of 128 from the shared snapshot at block 9496190. Last 10 days: daily read from block 9424190 (2026-11-03 08:19Z), net user flow -15.5 TAO, price -0.8%. Hourly reads of 2026-11-08 (two anchors): +62.8 to +150.2 TAO in the buy hour on 2026-11-05 and -140.0 TAO in the hour to 23:50Z.</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/6.html"><small>← Previous</small>SN6 Numinous</a><a rel="next" href="/bittensor-docs/subnets/8.html"><small>Next →</small>SN8 Vanta</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-11-13. Site built 2026-11-14. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

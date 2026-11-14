@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Leadpoet (SN71) | Bittensor Subnet Docs</title>
+<meta name="description" content="Daily contest to improve an open sales-research agent; a win of 5+ points over the baseline earns pay.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h17">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>71</span><div>
+<h1>Leadpoet <span class="muted">SN71</span></h1>
+<p class="tagline">Daily contest to improve an open sales-research agent; a win of 5+ points over the baseline earns pay.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>13<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>15<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>9.1<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-11-01</b><span>last chat</span></li><li class="pw"><b>6,406</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Shipping</b><span>code activity</span></li><li class="pw"><b>2,408</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-11-12</b><span>last commit</span></li><li class="pw"><b>2026-07-20</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>AI sales agents</dd>
+<dt>Status</dt><dd>Active: no new champion in nine rounds (11-04 to 11-12); the 11-03 winner&#x27;s share of incentive fell to 25% on 11-11.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-11-13</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Reward rules</a></li><li><a href="#sn-x1">Recent rounds</a></li><li><a href="#sn-x2">Docs vs code vs chain</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-similar">Similar subnets</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>miners submit a sales-research agent daily; to be paid it must beat the baseline by 5+ points.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>one miner holds 25% of incentive (about 10% of subnet emission, 2026-11-13; 75% on 11-10); the owner uid holds 75%.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>entries cost about $12-24 a day in API fees (median per round, 11-01 to 11-12); no GPU needed.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>entries per round fell from 37 (10-24) to 8 (11-09), then 10, 10 and 17 (11-12).</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>ARR tripled in two months and a strategic backer joined; no revenue figure is public.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Builds and submits a sales-research agent daily.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-caution">Paid service needed</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-no"><dt>Hardware</dt><dd>None specified; agents run in the subnet&#x27;s sandbox.</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>OpenRouter (zero-data-retention) and Deepline keys; about $12-24 per daily entry.</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Registration burn about 0.0005 TAO (2026-11-12); no stake is mentioned in the docs.</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Fork the baseline, code the agent; days of iteration.</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Runs agents on hidden requests, or just sets the team&#x27;s signed weights.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-caution">Paid service needed</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>Large server: 20.8 GiB free RAM for 10 parallel runs, 41.1 GiB for 20.</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>Own Webshare datacenter proxies (19 US, 1,000 GB a month); price not stated.</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Permit (1,000 TAO chain-wide); 75,000+ effective stake for scoring jobs, else weights only.</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Service plus proxy and memory checks; a restart must let work drain for up to 9,300 s.</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-11-13. Not financial advice.</span></div><p>Price -32% and 959 TAO net out in 30 days; the paid miner&#x27;s pay fell to 2.7 TAO a day. <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>Leadpoet (SN71) runs a daily contest in which miners improve a public sales-research agent that returns up to five companies, with evidence, for a buyer request. A winner that beats the baseline by 5+ points becomes the new baseline and earns miner rewards. The team sells a sales product; its website never mentions Bittensor.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>A miner forks the public baseline agent and edits it. The code keeps the AGPL-3.0 licence, runs in a sandbox and passes an AI code review.</p></div><div><h3>Validators</h3><p>The team&#x27;s gateway assigns scoring work and signs the weights. Validators with a permit and 75,000+ effective stake run each agent on 10 hidden requests; smaller ones only fetch the signed weights.</p></div><div><h3>Incentive</h3><p>Each day the best eligible agent is re-scored against the baseline. It is crowned only if it wins by 5+ points (8 before round 11-11), and its code becomes the next baseline. It also needs usable reasoning records for 80%+ of requests. Slots pay by margin; unclaimed shares go to the owner uid, a burn target.</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-11-13, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-good">Open</span>Permit plus 75,000 effective stake runs scoring jobs; the runner list is not an allowlist (docs).</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">71.9%</span>Owner uid holds 71.9% of emission and 75% of incentive; owner cut 18%.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">2 uids</span><span class="v2-sx muted">top 5 hold 100% of incentive.</span> Two uids: the owner uid (75%) and one miner (25%).</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Converged</span>All 8 validators send 75% of weight to uid 0 and 25% to the paid miner.</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-good">Open</span>Subnet repo and baseline agent are public (AGPL-3.0); the team runs the gateway.</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Builds and submits a sales-research agent daily.</p><ul>
+<li>Cap: $6 of sourcing per buyer request; over the cap scores zero.</li>
+<li>Median sourcing spend per entry: $19.9 (11-09), $19.2 (11-10), $14.8 (11-11), $11.6 (11-12); judging extra.</li>
+<li>Judging is capped at five attempts per entry since 2026-11-01; failures before any model call do not count.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Runs agents on hidden requests, or just sets the team&#x27;s signed weights.</p><p class="muted">No further detail found in the sources.</p></section></div>
+<h2 id="sn-x0">Reward rules</h2>
+<p>Slots are cumulative; a win under +5 earns the title but no reward. New winners take every tier cleared (+5 = 15%, +10 = 40%, +15 = 75% in total); the 11-03 winner keeps 20 / 15 / 15% until replaced. Each slot halves every 140 epochs, no floor; first halving 11-11.</p>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Improvement over baseline</th><th>Slot for a new winner</th><th>Held on 2026-11-12 (before halving)</th></tr></thead><tbody><tr><td>+5 points</td><td>15%</td><td>Round 11-03 winner: 15% (was +8)</td></tr><tr><td>+10 points</td><td>25%</td><td>Same winner: 15% (was +15)</td></tr><tr><td>+15 points</td><td>35%</td><td>Same winner: 20% (was +20)</td></tr></tbody></table></div>
+<h2 id="sn-x1">Recent rounds</h2>
+<p>Baseline scores 19.8 to 48.6; unfinished entries: 2 of 8 (11-09), 1 of 17 (11-12).</p>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Round</th><th>Challengers</th><th>Winner vs baseline</th><th>Result</th></tr></thead><tbody><tr><td>2026-11-09</td><td>8</td><td>38.8 vs 32.95 (+5.85)</td><td>No champion; under the 8-point margin</td></tr><tr><td>2026-11-10</td><td>10</td><td>27.65 vs 19.8 (+7.85)</td><td>No champion; 0.15 short of +8</td></tr><tr><td>2026-11-11</td><td>10</td><td>44.2 vs 39.325 (+4.875)</td><td>No champion; 0.125 short of +5</td></tr><tr><td>2026-11-12</td><td>17</td><td>46.325 vs 48.575 (-2.25)</td><td>No champion; baseline ranked first</td></tr></tbody></table></div>
+<h2 id="sn-x2">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Sourcing cap</td><td>README and integrity doc: $4 per buyer request.</td><td>Code: rounds 10-28 to 11-12 use a $6 cap.</td><td>2026-11-12</td></tr></tbody></table></div>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-11-13. Not financial advice.</span></div>
+<p class="v2-thesis">Net selling of 959 TAO (20% of the pool) in 30 days, 912 of it by 10-28; 96 TAO out in the last two days.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.003614 TAO per alpha</dd></div><div><dt>Pool</dt><dd>4,788 TAO, rank 86</dd></div><div><dt>Price, 30 days</dt><dd>-32% (from 2026-10-14)</dd></div><div><dt>Net flow, 30 days</dt><dd>-959 TAO (20% of pool)</dd></div><div><dt>Miner pay</dt><dd>2.7 TAO per day, to 1 miner</dd></div><div><dt>Code activity</dt><dd>last commit 2026-11-12; 3,037 commits in 30 days</dd></div></dl>
+<div class="v2-trend"><h3>Trend</h3><div class="v2-tbody"><figure class="v2-tfig"><svg class="v2-spark down" viewBox="0 0 240 56" role="img" aria-label="Price in TAO per alpha, 2026-09-28 to 2026-11-13: 0.003839 to 0.003614, -5.9%"><polyline points="5.0,44.8 20.0,44.2 30.0,44.9 35.0,46.2 40.0,47.9 45.0,36.8 55.0,15.8 65.0,16.7 70.0,17.8 75.0,14.6 80.0,5.0 90.0,16.5 100.0,22.9 105.0,33.1 110.0,9.8 115.0,24.6 125.0,44.2 130.0,42.4 135.0,42.1 140.0,45.7 145.0,44.8 150.0,47.7 155.0,47.7 160.0,49.1 165.0,48.2 170.0,46.2 175.0,49.0 180.0,41.7 185.0,42.7 190.0,44.7 195.0,46.0 200.0,44.8 205.0,45.5 210.0,44.6 215.0,45.8 220.0,46.6 225.0,49.3 235.0,51.0"/><circle cx="235.0" cy="51.0" r="3"/></svg><figcaption><strong>Price</strong> <span class="down">-5.9%</span> <span class="muted">0.003839 to 0.003614 TAO per alpha, 2026-09-28 to 2026-11-13</span></figcaption></figure><dl class="v2-tfacts"><div><dt>Net flow, 30 days</dt><dd><span class="down">-959 TAO</span> <span class="muted">2026-10-14 to 2026-11-13</span></dd></div><div><dt>Verdict history</dt><dd><ol class="v2-vh"><li><span class="muted">2026-11-08</span> <span class="st s-neutral">Neutral</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-09</span> <span class="st s-neutral">Neutral</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-10</span> <span class="st s-neutral">Neutral</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-13</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li></ol></dd></div></dl></div></div>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>The team ships daily: 3,037 commits in 30 days.</li>
+<li>Entries rose to 17 on 11-12; two rounds ended 0.15 and 0.125 short of a champion.</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>96 TAO net out in two days (5 of 7 days out); 959 TAO in 30 days.</li>
+<li>No champion in nine rounds; the paid miner&#x27;s share fell from 75% to 25% of incentive.</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> Bullish: a champion at +5 or more; a named, dated customer or revenue figure; a week of net buying. Bearish: no champion before the second halving (about 11-18) and more net selling.</p>
+<p class="muted">Since the last pass: Neutral to bearish since 2026-11-10: net selling after the halving, no champion in rounds 11-11 and 11-12; miner pay 8.3 to 2.7 TAO a day.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-similar">Similar subnets</h2>
+<div class="v2-sim"><p>By pool size this is <strong>rank 4 of 8</strong> among the subnets grouped as <em>agents</em> (what they mainly sell). Pool and price as of 2026-11-13 to 2026-11-14, price in TAO per alpha; the barrier is the easiest miner role.</p><div class="scroll"><table class="v2-table"><thead><tr><th>#</th><th>Subnet</th><th>Pool</th><th>Price</th><th>Miner barrier</th></tr></thead><tbody><tr><td>2</td><td><a href="/bittensor-docs/subnets/15.html">ORO</a> <span class="muted">SN15</span></td><td>13,485 TAO</td><td>0.01734</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr><td>3</td><td><a href="/bittensor-docs/subnets/121.html">sundae_bar</a> <span class="muted">SN121</span></td><td>5,352 TAO</td><td>0.003313</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr class="me" aria-current="true"><td>4</td><td>Leadpoet <span class="muted">SN71, this page</span></td><td>4,788 TAO</td><td>0.003614</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>5</td><td><a href="/bittensor-docs/subnets/98.html">NeverPlayAlone</a> <span class="muted">SN98</span></td><td>4,532 TAO</td><td>0.002114</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr><td>6</td><td><a href="/bittensor-docs/subnets/118.html">Ditto</a> <span class="muted">SN118</span></td><td>4,087 TAO</td><td>0.002947</td><td><span class="v2-barrier b-low">Low</span></td></tr></tbody></table></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-11-12</span> <span class="muted">(gateway API)</span> Round 11-12 (17 entries): baseline 48.575 ranked first, best entry 46.325 (-2.25); no champion. Round 11-13 (13 entries) is in stage 2; it publishes by 20:30Z.</li>
+<li><span class="when">2026-11-11</span> <span class="muted">(GitHub)</span> Rewards corrected (PR #1189): the 15 / 25 / 35% tiers apply only to models promoted from round 11-11; the 11-03 winner keeps 20 / 15 / 15%, halved after epoch 26323.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Clone leadpoet/leadpoet (Python 3.11) and register a hotkey on subnet 71 (burn about 0.0005 TAO).</li>
+<li>Fork the baseline agent (lab branch of leadpoet-sales-agent); keep its AGPL-3.0 licence beside harness.py.</li>
+<li>Edit run_icp to return at most five companies in the round&#x27;s schema.</li>
+<li>Choose OpenRouter models from the approved list: zero-data-retention route, full reasoning text.</li>
+<li>Submit with scripts/lab_arena_miner.py (interactive) and your API keys before 00:00 UTC.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Rules change often: rewards 10-08 to 10-24, cutoff 11-06, scoring code 11-07, re-score path 11-09, margin and slots 11-10, slot fix 11-11.</li>
+<li>The team runs the gateway and says it competes with its own hotkey; no entry checked (10-18 to 10-22) was on the owner&#x27;s coldkey.</li>
+<li>Validators copy the team&#x27;s signed weights: chain weights show configuration, not independent judgment.</li>
+<li>The team runs scoring and review and has paused, retried and re-scored rounds (11-01 to 11-10).</li>
+<li>Claims that operators enter many hotkeys a day are unverified. No revenue, customer or buyback figure is public.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/leadpoet/leadpoet" rel="noopener noreferrer">GitHub (subnet)</a></li>
+<li><a href="https://github.com/leadpoet/leadpoet-sales-agent" rel="noopener noreferrer">Baseline agent</a></li>
+<li><a href="https://github.com/leadpoet/leadpoet/blob/main/docs/arena_reward_slots.md" rel="noopener noreferrer">Reward rules</a></li>
+<li><a href="https://subnet71.com/" rel="noopener noreferrer">Leaderboard and dashboard</a></li>
+<li><a href="https://leadpoet.com/" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://leadpoet.com/pricing" rel="noopener noreferrer">Pricing (product)</a></li>
+<li><a href="https://gateway.subnet71.com/arena/v1/current" rel="noopener noreferrer">Gateway API (current round)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 7 sources</summary>
+<ul>
+<li><strong>repo</strong> leadpoet/leadpoet@a6ac9e4 (2026-11-12 21:57Z, PR #1212; GitHub compare from 8b7abb9: 141 commits, 158 files): docs/arena_reward_slots.md diff and full read, README.md and docs/arena-score-integrity.md ($4 lines), commit titles (f66d827, PR #1189), file list; earlier reads at 8b7abb9 (2026-11-10), 202ff96 (11-09), 35a541a (11-08), 9918373 (11-07), 587091f (11-05), f678074 (11-04), c8f11b2 (11-03)</li>
+<li><strong>repo</strong> leadpoet/leadpoet-sales-agent@bc0d0d4 (lab branch; newest commit 2026-11-04 15:22Z, commit titles only; no commit since, checked 2026-11-13)</li>
+<li><strong>web</strong> https://gateway.subnet71.com/arena/v1/current (read 2026-11-13 03:10Z) and /arena/v1/rounds/&lt;id&gt; for 2026-10-24 to 2026-11-13; round 11-12 published 2026-11-12T20:33:05Z (no champion; 17 entries and the baseline, one unfinished); round 11-11 published 2026-11-11T08:12:52Z (10 entries); round 11-10 published 2026-11-10T18:46:35Z (10 entries); round 11-13 in stage2 (13 entries and the baseline, margin 5); open round 11-14 margin 5; slot policy pool 50%, tiers 20 / 15 / 15% at +15 / +10 / +5 for the 11-03 slots (new winners 35 / 25 / 15%); king defended on 11-12; slot epoch 26183, current epoch 26361</li>
+<li><strong>web</strong> Chain read at block 9494586 (2026-11-13 02:59Z UTC): SN71 (Leadpoet): registered 2025-03-03, tempo 360, 256 of 256 uids, commit-reveal on; emission weights burn/recycle/owner/validator/miner = 0/0/18/41/41 % (stored, same values as the chain default), RecycleOrBurn = Burn; uids under the owner hotkey or owner coldkey hold 75 % of incentive and 71.92 % of last-epoch emission (a floor); 8 validators have weight rows, on average 75 % of weight goes to uid 0. Chain read at block 9494586 (2026-11-13 02:59Z UTC), compared with block 9486488 (2026-11-12 00:00Z UTC): SN71: no setting changed in 33 checked items; emission split unchanged; pool 4828.51 -&gt; 4787.81 TAO. Chain read at block 9494586 (2026-11-13 02:59Z): SN71 uid 88 registered 2026-10-27 18:50Z, incentive 24.999% (rank 2), validator permit True, hotkey owner-linked False, coldkey owner-linked False.</li>
+<li><strong>web</strong> Chain read at block 9494586 (2026-11-13 02:59Z): price SN71, 6 samples every 7d from block 9278586 (2026-10-14 02:40Z): price 0.005306 -&gt; 0.003614 TAO per alpha (-31.9%), pool TAO 5800.0 -&gt; 4787.8; over the 5 intervals where the pool change equals flow + protocol: net user flow -959.0 TAO (staked minus unstaked), protocol flow -53.1 TAO, gross volume 51245.0 TAO. Chain read at block 9494586 (2026-11-13 02:59Z): price SN71, 8 samples every 1d from block 9444186 (2026-11-06 02:58Z): price 0.003820 -&gt; 0.003614 TAO per alpha (-5.4%), pool TAO 4921.7 -&gt; 4787.8; over the 7 intervals where the pool change equals flow + protocol: net user flow -128.7 TAO (staked minus unstaked), protocol flow -5.2 TAO, gross volume 7009.6 TAO. Pool rank 86 and price rank 77 of 128 from the shared snapshot at block 9494586.</li>
+<li><strong>web</strong> https://leadpoet.com/ home and pricing pages (read 2026-11-05; re-read 2026-11-10: no mention of Bittensor, Free plan listed); all 7 page links return 200 (2026-11-13)</li>
+<li><strong>msg</strong> #71-leadpoet 2025-10-13 to 2026-11-01 (archive unreachable on 2026-11-13)</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/70.html"><small>← Previous</small>SN70 Fugal</a><a rel="next" href="/bittensor-docs/subnets/72.html"><small>Next →</small>SN72 StreetVision (NATIX) / chillyshort</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-11-13. Site built 2026-11-14. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

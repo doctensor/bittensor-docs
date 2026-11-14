@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ORO (SN15) | Bittensor Subnet Docs</title>
+<meta name="description" content="Miners build AI shopping agents that compete in daily races on freshly generated online-shop worlds.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h9">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>15</span><div>
+<h1>ORO <span class="muted">SN15</span></h1>
+<p class="tagline">Miners build AI shopping agents that compete in daily races on freshly generated online-shop worlds.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>167<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>99<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>106<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-11-02</b><span>last chat</span></li><li class="pw"><b>28,493</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Shipping</b><span>code activity</span></li><li class="pw"><b>24</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-11-13</b><span>last commit</span></li><li class="pw"><b>2026-11-08</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>AI agents for online commerce</dd>
+<dt>Status</dt><dd>Very active. Daily worlds since 2026-10-22; races 13 to 17 and 20 to 23 each crowned a new top agent; races 18 and 19 kept it. Rules still settling; tag v3.0.8 (2026-11-08).</dd>
+<dt>Confidence</dt><dd>high</dd>
+<dt>Researched</dt><dd>2026-11-14</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Key numbers</a></li><li><a href="#sn-x1">Enforcement</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-similar">Similar subnets</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>miners write AI shopping agents that validators grade on fresh online shops in a daily race.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>one uid takes 95.3% of incentive; 69 others share the rest. The top changed hands after each of races 20 to 23.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>no GPU; miners pay their own capped OpenRouter inference. Registering burns about 0.16 TAO.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>holders net sold 2,519 TAO in 30 days, 607 of it in the last 7; the price fell 17%.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>validators set weights from backend standings; the ORO backend, not validators, names the top agent.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-low">Low barrier</span></h3><p>Builds and submits one Python shopping agent; the top agent earns most emission.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-caution">Paid service needed</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>Laptop with Docker and 16 GB free disk (local tests only)</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>OpenRouter Management key; capped at $2 per qualifying run, $5 per race run</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>About 0.16 TAO to register (2026-11-14); no stake</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Python, Docker, git-lfs, oro CLI; one submission per hotkey every 18 h</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Runs agents in Docker sandboxes, reports scores, sets on-chain weights.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>Dedicated 8 cores, 16 GB RAM, 100 GB SSD, 100 Mbps; no GPU</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None required (no API key in the config docs); a dedicated host</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Permit plus 40,000 stake weight (docs); chain minimum 1,000; three miners got a permit at about 1,000-1,140 hotkey alpha</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Docker and one compose command; optional auto-updates</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-11-14. Not financial advice.</span></div><p>Net selling continues: -607 TAO in the last 7 days. Usage unverified. <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>ORO tests AI agents that shop for a simulated customer: they search a catalog, ask about unstated needs and finish with one order or a decline. Each daily race runs on a newly generated shop, so memorised answers fail.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Write one Python function, agent_main(problem_data), that reads the world&#x27;s tools from the request and makes one tool call per step, ending with an order or a decline. A task scores 1 only if that finish is fully correct within the budgets.</p></div><div><h3>Validators</h3><p>Validators claim work from the ORO backend and run each agent in an isolated Docker sandbox; the world&#x27;s grader marks each task 1 or 0 and scores are averaged across validators. They set weights from backend standings.</p></div><div><h3>Incentive</h3><p>The top agent has the best difficulty-adjusted average over its last three races; a challenger must beat it by a margin that starts at 0.011 and halves every 3.5 days. The top gets full weight; the last race&#x27;s survivors share a falling ladder. Burn is 0%, so the top uid held 95.3% of incentive on 2026-11-14.</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-11-14, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-good">Open</span>Any hotkey with a permit and 40,000 stake weight can validate; 12 hold permits, 11 set weights.</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">0%</span>Owner uid 0 earns 0% of emission; the owner cut is 18%; unassigned emission is burned.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">70 uids</span><span class="v2-sx muted">top 5 hold 95.9% of incentive.</span> 70 uids earn incentive; the top uid takes 95.3% and the top 5 take 95.9%.</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Converged</span>11 of 11 weight rows put their top weight on one uid; all are built from the same backend standings.</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-caution">Partial</span>Miner and validator code are public under MIT; the world runtime, graders and backend are not.</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-low">Low barrier</span></h3><p>Builds and submits one Python shopping agent; the top agent earns most emission.</p><ul>
+<li>Only models on ORO&#x27;s OpenRouter allowlist work; each run&#x27;s key expires after 1 hour, and a task stops after 5 minutes.</li>
+<li>One Python file under 1 MB; the practice world is public. Code is published after 5 days, the top agent&#x27;s at once.</li>
+<li>Zero-scoring tasks fall into six failure categories; world faults are rerun, not scored.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Runs agents in Docker sandboxes, reports scores, sets on-chain weights.</p><ul>
+<li>Reference hosts: AWS c7g.2xlarge or c6i/c7i.2xlarge; burstable CPUs time out. First start pulls about 8 GB.</li>
+<li>The backend can withhold standings from an ineligible validator; the rule is not documented (code).</li>
+</ul></section></div>
+<h2 id="sn-x0">Key numbers</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Item</th><th>Value</th></tr></thead><tbody><tr><td>Race size</td><td>274 qualifiers in race 21 (a record); 66 in race 1 (2026-10-22)</td></tr><tr><td>Cooldown / elimination</td><td>18 h per hotkey / bottom 65% of a large race</td></tr><tr><td>Qualifying closes</td><td>12:00 PT daily; threshold 0.55; hidden race tasks</td></tr><tr><td>Result delay</td><td>Scores are held back; incentive moved 2.5-3.5 hours after the race on the last four top changes</td></tr></tbody></table></div>
+<h2 id="sn-x1">Enforcement</h2>
+<ul class="v2-list">
+<li>Changing a run key&#x27;s spend cap mid-run: version discarded, hotkey banned.</li>
+<li>Hardcoded task identifiers: hotkey banned. Submissions are also screened for security problems and copying.</li>
+<li>Fixed lookup tables of product kinds, attributes or units: rejected, full cooldown (rule widened after 2026-11-01).</li>
+</ul>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-11-14. Not financial advice.</span></div>
+<p class="v2-thesis">Net selling and a 17% price fall; the team ships, but one uid takes 95% of incentive.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.01734 TAO per alpha</dd></div><div><dt>Pool</dt><dd>13,485 TAO, rank 34</dd></div><div><dt>Price, 30 days</dt><dd>-17%, 2026-10-15 to 2026-11-14</dd></div><div><dt>Net flow, 30 days</dt><dd>-2,519 TAO, 2026-10-15 to 2026-11-14</dd></div><div><dt>Miner pay</dt><dd>0.729 TAO per day on average (51.0 TAO per day over 70 uids)</dd></div><div><dt>Miner pay outside top 5</dt><dd>0.032 TAO per day on average (2.09 TAO per day over 65 uids outside the top 5)</dd></div><div><dt>Code activity</dt><dd>last commit 2026-11-13 (docs only since 2026-11-08); 30 commits in 30 days; latest tag 2026-11-08</dd></div></dl>
+<div class="v2-trend"><h3>Trend</h3><div class="v2-tbody"><figure class="v2-tfig"><svg class="v2-spark down" viewBox="0 0 240 56" role="img" aria-label="Price in TAO per alpha, 2026-09-28 to 2026-11-14: 0.02306 to 0.01734, -24.8%"><polyline points="5.0,21.0 19.7,15.8 24.6,14.0 34.4,11.7 39.3,5.0 44.1,10.4 49.0,17.6 53.9,19.0 58.8,21.0 68.6,21.1 73.5,21.2 78.4,23.8 83.3,28.9 88.2,31.8 93.1,31.1 102.9,29.8 107.8,32.9 112.7,34.6 117.6,36.5 122.4,37.6 127.3,37.8 132.2,37.2 137.1,36.9 142.0,34.7 146.9,33.1 151.8,36.4 156.7,41.3 161.6,43.6 166.5,46.3 171.4,45.8 176.3,46.0 181.2,49.0 186.1,48.2 191.0,46.1 195.9,46.2 200.7,44.8 205.6,45.2 210.5,46.8 215.4,47.3 220.3,47.9 225.2,48.3 230.1,49.5 235.0,51.0"/><circle cx="235.0" cy="51.0" r="3"/></svg><figcaption><strong>Price</strong> <span class="down">-24.8%</span> <span class="muted">0.02306 to 0.01734 TAO per alpha, 2026-09-28 to 2026-11-14</span></figcaption></figure><dl class="v2-tfacts"><div><dt>Net flow, 30 days</dt><dd><span class="down">-2,519 TAO</span> <span class="muted">2026-10-15 to 2026-11-14</span></dd></div><div><dt>Verdict history</dt><dd><ol class="v2-vh"><li><span class="muted">2026-11-08</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-10</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-12</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-14</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li></ol></dd></div></dl></div></div>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>Team ships: 30 commits in 30 days, v3.0.8 on 2026-11-08.</li>
+<li>Races hold 227-274 qualifiers (66 in race 1).</li>
+<li>Owner uid earns 0%; burn is 0%.</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>Net outflow in all 5 intervals over 30 days and on each of the last 7 days (-607 TAO).</li>
+<li>One uid takes 95.3% of incentive; the backend picks it, and changed it on 4 days running.</li>
+<li>No named customers or revenue.</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> Verified paying users or a week of net inflow would lift it; a burn above 0% would deepen it.</p>
+<p class="muted">Since the last pass: Unchanged since 2026-11-01. The 7-day test failed again (-607 TAO; -296 on 2026-11-12); the view turns neutral if that sum turns positive.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-similar">Similar subnets</h2>
+<div class="v2-sim"><p>By pool size this is <strong>rank 2 of 8</strong> among the subnets grouped as <em>agents</em> (what they mainly sell). Pool and price as of 2026-11-13 to 2026-11-14, price in TAO per alpha; the barrier is the easiest miner role.</p><div class="scroll"><table class="v2-table"><thead><tr><th>#</th><th>Subnet</th><th>Pool</th><th>Price</th><th>Miner barrier</th></tr></thead><tbody><tr><td>1</td><td><a href="/bittensor-docs/subnets/11.html">TrajectoryRL</a> <span class="muted">SN11</span></td><td>19,388 TAO</td><td>0.006881</td><td><span class="v2-barrier b-high">High</span></td></tr><tr class="me" aria-current="true"><td>2</td><td>ORO <span class="muted">SN15, this page</span></td><td>13,485 TAO</td><td>0.01734</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr><td>3</td><td><a href="/bittensor-docs/subnets/121.html">sundae_bar</a> <span class="muted">SN121</span></td><td>5,352 TAO</td><td>0.003313</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr><td>4</td><td><a href="/bittensor-docs/subnets/71.html">Leadpoet</a> <span class="muted">SN71</span></td><td>4,788 TAO</td><td>0.003614</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>5</td><td><a href="/bittensor-docs/subnets/98.html">NeverPlayAlone</a> <span class="muted">SN98</span></td><td>4,532 TAO</td><td>0.002114</td><td><span class="v2-barrier b-low">Low</span></td></tr></tbody></table></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-11-14</span> <span class="muted">(ORO public API)</span> Race 23 crowned PIRATE (0.3834); the old top, Pooh, came 108th. Races 21 and 22 also crowned new tops (CHIDORI, then Pooh).</li>
+<li><span class="when">2026-11-14</span> <span class="muted">(On-chain data)</span> New top uid 80 (registered 2026-11-11) got incentive 2.8-3.0 hours after race 23 ended; its stake rose from 3 to 1,127 alpha in 9 hours; no permit. The old tops&#x27; uids 86 and 104 now hold new hotkeys.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Install the SDK (pip install -U &quot;oro-sdk[bittensor]&quot;), create a wallet with btcli and register your hotkey on subnet 15.</li>
+<li>Clone the repo, run git lfs pull, put an OpenRouter key in .env and run oro inference connect for network runs.</li>
+<li>Start from src/agent/environment_agent.py and test with docker compose run test --agent-file my_agent.py.</li>
+<li>Read the code requirements page, then submit with the oro CLI or SDK.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>The rules are 23 days old and were last widened after 2026-11-01; miners report wrongful similarity rejections; no error rate is published.</li>
+<li>The world runtime, graders and backend are not public; the promised race world-seed commitment was empty for races 12 to 23.</li>
+<li>Docs no longer say who pays for the shopper&#x27;s model calls; a removed guide said miners.</li>
+<li>The backend supplies the top agent, survivors and burn rate; validator code falls back to 75% burn if it sends none.</li>
+<li>The top has sat under nine coldkeys since 2026-10-31 (two of them twice); the new top&#x27;s coldkey holds no other uid.</li>
+<li>Chat after 2026-11-01 was not read (archive down); newer team posts are missing.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/ORO-AI/oro" rel="noopener noreferrer">GitHub</a></li>
+<li><a href="https://oroagents.com/docs" rel="noopener noreferrer">Docs</a></li>
+<li><a href="https://oroagents.com/docs/miners/quick-start" rel="noopener noreferrer">Miner quick start</a></li>
+<li><a href="https://oroagents.com/docs/miners/code-requirements" rel="noopener noreferrer">Code requirements</a></li>
+<li><a href="https://oroagents.com/docs/validators/overview" rel="noopener noreferrer">Validator overview</a></li>
+<li><a href="https://oroagents.com/leaderboard" rel="noopener noreferrer">Leaderboard</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 12 sources</summary>
+<ul>
+<li><strong>repo</strong> ORO-AI/oro@d7a12e1 (HEAD on 2026-11-14, tags unchanged, latest v3.0.8; new since f156ffd: one README paragraph, 2026-11-13, #410; 30 commits in 30 days; docs link tags only since 2b060f2, 2026-11-08, tag v3.0.8): docs/miner-guide.md read in full from main on 2026-11-12 (failure categories, 300 s per task on the network); subnet/validator/weight_distribution.py (last changed 2026-10-03) and weight_setter.py (2026-10-17) read in full earlier and not in these commits</li>
+<li><strong>web</strong> oroagents.com/llms-full.txt and docs pages (validators overview and configuration incl. VALIDATOR_MEM_LIMIT; scoring and infrastructure-error rules; race system; code requirements incl. the widened lookup-table rule; ORO Bench EnvPacks; changelog, newest entry 2026-11-13 (SMB Bench report updates); FAQ; home page), read 2026-11-14 (compared by source URL with the 2026-11-11 read: no change except two new changelog entries)</li>
+<li><strong>web</strong> ORO public API (top-agent policy, current race, race history, details of races 21 to 23, seed-commitment endpoint), read 2026-11-14; the winners&#x27; hotkeys match chain uids 121, 162 and 80 by tag</li>
+<li><strong>web</strong> Chain read at block 9505223 (2026-11-14 14:27Z UTC): SN15 (ORO): registered 2026-01-21, tempo 360, 256 of 256 uids, commit-reveal on; emission weights burn/recycle/owner/validator/miner = 0/0/18/41/41 % (stored, same values as the chain default), RecycleOrBurn = Burn; uids under the owner hotkey or owner coldkey hold 0 % of incentive and 0 % of last-epoch emission (a floor); 11 validators have weight rows, on average 0 % of weight goes to uid 0.</li>
+<li><strong>web</strong> Chain read at block 9505223 (2026-11-14 14:27Z UTC), compared with block 9486488 (2026-11-12 00:00Z UTC): SN15: no setting changed in 33 checked items; Burn differs (moves with demand); emission split unchanged; pool 13597.16 -&gt; 13485.03 TAO.</li>
+<li><strong>web</strong> Chain read at block 9505223 (2026-11-14 14:27Z): price SN15, 6 samples every 7d from block 9289223 (2026-10-15 14:08Z): price 0.021474 -&gt; 0.017341 TAO per alpha (-19.2%), pool TAO 13748.2 -&gt; 13485.0; over the 5 intervals where the pool change equals flow + protocol: net user flow -2518.6 TAO (staked minus unstaked), protocol flow +2255.5 TAO, gross volume 21363.4 TAO.</li>
+<li><strong>web</strong> Chain read at block 9505223 (2026-11-14 14:27Z): price SN15, 9 samples every 1d from block 9447623 (2026-11-06 14:26Z): price 0.018170 -&gt; 0.017341 TAO per alpha (-4.6%), pool TAO 13512.2 -&gt; 13485.0; over the 8 intervals where the pool change equals flow + protocol: net user flow -577.2 TAO (staked minus unstaked), protocol flow +550.0 TAO, gross volume 5003.7 TAO.</li>
+<li><strong>web</strong> Chain read at block 9505223 (2026-11-14 14:27Z): price SN15, 17 samples every 3h from block 9490823 (2026-11-12 14:27Z): price 0.017861 -&gt; 0.017341 TAO per alpha (-2.9%), pool TAO 13614.6 -&gt; 13485.0; over the 16 intervals where the pool change equals flow + protocol: net user flow -280.7 TAO (staked minus unstaked), protocol flow +151.1 TAO, gross volume 1046.1 TAO.</li>
+<li><strong>web</strong> Chain read at block 9505223 (2026-11-14 14:27Z): shared snapshot of 128 subnets, SN15 pool rank 34, price rank 19, 0.69% of pooled TAO.</li>
+<li><strong>web</strong> Chain reads per uid at block 9505223 (2026-11-14 14:27Z): uid 80 (top), uids 121 and 162 (the tops of races 21 and 22) and uids 86 and 104 (earlier tops, slots now held by new hotkeys); block-pinned reads of uid 80 (2026-11-14 04:27Z to 05:58Z), uid 121 (2026-11-12 05:49Z and 06:19Z) and uid 162 (2026-11-13 06:59Z and 07:29Z) bracket each hand-over.</li>
+<li><strong>web</strong> Chain reads at block 9505223 (2026-11-14 14:27Z): storage ValidatorPermit (12 permits: uid 0 and 11 validators, no miner) and weights --all (11 rows, each putting 95.1% to 95.3% on the top uid).</li>
+<li><strong>msg</strong> #15 oro, 2026-10-21 to 2026-11-01 (the archive returned 502 or hung from 2026-11-03 to 2026-11-14), plus the channel&#x27;s pinned posts from 2026-03 to 2026-04</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/14.html"><small>← Previous</small>SN14 Cacheon</a><a rel="next" href="/bittensor-docs/subnets/16.html"><small>Next →</small>SN16 Unnamed subnet</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-11-14. Site built 2026-11-14. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ridges (SN62) | Bittensor Subnet Docs</title>
+<meta name="description" content="Contests where miners build software-engineering agents and validators score them on hidden tests.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h2">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>62</span><div>
+<h1>Ridges <span class="muted">SN62</span></h1>
+<p class="tagline">Contests where miners build software-engineering agents and validators score them on hidden tests.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>32<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>15<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>8.7<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-11-02</b><span>last chat</span></li><li class="pw"><b>28,866</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Shipping</b><span>code activity</span></li><li class="pw"><b>64</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-11-10</b><span>last commit</span></li><li class="pw"><b>2026-11-11</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>software engineering agents</dd>
+<dt>Status</dt><dd>Chat last read 2026-11-02 (archive down); price at a 30-day low.</dd>
+<dt>Confidence</dt><dd>high</dd>
+<dt>Researched</dt><dd>2026-11-13</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Competitions today</a></li><li><a href="#sn-x1">Ridgeline, the product</a></li><li><a href="#sn-x2">Docs vs code vs chain</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>miners build coding agents; only an agent that beats the current leader earns emissions.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>Problem Solving gets 50% of emissions, Test Generation 25%, Database queries 25%.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>43 uids earn incentive and the top one holds 18%; all 13 weight-setting validators rank it first.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>only whitelisted validators can join and the platform sets one weight mapping: the main risk.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>miners need Docker, an OpenRouter key and about $10-20 per full run; no GPU.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Builds a Python agent that turns a repository and task into a patch and uploads it to one competition.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-caution">Paid service needed</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>Laptop or VPS with Docker; no GPU</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>OpenRouter API and management keys; about $10-20 per full run (docs)</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Alpha burn per upload (about $5 floor, +15% per buy); registration 0.0005 TAO now</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Python agent and local tests; many iterations</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Runs assigned agents in Docker sandboxes, runs hidden tests and sets weights on chain.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-bad">Permissioned</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>64 GB SSD, 12 GB RAM, Docker (docs); no local model</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None: no local LLM or miner keys</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Team whitelist plus a validator permit; chain stake threshold 1,000 TAO</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Docker, PM2, uv, setup script</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-11-13. Not financial advice.</span></div><p>Bearish: price -17% and a net 2,728 TAO outflow in 30 days; about 1,090 TAO of it in one day (11-07). <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>Miners submit Python agents that turn a repository and a task into a code patch. Validators run them on hidden tests, and only agents that beat the current leader earn emissions. The team also sells Ridgeline, which turns GitHub issues into pull requests.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Write agent.py, which returns a code patch, test it locally, then burn alpha to upload it to one competition (CLI or dashboard ticket). It runs on the miner&#x27;s own OpenRouter key through two screeners and three validators.</p></div><div><h3>Validators</h3><p>The score is the share of hidden tests passed (0-1, no model judge), and a problem counts only if every assigned validator solves it (the &#x27;consensus&#x27; rule, the default for new competitions). Validators publish the platform&#x27;s single weight mapping on chain.</p></div><div><h3>Incentive</h3><p>Emissions split across open competitions (50/25/25 now), then among approved agents by a reward score. It grows with how long the leader went unbeaten (1 + sqrt(hours/6), 6.3x after a week; set 28 acts like 12 hours) and halves every 14 days. A benchmark winner is meant to score its pass rate x 100, no time bonus (docs).</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-11-13, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-caution">Whitelisted</span>Code: 13 whitelisted hotkeys (12 mainnet); chain: 25 permits, 13 set weights.</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">0%</span>Owner uid holds 0% of incentive and emission (chain, 2026-11-13); owner cut 18%, RecycleOrBurn is Recycle.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">43 uids</span><span class="v2-sx muted">top 5 hold 51.3% of incentive.</span> 43 uids earn incentive; the top 5 hold 51.3% and uid 15 alone 18%.</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Converged</span>All 13 weight setters rank uid 15 first; one platform mapping, so this is concentration, not independent checks.</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-caution">Partial</span>Miner and validator code are public in one repo, but it has no licence file (2026-11-13).</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Builds a Python agent that turns a repository and task into a patch and uploads it to one competition.</p><ul>
+<li>One submission per hotkey per competition every 12 hours.</li>
+<li>To earn, beat the leader by 3% on score, or be 6% cheaper at equal or higher score.</li>
+<li>Inference is capped at $0.29 per problem, about $60 per run (docs).</li>
+<li>Problem Solving: no sample tasks; task-type playbooks count as hardcoding (docs).</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Runs assigned agents in Docker sandboxes, runs hidden tests and sets weights on chain.</p><ul>
+<li>Only 12 named validator hotkeys (plus a testnet one) are accepted at registration (code, 2026-10-31).</li>
+<li>Release 0.3.15 added a team-run &#x27;platform&#x27; mode, limited to under half of an agent&#x27;s evaluations; production use is not visible (code).</li>
+</ul></section></div>
+<h2 id="sn-x0">Competitions today</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Competition</th><th>Emission share</th><th>Screener 1 / 2 bar</th><th>Status</th><th>Top payee&#x27;s share (11-12)</th></tr></thead><tbody><tr><td>Problem solving (set 30)</td><td>50%</td><td>0.30 / 0.09</td><td>Open since 10-30; leader 0.52, cheaper agent approved 11-09</td><td>35%</td></tr><tr><td>Test generation (set 29)</td><td>25%</td><td>0.50 / 0.514</td><td>Open; leader 0.64 (11-12; was 0.60)</td><td>26%</td></tr><tr><td>Database queries (set 28)</td><td>25%</td><td>0.80 / 0.89</td><td>Benchmark phase 11-07 to 11-09 (winner 0.74); then 0.76 (11-10), leader 0.78 (11-12)</td><td>35%</td></tr></tbody></table></div>
+<h2 id="sn-x1">Ridgeline, the product</h2>
+<ul class="v2-list">
+<li>Ridgeline hands a GitHub issue to a sandboxed agent and returns a pull request only the user can merge; one credit buys one.</li>
+<li>Credits: $9.99 a month for 10, or lock alpha (1 credit per 1,000 alpha per 3 days). No usage or revenue figures are public.</li>
+</ul>
+<h2 id="sn-x2">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Unallocated emission share</td><td>Burned; never paid to anyone</td><td>Code: goes to the owner hotkey. Chain: that uid has 0.0% incentive; not yet tested</td><td>2026-11-13</td></tr><tr><td>Benchmark winner reward</td><td>100 x its score, no time bonus</td><td>Code: agrees. The 11-09 winner has score 0.74 but 44.0 points on the platform (74 expected)</td><td>2026-11-13</td></tr></tbody></table></div>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-11-13. Not financial advice.</span></div>
+<p class="v2-thesis">Net 2,728 TAO (11% of the pool) left in 30 days, out in four of five steps; the last five days were small (-179 TAO).</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.00742 TAO per alpha</dd></div><div><dt>Pool</dt><dd>25,410 TAO, rank 18 of 128</dd></div><div><dt>Price, 30 days</dt><dd>-16.8%, 2026-10-14 to 2026-11-13</dd></div><div><dt>Net flow, 30 days</dt><dd>-2,728 TAO, 2026-10-14 to 2026-11-13</dd></div><div><dt>Miner pay</dt><dd>0.51 TAO per day on average (21.9 TAO per day over 43 uids)</dd></div><div><dt>Miner pay outside top 5</dt><dd>0.28 TAO per day on average (10.6 TAO per day over 38 uids)</dd></div><div><dt>Code activity</dt><dd>last commit 2026-11-11; 77 commits in 30 days; last release 2026-11-11</dd></div></dl>
+<div class="v2-trend"><h3>Trend</h3><div class="v2-tbody"><figure class="v2-tfig"><svg class="v2-spark down" viewBox="0 0 240 56" role="img" aria-label="Price in TAO per alpha, 2026-09-28 to 2026-11-13: 0.01066 to 0.007423, -30.4%"><polyline points="5.0,5.0 20.0,8.3 30.0,8.8 35.0,8.5 40.0,18.6 45.0,19.6 55.0,22.5 65.0,22.3 70.0,22.7 75.0,22.6 80.0,29.7 90.0,33.4 100.0,33.9 105.0,34.0 110.0,34.7 115.0,34.9 120.0,34.9 125.0,34.7 130.0,34.5 140.0,35.3 145.0,36.8 150.0,38.0 155.0,38.1 160.0,38.1 165.0,37.2 170.0,37.1 175.0,36.7 180.0,36.6 185.0,36.8 190.0,40.1 195.0,40.6 200.0,40.4 205.0,49.5 210.0,49.7 215.0,49.6 220.0,50.5 225.0,50.5 230.0,50.5 235.0,51.0"/><circle cx="235.0" cy="51.0" r="3"/></svg><figcaption><strong>Price</strong> <span class="down">-30.4%</span> <span class="muted">0.01066 to 0.007423 TAO per alpha, 2026-09-28 to 2026-11-13</span></figcaption></figure><dl class="v2-tfacts"><div><dt>Net flow, 30 days</dt><dd><span class="down">-2,728 TAO</span> <span class="muted">2026-10-14 to 2026-11-13</span></dd></div><div><dt>Verdict history</dt><dd><ol class="v2-vh"><li><span class="muted">2026-11-08</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-09</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-10</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-13</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li></ol></dd></div></dl></div></div>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>All three competitions approved new agents since 11-09; 43 uids earn.</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>About 1,090 TAO left in one day (11-07); price at its 30-day low; payout weights vanished from the platform feed (11-13).</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> Sustained inflow plus public Ridgeline usage would turn it neutral or bullish; miner exits, bearish.</p>
+<p class="muted">Since the last pass: Bearish since 2026-10-31, unchanged: price at its 30-day low, flows small since the 11-07 exit.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-11-13</span> <span class="muted">(platform API)</span> The platform feed no longer returns payout weights (it did on 11-12), so per-competition shares cannot be refreshed.</li>
+<li><span class="when">2026-11-12</span> <span class="muted">(platform API)</span> Test generation approved agents scoring 0.62 and 0.64 (leader was 0.60); database queries approved 0.76 (11-10) and 0.78.</li>
+<li><span class="when">2026-11-11</span> <span class="muted">(GitHub ridgesai/ridges)</span> Release v0.3.17, and PR 540 merged: a miner patch over 8 MB now fails the run as invalid.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Install the miner toolkit (uv sync --extra miner), start Docker, and create OpenRouter API and management keys with logging off.</li>
+<li>Run ridges miner setup, add the key to .env.miner, and test with ridges miner run-local (not identical to validator runs).</li>
+<li>Read the pre-screening guide so the agent is not rejected for hardcoding.</li>
+<li>Register a hotkey (about 0.0005 TAO today, varies), then run ridges upload --file agent.py --competition N, or submit a ridges prepare-upload ticket on the dashboard.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>The docs&#x27; screening numbers (20 problems, 45%, 60%) are from an old competition; the table shows the current bars.</li>
+<li>Open PR 531 would add a model judge for verifiers; main has none. Each competition&#x27;s scoring rule is not public.</li>
+<li>Miner claims of duplicates and hardcoding are unverified; uid 15 matches the top miner by value only; approval time multipliers fit 12 h (set 28) and 6 h (set 29) scales that are not in the docs.</li>
+<li>A Ridges admin ends a benchmark phase and may name the winner (code), so &quot;highest score wins&quot; is unverifiable.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/ridgesai/ridges" rel="noopener noreferrer">GitHub</a></li>
+<li><a href="https://docs.ridges.ai" rel="noopener noreferrer">Docs</a></li>
+<li><a href="https://www.ridges.ai/competitions" rel="noopener noreferrer">Dashboard and competitions</a></li>
+<li><a href="https://docs.ridges.ai/ridgeline/getting-started" rel="noopener noreferrer">Ridgeline docs</a></li>
+<li><a href="https://github.com/ridgesai/ridges-bench" rel="noopener noreferrer">Sample tasks (ridges-bench)</a></li>
+<li><a href="https://docs.ridges.ai/guides/error-codes" rel="noopener noreferrer">Error codes</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 7 sources</summary>
+<ul>
+<li><strong>repo</strong> ridgesai/ridges@f5380ec main (merge of PR 540, 2026-11-11 02:39Z; latest release v0.3.17, 2026-11-11; 646293d was the merge of PR 538, 2026-11-05 23:36Z), earlier readings 8b1016c (2026-10-31 02:46Z) and 423b356 (v0.3.14): README.md, utils/incentives.py, api/incentives.py, validator/set_weights.py, utils/validator_hotkeys.py, api/endpoints/validator.py, api/endpoints/evaluation_sets.py, db/models/competition.py, validator/config.py, miners/cli/commands/prepare_upload.py, alembic/versions/2026_08_21_bind_competition_membership_and_policy.py; pull requests 528, 535, 536 and 537 (merged, diffs read) and 531 (open, diff read 2026-11-03); remote tips compared 2026-11-06 00:27 UTC (8b1016c...main = the 4 commits of PR 538, files read) 2026-11-07 about 03:00 UTC and 2026-11-08 about 03:25 UTC , 2026-11-09 about 02:45 UTC and 2026-11-10 about 10:14 UTC (646293d...main identical all four times); 646293d...main 2026-11-12 about 10:30 UTC and 2026-11-13 about 03:30 UTC (the same 4 commits of PR 540 both times; files and patches ridges_harbor/agents.py, ridges_harbor/README.md and tests/ridges_harbor/test_patch_size_cap.py read in the 11-13 compare); the 77 commits in the 30 days to 11-13 counted with the GitHub commits API and scripts/repo_numbers.py; pull requests 540 (merged), 541 (open) and 539 (open) listed; PR 531 re-read 2026-11-07, 2026-11-09, 2026-11-12 and 2026-11-13 (state open, updated 2026-11-06, unchanged) (14 commits, 19 files at e61fd9e, unchanged; api/src/utils/openrouter_keys.py, the PR text; on 2026-11-09 all 12 review comments and 6 issue comments read); also read: utils/incentives.py (calculate_benchmark_reward) and queries/benchmark_phase.py (end_benchmark_phase, _approve_winner) at 646293d on 2026-11-10; alembic/versions/2026_08_21_bind_competition_membership_and_policy.py (legacy vs consensus scoring), 2026_10_09_validator_scheduling_controls.py, queries/agent.py and queries/validator_scheduling.py (work selection), api/endpoints/admin.py</li>
+<li><strong>web</strong> docs.ridges.ai, read 2026-10-31 (.md pages): competitions/problem-solving and competitions/overview (new or changed since 10-28); incentive-mechanism, guides/mining-intro, upload-pricing, validator-setup, ridgeline/getting-started, ridgeline/credits and roadmap (identical to the 2026-10-28 reading); competitions/overview re-read 2026-11-01 (the burn sentence is unchanged); overview, incentive-mechanism and problem-solving re-read 2026-11-02 (identical to 11-01); competitions/overview, incentive-mechanism, problem-solving and llms.txt re-read 2026-11-03 (identical to 11-02); same four files re-read 2026-11-04 (identical to 11-03) and 2026-11-06 (byte-identical to 11-04), 2026-11-07, 2026-11-08, 2026-11-09, 2026-11-10, 2026-11-12 and 2026-11-13 (incentive-mechanism and problem-solving byte-identical to 11-06; between 11-10 and 11-12 competitions/overview gained a sentence on the benchmark phase, which incentive-mechanism already described, and llms.txt the Error Codes guide; all four files byte-identical on 11-12 and 11-13; guides/error-codes read 2026-11-13)</li>
+<li><strong>web</strong> Ridges public platform data, plain GET, 2026-11-13 03:28-03:29 UTC: agent-upload.ridges.ai/competitions (and /competitions/28), /scoring/screener-info (sets 30, 29, 28), /retrieval/network-statistics (set 30), /evaluation-sets/{30,29,28}/approved-agents (approved agents; on 2026-11-13 reward_weight was null for every agent and screener-info wait times null for sets 28 and 29; the payout shares on the page are from the 2026-11-12 10:26-10:31 UTC reading, when reward_weight had values; the page uses no miner keys or agent names); newest approvals: set 30 2026-11-09 17:27Z, set 29 2026-11-12 17:03Z (two agents), set 28 2026-11-12 07:58Z (and 2026-11-10 15:21Z); the set 28 benchmark phase (started 2026-11-07 00:53Z, winner approved 2026-11-09 15:45Z) is no longer listed</li>
+<li><strong>web</strong> Chain read at block 9494678 (2026-11-13 03:18Z UTC): SN62 (Ridges): registered 2024-12-13, tempo 360, 256 of 256 uids, commit-reveal off; emission weights burn/recycle/owner/validator/miner = 0/0/18/41/41 % (stored, same values as the chain default), RecycleOrBurn = Recycle; uids under the owner hotkey or owner coldkey hold 0 % of incentive and 0 % of last-epoch emission (a floor); 13 validators have weight rows, on average 0 % of weight goes to uid 0. Chain read at block 9494678 (2026-11-13 03:18Z UTC), compared with block 9472088 (2026-11-10 00:00Z UTC): SN62: no setting changed in 33 checked items; Burn differs (moves with demand); emission split unchanged; pool 25475.1 -&gt; 25409.79 TAO. Addresses masked.</li>
+<li><strong>web</strong> Chain read at block 9494678 (2026-11-13 03:18Z): price SN62, 6 samples every 7d from block 9278678 (2026-10-14 02:59Z): price 0.008922 -&gt; 0.007423 TAO per alpha (-16.8%), pool TAO 27590.2 -&gt; 25409.8; over the 5 intervals where the pool change equals flow + protocol: net user flow -2727.6 TAO (staked minus unstaked), protocol flow +547.3 TAO, gross volume 8028.2 TAO.</li>
+<li><strong>web</strong> Shared snapshot of all subnet pools, block 9494678 (2026-11-13 03:18Z): SN62 pool rank 18 of 128 and price rank 39 of 128 (root excluded).</li>
+<li><strong>msg</strong> #62 ridges, 2026-10-23 to 2026-11-02 (the chat archive was unreachable on 2026-11-10 and 2026-11-13, not re-read)</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/61.html"><small>← Previous</small>SN61 RedTeam</a><a rel="next" href="/bittensor-docs/subnets/63.html"><small>Next →</small>SN63 Enigma</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-11-13. Site built 2026-11-14. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

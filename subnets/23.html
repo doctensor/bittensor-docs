@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Trishool (SN23) | Bittensor Subnet Docs</title>
+<meta name="description" content="Weekly red-team contest: miners write jailbreaks against the team&#x27;s Halo guards; 80% of miner emission is burned.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h17">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>23</span><div>
+<h1>Trishool <span class="muted">SN23</span></h1>
+<p class="tagline">Weekly red-team contest: miners write jailbreaks against the team&#x27;s Halo guards; 80% of miner emission is burned.</p>
+<span class="st s-transitioning">transitioning</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>14<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>9.8<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>16<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-11-02</b><span>last chat</span></li><li class="pw"><b>6,262</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Shipping</b><span>code activity</span></li><li class="pw"><b>2</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-10-27</b><span>last commit</span></li><li class="pw"><b>none</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>AI security (adversarial training of guard models)</dd>
+<dt>Status</dt><dd>Challenge 15 (28 Oct to 3 Nov) ended this phase; the team says a 4-6 week break follows. No result or next date by 2026-11-13; no miner is paid since about 11-11.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-11-13</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Anti-gaming rules</a></li><li><a href="#sn-x1">Burn and payout</a></li><li><a href="#sn-x2">The HaloGuard 2.0 claims</a></li><li><a href="#sn-x3">Docs vs code vs chain</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>miners write one jailbreak prompt a week against the team&#x27;s Halo guards; the best attacks retrain them.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>no miner is paid; the whole miner share, 41% of emission, is burned (2026-11-13).</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>Challenge 15 was the last of this phase; a 4-6 week break follows, next design unannounced.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>the guards are sold as HaloGuard EU; benchmarks are self-run, no revenue is public.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-low">Low barrier</span></h3><p>Writes one jailbreak template per challenge and uploads it with the miner CLI.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>Any computer; Docker for optional local tests</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None to submit; Chutes or OpenRouter key for testing</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>0.1 TAO registration burn (2026-11-13); no stake</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Install the CLI, write one prompt a week</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Runs prompts through the agent, guards and judge, then sets the platform&#x27;s weight vector.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-caution">Paid service needed</li><li class="fl fl-bad">Permissioned</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>Docker host; size not documented</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>Chutes API key; team-issued Telegram bot token</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Team whitelist and a validator permit; stake threshold not documented</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Docker, Node 18+, PM2, Python 3.12; team onboarding</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-11-13. Not financial advice.</span></div><p>Up 33% in a month, but all of it came by 10-28; net out since, and no miner is paid. <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>Trishool, built by the company Astroware, pays miners to red-team AI guard models. Each week miners submit one prompt that tries to get harmful requests past the team&#x27;s Halo guards; the best attacks retrain them. The team sells the guards (HaloGuard EU, launched 2026-10-21).</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>A miner submits one English prompt template of at most 2,000 characters with a single {{objective}} slot. The platform fills it with each of the challenge&#x27;s six harmful requests. Near-copies of other templates are rejected, and the team reviews top entries by hand.</p></div><div><h3>Validators</h3><p>Each validator sends the expanded prompts through the team&#x27;s agent behind the Halo input and output guards (hosted on Chutes); a judge scores each reply 0, 1 or 2, so a template can reach 12. Whitelisted validators then write the team platform&#x27;s weight vector onto the chain unchanged.</p></div><div><h3>Incentive</h3><p>Emission splits 18% owner, 41% validators, 41% miners. On chain (2026-11-13) all 11 weight setters put their whole weight on the owner slot, so incentive is 100% owner slot (UID 249 had 20% until about 11-11). Miner emission aimed at the owner slot is burned: 41% of all emission.</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-11-13, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-caution">Whitelisted</span>The team admits validators; 12 hold permits and 11 set weights, all with the owner uid as top target.</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">66.6%</span>Owner uid: 66.6% of emission, mostly the burned miner share; owner cut 18%, unused emission is burned.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">1 uid</span><span class="v2-sx muted">top 5 hold 100% of incentive.</span> One uid earns incentive: the owner uid (100%, burned). No miner is paid.</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Converged</span>All 11 weight setters put their whole weight on the owner uid; they copy one platform vector, not independent.</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-caution">Partial</span>Miner CLI and validator are public without a licence; scoring and weights run on a closed platform.</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-low">Low barrier</span></h3><p>Writes one jailbreak template per challenge and uploads it with the miner CLI.</p><ul>
+<li>Challenge 15&#x27;s four-day submission window closed on 2026-10-31 23:59 PST; the round ended 2026-11-03 (card).</li>
+<li>All 256 slots are full, so registering replaces the weakest uid; new ones are protected for about two days.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Runs prompts through the agent, guards and judge, then sets the platform&#x27;s weight vector.</p><ul>
+<li>12 permit holders; 11 hold weight rows, all 100% on the owner uid; 11 updated within the last tempo, 1 not for over 5 tempos.</li>
+<li>An optional auto-updater pulls the team&#x27;s main branch every 5 minutes and restarts the validator.</li>
+</ul></section></div>
+<h2 id="sn-x0">Anti-gaming rules</h2>
+<ul class="v2-list">
+<li>Banned: bundling requests, non-English text, runs of incoherent tokens and five technique families (posted 10-22); rules changed mid-challenge (10-13, 10-20).</li>
+</ul>
+<h2 id="sn-x1">Burn and payout</h2>
+<ul class="v2-list">
+<li>The burn was cut from 100% to 80% on 2026-08-06; the team calls it a dial to step down with demand milestones, no dates. Miners asked on 10-26 to 10-30 to cut it; no reply found.</li>
+<li>A winner is paid for one week from the next challenge&#x27;s opening (team, 10-26); the chain paid UID 249 until about 11-11 and nobody since. No setting changed: the burn is 100% through the weights.</li>
+<li>UID 249 (registered 2026-07-12; coldkey not the owner&#x27;s, three other uids) held 826 alpha on 11-10 and 1,151 on 11-11, then 29 at 11:18Z on 11-13 and none by 15:34Z. It never set weights; much of its pay never showed in its stake.</li>
+</ul>
+<h2 id="sn-x2">The HaloGuard 2.0 claims</h2>
+<ul class="v2-list">
+<li>On 11-04 the team summarised its HaloGuard 2.0 paper (dated 1 Nov; not found on arXiv): English and 17-language output guards, plus the input guard from 11-03.</li>
+<li>Its 83.63 average F1 beats Qwen3Guard-Gen 4B and 8B (83.57) by 0.06, which the authors call small; scores are self-run, rivals&#x27; copied from their authors, and the 17-language model (83.1) was tuned on the benchmark it reports.</li>
+<li>It reports no results from the contest.</li>
+</ul>
+<h2 id="sn-x3">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Burn and payout</td><td>Guide: 75% burned, winners share 25%</td><td>Chain: 100% burned, no miner paid</td><td>2026-11-13</td></tr><tr><td>Submission format</td><td>Site: 12 entries, up to 4 submissions</td><td>Code: one template, six requests</td><td>2026-11-13</td></tr></tbody></table></div>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-11-13. Not financial advice.</span></div>
+<p class="v2-thesis">The month&#x27;s +1,214 TAO came in the first two weeks (+1,645 to 10-28); -431 since. Usage and revenue are team claims.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.006259 TAO per alpha</dd></div><div><dt>Pool</dt><dd>9,045 TAO, rank 47</dd></div><div><dt>Price, 30 days</dt><dd>+33%, 2026-10-14 to 2026-11-13</dd></div><div><dt>Net flow, 30 days</dt><dd>+1,214 TAO, 2026-10-14 to 2026-11-13</dd></div><div><dt>Miner pay</dt><dd>No independent miner is paid (miner side burned)</dd></div><div><dt>Code activity</dt><dd>Last commit 2026-10-27; 2 commits in 30 days; no releases</dd></div><div><dt>Holders</dt><dd>Top coldkey 19%, top 10 63% of stake read; 29% on the owner&#x27;s hotkey</dd></div></dl>
+<div class="v2-trend"><h3>Trend</h3><div class="v2-tbody"><figure class="v2-tfig"><svg class="v2-spark up" viewBox="0 0 240 56" role="img" aria-label="Price in TAO per alpha, 2026-09-28 to 2026-11-13: 0.004939 to 0.006259, +26.7%"><polyline points="5.0,44.6 20.0,37.6 30.0,39.8 35.0,38.3 40.0,36.9 50.0,38.3 55.0,39.8 65.0,43.2 70.0,43.3 75.0,49.3 85.0,48.1 90.0,49.5 100.0,49.5 105.0,50.3 110.0,51.0 120.0,35.5 125.0,14.7 135.0,5.0 140.0,12.2 145.0,8.9 150.0,9.4 155.0,13.3 160.0,23.8 165.0,12.1 170.0,9.3 175.0,11.4 180.0,14.9 185.0,14.2 190.0,10.8 195.0,16.5 200.0,14.9 205.0,10.4 210.0,8.6 215.0,14.6 220.0,17.1 225.0,16.0 230.0,21.8 235.0,23.6"/><circle cx="235.0" cy="23.6" r="3"/></svg><figcaption><strong>Price</strong> <span class="up">+26.7%</span> <span class="muted">0.004939 to 0.006259 TAO per alpha, 2026-09-28 to 2026-11-13</span></figcaption></figure><dl class="v2-tfacts"><div><dt>Net flow, 30 days</dt><dd><span class="up">+1,214 TAO</span> <span class="muted">2026-10-14 to 2026-11-13</span></dd></div><div><dt>Verdict history</dt><dd><ol class="v2-vh"><li><span class="muted">2026-11-08</span> <span class="st s-neutral">Neutral</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-09</span> <span class="st s-neutral">Neutral</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-10</span> <span class="st s-neutral">Neutral</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-13</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li></ol></dd></div></dl></div></div>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>Price up 33% in 30 days with net inflow.</li>
+<li>Team shipped weekly until 10-27 and sells a priced product.</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>No miner is paid and all miner emission is burned; no dated restart; net outflow since 10-28; no customers or revenue are public.</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> A dated next phase with a paid miner, customers, revenue or an independent guard test: back to neutral. More outflow: more bearish.</p>
+<p class="muted">Since the last pass: Since 2026-11-10: price 0.00675 to 0.00626 (-7.2%); net flow -350 TAO; incentive 80% owner uid and 20% UID 249 became 100% owner uid.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-11-13</span> <span class="muted">(chain, trishool.ai, astroware.ai, GitHub)</span> Incentive 100% owner uid since about 11-11; UID 249&#x27;s stake fell from 1,151 alpha to 0. Net flow -350 TAO in three days. No commit, site change, Challenge 15 result or next date; Astroware lists a &#x27;Red Team Arena&#x27; (Live) since 11-09.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Register a hotkey on subnet 23 with btcli (0.1 TAO on 2026-11-13).</li>
+<li>Read the current Challenge Card on the team&#x27;s Notion pages for the six requests, dates and rules.</li>
+<li>Clone trishool-phase2, write a template with one {{objective}} placeholder (English, under 2,000 characters), optionally test it with tri-check, then upload it with the miner CLI in the window.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Scoring, similarity checks, manual review and weights run on the team&#x27;s closed platform; validators only copy its vector.</li>
+<li>Scores are all-or-nothing in practice, and the winning technique is shown only after the round.</li>
+<li>HaloGuard EU accuracy is self-run, not held out; community links to OpenAI are unconfirmed.</li>
+<li>Everything runs on Chutes, whose outages have affected rounds. The repo has no licence file.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://trishool.ai" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://trishool.ai/dashboard" rel="noopener noreferrer">Miner dashboard</a></li>
+<li><a href="https://github.com/TrishoolAI/trishool-phase2" rel="noopener noreferrer">GitHub (miner CLI and validator)</a></li>
+<li><a href="https://trishool.notion.site/p3-015" rel="noopener noreferrer">Challenge 15 card</a></li>
+<li><a href="https://docs.trishool.ai" rel="noopener noreferrer">Docs site (vision and roadmap, 2025 era)</a></li>
+<li><a href="https://guide.trishool.ai" rel="noopener noreferrer">Miner guide (older format)</a></li>
+<li><a href="https://litepaper.trishool.ai" rel="noopener noreferrer">Litepaper</a></li>
+<li><a href="https://astroware.ai" rel="noopener noreferrer">Astroware (HaloGuard EU, research)</a></li>
+<li><a href="https://astroware.ai/research/haloguard-2-0" rel="noopener noreferrer">HaloGuard 2.0 summary (Astroware)</a></li>
+<li><a href="https://huggingface.co/astroware" rel="noopener noreferrer">Hugging Face (HaloGuard models)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 13 sources</summary>
+<ul>
+<li><strong>repo</strong> TrishoolAI/trishool-phase2@c2ec7be (2026-10-27, v2.0.35; head re-checked 2026-11-13 by ls-remote, c2ec7be unchanged): README, docs/universal-jailbreaks.md, docs/chutes-and-openrouter.md, neurons/validator.py, alignet/validator and alignet/base, tri-claw and tri-judge configs REPO TrishoolAI/trishool-phase2 last_commit=2026-10-27 commits_30d=2 code_30d=2 path_last=2026-09-23 last_release=none checked=2026-11-13</li>
+<li><strong>repo</strong> TrishoolAI/trishool-ai-docs@80eb933 (2026-08-12) and https://guide.trishool.ai (read 2026-10-21; markup unchanged on 2026-11-13) REPO TrishoolAI/trishool-ai-docs last_commit=2026-08-12 commits_30d=0 code_30d=0 path_last=n/a last_release=none checked=2026-11-13</li>
+<li><strong>web</strong> https://trishool.ai, https://docs.trishool.ai, https://litepaper.trishool.ai (links 200 on 2026-11-13; site text re-read 2026-11-13, identical to 2026-11-10, still the Phase 2 wording); Challenge 15 card at trishool.notion.site/p3-015 (header read 2026-10-31, rules section did not load; page answers 200 on 2026-11-13, body not read); arXiv 2607.02079</li>
+<li><strong>web</strong> https://astroware.ai research index (4 entries, visible text identical on 2026-11-13; its product menu lists Red Team Arena and Chaos Mode) and its article &#x27;HaloGuard 2.0: An Output Guard That Reads the Answer as It Streams&#x27; (2026-11-04, read in full; page text unchanged on 2026-11-13); Hugging Face API listing for the astroware organisation (6 models, same on 2026-11-13, downloads 59 to 130 per model) and the model cards of astroware/HaloGuard2-Stream-0.8B (English) and astroware/HaloGuard2-MultiStream-0.8B (17 languages), both created 2026-10-29, and astroware/HaloGuard2-Gen-0.8B (input-prompt guard, created 2026-11-03, card read 2026-11-03); arXiv 2607.02079 (HaloGuard 1.0) and the outside coverage a web search returned on 2026-11-04</li>
+<li><strong>web</strong> Chain read at block 9499795 (2026-11-13 20:21Z UTC): SN23 (Trishool): registered 2024-01-02, tempo 360, 256 of 256 uids, commit-reveal off; emission weights burn/recycle/owner/validator/miner = 0/0/18/41/41 % (stored, same values as the chain default), RecycleOrBurn = Burn; uids under the owner hotkey or owner coldkey hold 100 % of incentive and 66.62 % of last-epoch emission (a floor); 11 validators have weight rows, on average 0 % of weight goes to uid 0.</li>
+<li><strong>web</strong> Chain read at block 9499795 (2026-11-13 20:21Z UTC), compared with block 9472088 (2026-11-10 00:00Z UTC): SN23: no setting changed in 33 checked items; emission split unchanged; pool 9434.99 -&gt; 9044.87 TAO.</li>
+<li><strong>web</strong> Shared snapshot at block 9499795 (2026-11-13 20:21Z): 129 subnets, SN23 pool 9044.9 TAO = rank 47 of 128 non-root (share 0.459%), price 0.00626 = rank 46 of 128.</li>
+<li><strong>web</strong> Chain read at block 9499795 (2026-11-13 20:21Z): price SN23, 6 samples every 7d from block 9283795 (2026-10-14 20:02Z): price 0.004748 -&gt; 0.006259 TAO per alpha (+31.8%), pool TAO 7876.8 -&gt; 9044.9; over the 5 intervals where the pool change equals flow + protocol: net user flow +1214.2 TAO (staked minus unstaked), protocol flow -46.1 TAO, gross volume 51132.5 TAO.</li>
+<li><strong>web</strong> Chain read at block 9499795 (2026-11-13 20:21Z): price SN23, 10 samples every 1d from block 9434995 (2026-11-04 20:20Z): price 0.007240 -&gt; 0.006259 TAO per alpha (-13.6%), pool TAO 9727.8 -&gt; 9044.9; over the 9 intervals where the pool change equals flow + protocol: net user flow -667.9 TAO (staked minus unstaked), protocol flow -15.0 TAO, gross volume 11686.0 TAO.</li>
+<li><strong>web</strong> Chain read at block 9499795 (2026-11-13 20:21Z): SN23 weights summary: 12 permits, 11 validators with weight rows, 1 target on average, uid 188 the top target of all 11; weight row of validator uid 188 at the same block: 100.0% to uid 188 (it was 80.0% to uid 188 and 20.0% to uid 249 on 2026-11-10).</li>
+<li><strong>web</strong> Chain read at block 9499795 (2026-11-13 20:21Z): SN23 uid 249 registered 2026-07-12 06:34Z, incentive 0.0%, emission 0, hotkey stake 0.0, validator permit False, weights never set, hotkey owner-linked False, coldkey owner-linked False (other uids 5, 50, 191). Same uid at earlier blocks: hotkey stake 29.0 alpha at blocks 9497082 (2026-11-13 11:18Z), 9498011 (14:24Z), 9498243 (15:11Z) and 9498301 (15:22Z), none at 9498359 (15:34Z) and 9498475 (15:57Z); 1,150.78 alpha with a validator permit at blocks 9495224 (05:07Z), 9490089 (2026-11-12 12:00Z) and 9482889 (2026-11-11 12:00Z); 855.575 alpha, no permit and incentive 20.0% at block 9478089 (2026-11-10 20:00Z); 826.054 on 2026-11-10 18:03Z; 501.3 on 2026-11-09; 471.8 on 2026-11-06 to 11-08; 353.7 on 2026-11-04; 58.5 on 2026-11-03; 2,214.2 on 2026-11-02.</li>
+<li><strong>web</strong> Chain read at block 9499795 (2026-11-13 20:21Z): SN23 stake by coldkey: 1121 coldkeys hold 3112983.371 alpha on 291 hotkeys (90.97% of the chain&#x27;s staked total); top coldkey 19.283%, top 5 47.381%, top 10 63.359%; owner coldkey 0.95%; 40.591% of the stake sits on validator-permit hotkeys; 12 hotkeys&#x27; stake rows were not fully read (9.03% of the staked total unattributed), shares are of what was read.</li>
+<li><strong>msg</strong> #23-trishool 2025-12-03 to 2026-10-31 (2026-10-23 to 2026-10-31 read in full; re-read on 2026-11-02 with --after 2026-10-31: 9 messages, none after 10-31 22:44) and archive searches for &#x27;Trusted&#x27; and &#x27;OpenAI&#x27; in the channel from 2026-01-01; archive unreachable on 2026-11-03 and 2026-11-04 (HTTP 502) and 2026-11-06 (read timed out) and 2026-11-07, 2026-11-08 and 2026-11-09 (connection failed), and 2026-11-13 (read timed out after 60 s), newest chat read 2026-11-02</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/22.html"><small>← Previous</small>SN22 Desearch</a><a rel="next" href="/bittensor-docs/subnets/25.html"><small>Next →</small>SN25 UR</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-11-13. Site built 2026-11-14. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

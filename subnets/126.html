@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Attelier (SN126) | Bittensor Subnet Docs</title>
+<meta name="description" content="Video-inference subnet (ex-Poker44): two outside workers paid again, 4.9% of incentive; the rest burns on uid 0.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h18">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>126</span><div>
+<h1>Attelier <span class="muted">SN126</span></h1>
+<p class="tagline">Video-inference subnet (ex-Poker44): two outside workers paid again, 4.9% of incentive; the rest burns on uid 0.</p>
+<span class="st s-transitioning">transitioning</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>7.7<small>/day</small></b><span>last 7 d</span></li><li class="pl4"><b>2.0<small>/day</small></b><span>days 8-30</span></li><li class="pl3"><b>1.3<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-11-02</b><span>last chat</span></li><li class="pw"><b>179</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Shipping</b><span>code activity</span></li><li class="pw"><b>15</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-11-11</b><span>last commit</span></li><li class="pw"><b>none</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>generative video inference (permissioned GPU network)</dd>
+<dt>Status</dt><dd>As of 2026-11-13 two outside workers (uids 240, 242) are paid again after a 28-hour stop; owner uid 0 holds the other 95.1% (burned).</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-11-13</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Docs vs code vs chain</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-similar">Similar subnets</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>video apps and a paid API are live; the subnet is meant to serve them with GPU providers.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>owner uid 0 (burned) holds 95.1% of incentive; uids 240 (3.9%) and 242 (1.1%) paid again since 11-11 after a stop.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>feed and dashboard are back: 43 eligible hourly windows in a row since 11-11 14:00Z; 14 to 22 jobs an hour from 17:00Z.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>jobs are team test traffic: 0 organic in the day to 11-13, 4 in the week.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>last commit 2026-11-11 adds feed v5 and 2-hour miner-share continuity to the public validator; no licence or release.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner (GPU provider) <span class="v2-barrier b-high">High barrier</span></h3><p>Serves video profiles on its own GPU behind the team&#x27;s gateway; paid by eligible work units, cut by its bid.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-caution">GPU needed</li><li class="fl fl-unk">Paid service unknown</li><li class="fl fl-bad">Permissioned</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>GPU; listed 11-13: an RTX PRO 6000 Max-Q (96 GB) busy, five others offline; no fixed minimum</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>GPU rent if not owned (5090 about $0.85/h); model licence not documented</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>0.2 TAO registration burn (2026-11-13); team approval needed</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Apply on the dashboard, sign wallet and hotkey, serve HTTPS endpoints; manual review</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Runs the light validator that follows the team&#x27;s signed hourly feed and publishes the weights.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-no"><dt>Hardware</dt><dd>None beyond a CPU host (Python 3.12, OpenSSL 3.0 or later)</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None: no API key, no GPU</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>0.2 TAO registration burn (2026-11-13) plus stake for a permit: threshold 1,000 TAO (chain)</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Install from the repo; one command with wallet and hotkey; dry-run mode</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-neutral">Neutral</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">low confidence, as of 2026-11-13. Not financial advice.</span></div><p>Outside pay and the team feed are back; net flow +54 TAO in 30 days, -105 in ten; price at its 30-day low. <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>Attelier is a generative-video company with apps and a paid API; its subnet is meant to be the GPU layer behind them. Outside pay is small and unsteady: it stopped 2026-11-10 13:55Z and returned 11-11 about 17:30Z. Two outside uids get 4.9% of incentive; owner uid 0 holds the rest and burns it.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Providers apply on the team&#x27;s dashboard with a wallet and hotkey and list HTTPS worker endpoints; the team activates each worker by hand (six listed). Workers serve approved video profiles (5 to 15 s, 480p to 1080p).</p></div><div><h3>Validators</h3><p>A light CPU process fetches the gateway&#x27;s signed hourly feed, checks it against the chain registry and publishes the weights. It cannot confirm a provider ran the agreed model, so validators follow the team&#x27;s feed.</p></div><div><h3>Incentive</h3><p>Each hourly UTC window, up to 5% of the miner pool is shared by eligible workers by work units (cut by their bid; organic jobs count double). The rest burns on uid 0.</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-11-13, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-good">Open</span>Any permit holder (1,000 TAO threshold) can run it, but it only republishes the team&#x27;s signed feed.</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">70.5%</span>Owner uids hold 70.5% of emission (a floor); owner cut 18%, the miner side burns on uid 0 except 4.9%.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">3 uids</span><span class="v2-sx muted">top 5 hold 100% of incentive.</span> Three uids have incentive: owner uid 0 (95.1%), uid 240 (3.9%) and uid 242 (1.1%).</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Converged</span>All 8 validators put top weight on uid 0 (95.6% on average); they follow one signed team feed, so not independent.</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-caution">Partial</span>Validator and accounting code is public, no licence, reads feed v1 to v5 since 11-11; the gateway is not.</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner (GPU provider) <span class="v2-barrier b-high">High barrier</span></h3><p>Serves video profiles on its own GPU behind the team&#x27;s gateway; paid by eligible work units, cut by its bid.</p><ul>
+<li>The team reviews hotkey, worker binding and profile; a health check alone admits nobody.</li>
+<li>Last sealed window (08:00Z, 11-13): 18 eligible jobs, one worker (uid 240); one or two workers a window since 11-11.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Runs the light validator that follows the team&#x27;s signed hourly feed and publishes the weights.</p><ul>
+<li>It publishes by default with the named wallet; --dry-run simulates. Work finished in window W sets the vector published in W+1.</li>
+<li>Chain 2026-11-13: 10 permits; 8 set weights, 95.6% on uid 0 on average, the rest on uids 240 and 242.</li>
+</ul></section></div>
+<h2 id="sn-x0">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Weights start</td><td>Chat 2026-10-26: gateway and weights within about 48 hours</td><td>Chain: paid in bursts from 10-30; stopped 11-10 13:55Z; back 11-11 about 17:30Z (uid 242), uid 240 by 20:42Z</td><td>2026-11-13</td></tr><tr><td>First phase</td><td>September whitepaper: model optimization first (Wan2.1 1.3B)</td><td>Code: mechanism 0 serves video; chat 2026-10-26 moves optimization to a later phase</td><td>2026-11-06</td></tr><tr><td>Repo link</td><td>Chain identity names attelierai/attelierai_subnet</td><td>Code: that URL is 404; the public repo is attelierai/attelier_subnet</td><td>2026-11-13</td></tr></tbody></table></div>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-neutral">Neutral</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">low confidence, as of 2026-11-13. Not financial advice.</span></div>
+<p class="v2-thesis">Outside pay and the feed returned after a 28-hour stop and the public validator reads feed v5. But traffic is team tests, flow is -105 TAO in ten days and the price is at its 30-day low.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.004088 TAO per alpha</dd></div><div><dt>Pool</dt><dd>2,373 TAO, rank 101</dd></div><div><dt>Price, 30 days</dt><dd>-3%, 2026-10-14 to 2026-11-13; last 5 days -1.7%</dd></div><div><dt>Net flow, 30 days</dt><dd>+54 TAO, 2026-10-14 to 2026-11-13; last 5 days +4 TAO</dd></div><div><dt>Miner pay</dt><dd>0.59 TAO a day to two outside workers; the miner pool is 12.0 TAO a day, the rest burned</dd></div><div><dt>Code activity</dt><dd>last commit 2026-11-11; 16 commits in 30 days; no releases</dd></div></dl>
+<div class="v2-trend"><h3>Trend</h3><div class="v2-tbody"><figure class="v2-tfig"><svg class="v2-spark down" viewBox="0 0 240 56" role="img" aria-label="Price in TAO per alpha, 2026-09-28 to 2026-11-13: 0.004395 to 0.004088, -7.0%"><polyline points="5.0,33.3 15.0,32.9 20.0,36.4 40.0,40.2 50.0,37.6 55.0,38.5 60.0,38.9 65.0,39.7 75.0,42.5 85.0,43.3 90.0,41.2 95.0,44.7 100.0,44.7 110.0,24.2 120.0,5.0 125.0,27.4 130.0,34.9 135.0,44.7 145.0,35.4 155.0,33.7 160.0,32.7 165.0,36.6 170.0,15.9 175.0,11.0 180.0,28.2 185.0,23.3 190.0,35.5 195.0,41.6 200.0,45.6 205.0,45.9 210.0,48.5 215.0,49.1 225.0,46.0 230.0,47.2 235.0,51.0"/><circle cx="235.0" cy="51.0" r="3"/></svg><figcaption><strong>Price</strong> <span class="down">-7.0%</span> <span class="muted">0.004395 to 0.004088 TAO per alpha, 2026-09-28 to 2026-11-13</span></figcaption></figure><dl class="v2-tfacts"><div><dt>Net flow, 30 days</dt><dd><span class="up">+54 TAO</span> <span class="muted">2026-10-14 to 2026-11-13</span></dd></div><div><dt>Verdict history</dt><dd><ol class="v2-vh"><li><span class="muted">2026-11-08</span> <span class="st s-neutral">Neutral</span> <span class="st v-unclear">Unclear</span> <span class="muted">low confidence</span></li><li><span class="muted">2026-11-09</span> <span class="st s-neutral">Neutral</span> <span class="st v-unclear">Unclear</span> <span class="muted">low confidence</span></li><li><span class="muted">2026-11-11</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">low confidence</span></li><li><span class="muted">2026-11-13</span> <span class="st s-neutral">Neutral</span> <span class="st v-unclear">Unclear</span> <span class="muted">low confidence</span></li></ol></dd></div></dl></div></div>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>Outside pay is back; 43 eligible windows in a row, 14 to 22 jobs an hour since 11-11 17:00Z.</li>
+<li>30-day net inflow +54 TAO; the public validator now reads feed v5 (commit 11-11).</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>Jobs are team test traffic (0 organic in the day); outside pay stopped for 28 hours from 11-10, no reason given.</li>
+<li>Net flow -105 TAO in ten days (price -11.2%); price at its 30-day low.</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> Bullish: organic jobs at scale, a third outside worker paid, a month without a pay gap. Bearish: another pay or feed gap, or heavy outflow.</p>
+<p class="muted">Since the last pass: Moved from bearish (2026-11-11) to neutral, low confidence: feed and outside pay returned; usage is still team tests.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-similar">Similar subnets</h2>
+<div class="v2-sim"><p>By pool size this is <strong>rank 8 of 8</strong> among the subnets grouped as <em>media</em> (what they mainly sell). Pool and price as of 2026-11-13 to 2026-11-14, price in TAO per alpha; the barrier is the easiest miner role.</p><div class="scroll"><table class="v2-table"><thead><tr><th>#</th><th>Subnet</th><th>Pool</th><th>Price</th><th>Miner barrier</th></tr></thead><tbody><tr><td>4</td><td><a href="/bittensor-docs/subnets/85.html">VidAIO</a> <span class="muted">SN85</span></td><td>12,000 TAO</td><td>0.004439</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>5</td><td><a href="/bittensor-docs/subnets/117.html">EveryFrame</a> <span class="muted">SN117</span></td><td>3,945 TAO</td><td>0.004575</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr><td>6</td><td><a href="/bittensor-docs/subnets/69.html">Herald</a> <span class="muted">SN69</span></td><td>3,357 TAO</td><td>0.004667</td><td><span class="v2-barrier b-high">High</span></td></tr><tr><td>7</td><td><a href="/bittensor-docs/subnets/115.html">MoirAI</a> <span class="muted">SN115</span></td><td>3,312 TAO</td><td>0.002269</td><td><span class="v2-barrier b-unknown">Unknown</span></td></tr><tr class="me" aria-current="true"><td>8</td><td>Attelier <span class="muted">SN126, this page</span></td><td>2,373 TAO</td><td>0.004088</td><td><span class="v2-barrier b-high">High</span></td></tr></tbody></table></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-11-13</span> <span class="muted">(chain, dashboard, feed)</span> Team side: feed and dashboard current (window 08:00Z: 18 jobs, one worker; 0 organic in the day). Chain: uids 240 and 242 hold 4.9% of incentive.</li>
+<li><span class="when">2026-11-11</span> <span class="muted">(repo, chain)</span> Code: commit 373572c (15:47Z) makes the public validator read feed v5 and keep miner shares through feed gaps (2 hours by default). Outside pay resumed about 17:30Z.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Provider: create an Attelier account at providers.attelier.ai/manage and sign a message with your provider wallet and your registered SN126 hotkey.</li>
+<li>Choose New application (provider name, concurrent jobs), add workers with HTTPS endpoints and capacity; the team reviews and activates them.</li>
+<li>Validator: install the repo (Python 3.12, OpenSSL 3), run attelier-validator --dry-run, then with your wallet and hotkey; a validator permit is required.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Outside pay is capped at 5% of the miner pool (about 0.6 of 12.0 TAO a day) and unsteady: gaps of about 33 hours (11-02), 15+ (11-04), 35 (11-06) and 28 (11-10); uid 242 lost it 11-09, uid 240 on 11-10; no reason given.</li>
+<li>Jobs are almost all the team&#x27;s own test traffic: 473 in the day to 11-13 09:00Z, none organic; 4 organic in the week, sender unknown.</li>
+<li>Trust sits with the team: it admits providers, runs the gateway and signs the feed; apps, customers and revenue are its statements.</li>
+<li>No windows were sealed from 11-10 12:00Z to 11-11 13:00Z; no reason given. The gateway is not public; chat after 2026-10-31 is unread (archive down).</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://attelier.ai" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://docs.attelier.ai" rel="noopener noreferrer">Docs</a></li>
+<li><a href="https://attelier.ai/landing/assets/lab/attelier-inference-whitepaper-20261026-393a4e15.pdf" rel="noopener noreferrer">Inference whitepaper (PDF, October 2026)</a></li>
+<li><a href="https://attelier.ai/landing/assets/lab/attelier-whitepaper-20260912-bb0a0fa3.pdf" rel="noopener noreferrer">Optimization whitepaper (PDF, September 2026)</a></li>
+<li><a href="https://providers.attelier.ai/" rel="noopener noreferrer">Providers dashboard (apply, network view)</a></li>
+<li><a href="https://github.com/attelierai/attelier_subnet" rel="noopener noreferrer">Subnet code (GitHub)</a></li>
+<li><a href="https://inference.attelier.ai/v1/subnet/126/light/latest" rel="noopener noreferrer">Signed hourly feed (public JSON)</a></li>
+<li><a href="https://inference.attelier.ai/openapi.json" rel="noopener noreferrer">Inference API OpenAPI</a></li>
+<li><a href="https://attelier.ai/status" rel="noopener noreferrer">Service status</a></li>
+<li><a href="https://x.com/attelier_ai" rel="noopener noreferrer">X (announcements)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 6 sources</summary>
+<ul>
+<li><strong>msg</strong> #attelier, 2026-09-17 to 2026-10-31 (team posts 2026-10-26, 2026-10-27, 2026-10-28; otherwise greetings and member questions; the archive was unavailable on 2026-11-02, 2026-11-04, 2026-11-05, 2026-11-06, 2026-11-07, 2026-11-08, 2026-11-09, 2026-11-10, 2026-11-11 and 2026-11-13)</li>
+<li><strong>msg</strong> former SN126 (Poker44/Attelier) channel, archived, 2026-09-01 to 2026-09-17: Attelier announcement 2026-09-16</li>
+<li><strong>repo</strong> attelierai/attelier_subnet@373572c (2026-11-11 15:47Z; compare with 30e4f72: README, docs/validator.md, docs/miner.md, docs/INFERENCE_PRELAUNCH.md, src/forge/inference/light.py, light_continuity.py; no commit after 373572c on 2026-11-13)</li>
+<li><strong>web</strong> Attelier inference whitepaper (October 2026) and first whitepaper (September 2026), read 2026-10-30 and 2026-10-26</li>
+<li><strong>web</strong> providers.attelier.ai dashboard data/inference.json (generated 2026-11-13 09:12Z, window 372, history 143 windows) and the signed light feed (window 372, issued 09:00Z, HTTP 200); site, docs, providers, API, status, X, repo and both whitepaper PDFs 200 on 2026-11-13; chain identity repo URL 404</li>
+<li><strong>web</strong> Chain read at block 9496438 (2026-11-13 09:10Z UTC): SN126 (Attelier): registered 2026-02-12, tempo 360, 256 of 256 uids, commit-reveal on; emission weights burn/recycle/owner/validator/miner = 0/0/18/41/41 % (stored, same values as the chain default), RecycleOrBurn = Burn; uids under the owner hotkey or owner coldkey hold 95.09 % of incentive and 70.5 % of last-epoch emission (a floor); 8 validators have weight rows, on average 95.6 % of weight goes to uid 0. Chain read at block 9496438 (2026-11-13 09:10Z UTC), compared with block 9479288 (2026-11-11 00:00Z UTC): SN126: no setting changed in 33 checked items; emission split unchanged; pool 2400.14 -&gt; 2373.04 TAO. Chain read at block 9496438 (2026-11-13 09:10Z): price SN126, 3 samples every 15d from block 9280438 (2026-10-14 08:51Z): price 0.004222 -&gt; 0.004088 TAO per alpha (-3.2%), pool TAO 2411.6 -&gt; 2373.0; over the 2 intervals where the pool change equals flow + protocol: net user flow +54.2 TAO (staked minus unstaked), protocol flow -92.7 TAO, gross volume 4355.7 TAO. Chain read at block 9496438 (2026-11-13 09:10Z): price SN126, 11 samples every 1d from block 9424438 (2026-11-03 09:08Z): price 0.004601 -&gt; 0.004088 TAO per alpha (-11.2%), pool TAO 2517.5 -&gt; 2373.0; over the 10 intervals where the pool change equals flow + protocol: net user flow -105.4 TAO (staked minus unstaked), protocol flow -39.1 TAO, gross volume 685.0 TAO. Incentive vector: uid 0 62,317 of 65,535, uid 240 2,526, uid 242 690. Block-pinned incentive reads: all uid 0 at 9484540, uid 242 first at 9484560 (about 2026-11-11 17:34Z), uid 240 between 9485000 and 9485500. Weights: uid 74 = 0 95.01, 240 4.99; uid 1 = 0 95.01, 240 3.93, 242 1.07. SN126 pool rank 101 of 128 non-root subnets, price rank 64.</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/125.html"><small>← Previous</small>SN125 Refinery</a><a rel="next" href="/bittensor-docs/subnets/127.html"><small>Next →</small>SN127 Zils</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-11-13. Site built 2026-11-14. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

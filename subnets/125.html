@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Refinery (SN125) | Bittensor Subnet Docs</title>
+<meta name="description" content="Miners submit LLM-training optimizers and data refiners; only confirmed gains over the best so far earn emissions.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h11">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>125</span><div>
+<h1>Refinery <span class="muted">SN125</span></h1>
+<p class="tagline">Miners submit LLM-training optimizers and data refiners; only confirmed gains over the best so far earn emissions.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl2"><b>0.57<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>6.8<small>/day</small></b><span>days 8-30</span></li><li class="pl4"><b>5.7<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-31</b><span>last chat</span></li><li class="pw"><b>502</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Shipping</b><span>code activity</span></li><li class="pw"><b>2</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-11-06</b><span>last commit</span></li><li class="pw"><b>none</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>AI training research</dd>
+<dt>Status</dt><dd>Rounds still run and confirmed gains are paid, but rounds since 2026-10-23 took 0 or 1 submission and 68% of miner weight burned on 2026-11-12.</dd>
+<dt>Confidence</dt><dd>high</dd>
+<dt>Researched</dt><dd>2026-11-13</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Where the two challenges stand</a></li><li><a href="#sn-x1">How the payout will shrink</a></li><li><a href="#sn-x2">Docs vs code vs chain</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-similar">Similar subnets</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>miners submit training algorithms; one team validator trains a 360M model on each and pays only confirmed gains.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>only 3 miners are paid; 68% of miner weight burns, up from 63% on 2026-11-10.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>a submission costs 0.85 TAO; no GPU is needed to submit, but real research needs compute and ML skill.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>on 2026-11-06 the team banned refiner data keyed to documents, after a submission pre-scored the public corpus.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>users net sold 344 TAO in 30 days (price -13%), 91 in the last week; no submissions after round 56.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Writes an optimizer or refiner, serves its source, prepays an evaluation credit and reveals the code when asked.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-no"><dt>Hardware</dt><dd>No GPU to submit; real testing needs one</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None required; experiment GPU and API costs are yours</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>0.85 TAO per submission; registration burn 0.0005 TAO</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Python 3.12 on Linux, public IP and port 8091; optimizer research skill</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Trains and scores submissions and sets weights; only the team&#x27;s validator (UID 203) may query miners.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-caution">GPU needed</li><li class="fl fl-caution">Paid service needed</li><li class="fl fl-bad">Permissioned</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>CPU coordinator plus rented B200 workers (RunPod, up to 8 at once)</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>GPU rental per run, repaid from miner fees</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Permit stake threshold not read (global 1,000 TAO); registration burn 0.0005 TAO</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Docker or git checkout (DEPLOYMENT.md), but miners answer only uid 203</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-11-13. Not financial advice.</span></div><p>Net selling of 344 TAO in 30 days, 91 in the last week; price -13%; payout pools keep shrinking. <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>Refinery (SN125) pays for research that helps open language models train better. Challenge 1 asks for optimizers that beat the best validation loss so far; Challenge 2 (open since 2026-10-19) asks for a refiner that decides what a fixed model learns from.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Miners write an optimizer or refiner in Python, test it on their own compute and prepay evaluation credits. A commit with no credit is rejected.</p></div><div><h3>Validators</h3><p>The team validator trains each submission on one rented B200 for up to 20 hours. Optimizers are scored on held-out loss, refiners on a benchmark suite; a winner needs a confirming second run.</p></div><div><h3>Incentive</h3><p>Miners get 41% of emission, half per challenge. A confirmed gain earns credit that halves every 14 days; a pool pays only as far as credit covers a reference level that rises for 56 days. The unpaid share goes to uid 0 (owner slot), which burns it.</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-11-13, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-bad">Owner only</span>Only the team&#x27;s validator (uid 203) trains and scores; 11 holders set weights, one coldkey takes 68% of dividends.</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">33.9%</span>Owner uid 0 holds 33.9% of emission and 68% of incentive (burned); owner cut 18%, RecycleOrBurn = Burn.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">4 uids</span><span class="v2-sx muted">top 5 hold 100% of incentive.</span> Four uids earn: the burn slot (68%), the refiner leader (25%) and two optimizer holders; three miners are paid.</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Converged</span>All 11 weight-setters rank the burn slot (uid 0) first, the refiner leader second: one shared vector.</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-caution">Partial</span>Miner and validator code are public in one repo, but it has no licence file.</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Writes an optimizer or refiner, serves its source, prepays an evaluation credit and reveals the code when asked.</p><ul>
+<li>Fee = estimated cost of one full run plus 10%, priced against a TAO/USD reference (docs: $250 default). A credit returns only for validator-side failures.</li>
+<li>Commit the hash of one Python file (under 1 MB), then reveal it. Only validator uid 203 can query your source server.</li>
+<li>A new best must beat the frontier by the bar (0.03 nats; 0.02 suite points for refiners) and pass a second run. The operator may publish your source, credited to you.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Trains and scores submissions and sets weights; only the team&#x27;s validator (UID 203) may query miners.</p><ul>
+<li>12 permit holders, 11 set weights within one tempo; how the 10 outside ones get their vector is undocumented.</li>
+</ul></section></div>
+<h2 id="sn-x0">Where the two challenges stand</h2>
+<p>As of the 2026-11-12 round (round 68).</p>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Item</th><th>Optimizer</th><th>Refiner</th></tr></thead><tbody><tr><td>Best so far</td><td>Loss 2.555 (from 2.776)</td><td>Score 0.614 (from 0.555)</td></tr><tr><td>Confirmed gains</td><td>2, latest 2026-10-06</td><td>1, on 2026-10-21</td></tr><tr><td>Pool paid</td><td>14%</td><td>50%</td></tr><tr><td>Paid to</td><td>2 miners, 64 / 36</td><td>1 miner</td></tr></tbody></table></div>
+<h2 id="sn-x1">How the payout will shrink</h2>
+<p>Our calculation from the public formula (matches the dashboard to four digits), assuming no new gain.</p>
+<ul class="v2-list">
+<li>Optimizer pool paid: about 14% on 2026-11-12, 12% on 11-15, 11% on 11-18.</li>
+<li>Refiner pool paid: about 50% on 2026-11-12, 40% on 11-15, 33% on 11-18.</li>
+<li>Burned share of miner weight: 68% on 2026-11-12, about 74% on 11-15 and 78% on 11-18.</li>
+</ul>
+<h2 id="sn-x2">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Validation is independent</td><td>README: validators train and independently score submissions</td><td>Code: miners answer only uid 203. Chain: one top target for all 11; uids 203 and 62 share a coldkey (68% of dividends)</td><td>2026-11-13</td></tr></tbody></table></div>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-11-13. Not financial advice.</span></div>
+<p class="v2-thesis">Users net sold 344 TAO in 30 days (6% of the pool), 91 in the last week; both payout pools shrink and the burn rises. Valuation unclear: no revenue to check.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.002271 TAO per alpha</dd></div><div><dt>Pool</dt><dd>4,955 TAO, rank 84</dd></div><div><dt>Price, 30 days</dt><dd>-13%, 2026-10-14 to 2026-11-13</dd></div><div><dt>Net flow, 30 days</dt><dd>-344 TAO, 2026-10-14 to 2026-11-13</dd></div><div><dt>Miner pay</dt><dd>2.2 TAO per day, 3 miners paid (burn slot excluded)</dd></div><div><dt>Miner pay outside top 5</dt><dd>None (3 miners paid)</dd></div><div><dt>Code activity</dt><dd>Last commit 2026-11-06 (review rule, 7 files); scoring code unchanged since 2026-10-17</dd></div></dl>
+<div class="v2-trend"><h3>Trend</h3><div class="v2-tbody"><figure class="v2-tfig"><svg class="v2-spark down" viewBox="0 0 240 56" role="img" aria-label="Price in TAO per alpha, 2026-09-28 to 2026-11-13: 0.002809 to 0.002271, -19.2%"><polyline points="5.0,5.0 15.0,7.5 20.0,9.2 30.0,10.0 35.0,10.0 40.0,12.1 45.0,12.9 55.0,15.3 60.0,15.3 65.0,16.3 70.0,19.1 75.0,21.6 80.0,21.2 90.0,21.8 95.0,22.1 100.0,22.0 105.0,24.3 110.0,25.9 115.0,29.3 125.0,32.1 130.0,35.5 135.0,32.4 140.0,44.3 145.0,44.3 150.0,44.3 155.0,44.0 160.0,43.1 165.0,42.4 170.0,42.4 175.0,44.6 180.0,44.2 185.0,43.6 190.0,44.3 195.0,45.1 200.0,43.3 205.0,44.4 210.0,44.5 215.0,45.4 220.0,48.8 225.0,48.5 230.0,50.9 235.0,51.0"/><circle cx="235.0" cy="51.0" r="3"/></svg><figcaption><strong>Price</strong> <span class="down">-19.2%</span> <span class="muted">0.002809 to 0.002271 TAO per alpha, 2026-09-28 to 2026-11-13</span></figcaption></figure><dl class="v2-tfacts"><div><dt>Net flow, 30 days</dt><dd><span class="down">-344 TAO</span> <span class="muted">2026-10-14 to 2026-11-13</span></dd></div><div><dt>Verdict history</dt><dd><ol class="v2-vh"><li><span class="muted">2026-11-08</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-09</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-10</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-13</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li></ol></dd></div></dl></div></div>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>Challenge 2 paid a winner within two days of launch; round records are public.</li>
+<li>The team wrote the pre-scoring gap into its spec and added a review rule.</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>Net selling of 344 TAO in 30 days while both payout pools shrink by formula.</li>
+<li>No submission in the published rounds after round 56 (2026-11-02); no new confirmed gain since 2026-10-21.</li>
+<li>One team validator decides scores; its coldkey also holds uid 62 (68% of dividends).</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> A new confirmed gain or a new task that brings submissions back would improve the view; more outflow, or no new gain after 2026-11-20, would worsen it.</p>
+<p class="muted">Since the last pass: Bearish on 2026-11-10 too: burn 63% to 68%, refiner pool paid 50% (58% before); selling slowed to 0.1 TAO in a day.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-similar">Similar subnets</h2>
+<div class="v2-sim"><p>By pool size this is <strong>rank 11 of 19</strong> among the subnets grouped as <em>training</em> (what they mainly sell). Pool and price as of 2026-11-13 to 2026-11-14, price in TAO per alpha; the barrier is the easiest miner role.</p><div class="scroll"><table class="v2-table"><thead><tr><th>#</th><th>Subnet</th><th>Pool</th><th>Price</th><th>Miner barrier</th></tr></thead><tbody><tr><td>9</td><td><a href="/bittensor-docs/subnets/65.html">TPN (True Performance Network)</a> <span class="muted">SN65</span></td><td>6,548 TAO</td><td>0.002919</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>10</td><td><a href="/bittensor-docs/subnets/20.html">Witness</a> <span class="muted">SN20</span></td><td>6,392 TAO</td><td>0.002274</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr class="me" aria-current="true"><td>11</td><td>Refinery <span class="muted">SN125, this page</span></td><td>4,955 TAO</td><td>0.002271</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>12</td><td><a href="/bittensor-docs/subnets/38.html">ChronoLLM</a> <span class="muted">SN38</span></td><td>4,713 TAO</td><td>0.004669</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>13</td><td><a href="/bittensor-docs/subnets/127.html">Zils</a> <span class="muted">SN127</span></td><td>3,648 TAO</td><td>0.003364</td><td><span class="v2-barrier b-medium">Medium</span></td></tr></tbody></table></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-11-12</span> <span class="muted">(Refinery dashboard)</span> Round 68 took no submission and burned 68% of miner weight (63% before); the refiner pool paid 50% (58% before).</li>
+<li><span class="when">2026-11-06</span> <span class="muted">(GitHub (Barbariandev/Refinery))</span> First code change since 10-17: a review rule bans refiner data keyed to specific documents.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Use Linux and Python 3.12, install the requirements, read MINING.md and start from the optimizer or refiner template.</li>
+<li>Verify the fee, treasury and validator in the signed round announcement before sending funds.</li>
+<li>Register a hotkey, open a public port, fund credits, then commit and reveal your source.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Dashboard figures are team-published; the latest burn (68%) matches the chain. The history skips rounds 61, 62 and 67.</li>
+<li>The refiner suite is a placeholder by its own spec and the held-out loss gate is off: all 14 results are worse than baseline on held-out loss (2.86 to 3.24 vs 2.59). The review rule is not retroactive.</li>
+<li>The team says it runs no miner (2026-09-16); the chain fits but cannot prove it.</li>
+<li>The six-week review (about 2026-10-20) has no recorded outcome; a pause would be an explicit decision.</li>
+<li>The fee uses a TAO/USD reference the repo fixes at $250 (dated 2026-09-06); the live setting is unseen.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/Barbariandev/Refinery" rel="noopener noreferrer">GitHub</a></li>
+<li><a href="https://github.com/Barbariandev/Refinery/blob/main/MINING.md" rel="noopener noreferrer">Mining guide</a></li>
+<li><a href="https://github.com/Barbariandev/Refinery/blob/main/docs/REFINER_TASK.md" rel="noopener noreferrer">Refiner task spec</a></li>
+<li><a href="https://refinery125.com/" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://refinery125.com/dashboard.html" rel="noopener noreferrer">Dashboard</a></li>
+<li><a href="https://refinery125.com/dashboard.json" rel="noopener noreferrer">Dashboard data (JSON)</a></li>
+<li><a href="https://refinery125.com/schedule.html" rel="noopener noreferrer">Schedule</a></li>
+<li><a href="https://huggingface.co/datasets/125datasets/sn125-genesis-baseline" rel="noopener noreferrer">Genesis baseline dataset</a></li>
+<li><a href="https://github.com/Barbariandev/Refinery/blob/main/docs/REFINER_MINING.md" rel="noopener noreferrer">Refiner mining guide</a></li>
+<li><a href="https://refinery125.com/mechanism.html" rel="noopener noreferrer">Mechanism</a></li>
+<li><a href="https://refinery125.com/verify.html" rel="noopener noreferrer">Verification</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 6 sources</summary>
+<ul>
+<li><strong>repo</strong> Barbariandev/Refinery@8a54c0c (2026-11-06 23:33Z, head re-checked 2026-11-13 (nothing newer, no issues or PRs); compare d301c83...8a54c0c = 1 commit, 7 files); README.md, MINING.md, DEPLOYMENT.md, docs/REFINER_TASK.md and docs/REFINER_MINING.md (re-read 2026-11-07), sn125/config.py, neuron.py, roundsm/refiner_frontier.py, pricing.py, miner_template.py, verify.py (code read 2026-11-02), review.py, roundsm/adapter.py, live.py, refiner/feeder.py (diff read 2026-11-07)</li>
+<li><strong>web</strong> https://refinery125.com/dashboard.json (read 2026-11-13, generated 00:33 UTC, version 0.2.4, team-reported): round 68 (published 2026-11-12) burned weight 0.6784, paid weights 0.0256 + 0.0458 (optimizer, 14% of its pool) and 0.2503 (refiner: progress 0.01984 vs reference 0.03964), 14 refiner results (newest 2026-11-03), 67 deposits = 52.703 TAO from 21 coldkeys; round 69 was live at 00:33 UTC (commit phase complete, no submission); rounds 61, 62 and 67 are not in the published history (the payment ledger shows their fee pins only; last debit round 56)</li>
+<li><strong>web</strong> Chain read at block 9493849 (2026-11-13 00:32Z UTC): SN125 (Refinery): registered 2025-06-22, tempo 360, 256 of 256 uids, commit-reveal on; emission weights burn/recycle/owner/validator/miner = 0/0/18/41/41 % (stored, same values as the chain default), RecycleOrBurn = Burn; uids under the owner hotkey or owner coldkey hold 67.84 % of incentive and 33.92 % of last-epoch emission (a floor); 11 validators have weight rows, on average 67.8 % of weight goes to uid 0. 4 uids have incentive: uid 0 (burn slot) 67.8 %, then uid 182 (refiner leader) 25.0 %; 12 permit holders, 11 with weight rows, all with top target uid 0. Uid reads of the weight-setters (same block): uids 203 and 62 share one coldkey and hold 43.4 % and 24.3 % of dividends; uid 203&#x27;s hotkey matches the dashboard&#x27;s validator hotkey (sha256 tag).</li>
+<li><strong>web</strong> Chain read at block 9493849 (2026-11-13 00:32Z UTC), compared with block 9472088 (2026-11-10 00:00Z UTC): SN125: no setting changed in 33 checked items; emission split unchanged; pool 4983.22 -&gt; 4955.01 TAO. Shared snapshot over 129 subnets: SN125 pool 4955.0 TAO = rank 84 of 128.</li>
+<li><strong>web</strong> Chain read at block 9493849 (2026-11-13 00:32Z): price SN125, 6 samples every 7d from block 9277849 (2026-10-14 00:13Z): price 0.002621 -&gt; 0.002271 TAO per alpha (-13.3%), pool TAO 5320.7 -&gt; 4955.0; over the 5 intervals where the pool change equals flow + protocol: net user flow -343.6 TAO (staked minus unstaked), protocol flow -22.1 TAO, gross volume 1640.5 TAO. A 1-day step read (2026-11-06 to 11-13) shows price -3.8% and net user flow -91.5 TAO, of which -0.1 TAO in the last day.</li>
+<li><strong>msg</strong> #125-refinery 2026-09-07 to 2026-11-02 (whole channel to 2026-10-25, every message since) (archive unreachable on 2026-11-13, nothing newer read)</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/124.html"><small>← Previous</small>SN124 Swarm</a><a rel="next" href="/bittensor-docs/subnets/126.html"><small>Next →</small>SN126 Attelier</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-11-13. Site built 2026-11-14. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

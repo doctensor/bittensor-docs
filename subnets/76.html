@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ormas (SN76) | Bittensor Subnet Docs</title>
+<meta name="description" content="Coding outcomes marketplace: miners bid on GitHub tasks and are paid only if the client&#x27;s tests pass.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h4">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>76</span><div>
+<h1>Ormas <span class="muted">SN76</span></h1>
+<p class="tagline">Coding outcomes marketplace: miners bid on GitHub tasks and are paid only if the client&#x27;s tests pass.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl4"><b>5.0<small>/day</small></b><span>last 7 d</span></li><li class="pl4"><b>3.7<small>/day</small></b><span>days 8-30</span></li><li class="pl2"><b>0.23<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-11-02</b><span>last chat</span></li><li class="pw"><b>133</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Shipping</b><span>code activity</span></li><li class="pw"><b>3</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-11-12</b><span>last commit</span></li><li class="pw"><b>2026-10-22</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>software engineering outcomes marketplace</dd>
+<dt>Status</dt><dd>Early alpha, US clients and miners only; the operator approves miners and the team runs acceptance (2026-11-13).</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-11-13</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Docs vs code vs chain</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-similar">Similar subnets</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>clients post a GitHub task with a test; miners bid and are paid only if the test passes.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>the owner&#x27;s uid took 99.8% of incentive on 2026-11-13; independent uid 63 took 0.18%.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>6 permits on 6 coldkeys; all put 99.8-100% of weight on the owner&#x27;s uid, one of them 100%.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>US-only beta; each miner needs the operator&#x27;s approval and a proof task first.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>price down 49% in 30 days, net inflow +6 TAO; pool 356 TAO, rank 123 of 128.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-high">High barrier</span></h3><p>Bids on coding tasks and is paid only if the client&#x27;s tests pass on the delivered branch.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-unk">GPU unknown</li><li class="fl fl-caution">Paid service needed</li><li class="fl fl-bad">Permissioned</li></ul><dl class="v2-needs"><div class="v2-need n-unk"><dt>Hardware</dt><dd>Not documented; Python 3.10+, models and hardware are yours (docs)</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>Your own inference or VM costs; Ormas pays none (docs)</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>0.0005 TAO registration burn (2026-11-13); all 256 slots in use</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Python 3.10+, runner key, emailed approval, proof task; US only</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Re-runs the client&#x27;s test on a delivery and signs accept or reject; the team does this today.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-unk">GPU unknown</li><li class="fl fl-unk">Paid service unknown</li><li class="fl fl-bad">Permissioned</li></ul><dl class="v2-needs"><div class="v2-need n-unk"><dt>Hardware</dt><dd>Not documented for outside validators</dd></div><div class="v2-need n-unk"><dt>API tokens / subscriptions</dt><dd>Not documented</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>1,000 TAO weight-setting threshold (chain, 2026-11-13)</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Closed: independent admission is release work (README)</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div><div class="v2-role"><h3>Client <span class="v2-barrier b-low">Low barrier</span></h3><p>Posts a GitHub repo, a task and a test; pays only for a delivery that passes.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-caution">Paid service needed</li><li class="fl fl-unk">Access unknown</li></ul><dl class="v2-needs"><div class="v2-need n-no"><dt>Hardware</dt><dd>None</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>Settled task price in USD; 5.5% fee on credit purchases (terms)</dd></div><div class="v2-need n-no"><dt>Stake / fees</dt><dd>None</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>GitHub repo with tests; ormas.ai sign-in; US only in the beta</dd></div></dl><a class="v2-more" href="#sn-role-2">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-neutral">Neutral</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">low confidence, as of 2026-11-13. Not financial advice.</span></div><p>Price down 49% in 30 days, 7% above its 11-11 level; independent miners earn 0.18% of incentive. <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>Ormas, run by Heron Cove LLC, sells verified coding outcomes. A client supplies a GitHub repo, a task and an automated test; miners quote a price, deliver a branch and are paid only if the test passes.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>A miner runs the open ormas-subnet software against the Ormas gateway. For each queued task it offers a firm price, a limit (estimate plus hard ceiling) or declines; the gateway awards the lowest expected total cost. The winner clones the repo, makes the change, runs the tests and publishes the branch.</p></div><div><h3>Validators</h3><p>A checker re-runs the client&#x27;s test on the branch and signs accept or reject. The reference checker is public, but the team runs all acceptance today. Six hotkeys hold validator permits; the README says a weight service relays a gateway-computed vector.</p></div><div><h3>Incentive</h3><p>An accepted delivery freezes an emission target of 2x its settled USD price (since 2026-10-05); unearned emission goes to the owner&#x27;s uid. On 2026-11-13 that uid held 71.8% of emission; the five other validators shared 28.1% as dividends and independent miners 0.1%. Stored split: 18% owner, 49% validators, 33% miners.</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-11-13, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-bad">Owner only</span>The team runs all acceptance; 6 permit holders on 6 coldkeys exist, all with 99.8-100% of weight on the owner&#x27;s uid.</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">71.8%</span>Owner&#x27;s uid holds 71.8% of emission and 99.8% of incentive; owner cut 18%; unearned miner share is burned.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">3 uids</span><span class="v2-sx muted">top 5 hold 100% of incentive.</span> 3 of 256 uids earn incentive: owner&#x27;s 99.8%, uid 63 0.18%, uid 59 0.003%; independents earned nothing on 11-11.</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Converged</span>6 of 6 validators rank the owner&#x27;s uid first (99.8-100% of weight); this shows concentration, not copying.</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-caution">Partial</span>Miner and reference validator are public (MIT); the gateway, acceptance and weight services are not.</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-high">High barrier</span></h3><p>Bids on coding tasks and is paid only if the client&#x27;s tests pass on the delivered branch.</p><ul>
+<li>One-time operator approval, then a proof task; the claim cap rises from 0 to 50 once it settles paid (docs).</li>
+<li>Pay is 2x the settled USD price as an emission target, in alpha; cost above your limit is your loss (docs).</li>
+<li>Independent uids earned about 0.01 TAO a day in total on 2026-11-13, nothing on 11-11; four earned on 2026-11-01.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Re-runs the client&#x27;s test on a delivery and signs accept or reject; the team does this today.</p><ul>
+<li>6 permit holders on 6 coldkeys, only uid 0 owner-linked; all rank the owner&#x27;s uid first (2026-11-13).</li>
+<li>Dividends: owner&#x27;s uid 43.8%, uid 1 33.5%, uid 99 19.5%, the other three 3.2%.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-2"><h3>Client <span class="v2-barrier b-low">Low barrier</span></h3><p>Posts a GitHub repo, a task and a test; pays only for a delivery that passes.</p><ul>
+<li>An unclaimed job ends after 60 minutes at $0 (API docs).</li>
+</ul></section></div>
+<h2 id="sn-x0">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Who sets weights</td><td>README: a weight service relays a gateway-computed vector</td><td>Chain: five holders put 99.8% on the owner&#x27;s uid and 0.19% on uid 63, one 100% on it; no weight code in the repo</td><td>2026-11-13</td></tr><tr><td>Independent miners</td><td>Provider feed: 18 independents listed, 4 with figures, all at 100% acceptance (test traffic included)</td><td>Chain: uid 63 earns 0.18% of incentive and uid 59 0.003%, uid 86 nothing (all 0 on 11-11)</td><td>2026-11-13</td></tr><tr><td>Checking the weights</td><td>Docs: signed epoch artifacts and a recompute script (planned)</td><td>Code: no such script in the repo</td><td>2026-11-13</td></tr></tbody></table></div>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-neutral">Neutral</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">low confidence, as of 2026-11-13. Not financial advice.</span></div>
+<p class="v2-thesis">A small pool (rank 123 of 128) fell from 499 to 356 TAO in 30 days while users net staked 6 TAO: the chain&#x27;s own flow was -148 TAO. One 2-hour step on 11-10 took out 34 TAO. Usage is team-stated.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.00293 TAO per alpha</dd></div><div><dt>Pool</dt><dd>356 TAO, rank 123</dd></div><div><dt>Price, 30 days</dt><dd>-49%, 2026-10-14 to 2026-11-13</dd></div><div><dt>Net flow, 30 days</dt><dd>+6 TAO, 2026-10-14 to 2026-11-13; +27 in the last 3 days</dd></div><div><dt>Miner pay</dt><dd>0.012 TAO per day to uids 63 and 59 (2026-11-13)</dd></div><div><dt>Code activity</dt><dd>last commit 2026-11-12; 9 commits in 30 days</dd></div></dl>
+<div class="v2-trend"><h3>Trend</h3><div class="v2-tbody"><figure class="v2-tfig"><svg class="v2-spark down" viewBox="0 0 240 56" role="img" aria-label="Price in TAO per alpha, 2026-09-28 to 2026-11-13: 0.005768 to 0.00293, -49.2%"><polyline points="5.0,12.2 15.0,7.3 20.0,10.1 30.0,9.5 40.0,16.7 50.0,17.7 55.0,19.5 60.0,20.3 65.0,21.3 75.0,5.0 85.0,12.5 90.0,11.3 95.0,23.0 100.0,21.1 110.0,24.2 120.0,24.9 125.0,25.7 130.0,26.9 135.0,41.0 145.0,34.9 155.0,37.3 160.0,37.6 165.0,39.4 170.0,41.6 175.0,41.6 180.0,35.9 190.0,47.3 195.0,47.8 200.0,43.9 205.0,44.1 210.0,41.1 215.0,44.2 220.0,51.0 225.0,50.9 230.0,48.3 235.0,48.8"/><circle cx="235.0" cy="48.8" r="3"/></svg><figcaption><strong>Price</strong> <span class="down">-49.2%</span> <span class="muted">0.005768 to 0.00293 TAO per alpha, 2026-09-28 to 2026-11-13</span></figcaption></figure><dl class="v2-tfacts"><div><dt>Net flow, 30 days</dt><dd><span class="up">+6.0 TAO</span> <span class="muted">2026-10-14 to 2026-11-13</span></dd></div><div><dt>Verdict history</dt><dd><ol class="v2-vh"><li><span class="muted">2026-11-08</span> <span class="st s-neutral">Neutral</span> <span class="st v-unclear">Unclear</span> <span class="muted">low confidence</span></li><li><span class="muted">2026-11-09</span> <span class="st s-neutral">Neutral</span> <span class="st v-unclear">Unclear</span> <span class="muted">low confidence</span></li><li><span class="muted">2026-11-11</span> <span class="st s-neutral">Neutral</span> <span class="st v-unclear">Unclear</span> <span class="muted">low confidence</span></li><li><span class="muted">2026-11-13</span> <span class="st s-neutral">Neutral</span> <span class="st v-unclear">Unclear</span> <span class="muted">low confidence</span></li></ol></dd></div></dl></div></div>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>Net stake flow +6 TAO over 30 days, +27 over the last 3 days</li>
+<li>18 independents are listed; gateway release 2026.11.13</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>99.8% of incentive on the owner&#x27;s uid; independents earn 0.18% in total</li>
+<li>Price 49% down in 30 days, pool rank 123 of 128; the 34 TAO exit of 11-10 and the 46 TAO exit of 11-03 have no visible cause</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> Bullish: independent validators live, steady independent earners, network figures filling in. Bearish: the inflow reversing or main going quiet.</p>
+<p class="muted">Since the last pass: Still neutral (2026-11-13), a little better: net inflow of 27 TAO in 3 days and the price 7% above its 11-11 level; the owner&#x27;s uid keeps 99.8% of incentive.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-similar">Similar subnets</h2>
+<div class="v2-sim"><p>By pool size this is <strong>rank 8 of 8</strong> among the subnets grouped as <em>agents</em> (what they mainly sell). Pool and price as of 2026-11-13 to 2026-11-14, price in TAO per alpha; the barrier is the easiest miner role.</p><div class="scroll"><table class="v2-table"><thead><tr><th>#</th><th>Subnet</th><th>Pool</th><th>Price</th><th>Miner barrier</th></tr></thead><tbody><tr><td>4</td><td><a href="/bittensor-docs/subnets/71.html">Leadpoet</a> <span class="muted">SN71</span></td><td>4,788 TAO</td><td>0.003614</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>5</td><td><a href="/bittensor-docs/subnets/98.html">NeverPlayAlone</a> <span class="muted">SN98</span></td><td>4,532 TAO</td><td>0.002114</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr><td>6</td><td><a href="/bittensor-docs/subnets/118.html">Ditto</a> <span class="muted">SN118</span></td><td>4,087 TAO</td><td>0.002947</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr><td>7</td><td><a href="/bittensor-docs/subnets/67.html">Harnyx</a> <span class="muted">SN67</span></td><td>2,331 TAO</td><td>0.002607</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr class="me" aria-current="true"><td>8</td><td>Ormas <span class="muted">SN76, this page</span></td><td>356 TAO</td><td>0.00293</td><td><span class="v2-barrier b-high">High</span></td></tr></tbody></table></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-11-13</span> <span class="muted">(chain data)</span> Uid 63, an independent, now holds 0.18% of incentive; five validators give it 0.19% of weight.</li>
+<li><span class="when">2026-11-12</span> <span class="muted">(GitHub)</span> PR 20 merged: runner keys no longer expire.</li>
+<li><span class="when">2026-11-10</span> <span class="muted">(chain data)</span> One 2-hour step on 11-10 took out 34 TAO net and 17% of the price.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Check eligibility: the beta is US-only and the operator approves each miner.</li>
+<li>Sign in at ormas.ai and mint a runner key (no expiry).</li>
+<li>Install the miner (Python 3.10+) or re-clone the repo, then run ormas-miner login and register a miner name.</li>
+<li>Ask the operator for slot approval before paying for registration (0.0005 TAO, all 256 slots taken).</li>
+<li>Finish the proof task, bind your hotkey with ormas-miner register-hotkey, then take offers.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Almost no emission reaches independent miners: the owner&#x27;s uid held at least 98.5% of incentive in every read since 2026-10-26; who runs the earning uids is not public.</li>
+<li>The team runs acceptance and its own miner.</li>
+<li>Usage is the team&#x27;s word: the network feed says &#x27;insufficient data&#x27;; independents show 100% acceptance, yet independent uids earn 0.18% of incentive.</li>
+<li>Miners report non-selection with no reason shown; no team chat post since 2026-10-18, and chat after 10-30 was unreadable on 11-13.</li>
+<li>Docs say independent Protected-tier mining is not open, yet a 2026-10-18 team post said a slot was approved.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://ormas.ai/" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://ormas.ai/docs/miners" rel="noopener noreferrer">Miner guide</a></li>
+<li><a href="https://ormas.ai/docs/first-task" rel="noopener noreferrer">First-task guide (clients)</a></li>
+<li><a href="https://github.com/heroncovelabs/ormas-subnet" rel="noopener noreferrer">GitHub (miner SDK, reference validator, docs)</a></li>
+<li><a href="https://ormas.ai/docs/network" rel="noopener noreferrer">Reading the network</a></li>
+<li><a href="https://ormas.ai/docs/service-levels" rel="noopener noreferrer">Standard and Protected service levels</a></li>
+<li><a href="https://ormas.ai/docs/open-client" rel="noopener noreferrer">Open protocol and what Ormas operates</a></li>
+<li><a href="https://ormas.ai/docs/miner-dashboard" rel="noopener noreferrer">Miner dashboard and wallet sign-in</a></li>
+<li><a href="https://ormas.ai/docs/api" rel="noopener noreferrer">Outcomes API reference</a></li>
+<li><a href="https://api.ormas.ai/v1/public/providers" rel="noopener noreferrer">Public provider statistics</a></li>
+<li><a href="https://ormas.ai/docs/terms" rel="noopener noreferrer">Terms (US-only, 5.5% credit fee)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 8 sources</summary>
+<ul>
+<li><strong>repo</strong> heroncovelabs/ormas-subnet@7d28513 (2026-11-12, PR 20 merged: runner keys do not expire; the head before was 295d5e3 of 2026-11-05): README, docs (DECISIONS, CONTRACT, economics, protocol, PROTECTED, INSTALL), MINER_TERMS.md, CHANGELOG, pyproject; open issues and pull requests read 2026-11-13: 11 issues, PRs 13 and 18 open, PR 20 merged; release v0.0.3 of 2026-10-22 is the latest; 9 commits in the 30 days from 2026-10-14 (the 21 commits of 2026-10-14 aged out of the window)</li>
+<li><strong>msg</strong> #ormas 2026-10-12 to 2026-10-30 (newer messages not read: the chat archive was unreachable on 2026-11-02 and 2026-11-04, HTTP 502; the read timed out on 2026-11-05 to 2026-11-09, 2026-11-11 and 2026-11-13)</li>
+<li><strong>web</strong> ormas.ai/docs: miners (re-read 2026-11-13: one change, keys do not expire; otherwise identical to 2026-11-11), api, terms, first-task, open-client and miner-dashboard (re-read 2026-11-13: the 60-minute unclaimed-job rule and the 5.5% credit fee are still stated), service-levels and network (re-read 2026-11-13, identical to 2026-11-11), privacy, supported-tasks, production-case-study (read 2026-10-21 to 2026-11-01); ormas.ai/miner page text</li>
+<li><strong>web</strong> api.ormas.ai /health, /v1/public/network, /v1/public/providers (read 2026-11-13; feeds byte-identical to 2026-11-09, dated 2026-11-09, sealed week of 10-26, 19 providers listed, network figures &#x27;insufficient data&#x27;; gateway release 2026.11.13, validators_live and reward_observation_fresh true)</li>
+<li><strong>web</strong> Chain read at block 9500658 (2026-11-13 23:14Z UTC): SN76 (Ormas): registered 2026-09-05, tempo 360, 256 of 256 uids, commit-reveal on; emission weights burn/recycle/owner/validator/miner = 0/0/18/49/33 %, RecycleOrBurn = Burn; uids under the owner hotkey or owner coldkey hold 99.82 % of incentive and 71.8 % of last-epoch emission (a floor); 6 validators have weight rows, on average 99.8 % of weight goes to uid 0.</li>
+<li><strong>web</strong> Chain read at block 9500658 (2026-11-13 23:14Z UTC), compared with block 9479288 (2026-11-11 00:00Z UTC): SN76: no setting changed in 33 checked items; emission split unchanged; pool 347.75 -&gt; 356.04 TAO.</li>
+<li><strong>web</strong> Chain read at block 9500658 (2026-11-13 23:14Z): price SN76, 3 samples every 15d from block 9284658 (2026-10-14 22:55Z): price 0.005744 -&gt; 0.002930 TAO per alpha (-49.0%), pool TAO 498.6 -&gt; 356.0; over the 2 intervals where the pool change equals flow + protocol: net user flow +6.0 TAO (staked minus unstaked; -14.6, then +20.6), protocol flow -148.5 TAO, gross volume 8367.5 TAO. 1-day samples from block 9450258 (2026-11-06 23:13Z): price 0.003313 -&gt; 0.002930 (-11.6%), 1-day grid low 0.002763 on 2026-11-10 23:14Z (-15.6% that day, net user flow -29.7 TAO; the 2026-11-11 05:36Z read had 0.002738, so the price is 7.0% above it); net user flow on the next three days +9.7, +15.7 and +1.4 TAO (+26.8). The 2-hour step of 2026-11-10 (pool 379.8 -&gt; 345.8 TAO, price -17.1%, net user flow -33.95 TAO) is from the 2026-11-11 read (block 9480970) and the 45.59 TAO exit ending 2026-11-03 18:32Z from the 2026-11-05 read (block 9438057). Pool rank 123 of 128 by pool TAO (shared snapshot, block 9500658).</li>
+<li><strong>web</strong> Chain read at block 9500658 (2026-11-13 23:14Z UTC): SN76 weights of the six permit holders: uid 0 puts 99.77 % on uid 0, 0.19 % on uid 63 and 0.05 % on uid 86; uids 1, 19 and 234 99.80 / 0.19 (uid 63) / 0.01 (uid 59); uid 99 99.81 / 0.19 / 0.00 (uid 86); uid 25 100 % on uid 0; incentive (storage Incentive, 3 of 256 uids nonzero): uid 0 99.817 %, uid 63 0.18 %, uid 59 0.003 %; dividends (uid reads) uid 0 43.78 %, uid 1 33.54 %, uid 99 19.53 %, uid 19 1.84 %, uid 25 1.06 %, uid 234 0.25 %; six coldkeys, only uid 0 owner-linked; uids 59 and 63 (separate coldkeys, not owner-linked, registered 2026-10-13, no weights ever set) hold 3.7 and 14.2 alpha. Holders at block 9500658: owner coldkey 60.84 % of alpha read (79.7 % coverage, walk truncated, 2 hotkeys incomplete), ck:50121d 22.67 % over 60 hotkeys, ck:f9f683 7.50 %.</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/75.html"><small>← Previous</small>SN75 Hippius</a><a rel="next" href="/bittensor-docs/subnets/77.html"><small>Next →</small>SN77 Liquidity</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-11-13. Site built 2026-11-14. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

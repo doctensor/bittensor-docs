@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TrajectoryRL (SN11) | Bittensor Subnet Docs</title>
+<meta name="description" content="Miners write agent routing policies and a winner takes the seat; since 2026-11-08 all miner emission is burned.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h5">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>11</span><div>
+<h1>TrajectoryRL <span class="muted">SN11</span></h1>
+<p class="tagline">Miners write agent routing policies and a winner takes the seat; since 2026-11-08 all miner emission is burned.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>15<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>8.3<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>23<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-11-02</b><span>last chat</span></li><li class="pw"><b>11,217</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Shipping</b><span>code activity</span></li><li class="pw"><b>10</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-11-08</b><span>last commit</span></li><li class="pw"><b>2026-11-08</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>agent skills and model routing (winner-take-all competition)</dd>
+<dt>Status</dt><dd>Miner pay is burned since 2026-11-08; the queue is empty and submissions are paused.</dd>
+<dt>Confidence</dt><dd>high</dd>
+<dt>Researched</dt><dd>2026-11-14</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Where emission goes</a></li><li><a href="#sn-x1">The burn (2026-11-08)</a></li><li><a href="#sn-x2">Docs vs code vs chain</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-similar">Similar subnets</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>Since 2026-11-08 validators put all weight on the owner&#x27;s UID 74, so all miner emission is burned (release 0.7.8).</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>The burn reached the chain about 11:54 UTC on 2026-11-08; the pool&#x27;s own TAO injection fell to about zero.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>Pool 19,388 TAO (rank 24); price -0.6% and net 35 TAO out in 30 days; +146 TAO net in over six days.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>Submissions paused since 2026-11-02; the queue is empty and no epoch has run since 2026-11-07. No GPU needed.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>No end date for the burn is given and the docs still describe miner pay.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-high">High barrier</span></h3><p>Writes packs; submissions are paused and, since 2026-11-08, no miner is paid.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-bad">Permissioned</li></ul><dl class="v2-needs"><div class="v2-need n-no"><dt>Hardware</dt><dd>None: any laptop with Python 3.10+</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None; an Engy API key for local tests is optional</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Burn 0.02 TAO (2026-11-14); no per-submission fee in the sample tool</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Hours to days of tuning; Docker for local tests</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Sets weights, all on UID 74 since 2026-11-08; only the team&#x27;s validator evaluates.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>Weight-only mode (default): small Docker host; evaluating mode: not specified</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None in weight-only mode; evaluating mode: Engy API key, up to 6 USD per pack</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Burn 0.02 TAO (2026-11-14); docs: 10,000 alpha staked (about 69 TAO); permit threshold 1,000 TAO</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Docker Compose from the repo with auto-updates</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div><div class="v2-role"><h3>Staker <span class="v2-barrier b-none">No barrier</span></h3><p>Stakes alpha on a validator to share its dividends; no hardware or code.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-no"><dt>Hardware</dt><dd>None</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Any amount above the chain&#x27;s dust minimum (docs)</dd></div><div class="v2-need n-no"><dt>Setup effort</dt><dd>None: a single staking command</dd></div></dl><a class="v2-more" href="#sn-role-2">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-overvalued">Overvalued</span></span><span class="v2-conf muted">medium confidence, as of 2026-11-14. Not financial advice.</span></div><p>All miner emission is burned since 2026-11-08 and the pool&#x27;s TAO injection stopped. <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>TrajectoryRL is a continuous contest. Miners submit a pack: a SKILL.md plus a fusion policy that picks which of eight open models answers each agent request. The team&#x27;s validator tests packs in sandboxed tasks and one miner holds the seat. Since 2026-11-08 the miner share is burned and nobody is paid.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>A miner writes a pack: a SKILL.md and a fusion policy (JSON, Python or an OpenAI-style server) and sends it with the miner tool. A pack that earns any reward passes its copyright to trajrl.com.</p></div><div><h3>Validators</h3><p>An integrity judge rejects packs with hints matching many scenarios. A queue feeds one challenger per epoch (about 1 hour). The team whitelists evaluators; only its validator (UID 74) reports scores, in a sandbox with a 0.30 USD cap per scenario.</p></div><div><h3>Incentive</h3><p>Score is tests passed over tests total, summed over 20 scenarios (maximum 20; the seat holder has 18.76). A challenger must beat the seat by about 3% at low scores, less near the top. A first win is provisional: two re-runs of both packs must confirm it.</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-11-14, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-good">Open</span>Any permit holder can set weights, but the team whitelists evaluators and only its validator reports scores.</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">91.4%</span>91.4% of emission is on the owner&#x27;s UID 74 (dividends plus the burned miner share); owner cut 18%, Burn.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">1 uid</span><span class="v2-sx muted">top 5 hold 100% of incentive.</span> Only the owner&#x27;s UID 74 has incentive (miner share burned); eight uids earn dividends.</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Converged</span>8 of 8 validators with weights put UID 74 first: the burn by design, not copying.</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-good">Open</span>Miner and validator code are in the MIT-licensed main repo; the scenario repo is public (licence not read).</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-high">High barrier</span></h3><p>Writes packs; submissions are paused and, since 2026-11-08, no miner is paid.</p><ul>
+<li>Closed in practice since 2026-11-02 (epoch 4650); reopening is not announced.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Sets weights, all on UID 74 since 2026-11-08; only the team&#x27;s validator evaluates.</p><ul>
+<li>Release 0.7.8 weights UID 74 by default; BURN_ALL=0 restores winner weights.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-2"><h3>Staker <span class="v2-barrier b-none">No barrier</span></h3><p>Stakes alpha on a validator to share its dividends; no hardware or code.</p><p class="muted">No further detail found in the sources.</p></section></div>
+<h2 id="sn-x0">Where emission goes</h2>
+<p>Pool of 5,888 alpha a day (2026-11-14); the miner half is burned.</p>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Recipient</th><th>Share of pool</th><th>Alpha a day</th></tr></thead><tbody><tr><td>Miner share, burned (weight on UID 74)</td><td>about 50%</td><td>about 2,940</td></tr><tr><td>Owner&#x27;s validator dividends (UID 74)</td><td>about 41%</td><td>about 2,440</td></tr><tr><td>Other validators</td><td>about 9%</td><td>about 510</td></tr></tbody></table></div>
+<h2 id="sn-x1">The burn (2026-11-08)</h2>
+<ul class="v2-list">
+<li>Commit 123a1ed (release 0.7.8, 2026-11-08) makes each validator put 100% weight on UID 74, on by default so all validators agree.</li>
+<li>The chain switched at the epoch ending about 11:54 UTC. The pool&#x27;s TAO injection was about 1.4 TAO per 3 hours before and is about zero since 13:49 UTC.</li>
+<li>The site still seats UID 157 (18.76 of 20); its hotkey holds no alpha now.</li>
+</ul>
+<h2 id="sn-x2">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Miner pay</td><td>Docs: the seat holder gets all miner emission</td><td>Chain: the miner share is burned since 2026-11-08</td><td>2026-11-14</td></tr><tr><td>Submission fee</td><td>Website guide: 50 alpha burned per submission</td><td>Code: the sample tool burns nothing; web submissions paused</td><td>2026-11-14</td></tr><tr><td>Spec number</td><td>Repo miner guide: Spec 27</td><td>Code: SPEC_NUMBER is 28; the API shows spec 28</td><td>2026-11-14</td></tr><tr><td>Ban rule</td><td>Repo docs: the fee replaced owner bans</td><td>Code: the API lists owner bans on 97 of 100 newest failed packs</td><td>2026-11-14</td></tr><tr><td>Who evaluates</td><td>Website guide: every validator runs the benchmark</td><td>Code: weight-only by default; only UID 74 evaluates</td><td>2026-11-14</td></tr></tbody></table></div>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-overvalued">Overvalued</span></span><span class="v2-conf muted">medium confidence, as of 2026-11-14. Not financial advice.</span></div>
+<p class="v2-thesis">No miner is paid and the pool&#x27;s own TAO injection stopped, while its 19,388 TAO rests on usage only the team claims. Flows are mixed: -35 TAO in 30 days, +146 in six.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.006881 TAO per alpha</dd></div><div><dt>Pool</dt><dd>19,388 TAO, rank 24</dd></div><div><dt>Price, 30 days</dt><dd>-0.6%, 2026-10-15 to 2026-11-14</dd></div><div><dt>Net flow, 30 days</dt><dd>-35 TAO, 2026-10-15 to 2026-11-14</dd></div><div><dt>Miner pay</dt><dd>No independent miner is paid (miner side burned)</dd></div><div><dt>Miner pay outside top 5</dt><dd>No independent miner is paid (miner side burned)</dd></div><div><dt>Code activity</dt><dd>last commit 2026-11-08; 8 commits in 30 days; last release 2026-11-08</dd></div></dl>
+<div class="v2-trend"><h3>Trend</h3><div class="v2-tbody"><figure class="v2-tfig"><svg class="v2-spark down" viewBox="0 0 240 56" role="img" aria-label="Price in TAO per alpha, 2026-09-27 to 2026-11-14: 0.007832 to 0.006881, -12.1%"><polyline points="5.0,5.0 9.8,9.0 19.4,7.9 24.2,10.5 29.0,9.9 33.8,10.9 43.3,11.6 48.1,9.9 52.9,11.9 57.7,11.3 62.5,11.4 72.1,11.4 76.9,11.6 81.7,11.7 86.5,28.0 91.2,31.9 96.0,36.5 105.6,37.7 110.4,38.3 115.2,34.9 120.0,38.3 124.8,38.1 129.6,25.5 139.2,24.0 144.0,24.8 148.8,23.3 153.5,17.9 158.3,17.1 163.1,22.0 167.9,41.8 172.7,37.7 177.5,46.6 182.3,47.6 187.1,51.0 191.9,39.9 196.7,36.0 201.5,38.6 206.2,36.2 211.0,32.5 215.8,33.0 220.6,32.1 225.4,28.2 230.2,27.4 235.0,32.3"/><circle cx="235.0" cy="32.3" r="3"/></svg><figcaption><strong>Price</strong> <span class="down">-12.1%</span> <span class="muted">0.007832 to 0.006881 TAO per alpha, 2026-09-27 to 2026-11-14</span></figcaption></figure><dl class="v2-tfacts"><div><dt>Net flow, 30 days</dt><dd><span class="down">-35 TAO</span> <span class="muted">2026-10-15 to 2026-11-14</span></dd></div><div><dt>Verdict history</dt><dd><ol class="v2-vh"><li><span class="muted">2026-11-08</span> <span class="st s-bearish">Bearish</span> <span class="st v-overvalued">Overvalued</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-10</span> <span class="st s-bearish">Bearish</span> <span class="st v-overvalued">Overvalued</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-12</span> <span class="st s-bearish">Bearish</span> <span class="st v-overvalued">Overvalued</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-14</span> <span class="st s-bearish">Bearish</span> <span class="st v-overvalued">Overvalued</span> <span class="muted">medium confidence</span></li></ol></dd></div></dl></div></div>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>Net flow +146 TAO over six days and price +1% since 2026-11-08.</li>
+<li>The burn is a switch (BURN_ALL=0): pay could return fast.</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>No miner is paid; the pool&#x27;s own TAO inflow stopped on 2026-11-08.</li>
+<li>Submissions paused, queue empty; usage and revenue unverified.</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> Bullish: burn switched off, submissions reopening, named usage. Bearish: net outflow once the burn has run for weeks.</p>
+<p class="muted">Since the last pass: Unchanged since 2026-11-12: the burn is still on and a validator joined.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-similar">Similar subnets</h2>
+<div class="v2-sim"><p>By pool size this is <strong>rank 1 of 8</strong> among the subnets grouped as <em>agents</em> (what they mainly sell). Pool and price as of 2026-11-13 to 2026-11-14, price in TAO per alpha; the barrier is the easiest miner role.</p><div class="scroll"><table class="v2-table"><thead><tr><th>#</th><th>Subnet</th><th>Pool</th><th>Price</th><th>Miner barrier</th></tr></thead><tbody><tr class="me" aria-current="true"><td>1</td><td>TrajectoryRL <span class="muted">SN11, this page</span></td><td>19,388 TAO</td><td>0.006881</td><td><span class="v2-barrier b-high">High</span></td></tr><tr><td>2</td><td><a href="/bittensor-docs/subnets/15.html">ORO</a> <span class="muted">SN15</span></td><td>13,485 TAO</td><td>0.01734</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr><td>3</td><td><a href="/bittensor-docs/subnets/121.html">sundae_bar</a> <span class="muted">SN121</span></td><td>5,352 TAO</td><td>0.003313</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr><td>4</td><td><a href="/bittensor-docs/subnets/71.html">Leadpoet</a> <span class="muted">SN71</span></td><td>4,788 TAO</td><td>0.003614</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>5</td><td><a href="/bittensor-docs/subnets/98.html">NeverPlayAlone</a> <span class="muted">SN98</span></td><td>4,532 TAO</td><td>0.002114</td><td><span class="v2-barrier b-low">Low</span></td></tr></tbody></table></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-11-13</span> <span class="muted">(chain)</span> Validator UID 212 registers and takes a permit; it earns 6.3% of dividends on delegated alpha.</li>
+<li><span class="when">2026-11-08</span> <span class="muted">(GitHub and chain)</span> Validator 0.7.8 burns all miner emission to UID 74; the chain follows about 11:54 UTC.</li>
+<li><span class="when">2026-11-07</span> <span class="muted">(trajrl.com API)</span> The queue runs dry after 22 failed challengers; UID 157 keeps the seat.</li>
+<li><span class="when">2026-11-02</span> <span class="muted">(trajrl.com API)</span> Owner bans at least 63 miner UIDs after an audit.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Read the miner and fusion policy guides, install the miner tool with pip, and write a SKILL.md and a policy from the repo&#x27;s examples.</li>
+<li>Test with scripts/eval_pack.py (Docker, your own Engy key).</li>
+<li>Check whether submissions have reopened and miner pay is back before you start.</li>
+<li>When open: register a hotkey (0.02 TAO burn on 2026-11-14) and submit with the web-submit command.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>One party runs all evaluation, and scores cannot be checked on chain.</li>
+<li>The confirmation rule has no public text.</li>
+<li>Usage and revenue are unverified; the site&#x27;s totals are self-reported and flat since 2026-11-01.</li>
+<li>Dividends do not follow own stake: UID 64 holds 269k alpha and earns 0.2%; UID 212 holds 460 and earns 6.3% on delegated alpha.</li>
+<li>Chat after 2026-11-01 is unread (archive down): the bans, pause and burn rest on the API, repo and pull request.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/trajectoryRL/trajectoryRL" rel="noopener noreferrer">GitHub (main repo)</a></li>
+<li><a href="https://trajrl.com/" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://trajrl.com/docs" rel="noopener noreferrer">Docs site</a></li>
+<li><a href="https://trajrl.com/docs/miner-guide" rel="noopener noreferrer">Miner guide</a></li>
+<li><a href="https://github.com/trajectoryRL/trajectoryRL/blob/main/docs/FUSION_POLICY.md" rel="noopener noreferrer">Fusion policy guide (repo)</a></li>
+<li><a href="https://github.com/trajectoryRL/trajectoryRL/blob/main/docs/ROADMAP.md" rel="noopener noreferrer">Roadmap (repo)</a></li>
+<li><a href="https://trajrl.com/submissions" rel="noopener noreferrer">Submission queue</a></li>
+<li><a href="https://trajrl.com/winners" rel="noopener noreferrer">Winners page</a></li>
+<li><a href="https://trajrl.com/docs/benchmark" rel="noopener noreferrer">Benchmark (20 scenarios and test counts)</a></li>
+<li><a href="https://github.com/trajectoryRL/trajrl-bench" rel="noopener noreferrer">Scenario images and verifiers (repo)</a></li>
+<li><a href="https://github.com/trajectoryRL/trajectoryRL/blob/main/docs/INCENTIVE_MECHANISM.md" rel="noopener noreferrer">Incentive mechanism (repo)</a></li>
+<li><a href="https://github.com/trajectoryRL/trajectoryRL/blob/main/scripts/eval_pack.py" rel="noopener noreferrer">Local evaluation script (repo)</a></li>
+<li><a href="https://engy.ai/docs/get-started/models-and-pricing" rel="noopener noreferrer">Engy models and prices</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 7 sources</summary>
+<ul>
+<li><strong>repo</strong> trajectoryRL/trajectoryRL@123a1ed (checked 2026-11-14, head unchanged; commit 123a1ed and pull request #347 BURN_ALL, validator 0.7.8; MIT licence): README.md, docs/MINER_GUIDE.md, FUSION_POLICY.md, INCENTIVE_MECHANISM.md, MINER_OPERATIONS.md, VALIDATOR_OPERATIONS.md, ROADMAP.md, config.py (docs unchanged since 2026-11-04)</li>
+<li><strong>repo</strong> trajectoryRL/trajrl-bench@1432824 (checked 2026-11-14, bench 4.0.25; no commit since 2026-11-01): scenarios and tests; SPEC 28 replacement commit</li>
+<li><strong>web</strong> trajrl.com public read API fetched 2026-11-14 17:29 UTC (challenge state, winner history, queue, failed and skipped lists, validators, epoch, stats) and docs pages /docs/miner-guide, /rules and the repo&#x27;s MINER_OPERATIONS.md (fetched 2026-11-14 17:29 UTC, byte-identical to 2026-11-12, 2026-11-10, 2026-11-08 and 2026-11-04)</li>
+<li><strong>web</strong> engy.ai/docs/get-started/models-and-pricing fetched on 2026-10-28, 2026-10-31 and 2026-11-04, same content (page still answers 200 on 2026-11-14; content not re-fetched) (model list and prices; no auto mode listed)</li>
+<li><strong>web</strong> Chain read at block 9506092 (2026-11-14 17:20Z UTC): SN11 (TrajectoryRL): registered 2024-05-09, tempo 360, 256 of 256 uids, commit-reveal on; emission weights burn/recycle/owner/validator/miner = 0/0/18/41/41 % (stored, same values as the chain default), RecycleOrBurn = Burn; uids under the owner hotkey or owner coldkey hold 100 % of incentive and 91.37 % of last-epoch emission (a floor); 8 validators have weight rows, on average 0 % of weight goes to uid 0; uids under the owner hotkey hold 100 % of incentive on uid 74 (the burned miner side) and 91.4 % of last-epoch emission; 8 permit holders, all 8 with weight rows, all ranking uid 74 first (7 permits on 2026-11-12: the new one is uid 212, registered 2026-11-13 18:09Z); registration burn at the 0.02 TAO minimum. Compared with block 9486488 (2026-11-12 00:00Z): no setting changed in 33 checked items. Uids 74, 157, 64, 48, 212, 89, 189, 235 and 236 read at the same block; shared snapshot of block 9506092: pool rank 24 of 128. Chain read at block 9506110 (local chain.py parents; the hosted API has no parents command): own alpha 460, 29,697 alpha passed down by one parent hotkey, childkey take 18 %. Reads of 2026-11-08 at blocks 9461200 to 9461400 (uid 157 top incentive at 9461250, uid 74 at 9461262) date the switch.</li>
+<li><strong>web</strong> Chain read at block 9506092 (2026-11-14 17:20Z): price SN11, 6 samples every 7d from block 9290092 (2026-10-15 17:02Z): price 0.006865 -&gt; 0.006881 TAO per alpha (+0.2%), pool TAO 19207.4 -&gt; 19388.1; over the 5 intervals where the pool change equals flow + protocol: net user flow -34.6 TAO (staked minus unstaked), protocol flow +215.3 TAO, gross volume 29645.1 TAO. Last six days (1-day grid from block 9462892, 2026-11-08 17:20Z): price 0.006797 -&gt; 0.006881 (+1.2%), net user flow +146.4 TAO; last two days -196.7 TAO net; protocol flow about zero since the burn (-3.3 TAO in the last two days).</li>
+<li><strong>msg</strong> msg #trajectory-rl, 2026-03-16 to 2026-11-01 (team posts and the latest messages; chat after 2026-11-01 not read: archive hung 2026-11-05 to 2026-11-14)</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/10.html"><small>← Previous</small>SN10 Pareton</a><a rel="next" href="/bittensor-docs/subnets/12.html"><small>Next →</small>SN12 ComputeHorde</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-11-14. Site built 2026-11-14. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

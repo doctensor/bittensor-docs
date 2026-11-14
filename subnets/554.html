@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sentinel (SN554) | Bittensor Subnet Docs</title>
+<meta name="description" content="Testnet-only subnet where miners give AI agents database and API-key access inside confidential VMs, with chip proofs.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h14">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>554</span><div>
+<h1>Sentinel <span class="muted">SN554</span></h1>
+<p class="tagline">Testnet-only subnet where miners give AI agents database and API-key access inside confidential VMs, with chip proofs.</p>
+<span class="st s-transitioning">transitioning</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl0"><b>0<small>/day</small></b><span>last 7 d</span></li><li class="pl0"><b>0<small>/day</small></b><span>days 8-30</span></li><li class="pl2"><b>0.17<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-09-10</b><span>last chat</span></li><li class="pw"><b>10</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Shipping</b><span>code activity</span></li><li class="pw"><b>31</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-11-12</b><span>last commit</span></li><li class="pw"><b>none</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>confidential compute (attested AI-agent access to databases)</dd>
+<dt>Status</dt><dd>Testnet only as of 2026-11-13: mainnet has no netuid 554 and the team has named no slot since 2026-09-10 (chat read 2026-11-01). Repo work resumed on 2026-11-03 (38 commits to 2026-11-12) and the owner&#x27;s validator has set weights since 2026-11-04.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-11-13</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Docs vs code vs chain</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>agents use a database or API credential they never see; miners prove with a chip signature what code booted.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>netuid 554 exists on the test network only (since 2026-08-30); mainnet has no netuid 554 (2026-11-13).</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>the owner&#x27;s validator set weights again 2026-11-04 to 2026-11-13; 3 uids hold incentive (testnet).</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>validators need an always-on Linux box, no GPU; miners need an Intel TDX cloud VM and the team&#x27;s signed image (docs, 2026-11-12).</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>the list holds v5 alone since 2026-11-12, the first image to sign the TLS key name; per the team all miners run it; no slashing.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-high">High barrier</span></h3><p>Runs database and API-key tools (MCP server) in a confidential VM and answers validator challenges with chip-signed proofs.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-caution">Paid service needed</li><li class="fl fl-bad">Permissioned</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>Intel TDX confidential VM (GCP c3-standard-4); AMD no longer accepted; no GPU</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>Cloud VM: about $168 a month on demand (docs, GCP list prices 2026-11-06)</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Testnet registration burn 0.0005 test TAO (2026-11-13); no collateral in code</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>gcloud, btcli, a config file; the team shares its signed image on request (docs, 2026-11-12)</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-low">Low barrier</span></h3><p>Challenges miners with a fresh nonce, verifies the chip attestation offline, scores five axes and sets weights.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>Always-on Linux box, no GPU or confidential hardware; free-tier e2-micro is enough (docs)</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None; a free-tier cloud VM covers it (docs)</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Testnet burn 0.0005 test TAO (2026-11-13); a permit needs stake (amount not stated)</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Python venv, hotkey on netuid 554, measurements from measurements.json, systemd (about 30 min, guide)</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>Sentinel is a testnet subnet whose miners run database and API tools inside confidential VMs, so an AI agent can use a credential it never sees. Validators check each reply&#x27;s chip signature offline and compare answers across miners. Since 2026-11-12 the registry lists one Intel TDX image (v5) and the README says TDX; the chain identity still says AMD.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Each miner runs an MCP server in an Intel TDX confidential VM booted from the team&#x27;s signed image, with no shell. A Key Broker releases the credential, a database password or an API key, only to an enclave that proved it booted an approved image. Every reply is chip-signed and bound to the validator&#x27;s nonce and, from v5, to the TLS key name.</p></div><div><h3>Validators</h3><p>Validators send each miner the same query with a fresh nonce, about every 22 minutes, and verify the attestation against Intel&#x27;s root. Scoring code: attestation 40 percent, latency 30, correctness 20, cache hygiene 5, nonce discipline 5. Attestation, hygiene and nonce are gates; correctness is majority agreement and gates only with three or more verified miners.</p></div><div><h3>Incentive</h3><p>Yuma Consensus with a timelock commit. The team says the testnet has no emissions; the stated reason to run a node is to test the design.</p></div></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-high">High barrier</span></h3><p>Runs database and API-key tools (MCP server) in a confidential VM and answers validator challenges with chip-signed proofs.</p><ul>
+<li>Tools: a Postgres query (read-only by default) and, since 2026-11-09, a web-API request whose key stays in the enclave. No wallet key goes on the VM.</li>
+<li>TESTNET.md (2026-09-24) says mock miners; results and README say real enclaves, all the team&#x27;s.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-low">Low barrier</span></h3><p>Challenges miners with a fresh nonce, verifies the chip attestation offline, scores five axes and sets weights.</p><ul>
+<li>A laptop does not work: past the 5,000-block activity cutoff (about 16 h 40 m) a validator is inactive and its miners fall to zero incentive.</li>
+<li>Weights without a validator permit are rejected; permits go to the top validators by stake. 2 of 64 slots are held (2026-11-13).</li>
+<li>Since 2026-11-12 measurements.json holds v5 alone.</li>
+</ul></section></div>
+<h2 id="sn-x0">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Slashing and payments</td><td>README until 2026-11-05: collateral, slashing and per-query payment</td><td>Code: none outside tests and docs; README since 2026-11-06: &#x27;Not built&#x27;</td><td>2026-11-13</td></tr><tr><td>Approved measurements</td><td>TESTNET.md (unchanged) lists the AMD value ccdc5cf0; the chain identity text says AMD SEV-SNP</td><td>Code: since 2026-11-12 one measurement only, Intel TDX v5; AMD values gone since 11-09</td><td>2026-11-13</td></tr><tr><td>Weights on chain</td><td>Site (unchanged since 2026-11-08): live on testnet 554, validators score every miner each round</td><td>Chain: the owner&#x27;s validator set weights on 2026-11-04 to 11-13; the other validator last did on 2026-10-18</td><td>2026-11-13</td></tr><tr><td>Which image runs</td><td>README and whitepaper (2026-11-12): TDX live, every miner on v5, all three score 1.00</td><td>Chain: cannot show which image a miner runs; the registry lists v5 alone</td><td>2026-11-13</td></tr></tbody></table></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-11-12</span> <span class="muted">(GitHub (compare API, whitepaper))</span> Four commits: README and mining guide rewritten for Intel TDX, registry cut to v5 alone, whitepaper v2.0. Per the team, all three miners moved to v5 that day and score 1.00.</li>
+<li><span class="when">2026-11-10</span> <span class="muted">(GitHub (compare API, results))</span> Nine commits on 11-09 and 11-10: TDX-only registry, an API-key tool, images v4 and v5 (the chip now signs the TLS key name), a browser checker, not published.</li>
+<li><span class="when">2026-11-08</span> <span class="muted">(GitHub (compare API, results))</span> Twenty-one commits to 11-08: Intel TDX quote checks, a credential sealed to the enclave&#x27;s key, a signed TDX image, TLS ending inside the enclave.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Read docs/mining.md&#x27;s opening and &#x27;Honest limits&#x27; first.</li>
+<li>Clone the repo, make a venv, install requirements.txt, and register a hotkey on netuid 554 with btcli on --network test (burn about 0.0005 test TAO).</li>
+<li>Miner: docs/mining.md (2026-11-12) boots the team&#x27;s signed image on a GCP Intel TDX machine; ask the team for image access.</li>
+<li>Validator: always-on Linux box, stake the hotkey for a permit. Dry-run scripts/run_validator.py --once --dry-run, then run it with one --measurement per value in measurements.json (one now: v5).</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>No emissions per the team (2026-11-13). The owner&#x27;s validator set no weights from about 2026-10-28 to 11-04, unexplained; both validators&#x27; top target is uid 1 (owner&#x27;s coldkey, no permit).</li>
+<li>On AMD the proof covers firmware only: a miner with edited code passed on 2026-10-04 and cross-miner agreement caught it. AMD left the registry 2026-11-09; per the team all three miners run v5.</li>
+<li>Plain HTTP (T25) is closed only on Intel TDX, for an agent that trusts just the customer&#x27;s CA; the TLS key name is signed only from v5. Validators do not require TLS yet.</li>
+<li>The correctness check needs three verified miners; the 2026-10-04 test used three on one VM, all the project&#x27;s.</li>
+<li>The site dropped its &#x27;100 percent detection&#x27; claim by 2026-11-08 and now offers TDX pilots, unaudited by its own account; docs/results.md still says an exfiltrator scores 1.0.</li>
+<li>README (2026-11-12): no design partners, no independent miners; the approved list means images the team signed, and no outsider has rebuilt one. The API-key tool ran only in the team&#x27;s own test.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/Ayoshiss/sentinel-subnet" rel="noopener noreferrer">GitHub (sentinel-subnet)</a></li>
+<li><a href="https://sentinelsubnet.com" rel="noopener noreferrer">Project site</a></li>
+<li><a href="https://github.com/Ayoshiss/sentinel-subnet/blob/c7d1773275a5cceb08f367a561c1e41845d426e5/TESTNET.md" rel="noopener noreferrer">Testnet facts and approved measurements (TESTNET.md)</a></li>
+<li><a href="https://github.com/Ayoshiss/sentinel-subnet/blob/a904212db48ec5377af5a75c7c72ac5e05745f67/docs/mining.md" rel="noopener noreferrer">Miner guide</a></li>
+<li><a href="https://github.com/Ayoshiss/sentinel-subnet/blob/c7d1773275a5cceb08f367a561c1e41845d426e5/docs/validating.md" rel="noopener noreferrer">Validator guide</a></li>
+<li><a href="https://github.com/Ayoshiss/sentinel-subnet/blob/5ae68194e2ebb06bbb54a0665de5aacebdacc1ce/docs/results.md" rel="noopener noreferrer">Validator results and hardware tests</a></li>
+<li><a href="https://x.com/sentinelsubnet" rel="noopener noreferrer">X (sentinelsubnet)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 8 sources</summary>
+<ul>
+<li><strong>repo</strong> sentinel-subnet repository @a904212 (last commit 2026-11-12, MIT, no releases): README.md at a904212 (the 2026-11-12 diff and the whole file, searched for exfiltrator, price and AMD lines); TESTNET.md (not in the diff, so identical to its 5ae6819 and 2026-11-08 copies; searched for AMD values and mock text); measurements.json at a904212 (diff: v1 to v4 removed, v5 alone); docs/mining.md, tests/test_registry.py and docs/whitepaper.md v2.0 (the added lines of the diff; the whitepaper was searched for status, release and operator lines, not read in full); docs/results.md and docs/validating.md at a904212 (searched for the exfiltrator rows and the 22-minute default; not in the diff); ROADMAP.md, scoring.py and deploy/provision-validator-gcp.sh as read at c7d1773 (not in the later diffs); the commits 0b876b2..c7d1773, c7d1773..a7fbe7b, a7fbe7b..cceb49e, cceb49e..b79d7ef, b79d7ef..96f4137, 96f4137..5ae6819 and 5ae6819..a904212 read as compare-API diffs (README, architecture, mining, threat register, results incl. the 2026-11-10 releases section, measurements.json, requirements, run_validator, evaluator, attestation.py, registry_source.py, the validator service file, commit messages, docs/pilot-install.md, the v5 evidence README, the head of deploy/pilot.sh, run_miner.py, check_miner.py, run_broker.py, the serving handler and the head of sentinel/mcp/tools/http.py); web/verify (only its vendor README and the results description), sentinel/tls.py, the key server, sealing, the TDX verifier, image code and the rest of http.py were not read in full</li>
+<li><strong>repo</strong> sentinel-subnet @0b876b2 (unchanged by the later commits): sentinel/validating/scoring.py (axis weights and gates), sentinel/validating/evaluator.py (three-miner threshold for the correctness gate), scripts/run_validator.py (22-minute default); a search for collateral and slash in code outside tests and docs found none (re-checked 2026-10-31; the 2026-11-03 diff touches none of these files; the 2026-11-06 and 2026-11-07 diffs add TDX and broker-claim branches to evaluator.py and run_validator.py, the 2026-11-08 diff adds TLS-key checks and an optional require_tls (default off) to evaluator.py; the 2026-11-09 diff touches neither; the 2026-11-10 diff adds an accept_unsigned_tls option (default off) to both and a signed TLS key to attestation.py; none touches scoring.py or the threshold lines, none adds TAO collateral or slashing code; the 2026-11-12 diff changes no source file except tests/test_registry.py)</li>
+<li><strong>msg</strong> #sentinel 2026-09-10 (the only messages in the archive for this channel; nothing newer, checked 2026-11-01; archive unreachable 2026-11-03, 2026-11-04, 2026-11-05, 2026-11-06, 2026-11-07, 2026-11-08, 2026-11-09, 2026-11-10, 2026-11-11 and 2026-11-13)</li>
+<li><strong>web</strong> https://sentinelsubnet.com (HTTP 200 on 2026-11-13, file identical to the 2026-11-11 copy, whose visible text matched the 2026-11-08 copy; text read 2026-11-01, 2026-11-05, 2026-11-06, 2026-11-07, 2026-11-08, 2026-11-10, 2026-11-11 and 2026-11-13; rewritten between 11-07 and 11-08: the 900-challenge, 100 percent and filesystem-binding text is gone, replaced by Intel TDX pilots, the statement that it is not independently audited and the testnet netuid 554 line)</li>
+<li><strong>web</strong> GitHub repository page and API for sentinel-subnet, 2026-11-01: head then 0b876b2, not archived, 20 commits since 2026-10-01, no release; head re-checked 2026-11-13: a904212 (four commits on 2026-11-12 between 12:54 and 17:24 UTC, compare API 5ae6819...a904212; before that seven commits on 2026-11-10 between 06:57 and 16:58 UTC, compare API 96f4137...5ae6819; two on 2026-11-09, six on 2026-11-08, five on 2026-11-07, ten on 2026-11-06 and four on 2026-11-03 before that)</li>
+<li><strong>web</strong> Bittensor mainnet chain read, netuid 554 absent, 2026-11-13 (mainnet block 9499886; the 2026-11-11 read at 9483635, the 2026-11-10 read at 9473258, the 2026-11-08 read at 9463730, the 2026-11-07 read at 9456619, the 2026-11-06 read at 9449648, the 2026-11-05 read at 9439886, the 2026-11-04 read at 9432383, the 2026-11-03 read at 9423259 and the 2026-11-01 read at 9412157 agree)</li>
+<li><strong>web</strong> Bittensor testnet chain reads, netuid 554 parameters, identity, validator permits, weight ages, incentive and revealed weights, 2026-11-13 (testnet block 8438343, about 20:39 UTC; the newest weight stamp, block 8438242 (about 20:19 UTC), is 101 blocks old and 3 commits wait in the timelock queue, while on 2026-11-11 at block 8422092 the newest stamp was 31 blocks old; the other validator&#x27;s stamp (block 8250165, 2026-10-18 17:23 UTC) grew by exactly the block difference, 16,251 blocks (171,927 to 188,178), so it did not update)</li>
+<li><strong>web</strong> Bittensor testnet chain read, netuid 554 neuron aggregates, 2026-10-21 (testnet blocks about 8273082 to 8273088)</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/498.html"><small>← Previous</small>SN498 Data Annotation (CanopyMRV)</a><a rel="next" href="/bittensor-docs/subnets/576.html"><small>Next →</small>SN576 Microtensor</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-11-13. Site built 2026-11-14. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

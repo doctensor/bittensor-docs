@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fugal (SN70) | Bittensor Subnet Docs</title>
+<meta name="description" content="A competition to train cost-aware LLM routers; miners prove their benchmark runs inside Intel TDX hardware.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h10">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>70</span><div>
+<h1>Fugal <span class="muted">SN70</span></h1>
+<p class="tagline">A competition to train cost-aware LLM routers; miners prove their benchmark runs inside Intel TDX hardware.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl2"><b>0.43<small>/day</small></b><span>last 7 d</span></li><li class="pl2"><b>0.35<small>/day</small></b><span>days 8-30</span></li><li class="pl3"><b>1.4<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-26</b><span>last chat</span></li><li class="pw"><b>97</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Shipping</b><span>code activity</span></li><li class="pw"><b>330</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-11-11</b><span>last commit</span></li><li class="pw"><b>2026-11-12</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>LLM routing (hardware-attested benchmark competition)</dd>
+<dt>Status</dt><dd>Emission started 2026-11-03; v2 has been live since 2026-11-11 and three uids on one coldkey earn; pool 381 TAO.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-11-14</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Who earns now (all ck:566b2d)</a></li><li><a href="#sn-x1">Incentive since the switch (UTC)</a></li><li><a href="#sn-x2">Who held this netuid</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-similar">Similar subnets</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>pool 381 TAO (rank 122 of 128); price 0.0073, -9% in 7 days, +75% since registration; 7-day flow +18 TAO.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>v2 is live; 3 uids earn (85/10/5), all on coldkey ck:566b2d; 187 earned before the switch.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>from about 23:30Z on 11-11 the miner share sat on owner uid 0 for about 4 hours; the seat has moved twice since.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>miners need a GCP TDX VM, a funded OpenRouter key and hours of first-boot compute; burn is 0.0005 TAO, all 256 slots taken.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>its site now sells a router chat and API (free daily allowance, prepaid credit), quoting no accuracy figure for it.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-high">High barrier</span></h3><p>Train a router and run the benchmark in an Intel TDX VM, paying your own model calls.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-caution">Paid service needed</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>Intel TDX VM on GCP c3 with dstack, about $150/month (docs); CPU head training works, slower</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>OpenRouter key: about $0.3 to $48 a day (docs, by routing mix)</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>about 0.0005 TAO registration burn (2026-11-14); all 256 slots are taken</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>About 32 min to deploy; first boot embeds the 28,986-question v2 pool (8 h 28 min on testnet, docs)</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Verify attested proofs, score miners and set weights; no model calls, no API key.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>A CPU server with good uptime; no GPU (docs)</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None: no API key and no model calls (docs)</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>1,000 TAO chain permit threshold; miners answer only 50+ stake on the subnet (docs); burn 0.0005 TAO</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>systemd unit in the repo; approved image entries from a signed release</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-neutral">Neutral</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">low confidence, as of 2026-11-14. Not financial advice.</span></div><p>381 TAO pool (rank 122 of 128); price 0.0073, down 9% in 7 days and 66% from 2026-11-04. <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>Fugal pays miners to build routers that send each question to the cheapest model likely to answer it correctly. Miners run a benchmark slice with a small trained router inside an Intel TDX VM, pay their own model calls and submit a signed proof.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Train a small router head on a frozen Qwen3-0.6B. Each epoch (about 300 questions) it runs in an Intel TDX VM on GCP, calls models through OpenRouter at the miner&#x27;s cost and returns a signed proof.</p></div><div><h3>Validators</h3><p>Validators call no model: they check the signature, approved image, head hash and answers, score miners, bar copies of older heads and set weights.</p></div><div><h3>Incentive</h3><p>Split: 18% owner, 41% validators, 41% miners. Since the v2 switch one champion takes 85% of the miner share and the last two 10% and 5% (docs); a head wins the seat by beating the champion by 0.2 points at 99% confidence over five or more epochs; with no eligible head the share burns.</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-11-14, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-good">Open</span>5 permit holders, 4 not owner-linked; chain stake threshold 1,000 TAO, no whitelist in the docs.</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">29%</span>Owner uid 0 takes 29.0% of last-epoch emission as validator dividends, 0% incentive; owner cut 18%, unspent Burn.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">3 uids</span><span class="v2-sx muted">top 5 hold 100% of incentive.</span> 3 uids hold incentive (uid 55 85%, 215 10%, 12 5%), all on one coldkey, ck:566b2d.</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Converged</span>All 4 validators with weights put uid 55 first; the fifth permit holder, uid 215, has never set weights.</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-good">Open</span>Miner and validator code are public under the MIT licence (fugal-ai/fugal-subnet).</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-high">High barrier</span></h3><p>Train a router and run the benchmark in an Intel TDX VM, paying your own model calls.</p><ul>
+<li>Only the signed image-v* release is approved; a VM dstack does not measure is rejected while you still pay for calls.</li>
+<li>A failed model call scores as wrong and a missed round resets burn-in; v0.3.2 (2026-11-12) stopped dead axons delaying live miners.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Verify attested proofs, score miners and set weights; no model calls, no API key.</p><ul>
+<li>5 permits (uids 0, 1, 2, 15, 215); 4 set weights, all with uid 55 first; uid 215 (a seat holder on ck:566b2d) never has.</li>
+<li>uid 0 (owner) holds 58.0% of dividends, uid 1 (ck:1ab6ad) 39.7%.</li>
+</ul></section></div>
+<h2 id="sn-x0">Who earns now (all ck:566b2d)</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Seat</th><th>Uid</th><th>Registered</th><th>Share of incentive</th><th>Alpha a day</th></tr></thead><tbody><tr><td>Champion</td><td>55</td><td>2026-11-08</td><td>85.0%</td><td>2,502</td></tr><tr><td>Seat 2</td><td>215</td><td>2026-11-07</td><td>10.0%</td><td>294</td></tr><tr><td>Seat 3</td><td>12</td><td>2026-11-07</td><td>5.0%</td><td>147</td></tr></tbody></table></div>
+<h2 id="sn-x1">Incentive since the switch (UTC)</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Window</th><th>Incentive</th></tr></thead><tbody><tr><td>11-11 22:00 to 23:10</td><td>v1 vector: 187 uids</td></tr><tr><td>11-11 23:40 to 11-12 03:20</td><td>100% on owner uid 0</td></tr><tr><td>11-12 04:20 to 10:00</td><td>uid 12, 30% rising to 100%</td></tr><tr><td>11-12 11:40 to 11-13 17:40</td><td>uid 215 90%, uid 12 10%</td></tr><tr><td>11-13 18:40 to 20:20</td><td>uid 55, 32% rising to 62%</td></tr><tr><td>11-13 21:00 onward</td><td>uid 55 85%, 215 10%, 12 5%</td></tr></tbody></table></div>
+<h2 id="sn-x2">Who held this netuid</h2>
+<ul class="v2-list">
+<li>Vericore held SN70 first, then NexisGen from 2026-03 (deregistered 2026-08-12), then &#x27;Consted 2.0&#x27; until 2026-10-26.</li>
+<li>The 2026-10-26 owner has no visible link to earlier owners; the team&#x27;s testnet subnet is 552.</li>
+</ul>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-neutral">Neutral</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">low confidence, as of 2026-11-14. Not financial advice.</span></div>
+<p class="v2-thesis">v2 switched on 2026-11-11 and miner pay now goes to three uids on one coldkey. The price slid from 0.0080 to 0.0073 in a week; net flow was +18 TAO. No usage or revenue is published.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.007286 TAO per alpha</dd></div><div><dt>Pool</dt><dd>381 TAO, rank 122</dd></div><div><dt>Price, 30 days</dt><dd>+75%, 2026-10-26 to 2026-11-14</dd></div><div><dt>Net flow, 30 days</dt><dd>+118 TAO in 15 days (+282 first 5 days, -163 since)</dd></div><div><dt>Miner pay</dt><dd>21.4 TAO per day over 3 uids, one coldkey</dd></div><div><dt>Code activity</dt><dd>last merge 2026-11-12 (v0.3.2); 473 commits in 30 days</dd></div></dl>
+<div class="v2-trend"><h3>Trend</h3><div class="v2-tbody"><figure class="v2-tfig"><svg class="v2-spark up" viewBox="0 0 240 56" role="img" aria-label="Price in TAO per alpha, 2026-10-26 to 2026-11-14: 0.004198 to 0.007286, +73.6%"><polyline points="5.0,51.0 17.1,51.0 29.2,51.0 41.3,51.0 53.4,51.0 65.5,50.9 77.6,50.9 89.7,50.9 101.8,50.9 113.9,5.0 126.1,22.1 138.2,40.6 150.3,22.9 162.4,24.2 174.5,26.0 186.6,32.9 198.7,34.8 210.8,38.2 222.9,38.8 235.0,38.7"/><circle cx="235.0" cy="38.7" r="3"/></svg><figcaption><strong>Price</strong> <span class="up">+73.6%</span> <span class="muted">0.004198 to 0.007286 TAO per alpha, 2026-10-26 to 2026-11-14</span></figcaption></figure><dl class="v2-tfacts"><div><dt>Verdict history</dt><dd><ol class="v2-vh"><li><span class="muted">2026-11-08</span> <span class="st s-neutral">Neutral</span> <span class="st v-unclear">Unclear</span> <span class="muted">low confidence</span></li><li><span class="muted">2026-11-10</span> <span class="st s-neutral">Neutral</span> <span class="st v-unclear">Unclear</span> <span class="muted">low confidence</span></li><li><span class="muted">2026-11-11</span> <span class="st s-neutral">Neutral</span> <span class="st v-unclear">Unclear</span> <span class="muted">low confidence</span></li><li><span class="muted">2026-11-14</span> <span class="st s-neutral">Neutral</span> <span class="st v-unclear">Unclear</span> <span class="muted">low confidence</span></li></ol></dd></div></dl></div></div>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>v2 paid as designed: the first seat was filled about 7 hours after the switch.</li>
+<li>A router chat and API with prepaid credit are now on sale.</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>All 3 seats and all miner pay sit on one coldkey (ck:566b2d).</li>
+<li>Price down 66% from 2026-11-04; no accuracy figure is quoted for the chat router.</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> Outside heads taking a seat, published usage or inflow would lift it; one coldkey keeping every seat, or outflow, would lower it.</p>
+<p class="muted">Since the last pass: Unchanged (neutral / unclear / low): v2 pays, but one coldkey holds every seat.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-similar">Similar subnets</h2>
+<div class="v2-sim"><p>By pool size this is <strong>rank 12 of 12</strong> among the subnets grouped as <em>inference</em> (what they mainly sell). Pool and price as of 2026-11-13 to 2026-11-14, price in TAO per alpha; the barrier is the easiest miner role.</p><div class="scroll"><table class="v2-table"><thead><tr><th>#</th><th>Subnet</th><th>Pool</th><th>Price</th><th>Miner barrier</th></tr></thead><tbody><tr><td>8</td><td><a href="/bittensor-docs/subnets/46.html">Instant</a> <span class="muted">SN46</span></td><td>7,806 TAO</td><td>0.002993</td><td><span class="v2-barrier b-high">High</span></td></tr><tr><td>9</td><td><a href="/bittensor-docs/subnets/92.html">REAX</a> <span class="muted">SN92</span></td><td>4,337 TAO</td><td>0.02585</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>10</td><td><a href="/bittensor-docs/subnets/96.html">Verathos</a> <span class="muted">SN96</span></td><td>2,118 TAO</td><td>0.00287</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>11</td><td><a href="/bittensor-docs/subnets/31.html">Recall</a> <span class="muted">SN31</span></td><td>1,611 TAO</td><td>0.003137</td><td><span class="v2-barrier b-high">High</span></td></tr><tr class="me" aria-current="true"><td>12</td><td>Fugal <span class="muted">SN70, this page</span></td><td>381 TAO</td><td>0.007286</td><td><span class="v2-barrier b-high">High</span></td></tr></tbody></table></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-11-14</span> <span class="muted">(chain; website)</span> 3 uids earn, all ck:566b2d; price 0.0073; the site now offers a router chat and API.</li>
+<li><span class="when">2026-11-13</span> <span class="muted">(chain)</span> uid 55 takes the champion seat (about 18:40 to 21:00 UTC); uid 215 drops to seat 2.</li>
+<li><span class="when">2026-11-12</span> <span class="muted">(chain; GitHub)</span> v0.3.2 (PR 193) stops dead axons delaying live miners; the seat passes from uid 12 to 215.</li>
+<li><span class="when">2026-11-11</span> <span class="muted">(chain; GitHub)</span> v2 activation block 9,485,640 (about 21:09Z); no champion for 4 hours from about 23:30Z.</li>
+<li><span class="when">2026-11-03</span> <span class="muted">(chain; GitHub changelog)</span> Started 15:49 UTC; a validator bug rejected both seed miners&#x27; first epoch (fixed).</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Read the miner guide, train a head (scripts/train_head.py) and rehearse on testnet with --mock (no spend).</li>
+<li>Deploy the published miner image on a GCP TDX VM with dstack, push the head and a funded OpenRouter key over the attested channel, then register a hotkey (0.0005 TAO on 2026-11-14).</li>
+<li>Validators: stake 50+, set the 4,320 s epoch, load approved entries, run neurons/validator.py --live.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Chain facts: reads at 2026-11-14 06:15 UTC plus pinned incentive reads from 2026-11-11 to 11-14; weights are opinions, not payouts; owner share is a floor. Chat unread since 2026-11-01.</li>
+<li>Who runs ck:566b2d (37 slots) is not visible; one operator upgrading its heads fits, but the chain cannot show it.</li>
+<li>The team&#x27;s earlier parity claim (own 110-question test) is gone from its site; adversarial miners are unverified (repo).</li>
+<li>Permit floor differs: chain 1,000 TAO, repo 50. Seat times come from a 1,000-block read grid.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://www.fugalai.com" rel="noopener noreferrer">Fugal site</a></li>
+<li><a href="https://github.com/fugal-ai/fugal-subnet" rel="noopener noreferrer">GitHub</a></li>
+<li><a href="https://github.com/fugal-ai/fugal-subnet/blob/main/docs/MINER_GUIDE.md" rel="noopener noreferrer">Miner guide</a></li>
+<li><a href="https://github.com/fugal-ai/fugal-subnet/blob/main/docs/VALIDATOR_GUIDE.md" rel="noopener noreferrer">Validator guide</a></li>
+<li><a href="https://github.com/fugal-ai/fugal-subnet/blob/main/docs/MAINNET_LAUNCH.md" rel="noopener noreferrer">Mainnet launch notes</a></li>
+<li><a href="https://taostats.io/subnets/70" rel="noopener noreferrer">Taostats subnet 70</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 5 sources</summary>
+<ul>
+<li><strong>repo</strong> fugal-ai/fugal-subnet@7480395 (main head: PR 193 merge at 2026-11-12 02:43Z, unchanged at 2026-11-14 06:30Z; before it 2973b52, PR 192 merge at 2026-11-10 20:06Z): CHANGELOG 0.3.2 (validator-only collection fix, consensus digest unchanged) and 0.3.1; MINER_GUIDE (&#x27;Scoring&#x27;: one champion seat, 85/10/5 payout, 0.2-point margin, five-epoch burn-in); PR 192 &#x27;deploy: freeze the v2 composes on image build-v2026.11.10b (v0.3.1), finney block 9485640&#x27;; tags v0.3.2, v0.3.1, image-v2026.11.10b; no new image tag since; only open PR is a dependabot bump; 473 commits on main in 30 days (repo_numbers.py, 2026-11-14)</li>
+<li><strong>web</strong> https://www.fugalai.com on 2026-11-14: home (12,758 bytes, now a router chat), docs/pricing (free preview, 10 free answers a day, prepaid credit), docs/faq (OpenAI and Anthropic formats), docs/how-it-works (&#x27;No accuracy or savings figure is quoted here&#x27;), network and leaderboard pages, all 200; the leaderboard data loads by script and was not read; the earlier team figures (110-question test, 0.945 accuracy, 17 models) are not on the site</li>
+<li><strong>msg</strong> #70 unclaimed (channel 1564273282356871348) and #70 pending: last read 2026-10-31 18:41 UTC; the archive answered HTTP 502 on 2026-11-04 and hung on 2026-11-05 and 2026-11-06 and timed out on 2026-11-07, 2026-11-08, 2026-11-10, 2026-11-11 and 2026-11-14, so no newer chat was read</li>
+<li><strong>web</strong> Chain read at block 9502766 (2026-11-14 06:15Z UTC): SN70 (Fugal), 256 of 256 uids, 5 permits (uids 0, 1, 2, 15, 215; weights last set 06:12Z, 05:09Z, 05:39Z, 06:12Z; uid 215 never), emission split 0/0/18/41/41 % (stored), RecycleOrBurn Burn; incentive on 3 uids (55 85.0%, 215 10.0%, 12 5.0%; storage read), all hotkeys on ck:566b2d (37 slots), miner pay 2,943.8 alpha a day = 21.4 TAO at 0.007286; uid 0 holds 29.0% of last-epoch emission; pool 381.4 TAO, burn 0.0005 TAO; refresh against 2026-11-11: no setting changed except burn; price path 2026-11-07 to 2026-11-14 (1d steps from 06:14Z: 0.0080, 0.0105, 0.0114, 0.0081, 0.0087, 0.0077, 0.0073, 0.0073; net user flow +17.7 TAO, gross volume 4,267 TAO) and 15 d from 2026-10-30 (0.0042, 0.0212, 0.0114, 0.0073; net flow +281.6, -114.1, -49.4 TAO); stake by coldkey (161 coldkeys, top 10 hold 70.6% of 77.2% read); pinned Incentive reads at 26 blocks from 9485930 to 9502000 (times at 12 s a block from block 9502766); pool rank 122 of 128 (snapshot block 9502766)</li>
+<li><strong>web</strong> https://taostats.io/subnets/70 returned 200 on 2026-11-14; a JavaScript app, contents not read</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/69.html"><small>← Previous</small>SN69 Herald</a><a rel="next" href="/bittensor-docs/subnets/71.html"><small>Next →</small>SN71 Leadpoet</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-11-14. Site built 2026-11-14. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>
