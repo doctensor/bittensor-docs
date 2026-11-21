@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Zils (SN127) | Bittensor Subnet Docs</title>
+<meta name="description" content="Small decision models (ex-Astrid): miners train open models daily; one seat pays, held by one account.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h1">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>127</span><div>
+<h1>Zils <span class="muted">SN127</span></h1>
+<p class="tagline">Small decision models (ex-Astrid): miners train open models daily; one seat pays, held by one account.</p>
+<span class="st s-transitioning">transitioning</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl3"><b>1.7<small>/day</small></b><span>last 7 d</span></li><li class="pl3"><b>1.0<small>/day</small></b><span>days 8-30</span></li><li class="pl4"><b>4.0<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-11-02</b><span>last chat</span></li><li class="pw"><b>1,303</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Shipping</b><span>code activity</span></li><li class="pw"><b>295</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-11-19</b><span>last commit</span></li><li class="pw"><b>2026-11-19</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>Decision models (miners train open models)</dd>
+<dt>Status</dt><dd>Renamed from Astrid on 2026-11-03; one miner paid (4%); the owner&#x27;s uid has 96% of incentive.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-11-21</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">From Astrid to Zils</a></li><li><a href="#sn-x1">Docs vs code vs chain</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-similar">Similar subnets</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>renamed from Astrid to Zils on 2026-11-03 with the same owner keys; the old Astrid Arena site no longer resolves.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>one miner paid, 4% (uid 190); uid 155 lost its 4% on 11-21; all 10 weight rows give the owner&#x27;s uid 96%.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>hosted decision models, open sign-up since 11-09, $0.06 per million input tokens; no customer or revenue figure.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>miners publish a model on Hugging Face (BF16 NVIDIA GPU); the site lists 139 hotkeys, 138 with a body; burn about 0.0005 TAO.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>price +31% and +436 TAO in 30 days, but -12% and -213 TAO in 10 days; pool 3,283 TAO, rank 96 of 128.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Commit a fine-tuned model to a soup pool, or train customer jobs.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-caution">GPU needed</li><li class="fl fl-unk">Paid service unknown</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>BF16 NVIDIA GPU, 12 GiB free; disk 25 GB (customer jobs), 30 GiB per soup attempt</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>Hugging Face write token (cost not stated); GPU rental if needed</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Burn about 0.0005 TAO (2026-11-21); subnet full, a new hotkey replaces the lowest scorer past immunity</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Linux x86_64 or WSL 2, Git, uv; installer; soup: fine-tune and commit; customer jobs: qualify the host first</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Download bodies, score them, set weights. All 10 permit holders put 96% on uid 0 (11-21).</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-caution">GPU needed</li><li class="fl fl-unk">Paid service unknown</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>GPU by pool: lite 4, mini 12, flash 20, z3 56 GiB free (80 GB card); disk 40 to 320 GB by pool</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>Exam items: private bank (outside access not documented) or the public Zils Current stream</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Burn about 0.0005 TAO; permit needs top-64 stake and 1,000 TAO (smallest holder not read)</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Provisioning script and preflight check on a qualified GPU host</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-neutral">Neutral</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">low confidence, as of 2026-11-21. Not financial advice.</span></div><p>Neutral, low confidence: one miner seat is paid (0.32 TAO a day) and 10 days are -213 TAO. <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>Zils sells small decision models through an API (open sign-up since 2026-11-09). Miners are paid when their published models improve a daily &#x27;soup&#x27; pool (two of four are open). Until 2026-11-03 the same owner ran Astrid, a trading contest subnet.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>A miner fine-tunes or merges a pinned Qwen-based model, publishes it on Hugging Face and commits its hash on chain; one hotkey per pool.</p></div><div><h3>Validators</h3><p>Each day after a pool&#x27;s deadline a validator downloads the committed bodies, scores them on a private exam bank and on Zils Outcomes, and averages up to five that improve the pool.</p></div><div><h3>Incentive</h3><p>Lite and mini get 25% of emissions each, flash and z3 15% each (closed: they burn), customer-job miners 20% (burns until customers pay). Per pool: five seats of 16% and a 20% crown (a seat is 4% of the miner side, a crown 5%); unearned shares burn on the owner&#x27;s uid. A seat and a nightly join need 0.5 points. On 11-21 the lite body (uid 155) scored +0.0 at 09:09Z and lost its seat at the next epoch; only mini uid 190 is paid. An optional weekly-pay mode merged 11-16; none shows.</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-11-21, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-good">Open</span>10 uids hold permits; all 10 set weights within one tempo; the validator code is public.</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">76%</span>Owner&#x27;s uid: 96% of incentive, 76.04% of emission; owner cut 18%; RecycleOrBurn is Burn.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">2 uids</span><span class="v2-sx muted">top 5 hold 100% of incentive.</span> Two uids have incentive: the owner&#x27;s (96%) and one miner (4%); the miner has no validator permit.</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Converged</span>10 of 10 put 96% on uid 0: concentration, not independent scoring.</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-caution">Partial</span>Repo is public (miner, validator, docs) but the GitHub API shows no licence; the hosted platform is closed.</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Commit a fine-tuned model to a soup pool, or train customer jobs.</p><ul>
+<li>Soup bodies are full fine-tunes of a pinned Qwen model, open licence; customer jobs train adapters on z3-mini and need no approval.</li>
+<li>139 hotkeys listed, 138 with a body (88 lite, 50 mini), 38 Hugging Face accounts; one seat paid (uid 190); uid 155 lost its seat on 11-21.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Download bodies, score them, set weights. All 10 permit holders put 96% on uid 0 (11-21).</p><ul>
+<li>All 10 set weights within a tempo (oldest 279 blocks); operators unknown.</li>
+<li>Round deadlines (UTC): mini 00:00, lite 06:00, flash 12:00, z3 18:00; 6 hour limit.</li>
+</ul></section></div>
+<h2 id="sn-x0">From Astrid to Zils</h2>
+<ul class="v2-list">
+<li>On 2026-11-03 the identity changed from Astrid to Zils (zils.ai); owner keys and the 2025-06-24 registration are unchanged.</li>
+<li>The Astrid Arena site no longer resolves; its MS6 and MS7 prizes were never shown paid.</li>
+</ul>
+<h2 id="sn-x1">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Network</td><td>Docs: runs on mainnet 127; one line says no bodies are committed</td><td>Chain: 10 validators set weights; 138 hotkeys list a body</td><td>2026-11-21</td></tr><tr><td>Payout rule</td><td>Docs and site: lite and mini 25%, flash and z3 15%, adapters 20%</td><td>Chain: one seat paid (4%); uid 0 has 96%</td><td>2026-11-21</td></tr><tr><td>Paid seats</td><td>Site: one paid seat (uid 190)</td><td>Chain: only uid 190 paid</td><td>2026-11-21</td></tr></tbody></table></div>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-neutral">Neutral</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">low confidence, as of 2026-11-21. Not financial advice.</span></div>
+<p class="v2-thesis">One seat is paid (0.32 TAO a day; 96% of the miner side burns) and 30 days are +436 TAO net, but the lite seat is gone and 10 days are -213 TAO.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.00273 TAO per alpha</dd></div><div><dt>Pool</dt><dd>3,283 TAO, rank 96</dd></div><div><dt>Price, 30 days</dt><dd>+31% (10-22 to 11-21)</dd></div><div><dt>Net flow, 30 days</dt><dd>+436 TAO (10-22 to 11-21; last 15 days -392)</dd></div><div><dt>Miner pay</dt><dd>0.32 TAO a day to 1 miner; 96% of the miner side burns</dd></div><div><dt>Code activity</dt><dd>last commit 2026-11-19; 502 commits in 30 days</dd></div></dl>
+<div class="v2-trend"><h3>Trend</h3><div class="v2-tbody"><figure class="v2-tfig"><svg class="v2-spark up" viewBox="0 0 240 56" role="img" aria-label="Price in TAO per alpha, 2026-09-28 to 2026-11-21: 0.002305 to 0.002725, +18.2%"><polyline points="5.0,46.3 13.5,46.2 17.8,46.5 26.3,46.8 34.8,49.6 43.3,49.1 47.6,48.4 51.9,48.5 56.1,48.2 64.6,48.2 73.1,47.7 77.4,49.5 81.7,50.0 85.9,50.2 94.4,50.1 103.0,50.1 107.2,51.0 111.5,49.7 115.7,48.0 124.3,43.7 132.8,43.2 137.0,43.4 141.3,39.0 145.6,22.0 149.8,20.0 154.1,22.5 158.3,5.0 162.6,11.9 166.9,27.6 171.1,27.0 175.4,34.3 179.6,28.7 183.9,30.6 188.1,31.6 192.4,32.8 196.7,31.7 200.9,29.6 205.2,31.1 209.4,39.7 213.7,40.6 218.0,41.1 222.2,43.2 226.5,33.7 230.7,37.9 235.0,39.0"/><circle cx="235.0" cy="39.0" r="3"/></svg><figcaption><strong>Price</strong> <span class="up">+18.2%</span> <span class="muted">0.002305 to 0.002725 TAO per alpha, 2026-09-28 to 2026-11-21</span></figcaption></figure><dl class="v2-tfacts"><div><dt>Net flow, 30 days</dt><dd><span class="up">+436 TAO</span> <span class="muted">2026-10-22 to 2026-11-21</span></dd></div><div><dt>Verdict history</dt><dd><ol class="v2-vh"><li><span class="muted">2026-11-13</span> <span class="st s-neutral">Neutral</span> <span class="st v-unclear">Unclear</span> <span class="muted">low confidence</span></li><li><span class="muted">2026-11-15</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">low confidence</span></li><li><span class="muted">2026-11-17</span> <span class="st s-neutral">Neutral</span> <span class="st v-unclear">Unclear</span> <span class="muted">low confidence</span></li><li><span class="muted">2026-11-21</span> <span class="st s-neutral">Neutral</span> <span class="st v-unclear">Unclear</span> <span class="muted">low confidence</span></li></ol></dd></div></dl></div></div>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>A seat was paid at every check since 11-16; 30 days: +31% price, +436 TAO net.</li>
+<li>502 commits in 30 days, releases on 11-18 and 11-19.</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>96% of the miner side burns; one account has held every seat since 11-17; the lite seat is gone.</li>
+<li>10 days: -12% and -213 TAO; usage and revenue are team claims.</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> Bullish: seats stay paid for weeks, a second paid seat, a named customer, inflows. Bearish: the last seat stops paying, or outflows continue.</p>
+<p class="muted">Since the last pass: Unchanged (neutral): pay halved to one seat (0.32 TAO a day); 10 days are -213 TAO.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-similar">Similar subnets</h2>
+<div class="v2-sim"><p>By pool size this is <strong>rank 13 of 20</strong> among the subnets grouped as <em>training</em> (what they mainly sell). Pool and price as of 2026-11-19 to 2026-11-21, price in TAO per alpha; the barrier is the easiest miner role.</p><div class="scroll"><table class="v2-table"><thead><tr><th>#</th><th>Subnet</th><th>Pool</th><th>Price</th><th>Miner barrier</th></tr></thead><tbody><tr><td>11</td><td><a href="/bittensor-docs/subnets/125.html">Refinery</a> <span class="muted">SN125</span></td><td>5,012 TAO</td><td>0.002324</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>12</td><td><a href="/bittensor-docs/subnets/38.html">ChronoLLM</a> <span class="muted">SN38</span></td><td>4,639 TAO</td><td>0.004489</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr class="me" aria-current="true"><td>13</td><td>Zils <span class="muted">SN127, this page</span></td><td>3,283 TAO</td><td>0.002725</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>14</td><td><a href="/bittensor-docs/subnets/102.html">Connito</a> <span class="muted">SN102</span></td><td>3,125 TAO</td><td>0.004519</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>15</td><td><a href="/bittensor-docs/subnets/119.html">CapabilityForge Next</a> <span class="muted">SN119</span></td><td>3,115 TAO</td><td>0.002326</td><td><span class="v2-barrier b-unknown">Unknown</span></td></tr></tbody></table></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-11-21</span> <span class="muted">(on-chain)</span> Chain: the 09:09Z lite round scored uid 155&#x27;s body +0.0; the epoch at about 10:35Z ended its 4%. All 10 weight rows give uid 0 96%.</li>
+<li><span class="when">2026-11-19</span> <span class="muted">(ooo-hq/zils)</span> Code: release e8350f5 (fine-tune credit over base); b5a248c on 11-18 (joins need 0.5).</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Check your GPU (BF16 NVIDIA, 12 GiB free); install the miner with the zils.ai installer (Linux or WSL 2, Git, uv).</li>
+<li>Register a hotkey on subnet 127 (burn about 0.0005 TAO on 2026-11-21); use one hotkey per pool.</li>
+<li>Soup: train or merge a body, publish it on Hugging Face, commit it before the deadline. Customer jobs: qualify the host, run the worker.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Why the Astrid owner moved to Zils, and what happens to the unpaid Astrid prizes, is unknown.</li>
+<li>Seats changed hands about every 24 hours (11-17 to 11-20) and uid 155&#x27;s ended on 11-21; no reason is given. The 0.5 floor is about 1.5 standard errors, so a seat can be paid one round and missed the next.</li>
+<li>The exam is private and no traffic reaches miners yet, so pay rests on the team&#x27;s own scoring.</li>
+<li>The docs lag the repo; this page follows the changelog, the code and the chain. Chat after 2026-11-02 was unreadable.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://zils.ai" rel="noopener noreferrer">Zils website</a></li>
+<li><a href="https://docs.zils.ai" rel="noopener noreferrer">Docs</a></li>
+<li><a href="https://docs.zils.ai/changelog" rel="noopener noreferrer">Changelog</a></li>
+<li><a href="https://docs.zils.ai/operations/soup" rel="noopener noreferrer">Soup pools (miner and validator rules)</a></li>
+<li><a href="https://github.com/ooo-hq/zils" rel="noopener noreferrer">Zils code (GitHub)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 8 sources</summary>
+<ul>
+<li><strong>repo</strong> ooo-hq/zils@16960b6 (2026-11-19; no licence in the GitHub API; no open pull request; release stable-e8350f5): 12 commits since 6fe2b7c (PRs 249 to 254: joins need the 0.5 floor, fine-tune credit docs, unpaid scores not shown at the floor, releases b5a248c and e8350f5), patches of docs/mining.md and the soup code; earlier reads 2026-11-13 and 11-17; read 2026-11-21 (unchanged at 17:33Z); 502 commits in 30 days, 295 touching code</li>
+<li><strong>msg</strong> #astrid (channel 127), 2026-06-22 to 2026-11-01 (earlier passes; nothing after 10-30 found; the chat archive was unreachable on 2026-11-02 and 11-04 to 11-21: HTTP 502, then reads that timed out; three reads on 2026-11-21 failed): Astrid contest history, the 10-29 team update on MS6 and MS7</li>
+<li><strong>web</strong> zils.ai home (text unchanged) and /miners (139 miners on 6 pages: 88 lite, 50 mini, 1 without a body; &#x27;Paid seat&#x27; on uid 190 only (uid 141 was paid at 14:33Z, then swapped its body), uid 155 &#x27;In the soup, unpaid&#x27;; 17 in line, 16 not admitted; the next-round list checks the first 20 new bodies), docs.zils.ai changelog (unchanged; still says no bodies are committed) and operations/soup (rewritten after 11-17: 0.5 floor, weekly soup, fine-tune credit over base), read 2026-11-21 17:33Z (also 09:55Z and 14:33Z). Lite soup d3-lite-2026-11-21 (45.1, finished 09:09Z; uid 155&#x27;s body Unpaid +0.0; 9 bodies waiting) and mini soup d3-mini-2026-11-21 (60.4; uid 190&#x27;s body Seat +12.5; 8 waiting): one body each, no crown.</li>
+<li><strong>web</strong> Chain read at block 9556447 (2026-11-21 17:17Z UTC): SN127 (Zils): registered 2025-06-24, tempo 360, 256 of 256 uids, commit-reveal off; emission weights burn/recycle/owner/validator/miner = 0/0/18/41/41 % (stored, same values as the chain default), RecycleOrBurn = Burn; uids under the owner hotkey or owner coldkey hold 96 % of incentive and 76.04 % of last-epoch emission (a floor); 10 validators have weight rows, on average 96 % of weight goes to uid 0.</li>
+<li><strong>web</strong> Chain read at block 9556523 (2026-11-21 17:32Z UTC), compared with block 9551280 (2026-11-20 23:59Z UTC): SN127: no setting changed in 33 checked items; emission split unchanged; pool 3324.48 -&gt; 3283.1 TAO.</li>
+<li><strong>web</strong> Chain read at block 9556523 (2026-11-21 17:32Z): price SN127, 3 samples every 15d from block 9340523 (2026-10-22 17:24Z): price 0.002073 -&gt; 0.002725 TAO per alpha (+31.4%), pool TAO 2863.6 -&gt; 3283.1; over the 2 intervals where the pool change equals flow + protocol: net user flow +435.5 TAO (staked minus unstaked), protocol flow -16.0 TAO, gross volume 56984.0 TAO.</li>
+<li><strong>web</strong> Chain reads of SN127 on 2026-11-21 (dossier at block 9556447, 17:17Z; weights, uid, row and price reads at 9556523, 17:32Z): all 10 permit holders put 96% on uid 0 (permit holders unchanged); every weight row is uid 0 96% and uid 190 4% (at 09:41Z six rows also gave uid 155 4%); incentive at block 9554500, after the epoch at 9554459 (about 10:35Z), already omits uid 155 (4% at 9554187; epochs run every 361 blocks), and reads at 9554900, 9555250, 9555560 and 9556523 agree; uid 190 earns 117.77 alpha a day (hotkey alpha 65.0, +35.4 = 6 epochs since 09:56Z), uid 155 earns 0 (hotkey alpha 29.5, unchanged since 09:56Z), uid 141 earns 0; uids 74, 45, 125 and 193 earn 0. Earlier incentive reads bisected to 37 blocks: uid 74 out and 133 in at 11-17 ~11:30Z, 45 out and 137 in 11-18 ~04:15Z, 133 out and 155 in 11-18 ~11:30Z, 137 out 11-19 ~04:15Z, 190 in at 9% 11-20 ~05:30Z, back to 4% 11-21 ~04:20Z. Uids 133, 137, 141, 155, 156 and 190 share one coldkey. Price over 10 days -12.2%, net flow -212.7 TAO; pool rank 96 of 128 (snapshot of block 9556523).</li>
+<li><strong>web</strong> Astrid Arena (arena.astrid.global no longer resolves; arena-api.astrid.global /public/arena/bittensor, /public/arena/completed-competitions, /public/competitions, /public/rewards return HTTP 503), checked 2026-11-11 (on 2026-11-13, 11-15, 11-17 and 11-21 /public/arena/bittensor answers HTTP 404); last readable 2026-11-09: no open contest, 27 competitions all completed, no payout since 2026-11-01</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/126.html"><small>← Previous</small>SN126 Attelier</a><a rel="next" href="/bittensor-docs/subnets/128.html"><small>Next →</small>SN128 ByteLeap</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-11-21. Site built 2026-11-21. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

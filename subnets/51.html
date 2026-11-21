@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lium (SN51) | Bittensor Subnet Docs</title>
+<meta name="description" content="GPU rental marketplace: providers keep 95% of rental fees, but one team validator and one burner key shape emission.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h21">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>51</span><div>
+<h1>Lium <span class="muted">SN51</span></h1>
+<p class="tagline">GPU rental marketplace: providers keep 95% of rental fees, but one team validator and one burner key shape emission.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>15<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>12<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>8.8<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-11-02</b><span>last chat</span></li><li class="pw"><b>17,771</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Shipping</b><span>code activity</span></li><li class="pw"><b>542</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-11-20</b><span>last commit</span></li><li class="pw"><b>2026-11-19</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>GPU compute marketplace</dd>
+<dt>Status</dt><dd>Pool rank 1; uid 47&#x27;s share rose to 86.6%; 73% of GPUs rented.</dd>
+<dt>Confidence</dt><dd>high</dd>
+<dt>Researched</dt><dd>2026-11-20</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">How pay works</a></li><li><a href="#sn-x1">Docs vs code vs chain</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-similar">Similar subnets</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>73% of 2,300 listed GPUs rented; renters spent $3.07M in 30 days.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>providers keep 95% of rental fees (off chain); emission adds idle pay.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>one team validator; uid 47, a team payout key per code, holds 86.6% of miner incentive.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>miners&#x27; emission share 41% to 50% on 11-12; pool rank 1; price +15%, net flow -290 TAO in 30 days.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner (provider) <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Lists NVIDIA GPU hosts for rent and sets prices; earns 95% of rental fees plus emission.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-caution">GPU needed</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>NVIDIA GPU host, Ubuntu 24.04 or 26.04, Docker, 8 GB RAM, 150 GB disk, 100 Mbit/s down and 10 up, public IP</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None; Lium&#x27;s provider server is the default</dd></div><div class="v2-need n-no"><dt>Stake / fees</dt><dd>None with an e-mail or Google account; 0.5 TAO burn with your own hotkey (2026-11-20); Lium keeps 5% of rent</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>One install command and portal sign-up; listed in about 5 minutes (docs)</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>The team runs the only validator; outsiders can only run an auditor that copies its public results.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-bad">Permissioned</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>Auditor script: 1 CPU core, 256 MB RAM, outbound HTTPS</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Permit stake threshold 1,000 TAO (chain, 2026-11-20); registration burn 0.5 TAO</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Python 3.11 script with a wallet; no node software</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div><div class="v2-role"><h3>Renter <span class="v2-barrier b-low">Low barrier</span></h3><p>Rents GPUs by the hour on lium.io, the CLI, SDK or API.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-caution">Paid service needed</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-no"><dt>Hardware</dt><dd>None</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>Account credit; H100 80GB 30-day median about $2.00 per GPU-hour (team stats)</dd></div><div class="v2-need n-no"><dt>Stake / fees</dt><dd>None</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Account and a credit top-up</dd></div></dl><a class="v2-more" href="#sn-role-2">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-neutral">Neutral</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-fair">Fairly valued</span></span><span class="v2-conf muted">medium confidence, as of 2026-11-20. Not financial advice.</span></div><p>Pool rank 1; 30-day net flow about flat after +2,591 TAO in 2 days. <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>Lium rents NVIDIA GPUs by the hour. Providers list hosts; renters rent them by the hour, and Lium keeps 5%. Emission is a second income, but one team validator decides who gets it and most miner emission goes to a team-controlled key.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Providers run a node agent on each GPU host, list it through Lium&#x27;s provider server (default) or their own, and set an hourly price.</p></div><div><h3>Validators</h3><p>The team runs the only validator: it checks each node every 15 minutes and lists those that pass.</p></div><div><h3>Incentive</h3><p>Rental fees are the main income. Emission is second: the team validator splits the miners&#x27; 50% into a rented pool, idle pay and a remainder it calls burn.</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-11-20, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-bad">Owner only</span>The team runs the only node-checking validator; 11 permits exist, outsiders can only copy its public results.</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">0%</span>Owner uids hold 0% (a floor); owner cut 9%, not Burn; team-key uid 47 holds 43.2%.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">61 uids</span><span class="v2-sx muted">top 5 hold 92.7% of incentive.</span> 61 uids paid; the top 5 hold 92.7% of incentive and uid 47 alone 86.6%.</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Converged</span>All 9 weight rows put uid 47 first; one team scorer drives them, so this is not proof of copying.</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-good">Open</span>Miner and validator code is public under MIT (lium-io); the community auditor has not changed since 2025-09-15.</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner (provider) <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Lists NVIDIA GPU hosts for rent and sets prices; earns 95% of rental fees plus emission.</p><ul>
+<li>Ports 8080, 2200 and three renting ports; SSH must arrive directly, not via a relay; HGX H100 or H200 need Fabric Manager.</li>
+<li>Rental fees arrive as alpha or USDT; emission is alpha on a hotkey, or USDT for an e-mail or Google account (docs, 11-12).</li>
+<li>Idle pay needs disk of 1.5 times GPU memory and a price at or below 1.5 times market p90; V100 gets none (code).</li>
+<li>Secure: a rental ending on an inactive node costs 48 hours of its price.</li>
+<li>Spot idle pay is at most 80% of Secure, also on a split node; idle Spot nodes of one GPU model together get at most 90% of Default Jobs&#x27; earnings. GB200 / GB300 trays need GPU splitting.</li>
+<li>Cards below the reported model, or a foreign GPU workload on an idle node, earn nothing (code, 11-13).</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>The team runs the only validator; outsiders can only run an auditor that copies its public results.</p><ul>
+<li>9 of 11 permit holders set weights in the last tempo; 2 are silent, the oldest for about 642 days.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-2"><h3>Renter <span class="v2-barrier b-low">Low barrier</span></h3><p>Rents GPUs by the hour on lium.io, the CLI, SDK or API.</p><ul>
+<li>On demand only; if a provider&#x27;s node drops, billing pauses and processes must restart.</li>
+</ul></section></div>
+<h2 id="sn-x0">How pay works</h2>
+<ul class="v2-list">
+<li>Emission: 9% owner, 41% validators, 50% miners (18 / 41 / 41 until 11-12); the miners&#x27; share goes to rented nodes (7.5% of it), idle nodes under a soft limit and burn.</li>
+<li>Burn goes to one uid that a code comment calls a team payout key; it is not shown to be destroyed. It held 86.6% of miner incentive on 11-20 (72.9% on 11-16); others share about 6.7% of total emission. Its hotkey alpha fell 39% in 7.9 days (35,185 to 21,417) despite about 19,800 earned.</li>
+<li>Team says: rental-income buy-backs and burns ran through the owner key (chat, July and August); no policy is published; unchecked here.</li>
+</ul>
+<h2 id="sn-x1">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Auditor</td><td>README: it audits the network&#x27;s results</td><td>Code: it copies the team&#x27;s weights, no check</td><td>2026-11-20</td></tr><tr><td>Two reverted power caps stop idle pay</td><td>Docs: 2 such jobs in 24 h, no idle pay</td><td>Code: default-off flag deleted 11-19</td><td>2026-11-20</td></tr></tbody></table></div>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-neutral">Neutral</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-fair">Fairly valued</span></span><span class="v2-conf muted">medium confidence, as of 2026-11-20. Not financial advice.</span></div>
+<p class="v2-thesis">Price +15%, net flow -290 TAO in 30 days; one +6,500 TAO buying day to 11-18; +2,591 TAO in 2 days.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.1263 TAO per alpha</dd></div><div><dt>Pool</dt><dd>196,077 TAO, rank 1</dd></div><div><dt>Price, 30 days</dt><dd>+15%, 2026-10-21 to 2026-11-20</dd></div><div><dt>Net flow, 30 days</dt><dd>-290 TAO, 2026-10-21 to 2026-11-20</dd></div><div><dt>Miner pay</dt><dd>7.43 TAO per day on average (453 TAO per day over 61 uids)</dd></div><div><dt>Miner pay outside top 5</dt><dd>0.591 TAO per day on average (33.1 TAO per day over 56 uids outside the top 5)</dd></div><div><dt>Code activity</dt><dd>last commit 2026-11-20; 543 commits in 30 days; last release 2026-11-19</dd></div></dl>
+<div class="v2-trend"><h3>Trend</h3><div class="v2-tbody"><figure class="v2-tfig"><svg class="v2-spark up" viewBox="0 0 240 56" role="img" aria-label="Price in TAO per alpha, 2026-09-28 to 2026-11-20: 0.09189 to 0.1263, +37.5%"><polyline points="5.0,51.0 18.0,46.5 26.7,49.6 31.0,47.5 35.4,48.5 39.7,41.9 48.4,40.6 57.1,39.2 61.4,36.0 65.8,32.4 70.1,31.2 78.8,30.6 87.5,30.1 91.8,30.3 96.1,28.0 100.5,29.6 104.8,28.3 109.2,26.6 113.5,24.6 117.8,21.2 122.2,18.0 126.5,19.3 130.8,13.7 135.2,14.2 139.5,9.9 143.9,5.2 148.2,5.0 152.5,8.6 156.9,22.9 161.2,20.5 165.6,19.2 169.9,11.2 174.2,8.6 178.6,11.6 182.9,13.2 187.3,12.2 191.6,13.9 195.9,28.5 200.3,27.4 204.6,16.8 209.0,17.7 213.3,20.2 217.6,23.6 222.0,23.3 226.3,16.6 235.0,8.4"/><circle cx="235.0" cy="8.4" r="3"/></svg><figcaption><strong>Price</strong> <span class="up">+37.5%</span> <span class="muted">0.09189 to 0.1263 TAO per alpha, 2026-09-28 to 2026-11-20</span></figcaption></figure><dl class="v2-tfacts"><div><dt>Net flow, 30 days</dt><dd><span class="down">-290 TAO</span> <span class="muted">2026-10-21 to 2026-11-20</span></dd></div><div><dt>Verdict history</dt><dd><ol class="v2-vh"><li><span class="muted">2026-11-12</span> <span class="st s-neutral">Neutral</span> <span class="st v-fair">Fairly valued</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-14</span> <span class="st s-neutral">Neutral</span> <span class="st v-fair">Fairly valued</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-16</span> <span class="st s-neutral">Neutral</span> <span class="st v-fair">Fairly valued</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-20</span> <span class="st s-neutral">Neutral</span> <span class="st v-fair">Fairly valued</span> <span class="muted">medium confidence</span></li></ol></dd></div></dl></div></div>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>Spend above $120k a day ($127k on 11-18, team figure); 157 providers.</li>
+<li>Owner cut halved to 9%; 78 commits since 11-16.</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>87% of miner incentive sits on one team key; its hotkey alpha fell 39% since 11-12.</li>
+<li>30-day net flow below zero; buyers and sellers unknown.</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> Positive 30-day net flow with spend above $100k a day: bullish; 8,000 TAO net outflow by 11-27, or spend under $95k: bearish.</p>
+<p class="muted">Since the last pass: Neutral since 11-03: pool rank 1; other miners&#x27; emission share fell from 13.6% to 6.7%.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-similar">Similar subnets</h2>
+<div class="v2-sim"><p>By pool size this is <strong>rank 1 of 13</strong> among the subnets grouped as <em>compute</em> (what they mainly sell). Pool and price as of 2026-11-20 to 2026-11-21, price in TAO per alpha; the barrier is the easiest miner role.</p><div class="scroll"><table class="v2-table"><thead><tr><th>#</th><th>Subnet</th><th>Pool</th><th>Price</th><th>Miner barrier</th></tr></thead><tbody><tr class="me" aria-current="true"><td>1</td><td>Lium <span class="muted">SN51, this page</span></td><td>196,077 TAO</td><td>0.1263</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>2</td><td><a href="/bittensor-docs/subnets/4.html">Targon</a> <span class="muted">SN4</span></td><td>138,324 TAO</td><td>0.05366</td><td><span class="v2-barrier b-high">High</span></td></tr><tr><td>3</td><td><a href="/bittensor-docs/subnets/75.html">Hippius</a> <span class="muted">SN75</span></td><td>36,574 TAO</td><td>0.01958</td><td><span class="v2-barrier b-high">High</span></td></tr><tr><td>4</td><td><a href="/bittensor-docs/subnets/48.html">Quantum Compute</a> <span class="muted">SN48</span></td><td>15,935 TAO</td><td>0.008839</td><td><span class="v2-barrier b-high">High</span></td></tr><tr><td>5</td><td><a href="/bittensor-docs/subnets/110.html">Green Compute</a> <span class="muted">SN110</span></td><td>12,570 TAO</td><td>0.0251</td><td><span class="v2-barrier b-high">High</span></td></tr></tbody></table></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-11-20</span> <span class="muted">(GitHub commits, 2026-11-16 to 2026-11-20)</span> 78 commits since 11-16: a validator refuses a node set up for another account; modded 4090 / 4080 cards priced; post-rental GPU recheck removes fillers at once.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Sign up in the provider portal with an e-mail or Google account, or register your own hotkey on subnet 51 (0.5 TAO burn).</li>
+<li>Connect Discord, join the Lium server and confirm an e-mail; idle pay needs them.</li>
+<li>Prepare the host (Ubuntu 24.04 or 26.04, NVIDIA driver, Docker, open ports), then choose Add Node and run the install command.</li>
+<li>Set a price at or below the soft limit, pick Secure or Spot and check the node is listed.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Where the burner key&#x27;s alpha goes is not visible on chain; &#x27;burn&#x27; here means paid to a team key.</li>
+<li>Usage, revenue and fleet figures are the team&#x27;s own.</li>
+<li>The rented share fell from 87% to 67% after outages, then ranged 65% to 80% (11-20: 73%); causes unknown.</li>
+<li>Docs say e-mail or Google accounts get emission in USDT (11-12); which hotkey earns it is undocumented.</li>
+<li>Team chat after 2026-11-01 was not read.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://lium.io" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://lium.io/stats" rel="noopener noreferrer">Live stats</a></li>
+<li><a href="https://docs.lium.io" rel="noopener noreferrer">Docs</a></li>
+<li><a href="https://docs.lium.io/providers/quickstart" rel="noopener noreferrer">Provider quickstart</a></li>
+<li><a href="https://docs.lium.io/providers/nodes/quickstart" rel="noopener noreferrer">Node quickstart</a></li>
+<li><a href="https://docs.lium.io/providers/rewards" rel="noopener noreferrer">Provider rewards docs</a></li>
+<li><a href="https://provider.lium.io" rel="noopener noreferrer">Provider portal</a></li>
+<li><a href="https://provider.lium.io/signup" rel="noopener noreferrer">Provider sign-up</a></li>
+<li><a href="https://github.com/Datura-ai/lium-io" rel="noopener noreferrer">GitHub (subnet code)</a></li>
+<li><a href="https://github.com/Datura-ai/lium" rel="noopener noreferrer">CLI and SDK</a></li>
+<li><a href="https://github.com/Datura-ai/sn51-auditor" rel="noopener noreferrer">Community auditor</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 7 sources</summary>
+<ul>
+<li><strong>repo</strong> Datura-ai/lium-io@6a39d95 (2026-11-20 04:19Z), MIT; 78 commits since 9d23a2f (2026-11-16) read via the compare API (265 files: validators incentive/config.py, core/config.py, services/task/score_calculator.py, incentive/default.py, incentive/rental_price.py, node account check); commits 86f0b50 (services/docker_service.py) and 6a39d95 (task/checks/post_rental_gpu_recheck.py) read in full; releases executor-v1.185 to v1.191 (2026-11-17 to 2026-11-19); repo_numbers.py: 542 commits in 30 days (GitHub listing: 569 since 2026-10-20); earlier diffs against 9d23a2f (2026-11-16), 6458d58 (2026-11-13), a7ddbec (2026-11-12), b218f10 (2026-11-10), f815bc8 (2026-11-06), 0f38927 (2026-11-05), 747aa1e (2026-11-04), ee7b77c (2026-11-03), 3d88f13 (2026-10-31), 2bfa0de (2026-10-28)</li>
+<li><strong>repo</strong> Datura-ai/sn51-auditor@8747140 (2025-09-15, head unchanged on 2026-11-20) README and auditor.py</li>
+<li><strong>web</strong> https://lium.io/api/public/v1/stats (generated 2026-11-20 06:18Z), https://lium.io/api/v1/shared-config (2026-11-20; adds three modded-card prices since 2026-11-16: total_burn_emission 0.925) and https://lium.io/api/latest-set-weights (2026-11-20, updated 06:10Z; uid 47 84.0% of the file&#x27;s weight)</li>
+<li><strong>web</strong> docs.lium.io providers quickstart, node quickstart, rewards, emission, node tier and GPU power cap pages, read 2026-11-20 (changed since 2026-11-16: node quickstart adds --storage / --host-tuning flags and &#x27;lium mine --auto --renting-port-range&#x27;; emission page says the idle rate is a target in USD per GPU-hour and adds an estimated-idle-pay card; node-tier page adds a rule for re-added nodes; providers quickstart, rewards and GPU power cap pages same text); authentication and Discord pages (read 2026-11-02)</li>
+<li><strong>web</strong> Chain read at block 9545924 (2026-11-20 06:07Z UTC): SN51 (lium.io): registered 2024-10-04, tempo 360, 256 of 256 uids, commit-reveal on; emission weights burn/recycle/owner/validator/miner = 0/0/9/41/50 %, RecycleOrBurn = Recycle; uids under the owner hotkey or owner coldkey hold 0 % of incentive and 0 % of last-epoch emission (a floor); 9 validators have weight rows, on average 0 % of weight goes to uid 0. uid 47 held 86.6 % of incentive (72.9 % at block 9522478, 2026-11-16); 61 uids with incentive (66), top 5 92.7 %; 0 of 33 settings differ since block 9515287 (2026-11-15 23:59Z UTC) and the emission split is unchanged 0/0/9/41/50; weight recency of the 11 permit holders: 9 within one tempo, 2 over five (oldest about 642 days); the 9 weight rows split into two vectors (uid 47 at 84.9 % in 3 rows, 86.5 % in 6). uid 47 hotkey alpha by `uid 51 47 --at`: 25,863 (11-16 23:58Z), 25,458 (11-17 12:00Z), 23,323 (11-18 12:00Z), 22,183 (11-19 12:00Z), 20,745 (11-19 23:46Z), 21,417 (11-20 06:07Z).</li>
+<li><strong>web</strong> Chain read at block 9545924 (2026-11-20 06:07Z): price SN51, 3 samples every 15d from block 9329924 (2026-10-21 06:04Z): price 0.109520 -&gt; 0.126317 TAO per alpha (+15.3%), pool TAO 179232.1 -&gt; 196076.9; over the 2 intervals where the pool change equals flow + protocol: net user flow -290.0 TAO (staked minus unstaked), protocol flow +17134.9 TAO, gross volume 489844.4 TAO. 7-day read, 8 samples every 1d from block 9495524: price +6.3%, net user flow +2594.8 TAO (+31, -2080, -3545, -901, +6500, -1397, +3988 TAO per day; the +6500 day has 56,762 TAO gross volume); 3-hour read from block 9531524: +2591.3 TAO and price +3.7% in the 2 days to 2026-11-20 06:07Z. Pool and price rank among 128 non-root subnets from the shared snapshot at block 9545924.</li>
+<li><strong>msg</strong> #51-lium-io 2026-11-01 (later chat not read); archive search 2026-06-01 to 2026-08-31 (buy-back and burn statements)</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/50.html"><small>← Previous</small>SN50 Synth</a><a rel="next" href="/bittensor-docs/subnets/53.html"><small>Next →</small>SN53 engy</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-11-20. Site built 2026-11-21. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

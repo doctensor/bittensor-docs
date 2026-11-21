@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Targon (SN4) | Bittensor Subnet Docs</title>
+<meta name="description" content="Confidential GPU cloud: miners rent attested servers by the card hour; the team burned alpha on 2026-10-27.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h4">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>4</span><div>
+<h1>Targon <span class="muted">SN4</span></h1>
+<p class="tagline">Confidential GPU cloud: miners rent attested servers by the card hour; the team burned alpha on 2026-10-27.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl4"><b>3.6<small>/day</small></b><span>last 7 d</span></li><li class="pl3"><b>1.6<small>/day</small></b><span>days 8-30</span></li><li class="pl4"><b>3.1<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-11-02</b><span>last chat</span></li><li class="pw"><b>21,661</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Quiet</b><span>code activity</span></li><li class="pw"><b>0</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-11-09</b><span>last commit</span></li><li class="pw"><b>2026-09-17</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>confidential GPU compute (AI cloud)</dd>
+<dt>Status</dt><dd>Four miner uids were paid on 2026-11-21, matching chain incentive; the team burned 152,314 alpha on 2026-10-27.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-11-21</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Product and revenue</a></li><li><a href="#sn-x1">Burns and buybacks</a></li><li><a href="#sn-x2">Auction targets and pay</a></li><li><a href="#sn-x3">Alpha holders</a></li><li><a href="#sn-x4">Docs vs code vs chain</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-similar">Similar subnets</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>$659K revenue in the 30 days to 2026-11-20, 81% contracts; its dashboard cut past contracts days 24-50%.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>152,314 alpha burned on 2026-10-27, none since; a moderator said buybacks are planned monthly.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>4 miner uids earn incentive, the top one 66%; all 10 validators put their top weight on the same uid.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>miners need 8 same-model GPUs with 1-3.9 TiB RAM (or a 48-thread CPU server); validators an SEV-SNP server.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>auctions target 1,408 GPU cards, 312 are live; payouts run 28% under the code&#x27;s formula (12% on 11-18).</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-high">High barrier</span></h3><p>Run TargonOS on an attested server and rent its GPUs through team auctions.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-caution">GPU needed</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>8 same-model GPUs, 1-3.9 TiB RAM, 3 TB disk, TPM 2.0; or a 48-thread CPU profile</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None (own hardware; outbound HTTPS)</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>0.0005 TAO registration burn (2026-11-21); no stake needed</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Enable TDX or SEV-SNP, install TargonOS by network boot or ISO</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Check node attestations through the team&#x27;s service and set weights from its targets.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-caution">Paid service needed</li><li class="fl fl-unk">Access unknown</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>AMD SEV-SNP CPU server (docs; chat differs, see the table)</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>Rented SEV-SNP server (docs suggest Latitude m4.metal.medium)</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>0.0005 TAO burn (2026-11-21); permit threshold 1,000 TAO (chain)</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Pull the team&#x27;s validator VM, run launch_vm.sh and the sn4 CLI; choose your own database login</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-neutral">Neutral</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-fair">Fairly valued</span></span><span class="v2-conf muted">medium confidence, as of 2026-11-21. Not financial advice.</span></div><p>Rank-3 pool; price -5% in a week; net flow -5,289 TAO over 30 days. <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>Targon, built by Manifold Labs, rents confidential cloud machines: GPU and CPU VMs in hardware enclaves, bare metal, sandboxes and reserved capacity. Miners supply attested servers running TargonOS; validators set weights from auction targets the team&#x27;s servers publish.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Miners install TargonOS, the team&#x27;s signed OS image (required since 2026-07-14), on a server with TPM 2.0 and an enclave (Intel TDX or AMD SEV-SNP); it attests to the team&#x27;s service at each boot.</p></div><div><h3>Validators</h3><p>Every 361 blocks a validator asks random nodes for attestation evidence, sends it to the team&#x27;s service and sets weights from what comes back: each node&#x27;s auction, cards and the burn split.</p></div><div><h3>Incentive</h3><p>The code assumes miners get 41% of emission and turns it into a dollar budget. Each auction sets target cards, a target price and a maximum price per card hour; a live card earns target price x target cards divided by live cards, capped at the maximum. Any remainder goes to a team-set burn split, then the owner&#x27;s uid.</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-11-21, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-unk">Unknown</span>13 of 64 permit slots used; public docs, but the team&#x27;s VM service and access list are untested.</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">23.6%</span>Owner hotkey gets 23.6% of last-epoch emission; owner cut 18%; RecycleOrBurn is Burn.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">5 uids</span><span class="v2-sx muted">top 5 hold 100% of incentive.</span> 5 uids earn incentive: 4 miners (top one 65.9%, the fourth under 1%) and the owner&#x27;s validator uid 28 at 0.005%.</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Converged</span>All 10 validators put their top weight on one uid; one team backend sets it, so that shows no independence.</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-good">Open</span>Miner and validator code are public (MIT); the auction and attestation backend is not.</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-high">High barrier</span></h3><p>Run TargonOS on an attested server and rent its GPUs through team auctions.</p><ul>
+<li>The miner process refuses validators without a permit or under 1,000 alpha (default).</li>
+<li>Docs minimums: 128-192 threads on GPU profiles.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Check node attestations through the team&#x27;s service and set weights from its targets.</p><ul>
+<li>Whether the team&#x27;s VM service serves only permit holders is undocumented; a 2026-09-23 chat error shows a refusal for no permit.</li>
+</ul></section></div>
+<h2 id="sn-x0">Product and revenue</h2>
+<ul class="v2-list">
+<li>Team says: $658,823 revenue 2026-10-22 to 11-20: 81% contracts ($18,344 a day 11-06 to 11-19, $19,787 on 11-20), 18% VMs ($2.5-5.2K a day); 16,041 users.</li>
+<li>Hippius, a rival project, tested Targon&#x27;s CPU VMs on 2026-10-15 (conflict disclosed): genuine AMD SEV-SNP proofs.</li>
+</ul>
+<h2 id="sn-x1">Burns and buybacks</h2>
+<ul class="v2-list">
+<li>Chain: on 2026-10-27 two burns removed 152,334 alpha from stake (the team&#x27;s dashboard says 8,536 TAO); alpha-out is unchanged, so it is not a supply cut.</li>
+<li>Team says: 1,772 TAO of that week&#x27;s buys, the rest alpha from its own revenue; 5,939 purchases (6,881 TAO) since 2025-07-07, none after 10-27.</li>
+</ul>
+<h2 id="sn-x2">Auction targets and pay</h2>
+<ul class="v2-list">
+<li>Team says, 2026-11-21: its auction list targets 1,408 GPU cards; 312 are live (B300 136 of 128, SEV B300 24 of 80, H200 104 of 128, H100 24 of 240, RTX 6000B 16 of 32, B200 8 of 64).</li>
+<li>The code&#x27;s formula pays $1,619 an hour (B300 $832, SEV B300 $234, H200 $371, other GPUs $180). The team API pays 28% under it: its total follows the moving price (-1.4% vs -1.5% since 11-18), so the new live cards split one budget.</li>
+</ul>
+<h2 id="sn-x3">Alpha holders</h2>
+<ul class="v2-list">
+<li>Chain: the owner coldkey holds 36% of the alpha read (38% on 11-18); the top validator hotkey, the owner&#x27;s uid 28, holds 48%; 3 coldkeys hold 49%.</li>
+</ul>
+<h2 id="sn-x4">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Validator hardware</td><td>Docs: AMD SEV-SNP server</td><td>Chat: 2026-08-17 reply said Intel TDX, 8-16 cores, 32 GB</td><td>2026-11-01</td></tr><tr><td>GPUs per VM</td><td>Homepage: up to eight GPUs per VM</td><td>Chat: 2026-09-22 a team reply said one GPU per VM</td><td>2026-11-01</td></tr></tbody></table></div>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-neutral">Neutral</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-fair">Fairly valued</span></span><span class="v2-conf muted">medium confidence, as of 2026-11-21. Not financial advice.</span></div>
+<p class="v2-thesis">Third-largest pool; price +2% in 30 days, -5% in a week; net flow -5,289 TAO (+4,519, then -9,808).</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.05366 TAO per alpha</dd></div><div><dt>Pool</dt><dd>138,325 TAO, rank 3</dd></div><div><dt>Price, 30 days</dt><dd>+2%, 2026-10-22 to 2026-11-21</dd></div><div><dt>Net flow, 30 days</dt><dd>-5,289 TAO, 2026-10-22 to 2026-11-21</dd></div><div><dt>Miner pay</dt><dd>158 TAO per day over 5 paid uids (too few for an average)</dd></div><div><dt>Miner pay outside top 5</dt><dd>None: the 5 paid uids are the top 5</dd></div><div><dt>Code activity</dt><dd>last commit 2026-11-09; 1 commit in 30 days (no code); last release 2026-09-17</dd></div></dl>
+<div class="v2-trend"><h3>Trend</h3><div class="v2-tbody"><figure class="v2-tfig"><svg class="v2-spark up" viewBox="0 0 240 56" role="img" aria-label="Price in TAO per alpha, 2026-09-28 to 2026-11-21: 0.0536 to 0.05366, +0.1%"><polyline points="5.0,39.1 13.5,46.4 17.8,50.8 26.3,50.0 34.8,50.5 39.1,49.8 43.3,49.4 47.6,49.8 51.9,49.2 56.1,49.6 64.6,49.8 68.9,50.5 73.1,51.0 77.4,49.3 81.7,48.5 85.9,44.5 90.2,43.1 94.4,42.4 98.7,41.1 103.0,44.8 107.2,43.1 111.5,40.7 115.7,32.7 124.3,25.2 128.5,33.5 132.8,16.2 137.0,23.6 141.3,15.1 145.6,18.2 149.8,17.7 154.1,13.5 162.6,20.5 166.9,14.6 171.1,11.3 175.4,13.1 179.6,12.9 183.9,5.0 188.1,8.9 192.4,21.8 196.7,26.3 200.9,26.0 205.2,19.9 209.4,27.7 213.7,22.1 218.0,28.6 222.2,35.4 226.5,34.5 230.7,37.6 235.0,38.7"/><circle cx="235.0" cy="38.7" r="3"/></svg><figcaption><strong>Price</strong> <span class="up">+0.1%</span> <span class="muted">0.0536 to 0.05366 TAO per alpha, 2026-09-28 to 2026-11-21</span></figcaption></figure><dl class="v2-tfacts"><div><dt>Net flow, 30 days</dt><dd><span class="down">-5,289 TAO</span> <span class="muted">2026-10-22 to 2026-11-21</span></dd></div><div><dt>Verdict history</dt><dd><ol class="v2-vh"><li><span class="muted">2026-11-14</span> <span class="st s-neutral">Neutral</span> <span class="st v-fair">Fairly valued</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-15</span> <span class="st s-neutral">Neutral</span> <span class="st v-fair">Fairly valued</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-18</span> <span class="st s-neutral">Neutral</span> <span class="st v-fair">Fairly valued</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-21</span> <span class="st s-neutral">Neutral</span> <span class="st v-fair">Fairly valued</span> <span class="muted">medium confidence</span></li></ol></dd></div></dl></div></div>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>152,314 alpha burned on chain; buybacks said to be monthly</li>
+<li>A rival&#x27;s test found genuine SEV-SNP proofs on Targon&#x27;s CPU VMs</li>
+<li>Live GPU cards 264 to 312 since 11-11; SDK 4.0.0 shipped</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>Revenue is a team number, cut 24-50% on past days</li>
+<li>Four paid miner uids, one at 66%; no buyback since 10-27</li>
+<li>30-day net flow -5,289 TAO; owner coldkey alpha -6% on 11-18/19; main repo quiet 30 days</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> Bullish: verifiable customer revenue, a second buyback, net inflow. Bearish: outflows, another restatement, fewer than three paid miner uids.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-similar">Similar subnets</h2>
+<div class="v2-sim"><p>By pool size this is <strong>rank 2 of 13</strong> among the subnets grouped as <em>compute</em> (what they mainly sell). Pool and price as of 2026-11-20 to 2026-11-21, price in TAO per alpha; the barrier is the easiest miner role.</p><div class="scroll"><table class="v2-table"><thead><tr><th>#</th><th>Subnet</th><th>Pool</th><th>Price</th><th>Miner barrier</th></tr></thead><tbody><tr><td>1</td><td><a href="/bittensor-docs/subnets/51.html">Lium</a> <span class="muted">SN51</span></td><td>196,077 TAO</td><td>0.1263</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr class="me" aria-current="true"><td>2</td><td>Targon <span class="muted">SN4, this page</span></td><td>138,324 TAO</td><td>0.05366</td><td><span class="v2-barrier b-high">High</span></td></tr><tr><td>3</td><td><a href="/bittensor-docs/subnets/75.html">Hippius</a> <span class="muted">SN75</span></td><td>36,574 TAO</td><td>0.01958</td><td><span class="v2-barrier b-high">High</span></td></tr><tr><td>4</td><td><a href="/bittensor-docs/subnets/48.html">Quantum Compute</a> <span class="muted">SN48</span></td><td>15,935 TAO</td><td>0.008839</td><td><span class="v2-barrier b-high">High</span></td></tr><tr><td>5</td><td><a href="/bittensor-docs/subnets/110.html">Green Compute</a> <span class="muted">SN110</span></td><td>12,570 TAO</td><td>0.0251</td><td><span class="v2-barrier b-high">High</span></td></tr></tbody></table></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-11-20</span> <span class="muted">(chain)</span> uid 32 lost its validator permit; its hotkey alpha fell 4,677 to 61 (11-19 18:00Z to 11-20 00:00Z).</li>
+<li><span class="when">2026-11-20</span> <span class="muted">(repo, PyPI)</span> SDK tag cli/v4.1.0: the Rust CLI adds bare-metal commands, drops rental and volume; PyPI still 4.0.0.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Read docs/miner/miner.md and installing-targonos.md; check your hardware against the profile (GPUs, RAM, TPM 2.0, TDX or SEV-SNP).</li>
+<li>Install TargonOS 13.1.0 (network boot or ISO); it wipes every eligible disk.</li>
+<li>Register a hotkey on subnet 4 (0.0005 TAO burn on 2026-11-21) and run the miner process with your node addresses and port 7777.</li>
+<li>Validators: start from docs/validator/validator.md; hardware advice has changed, so check chat first.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Attestation checks and the burn split come from the team&#x27;s closed backend. Payout totals imply a fixed TAO price input near $214 (inference).</li>
+<li>Revenue, user and payout figures are the team&#x27;s own and were restated three times; only the burns are on chain.</li>
+<li>The code hardcodes miners at 41%; eTAO (10-19) lets the owner change the chain split without a code change.</li>
+<li>The four paid uids use different coldkeys, none owner-linked; that does not show independence from the team.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://targon.com" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://docs.targon.com" rel="noopener noreferrer">Docs</a></li>
+<li><a href="https://github.com/manifold-inc/targon" rel="noopener noreferrer">GitHub</a></li>
+<li><a href="https://stats.targon.com" rel="noopener noreferrer">Stats site (allocation, earnings)</a></li>
+<li><a href="https://stats.targon.com/revenue" rel="noopener noreferrer">Revenue dashboard (team figures)</a></li>
+<li><a href="https://stats.targon.com/buybacks" rel="noopener noreferrer">Buybacks dashboard (team figures)</a></li>
+<li><a href="https://tower.targon.com/api/v2/auctions" rel="noopener noreferrer">Auction targets (team JSON)</a></li>
+<li><a href="https://github.com/manifold-inc/targon-sdk" rel="noopener noreferrer">Python SDK (GitHub)</a></li>
+<li><a href="https://releases.targon.com" rel="noopener noreferrer">TargonOS releases (team)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 12 sources</summary>
+<ul>
+<li><strong>repo</strong> manifold-inc/targon@5752bfa (pushed 2026-11-09 UTC, docs only; head unchanged on 2026-11-21; MIT licence): README.md and docs/validator/validator.md (re-read 2026-11-01), docs/miner/miner.md and docs/miner/installing-targonos.md (11-09 diff read), docs/sn4/sn4.md, cmd/miner/main.go, internal/validator/callbacks/callbacks.go, cvms.go and weights.go, internal/tower/tower.go, weights-api/main.py</li>
+<li><strong>repo</strong> manifold-inc/targon-sdk (default branch: head 791fd9e, tag cli/v4.1.0 on 2026-11-20 22:18Z after PR #16 merged at 22:14Z: Rust CLI 3.0.0 to 4.1.0, adds bm commands and a region command, removes rental and volume commands; compare 3eca7cf...791fd9e = 3 commits, 26 files, read 2026-11-21; 4.0.0 release commit 3eca7cf, 2026-11-11 21:20Z, 42 commits since 018f534 with the CHANGELOG 4.0.0 patch read 2026-11-14; tags libs/go/v4.0.0 and python/v4.0.0, no typescript tag, the TypeScript package is not on npm; targon-sdk 4.0.0 on PyPI since 2026-11-12 17:26Z, still the newest on 2026-11-21; Apache-2.0; releases read 2026-10-26)</li>
+<li><strong>web</strong> https://targon.com and https://docs.targon.com (read 2026-10-21; homepage and docs re-read 2026-11-21, text unchanged since 11-08)</li>
+<li><strong>web</strong> https://stats.targon.com: /api/miners summed by uid (2026-11-21, no hotkeys), the revenue data behind /revenue (month, week and all ranges, read 2026-11-21, no past day changed since 11-14; contracts restated down 24-50% on 91 days back to 2026-08-12 between the 11-11 read and a 11-13 10:33Z read, VM and other lines unchanged; earlier restatements 11-04 and 11-06) and the buybacks data behind /buybacks (covered through 2026-11-21 06:52Z; totals unchanged), /docs (2026-10-21)</li>
+<li><strong>web</strong> https://tower.targon.com/api/v2/auctions: plain GET, 13 node types (read 2026-11-21, same list as 11-04 to 11-18; 502 on 2026-10-21 and 10-26)</li>
+<li><strong>web</strong> https://s3.hippius.com/poppy/public/hippius-targon-confidential-vms.html (read 2026-10-30; written by a Hippius co-founder&#x27;s AI agent, dated 2026-10-15, with a disclosure)</li>
+<li><strong>web</strong> https://releases.targon.com index (re-read 2026-11-21: only 13.1.0/, files unchanged since 11-14), 13.1.0/ file list and RELEASE.txt (13.1.0 rebuilt 2026-11-11 19:24Z: same git commit 2808f6a54eb3, new ISO and installer checksums; files carry minisign signatures); first read 2026-11-09; the 2026-10-26 read showed 0.1.0 and horizon/; no answer in the checks of 2026-10-30 to 2026-11-08</li>
+<li><strong>web</strong> Chain read at block 9553322 (2026-11-21 06:48Z UTC): SN4 (Targon): registered 2023-10-03, tempo 360, 256 of 256 uids, commit-reveal on; emission weights burn/recycle/owner/validator/miner = 0/0/18/41/41 % (stored, same values as the chain default), RecycleOrBurn = Burn; uids under the owner hotkey or owner coldkey hold 0 % of incentive and 23.6 % of last-epoch emission (a floor); 13 validator permits, 10 validators have weight rows, on average 0 % of weight goes to uid 0. Compared with block 9529688 (2026-11-18 00:00Z UTC), same read: no setting changed in 33 checked items; pool 138937.68 -&gt; 138324.51 TAO.</li>
+<li><strong>web</strong> Chain read at block 9553322 (2026-11-21 06:48Z): SN4 price, 3 samples every 15d from 2026-10-22: 0.052494 -&gt; 0.053660 TAO per alpha (+2.2%), pool 135293.7 -&gt; 138324.5 TAO; over 2 intervals net user flow -5289.2 TAO (+4518.6 to 11-06, then -9807.8), protocol flow +8320.0 TAO, gross volume 156104.2 TAO (the price file&#x27;s 30-day point is the first sample, 2026-10-22 06:44Z). Daily read from 2026-11-14 (7 intervals): price 0.056705 -&gt; 0.053660 (-5.4%), net user flow -5463.5 TAO (5 of 7 days negative: -1552.4, +871.4, -1700.6, -1727.7, +54.9, -963.0, -446.1); pool rank 3 of 128 (shared snapshot, same block).</li>
+<li><strong>web</strong> Chain read at block 9553322: uids 156, 7, 32 and 162 (the paid miners) have four different coldkeys, none owner-linked (uid 162&#x27;s coldkey also holds idle uid 25: no weights, no incentive); incentive 65.863 / 27.209 / 5.934 / 0.989 %, equal to the team API&#x27;s payout shares within 0.012 point; the fifth incentive uid is the owner hotkey&#x27;s uid 28, a validator (incentive 0.005 %, rank 5; every validator row lists it as a fifth target at 0.00 %, read for uid 6); uid 32 held a validator permit and never set weights, then lost the permit as its hotkey alpha fell from 4,676.5 (block 9542287, 2026-11-19 18:00Z, permit) to 61.3 (block 9544086, 11-20 00:00Z, no permit; 4,588.9 at 11-19 06:00Z), now 280.3 (its own emission, 175 alpha a day); uids 156, 7 and 162 hold no permit; all 10 validators with weight rows put their top weight (65.9 % in every row) on uid 156. Owner coldkey and hotkey, SubnetEmissionEnabled and the identity did not change over 2026-09-01 to 2026-11-01 (sampled every 3d, read 2026-11-01). Stake by coldkey (hosted holders, top 30), block 9553398 (2026-11-21 07:03Z; 5,683 coldkeys, 174 hotkeys with alpha, 2.516M of the staked 2.924M alpha read = 86 %, 11 hotkeys incompletely read): owner coldkey 36.0 % on 2 hotkeys (99.9 % on validator-permit hotkeys), ck:500650 8.5 %, ck:a4eaab (the owner hotkey&#x27;s coldkey) 4.5 %; top 3 coldkeys 49.0 %; 60.4 % of the alpha read on validator-permit hotkeys, the top one (owner uid 28, 1,202,482 alpha) 47.8 %; 34.3 % on hotkeys no longer registered on SN4. Owner coldkey alpha: 964,061 (38.2 %, block 9532416, 2026-11-18 09:05Z) -&gt; 901,077 (35.7 %, block 9538922, 11-19 06:46Z) -&gt; 904,997 now; pool net flow +54.9 TAO on 11-18 06:46Z to 11-19 06:46Z, so no unstake shows (destination unread).</li>
+<li><strong>web</strong> Chain events, blocks 9376320 to 9376326 (2026-10-27 16:44Z UTC): two SubtensorModule.AlphaBurned events on netuid 4 (20.157 and 152,314.359 alpha)</li>
+<li><strong>msg</strong> #4-targon, 2026-01-15 to 2026-10-31 (archive searches for TargonOS and tower over 2026-01-01..2026-11-01); #announce 2026-10-15, 2026-10-19, 2026-10-22, 2026-10-29 (newer messages not read: the chat archive was still unreachable on 2026-11-21)</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/3.html"><small>← Previous</small>SN3 Teutonic</a><a rel="next" href="/bittensor-docs/subnets/5.html"><small>Next →</small>SN5 Hone</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-11-21. Site built 2026-11-21. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

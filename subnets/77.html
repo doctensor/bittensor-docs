@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Liquidity (SN77) | Bittensor Subnet Docs</title>
+<meta name="description" content="Uniswap V3 liquidity mining: holders vote on pools, a team server scores miners, validators copy its weights.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h11">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>77</span><div>
+<h1>Liquidity <span class="muted">SN77</span></h1>
+<p class="tagline">Uniswap V3 liquidity mining: holders vote on pools, a team server scores miners, validators copy its weights.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl2"><b>0.29<small>/day</small></b><span>last 7 d</span></li><li class="pl2"><b>0.26<small>/day</small></b><span>days 8-30</span></li><li class="pl2"><b>0.60<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-11-01</b><span>last chat</span></li><li class="pw"><b>1,811</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Quiet</b><span>code activity</span></li><li class="pw"><b>0</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-06-24</b><span>last commit</span></li><li class="pw"><b>2025-05-31</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>DeFi liquidity provision (Uniswap V3 on Ethereum)</dd>
+<dt>Status</dt><dd>Emission is on and 14 uids earn, but scoring runs on the team&#x27;s server and its repos have been quiet since 2026-06-24 (checked 2026-11-19). Chat is thin: nothing after 2026-10-21 (read 2026-11-01).</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-11-19</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">What the scoring rewards</a></li><li><a href="#sn-x1">Docs vs code vs chain</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-similar">Similar subnets</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>miners hold Uniswap V3 liquidity on Ethereum, mostly wTAO/WETH and wTAO/USDC; alpha holders vote which pools earn.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>14 uids earn, top five hold 78.9%; the owner&#x27;s validator set no weights since 2026-11-16 and is inactive (emission 37.5% to 1.4%).</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>the team&#x27;s server computes the weights and validators copy them; its output matches the public formula.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>the owner&#x27;s key holds 80% of staked alpha and casts 99.5% of the pool vote, so voting is nominal.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>no repo commit since 2026-06-24 and the July update is missing; mining needs real Ethereum capital, no GPU.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Hold Uniswap V3 liquidity on Ethereum in voted wTAO pools and link the hotkey to that address.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-no"><dt>Hardware</dt><dd>None; no GPU</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None; ETH for gas, a TAO-to-wTAO bridge</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>0.0005 TAO burn (2026-11-19); capital in positions at risk</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Bridge TAO, open a position, run the register script</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Download the team server&#x27;s weight vector and set it on chain; no own measurement.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>A cheap virtual server, no GPU (team, 2026-08-05)</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>0.0005 TAO burn; permit needs about 1,000 TAO stake (2026-11-19)</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Install Bun, set the hotkey in .env, run `just validate`</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div><div class="v2-role"><h3>Pool voter <span class="v2-barrier b-low">Low barrier</span></h3><p>An alpha holder who splits 10,000 vote points across pools, setting how miner emission is divided.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-no"><dt>Hardware</dt><dd>None</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Hold alpha; vote weight is your share of the voting alpha</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Put the coldkey in .env and run `just vote`</dd></div></dl><a class="v2-more" href="#sn-role-2">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-11-19. Not financial advice.</span></div><p>Emission reaches 14 miners, but money is leaving, the team is quiet and one party holds scoring and votes. <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>Subnet 77 pays miners to hold Uniswap V3 liquidity on Ethereum, mostly in wTAO pools, so TAO is easier to trade outside Bittensor. Alpha holders vote on which pools earn. A team server turns the votes and the miners&#x27; live positions into one weight vector, and validators copy it onto the chain.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Miners bridge TAO to wTAO, open Uniswap V3 positions in voted pools and link a hotkey to the Ethereum address with a signed claim. On 2026-11-19, 17 of 110 linked hotkeys held positions (about 0.35 million USD, server figures).</p></div><div><h3>Validators</h3><p>Validators do not measure liquidity. The reference validator downloads the team server&#x27;s weight vector every 5 minutes, smooths it and sets weights every 101 blocks.</p></div><div><h3>Incentive</h3><p>Each voting alpha holder splits 10,000 points across pools, weighted by their share of voting alpha. Inside a pool only in-range positions score: a bell curve of the distance to the range&#x27;s edges and midpoint, times liquidity. Emission split 0 / 0 / 18% / 41% / 41% (burn / recycle / owner / validators / miners), unchanged since 2026-10-21.</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-11-19, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-good">Open</span>Anyone with about 1,000 TAO stake gets a permit (18 holders), but all copy the team server&#x27;s vector.</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">1.4%</span>Owner uid 0 holds 1.4% of last-epoch emission (37.5% on 2026-11-16); owner cut 18%; RecycleOrBurn is Burn.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">14 uids</span><span class="v2-sx muted">top 5 hold 78.9% of incentive.</span> 14 uids earn incentive; the top five hold 78.9%.</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Converged</span>All 13 validators with weights share one top uid; they copy the team&#x27;s vector, by design.</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-caution">Partial</span>Client, scripts and validator are public; the server repo dates from 2025-09-02; neither repo has a licence.</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Hold Uniswap V3 liquidity on Ethereum in voted wTAO pools and link the hotkey to that address.</p><ul>
+<li>No minimum position is documented; the 17 miners with positions held under 1 USD to about 75,800 USD (server figures, 2026-11-19).</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Download the team server&#x27;s weight vector and set it on chain; no own measurement.</p><ul>
+<li>On 2026-11-19, 12 of 18 permit holders had set weights within a tempo; 6 had not for over 5 tempos, uid 0 among them.</li>
+<li>Uid 112 holds 0.4 alpha but is counted for about 227,000 through four parent hotkeys (22% of dividends).</li>
+</ul></section><section class="v2-rdetail" id="sn-role-2"><h3>Pool voter <span class="v2-barrier b-low">Low barrier</span></h3><p>An alpha holder who splits 10,000 vote points across pools, setting how miner emission is divided.</p><ul>
+<li>Vote cooldown 72 minutes, doubling on frequent changes up to 8 hours (server code, 2025-09-02).</li>
+</ul></section></div>
+<h2 id="sn-x0">What the scoring rewards</h2>
+<ul class="v2-list">
+<li>Weight follows Uniswap liquidity, not dollars: narrow ranges near the price earn more per dollar.</li>
+<li>Of 18 positions on 2026-11-19, five were 200 ticks wide: 53% of value, 76% of weight; one 2,200-tick position held 21% of value but 2.0% of weight.</li>
+</ul>
+<h2 id="sn-x1">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Who decides the pools</td><td>Alpha holders vote</td><td>Chain: owner&#x27;s coldkey holds 99.5% of voting alpha and 80% of all staked alpha</td><td>2026-11-19</td></tr><tr><td>Pool limits, update</td><td>Pool limits (2025); an update for 2026-07-07</td><td>Code: no allowlist code; nothing new in either repo since 2026-06-24</td><td>2026-11-19</td></tr><tr><td>Wrapped alpha, buyback</td><td>Wrapped alpha with buyback (owner, 2025)</td><td>Chain: 51.7 wSN77 exist (about 0.23 TAO); supply unchanged since 2026-11-03, no mint or burn since 2025-10-08</td><td>2026-11-19</td></tr></tbody></table></div>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-11-19. Not financial advice.</span></div>
+<p class="v2-thesis">Mid-sized pool (rank 40 of 128), down 3.7% in a month; net outflow in both halves of the window, price down 9%.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.004402 TAO per alpha</dd></div><div><dt>Pool</dt><dd>11,051 TAO, rank 40</dd></div><div><dt>Price, 30 days</dt><dd>-9%, 2026-10-20 to 2026-11-19</dd></div><div><dt>Net flow, 30 days</dt><dd>-502 TAO, 2026-10-20 to 2026-11-19</dd></div><div><dt>Miner pay</dt><dd>0.926 TAO per day on average (13.0 TAO per day over 14 uids)</dd></div><div><dt>Miner pay outside top 5</dt><dd>0.304 TAO per day on average (2.73 TAO per day over 9 uids outside the top 5)</dd></div></dl>
+<div class="v2-trend"><h3>Trend</h3><div class="v2-tbody"><figure class="v2-tfig"><svg class="v2-spark down" viewBox="0 0 240 56" role="img" aria-label="Price in TAO per alpha, 2026-09-28 to 2026-11-21: 0.005079 to 0.004377, -13.8%"><polyline points="5.0,5.8 13.5,5.0 17.8,7.1 22.0,5.3 30.6,6.2 34.8,7.8 39.1,8.1 43.3,9.1 47.6,9.5 51.9,9.9 60.4,11.5 64.6,14.0 68.9,14.3 73.1,16.0 77.4,17.7 81.7,18.0 85.9,18.3 90.2,18.7 94.4,19.5 98.7,20.8 103.0,20.9 107.2,20.7 111.5,21.2 115.7,23.6 120.0,24.8 124.3,25.1 128.5,25.3 132.8,32.2 137.0,32.6 141.3,32.6 145.6,33.0 149.8,33.3 154.1,33.5 158.3,35.5 162.6,35.7 166.9,36.2 171.1,36.5 175.4,37.5 179.6,38.4 183.9,40.0 188.1,40.2 192.4,40.8 196.7,41.3 200.9,43.2 205.2,43.6 209.4,46.4 213.7,46.6 218.0,47.5 222.2,48.4 226.5,49.4 230.7,50.6 235.0,51.0"/><circle cx="235.0" cy="51.0" r="3"/></svg><figcaption><strong>Price</strong> <span class="down">-13.8%</span> <span class="muted">0.005079 to 0.004377 TAO per alpha, 2026-09-28 to 2026-11-21</span></figcaption></figure><dl class="v2-tfacts"><div><dt>Net flow, 30 days</dt><dd><span class="down">-546 TAO</span> <span class="muted">2026-10-22 to 2026-11-21</span></dd></div><div><dt>Verdict history</dt><dd><ol class="v2-vh"><li><span class="muted">2026-11-11</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-14</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-16</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-19</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li></ol></dd></div></dl></div></div>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>Emission is on and reaches 14 uids</li>
+<li>About 0.35 million USD of liquidity in server position data</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>Net outflow of 502 TAO in 30 days, out every day of the last week</li>
+<li>Scoring, votes and 80% of staked alpha rest with the owner; July update missing</li>
+<li>Emission was off for 53 days in 2026</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> Bullish: a shipped update, votes beyond the owner, or steady inflows. Bearish: another emission pause or a server outage.</p>
+<p class="muted">Since the last pass: Verdict unchanged since 2026-11-16; owner validator inactive, owner emission 37.5% to 1.4%; outflow on 7 of 7 days.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-similar">Similar subnets</h2>
+<div class="v2-sim"><p>By pool size this is <strong>rank 3 of 11</strong> among the subnets grouped as <em>trading</em> (what they mainly sell). Pool and price as of 2026-11-20 to 2026-11-21, price in TAO per alpha; the barrier is the easiest miner role.</p><div class="scroll"><table class="v2-table"><thead><tr><th>#</th><th>Subnet</th><th>Pool</th><th>Price</th><th>Miner barrier</th></tr></thead><tbody><tr><td>1</td><td><a href="/bittensor-docs/subnets/8.html">Vanta</a> <span class="muted">SN8</span></td><td>94,441 TAO</td><td>0.03769</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>2</td><td><a href="/bittensor-docs/subnets/41.html">Almanac</a> <span class="muted">SN41</span></td><td>17,956 TAO</td><td>0.009634</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr class="me" aria-current="true"><td>3</td><td>Liquidity <span class="muted">SN77, this page</span></td><td>11,028 TAO</td><td>0.004377</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>4</td><td><a href="/bittensor-docs/subnets/50.html">Synth</a> <span class="muted">SN50</span></td><td>9,326 TAO</td><td>0.003302</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr><td>5</td><td><a href="/bittensor-docs/subnets/30.html">Endure</a> <span class="muted">SN30</span></td><td>8,125 TAO</td><td>0.003103</td><td><span class="v2-barrier b-low">Low</span></td></tr></tbody></table></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-11-19</span> <span class="muted">(on-chain data)</span> The owner&#x27;s validator (uid 0) last set weights 2026-11-16 and is inactive; its emission fell from 37.5% to 1.4% and dividends moved to uids 81, 112 and 74 (79%).</li>
+<li><span class="when">2026-08-14</span> <span class="muted">(on-chain data, #liquidity)</span> Emission was switched back on after 53 days off. Chat credits the network lead; the chain shows no reason.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Have wTAO (bridged from TAO), WETH or USDC, and ETH for gas to fund Uniswap V3 positions.</li>
+<li>Register a hotkey on subnet 77 (burn 0.0005 TAO on 2026-11-19) and hold some alpha.</li>
+<li>Open a position in a voted pool (see /pools) in a narrow range near the price; out-of-range positions score zero.</li>
+<li>Link the hotkey to the Ethereum address with the repo&#x27;s register script. Never paste keys into chat; DMs offering help are scams.</li>
+<li>Check /positions and /weights or run `just verify-weights`; holders vote with `just vote`, validators run `just validate`.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Scoring runs on the team&#x27;s server; outages (2026-04-24, 2026-07-28, 2026-09-20, 2026-10-15) stop weight updates.</li>
+<li>The server&#x27;s weights match the public formula on its own position data, not checked against Ethereum.</li>
+<li>Emission was off from 2026-06-22 to 2026-08-14; another pause is possible.</li>
+<li>Chat claims about miner earnings conflict; the site&#x27;s liquidity figure (393,000 USD; positions list 353,000) is server-reported.</li>
+<li>Who runs the 14 earning uids is not shown; uid 4 (25.5% of incentive) is not under the owner&#x27;s keys.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/CreativeBuilds/sn77" rel="noopener noreferrer">GitHub (client, scripts and validator)</a></li>
+<li><a href="https://github.com/CreativeBuilds/sn77-server" rel="noopener noreferrer">GitHub (server code, last updated 2025-09-02)</a></li>
+<li><a href="https://sn77.xyz" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://77.creativebuilds.io/weights" rel="noopener noreferrer">Weights API (public GET)</a></li>
+<li><a href="https://77.creativebuilds.io/pools" rel="noopener noreferrer">Pools and votes API (public GET)</a></li>
+<li><a href="https://github.com/CreativeBuilds/walpha-cli" rel="noopener noreferrer">GitHub (wrapped-alpha CLI, last updated 2025-11-05)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 10 sources</summary>
+<ul>
+<li><strong>msg</strong> #liquidity 2025-03-17 to 2026-10-21 (whole channel read 2026-11-01, nothing newer; archive unreachable 2026-11-19 (no answer)), #rao 2026-06-22, #announce 2026-06 to 2026-10</li>
+<li><strong>repo</strong> CreativeBuilds/sn77 @87bef7c (2026-06-24, unchanged on 2026-11-19, ls-remote): README.md, justfile, .env.example, docker-compose.yml, validator/index.ts, utils/weightCalculation.ts</li>
+<li><strong>repo</strong> CreativeBuilds/sn77-server @a319989 (2025-09-02, unchanged on 2026-11-19, ls-remote): server.ts (position score, API docs, vote cooldown)</li>
+<li><strong>repo</strong> CreativeBuilds/walpha-cli @121bc6b (2025-11-05, unchanged on 2026-11-19): README.md, package.json, wrap and bridge config (token contract per subnet)</li>
+<li><strong>web</strong> https://77.creativebuilds.io/ weights, pools, positions, allMiners (read 2026-11-19 about 04:23 UTC, headers checked; the same files on 2026-11-16 at 01:39 UTC showed 19 positions and 380,426 USD); weights recomputed offline from positions and pools; https://sn77.xyz (meta description 393,076 USD on 2026-11-19, 382,172 USD on 2026-11-16, 468,997 USD on 2026-11-14, 340,203 USD on 2026-11-13, 503,486 USD on 2026-11-11; /positions sums to 353,282 USD on 2026-11-19); https://evm.taostats.io token page for wSN77 (1 holder, 16 transfers, 2025-09-23 to 2025-10-08)</li>
+<li><strong>web</strong> Chain read at block 9538196 (2026-11-19 04:21Z UTC): SN77 (Liquidity): registered 2025-03-14, tempo 360, 256 of 256 uids, commit-reveal off; emission weights burn/recycle/owner/validator/miner = 0/0/18/41/41 % (stored, same values as the chain default), RecycleOrBurn = Burn; uids under the owner hotkey or owner coldkey hold 0 % of incentive and 1.43 % of last-epoch emission (a floor); 18 permit holders, 13 with weight rows (uid 4 on top for all 13), 14 uids with incentive (top 1 25.5 %, top 5 78.9 %), on average 0 % of weight goes to uid 0.</li>
+<li><strong>web</strong> Chain read at block 9538196 (2026-11-19 04:21Z): price SN77, 3 samples every 15d from block 9322196 (2026-10-20 04:02Z): price 0.004835 -&gt; 0.004402 TAO per alpha (-9.0%), pool TAO 11478.5 -&gt; 11051.2; over the 2 intervals where the pool change equals flow + protocol: net user flow -502.0 TAO (staked minus unstaked), protocol flow +74.7 TAO, gross volume 2062.1 TAO. By interval: -252.91 TAO (2026-10-20 to 11-04), -249.06 TAO (11-04 to 11-19); the daily grid 11-12 to 11-19 shows -153.63 TAO, out on 7 of 7 days. Chain read at block 9538196 (2026-11-19 04:21Z UTC), compared with block 9515288 (2026-11-16 00:00Z UTC): SN77: no setting changed in 33 checked items; emission split unchanged; pool 11099.23 -&gt; 11051.21 TAO.</li>
+<li><strong>web</strong> Chain read at block 9538196 (2026-11-19 04:21Z): SN77 stake by coldkey: 808 coldkeys hold 2821815.002 alpha on 160 hotkeys (99.496% of the chain&#x27;s staked total); top coldkey 80.368%, top 5 91.945%, top 10 93.649%; owner coldkey 80.368%; 86.967% of the stake sits on validator-permit hotkeys; 34 hotkeys&#x27; stake rows were not fully read (0.504% of the staked total unattributed), shares are of what was read.</li>
+<li><strong>web</strong> Chain EVM read 2026-11-19 about 04:24Z (TAO EVM block 9538207): wrapped SN77 token (wSN77, 9 decimals) global supply 51.652900005, fee 0, contract stake 78.35 alpha (78.21 on 2026-11-16), not deregistered; Ethereum side supply 51.0 (public RPC, same read); EmissionsProcessed logs not re-read this pass (none in the last 1,000,000 TAO EVM blocks on 2026-11-10, head 9472685). Earlier: 2026-11-14: contract stake 78.10 alpha; 2026-11-11: 77.95 alpha; 2026-11-08 about 19:14Z (block 9463460): 77.79 alpha; 2026-11-03 02:37Z (block 9422482): global supply 51.65, contract stake 77.46 alpha; Ethereum side 51.0 (re-read 2026-11-04, unchanged)</li>
+<li><strong>web</strong> Chain reads 2026-11-19 at block 9538196: uid 77 N for the 12 permit holders other than uid 0 (all active, last weights 2026-11-19 03:14Z to 04:12Z; dividends 34.67 % uid 81, 22.43 % uid 112, 22.03 % uid 74; with uid 0 at 2.86 % they sum to 100 %) and uid 77 0 (last weights 2026-11-16 22:04Z, inactive, 2,371,985 alpha on its hotkey). Chain read at block 9538235 (2026-11-19 04:29Z): SN77: 13 of 19 validator-permit hotkeys have parents; they hold 2,446,418 alpha themselves and are counted for ~2,808,786 alpha, of which 362,589 alpha come from parents; the biggest, uid 112, is counted for ~226,656 alpha (own 0.41). Local chain copy (the hosted checker has no `parents` command yet); uid 0 has no children.</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/76.html"><small>← Previous</small>SN76 Ormas</a><a rel="next" href="/bittensor-docs/subnets/78.html"><small>Next →</small>SN78 UMI</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-11-19. Site built 2026-11-21. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KubeTEE (SN90) | Bittensor Subnet Docs</title>
+<meta name="description" content="Miners run confidential-computing GPU Kubernetes clusters; the validator pays them by GPU type, count and uptime.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h6">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>90</span><div>
+<h1>KubeTEE <span class="muted">SN90</span></h1>
+<p class="tagline">Miners run confidential-computing GPU Kubernetes clusters; the validator pays them by GPU type, count and uptime.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl4"><b>6.1<small>/day</small></b><span>last 7 d</span></li><li class="pl4"><b>3.6<small>/day</small></b><span>days 8-30</span></li><li class="pl4"><b>5.0<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-11-02</b><span>last chat</span></li><li class="pw"><b>609</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Shipping</b><span>code activity</span></li><li class="pw"><b>37</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-11-21</b><span>last commit</span></li><li class="pw"><b>2026-11-21</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>confidential computing GPU clusters (AI infrastructure)</dd>
+<dt>Status</dt><dd>Phase 1 since 2026-11-15: two outside clusters earn. v1.4.3 (2026-11-18) fixed scoring that had zeroed the larger one.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-11-19</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Who earns miner pay</a></li><li><a href="#sn-x1">Docs vs code vs chain</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-similar">Similar subnets</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>Miners run confidential-computing GPU clusters; the validator pays for readiness, hardware and uptime, not for work served.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>incentive on three uids: owner 47.0% (recycled) and one operator&#x27;s clusters, 39.6% and 13.3%; the larger had 0% for hours on 11-18.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>v1.4.3 scores only worker nodes; pricing is 5% above the highest of Targon, Lium and Chutes, never below the owner&#x27;s floor.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>price +25% and a net 739 TAO in over 7 days, but -21% over 30 days (net -129 TAO); pool 6,105 TAO, rank 66.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-high">High barrier</span></h3><p>Runs a confidential-computing GPU cluster; KubeTEE prepares the hosts over SSH and binds the cluster to the miner&#x27;s hotkey.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-caution">GPU needed</li><li class="fl fl-good">No paid service</li><li class="fl fl-bad">Permissioned</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>One data centre, 8-GPU nodes of one type; Xeon 6 (TDX), 128 cores, 2 TB RAM; OS disk &gt;784 GB, data drives &gt;7 TB raw</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None required by the docs; hosting, power and bandwidth are the miner&#x27;s cost</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Registration burn 0.0005 TAO (2026-11-19); 10 TAO per node deposit announced, not enforced yet</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Plain Ubuntu 26.04, BIOS (TDX/SGX) and GPU firmware; give KubeTEE SSH with sudo and remote power access</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Reads cluster inventory, checks readiness, prices the hardware and sets weights once per epoch.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-unk">Paid service unknown</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>One small server for a Docker container (specs not stated); no GPU</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>Taostats API key (price not stated); the owner&#x27;s Rancher proxy is free but owner-run</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Chain stake threshold 1,000 TAO to set weights; registration burn 0.0005 TAO (2026-11-19)</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Docker compose, about 1 h; a hotkey with a validator permit</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-neutral">Neutral</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-11-19. Not financial advice.</span></div><p>Price +25% and +739 TAO net in over 7 days, but 30 days are -21%. <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>KubeTEE calls itself a decentralized AI factory: miners run Kubernetes GPU clusters with hardware confidential computing (Intel TDX, NVIDIA).</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Operate 8-GPU Blackwell-class nodes on Intel TDX CPUs. Onboarding is by hand: the miner installs plain Ubuntu, sets BIOS and GPU firmware, and gives KubeTEE SSH and power access; the team builds the Rancher-managed RKE2 cluster, labelled with the miner&#x27;s hotkey.</p></div><div><h3>Validators</h3><p>The validator reads the Rancher inventory and gives each cluster a ready or not-ready verdict, then sets weights once per epoch; since v1.3.4 a node counts only with a heartbeat under 15 minutes old. TEE attestation and job metrics are not in the weights yet.</p></div><div><h3>Incentive</h3><p>A ready cluster earns a USD price per GPU-hour times GPU count times a tenure factor, scaled down pro rata when claims exceed the epoch pool; unused weight goes to the owner UID and is recycled. Since v1.4.0 each GPU class is priced once per epoch, 5% above the highest of three feeds (Targon, Lium, Chutes), never below the owner&#x27;s floor.</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-11-19, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-good">Open</span>Any hotkey with a permit can run the published code; it reads cluster inventory through the owner&#x27;s proxy.</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">44.8%</span>Owner uid 0: 44.8% of emission (47.0% of incentive, 42.5% of dividends); the 18% cut is recycled.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">3 uids</span><span class="v2-sx muted">top 5 hold 100% of incentive.</span> 3 uids hold incentive: the owner uid 47.0% (unclaimed pool, recycled) and two outside clusters, 39.6% and 13.3%.</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Converged</span>All 9 rank owner uid 0 first; 7 split 46 / 41 / 13 over uids 0 / 133 / 132; uids 57 and 90 give 87 / 13 to uids 0 / 132.</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-caution">Partial</span>Validator code and docs are MIT on GitHub; the miner stack is deployed by the team and its repo was not found.</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-high">High barrier</span></h3><p>Runs a confidential-computing GPU cluster; KubeTEE prepares the hosts over SSH and binds the cluster to the miner&#x27;s hotkey.</p><ul>
+<li>New nodes: B200, B300, RTX PRO 6000 Blackwell or Vera Rubin; H100 and H200 are deprecated (removal targeted November 2026).</li>
+<li>KubeTEE sets the kernel, CC mode, drivers and storage; Phase 1 (2026-11-15) onboards external miners only. One cluster per hotkey.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Reads cluster inventory, checks readiness, prices the hardware and sets weights once per epoch.</p><ul>
+<li>Release v1.4.3 (2026-11-18); no Rancher account needed, inventory comes through the owner&#x27;s proxy.</li>
+<li>Nine permit holders, all set weights, all ranking the owner uid first.</li>
+</ul></section></div>
+<h2 id="sn-x0">Who earns miner pay</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Uid</th><th>Cluster</th><th>GPUs</th><th>Share of miner incentive</th></tr></thead><tbody><tr><td>133</td><td>Outside miner, Luxembourg; same coldkey as uid 132</td><td>B300 x16</td><td>39.6%</td></tr><tr><td>132</td><td>Same operator, Dallas; earns since 11-16</td><td>B200 x8</td><td>13.3%</td></tr><tr><td>56</td><td>Owner&#x27;s staging cluster: no GPUs, idle</td><td>None</td><td>0.0%</td></tr><tr><td>0</td><td>Owner uid: unclaimed pool, recycled</td><td>-</td><td>47.0%</td></tr></tbody></table></div>
+<h2 id="sn-x1">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Minimum cluster size</td><td>README and docs: 3 nodes of one GPU type</td><td>Code: no node-count gate since 2026-10-29; uid 132 (8 GPUs) and 133 (16) are paid</td><td>2026-11-19</td></tr><tr><td>Pricing markup</td><td>Validator README and dashboard: market + 10%</td><td>Code: 1.05 x the top of three feeds (B300 $10.32 = 1.05 x Lium $9.83)</td><td>2026-11-19</td></tr><tr><td>Which nodes are scored</td><td>Team commit d386bd5: etcd and control-plane VMs zeroed uid 133</td><td>Code: since v1.4.3 only worker nodes are checked and weighted</td><td>2026-11-19</td></tr><tr><td>Uid 133 since 11-18</td><td>Dashboard: listed 02:19Z, 05:55Z, 17:52Z, 22:16Z; not 11:49Z, 12:25Z</td><td>Chain: incentive 33.4% at 12:15Z, 0% 13:21Z-15:21Z, 29.2% at 16:01Z, 39.6% at 01:29Z</td><td>2026-11-19</td></tr></tbody></table></div>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-neutral">Neutral</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-11-19. Not financial advice.</span></div>
+<p class="v2-thesis">Price -21%, net flow -129 TAO in 30 days from 2026-10-20 (-503, then +374); last 7 days +739 TAO, price +25%. Usage and revenue are team statements.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.01691 TAO per alpha</dd></div><div><dt>Pool</dt><dd>6,105 TAO, rank 66</dd></div><div><dt>Price, 30 days</dt><dd>-21%, 2026-10-20 to 2026-11-19</dd></div><div><dt>Net flow, 30 days</dt><dd>-129 TAO, 2026-10-20 to 2026-11-19</dd></div><div><dt>Miner pay</dt><dd>Gross 26.4 TAO per day to two outside uids, 19.7 and 6.6 (too few for an average)</dd></div><div><dt>Code activity</dt><dd>last commit 2026-11-18; 56 commits in 30 days; release v1.4.3 on 2026-11-18</dd></div></dl>
+<div class="v2-trend"><h3>Trend</h3><div class="v2-tbody"><figure class="v2-tfig"><svg class="v2-spark down" viewBox="0 0 240 56" role="img" aria-label="Price in TAO per alpha, 2026-09-28 to 2026-11-21: 0.02097 to 0.01499, -28.5%"><polyline points="5.0,15.4 13.5,5.7 17.8,5.0 26.3,8.8 34.8,15.4 43.3,13.5 47.6,11.2 51.9,13.5 56.1,17.0 64.6,23.8 73.1,7.9 77.4,12.7 81.7,15.2 85.9,16.1 90.2,17.3 94.4,19.3 98.7,12.9 103.0,24.0 107.2,24.6 111.5,29.0 115.7,29.3 124.3,27.6 132.8,33.2 137.0,34.5 141.3,35.1 145.6,34.6 149.8,35.3 154.1,32.9 158.3,35.4 162.6,36.7 166.9,38.9 171.1,39.2 175.4,38.7 179.6,39.8 183.9,42.5 188.1,43.3 192.4,47.5 196.7,48.5 200.9,48.5 205.2,51.0 209.4,46.3 213.7,38.0 218.0,31.3 222.2,33.7 226.5,33.5 230.7,41.7 235.0,42.0"/><circle cx="235.0" cy="42.0" r="3"/></svg><figcaption><strong>Price</strong> <span class="down">-28.5%</span> <span class="muted">0.02097 to 0.01499 TAO per alpha, 2026-09-28 to 2026-11-21</span></figcaption></figure><dl class="v2-tfacts"><div><dt>Net flow, 30 days</dt><dd><span class="down">-172 TAO</span> <span class="muted">2026-10-22 to 2026-11-21</span></dd></div><div><dt>Verdict history</dt><dd><ol class="v2-vh"><li><span class="muted">2026-11-11</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-13</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-15</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-19</span> <span class="st s-neutral">Neutral</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li></ol></dd></div></dl></div></div>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>Two outside clusters (B300 x16, B200 x8) hold 53.0% of incentive; seven of nine validators weight them alike; 56 commits in 30 days.</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>Still -21% over 30 days (net -129 TAO); the pool, 6,105 TAO, is unchanged since 11-18 01:29Z (6,104).</li>
+<li>A scoring bug zeroed the larger cluster for hours; uids 57 and 90 give uid 133 no weight; one coldkey holds both clusters.</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> More independent clusters earning a real share and steady inflow would point up; renewed outflow with one owner cluster, down.</p>
+<p class="muted">Since the last pass: Was bearish on 2026-11-15: flows turned positive.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-similar">Similar subnets</h2>
+<div class="v2-sim"><p>By pool size this is <strong>rank 8 of 13</strong> among the subnets grouped as <em>compute</em> (what they mainly sell). Pool and price as of 2026-11-21, price in TAO per alpha; the barrier is the easiest miner role.</p><div class="scroll"><table class="v2-table"><thead><tr><th>#</th><th>Subnet</th><th>Pool</th><th>Price</th><th>Miner barrier</th></tr></thead><tbody><tr><td>6</td><td><a href="/bittensor-docs/subnets/12.html">ComputeHorde</a> <span class="muted">SN12</span></td><td>12,475 TAO</td><td>0.004641</td><td><span class="v2-barrier b-high">High</span></td></tr><tr><td>7</td><td><a href="/bittensor-docs/subnets/25.html">UR</a> <span class="muted">SN25</span></td><td>10,371 TAO</td><td>0.003994</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr class="me" aria-current="true"><td>8</td><td>KubeTEE <span class="muted">SN90, this page</span></td><td>5,827 TAO</td><td>0.01499</td><td><span class="v2-barrier b-high">High</span></td></tr><tr><td>9</td><td><a href="/bittensor-docs/subnets/106.html">Nodexo</a> <span class="muted">SN106</span></td><td>5,816 TAO</td><td>0.002269</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>10</td><td><a href="/bittensor-docs/subnets/105.html">Beam</a> <span class="muted">SN105</span></td><td>4,998 TAO</td><td>0.005358</td><td><span class="v2-barrier b-medium">Medium</span></td></tr></tbody></table></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-11-19</span> <span class="muted">(Chain reads at blocks 9535053, 9536397 and 9537336)</span> Uids 57 and 90 (4.5% of dividends) went from 86.5% owner (17:42Z on 11-18) to 100% (21:18Z) and back to 87% owner / 13% uid 132 (00:54Z).</li>
+<li><span class="when">2026-11-18</span> <span class="muted">(GitHub commit d386bd5; chain reads 2026-11-18)</span> v1.4.3 (14:27Z): only worker nodes are scored; the team says etcd and control-plane VMs had zeroed uid 133 (B300 x16).</li>
+<li><span class="when">2026-11-17</span> <span class="muted">(GitHub compare; chain reads)</span> Newest commit pins the SDK to a release candidate; uid 133 lost its validator permit.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Read the README roadmap and docs/GPU-NODE-REQUIREMENTS.md; they separate what ships today from what is planned.</li>
+<li>Miner: sign-up is hand-reviewed; ask the team in the subnet channel. docs/MINER-ONBOARDING.md lists the SSH handoff.</li>
+<li>Validator: get a validator permit, then run the ghcr.io/kubetee-ai/kubetee-validator image with a Taostats key and follow validator/README.md.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Only 16 of 56 recycler fills were checked on chain; none found at the 11-17 and 11-18 slots.</li>
+<li>Cluster names come from the team&#x27;s dashboard and README; uids 56, 132 and 133 are not owner-linked on chain.</li>
+<li>Chain read 2026-11-19. Weights are opinions, not payouts; why uids 57 and 90 keep changing theirs was not read.</li>
+<li>That v1.4.3 restored uid 133 is the team&#x27;s message plus timing; which validators run it was not read.</li>
+<li>Chat after 2026-10-31 was not read (archive unreachable).</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/KubeTEE-AI/kubetee-subnet" rel="noopener noreferrer">GitHub (subnet and validator)</a></li>
+<li><a href="https://kubetee.ai" rel="noopener noreferrer">Project site</a></li>
+<li><a href="https://s3.hippius.com/kubetee-validator/index.html" rel="noopener noreferrer">Validator dashboard</a></li>
+<li><a href="https://kubetee.ai/dashboard/" rel="noopener noreferrer">Revenue (alpha recycle) dashboard</a></li>
+<li><a href="https://github.com/KubeTEE-AI/kubetee-subnet/blob/main/docs/GPU-NODE-REQUIREMENTS.md" rel="noopener noreferrer">Miner hardware requirements</a></li>
+<li><a href="https://github.com/KubeTEE-AI/kubetee-subnet/blob/main/docs/SN28-SN90-ALPHA-RECYCLE.md" rel="noopener noreferrer">Alpha recycler docs</a></li>
+<li><a href="https://github.com/KubeTEE-AI/kubetee-subnet/blob/main/docs/MINER-ONBOARDING.md" rel="noopener noreferrer">Miner onboarding</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 5 sources</summary>
+<ul>
+<li><strong>repo</strong> KubeTEE-AI/kubetee-subnet @d386bd5 (2026-11-18, tag v1.4.3; v1.4.2 at 2026-11-08): README.md, docs/{GPU-NODE-REQUIREMENTS,MINER-ONBOARDING,MINER-DEPOSIT,SN28-SN90-ALPHA-RECYCLE}.md, validator/{README.md,validator.py,market_snapshot.py,miner_scoring.py,infrastructure_validation.py} (compare 2a81d16...d386bd5 = 5 commits: Phase 1 docs, SDK pin, worker-only scoring; commit d386bd5 diff read; tags and pull requests #9, #10 re-read 2026-11-19); commit log; tags</li>
+<li><strong>web</strong> Validator dashboard s3.hippius.com/kubetee-validator/index.html (copies 2026-11-18 02:19Z, 05:55Z, 11:49Z, 12:25Z, 17:52Z, 22:16Z epoch 26,489 and 2026-11-19 01:28Z epoch 26,492), market.json (epoch 26492) and price-card.json (epoch 9537329); kubetee.ai/dashboard/ (refreshed 2026-11-10); kubetee.ai home unchanged since 2026-11-11; api.github.com/repos/KubeTEE-AI/kubetee-subnet; validator/validator.py</li>
+<li><strong>web</strong> Chain read at block 9537336 (2026-11-19 01:29Z): 156 of 256 uids, commit-reveal off; emission split burn / recycle / owner / validator / miner = 0 / 0 / 18 / 41 / 41 %. Compared with block 9508088 (2026-11-15 00:00Z) at block 9537260 (01:14Z): no setting changed (SubnetworkN 154 -&gt; 156); pool 5515.36 -&gt; 6104.53 TAO. Uid reads and weights at block 9537336 (incentive 47.044 / 39.634 / 13.321%). Pinned reads: uids 57 / 90 weights at blocks 9535053 and 9536397; uid 133 incentive at blocks 9533367 (33.4%), 9533700, 9533750, 9534099, 9534300 (0%), 9534500 (29.2%), 9534900 (32.5%); uid 132 earns from about block 9518900; uid 133 loses its permit at about block 9525100.</li>
+<li><strong>web</strong> Chain read at block 9537260 (2026-11-19 01:14Z): 30-day grid of 15 days from 2026-10-20 00:55Z (-20.9%; the page stat -21% uses the price file from 10-20 05:21Z); net user flow -129.3 TAO (-503.0, +373.7). Block 9537336 (01:29Z): 7-day grid of 1 day from 11-12 01:29Z (+25.0%, net +739.6 TAO, in on 5 of 7 days; +311.4 and +282.8 on the days to 11-17 and 11-18, +16.3 on the last); 2-day grid of 3h (+8.8%, +299.0 TAO, high 0.017383 at 11-17 22:29Z). Pool rank 66 of 128 by hand. Events at blocks 9522441..9522540 and 9529641..9529740: no AlphaRecycled.</li>
+<li><strong>msg</strong> #90 kubetee, 2026-08-23 to 2026-10-31 (newer messages not read: archive unreachable 2026-11-05 to 2026-11-19)</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/89.html"><small>← Previous</small>SN89 InfiniteQuant</a><a rel="next" href="/bittensor-docs/subnets/91.html"><small>Next →</small>SN91 Cascade</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-11-19. Site built 2026-11-21. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>
