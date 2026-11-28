@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Recall (SN31) | Bittensor Subnet Docs</title>
+<meta name="description" content="A hosted RAG and memory API: 242 miners paid, up from six on 2026-11-16; miner and validator code public.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h1">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>31</span><div>
+<h1>Recall <span class="muted">SN31</span></h1>
+<p class="tagline">A hosted RAG and memory API: 242 miners paid, up from six on 2026-11-16; miner and validator code public.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>8.1<small>/day</small></b><span>last 7 d</span></li><li class="pl4"><b>6.0<small>/day</small></b><span>days 8-30</span></li><li class="pl4"><b>4.0<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-11-02</b><span>last chat</span></li><li class="pw"><b>787</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Shipping</b><span>code activity</span></li><li class="pw"><b>10</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-11-22</b><span>last commit</span></li><li class="pw"><b>2026-11-22</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>retrieval-augmented generation (RAG) as a service</dd>
+<dt>Status</dt><dd>Paid miners grew from six to 242 since 2026-11-16; net flow is -174 TAO over six days. Customer use is not shown.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-11-27</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Product and limits</a></li><li><a href="#sn-x1">How scoring works</a></li><li><a href="#sn-x2">Service status and payout</a></li><li><a href="#sn-x3">Who holds the alpha</a></li><li><a href="#sn-x4">Docs vs code vs chain</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-similar">Similar subnets</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>a hosted memory and RAG API; miners store, embed, rerank and generate.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>242 miners earn 0.06 to 0.43% each (192 on 2026-11-19); all 256 uids are taken.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>miner and validator are public (MIT); the owner hotkey is the master validator and 6 others relay it; nothing burns.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>status operational; rerank 97.9% over 7 days against its 95% bar.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>pool 1,944 TAO, rank 104; six days price -16% and net flow -174 TAO; 30 days +20% and +213 TAO.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Runs the Docker stack and passes Recall API checks (code). 242 miners earn about 0.05 TAO per day each (chain).</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-caution">Paid service needed</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>CPU: 8 vCPU, 32 GB RAM, 200 GB SSD minimum; no GPU (code)</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>A public server with one open TCP port; optional Chutes key (code)</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Burn 0.38 TAO (chain, 2026-11-27); no stake</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Documented: Docker Compose, hotkey seed on the server, self-signed TLS (code)</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Relays the master validator&#x27;s signed weights (code).</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-bad">Permissioned</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>2 vCPU, 4 GB RAM, 20 GB disk; no GPU (code)</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None documented</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Burn 0.38 TAO; a permit needs 1,000 TAO of stake (chain)</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Documented: install, one signing hotkey per process (code)</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-neutral">Neutral</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-11-27. Not financial advice.</span></div><p>Net flow -174 TAO and price -16% in six days; 30 days +20% and +213 TAO. <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>Recall is a hosted memory and retrieval-augmented generation (RAG) API with an MCP endpoint for agents. Miner and validator code is public (MIT) since 2026-11-16; the scoring API is private.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Per the code: a Docker stack (Go miner, vector database, embedding and rerank services, optional generation sidecar on Chutes) behind one public HTTPS port; the Recall API probes four tiers.</p></div><div><h3>Validators</h3><p>Per the code: the master validator (owner hotkey, UID 0) scores from the private Recall API and publishes a signed weight bundle; the other 6 permit holders submit it.</p></div><div><h3>Incentive</h3><p>On chain (2026-11-27) 242 uids earn 0.06 to 0.43% each; UID 0 holds 31.9% of emission as a validator, miners 50%; split 18/41/41 (owner, validators, miners).</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-11-27, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-bad">Owner only</span>The owner hotkey (UID 0) is the master that scores; the other 6 permit holders relay its signed weights.</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">31.9%</span>31.9% of last-epoch emission is on the owner&#x27;s UID 0 (a floor); owner cut 18%; RecycleOrBurn is Burn.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">242 uids</span><span class="v2-sx muted">top 5 hold 2.1% of incentive.</span> 242 uids earn 0.06 to 0.43% each (six earned 16.5% each until 2026-11-16); 227 get near-equal full pay.</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Converged</span>Top uid is 1 for all seven (near-equal weights); none weights UID 0. One scorer, not independent.</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-good">Open</span>Miner and validator are public under MIT since 2026-11-16; the Recall API and site that feed scoring are private.</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Runs the Docker stack and passes Recall API checks (code). 242 miners earn about 0.05 TAO per day each (chain).</p><ul>
+<li>Chain: 227 uids earn 0.40 to 0.43%; 15 earn less, down to 0.06%; seven earn nothing, six of them up under three hours (restarts cut pay for hours).</li>
+<li>Repo docs (2026-11-17): one hotkey per coldkey earns, the newest.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Relays the master validator&#x27;s signed weights (code).</p><ul>
+<li>Chain: 7 hotkeys hold permits (12 on 2026-11-19); seven former holders earn as miners. None weights UID 0.</li>
+<li>Code: a secondary cannot change scores; stake can be delegated to a child hotkey.</li>
+</ul></section></div>
+<h2 id="sn-x0">Product and limits</h2>
+<ul class="v2-list">
+<li>Users create vector databases, store text, query and generate answers; agents use a remote MCP endpoint.</li>
+<li>Free tier (docs): 20 databases, 8 million vectors, 50 GiB, 10,000 queries per hour.</li>
+<li>Miners see text in plaintext and two other miners may check embedding and rerank text (privacy policy, 2026-11-09); stored text is encrypted at rest. Do not store secrets.</li>
+</ul>
+<h2 id="sn-x1">How scoring works</h2>
+<ul class="v2-list">
+<li>Code: each epoch splits 100 units over four tiers: vector database 30, embedding 22, rerank 18, generation 30.</li>
+<li>Code: each tier pays 40% as readiness to every eligible miner by pass rate, no customer needed, and 60% for customer work; evidence counts over 6 hours.</li>
+<li>Code (2026-11-22): nothing burns; unearned units go to earning miners up to a cap, then equally to all; validators refuse bundles weighting the owner UID. New miners earn nothing, then half pay for five epochs.</li>
+<li>Chain: near-equal pay and zero weight on UID 0 fit readiness-only payout.</li>
+</ul>
+<h2 id="sn-x2">Service status and payout</h2>
+<ul class="v2-list">
+<li>Team status page (2026-11-27, 02:29): operational; rerank 97.9% over 7 days against its 95% bar; generation under 98% in 8 of the last 168 hours (worst 95.3%).</li>
+<li>Explorer vs chain (02:30): seven uids up under three hours earn nothing; of 43 up three to six hours, 40 earn 98% or more of top pay. Pay returns after about three hours (inference).</li>
+</ul>
+<h2 id="sn-x3">Who holds the alpha</h2>
+<ul class="v2-list">
+<li>Chain (2026-11-27, 95% of staked alpha read): one coldkey holds 51.7% (640,713 alpha, +0.6% since 2026-11-22); the owner hotkey carries 66.0% as delegated stake and permit holders 87.1%.</li>
+<li>Chain: a second coldkey holds 14.2% (176,354 alpha); the owner&#x27;s own coldkey holds 18,282 alpha.</li>
+</ul>
+<h2 id="sn-x4">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Public code</td><td>Team (2026-09-10): repos private for now</td><td>Code: miner and validator public (MIT) since 2026-11-16</td><td>2026-11-27</td></tr></tbody></table></div>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-neutral">Neutral</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-11-27. Not financial advice.</span></div>
+<p class="v2-thesis">Paid miners rose from 6 to 242 and held; flow was net out on three of six days; customer use is not shown.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.004313 TAO per alpha</dd></div><div><dt>Pool</dt><dd>1,944 TAO, rank 104</dd></div><div><dt>Price, 30 days</dt><dd>+20%, 2026-10-28 to 2026-11-27</dd></div><div><dt>Net flow, 30 days</dt><dd>+213 TAO, 2026-10-28 to 2026-11-27</dd></div><div><dt>Miner pay</dt><dd>0.053 TAO per day on average (12.6 TAO per day over 239 uids; 242 at 02:20Z)</dd></div><div><dt>Code activity</dt><dd>last commit 2026-11-22; 11 commits in 30 days (two repos); tags v1.20261122.03 (miner), v1.20261122.00 (validator)</dd></div></dl>
+<div class="v2-trend"><h3>Trend</h3><div class="v2-tbody"><figure class="v2-tfig"><svg class="v2-spark up" viewBox="0 0 240 56" role="img" aria-label="Price in TAO per alpha, 2026-09-28 to 2026-11-27: 0.003894 to 0.004313, +10.8%"><polyline points="5.0,31.7 12.7,29.0 16.5,27.2 24.2,25.2 28.0,25.2 31.8,29.8 39.5,33.0 43.3,35.5 51.0,32.1 54.8,30.6 58.7,30.7 62.5,29.5 66.3,29.7 70.2,30.2 74.0,28.5 77.8,33.2 81.7,32.1 85.5,31.4 89.3,32.8 93.2,36.8 97.0,38.4 100.8,33.6 104.7,37.6 108.5,37.5 112.3,38.0 116.2,38.7 120.0,38.9 123.8,40.0 131.5,40.6 135.3,41.0 139.2,41.2 143.0,34.4 146.8,23.9 150.7,30.1 154.5,37.8 158.3,42.9 162.2,43.3 166.0,44.3 169.8,45.2 173.7,49.0 177.5,51.0 181.3,49.5 185.2,47.7 189.0,46.6 192.8,37.6 196.7,34.6 200.5,31.4 204.3,25.1 208.2,11.1 212.0,5.0 215.8,8.3 219.7,13.0 223.5,10.1 227.3,11.5 231.2,24.5 235.0,22.0"/><circle cx="235.0" cy="22.0" r="3"/></svg><figcaption><strong>Price</strong> <span class="up">+10.8%</span> <span class="muted">0.003894 to 0.004313 TAO per alpha, 2026-09-28 to 2026-11-27</span></figcaption></figure><dl class="v2-tfacts"><div><dt>Net flow, 30 days</dt><dd><span class="up">+213 TAO</span> <span class="muted">2026-10-28 to 2026-11-27</span></dd></div><div><dt>Verdict history</dt><dd><ol class="v2-vh"><li><span class="muted">2026-11-18</span> <span class="st s-neutral">Neutral</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-19</span> <span class="st s-neutral">Neutral</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-22</span> <span class="st s-neutral">Neutral</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-27</span> <span class="st s-neutral">Neutral</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li></ol></dd></div></dl></div></div>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>Paid miners 6 to 242 in eleven days; public MIT code</li>
+<li>Net flow +213 TAO in 30 days; restarted miners earn full pay after about three hours</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>No customer use shown; one master validator sets all weights</li>
+<li>Price -16% and net flow -174 TAO in six days; last 24 hours -1.0% and -10 TAO</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> Credited customer traffic or independent validators would improve it; renewed outflow or paid miners leaving would worsen it.</p>
+<p class="muted">Since the last pass: Unchanged (neutral, unclear): usage is still unproven; the last six days were net outflow.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-similar">Similar subnets</h2>
+<div class="v2-sim"><p>By pool size this is <strong>rank 11 of 12</strong> among the subnets grouped as <em>inference</em> (what they mainly sell). Pool and price as of 2026-11-26 to 2026-11-28, price in TAO per alpha; the barrier is the easiest miner role.</p><div class="scroll"><table class="v2-table"><thead><tr><th>#</th><th>Subnet</th><th>Pool</th><th>Price</th><th>Miner barrier</th></tr></thead><tbody><tr><td>8</td><td><a href="/bittensor-docs/subnets/46.html">Instant</a> <span class="muted">SN46</span></td><td>6,991 TAO</td><td>0.002396</td><td><span class="v2-barrier b-high">High</span></td></tr><tr><td>9</td><td><a href="/bittensor-docs/subnets/92.html">REAX</a> <span class="muted">SN92</span></td><td>4,243 TAO</td><td>0.02037</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>10</td><td><a href="/bittensor-docs/subnets/96.html">Verathos</a> <span class="muted">SN96</span></td><td>1,979 TAO</td><td>0.002506</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr class="me" aria-current="true"><td>11</td><td>Recall <span class="muted">SN31, this page</span></td><td>1,944 TAO</td><td>0.004313</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>12</td><td><a href="/bittensor-docs/subnets/70.html">Fugal</a> <span class="muted">SN70</span></td><td>264 TAO</td><td>0.00221</td><td><span class="v2-barrier b-high">High</span></td></tr></tbody></table></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-11-27</span> <span class="muted">(Bittensor chain read; rec4ll.com)</span> Chain: 242 miners paid; seven up under three hours earn nothing; uid 12 gained a validator permit.</li>
+<li><span class="when">2026-11-22</span> <span class="muted">(GitHub)</span> Validator update (v1.20261122.00): nothing burns; the owner UID gets no weight.</li>
+<li><span class="when">2026-11-22</span> <span class="muted">(GitHub; rec4ll.com)</span> Miner builds .02 and .03 fix generation dropouts; 100 of 249 uids run .03.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Users: sign in on rec4ll.com, create a database, store and query text.</li>
+<li>Agents: use the remote MCP endpoint (OAuth) or the REST API.</li>
+<li>Miners: register from a coldkey with no other miner hotkey; follow SETUP.md in recall-miner.</li>
+<li>Validators: follow SETUP.md in recall-validator (permit and stake needed).</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Scoring evidence comes from the private Recall API; the published rules cannot be checked against its probes.</li>
+<li>Hardware profiles repeat across many uids (49, 31, 30, 30, 29); separate coldkeys may be one operator (an inference).</li>
+<li>No customer use is shown (organic counter 0); chat after 2026-10-31 unread (archive down).</li>
+<li>Who runs the 242 earners, the 14.2% coldkey or the 2026-11-26 sellers is not shown; why permits keep changing is not known.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://rec4ll.com" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://rec4ll.com/docs" rel="noopener noreferrer">Docs</a></li>
+<li><a href="https://rec4ll.com/faq" rel="noopener noreferrer">FAQ</a></li>
+<li><a href="https://rec4ll.com/miners" rel="noopener noreferrer">Network explorer (mainnet data)</a></li>
+<li><a href="https://github.com/rec4ll-main/recall-miner" rel="noopener noreferrer">Miner code (GitHub)</a></li>
+<li><a href="https://github.com/rec4ll-main/recall-validator" rel="noopener noreferrer">Validator code (GitHub)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 10 sources</summary>
+<ul>
+<li><strong>repo</strong> rec4ll-main/recall-miner@3bdb4e7 (checked 2026-11-27; Go and Python, MIT; seven commits, tags v1.20261116.01 to v1.20261122.03; README, SETUP.md; 0bbce27 (2026-11-17) adds a heartbeat recovery; b63e30c (2026-11-17) says one hotkey per coldkey earns; 916303e (2026-11-22 04:03Z) defers the ML imports of the generation sidecar; 716cf20 (10:04Z) cuts the generation deadline from 85 to 58 s; 876b489 (21:22Z) lets the sidecar finish a request already sent to Chutes when the caller disconnects; 3bdb4e7 (21:43Z) makes the readiness check wait out a short ledger write; no commit since 2026-11-22)</li>
+<li><strong>repo</strong> rec4ll-main/recall-validator@3c05a47 (checked 2026-11-27; Python, MIT; four commits, tags v1.20261116.00 to v1.20261122.00; 3c05a47 (2026-11-22 08:07Z) removes burning and refuses a bundle that weights the owner; cdf0588 (2026-11-20) drops a replaced miner uid and shares its weight; 34d2e54 (2026-11-19) adds missed-epoch alerts; v3_params.py and allocation_v3.py read at 3c05a47; the master hotkey address in SETUP.md matched hotkey tag 1167cf, the owner hotkey, on 2026-11-18; no commit since 2026-11-22)</li>
+<li><strong>web</strong> rec4ll.com explorer API /api/public/miners (5 pages, as_of 2026-11-27 02:29:55Z, chain block 9595204, 249 rows, all online; it lists the 249 uids without a validator permit; organic count 0; North America 200, Europe 49; builds 3bdb4e7 on 100 and 0bbce27 on 100; largest hardware profiles 49, 31, 30, 30, 29 uids), status API /api/public/uptime (as_of 2026-11-27 02:29:56Z; rerank 7 d 97.9%, generation 7 d 99.5%; rerank bar 0.95), site version.json (1795671261936, was 1794287945407 on 2026-11-22: site redeployed, pages not diffed), /api/models (7 models, unchanged), and home, /docs, /faq, /miners, /uptime, /status (HTTP 200, 2026-11-27 02:30Z)</li>
+<li><strong>web</strong> Chain read at block 9595161 (2026-11-27 02:20Z): SN31 pool 1940.5 TAO, price 0.004304 TAO per alpha; incentive on 242 uids (uid 4 0.4%, top 5 2.1%), uid 0 31.9% of last-epoch emission; 7 validators with weight rows (none on uid 0; top target uid 4 for all seven; vector versions not compared); split 0/0/18/41/41, RecycleOrBurn Burn, commit-reveal off; registration burn 0.30 TAO; refresh since 2026-11-22 00:00Z: only the burn changed (0.32 to 0.30 TAO); permit holders 12 on 2026-11-19, 7 on 2026-11-22 and 7 now (0, 5, 9, 12, 49, 58, 155; uid 178 lost its permit, uid 12 gained one).</li>
+<li><strong>web</strong> Chain read of the per-uid Emission vector (2026-11-27 02:20Z, block 9595161): the 242 earning uids hold 50.0% of 295.2 alpha per epoch, uid 0 31.9%.</li>
+<li><strong>web</strong> Chain reads, price 31 --from 30d --step 15d (blocks 9380485..9596485, flow +213.4 TAO, price +20.2% from 2026-10-28), --from 6d --step 1d (blocks 9553285..9596485, 2026-11-21 06:40Z to 2026-11-27 06:44Z) and --from 24h --step 3h (to block 9596485): six days -16.2% and -174.36 TAO (net in on three days, net out on three); last 24 hours -1.0% and -10.11 TAO (net in on four of eight three-hour intervals); pool rank 104, price rank 59 of 129 listed (snapshot at block 9596485).</li>
+<li><strong>web</strong> Chain read, stake by coldkey at block 9595161 (2026-11-27 02:20Z, 95.4% coverage), against block 9561703 (2026-11-22, 94.4%): staked alpha 1,299,244; top coldkey 640,713 alpha = 51.7% (636,676 on 2026-11-22); ck:80496e 176,354 alpha (175,023); owner hotkey 66.0% of alpha read, 87.1% on permit holders; owner coldkey 18,282 alpha (11,038); named coldkeys are compared by alpha, not share.</li>
+<li><strong>web</strong> Chain Incentive, Emission and ValidatorPermit vectors (block 9595161), compared with the 2026-11-22 10:52Z reads, and the explorer: 242 earners; nine joined (13, 14, 60, 133, 157, 161, 168, 178, 201) and eight left (12, 85, 105, 180, 198, 232, 246, 248) since 2026-11-22; uid 12 now holds a permit; the seven explorer uids up under three hours earn nothing, 40 of 43 up three to six hours earn 98% or more of top pay; 227 uids at 0.40% or more; dividends: top uid 63.9%, top 5 99.0%.</li>
+<li><strong>msg</strong> #recall (channel 31), 2025-12-25 to 2026-10-31, incl. team posts of 2026-05-24, 2026-06-02, 2026-09-10, 2026-10-05, 2026-10-09, 2026-10-12, 2026-10-23 and replies of 2026-10-26 to 2026-10-29; no team post after 2026-10-23; the archive did not answer from 2026-11-02 to 2026-11-27 (one attempt on 2026-11-27 timed out), so nothing after 2026-10-31 was read</li>
+<li><strong>web</strong> Chain read at block 9596485 (2026-11-27 06:44Z): SN31 pool 1944.03 TAO, price 0.004313 TAO per alpha; incentive nonzero on 239 uids (top 0.4%, top 5 2.2%), uid 0 32.0% of last-epoch emission; 7 validators with weight rows, none on uid 0; split 0/0/18/41/41, RecycleOrBurn Burn, commit-reveal off; refresh since 2026-11-27 00:00Z: no setting changed in 33 items (registration burn moves with demand, now 0.38 TAO); repos rec4ll-main/recall-miner and recall-validator: no commit after 2026-11-22.</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/30.html"><small>← Previous</small>SN30 Endure</a><a rel="next" href="/bittensor-docs/subnets/32.html"><small>Next →</small>SN32 It&#x27;s AI</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-11-27. Site built 2026-11-28. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

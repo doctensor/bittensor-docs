@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Leadpoet (SN71) | Bittensor Subnet Docs</title>
+<meta name="description" content="Sales-AI lab: miners fund simulated sales jobs on their own API keys; no miner is paid yet.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h17">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>71</span><div>
+<h1>Leadpoet <span class="muted">SN71</span></h1>
+<p class="tagline">Sales-AI lab: miners fund simulated sales jobs on their own API keys; no miner is paid yet.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>13<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>15<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>9.1<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-11-01</b><span>last chat</span></li><li class="pw"><b>6,406</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Shipping</b><span>code activity</span></li><li class="pw"><b>2,035</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-11-25</b><span>last commit</span></li><li class="pw"><b>2026-07-20</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>AI sales agents</dd>
+<dt>Status</dt><dd>Active, but the daily contest ended on 2026-11-24; no independent miner is paid yet.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-11-25</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Collection pilot</a></li><li><a href="#sn-x1">Paid collection (not started)</a></li><li><a href="#sn-x2">Last contest rounds</a></li><li><a href="#sn-x3">Docs vs code vs chain</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-similar">Similar subnets</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>the daily champion contest ended 2026-11-24; miners now fund simulated sales jobs with their own OpenRouter keys.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>the owner uid holds 100% of incentive and 78% of emission; no independent miner is paid (2026-11-25).</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>pilot jobs pay no emissions; paid jobs are planned at 125% of measured cost, with no start date.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>joining takes a registered hotkey and two OpenRouter keys; you set a daily spend cap.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>ARR tripled in two months and a strategic backer joined; no revenue figure is public.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-low">Low barrier</span></h3><p>Funds simulated sales jobs on your own OpenRouter key; the pilot pays no emissions.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-caution">Paid service needed</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-no"><dt>Hardware</dt><dd>None; the subnet&#x27;s worker runs the jobs.</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>OpenRouter credits (capped by you; docs example $0.30 a day) plus a read-only management key.</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Registration burn about 0.0005 TAO (2026-11-25); no stake in the docs.</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Python 3.11, a wallet, two OpenRouter keys, one command (docs).</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Fetches the team&#x27;s signed weights and sets them on chain; no scoring jobs remain.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-unk">GPU unknown</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-unk"><dt>Hardware</dt><dd>Not documented for weight-only running.</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None for weights (scoring, now ended, needed 19 Webshare proxies).</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Permit (1,000 TAO chain-wide threshold); 8 hold one. Weights are served at any stake.</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Run neurons/validator.py with the updated weight code.</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div><div class="v2-role"><h3>Reviewer <span class="v2-barrier b-none">No barrier</span></h3><p>Rates simulated sales workflows blind; no wallet needed; the team decides who is accepted.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-unk">Access unknown</li></ul><dl class="v2-needs"><div class="v2-need n-no"><dt>Hardware</dt><dd>None</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None</dd></div><div class="v2-need n-no"><dt>Stake / fees</dt><dd>None; no wallet or API credits (docs).</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Volunteer in the GitHub pilot thread (issue 1343).</dd></div></dl><a class="v2-more" href="#sn-role-2">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-11-25. Not financial advice.</span></div><p>Price -38% and 1,101 TAO net out in 30 days; the contest that paid miners has ended. <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>Leadpoet (SN71) ran a daily contest in which miners improved a public sales-research agent. The team retired it on 2026-11-24. Miners now fund simulated sales jobs on their own OpenRouter keys. The pilot pays no emissions; paid jobs are planned at 125% of measured cost, with no date. Until then the miner side of emission is burned. The team sells a sales product; its website never mentions Bittensor.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>A miner registers a hotkey and enrolls an OpenRouter key with a daily cap. The subnet&#x27;s worker runs one assigned model through a simulated sales task on that key; the miner&#x27;s statement lists every charge.</p></div><div><h3>Validators</h3><p>Permit holders fetch the team&#x27;s signed weights and set them on chain; all 8 put 100% on the owner uid.</p></div><div><h3>Incentive</h3><p>Nothing reaches miners today: the signed weights send the whole vector to the owner&#x27;s burn uid. Once paid collection starts, each verified job earns a fixed quote.</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-11-25, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-good">Open</span>Any permit holder fetches the team&#x27;s signed weights at any stake; scoring jobs ended with the contest.</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">78.2%</span>Owner uid holds 100% of incentive and 78.2% of emission; owner cut 18%; unused miner emission is burned.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">1 uid</span><span class="v2-sx muted">top 5 hold 100% of incentive.</span> One uid earns: the owner&#x27;s burn uid (100% of incentive). No independent miner is paid.</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Converged</span>All 8 permit holders put 100% on the owner uid; they apply the team&#x27;s signed weights, not their own scoring.</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-good">Open</span>Subnet repo and baseline agent are public; the pilot&#x27;s scenarios, graders and reviewers are private.</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-low">Low barrier</span></h3><p>Funds simulated sales jobs on your own OpenRouter key; the pilot pays no emissions.</p><ul>
+<li>Default is one new assignment per UTC day, up to six on request; a failed job still counts toward the day.</li>
+<li>Pilot quote is zero. Revoking stops new calls, but calls already sent can still be billed; use a dedicated key with prompt logging off.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Fetches the team&#x27;s signed weights and sets them on chain; no scoring jobs remain.</p><ul>
+<li>A permit alone gets the signed weights: the 24-hour recent-work gate was removed, and the 75,000 effective-stake minimum applied only to scoring jobs, which ended.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-2"><h3>Reviewer <span class="v2-barrier b-none">No barrier</span></h3><p>Rates simulated sales workflows blind; no wallet needed; the team decides who is accepted.</p><p class="muted">No further detail found in the sources.</p></section></div>
+<h2 id="sn-x0">Collection pilot</h2>
+<ul class="v2-list">
+<li>Six open models share each scenario pack: Kimi K3.1 Pro, DeepSeek V4 Pro, Mistral Large 4, Qwen3.8-27B, Nemotron 3.5 Super VL and DeepSeek V4.1 Flash; each runs on a pinned zero-retention endpoint and the team pays the judges.</li>
+<li>Run traces can become training data once reviewed, under each funder&#x27;s signed terms; read the text for your scope before signing.</li>
+</ul>
+<h2 id="sn-x1">Paid collection (not started)</h2>
+<p>No start date appears in any doc.</p>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Step</th><th>What the docs say</th></tr></thead><tbody><tr><td>Qualify the pilot</td><td>100 judged ordinary runs across the six models, both judges, and 50 blind human marks.</td></tr><tr><td>Price and pay</td><td>A signed price schedule; each verified job is quoted at 125% of average settled miner cost, weights follow the quotes, surplus is burned.</td></tr></tbody></table></div>
+<h2 id="sn-x2">Last contest rounds</h2>
+<p>A winner needed +5 points over the baseline.</p>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Round</th><th>Entries</th><th>Best vs baseline</th><th>Result</th></tr></thead><tbody><tr><td>2026-11-18</td><td>9</td><td>53.625 vs 45.8 (+7.825)</td><td>Last champion: +5 slot</td></tr><tr><td>2026-11-21 to 11-24</td><td>34 in four rounds</td><td>Best vs baseline from -3.925 to +4.875</td><td>No champion; the margin is 5</td></tr></tbody></table></div>
+<h2 id="sn-x3">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Champion payouts</td><td>The slot doc still lists slot payouts of 15%, 25% and 35%.</td><td>Chain: the owner uid holds 100% of incentive; no champion slot pays.</td><td>2026-11-25</td></tr></tbody></table></div>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-11-25. Not financial advice.</span></div>
+<p class="v2-thesis">Net out 1,101 TAO (28% of the pool) in 30 days. The contest that paid miners is over; the miner side is burned until paid collection starts.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.002377 TAO per alpha</dd></div><div><dt>Pool</dt><dd>3,884 TAO, rank 89</dd></div><div><dt>Price, 30 days</dt><dd>-38%, 2026-10-26 to 2026-11-25</dd></div><div><dt>Net flow, 30 days</dt><dd>-1,101 TAO (28% of pool)</dd></div><div><dt>Miner pay</dt><dd>No independent miner is paid (miner side burned)</dd></div><div><dt>Code activity</dt><dd>last commit 2026-11-25; 2,490 commits in 30 days; last release 2026-07-20</dd></div></dl>
+<div class="v2-trend"><h3>Trend</h3><div class="v2-tbody"><figure class="v2-tfig"><svg class="v2-spark down" viewBox="0 0 240 56" role="img" aria-label="Price in TAO per alpha, 2026-09-28 to 2026-11-25: 0.003839 to 0.002377, -38.1%"><polyline points="5.0,27.9 16.9,27.6 24.8,28.0 28.8,28.7 32.8,29.7 36.7,23.3 44.7,11.2 52.6,11.7 56.6,12.4 60.5,10.6 64.5,5.0 72.4,9.8 80.3,18.3 84.3,21.2 88.3,7.8 92.2,16.3 100.2,27.6 104.1,25.8 108.1,27.3 112.1,28.0 116.0,27.9 120.0,29.6 124.0,29.6 127.9,30.4 131.9,29.9 135.9,28.7 139.8,30.3 143.8,26.1 147.8,26.7 151.7,27.9 155.7,28.6 159.7,27.9 163.6,28.2 167.6,27.4 171.6,28.5 175.5,29.6 179.5,30.7 183.4,31.4 187.4,31.8 191.4,32.9 195.3,33.4 199.3,37.3 203.3,39.7 207.2,42.6 211.2,40.5 215.2,48.7 219.1,49.0 223.1,49.7 227.1,50.4 231.0,50.6 235.0,51.0"/><circle cx="235.0" cy="51.0" r="3"/></svg><figcaption><strong>Price</strong> <span class="down">-38.1%</span> <span class="muted">0.003839 to 0.002377 TAO per alpha, 2026-09-28 to 2026-11-25</span></figcaption></figure><dl class="v2-tfacts"><div><dt>Net flow, 30 days</dt><dd><span class="down">-1,101 TAO</span> <span class="muted">2026-10-26 to 2026-11-25</span></dd></div><div><dt>Verdict history</dt><dd><ol class="v2-vh"><li><span class="muted">2026-11-16</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-20</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-22</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-25</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li></ol></dd></div></dl></div></div>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>Selling slowed: net -25 TAO over the last 3 days, after -262 on 11-19.</li>
+<li>The team ships daily and has built a fixed-price paid mode.</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>No independent miner is paid; paid collection has no start date.</li>
+<li>Net out on 4 of 7 days (552 TAO, price -23%); the pilot is unqualified.</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> Bullish: a week of net buying, a first paid collection epoch (non-burn weights) or a named, dated customer or revenue figure. Bearish: selling resumes with no paid-collection start date.</p>
+<p class="muted">Since the last pass: Unchanged from 2026-11-22 (bearish), for a new reason: the contest ended.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-similar">Similar subnets</h2>
+<div class="v2-sim"><p>By pool size this is <strong>rank 5 of 8</strong> among the subnets grouped as <em>agents</em> (what they mainly sell). Pool and price as of 2026-11-25 to 2026-11-28, price in TAO per alpha; the barrier is the easiest miner role.</p><div class="scroll"><table class="v2-table"><thead><tr><th>#</th><th>Subnet</th><th>Pool</th><th>Price</th><th>Miner barrier</th></tr></thead><tbody><tr><td>3</td><td><a href="/bittensor-docs/subnets/121.html">sundae_bar</a> <span class="muted">SN121</span></td><td>5,255 TAO</td><td>0.003194</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr><td>4</td><td><a href="/bittensor-docs/subnets/98.html">NeverPlayAlone</a> <span class="muted">SN98</span></td><td>3,923 TAO</td><td>0.001581</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr class="me" aria-current="true"><td>5</td><td>Leadpoet <span class="muted">SN71, this page</span></td><td>3,884 TAO</td><td>0.002377</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr><td>6</td><td><a href="/bittensor-docs/subnets/118.html">Ditto</a> <span class="muted">SN118</span></td><td>3,566 TAO</td><td>0.002229</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr><td>7</td><td><a href="/bittensor-docs/subnets/67.html">Harnyx</a> <span class="muted">SN67</span></td><td>2,238 TAO</td><td>0.002388</td><td><span class="v2-barrier b-medium">Medium</span></td></tr></tbody></table></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-11-25</span> <span class="muted">(GitHub)</span> 212 commits since 11-22: pilot enrollment docs, a README rewrite and migrations 711 to 754.</li>
+<li><span class="when">2026-11-24</span> <span class="muted">(GitHub and gateway API)</span> Champion competition retired: round 11-25 cancelled, champion weights closed, unallocated miner emission goes to the burn uid.</li>
+<li><span class="when">2026-11-23</span> <span class="muted">(GitHub)</span> Consent-based synthetic pilot opened; round 11-22 ended with no champion.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Clone leadpoet/leadpoet (Python 3.11) and register a hotkey on subnet 71 (burn about 0.0005 TAO).</li>
+<li>Create a dedicated funded OpenRouter key plus a read-only management key for the same workspace, with prompt logging off.</li>
+<li>Run leadpoet collection-terms for your scope, read it, then leadpoet collection-register --mode pilot with a daily cap and the terms digest.</li>
+<li>Check charges with collection-statement; stop new calls any time with collection-revoke. Reviewing needs no wallet.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>The model changed fast: 212 commits in four days turned a daily contest into a pilot, so older pages and docs are stale.</li>
+<li>The team runs the gateway; scenarios, graders and judge prompts are private, and no enrollment or job count is public.</li>
+<li>Validators copy the team&#x27;s signed weights, so chain weights show configuration, not independent judgment.</li>
+<li>Miners fund the pilot with their own money and may never be paid: paid mode needs a qualified pilot and a signed price approval.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/leadpoet/leadpoet" rel="noopener noreferrer">GitHub (subnet)</a></li>
+<li><a href="https://github.com/leadpoet/leadpoet/blob/main/docs/locked-collection.md" rel="noopener noreferrer">Pilot enrollment steps</a></li>
+<li><a href="https://github.com/leadpoet/leadpoet/issues/1343" rel="noopener noreferrer">Pilot and reviewer thread</a></li>
+<li><a href="https://github.com/leadpoet/leadpoet-sales-agent" rel="noopener noreferrer">Baseline agent</a></li>
+<li><a href="https://subnet71.com/" rel="noopener noreferrer">Leaderboard and dashboard</a></li>
+<li><a href="https://leadpoet.com/" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://leadpoet.com/pricing" rel="noopener noreferrer">Pricing (product)</a></li>
+<li><a href="https://gateway.subnet71.com/arena/v1/current" rel="noopener noreferrer">Gateway API (current round)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 7 sources</summary>
+<ul>
+<li><strong>repo</strong> leadpoet/leadpoet@f231050 (2026-11-25 19:00Z; GitHub compare from 9ee6aa7: 212 commits, 191 files): README.md (rewritten), docs/locked-collection.md, docs/arena_normal_validator_weights.md (&#x27;Weight submission&#x27;, &#x27;Locked collection settlement&#x27;), AGENTS.md, scripts/743-retire-champion-rewards.sql, scripts/752-signed-collection-daily-slots.sql, commit titles of 2026-11-23 to 11-25 (retirement commits 2026-11-24 18:42Z to 18:54Z, PR 1345); docs/arena_reward_slots.md and docs/arena-score-integrity.md unchanged since 11-19 and not re-read; docs/judge-output-spec.md not read in full; checked 2026-11-25</li>
+<li><strong>repo</strong> leadpoet/leadpoet-sales-agent@e04526d (newest commit 2026-11-19 01:35Z, &#x27;Promote Arena winner ... from round arena-2026-11-18&#x27;; no commit since; commit titles only; checked 2026-11-25)</li>
+<li><strong>web</strong> https://gateway.subnet71.com/arena/v1/current (read 2026-11-25 19:08Z: no king, no reward slots, reward_mode fixed_collection_quotes, current epoch 26615) and /arena/v1/rounds/&lt;id&gt;: round 11-21 (published 2026-11-23T07:04Z), 11-22 (11-23T20:33Z), 11-23 (11-24T17:02Z) and 11-24 (11-24T05:32Z) all without a champion; round 11-25 cancelled, reason &#x27;Champion competition retired&#x27;; round 11-26 does not exist. Round 11-18 (champion) from earlier passes</li>
+<li><strong>web</strong> Chain read at block 9585732 (2026-11-25 18:54Z UTC): SN71 (Leadpoet): registered 2025-03-03, tempo 360, 256 of 256 uids, commit-reveal on; emission weights burn/recycle/owner/validator/miner = 0/0/18/41/41 % (stored, same values as the chain default), RecycleOrBurn = Burn; uids under the owner hotkey or owner coldkey hold 100 % of incentive and 78.24 % of last-epoch emission (a floor); 8 validators have weight rows, on average 100 % of weight goes to uid 0. Chain read at block 9585732 (2026-11-25 18:54Z UTC), compared with block 9558461 (2026-11-22 00:00Z UTC): SN71: no setting changed in 33 checked items; emission split unchanged; pool 3954.57 -&gt; 3883.64 TAO. Chain read at block 9585732 (2026-11-25 18:54Z): SN71 uid 44 registered 2026-11-04 08:25Z, incentive 0.0%, validator permit False, hotkey owner-linked False, coldkey owner-linked False. Chain read at block 9585732 (2026-11-25 18:54Z): SN71 uid 88 registered 2026-10-27 18:50Z, incentive 0.0%, validator permit False, hotkey owner-linked False, coldkey owner-linked False.</li>
+<li><strong>web</strong> Chain read at block 9585732 (2026-11-25 18:54Z): price SN71, 3 samples every 15d from block 9369732 (2026-10-26 18:46Z): price 0.003965 -&gt; 0.002377 TAO per alpha (-40.0%), pool TAO 5014.2 -&gt; 3883.6; over the 2 intervals where the pool change equals flow + protocol: net user flow -1101.5 TAO (staked minus unstaked), protocol flow -29.0 TAO, gross volume 31175.0 TAO. Chain read at block 9585732 (2026-11-25 18:54Z): price SN71, 8 samples every 1d from block 9535332 (2026-11-18 18:48Z): price 0.003087 -&gt; 0.002377 TAO per alpha (-23.0%), pool TAO 4425.5 -&gt; 3883.6; over the 7 intervals where the pool change equals flow + protocol: net user flow -551.8 TAO (staked minus unstaked), protocol flow +9.9 TAO, gross volume 7329.4 TAO. Pool rank 89 of 128 from the shared snapshot at block 9585732 (sorted by tao_in).</li>
+<li><strong>web</strong> https://subnet71.com/ (read 2026-11-25: sales research lab, miner enrollment, volunteer to review, champion history), https://leadpoet.com/ home and pricing pages (read 2026-11-05; re-read 2026-11-25: no mention of Bittensor; one $500 a month base plan with 500 leads, Enterprise on request, a Black Friday offer); all 10 listed and checked links return 200 (2026-11-25)</li>
+<li><strong>msg</strong> #71-leadpoet 2025-10-13 to 2026-11-01 (archive down since 2026-11-02; read attempt timed out 2026-11-25)</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/70.html"><small>← Previous</small>SN70 Fugal</a><a rel="next" href="/bittensor-docs/subnets/72.html"><small>Next →</small>SN72 StreetVision (NATIX) / chillyshort</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-11-25. Site built 2026-11-28. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

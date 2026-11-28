@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RedTeam (SN61) | Bittensor Subnet Docs</title>
+<meta name="description" content="Miners ship Docker images of detection code or, since 2026-11-24, browser bots; accepted scores earn pay.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h19">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>61</span><div>
+<h1>RedTeam <span class="muted">SN61</span></h1>
+<p class="tagline">Miners ship Docker images of detection code or, since 2026-11-24, browser bots; accepted scores earn pay.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>66<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>51<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>38<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-11-02</b><span>last chat</span></li><li class="pw"><b>9,107</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Shipping</b><span>code activity</span></li><li class="pw"><b>11</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-11-24</b><span>last commit</span></li><li class="pw"><b>2026-11-24</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>security challenges (browser fingerprinting and detection)</dd>
+<dt>Status</dt><dd>ADA v3 pays 91 uids evenly; the new Bot Virus v2 (60% weight in code) has not scored yet.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-11-25</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">The three live challenges</a></li><li><a href="#sn-x1">What to watch</a></li><li><a href="#sn-x2">Docs vs code vs chain</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-similar">Similar subnets</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>miners ship Docker images: detection code (BEX, ADA v3) or, since 11-24, a bot that must pass bot checks.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>Bot Virus v2 gets 60% of miner weight, BEX and ADA v3 20% each (2026-11-24); nothing scored yet.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>91 uids earn about evenly (top 1.9%); the BEX entry that held 60% ran out on 11-22.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>157 of 256 slots re-registered since 11-22; the entry fee rose from 0.002 to 0.10 TAO.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>mining needs a small server and Docker Hub; validating needs a bare-metal server, stake and a team key.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-low">Low barrier</span></h3><p>Builds a detector or a bot as a Docker image; one commit per challenge per day.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>2+ cores, 8 GB RAM, 50 GB disk, Linux; no GPU</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>Docker Hub account (private repo advised); no paid API</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Burn about 0.10 TAO (2026-11-25; 0.002 on 11-22; moves with demand)</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Docker, Python 3.10+, JavaScript (detectors) or Python (bots); winning is the hard part</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Fetches the team&#x27;s scored results and sets weights; scoring runs on the team&#x27;s server.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-unk">Access unknown</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>Bare metal, 8+ cores, 32 GB RAM, 512 GB disk; no GPU named</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>Team-issued storage API key; no paid service named</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Burn about 0.10 TAO; permit needs 1,000 TAO stake (chain setting); docs give no figure</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Python 3.10+, Docker; a server kept online</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-11-25. Not financial advice.</span></div><p>Price down 49% in 30 days; the new challenge pays nothing yet. <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>On 2026-11-25 ADA v3 paid 91 uids almost evenly; BEX&#x27;s paying entry ran out on 11-22 and the new Bot Virus v2 has not scored yet.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>A miner packs a submission in a Docker image and commits its digest, once per challenge per 24 hours: JavaScript with no outside requests (BEX), one detector per anti-detect browser plus a headless one (ADA v3), or a Python bot that must complete a web page unflagged (Bot Virus v2).</p></div><div><h3>Validators</h3><p>Commits are revealed after about a day, checked, compared and scored on the team&#x27;s own server. Validator code fetches the scored results once a day from 14:00 UTC and sets weights about every 20 minutes (live pay came faster).</p></div><div><h3>Incentive</h3><p>An entry counts if it reaches the challenge&#x27;s minimum score and is not too similar to others (limit 0.6; 0.8 against your own commits). A best entry holds full value for 10 days, then fades, faster each day, to zero at day 15; a resubmission restarts that only if accepted and higher. If a challenge has no accepted entry, its weight goes to the others; an accepted one takes it back. Miners sharing an IP, Docker Hub account or coldkey count as one.</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-11-25, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-unk">Unknown</span>12 hotkeys hold a permit, 10 set weights; the scoring key comes from the team and its policy is not public.</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">0%</span>Owner uids hold 0% of last-epoch emission; configured owner cut 18%; RecycleOrBurn is Burn.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">91 uids</span><span class="v2-sx muted">top 5 hold 9.3% of incentive.</span> 91 uids earn almost evenly: the top one 1.9%, the median 1.1%.</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Converged</span>All 10 validators with weights score 91 or 92 uids and put uid 136 first (1.9%).</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-good">Open</span>Miner, validator and challenge repos (Bot Virus too) are MIT; the team&#x27;s scoring servers are not published.</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-low">Low barrier</span></h3><p>Builds a detector or a bot as a Docker image; one commit per challenge per day.</p><ul>
+<li>Needs git, a wallet and the miner repo 3.1.15+ (2026-11-24).</li>
+<li>Size limits: BEX 750 lines, ADA 500, Bot Virus 2,000 for bot.py plus a 500-line Dockerfile.</li>
+<li>A score takes about 25 hours (docs: up to 48).</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Fetches the team&#x27;s scored results and sets weights; scoring runs on the team&#x27;s server.</p><ul>
+<li>The key comes from the team&#x27;s storage service; who gets one is not public.</li>
+</ul></section></div>
+<h2 id="sn-x0">The three live challenges</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Challenge</th><th>Miners build</th><th>Weight</th><th>Minimum</th><th>Accepted now</th></tr></thead><tbody><tr><td>Bot Virus v2</td><td>A bot that passes a page unflagged</td><td>0.6 (new)</td><td>0.6</td><td>0 (142 pending)</td></tr><tr><td>BEX Tracer v1</td><td>Spot which of 89 Chrome extensions run</td><td>0.2 (was 0.6)</td><td>0.8</td><td>1, pays 0</td></tr><tr><td>ADA v3</td><td>Spot which anti-detect browser drives a session</td><td>0.2 (was 0.4)</td><td>0.9</td><td>137 (47 fading)</td></tr></tbody></table></div>
+<h2 id="sn-x1">What to watch</h2>
+<ul class="v2-list">
+<li>Bot Virus v2: 142 entries from 126 miners in a day, none scored yet. An accepted entry takes 60% of miner pay.</li>
+<li>Pay is flat: top uid 1.9%, median 1.1%, about 0.16 TAO a day each. BEX&#x27;s one accepted entry pays 0: its slot changed hands.</li>
+<li>157 slots re-registered since 11-22, 116 after the Bot Virus config (11-23); 4 earn. A new slot earns only after its own accepted entry.</li>
+</ul>
+<h2 id="sn-x2">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Own-commit similarity</td><td>Docs: lower limit, about 0.9 vs 0.7</td><td>Code: 0.8 own, 0.6 others; team agrees</td><td>2026-11-25</td></tr><tr><td>Entry after a hotkey change</td><td>Docs: do not swap hotkeys</td><td>Code: entry dropped on change. Chain: 153 of 157 slots re-registered since 11-22 earn 0</td><td>2026-11-25</td></tr><tr><td>What Bot Virus asks</td><td>Docs: a browser bot that completes a page unflagged</td><td>Code: the config still calls it &#x27;Browser extension tracing challenge&#x27; (copied from BEX)</td><td>2026-11-25</td></tr></tbody></table></div>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-11-25. Not financial advice.</span></div>
+<p class="v2-thesis">Price fell 49% in 30 days on 3,848 TAO net outflow, 292 TAO of it in the two days around the release.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.005035 TAO per alpha</dd></div><div><dt>Pool</dt><dd>9,701 TAO, rank 44</dd></div><div><dt>Price, 30 days</dt><dd>-49%, 2026-10-26 to 2026-11-25</dd></div><div><dt>Net flow, 30 days</dt><dd>-3,848 TAO, 2026-10-26 to 2026-11-25</dd></div><div><dt>Miner pay</dt><dd>0.163 TAO per day on average (14.8 TAO per day over 91 uids)</dd></div><div><dt>Miner pay outside top 5</dt><dd>0.156 TAO per day on average (13.4 TAO per day over 86 uids outside the top 5)</dd></div><div><dt>Code activity</dt><dd>last commit 2026-11-24; 10 in 30 days</dd></div></dl>
+<div class="v2-trend"><h3>Trend</h3><div class="v2-tbody"><figure class="v2-tfig"><svg class="v2-spark down" viewBox="0 0 240 56" role="img" aria-label="Price in TAO per alpha, 2026-09-28 to 2026-11-28: 0.0107 to 0.0047, -56.1%"><polyline points="5.0,17.6 16.3,17.1 20.1,16.9 27.6,14.9 31.4,15.6 35.2,9.2 38.9,5.0 42.7,9.9 46.5,9.0 54.0,9.6 57.8,10.7 61.6,11.0 65.3,12.5 69.1,13.4 72.9,15.8 76.6,14.5 80.4,14.5 84.2,14.3 88.0,12.2 91.7,10.5 95.5,10.0 99.3,18.3 103.0,19.6 106.8,20.5 110.6,22.8 114.3,25.7 118.1,28.6 121.9,30.0 125.7,41.0 129.4,41.3 133.2,42.9 137.0,44.8 140.7,44.8 144.5,47.8 148.3,47.2 152.0,47.5 155.8,47.1 159.6,47.7 163.4,40.9 167.1,43.7 170.9,45.7 174.7,45.3 178.4,46.2 182.2,46.3 186.0,44.9 189.8,45.9 193.5,46.3 197.3,48.7 201.1,48.8 204.8,47.4 208.6,47.5 212.4,47.7 216.1,47.2 219.9,48.9 223.7,49.1 227.5,49.9 231.2,49.8 235.0,51.0"/><circle cx="235.0" cy="51.0" r="3"/></svg><figcaption><strong>Price</strong> <span class="down">-56.1%</span> <span class="muted">0.0107 to 0.0047 TAO per alpha, 2026-09-28 to 2026-11-28</span></figcaption></figure><dl class="v2-tfacts"><div><dt>Net flow, 30 days</dt><dd><span class="down">-3,342 TAO</span> <span class="muted">2026-10-29 to 2026-11-28</span></dd></div><div><dt>Verdict history</dt><dd><ol class="v2-vh"><li><span class="muted">2026-11-16</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-20</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-22</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-25</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li></ol></dd></div></dl></div></div>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>Third challenge shipped 11-24; 126 miners entered in a day</li>
+<li>157 slots re-registered in three days</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>Net outflow 3,848 TAO in 30 days</li>
+<li>Small, flat pay (0.16 TAO a day per uid) until Bot Virus scores</li>
+<li>Client claims not visible on chain</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> Paying Bot Virus entries with net inflow, or named paying users, would lift it; continued outflow with Bot Virus unscored would deepen it.</p>
+<p class="muted">Since the last pass: Was bearish (medium) on 2026-11-22; unchanged.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-similar">Similar subnets</h2>
+<div class="v2-sim"><p>By pool size this is <strong>rank 2 of 5</strong> among the subnets grouped as <em>security</em> (what they mainly sell). Pool and price as of 2026-11-27 to 2026-11-28, price in TAO per alpha; the barrier is the easiest miner role.</p><div class="scroll"><table class="v2-table"><thead><tr><th>#</th><th>Subnet</th><th>Pool</th><th>Price</th><th>Miner barrier</th></tr></thead><tbody><tr><td>1</td><td><a href="/bittensor-docs/subnets/63.html">Enigma</a> <span class="muted">SN63</span></td><td>10,028 TAO</td><td>0.00334</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr class="me" aria-current="true"><td>2</td><td>RedTeam <span class="muted">SN61, this page</span></td><td>9,385 TAO</td><td>0.0047</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr><td>3</td><td><a href="/bittensor-docs/subnets/32.html">It&#x27;s AI</a> <span class="muted">SN32</span></td><td>6,337 TAO</td><td>0.002295</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>4</td><td><a href="/bittensor-docs/subnets/104.html">TAOStatus</a> <span class="muted">SN104</span></td><td>6,032 TAO</td><td>0.004193</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr><td>5</td><td><a href="/bittensor-docs/subnets/87.html">Provenonce (Proof of Assurance)</a> <span class="muted">SN87</span></td><td>1,218 TAO</td><td>0.002164</td><td><span class="v2-barrier b-high">High</span></td></tr></tbody></table></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-11-24</span> <span class="muted">(GitHub)</span> Bot Virus v2 released with 60% of miner weight; BEX and ADA v3 cut to 20% each.</li>
+<li><span class="when">2026-11-22</span> <span class="muted">(Chain, team dashboard)</span> uid 30&#x27;s BEX entry (60% of pay) ran out; ADA v3 uids now share all miner pay.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Pick a challenge and read its docs; one commit per challenge per 24 hours.</li>
+<li>Test with the challenge repo&#x27;s harness or practice page; BEX detectors may make no outside requests.</li>
+<li>Push the Docker image to Docker Hub (private repo advised, one account for all images).</li>
+<li>Run the miner repo (3.1.15+) to commit the digest. Do not swap hotkeys: it has broken commit tracking.</li>
+<li>Check the dashboard that your entry is scored and accepted (about 25 h after the commit).</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Weights, minimums, decay and fade dates come from repo config, code, dashboards and chain fits; the scoring servers are private.</li>
+<li>Buyback, banking and client-news claims (2026-10-23 to 10-31) are not visible on chain or in code. Chat read to 2026-11-01; archive down 2026-11-25.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/RedTeamSubnet/RedTeam" rel="noopener noreferrer">GitHub (main repo)</a></li>
+<li><a href="https://docs.theredteam.io/" rel="noopener noreferrer">Docs</a></li>
+<li><a href="https://www.theredteam.io/dashboard/miner?challenge=bex_tracer_v1" rel="noopener noreferrer">Dashboard (new, BEX Tracer)</a></li>
+<li><a href="https://www.theredteam.io/dashboard/miner?challenge=ada_detection_v3" rel="noopener noreferrer">Dashboard (new, ADA v3)</a></li>
+<li><a href="https://www.theredteam.io/dashboard/miner?challenge=bot_virus_v2" rel="noopener noreferrer">Dashboard (new, Bot Virus v2)</a></li>
+<li><a href="https://github.com/RedTeamSubnet/miner" rel="noopener noreferrer">Miner repo</a></li>
+<li><a href="https://github.com/RedTeamSubnet/validator" rel="noopener noreferrer">Validator repo</a></li>
+<li><a href="https://github.com/RedTeamSubnet/bex-tracer-challenge" rel="noopener noreferrer">BEX Tracer challenge repo</a></li>
+<li><a href="https://github.com/RedTeamSubnet/bot-virus-challenge" rel="noopener noreferrer">Bot Virus challenge repo</a></li>
+<li><a href="https://github.com/RedTeamSubnet/ada-detection-challenge" rel="noopener noreferrer">ADA detection challenge repo</a></li>
+<li><a href="https://x.com/_redteam_" rel="noopener noreferrer">X account (per docs)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 9 sources</summary>
+<ul>
+<li><strong>repo</strong> RedTeamSubnet/RedTeam @86d5451 (2026-11-24, v4.11.1; heads re-checked 2026-11-25): src/redteam_core/challenge_pool/active_challenges.yaml (bot_virus_v2 weight 0.6, BEX 0.2, ADA v3 0.2), docs/challenges/bot_virus/README.md and v2.md, validator and challenge-manager code, changelog, miner concept docs</li>
+<li><strong>repo</strong> RedTeamSubnet/bex-tracer-challenge @8dfa689 (2026-09-29): src/bex_tracer/challenge_manager.py (acceptance, decay, softmax), docs</li>
+<li><strong>repo</strong> RedTeamSubnet/ada-detection-challenge @5689cd9 (2026-09-27): src/ada_challenge/challenge_manager.py, AGENTS.md, scoring code, challenge.yml</li>
+<li><strong>repo</strong> RedTeamSubnet/validator @3bf7c16 (2026-11-24, 2.3.27-261124): src/validator/_core.py (centralized scoring pull, storage API key, set_weights) and _base.py (20-minute loop); RedTeamSubnet/miner @ccd1a69 (2026-11-24, 3.1.15-261124); RedTeamSubnet/bot-virus-challenge @afd632e (v2.0.0, 2026-11-24)</li>
+<li><strong>web</strong> docs.theredteam.io (challenge and miner concept pages, fetched 2026-10-27; BEX and comparison pages re-read 2026-10-31; site map and 4.10 site map re-read 2026-11-20: newest build 2026-09-29)</li>
+<li><strong>web</strong> RedTeam miner dashboards for BEX Tracer and ADA v3 (www.theredteam.io/dashboard/miner, per-miner tables in the pages, fetched 2026-10-27, 2026-10-31, 2026-11-03, 2026-11-04, 2026-11-05, 2026-11-06, 2026-11-07, 2026-11-08, 2026-11-10, 2026-11-12, 2026-11-14, 2026-11-16 2026-11-20 and 2026-11-22 with the accepted, decaying and decayed filters, 2026-11-25 with Bot Virus v2)</li>
+<li><strong>web</strong> Chain read at block 9582170 (2026-11-25 07:01Z UTC): SN61 (RedTeam): registered 2024-12-11, tempo 360, 256 of 256 uids, commit-reveal on; emission weights burn/recycle/owner/validator/miner = 0/0/18/41/41 % (stored, same values as the chain default), RecycleOrBurn = Burn; uids under the owner hotkey or owner coldkey hold 0 % of incentive and 0 % of last-epoch emission (a floor); 10 validators have weight rows, on average 0 % of weight goes to uid 0. Compared with block 9558461 (2026-11-22 00:00Z): no setting changed in 33 checked items; Burn 0.0025 -&gt; 0.0999 TAO (moves with demand). Registration blocks of all 256 uids at block 9582170: 157 registered since 2026-11-22.</li>
+<li><strong>web</strong> Chain read at block 9582245 (2026-11-25 07:16Z): price SN61, 6 samples every 7d from block 9366245 (2026-10-26 07:08Z): price 0.009776 -&gt; 0.005035 TAO per alpha (-48.5%), pool TAO 13299.6 -&gt; 9700.9; over the 5 intervals where the pool change equals flow + protocol: net user flow -3847.5 TAO (staked minus unstaked), protocol flow +248.8 TAO, gross volume 84850.5 TAO. 4-hour samples 2026-11-23 07:16Z to 11-25 07:16Z (block 9582245): net user flow -292.4 TAO, price -5.5%.</li>
+<li><strong>msg</strong> #red-team, 2026-09-20 to 2026-11-01 (the 2026-10-14 BEX threshold and weights post found by an archive search of 2026-09-26 to 2026-10-23; the archive did not answer on 2026-11-25)</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/60.html"><small>← Previous</small>SN60 Bitsec</a><a rel="next" href="/bittensor-docs/subnets/62.html"><small>Next →</small>SN62 Ridges</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-11-25. Site built 2026-11-28. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

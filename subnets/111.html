@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Claims (SN111) | Bittensor Subnet Docs</title>
+<meta name="description" content="Turns science papers into evidence-linked claims; 88% of miner weight is burned, the rest pays a weekly contest">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h9">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>111</span><div>
+<h1>Claims <span class="muted">SN111</span></h1>
+<p class="tagline">Turns science papers into evidence-linked claims; 88% of miner weight is burned, the rest pays a weekly contest</p>
+<span class="st s-transitioning">transitioning</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl4"><b>6.4<small>/day</small></b><span>last 7 d</span></li><li class="pl4"><b>5.9<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>14<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-11-01</b><span>last chat</span></li><li class="pw"><b>1,203</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Shipping</b><span>code activity</span></li><li class="pw"><b>117</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-11-25</b><span>last commit</span></li><li class="pw"><b>2026-11-11</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>scientific data extraction</dd>
+<dt>Status</dt><dd>Old-format rounds were cancelled (11-23, 11-25); the first new-format round (27 miners) is in scoring, result 11-28.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-11-26</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Weekly mainnet contest (from 9 Nov)</a></li><li><a href="#sn-x1">New-format round (mainnet, experimental)</a></li><li><a href="#sn-x2">Docs vs code vs chain</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-similar">Similar subnets</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>turns science papers into claim-and-evidence records; miners now submit whole extraction pipelines each week; MIT licence.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>87.6% of incentive sits on UID 0 (the owner, burned); UIDs 222, 92 and 142 share the other 12.4% (2026-11-26).</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>old-format rounds cancelled (11-23, 11-25); first new-format round (27 miners) in scoring, result 11-28.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>emission split 26% owner, 41% validator, 33% miner since 11-12 (was 18 / 41 / 41); UID 39 no longer earns.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>30-day flow -253 TAO, -118 in the last 7 days; miners earn about 1.06 TAO a day in total (gross).</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Builds an extraction pipeline and enters it in the weekly contest.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>A machine to build and test the package; the team&#x27;s worker runs it</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None for the contest: the worker gives a paper-scoped model key</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Burn 0.05 TAO (2026-11-26); team and funding checks per entry; no minimum stake documented</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Wheel and manifest, signed upload, on-chain commitment by the round deadline</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Runs the AI judges that accept or reject claims and sets weights.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-caution">Paid service needed</li><li class="fl fl-unk">Access unknown</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>CPU server, 8 cores / 32 GB RAM min (16 / 64 advised), 100 GB disk; no GPU</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>Hosted LLM key (OpenRouter advised); cost not stated</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Burn 0.05 TAO; a permit needs the 1,000 TAO global stake floor (2026-11-26)</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Ubuntu installer or Docker; outside-validator admission not documented</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-11-26. Not financial advice.</span></div><p>30-day flow -253 TAO, -118 in 7 days; price -10%; 88% of miner weight burned. <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>Claims (SN111) turns scientific papers into claims tied to quoted evidence, judged by AI. Miners extracted claims daily until 11-08; since 11-09 they enter weekly contests with packaged pipelines. Mainnet since 2026-08-28.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Until 11-08 miners extracted claims from daily batches; since 11-09 they upload a pipeline before each round deadline.</p></div><div><h3>Validators</h3><p>AI judges check each result against the source paper; a package must pass copy, code and security audits. Its score is the average gain over the baseline.</p></div><div><h3>Incentive</h3><p>The best pipeline gets 70% of the miner pool, the next two 20% and 10%; an empty slot burns. Since 11-12 the validator sends 87.6% of its weight to UID 0 (burned), so miners share 12.4%.</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-11-26, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-unk">Unknown</span>Permits need a 1,000 TAO stake; three non-owner holders; admission not documented.</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">86.1%</span>UID 0 holds 86.1% of emission (87.6% of incentive, burned); owner cut 26%; RecycleOrBurn is Burn.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">4 uids</span><span class="v2-sx muted">top 5 hold 100% of incentive.</span> 4 uids earn: UID 0 (burned) 87.6%; UIDs 222, 92 and 142 share 12.4%.</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Converged</span>3 of 4 validators put 87.6% on UID 0, the signed contest vector; UID 44 puts 70% on UID 177, which earns nothing.</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-good">Open</span>Miner and validator code is MIT; contest controller code is on main, pipeline packages stay private.</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Builds an extraction pipeline and enters it in the weekly contest.</p><ul>
+<li>Last paid result (round 2, 11-16): gains against UID 222 -0.05 to +0.009; the new round has no incumbent.</li>
+<li>Pay now (gross): UID 222 about 0.74 TAO a day, UID 92 about 0.21, UID 142 about 0.11.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Runs the AI judges that accept or reject claims and sets weights.</p><ul>
+<li>The team&#x27;s backend signs the weights; 3 of 4 permit holders set that row, UID 44 another.</li>
+<li>4 of 64 permit slots held (2026-11-26); UID 44 registered 11-19 and already holds a permit.</li>
+</ul></section></div>
+<h2 id="sn-x0">Weekly mainnet contest (from 9 Nov)</h2>
+<ul class="v2-list">
+<li>Rounds 1 and 2 (11-09, 11-16; 31 and 58 miners): round 2 ended 11-19 with no challenger above the bar, so UID 222 stays.</li>
+<li>The old-format round of 11-23 (23 miners) and the 11-30 round were cancelled by the owner on 11-23 and 11-25.</li>
+</ul>
+<h2 id="sn-x1">New-format round (mainnet, experimental)</h2>
+<ul class="v2-list">
+<li>The 11-25 round is the first on the new result format (schema v1.1): 27 miners, 22 accepted packages.</li>
+<li>Three stages (20, 120, 500 papers); the first finished 11-26, 113 of 460 jobs failed. Result 11-28, production switch 12-02.</li>
+<li>Scores are lower bounds (unfinished judge checks count as zero); accuracy is unmeasured and ten production requirements are unmet.</li>
+<li>Testnet round of 11-22: 10 of 19 miners cleared the baseline.</li>
+</ul>
+<h2 id="sn-x2">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Where miner weight goes</td><td>docs/submission.md: whole vector split 70/20/10 among three pipelines</td><td>Chain: 87.6% on UID 0 (burned), 12.4% split 70/20/10, as docs/0022 says</td><td>2026-11-26</td></tr><tr><td>Contest openness</td><td>Team post: open-source pipeline competition</td><td>Code: miner code private; results public; rules revised after deadlines</td><td>2026-11-22</td></tr><tr><td>Winner veto</td><td>Update: a miner review check can block a challenger</td><td>Code: Silver judges decide; round 1 had 0 gold cases and 0 miner votes</td><td>2026-11-22</td></tr><tr><td>Runner-up pay</td><td>docs/submission.md: next two pipelines get 20% and 10%</td><td>Code: payout skips the incumbent&#x27;s team; UID 102 is in its code family, so 92 and 142 were paid</td><td>2026-11-22</td></tr><tr><td>Contest format</td><td>Repo doc 11-21: the new track changes no active round</td><td>Code: the 11-25 mainnet round runs schema v1.1 (experimental); old-format rounds cancelled</td><td>2026-11-26</td></tr></tbody></table></div>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-11-26. Not financial advice.</span></div>
+<p class="v2-thesis">The pool lost 253 TAO in 30 days (-118 in the last 7) and the price fell 10%; 88% of miner weight burns and no new papers have appeared since 11-08. A shipping team and 27 entrants do not yet offset that.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.003608 TAO per alpha</dd></div><div><dt>Pool</dt><dd>5,180 TAO, rank 80</dd></div><div><dt>Price, 30 days</dt><dd>-10%, 2026-10-27 to 2026-11-26</dd></div><div><dt>Net flow, 30 days</dt><dd>-253 TAO, 2026-10-27 to 2026-11-26</dd></div><div><dt>Miner pay</dt><dd>1.06 TAO per day over 3 paid miners</dd></div><div><dt>Code activity</dt><dd>last commit 2026-11-25; 134 commits in 30 days; v2.0.0 on 2026-11-11</dd></div></dl>
+<div class="v2-trend"><h3>Trend</h3><div class="v2-tbody"><figure class="v2-tfig"><svg class="v2-spark down" viewBox="0 0 240 56" role="img" aria-label="Price in TAO per alpha, 2026-09-28 to 2026-11-26: 0.004456 to 0.003608, -19.0%"><polyline points="5.0,5.0 12.8,6.8 16.7,9.1 24.5,9.7 28.4,13.5 32.3,17.7 36.2,18.3 40.1,19.7 44.0,20.7 51.8,14.6 55.7,13.7 59.6,11.6 63.5,12.1 67.4,22.2 71.3,24.3 79.1,26.1 83.0,26.9 86.9,26.8 90.8,26.7 94.7,26.3 98.6,25.7 106.4,29.5 110.3,29.6 114.2,29.7 118.1,29.5 121.9,31.9 125.8,31.1 133.6,28.8 137.5,30.0 141.4,30.4 145.3,25.7 153.1,28.1 157.0,26.3 160.9,21.8 164.8,22.4 168.7,21.9 172.6,25.7 176.5,33.3 180.4,31.0 184.3,34.8 188.2,40.7 192.1,40.7 196.0,40.9 203.8,41.2 207.7,41.5 211.6,40.9 215.5,41.2 219.4,41.9 223.3,40.8 227.2,44.9 231.1,46.1 235.0,51.0"/><circle cx="235.0" cy="51.0" r="3"/></svg><figcaption><strong>Price</strong> <span class="down">-19.0%</span> <span class="muted">0.004456 to 0.003608 TAO per alpha, 2026-09-28 to 2026-11-26</span></figcaption></figure><dl class="v2-tfacts"><div><dt>Net flow, 30 days</dt><dd><span class="down">-253 TAO</span> <span class="muted">2026-10-27 to 2026-11-26</span></dd></div><div><dt>Verdict history</dt><dd><ol class="v2-vh"><li><span class="muted">2026-11-17</span> <span class="st s-neutral">Neutral</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-20</span> <span class="st s-neutral">Neutral</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-22</span> <span class="st s-neutral">Neutral</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-26</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li></ol></dd></div></dl></div></div>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>Team ships (43 commits since 11-22); 27 miners entered the new round.</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>Net outflow: -253 TAO in 30 days, -118 in 7; 88% of miner weight burns.</li>
+<li>No new papers since 11-08; usage is the team&#x27;s claim; two rounds cancelled.</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> A published 11-28 result, papers flowing by 12-02 and steady inflow would lift it; more outflow would deepen it.</p>
+<p class="muted">Since the last pass: Moved neutral -&gt; bearish: the 7-day flow turned from +7 to -118 TAO the week of the 11-23 cancellation.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-similar">Similar subnets</h2>
+<div class="v2-sim"><p>By pool size this is <strong>rank 7 of 8</strong> among the subnets grouped as <em>data</em> (what they mainly sell). Pool and price as of 2026-11-25 to 2026-11-27, price in TAO per alpha; the barrier is the easiest miner role.</p><div class="scroll"><table class="v2-table"><thead><tr><th>#</th><th>Subnet</th><th>Pool</th><th>Price</th><th>Miner barrier</th></tr></thead><tbody><tr><td>4</td><td><a href="/bittensor-docs/subnets/54.html">Yanez</a> <span class="muted">SN54</span></td><td>8,270 TAO</td><td>0.004123</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>5</td><td><a href="/bittensor-docs/subnets/22.html">Desearch</a> <span class="muted">SN22</span></td><td>7,143 TAO</td><td>0.002703</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr><td>6</td><td><a href="/bittensor-docs/subnets/45.html">AlphaRidge</a> <span class="muted">SN45</span></td><td>5,591 TAO</td><td>0.001946</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr class="me" aria-current="true"><td>7</td><td>Claims <span class="muted">SN111, this page</span></td><td>5,180 TAO</td><td>0.003608</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>8</td><td><a href="/bittensor-docs/subnets/101.html">Tag101</a> <span class="muted">SN101</span></td><td>3,308 TAO</td><td>0.003035</td><td><span class="v2-barrier b-low">Low</span></td></tr></tbody></table></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-11-25</span> <span class="muted">(api.claims111.ai)</span> First new-format mainnet round closed: 27 miners, 29 packages, 22 accepted.</li>
+<li><span class="when">2026-11-25</span> <span class="muted">(GitHub)</span> Code enabled the experimental new-format launch; 43 commits since 11-22.</li>
+<li><span class="when">2026-11-23</span> <span class="muted">(api.claims111.ai)</span> Old-format round cancelled by the owner (23 miners, 31 packages).</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Read the README, docs/submission.md and the round rules; start from the sample package.</li>
+<li>Build a package and manifest for the new result format (schema v1.1).</li>
+<li>Register a hotkey (0.05 TAO burn); the entry policy needs 2 mainnet consensus rounds in 7 days.</li>
+<li>Upload with a signed request and commit on-chain before the round deadline (the last: 11-25 15:00 UTC).</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>The weight policy moved from a 90% operator share to a burn on 11-12, set by the team&#x27;s validator; new code lets the operator burn more for up to 90 days after a signed result.</li>
+<li>Usage figures are the team&#x27;s own and disagree (119 a day in a post, about 200 in the API).</li>
+<li>Round 1&#x27;s top gains lie within one standard error. How entrants meet the consensus-round entry rule is not documented.</li>
+<li>UID 0 earns 84.7% of validator dividends (about 9.0 TAO a day gross, shared with stakers); UID 15 earns 13.9%, unexplained.</li>
+<li>Miners report flood attacks and selection bias; none verified. Chat after 2026-11-01 unread.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://claims111.ai" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://claims111.ai/papers" rel="noopener noreferrer">Papers (white paper and operations guide)</a></li>
+<li><a href="https://github.com/DeSciClaims/Claims" rel="noopener noreferrer">GitHub</a></li>
+<li><a href="https://dashboard.claims111.ai/?network=mainnet" rel="noopener noreferrer">Dashboard</a></li>
+<li><a href="https://api.claims111.ai/docs" rel="noopener noreferrer">Validator and backend API docs</a></li>
+<li><a href="https://artifacts.claims111.ai/docs" rel="noopener noreferrer">Miner upload API docs</a></li>
+<li><a href="https://x.com/DeSciClaims" rel="noopener noreferrer">Team announcements on X</a></li>
+<li><a href="https://github.com/DeSciClaims/Claims/tree/main/competition" rel="noopener noreferrer">Contest controller code</a></li>
+<li><a href="https://github.com/DeSciClaims/Claims/blob/main/docs/submission.md" rel="noopener noreferrer">Mainnet submission guide</a></li>
+<li><a href="https://api.claims111.ai/public/competition/rounds?network=mainnet" rel="noopener noreferrer">Weekly rounds, mainnet (public API)</a></li>
+<li><a href="https://api.claims111.ai/public/competition/rounds/round_20261125T150000Z_mainnet/progress" rel="noopener noreferrer">New-format round progress (public API)</a></li>
+<li><a href="https://github.com/DeSciClaims/claims-miner-package" rel="noopener noreferrer">Sample miner package</a></li>
+<li><a href="https://github.com/DeSciClaims/claims-reference-miner" rel="noopener noreferrer">Reference miner (baseline pipeline)</a></li>
+<li><a href="https://github.com/DeSciClaims/Claims/blob/main/docs/0022-mainnet-miner-burn-policy.md" rel="noopener noreferrer">Mainnet burn policy</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 7 sources</summary>
+<ul>
+<li><strong>msg</strong> #111-claims, 2026-08-18 to 2026-11-01 (pinned posts, the weekly updates of 2026-09-25, 2026-10-08, 2026-10-23 and 2026-10-30, and the messages from 2026-10-24 to 2026-11-01 22:24 UTC); nothing later was read on 2026-11-26 (archive unavailable, connection timed out)</li>
+<li><strong>repo</strong> DeSciClaims/Claims@992dc96 (main, 2026-11-25 18:27Z; 43 commits and 133 files since e1b0abc, commit bodies are one-liners; 134 commits since 2026-10-27; release v2.0.0 (2026-11-11) still the latest; claims-miner-package and claims-reference-miner not re-checked, last seen 2026-11-04 and 2026-11-21). Read on 2026-11-26: compare e1b0abc...main, commits 8da1249 and 795457f (file lists), competition/burn_window.py, docs/scientific-source-preparation.md, validator/scientific_result_v1/FIRST_ROUND_SCORING.md, competition/scientific_launch.py, the miner README patch; on 2026-11-22: miner and validator READMEs, docs/0020-testnet-competition-participation.md, competition/weights.py; on 2026-11-13: docs/0022-mainnet-miner-burn-policy.md, docs/submission.md in full, release v2.0.0 notes</li>
+<li><strong>web</strong> api.claims111.ai/public/production-quality (as_of 2026-11-26 06:45Z) and /public/stats; /public/competition/rounds for mainnet and testnet, /overview, round_20261125T150000Z_mainnet /progress, /rules, /rules/amendments and /intake, round_20261123T120000Z_mainnet and round_20261130T120000Z_mainnet /progress, testnet round_20261122T151842Z_testnet /progress and /score-summary, /entry-policy?network=mainnet (read 2026-11-26 02:35-02:45Z and, for round_20261125T150000Z_mainnet /progress, /rules, /entry-policy, production-quality, /stats and the round list, again 06:40-06:45Z); round 2 /results, /code-review and /rules as read on 2026-11-22; the 14 page links returned 200 on 2026-11-26</li>
+<li><strong>web</strong> Chain read at block 9589245 (2026-11-26 06:36Z UTC): SN111 (Claims): registered 2025-05-22, tempo 360, 256 of 256 uids, commit-reveal on; emission weights burn/recycle/owner/validator/miner = 0/0/26/41/33 %, RecycleOrBurn = Burn; uids under the owner hotkey or owner coldkey hold 87.58 % of incentive and 86.14 % of last-epoch emission (a floor); 4 validators have weight rows, on average 65.7 % of weight goes to uid 0.</li>
+<li><strong>web</strong> Chain read at block 9589245 (2026-11-26 06:36Z): price SN111, 3 samples every 15d from block 9373245 (2026-10-27 06:28Z): price 0.004005 -&gt; 0.003608 TAO per alpha (-9.9%), pool TAO 5425.2 -&gt; 5179.9; net user flow -252.6 TAO (staked minus unstaked), protocol flow +7.3 TAO, gross volume 5231.2 TAO. Daily read, 7 intervals 2026-11-19 06:31Z to 2026-11-26 06:36Z: net user flow -117.7 TAO, price 0.003783 -&gt; 0.003608 (-4.6%). Pool rank 80 of 129 (80 of 128 on 2026-11-22): snapshot at block 9589245.</li>
+<li><strong>web</strong> Chain read at block 9500214 (2026-11-13 21:45Z UTC), compared with block 9486488 (2026-11-12 00:00Z UTC): SN111: emission split burn/recycle/owner/validator/miner 0/0/18/41/41 -&gt; 0/0/26/41/33 %; pool 5408.83 -&gt; 5390.76 TAO. Compared again on 2026-11-26 (block 9589245 against 9558461): 1 of 33 settings differs (registration burn 0.0578 -&gt; 0.05 TAO, moves with demand), split unchanged.</li>
+<li><strong>web</strong> Chain read at block 8405791 (2026-11-09 08:09Z UTC): SN530 (claims): registered 2026-07-10, tempo 360, 117 of 256 uids, commit-reveal on; emission weights burn/recycle/owner/validator/miner = 0/0/18/41/41 % (stored, same values as the chain default), RecycleOrBurn = Burn; uids under the owner hotkey or owner coldkey hold 0 % of incentive and 60.22 % of last-epoch emission (a floor); 2 validators have weight rows, on average 1.5 % of weight goes to uid 0. Testnet weights 530 --all read at block 8405791: 2 validators, one with 3 targets.</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/110.html"><small>← Previous</small>SN110 Green Compute</a><a rel="next" href="/bittensor-docs/subnets/114.html"><small>Next →</small>SN114 SOMA</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-11-26. Site built 2026-11-28. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

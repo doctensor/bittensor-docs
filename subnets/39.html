@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kokoah (SN39) | Bittensor Subnet Docs</title>
+<meta name="description" content="Hyperliquid trading subnet: miners are traders paid by Kokoah fees they generate; one account takes all miner pay now.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h9">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>39</span><div>
+<h1>Kokoah <span class="muted">SN39</span></h1>
+<p class="tagline">Hyperliquid trading subnet: miners are traders paid by Kokoah fees they generate; one account takes all miner pay now.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>7.9<small>/day</small></b><span>last 7 d</span></li><li class="pl4"><b>3.0<small>/day</small></b><span>days 8-30</span></li><li class="pl4"><b>5.9<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-11-02</b><span>last chat</span></li><li class="pw"><b>1,788</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Shipping</b><span>code activity</span></li><li class="pw"><b>298</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-11-25</b><span>last commit</span></li><li class="pw"><b>none</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>trading (Hyperliquid perpetuals)</dd>
+<dt>Status</dt><dd>As of 2026-11-24 Kokoah scores traders daily and validators set weights from it; the slot&#x27;s chain identity became Kokoah on 2026-11-20. One account has held all miner incentive since about 06:20Z.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-11-24</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Docs vs code vs chain</a></li><li><a href="#sn-x1">Ownership and alpha holders</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-similar">Similar subnets</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>one trader hotkey (UID 13) takes all incentive since about 06:20Z on 2026-11-24; four UIDs shared it before.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>80% of pay follows Kokoah fees paid, 20% a 30-day skill test; nobody has passed it yet, so all pay is the fee part.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>16 scored days paid $52.3k of alpha against $21.6k of fees; revenue is said to buy back and burn alpha (not checked).</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>MIT repo, 396 commits in 30 days (bot-authored PRs), last 11-24: floor cut to $5,000; no releases.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>price -31% in 30 days, net flow -3,670 TAO (-345 in the last 15 days); pool 17,569 TAO, rank 26.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Trade Hyperliquid perpetuals through Kokoah from a linked account; no miner software. Pay follows the Kokoah fees you pay.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-caution">Paid service needed</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-no"><dt>Hardware</dt><dd>None (a Hyperliquid account)</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>Hyperliquid fees plus Kokoah&#x27;s 0.045% builder fee</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Registration burn 0.0005 TAO; $5,000 average account value a day to be paid (from 2026-11-24)</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Wallet, hotkey, signed account link, 3 qualifying trades worth $1,000</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Reads linked accounts&#x27; public fills and the chain, scores each UTC day, sets weights. Needs a validator permit (stake).</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>2 CPU cores, 4 GB RAM, 20 GB disk, Docker, Python 3.12 (docs)</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None required; Kokoah&#x27;s agent service for agent checks</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Weights stake threshold 1,000 TAO (global); registration burn 0.0005 TAO</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Docker or systemd, a PostgreSQL record; hotkey only on the server</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-neutral">Neutral</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-overvalued">Overvalued</span></span><span class="v2-conf muted">medium confidence, as of 2026-11-24. Not financial advice.</span></div><p>Rank-26 pool, price -31% in 30 days, outflow slowing; one trader takes all miner pay <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>Netuid 39 was Basilica, a GPU-rental project that said in April 2026 it was leaving Bittensor, then a community team&#x27;s slot. It is now Kokoah&#x27;s: a non-custodial Hyperliquid trading app whose subnet pays traders for perpetuals they trade through it.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Link one Hyperliquid account to a registered hotkey with a signed on-chain commitment, then trade perpetuals through Kokoah so each order carries its builder code. No miner software runs. An account is paid on days its average value is at least $5,000 (from 2026-11-24, was $10,000), after three qualifying trades worth $1,000.</p></div><div><h3>Validators</h3><p>Each validator reads linked accounts&#x27; public fills, the exchange&#x27;s daily builder-fee file and the chain, scores each UTC day after it ends and sets weights. The code is deterministic, so all 11 weight rows are identical.</p></div><div><h3>Incentive</h3><p>Rules: 80% of the miner pool by builder fees paid, 20% to accounts whose 30-day record passes a statistical test. Chain: 1 of 8 linked accounts earns (UID 13); four did until 2026-11-24. The miner pool is about 2,944 alpha (20 TAO) a day; emission splits 18% owner, 41% validators, 41% miners.</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-11-24, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-good">Open</span>15 of 64 permit slots used, 14 not the owner&#x27;s; a permit needs stake only, no whitelist found</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">5.6%</span>Owner UID takes 5.6% of emission (a floor; its child UID 46 adds 3.7%); owner cut 18%; RecycleOrBurn is Burn</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">1 uid</span><span class="v2-sx muted">top 5 hold 100% of incentive.</span> 1 UID earns (13), a Kokoah-linked trader, 100%; 255 get none</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Converged</span>All 11 weight rows give the same split; validators share one scorer, so this is not independent checking</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-good">Open</span>Kokoah&#x27;s MIT repo holds the scorer, validator and agent harness; a Kokoah-run service holds agent keys</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Trade Hyperliquid perpetuals through Kokoah from a linked account; no miner software. Pay follows the Kokoah fees you pay.</p><ul>
+<li>Counts: perpetual fills carrying Kokoah&#x27;s builder code. Never counts: other front ends, spot, trades with other miners or your own linked accounts.</li>
+<li>Skill reward needs 30+ daily returns after the link, 10 round trips, 7 active days and $500 average value in 30 days.</li>
+<li>Kokoah&#x27;s leaderboard (day 2026-11-23): 1 of 8 linked accounts eligible; 3 never qualified, 4 under the $10,000 average.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Reads linked accounts&#x27; public fills and the chain, scores each UTC day, sets weights. Needs a validator permit (stake).</p><ul>
+<li>15 hotkeys hold permits; 11 set weights within a tempo, 4 have not for over 5 tempos (2026-11-24).</li>
+</ul></section></div>
+<h2 id="sn-x0">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Pay follows fees</td><td>80% of the miner pool follows builder fees, for accounts above the value floor ($5,000 from 2026-11-24, $10,000 before)</td><td>Chain: UID 13 took 100% for day 2026-11-23, paying $46 of $3,171 fees; $3,125 came from accounts under the floor</td><td>2026-11-24</td></tr><tr><td>Skill reward</td><td>20% to accounts with a proven 30-day record</td><td>Code: Kokoah&#x27;s leaderboard shows no account with 30 days since linking, so skill pay is 0</td><td>2026-11-24</td></tr><tr><td>Buyback and burn</td><td>All revenue buys back and burns alpha</td><td>Chain: not checked; Kokoah&#x27;s 8,856 burned alpha is miner pool of days nobody qualified</td><td>2026-11-24</td></tr></tbody></table></div>
+<h2 id="sn-x1">Ownership and alpha holders</h2>
+<p>Chain.</p>
+<ul class="v2-list">
+<li>The owner&#x27;s UID 136 takes 5.6% of emission and its child UID 46 3.7%. UID 114, not owner-linked, holds 58% of staked alpha and gets 32% of emission.</li>
+<li>The top coldkey holds 15.4% of stake (down 35% from 11-03), the top 5 hold 53.4%. By Kokoah&#x27;s count UIDs 128, 13, 113 and 205 earned about 7,719, 6,191, 12,414 and 5,518 alpha; they hold 3,532, 2,468, 12,384 and 534.</li>
+</ul>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-neutral">Neutral</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-overvalued">Overvalued</span></span><span class="v2-conf muted">medium confidence, as of 2026-11-24. Not financial advice.</span></div>
+<p class="v2-thesis">A live product with public scoring, but 17,569 TAO of pool sits behind one paid account; alpha paid is about 2.4 times fees.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.006867 TAO per alpha</dd></div><div><dt>Pool</dt><dd>17,569 TAO, rank 26</dd></div><div><dt>Price, 30 days</dt><dd>-31%, 2026-10-24 to 2026-11-24</dd></div><div><dt>Net flow, 30 days</dt><dd>-3,670 TAO, 2026-10-25 to 2026-11-24</dd></div><div><dt>Miner pay</dt><dd>20.2 TAO per day to 1 paid uid (too few for an average)</dd></div><div><dt>Code activity</dt><dd>last commit 2026-11-24; 396 commits in 30 days; no releases</dd></div></dl>
+<div class="v2-trend"><h3>Trend</h3><div class="v2-tbody"><figure class="v2-tfig"><svg class="v2-spark up" viewBox="0 0 240 56" role="img" aria-label="Price in TAO per alpha, 2026-09-28 to 2026-11-27: 0.006639 to 0.006845, +3.1%"><polyline points="5.0,51.0 12.7,48.8 16.5,48.9 24.2,49.2 31.8,42.1 39.5,40.8 43.3,41.6 47.2,41.6 51.0,41.7 58.7,42.2 66.3,42.2 70.2,34.8 74.0,36.0 77.8,35.6 85.5,35.5 93.2,36.1 97.0,32.3 100.8,27.6 104.7,29.1 108.5,28.0 112.3,24.8 120.0,8.4 123.8,8.6 127.7,5.0 131.5,22.7 135.3,17.1 139.2,40.2 143.0,44.8 146.8,46.5 150.7,46.7 154.5,48.2 158.3,48.1 162.2,48.1 166.0,47.9 169.8,48.2 173.7,49.0 177.5,49.0 181.3,49.0 185.2,49.0 189.0,49.0 192.8,49.0 196.7,49.0 200.5,49.1 204.3,48.7 208.2,48.1 212.0,49.8 215.8,49.9 219.7,49.8 223.5,49.9 227.3,50.6 231.2,50.7 235.0,49.7"/><circle cx="235.0" cy="49.7" r="3"/></svg><figcaption><strong>Price</strong> <span class="up">+3.1%</span> <span class="muted">0.006639 to 0.006845 TAO per alpha, 2026-09-28 to 2026-11-27</span></figcaption></figure><dl class="v2-tfacts"><div><dt>Net flow, 30 days</dt><dd><span class="down">-6,890 TAO</span> <span class="muted">2026-10-28 to 2026-11-27</span></dd></div><div><dt>Verdict history</dt><dd><ol class="v2-vh"><li><span class="muted">2026-11-16</span> <span class="st s-bearish">Bearish</span> <span class="st v-overvalued">Overvalued</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-19</span> <span class="st s-bearish">Bearish</span> <span class="st v-overvalued">Overvalued</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-22</span> <span class="st s-neutral">Neutral</span> <span class="st v-overvalued">Overvalued</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-24</span> <span class="st s-neutral">Neutral</span> <span class="st v-overvalued">Overvalued</span> <span class="muted">medium confidence</span></li></ol></dd></div></dl></div></div>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>Live product, public scoring data, open code; the $5,000 floor can bring accounts back</li>
+<li>Outflow slowed: -3,325 TAO, then -345 TAO in the last 15 days</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>One account takes all miner pay; alpha paid is about 2.4x fees (team data)</li>
+<li>Price -31% in 30 days; 11 validators run one scorer; buyback and burn unverified</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> Buybacks shown on chain, more eligible miners and net inflow would turn it bullish; fewer paid accounts would turn it bearish.</p>
+<p class="muted">Since the last pass: Unchanged from 2026-11-22 (neutral since 11-19): paid accounts fell from three to one.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-similar">Similar subnets</h2>
+<div class="v2-sim"><p>By pool size this is <strong>rank 2 of 12</strong> among the subnets grouped as <em>trading</em> (what they mainly sell). Pool and price as of 2026-11-27 to 2026-11-28, price in TAO per alpha; the barrier is the easiest miner role.</p><div class="scroll"><table class="v2-table"><thead><tr><th>#</th><th>Subnet</th><th>Pool</th><th>Price</th><th>Miner barrier</th></tr></thead><tbody><tr><td>1</td><td><a href="/bittensor-docs/subnets/8.html">Vanta</a> <span class="muted">SN8</span></td><td>95,519 TAO</td><td>0.03836</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr class="me" aria-current="true"><td>2</td><td>Kokoah <span class="muted">SN39, this page</span></td><td>17,563 TAO</td><td>0.006845</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>3</td><td><a href="/bittensor-docs/subnets/41.html">Almanac</a> <span class="muted">SN41</span></td><td>16,062 TAO</td><td>0.007655</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr><td>4</td><td><a href="/bittensor-docs/subnets/50.html">Synth</a> <span class="muted">SN50</span></td><td>11,664 TAO</td><td>0.005148</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr><td>5</td><td><a href="/bittensor-docs/subnets/77.html">Liquidity</a> <span class="muted">SN77</span></td><td>10,966 TAO</td><td>0.004307</td><td><span class="v2-barrier b-medium">Medium</span></td></tr></tbody></table></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-11-24</span> <span class="muted">(Chain incentive reads)</span> Incentive moved to UID 13 alone at about 06:20Z, after Kokoah&#x27;s day 2026-11-23 paid one account.</li>
+<li><span class="when">2026-11-24</span> <span class="muted">(Kokoah repo and docs)</span> Kokoah&#x27;s repo merged a $5,000 account-value floor (was $10,000) and time-weighted daily returns (spec 6.8).</li>
+<li><span class="when">2026-11-23</span> <span class="muted">(Chain incentive reads)</span> UID 205 returned to the incentive at about 04:40Z, making four earners.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Miner: register a hotkey (burn 0.0005 TAO), link a Hyperliquid account worth $5,000 or more (from 2026-11-24), trade perpetuals through Kokoah, then check the leaderboard (docs/miners.md).</li>
+<li>Validator: run Kokoah&#x27;s validator image with a permitted hotkey; --watch scores without setting weights (docs/validators.md).</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Pay, fee, volume and skill figures come from Kokoah&#x27;s own API; the chain split matches its weights, but fees and volume were not checked against Hyperliquid.</li>
+<li>Hotkeys were matched to UIDs by registration block; the chain tool masks keys.</li>
+<li>Buyback, burn and the owner-share lock are Kokoah&#x27;s statements, not checked on chain.</li>
+<li>Rules changed on 11-23 and 11-24, and no scored day uses the $5,000 floor yet; commits and PRs come from bot accounts.</li>
+<li>Stake shares cover about 77% of staked alpha; chat after 2026-11-01 was unreadable (archive down).</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://kokoah.com/" rel="noopener noreferrer">Kokoah (trading app)</a></li>
+<li><a href="https://kokoah.com/docs/subnet" rel="noopener noreferrer">Kokoah subnet guide</a></li>
+<li><a href="https://github.com/kokoahdotcom/kokoah-subnet" rel="noopener noreferrer">Kokoah subnet repository (MIT)</a></li>
+<li><a href="https://github.com/kokoahdotcom/kokoah-subnet/blob/main/docs/miners.md" rel="noopener noreferrer">Miner guide</a></li>
+<li><a href="https://github.com/kokoahdotcom/kokoah-subnet/blob/main/docs/validators.md" rel="noopener noreferrer">Validator guide</a></li>
+<li><a href="https://github.com/kokoahdotcom/kokoah-subnet/blob/main/docs/whitepaper.md" rel="noopener noreferrer">Whitepaper</a></li>
+<li><a href="https://api.kokoah.com/subnet/leaderboard" rel="noopener noreferrer">Subnet leaderboard (JSON)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 7 sources</summary>
+<ul>
+<li><strong>msg</strong> #pending 2026-04-13 (pinned) and 2026-04-14 to 2026-11-01, including Cathedral&#x27;s posts of 2026-09-01 to 2026-09-09, the owner-role posts of 2026-09-23 and 2026-10-31 and the tracker thread of 2026-10-27; later posts not read (chat archive unreadable on 2026-11-03 to 2026-11-15)</li>
+<li><strong>msg</strong> #cathedral (SN94) 2026-09-25 to 2026-10-30</li>
+<li><strong>msg</strong> archived #basilica channel 2026-03-26 to 2026-04-10 (docs move 2026-04-06, new images 2026-04-08)</li>
+<li><strong>repo</strong> kokoahdotcom/kokoah-subnet@3ad5a31 (main, last commit 2026-11-24, created 2026-10-19; checked 2026-11-24): README, docs/miners.md, validators.md, agents.md, whitepaper.md, design/01-incentive-mechanism.md (v6.8); pull requests 22 to 33; MIT, not archived</li>
+<li><strong>web</strong> kokoah.com home and /docs/subnet, HTTP 200 on 2026-11-24. Kokoah public API on 2026-11-24: /subnet/leaderboard, /subnet/days/latest (day 2026-11-23, block 9574075), /subnet/bindings, /subnet/summary (latest day 2026-11-23); figures are Kokoah&#x27;s own.</li>
+<li><strong>web</strong> Chain read at block 9575503 (2026-11-24 08:48Z UTC): SN39 (Kokoah): registered 2024-06-28, tempo 360, 256 of 256 uids, commit-reveal off; emission weights burn/recycle/owner/validator/miner = 0/0/18/41/41 % (stored, same values as the chain default), RecycleOrBurn = Burn; uids under the owner hotkey or owner coldkey hold 0 % of incentive and 5.57 % of last-epoch emission (a floor); 11 validators have weight rows, on average 0 % of weight goes to uid 0. UID 128 read at block 9575503 (2026-11-24 08:48Z); UID 13, 113, 114, 205, 136 and 46 reads, weights, holders and the refresh at block 9575579 (09:03Z; the hosted pin moved between reads, incentive and emission agree). Storage Incentive read at blocks 9567059, 9567076 and 9567142 (UID 205 returns between the first two, about 2026-11-23 04:40Z), 9574000, 9574250 and 9574450 (four earners), then 9574800, 9575000, 9575200, 9575500 and 9575579 (UID 13 alone): the change falls in the epoch closing at block 9574763, about 06:20Z on 2026-11-24 (block times counted from block 9575503 = 08:48Z at 12 s). Parent / child links: chain-tool reads at block 9575563 (09:00Z; run locally, the hosted service still lacks those commands). Hotkeys matched to UIDs by registration block against Kokoah&#x27;s link block (UID 13: registered 9492095, linked 9492098). Refresh since 2026-11-22: 0 of 33 checked items differ.</li>
+<li><strong>web</strong> Chain read at block 9575579 (2026-11-24 09:03Z): price SN39, 3 samples every 15d from block 9359579 (2026-10-25 08:55Z): price 0.010021 -&gt; 0.006867 TAO per alpha (-31.5%), pool TAO 21132.0 -&gt; 17569.4; over the 2 intervals where the pool change equals flow + protocol: net user flow -3670.5 TAO (staked minus unstaked), protocol flow +107.8 TAO, gross volume 67851.3 TAO. Pool rank 26 of 128 non-root pools (snapshot at block 9575579). Holders: Chain read at block 9575579 (2026-11-24 09:03Z): SN39 stake by coldkey: 1252 coldkeys hold 1723423.602 alpha on 218 hotkeys (76.937% of the chain&#x27;s staked total); top coldkey 15.361%, top 5 53.402%, top 10 68.844%; owner coldkey 1.939%; 70.468% of the stake sits on validator-permit hotkeys; 8 hotkeys&#x27; stake rows were not fully read (23.063% of the staked total unattributed), shares are of what was read.</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/38.html"><small>← Previous</small>SN38 ChronoLLM</a><a rel="next" href="/bittensor-docs/subnets/40.html"><small>Next →</small>SN40 Ralph</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-11-24. Site built 2026-11-28. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

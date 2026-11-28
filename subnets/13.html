@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Data Universe (SN13) | Bittensor Subnet Docs</title>
+<meta name="description" content="Miners scrape X and Reddit data for validators and customers; 71% of incentive goes to the owner UID, a burn.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h19">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>13</span><div>
+<h1>Data Universe <span class="muted">SN13</span></h1>
+<p class="tagline">Miners scrape X and Reddit data for validators and customers; 71% of incentive goes to the owner UID, a burn.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl3"><b>0.71<small>/day</small></b><span>last 7 d</span></li><li class="pl3"><b>1.5<small>/day</small></b><span>days 8-30</span></li><li class="pl4"><b>3.3<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-11-02</b><span>last chat</span></li><li class="pw"><b>16,894</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Shipping</b><span>code activity</span></li><li class="pw"><b>15</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-11-27</b><span>last commit</span></li><li class="pw"><b>2026-11-27</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>data scraping / social data</dd>
+<dt>Status</dt><dd>Release v1.18.76 shipped 2026-11-27; 234 of 256 UIDs have incentive (2026-11-27). Chat last read 2026-10-31.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-11-27</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Burn history</a></li><li><a href="#sn-x1">Docs vs code vs chain</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-similar">Similar subnets</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>the owner&#x27;s UID, a burn in code, holds 71.2% of incentive; 233 other UIDs share 28.8% (2026-11-27).</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>release v1.18.76 (11-27) tightens checks on live-request answers from 11-29 00:00 UTC.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>price -11% and 953 TAO net outflow in 30 days, with 608 TAO (11-23) and 290 TAO (11-25) leaving in 3-hour spells.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>55 billion posts scraped; no customer or revenue figure is public, and owners still sought product-market fit (09-23).</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>miners need no GPU, only a server and a scraper; the registration burn is 0.014 TAO (2026-11-27).</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-low">Low barrier</span></h3><p>Scrape and store X and Reddit data, answer live requests.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-no"><dt>Hardware</dt><dd>No GPU; a low-tier machine, enough disk and bandwidth</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>Apify optional; an own scraper is recommended</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Burn 0.014 TAO (2026-11-27), non-refundable; no stake</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Clone the repo, Python 3.10+, a scraper</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Re-scrape samples of miner data and set weights; the code puts 70% on the owner UID.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-caution">Paid service needed</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>32 GB RAM, 4+ cores, no GPU (doc, Jan 2024)</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>Apify token (about $5.40 a day, Jan 2024 doc); W&amp;B login</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Burn 0.014 TAO; permit needs top-64 stake and 1,000 TAO</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Clone the repo, Python, wallet, Apify and W&amp;B keys</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-11-27. Not financial advice.</span></div><p>Bearish: price down 11% and 953 TAO net outflow in 30 days; 71% of incentive on the owner UID. <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>Data Universe is Macrocosmos&#x27;s subnet for collecting public X and Reddit posts. Miners scrape, store and upload data and answer live requests; validators re-scrape samples. The team sells the data through its Gravity API, a marketplace, an SDK and MCP tools.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Miners scrape X and Reddit with Apify actors or their own scraper. Scoring has three paths: locally stored data (P2P), a Parquet snapshot per job about every 2 hours (S3) and live customer requests (on-demand).</p></div><div><h3>Validators</h3><p>One Macrocosmos-run validator checks S3 uploads (format, duplicates, 95% job match, 20 entities re-scraped with 80% matching) and the others fetch its result. Since v1.18.76 its own listing or download failures usually give no verdict instead of a fail. The top validator earns 54.3% of dividends.</p></div><div><h3>Incentive</h3><p>Score = P2P (capped at S3 plus on-demand) + S3 + on-demand. S3 is capped at twice on-demand. The validator code then gives the owner UID exactly 70% of the weight, a burn, and the rest goes to miners; the chain shows 71.2% on that UID. Stored split: 18% owner, 41% validators, 41% miners.</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-11-27, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-good">Open</span>9 of 64 permit slots held, 8 set weights within a tempo; one team validator runs the S3 check and the rest fetch it.</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">35.5%</span>UID 162 holds 71.2% of incentive and 35.5% of emission; owner cut 18%, withheld miner emission is burned.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">234 uids</span><span class="v2-sx muted">top 5 hold 71.8% of incentive.</span> 234 UIDs have incentive; the owner UID has 71.2%, the other four of the top five under 1 point together.</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Converged</span>All 9 validators rank UID 162 first, as the code&#x27;s 70% burn does; UID 3&#x27;s other 30% goes to UID 72.</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-good">Open</span>Miner and validator are in one public repo under the MIT licence.</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-low">Low barrier</span></h3><p>Scrape and store X and Reddit data, answer live requests.</p><ul>
+<li>Pay: about 0.013 TAO a day on average for each of 233 non-owner UIDs with incentive (gross, 2026-11-27).</li>
+<li>Bulk uploads alone earn nothing; live requests must be answered too.</li>
+<li>Live X requests from 11-29: stale or far too low counts fail; skipped username jobs cut the multiplier up to 30%.</li>
+<li>A re-registered UID starts from zero, even with the same hotkey.</li>
+<li>Reddit blocks unauthenticated JSON (403, 2026).</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Re-scrape samples of miner data and set weights; the code puts 70% on the owner UID.</p><ul>
+<li>9 UIDs hold permits; 8 set weights within a tempo, and the owner UID is idle since 2024.</li>
+</ul></section></div>
+<h2 id="sn-x0">Burn history</h2>
+<ul class="v2-list">
+<li>2026-03-10 (v1.17.0): S3 re-enabled, burn cut from 90% to 70%.</li>
+<li>2026-07-24: burn removed; 07-28: 70% restored for an emission review (v1.18.69).</li>
+<li>Miners asked for a cut five times (last 10-21); on 09-23 the team said no change.</li>
+</ul>
+<h2 id="sn-x1">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Data sources</td><td>Scoring doc: Reddit 55, X 35, YouTube 10</td><td>Code: Reddit 0.65, X 0.35; no YouTube scraper</td><td>2026-11-27</td></tr><tr><td>Miner score</td><td>One score: data value x credibility^2.5</td><td>Code: three paths; S3 capped at 2x on-demand (a raise to 2.25x was reverted)</td><td>2026-11-27</td></tr><tr><td>S3 credibility</td><td>Not enabled at this moment</td><td>Code: applied (+0.30 on a pass, x0.70 on a fail)</td><td>2026-11-27</td></tr><tr><td>Which data is wanted</td><td>Validators vote on wanted data by stake (GitHub, chain commit); 70% validators, 30% default</td><td>Code: miners and validators fetch the job list from the team&#x27;s API; newest vote-repo commit 2026-01-08</td><td>2026-11-27</td></tr></tbody></table></div>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-11-27. Not financial advice.</span></div>
+<p class="v2-thesis">994 TAO net left in seven days, mostly in two short sell-offs. The team shipped a release on 11-27, but paying usage is unverified and the burn UID still takes 71% of incentive.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.003627 TAO per alpha</dd></div><div><dt>Pool</dt><dd>16,093 TAO, rank 28</dd></div><div><dt>Price, 30 days</dt><dd>-11%, 2026-10-28 to 2026-11-27</dd></div><div><dt>Net flow, 30 days</dt><dd>-953 TAO, 2026-10-28 to 2026-11-27</dd></div><div><dt>Miner pay</dt><dd>0.013 TAO per day on average (3.10 TAO per day over 234 uids)</dd></div><div><dt>Alpha holders</dt><dd>top 5 of 1,824 coldkeys hold 50% (2026-11-27)</dd></div><div><dt>Code activity</dt><dd>last commit 2026-11-27; 20 commits in 30 days; last release 2026-11-27</dd></div></dl>
+<div class="v2-trend"><h3>Trend</h3><div class="v2-tbody"><figure class="v2-tfig"><svg class="v2-spark down" viewBox="0 0 240 56" role="img" aria-label="Price in TAO per alpha, 2026-07-22 to 2026-11-27: 0.00688 to 0.003627, -47.3%"><polyline points="5.0,5.3 6.8,5.0 8.6,5.1 10.4,5.9 12.2,6.2 14.0,6.0 15.8,6.3 17.6,6.8 19.4,10.4 21.2,10.8 127.2,35.3 130.8,35.5 132.6,35.5 136.2,35.6 139.8,38.9 143.4,39.1 145.2,39.2 147.0,39.4 148.8,39.6 152.3,40.0 155.9,43.0 157.7,43.2 159.5,43.0 161.3,43.2 164.9,43.5 168.5,43.3 170.3,43.7 172.1,43.7 173.9,44.4 177.5,44.4 179.3,44.5 181.1,44.4 182.9,44.2 184.7,43.9 186.5,45.4 188.3,45.5 190.1,46.3 191.9,46.5 193.7,46.6 195.5,46.6 197.3,46.6 199.1,46.8 200.9,46.8 202.7,46.9 204.5,47.1 206.2,47.1 208.0,47.3 209.8,47.2 211.6,47.3 213.4,47.5 215.2,47.8 217.0,47.8 218.8,48.0 220.6,44.0 222.4,44.3 224.2,44.3 226.0,44.5 227.8,48.9 229.6,48.8 231.4,49.1 233.2,51.0 235.0,50.8"/><circle cx="235.0" cy="50.8" r="3"/></svg><figcaption><strong>Price</strong> <span class="down">-47.3%</span> <span class="muted">0.00688 to 0.003627 TAO per alpha, 2026-07-22 to 2026-11-27</span></figcaption></figure><dl class="v2-tfacts"><div><dt>Net flow, 30 days</dt><dd><span class="down">-953 TAO</span> <span class="muted">2026-10-28 to 2026-11-27</span></dd></div><div><dt>Verdict history</dt><dd><ol class="v2-vh"><li><span class="muted">2026-11-16</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">low confidence</span></li><li><span class="muted">2026-11-19</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">low confidence</span></li><li><span class="muted">2026-11-23</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">low confidence</span></li><li><span class="muted">2026-11-27</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li></ol></dd></div></dl></div></div>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>Code is moving again: v1.18.76 targets under-reported engagement and score-keeping re-registrations</li>
+<li>Team dashboard: 244 of 245 miners with data uploaded in 24 hours</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>Without the 11-19 buy and both sell-offs, 30-day flow is still -714 TAO</li>
+<li>71% of incentive goes to the owner UID, whose coldkey holds 24% of alpha</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> Neutral or better: weekly net inflow, a lower burn or verifiable paying usage.</p>
+<p class="muted">Since the last pass: Still bearish; confidence up from low: the outflow no longer depends on one large move.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-similar">Similar subnets</h2>
+<div class="v2-sim"><p>By pool size this is <strong>rank 1 of 8</strong> among the subnets grouped as <em>data</em> (what they mainly sell). Pool and price as of 2026-11-25 to 2026-11-28, price in TAO per alpha; the barrier is the easiest miner role.</p><div class="scroll"><table class="v2-table"><thead><tr><th>#</th><th>Subnet</th><th>Pool</th><th>Price</th><th>Miner barrier</th></tr></thead><tbody><tr class="me" aria-current="true"><td>1</td><td>Data Universe <span class="muted">SN13, this page</span></td><td>16,093 TAO</td><td>0.003627</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr><td>2</td><td><a href="/bittensor-docs/subnets/43.html">Graphite</a> <span class="muted">SN43</span></td><td>12,181 TAO</td><td>0.003885</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr><td>3</td><td><a href="/bittensor-docs/subnets/33.html">ReadyAI</a> <span class="muted">SN33</span></td><td>11,397 TAO</td><td>0.002811</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr><td>4</td><td><a href="/bittensor-docs/subnets/54.html">Yanez</a> <span class="muted">SN54</span></td><td>8,270 TAO</td><td>0.004123</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>5</td><td><a href="/bittensor-docs/subnets/22.html">Desearch</a> <span class="muted">SN22</span></td><td>7,143 TAO</td><td>0.002703</td><td><span class="v2-barrier b-low">Low</span></td></tr></tbody></table></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-11-27</span> <span class="muted">(GitHub (release v1.18.76))</span> Stricter checks on live X answers from 11-29, fewer fails for validator-side faults, re-registered UIDs reset. An S3 cap raise was reverted.</li>
+<li><span class="when">2026-11-27</span> <span class="muted">(Team dashboard)</span> 9.07 TB in 484,377 files (11-23: 9.37 TB); 1,259 active jobs; 244 of 245 miners uploaded in 24 hours.</li>
+<li><span class="when">2026-11-25</span> <span class="muted">(Chain)</span> Net 290 TAO left in three hours. Three large coldkeys cut about 69% of their alpha, two more left the top 40: sales inferred.</li>
+<li><span class="when">2026-11-23</span> <span class="muted">(Chain)</span> Net 608 TAO left in three hours. ck:97575c, the inferred 11-19 buyer (152,815 alpha), left the top 40: a sale is inferred.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Read the data compliance policy at the top of the repo README.</li>
+<li>Test your scraper first; the 0.014 TAO fee (2026-11-27) is not refundable.</li>
+<li>Clone macrocosm-os/data-universe (the guide&#x27;s URL is a personal fork); Python 3.10+, certifi 2026.10.19 or newer.</li>
+<li>Set up Apify or your own scraper, then create a wallet and register a hotkey on subnet 13.</li>
+<li>Run python neurons/miner.py --netuid 13 with your wallet and hotkey (pm2 in the guide); there is no auto-update, so follow the channel for releases.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>The chain shows weights and incentive, not payouts or intent; the last team burn statement read is from 09-23.</li>
+<li>Sales are inferred from pool flow and stake reads; who controls those keys is unknown.</li>
+<li>Usage and revenue are unchecked team claims.</li>
+<li>The new on-demand rules were read in code, before their start.</li>
+<li>The scoring doc, S3 doc and README date from February 2026 and lag the code.</li>
+<li>Chat after 2026-10-31 could not be read (archive unreachable).</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/macrocosm-os/data-universe" rel="noopener noreferrer">GitHub (data-universe)</a></li>
+<li><a href="https://github.com/macrocosm-os/data-universe/blob/main/docs/miner.md" rel="noopener noreferrer">Miner guide</a></li>
+<li><a href="https://sn13-dashboard.api.macrocosmos.ai/" rel="noopener noreferrer">Public network dashboard</a></li>
+<li><a href="https://datauniverse.macrocosmos.ai/" rel="noopener noreferrer">Data Universe site (the subnet URL stored on chain)</a></li>
+<li><a href="https://x.com/Data_SN13" rel="noopener noreferrer">Team X account</a></li>
+<li><a href="https://github.com/macrocosm-os/dataverse-cli" rel="noopener noreferrer">dataverse-cli</a></li>
+<li><a href="https://github.com/macrocosm-os/macrocosmos-mcp" rel="noopener noreferrer">macrocosmos-mcp</a></li>
+<li><a href="https://docs.macrocosmos.ai/subnets/subnet-13-data-universe" rel="noopener noreferrer">Documentation</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 15 sources</summary>
+<ul>
+<li><strong>repo</strong> macrocosm-os/data-universe@588031c (2026-11-27, release v1.18.76; MIT licence): diff from 42d8e3e of AGENTS.md, vali_utils/miner_evaluator.py, vali_utils/on_demand/on_demand_validation.py, scraping/x/utils.py, scraping/x/apidojo_scraper.py, common/api_client.py; read earlier and unchanged since: README.md, docs/miner.md, docs/validator.md, docs/scoring.md, rewards/miner_scorer.py, neurons/validator.py, neurons/miner.py, common/constants.py, common/data.py, dynamic_desirability/, vali_utils/api/routes.py, scripts/start_validator.py, requirements.txt</li>
+<li><strong>repo</strong> REPO macrocosm-os/data-universe last_commit=2026-11-27 commits_30d=20 code_30d=15 last_release=2026-11-27 checked=2026-11-27; dataverse-cli and macrocosmos-mcp last commit 2026-08-20</li>
+<li><strong>repo</strong> commits e089d65, 3aa555e (burn 2026-07-24 and 2026-07-29), 5031097 (Reddit validation, 2026-10-08), a7cee75 (certifi floor, 2026-10-22); releases v1.17.0, v1.18.68 to v1.18.76; release v1.18.76 notes and pull requests 928, 931 to 935, 937, 940 and 941 (GitHub API, 2026-11-27); commit c38aab2 (re-registration reset)</li>
+<li><strong>web</strong> Chain read at block 9601241 (2026-11-27 22:36Z UTC): SN13 (Data Universe): registered 2023-12-11, tempo 360, 256 of 256 uids, commit-reveal on; emission weights burn/recycle/owner/validator/miner = 0/0/18/41/41 % (stored, same values as the chain default), RecycleOrBurn = Burn; uids under the owner hotkey or owner coldkey hold 71.18 % of incentive and 35.5 % of last-epoch emission (a floor); 9 validators have weight rows, on average 0.1 % of weight goes to uid 0.</li>
+<li><strong>web</strong> Chain read at block 9601317 (2026-11-27 22:51Z UTC), compared with block 9565661 (2026-11-23 00:00Z UTC): SN13: no setting changed in 33 checked items; Burn differs (moves with demand); emission split unchanged; pool 17042.23 -&gt; 16093.05 TAO.</li>
+<li><strong>web</strong> Chain read at block 9601317 (2026-11-27 22:51Z): price SN13, 3 samples every 15d from block 9385317 (2026-10-28 22:43Z): price 0.004084 -&gt; 0.003627 TAO per alpha (-11.2%), pool TAO 17075.3 -&gt; 16093.0; over the 2 intervals where the pool change equals flow + protocol: net user flow -952.8 TAO (staked minus unstaked), protocol flow -29.5 TAO, gross volume 9972.9 TAO.</li>
+<li><strong>web</strong> Chain read at block 9601317 (2026-11-27 22:51Z): price SN13, 9 samples every 1d from block 9543717 (2026-11-19 22:46Z): price 0.004124 -&gt; 0.003627 TAO per alpha (-12.1%), pool TAO 17160.8 -&gt; 16093.0; over the 8 intervals where the pool change equals flow + protocol: net user flow -1059.9 TAO (staked minus unstaked), protocol flow -7.8 TAO, gross volume 2368.2 TAO. Daily steps ending 11-21 to 11-27 sum to -994.19 TAO.</li>
+<li><strong>web</strong> Chain read at block 9601317 (2026-11-27 22:51Z): price SN13, 41 samples every 3h from block 9565317 (2026-11-22 22:51Z): price 0.004068 -&gt; 0.003627 TAO per alpha (-10.8%), pool TAO 17042.4 -&gt; 16093.0; over the 40 intervals where the pool change equals flow + protocol: net user flow -945.5 TAO (staked minus unstaked), protocol flow -3.9 TAO, gross volume 1658.4 TAO. Three-hour intervals ending 2026-11-23 19:51Z and 2026-11-25 22:51Z: net user flow -608.26 and -289.96 TAO.</li>
+<li><strong>web</strong> Chain read at block 9601317 (2026-11-27 22:51Z): shared snapshot of subnet pools: SN13 pool 16093.05 TAO, rank 28 of 129 non-root pools. Weights at the same block: 9 validators with weight rows, all with uid 162 as top target.</li>
+<li><strong>web</strong> Chain read at block 9601317 (2026-11-27 22:51Z): SN13 stake by coldkey: 1824 coldkeys hold 1163716.585 alpha on 593 hotkeys (90.328% of the chain&#x27;s staked total); top coldkey 24.253%, top 5 50.242%, top 10 60.704%; owner coldkey 24.253%; 48.477% of the stake sits on validator-permit hotkeys; 7 hotkeys&#x27; stake rows were not fully read (9.672% of the staked total unattributed), shares are of what was read.</li>
+<li><strong>web</strong> Stake by coldkey at blocks 9568826 (2026-11-23 10:33Z), 9570884 (17:24Z), 9585870 (2026-11-25 19:21Z) and 9586770 (22:21Z), top 40: ck:97575c 152815 alpha at the first, absent at the second; ck:605e16 48867 to 14907, ck:a21e56 16590 to 5185, ck:1dcede 16467 to 5142 between the last two; ck:dbec1b and ck:e4b3e8 absent at the last.</li>
+<li><strong>web</strong> Chain reads of 2026-11-19 to 2026-11-23: three-hour interval ending 2026-11-19 15:25Z net user flow +659.38 TAO; ck:97575c outside the top 80 at block 9541000 and holding 151812 alpha at block 9541300.</li>
+<li><strong>web</strong> sn13-dashboard.api.macrocosmos.ai, read 2026-11-27 at 22:53Z (snapshot 4 hours old): 9.07 TB, 484,377 files, 245 miners with data, 244 uploaded in 24 hours, 1,259 active jobs, 239 earning / 8 validators / 1 burn / 8 idle.</li>
+<li><strong>msg</strong> #dataverse (channel 13): latest 200 messages 2026-08-05 to 2026-10-13, 2026-10-21 to 2026-10-31; archive search &#x27;burn&#x27; 2025-10-01 to 2026-08-01 (60 of 115 hits read); chat after 2026-10-31 not read (archive returned 502 on 2026-11-02 to 2026-11-05; the read hung or failed again on 2026-11-06 to 2026-11-23; the reads of 00:44Z and 10:36Z failed on a timeout) One more read attempt on 2026-11-27 timed out.</li>
+<li><strong>web</strong> github.com/macrocosm-os/gravity (the vote repo of the docs), GitHub API read 2026-11-08 to 2026-11-23 (no change at 10:36Z against 00:43Z): newest commit 2026-01-08 (a validator preferences file); data-universe-api.api.macrocosmos.ai/openapi.json (public), read 2026-11-08 to 2026-11-23 (routes unchanged; between 11-19 05:23Z and 11-22 21:46Z the ListJobsWithSubmissionsForValidationRequest schema gained an optional job_type field, value x_username, which fits the username-coverage change of pull request 932): routes /dynamic-desirability/miner/get-latest-list and /validator/get-latest-list, and team-side upsert, enable and delete routes under /dynamic-desirability/constellation; github.com/macrocosm-os/data-universe-api answered 404.</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/12.html"><small>← Previous</small>SN12 ComputeHorde</a><a rel="next" href="/bittensor-docs/subnets/14.html"><small>Next →</small>SN14 Cacheon</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-11-27. Site built 2026-11-28. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cathedral (SN94) | Bittensor Subnet Docs</title>
+<meta name="description" content="Confidential CPU sandboxes for AI agents; outside miners may apply, but 90% of validator weight is still burned.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h10">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>94</span><div>
+<h1>Cathedral <span class="muted">SN94</span></h1>
+<p class="tagline">Confidential CPU sandboxes for AI agents; outside miners may apply, but 90% of validator weight is still burned.</p>
+<span class="st s-transitioning">transitioning</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl3"><b>1.1<small>/day</small></b><span>last 7 d</span></li><li class="pl3"><b>1.3<small>/day</small></b><span>days 8-30</span></li><li class="pl4"><b>2.6<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-30</b><span>last chat</span></li><li class="pw"><b>289</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Shipping</b><span>code activity</span></li><li class="pw"><b>445</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-11-26</b><span>last commit</span></li><li class="pw"><b>2026-11-20</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>compute (confidential sandboxes for AI agents)</dd>
+<dt>Status</dt><dd>Compute mining opened to applications on 2026-11-20, but only the owner&#x27;s own approved hotkeys earn (5% each); 90% of validator weight is burned.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-11-27</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Product and customers</a></li><li><a href="#sn-x1">Docs vs code vs chain</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-similar">Similar subnets</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>confidential sandboxes for AI agents, price cut to $0.01 an hour on 11-20; no customers shown; its 1,000-agent run solved 424.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>8 validators set weights, all 90% on the owner&#x27;s burned uid 0 and 5% each on uids 19 and 21; those two hold permits but set none.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>mining is open to AMD SEV-SNP servers by application since 11-20; none admitted; approved hotkeys are still the owner&#x27;s three.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>the Escape Room needs no hardware and shares 10% of the team&#x27;s weight; no break proven, only the team&#x27;s validator scores it.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>price 0.003602 TAO, -5% in 30 days; the 11-20 burst is mostly given back (-170 TAO since 11-21); pool 2,054 TAO, rank 101 of 129.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-high">High barrier</span></h3><p>Runs a machine that validators verify; only the owner&#x27;s approved hotkeys are paid, applications are open.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-caution">Paid service needed</li><li class="fl fl-bad">Permissioned</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>AMD EPYC Genoa, Bergamo or Siena bare metal (SEV-SNP), 128 GB RAM, about 1 TB NVMe, public IPv4</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>Rented Genoa host if you own none (EUR 239 to $2,780 a month)</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>About 0.0005 TAO registration burn; no minimum stake documented</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Run the host check and apply with its JSON; 24 hours of test traffic first</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Verifies miner machines, tests them and writes weights from the verified work.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>CPU only: 2 vCPU, 4 GB RAM, 20 GB disk</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Permit needs stake (threshold 1,000; uids 19 and 21 hold one at about 2,130 alpha); about 0.0005 TAO to register</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Linux with Python 3.12 or Docker; hotkey file only; AMD policy ships signed; auto-updates</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-neutral">Neutral</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-fair">Fairly valued</span></span><span class="v2-conf muted">low confidence, as of 2026-11-27. Not financial advice.</span></div><p>Price down 5% in 30 days as the 11-20 burst is mostly given back; 90% of weight is burned and only the team&#x27;s hotkeys are paid. <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>Cathedral sells confidential sandboxes: small Linux machines for AI agent work, run on AMD SEV-SNP hardware with a signed receipt per command, now $0.01 an hour. Validators verify the miners&#x27; machines; since 2026-11-12 only approved miners are paid, and since 2026-11-20 outside AMD servers may apply.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>A miner runs a worker inside a confidential VM and announces its public address as the hotkey&#x27;s endpoint. Since 11-20 AMD SEV-SNP servers may apply: hand review, then 24 hours of test traffic. Only the owner&#x27;s approved list earns, today its own three (uids 19 to 21).</p></div><div><h3>Validators</h3><p>A validator checks each machine&#x27;s fresh hardware evidence and TLS key and sends one SAT puzzle per machine. Since 2026-11-12 it gives approved miners 10% by verified machines (scaled by uptime since 11-25), proven escapes 10% (on by default since 11-20), and burns the rest.</p></div><div><h3>Incentive</h3><p>Emission splits 18% owner, 41% validators, 41% miners. All 8 validators that set weights put 90% on uid 0, so 90% of the miner side is burned; uids 19 and 21 get 5% each (about 1.06 TAO a day). Customer payments to miners are undocumented.</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-11-27, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-good">Open</span>Any hotkey with a permit can run the public validator; 10 of 64 slots held, 8 set weights.</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">52.8%</span>Owner&#x27;s uid 0 holds 90% of incentive and 53% of emission; its miner share is burned. Owner cut 18%.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">3 uids</span><span class="v2-sx muted">top 5 hold 100% of incentive.</span> Three uids earn: the owner&#x27;s uid 0 (90%) and the team&#x27;s approved uids 19 and 21 (5% each); no outside miner.</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Converged</span>All 8 rows read put 90% on uid 0 and 5% each on uids 19 and 21, as the public validator rules give.</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-caution">Partial</span>Miner repo is MIT; the validator repo is public but has no licence file.</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-high">High barrier</span></h3><p>Runs a machine that validators verify; only the owner&#x27;s approved hotkeys are paid, applications are open.</p><ul>
+<li>Duplicate hardware, endpoint or TLS key scores zero for every claimant.</li>
+<li>A verified machine on an unlisted hotkey earns nothing.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Verifies miner machines, tests them and writes weights from the verified work.</p><p class="muted">No further detail found in the sources.</p></section></div>
+<h2 id="sn-x0">Product and customers</h2>
+<ul class="v2-list">
+<li>Team says: price cut on 11-20 from $0.035 to $0.01 an hour for 2 vCPU and 4 GiB; Intel TDX one-shot retired.</li>
+<li>Cathedral leases its AMD hosts; customers share one.</li>
+<li>Code: 86 sandbox commits since 22 Nov (customer VMs, in-room hardware reports, guest volumes) and 1 validator commit (pay scales with uptime).</li>
+<li>No customer, usage or revenue figures were found. The 6 Nov run of 1,000 agents solved 424.</li>
+<li>The escape room (host only) now allows 20 rooms at once; no proven break; its 10% share is about 295 alpha (1.06 TAO) a day.</li>
+</ul>
+<h2 id="sn-x1">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Is mining open?</td><td>README and site (11-20): open to AMD SEV-SNP servers by application.</td><td>Chain: only the owner&#x27;s approved uids 19 and 21 earn.</td><td>2026-11-27</td></tr><tr><td>What validators weigh</td><td>Validator doc (11-12): 10% machines, 10% escapes, rest burned.</td><td>Code: escape lane on, compute weight scaled by uptime (11-25); chain: 90% uid 0, 5% each to uids 19, 21.</td><td>2026-11-27</td></tr><tr><td>Do miners earn today?</td><td>Team report (2026-10-07): SAT rewards &#x27;live&#x27;; validator doc (11-12): approved hotkeys only.</td><td>Chain: the two approved uids earn about 0.53 TAO a day each.</td><td>2026-11-27</td></tr></tbody></table></div>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-neutral">Neutral</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-fair">Fairly valued</span></span><span class="v2-conf muted">low confidence, as of 2026-11-27. Not financial advice.</span></div>
+<p class="v2-thesis">Nobody outside the team is paid and usage is a team claim, but the team ships and has opened mining.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.003602 TAO per alpha</dd></div><div><dt>Pool</dt><dd>2,054 TAO, rank 101</dd></div><div><dt>Price, 30 days</dt><dd>-5%, 2026-10-27 to 2026-11-27</dd></div><div><dt>Net flow, 30 days</dt><dd>+40 TAO, 2026-10-28 to 2026-11-27</dd></div><div><dt>Miner pay</dt><dd>1.06 TAO per day, all to uids 19 and 21</dd></div><div><dt>Code activity</dt><dd>450 commits in 30 days (miner repo); last release 2026-08-30</dd></div></dl>
+<div class="v2-trend"><h3>Trend</h3><div class="v2-tbody"><figure class="v2-tfig"><svg class="v2-spark down" viewBox="0 0 240 56" role="img" aria-label="Price in TAO per alpha, 2026-09-28 to 2026-11-27: 0.004531 to 0.003602, -20.5%"><polyline points="5.0,22.3 12.7,15.0 16.5,5.0 24.2,9.0 31.8,14.6 39.5,16.7 43.3,21.3 47.2,22.7 51.0,20.6 58.7,22.6 66.3,21.8 70.2,16.5 74.0,21.8 77.8,27.2 81.7,27.1 85.5,28.5 93.2,24.1 97.0,25.9 100.8,38.1 104.7,42.3 112.3,38.9 116.2,38.0 120.0,41.6 123.8,44.1 127.7,45.3 131.5,43.8 135.3,42.1 139.2,35.8 143.0,30.0 146.8,33.4 150.7,36.3 154.5,36.6 158.3,36.0 162.2,35.1 166.0,36.2 169.8,40.8 173.7,44.4 177.5,42.1 181.3,43.7 185.2,45.6 189.0,45.8 192.8,47.4 196.7,50.9 200.5,51.0 204.3,43.1 208.2,44.9 212.0,26.5 215.8,27.1 219.7,30.4 223.5,35.4 227.3,41.9 235.0,42.6"/><circle cx="235.0" cy="42.6" r="3"/></svg><figcaption><strong>Price</strong> <span class="down">-20.5%</span> <span class="muted">0.004531 to 0.003602 TAO per alpha, 2026-09-28 to 2026-11-27</span></figcaption></figure><dl class="v2-tfacts"><div><dt>Net flow, 30 days</dt><dd><span class="up">+40 TAO</span> <span class="muted">2026-10-28 to 2026-11-27</span></dd></div><div><dt>Verdict history</dt><dd><ol class="v2-vh"><li><span class="muted">2026-11-17</span> <span class="st s-bearish">Bearish</span> <span class="st v-fair">Fairly valued</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-21</span> <span class="st s-neutral">Neutral</span> <span class="st v-fair">Fairly valued</span> <span class="muted">low confidence</span></li><li><span class="muted">2026-11-22</span> <span class="st s-neutral">Neutral</span> <span class="st v-fair">Fairly valued</span> <span class="muted">low confidence</span></li><li><span class="muted">2026-11-27</span> <span class="st s-neutral">Neutral</span> <span class="st v-fair">Fairly valued</span> <span class="muted">low confidence</span></li></ol></dd></div></dl></div></div>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>Team ships: 410 code commits in 30 days.</li>
+<li>Live service with signed receipts; paid miners had full uptime this week.</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>Net outflow since the burst: -170 TAO in 6 days, price -16%; 90% of weight is burned.</li>
+<li>Only the team&#x27;s hotkeys are paid (1.06 TAO a day); usage unproven; no outside box admitted.</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> Another week of net outflow would make it bearish; an outside miner admitted and paid would lift it.</p>
+<p class="muted">Since the last pass: Neutral, confidence low, unchanged but weaker: the burst is mostly given back; 30-day flow now +40 TAO (was +183).</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-similar">Similar subnets</h2>
+<div class="v2-sim"><p>By pool size this is <strong>rank 12 of 13</strong> among the subnets grouped as <em>compute</em> (what they mainly sell). Pool and price as of 2026-11-26 to 2026-11-28, price in TAO per alpha; the barrier is the easiest miner role.</p><div class="scroll"><table class="v2-table"><thead><tr><th>#</th><th>Subnet</th><th>Pool</th><th>Price</th><th>Miner barrier</th></tr></thead><tbody><tr><td>9</td><td><a href="/bittensor-docs/subnets/106.html">Nodexo</a> <span class="muted">SN106</span></td><td>5,013 TAO</td><td>0.001683</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>10</td><td><a href="/bittensor-docs/subnets/105.html">Beam</a> <span class="muted">SN105</span></td><td>4,065 TAO</td><td>0.003478</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>11</td><td><a href="/bittensor-docs/subnets/128.html">ByteLeap</a> <span class="muted">SN128</span></td><td>3,994 TAO</td><td>0.002693</td><td><span class="v2-barrier b-high">High</span></td></tr><tr class="me" aria-current="true"><td>12</td><td>Cathedral <span class="muted">SN94, this page</span></td><td>2,054 TAO</td><td>0.003602</td><td><span class="v2-barrier b-high">High</span></td></tr><tr><td>13</td><td><a href="/bittensor-docs/subnets/36.html">Weir</a> <span class="muted">SN36</span></td><td>830 TAO</td><td>0.008056</td><td><span class="v2-barrier b-medium">Medium</span></td></tr></tbody></table></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-11-26</span> <span class="muted">(cathedral-sandbox; cathedral-validator)</span> Team shipped 86 sandbox commits in five days (customer VMs, hardware reports, guest volumes); its validator now scales miner pay by uptime.</li>
+<li><span class="when">2026-11-20</span> <span class="muted">(cathedral-sandbox; cathedral.computer; cathedral-validator)</span> Team opened mining to AMD SEV-SNP servers by application and cut the price to $0.01 an hour; escape lane on by default.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Miners: with an AMD SEV-SNP bare-metal server, run the host check at cathedral.computer/bring-your-compute and apply; none admitted yet.</li>
+<li>To try the escape contest, register a hotkey on SN94; no hardware needed.</li>
+<li>Validators: get a permit on SN94 (1,000 TAO stake threshold) and follow the README; timelocked commit-reveal is the default.</li>
+<li>To use the sandboxes, sign in at cathedral.computer, add prepaid credit and install the ctcli client.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Usage, customers and revenue are team claims; the 4,000- and 1,000-agent runs were its own tests; the 6 Nov card has no verify command.</li>
+<li>Uids 19 to 21 are the owner&#x27;s own per the validator repo. Unlinked coldkeys hold 58 uids (85 to 147), 28 and two blocks of 20; who runs them is undocumented.</li>
+<li>A hotkey swap after the validator&#x27;s one-block check keeps the weight; its doc says to close this before outsiders are listed.</li>
+<li>Team chat after 2026-10-30 was not read (archive unreachable).</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://cathedral.computer/" rel="noopener noreferrer">Cathedral website</a></li>
+<li><a href="https://cathedral.computer/docs" rel="noopener noreferrer">Docs and quickstart</a></li>
+<li><a href="https://cathedral.computer/pricing/" rel="noopener noreferrer">Pricing</a></li>
+<li><a href="https://cathedral.computer/bring-your-compute/" rel="noopener noreferrer">Bring your compute (miner application)</a></li>
+<li><a href="https://cathedral.computer/proof/4000-agents/" rel="noopener noreferrer">The 4,000-agent run and how to check it</a></li>
+<li><a href="https://cathedral.computer/r/liquid-full-20261106b/" rel="noopener noreferrer">6 Nov run card</a></li>
+<li><a href="https://cathedral.computer/escape-room/" rel="noopener noreferrer">Escape room</a></li>
+<li><a href="https://cathedral.computer/leaderboard/" rel="noopener noreferrer">Escape-room leaderboard (proven breaks)</a></li>
+<li><a href="https://github.com/cathedralai/cathedral-sandbox" rel="noopener noreferrer">Miner repo (Cathedral Sandbox)</a></li>
+<li><a href="https://github.com/cathedralai/cathedral-sandbox/blob/main/docs/MINING.md" rel="noopener noreferrer">Mining guide</a></li>
+<li><a href="https://github.com/cathedralai/cathedral-sandbox/blob/main/docs/BRING_YOUR_COMPUTE.md" rel="noopener noreferrer">Bring your compute guide (repo)</a></li>
+<li><a href="https://cathedral.computer/miners.md" rel="noopener noreferrer">Notes for miners and compute providers</a></li>
+<li><a href="https://github.com/cathedralai/cathedral-sandbox/blob/main/docs/CAPACITY.md" rel="noopener noreferrer">Capacity prober design</a></li>
+<li><a href="https://github.com/cathedralai/cathedral-validator" rel="noopener noreferrer">Validator repo</a></li>
+<li><a href="https://github.com/cathedralai/cathedral-validator/blob/main/docs/OPERATOR_RUNBOOK.md" rel="noopener noreferrer">Validator operator runbook</a></li>
+<li><a href="https://github.com/cathedralai/cathedral-validator/blob/main/docs/GATED_COMPUTE.md" rel="noopener noreferrer">Gated compute rules (validator repo)</a></li>
+<li><a href="https://github.com/cathedralai/cathedral-escape" rel="noopener noreferrer">Escape room repo</a></li>
+<li><a href="https://cathedral.computer/docs/speedrun/rules/" rel="noopener noreferrer">Speedrun rules (not yet run)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 5 sources</summary>
+<ul>
+<li><strong>repo</strong> cathedralai/cathedral-sandbox@eddd7b5 (2026-11-26 22:46Z): 86 commits since 653e7a5 (11-22 12:25Z) read by the compare API (192 files listed): AB#894 ready-room refill and self-serve metered guests, AB#683 fresh guest launches and escape fresh slot, AB#947 fresh attestation gate for miner hotels, AB#991 host VM runtime for long-lived customer VMs and VM execution history (AB#992), AB#789 / AB#825 guest volume agent and timed volume commits, AB#1001 in-room SNP report call and verifier --room-report, AB#968 TCB floor, chip pin and signed approved list in verify_receipts.py, AB#938 Turin support to the SNP verifiers, AB#709 / AB#956 desktop image allowlist, URnetwork sandbox; repo_numbers 2026-11-27: 450 commits and 410 code commits in 30 days, last release 2026-08-30 (cathedral-tdx-verifier-v1.0.0), MIT licence</li>
+<li><strong>repo</strong> cathedralai/cathedral-validator@42b207f (2026-11-25 14:52Z, no licence file): 1 commit since 6eb8568 (11-21 13:26Z): AB#327 scale compute weight by uptime (an approved miner&#x27;s weight times its uptime in the latest settled UTC day, zero below 9500 bps, three failing days in the last seven = probation; the cut goes to the burn; uptime_weight.py +183, test +468, GATED_COMPUTE.md +33); approved_miners.py not touched (the owner&#x27;s three hotkeys); latest release validator-86226341 (2026-11-20 00:22Z); repo_numbers 2026-11-27: 42 commits and 35 code commits in 30 days</li>
+<li><strong>web</strong> https://cathedral.computer/ pages read 2026-11-27: /pricing/ ($0.01 an hour for 2 vCPU and 4 GiB, $0.0025 per GiB-hour), /bring-your-compute/ and /miners.md (&quot;No outside box has been admitted yet&quot;; EPYC 9004 Genoa is the admitted generation, 7003 and 9005 can apply), public JSON /v1/leaderboard/snapshot (observed 2026-11-26 23:58Z, 31 rows, 2 weighted uids 19 and 21 with one SEV-SNP machine each, 20 SAT units each, uptime 141 of 141 rounds in 7 days, burn_weight 58,982 of 65,535), /v1/escape/open (2026-11-27 02:16Z: public_open, max_rooms 20, pool_size 20, rooms_per_hour 3, live_rooms 1, ready 0, prize share 0.1 = 295.2 alpha = 1.0633 TAO = USD 197.01 a day) and /v1/escape/receipts/published (0 receipts); 13 links 200</li>
+<li><strong>web</strong> Chain read at block 9595081 (2026-11-27 02:04Z UTC): SN94 (Cathedral): registered 2025-11-25, tempo 360, 256 of 256 uids, commit-reveal on; emission weights burn/recycle/owner/validator/miner = 0/0/18/41/41 %, RecycleOrBurn Burn, registration burn 0.0005 TAO (refresh since 2026-11-22: 0 of 33 items differ); uid 0 (owner hotkey and coldkey) holds 90.0 % of incentive and 52.79 % of last-epoch emission (3,108.3 alpha a day of 5,887.7); MinerBurned 90 % = 36.9 % of the subnet emission; incentive on 3 uids (0, 19, 21); 10 validator permits (0, 4, 11, 19, 21, 65, 70, 74, 189, 249), 8 weight rows read at block 9595161 and identical (uid 0 90 %, uid 19 5 %, uid 21 5 %; uids 19 and 21 have never set weights; uid 74 is new since 11-22); uids 19 and 21 hotkey alpha 2,129.5 / 2,130.1 (1,458.1 / 1,458.5 on 11-22), 147.2 alpha a day each = 0.53 TAO; uid 70 4,237.6; dividends 8 uids, top uid 4 46.0 %; coldkey groups at block 9595081: ck:43692e 58 uids (85 to 147), ck:762ec3 28 (166 to 195), ck:e51867 20, ck:096239 20; price series 2026-10-27 to 2026-11-27 (15-day steps: -5 %, net user flow +40.1 TAO: -12 then +52), 2026-11-20 to 2026-11-27 (1-day steps: +6.0 %, +84.0 TAO; day to 11-21 02:16Z +253.8 TAO, +26.65 %; the six days after it -169.8 TAO, price 0.004303 to 0.003602, -16.3 %) and 2026-11-25 to 2026-11-27 (6-hour steps: -13.0 %, -134.1 TAO; largest 11-25 08:20Z to 14:20Z -63.2 TAO, -6.56 %); pool 2,054.3 TAO, rank 101 of 129 (snapshot block 9595081)</li>
+<li><strong>msg</strong> #94-cathedral, 2026-07-13 to 2026-10-30 (newer messages not read: q.py timed out on 2026-11-13, 11-15, 11-17, 11-20, 11-21, 11-22 and 11-27), including team updates of 2026-10-03, 10-14, 10-22 and 10-24</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/93.html"><small>← Previous</small>SN93 Bitcast</a><a rel="next" href="/bittensor-docs/subnets/95.html"><small>Next →</small>SN95 Actual</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-11-27. Site built 2026-11-28. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

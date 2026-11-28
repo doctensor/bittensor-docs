@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Teutonic (SN3) | Bittensor Subnet Docs</title>
+<meta name="description" content="Miners compete to train one shared 110B model; four competitions, each with a king that earns emission.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h21">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>3</span><div>
+<h1>Teutonic <span class="muted">SN3</span></h1>
+<p class="tagline">Miners compete to train one shared 110B model; four competitions, each with a king that earns emission.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl4"><b>4.0<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>10<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>15<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-31</b><span>last chat</span></li><li class="pw"><b>9,098</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Shipping</b><span>code activity</span></li><li class="pw"><b>25</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-11-20</b><span>last commit</span></li><li class="pw"><b>none</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>model pretraining competition</dd>
+<dt>Status</dt><dd>Active: four paid competitions; MAIN2, MIX08 and MIX09 replaced MAIN, MIX01 and MIX06 on 2026-11-19.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-11-22</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Competitions and rewards</a></li><li><a href="#sn-x1">Who gets paid</a></li><li><a href="#sn-x2">Docs vs code vs chain</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-similar">Similar subnets</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>Miners train whole checkpoints of one shared 110B model; four competitions (MAIN2, MIX07, MIX08, MIX09) each crown a paid king.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>Mining needs an 8-GPU node (H200 or B300 class); registering burns the 1 TAO minimum today.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>The team scores whole documents (60M tokens) against a pinned Horizon model; the win margin fell to 0.0005 on 2026-11-16.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>One wallet (72 of 256 uids, 53 on 11-18) holds two of four paid slots, 60.1% of incentive.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>Its 12-test king benchmark rose from 19.5% to 70.2% (reign 54), then went flat; MIX08 and MIX09 kings now score 71.1% to 72.6%.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-high">High barrier</span></h3><p>Trains and submits a full checkpoint of the shared model.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-caution">GPU needed</li><li class="fl fl-caution">Paid service needed</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>8x H200 / B200-class GPUs to train; the team tests on 8x B300</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>GPU rental or own cluster (the team uses Lium); no API keys</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>About 1 TAO to register (the minimum, 2026-11-22); no stake</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Python 3.11+, btcli, Ed25519 hotkey; training time not documented</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Checks submissions and sets weights; in practice the team runs it.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-unk">GPU unknown</li><li class="fl fl-unk">Paid service unknown</li><li class="fl fl-bad">Permissioned</li></ul><dl class="v2-needs"><div class="v2-need n-unk"><dt>Hardware</dt><dd>Not documented; the team&#x27;s evaluator uses 8x B300 (8x H200 profile since 2026-11-17)</dd></div><div class="v2-need n-unk"><dt>API tokens / subscriptions</dt><dd>Not documented; runs on team infrastructure</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Permit stake threshold 1,000 TAO (chain); registration burn about 1 TAO</dd></div><div class="v2-need n-unk"><dt>Setup effort</dt><dd>Not documented</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-11-22. Not financial advice.</span></div><p>Big pool, steady outflow, code boards crowning fast. <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>Teutonic is a competition to train one shared language model, Teutonic-II-110B-A7B. Miners submit full checkpoints; a challenger that cuts the king&#x27;s loss gap to a pinned reference model (Horizon) by a set margin is crowned and earns emission.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Miners submit a full checkpoint with the repo&#x27;s miner tool. Each hotkey gets one irreversible submission, shared across all competitions; the miner picks MAIN2, MIX07, MIX08 or MIX09.</p></div><div><h3>Validators</h3><p>The team&#x27;s validator verifies each checkpoint against its on-chain commitment; a remote GPU evaluator then scores whole documents for the challenger, the king and a pinned reference model, Horizon. A challenger wins if the lower bound of its cut in the king&#x27;s deficit against Horizon exceeds the margin (0.0005 bits per byte).</p></div><div><h3>Incentive</h3><p>Rewards are paid in alpha: 40% of miner rewards to MAIN2, 20% each to MIX07, MIX08 and MIX09, hours after a crowning.</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-11-22, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-bad">Owner only</span>The team&#x27;s services run all validation; 4 permits exist, one on the owner&#x27;s hotkey, and no outside guide exists.</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">49.3%</span>49.3% of last-epoch emission is on the owner&#x27;s validator uid (0% of incentive); owner cut 18%, RecycleOrBurn is Burn.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">4 uids</span><span class="v2-sx muted">top 5 hold 100% of incentive.</span> Four uids hold all incentive (the paid kings): 40.4%, 20.2%, 19.7% and 19.7%; two sit on one wallet.</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Converged</span>All 3 rows put uid 252 at 40% and uid 20 at 20%; the other 40% is uids 202, 47 (204) or 247, 32 (217, 244).</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-good">Open</span>Miner, validator and evaluator code are public; pyproject says MIT but there is no LICENSE file.</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-high">High barrier</span></h3><p>Trains and submits a full checkpoint of the shared model.</p><ul>
+<li>The model is about 220 GB in bf16; a checkpoint must support 16,384 positions.</li>
+<li>Training data is public (packed-text manifest, plus RefineCode for code); kings&#x27; models are public; upload credentials are free.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Checks submissions and sets weights; in practice the team runs it.</p><ul>
+<li>Evaluation, queue order and crowning run in the team&#x27;s services; no outside-validator guide exists.</li>
+<li>Four uids hold permits, three set weights: all give uid 252 40% and uid 20 20%; uid 204 adds uids 202, 47, uids 217 and 244 uids 247, 32 (20% each). Uid 252 (MAIN2 king) gained a permit on 11-22 with 1,146 alpha and has set no weights.</li>
+</ul></section></div>
+<h2 id="sn-x0">Competitions and rewards</h2>
+<p>Whole documents (60M tokens) against Horizon; margin 0.0005; the new boards began on 2026-11-19.</p>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Competition</th><th>Data emphasis</th><th>Reward share (team rule)</th></tr></thead><tbody><tr><td>MAIN2</td><td>The 24 MAIN categories 93.3%; code (RefineCode) 6.7%</td><td>40%</td></tr><tr><td>MIX07</td><td>Web text (DCLM) 100%</td><td>20%</td></tr><tr><td>MIX08</td><td>Web text 50%; code 50%</td><td>20%</td></tr><tr><td>MIX09</td><td>Code (RefineCode) 100%</td><td>20%</td></tr><tr><td>MAIN, MIX01 to MIX06</td><td>Retired (MAIN, MIX01, MIX06 on 11-19)</td><td>None now</td></tr></tbody></table></div>
+<h2 id="sn-x1">Who gets paid</h2>
+<ul class="v2-list">
+<li>Emission splits 18% owner, 41% validators, 36% miners (41% until 11-20 22:44Z); the paid kings share the miner part.</li>
+<li>Wallet ck:d5104e (72 of 256 uids) holds two paid slots (MAIN2 uid 252, MIX09 uid 47): 60.1% of incentive. The others are uid 20 (ck:6ab5fe, MIX07) at 20.2% and uid 202 (MIX08, new wallet ck:8db448) at 19.7%. Uids 247 and 93, paid at 17:29Z, are at 0.0%.</li>
+<li>Since 10-21 two wallets (ck:d5104e, ck:e5805d) took 68 of 108 crowns. The team does not say who runs the wallets.</li>
+<li>The owner&#x27;s hotkey is the main validator: 98.6% of dividends, 49.3% of emission (2,726 alpha a day; all kings 2,764); its coldkey changed on 11-18.</li>
+</ul>
+<h2 id="sn-x2">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Win margin</td><td>Guide: one line says 0.00075, others 0.0005</td><td>Code: competitions.json and chain.toml: 0.0005 on all four</td><td>2026-11-22</td></tr><tr><td>Cutover</td><td>README: cutover pending; guide: fixed 40/20/20/20 until activated</td><td>Chain: MAIN2, MIX08, MIX09 live since 11-19; pay lags the kings by hours</td><td>2026-11-22</td></tr></tbody></table></div>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-11-22. Not financial advice.</span></div>
+<p class="v2-thesis">Sixth-largest pool of 128 subnets, yet 10,057 TAO net left in 30 days (2,797 in 7). No usage is verified.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.01817 TAO per alpha</dd></div><div><dt>Pool</dt><dd>64,906 TAO, rank 6 of 128</dd></div><div><dt>Price, 30 days</dt><dd>-20%, 2026-10-24 to 2026-11-22</dd></div><div><dt>Net flow, 30 days</dt><dd>-10,057 TAO, 2026-10-23 to 2026-11-22</dd></div><div><dt>Miner pay</dt><dd>47.0 TAO per day over 4 uids (gross, before costs)</dd></div><div><dt>Code activity</dt><dd>last commit 2026-11-20; 28 commits in 30 days; no releases</dd></div></dl>
+<div class="v2-trend"><h3>Trend</h3><div class="v2-tbody"><figure class="v2-tfig"><svg class="v2-spark down" viewBox="0 0 240 56" role="img" aria-label="Price in TAO per alpha, 2026-09-28 to 2026-11-28: 0.02856 to 0.0174, -39.1%"><polyline points="5.0,5.0 16.3,9.1 23.9,17.3 27.6,16.5 31.4,17.3 38.9,17.2 42.7,17.0 50.2,17.2 54.0,17.0 57.8,16.4 61.6,16.5 65.3,18.5 69.1,21.9 76.6,21.6 80.4,25.5 84.2,28.4 88.0,28.6 91.7,28.9 95.5,29.0 99.3,29.0 103.0,28.8 106.8,29.0 110.6,28.8 114.3,28.8 118.1,27.2 121.9,28.9 125.7,30.7 129.4,31.0 133.2,31.1 137.0,31.1 140.7,30.3 144.5,30.8 148.3,31.3 152.0,31.5 155.8,35.3 159.6,35.1 163.4,35.2 167.1,35.5 170.9,39.6 174.7,41.6 178.4,41.6 182.2,42.5 186.0,42.5 189.8,42.4 193.5,43.2 197.3,44.8 201.1,44.8 204.8,44.7 208.6,46.9 212.4,47.8 216.1,48.3 219.9,48.9 223.7,49.0 227.5,49.9 231.2,50.0 235.0,51.0"/><circle cx="235.0" cy="51.0" r="3"/></svg><figcaption><strong>Price</strong> <span class="down">-39.1%</span> <span class="muted">0.02856 to 0.0174 TAO per alpha, 2026-09-28 to 2026-11-28</span></figcaption></figure><dl class="v2-tfacts"><div><dt>Net flow, 30 days</dt><dd><span class="down">-11,649 TAO</span> <span class="muted">2026-10-29 to 2026-11-28</span></dd></div><div><dt>Verdict history</dt><dd><ol class="v2-vh"><li><span class="muted">2026-11-13</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-17</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-18</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-22</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li></ol></dd></div></dl></div></div>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>108 crownings since 10-21 (35 since 11-19); 28 commits in 30 days</li>
+<li>Pool still sixth of 128; price down 6.6% in seven days against 20% in thirty</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>Net outflow on 7 of 7 days and over 30 days; price at its lowest sample</li>
+<li>One wallet (72 uids) holds two of four paid slots; the owner&#x27;s validator takes about as much as all kings</li>
+<li>No outside customer or revenue named; the benchmark is the team&#x27;s own</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> Named users or revenue, or weeks of net inflow, would lift it; heavy outflow or stalled commits would worsen it.</p>
+<p class="muted">Since the last pass: Still bearish, as on 2026-11-18: 10,057 TAO left in 30 days; 2,797 TAO in the last seven, 390 in the last day.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-similar">Similar subnets</h2>
+<div class="v2-sim"><p>By pool size this is <strong>rank 2 of 20</strong> among the subnets grouped as <em>training</em> (what they mainly sell). Pool and price as of 2026-11-26 to 2026-11-28, price in TAO per alpha; the barrier is the easiest miner role.</p><div class="scroll"><table class="v2-table"><thead><tr><th>#</th><th>Subnet</th><th>Pool</th><th>Price</th><th>Miner barrier</th></tr></thead><tbody><tr><td>1</td><td><a href="/bittensor-docs/subnets/120.html">Affine</a> <span class="muted">SN120</span></td><td>72,783 TAO</td><td>0.03823</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr class="me" aria-current="true"><td>2</td><td>Teutonic <span class="muted">SN3, this page</span></td><td>63,591 TAO</td><td>0.0174</td><td><span class="v2-barrier b-high">High</span></td></tr><tr><td>3</td><td><a href="/bittensor-docs/subnets/9.html">IOTA</a> <span class="muted">SN9</span></td><td>54,535 TAO</td><td>0.02447</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>4</td><td><a href="/bittensor-docs/subnets/56.html">Gradients</a> <span class="muted">SN56</span></td><td>47,907 TAO</td><td>0.01356</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>5</td><td><a href="/bittensor-docs/subnets/1.html">Apex</a> <span class="muted">SN1</span></td><td>20,898 TAO</td><td>0.005394</td><td><span class="v2-barrier b-medium">Medium</span></td></tr></tbody></table></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-11-21</span> <span class="muted">(chain, team dashboard, repo)</span> 21 crowns on 11-21 and 11-22 (MIX08 ten, MIX09 ten, MAIN2 uid 252). No repo commit since 11-20 12:14Z.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Check hardware: a 220 GB model needs an 8x H200/B200-class node.</li>
+<li>Clone the repo, make a Python 3.11+ environment, install the miner extras and create an Ed25519 hotkey with btcli.</li>
+<li>Run the register command (it can spend TAO; check-only mode never pays).</li>
+<li>Pick one of MAIN2, MIX07, MIX08 or MIX09 from the competitions JSON, train on the public datasets, then upload and mark ready.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Rules move fast (MAIN2, MIX08, MIX09 on 11-19; margin 0.0005 on 11-16); the guide and README lag the repo. Trust the dashboard.</li>
+<li>Pay trails a crowning by hours (commit-reveal): uids 202 and 47 (crowned 11-22 14:29Z, 15:53Z) are paid at 22:14Z; uid 32 (12:44Z) and kings 149, 113 (18:03Z, 19:27Z) are not.</li>
+<li>The owner key pair changed around 2026-08-14 to 08-15 and its coldkey on 11-18; the holder is not verifiable. Per chat, the Dendrite team (also SN97) operates it.</li>
+<li>Chat after 2026-10-29 was not read (archive down).</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://teutonic.ai/" rel="noopener noreferrer">Website and dashboard</a></li>
+<li><a href="https://github.com/unarbos/teutonic" rel="noopener noreferrer">GitHub</a></li>
+<li><a href="https://teutonic.ai/llms.txt" rel="noopener noreferrer">Mining guide for agents (llms.txt)</a></li>
+<li><a href="https://teutonic.ai/paper.html" rel="noopener noreferrer">Technical report on the first (10B) competition</a></li>
+<li><a href="https://teutonic.ai/dashboard.json" rel="noopener noreferrer">Dashboard data (JSON)</a></li>
+<li><a href="https://pub-64e3f687d8a2411ca8595bc760d31654.r2.dev/refinecode-text-v2/manifest.json" rel="noopener noreferrer">RefineCode code data manifest</a></li>
+<li><a href="https://teutonic.ai/competitions.json" rel="noopener noreferrer">Competitions, thresholds and kings (JSON)</a></li>
+<li><a href="https://pub-c982d552b8044578b4a79e653700ec73.r2.dev/king-benchmark-daily/all-kings/results.json" rel="noopener noreferrer">King benchmark results (JSON)</a></li>
+<li><a href="https://pub-c982d552b8044578b4a79e653700ec73.r2.dev/competitions/mix07/all-kings/results.json" rel="noopener noreferrer">MIX07 king benchmark results (JSON)</a></li>
+<li><a href="https://huggingface.co/dendriteholdings/teutonic-II-110B-genesis" rel="noopener noreferrer">Genesis model</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 9 sources</summary>
+<ul>
+<li><strong>repo</strong> unarbos/teutonic@31924e3 (2026-11-20 12:14Z): README.md, DEPLOY.md, chain.toml and website/llms.txt patches (read at 2228e78, 2026-11-19 16:08Z), deployment/refinecode-20261119/README.md, the messages and file lists of the 4 commits from a4556e0 to 2228e78 (MAIN2 / RefineCode competitions, retired-king reward policy v6) and of the 4 commits after it (5aa7cf8 08:00Z, fff718f 08:33Z, a9e5254 11:47Z, 31924e3 12:14Z: benchmark proxy, website and tests only; compare API 2026-11-20 21:48Z); code files (weights policy, evaluator, competitions.py) last read at 9b0086f (2026-11-04); head re-checked 2026-11-22 22:21Z (git ls-remote): 31924e3</li>
+<li><strong>web</strong> https://teutonic.ai/competitions.json and /competitions/&lt;id&gt;/dashboard.json for MIX07, MIX08, MIX09 and MAIN2 (read 2026-11-22, 22:21Z; weights finalized 22:12Z), MAIN (/dashboard.json) and MIX01 to MIX06 (retired; last read 2026-11-21 00:59Z) and /llms.txt (33,151 bytes, md5 e91d266b..., unchanged since 11-20; was 32,445 bytes on 11-18)</li>
+<li><strong>web</strong> Team king benchmark results.json (generated 2026-11-20T07:34Z; 56 kings, 672 results; mean of the 12 tests: reign 54 70.2%, reign 55 69.7%, reign 56 69.6%, reign 0 19.5%; unchanged), and the team&#x27;s per-board feeds /competitions/&lt;id&gt;/all-kings/results.json (read 2026-11-22 22:21Z; MIX07 17 kings, MAIN2 3, MIX08 14, MIX09 15): the 49 kings with all 12 tests done score 69.4% to 72.6%, MIX08 and MIX09 kings from reign 6 on (19 kings) 71.1% to 72.6%; MIX09 reign 14 now has all 12 tests (72.3%), linked above</li>
+<li><strong>web</strong> Chain read at block 9565134 (2026-11-22 22:14Z UTC): SN3 (Teutonic): registered 2024-10-31, tempo 360, 256 of 256 uids, commit-reveal on; emission weights burn/recycle/owner/validator/miner = 0/0/18/41/36 %, RecycleOrBurn = Burn; uids under the owner hotkey or owner coldkey hold 0 % of incentive and 49.3 % of last-epoch emission (a floor); 3 validators have weight rows, on average 0 % of weight goes to uid 0.</li>
+<li><strong>web</strong> Chain read at block 9565134 (2026-11-22 22:14Z): SN3 uids 252, 20, 202, 47, 247, 32, 149, 113, 93 (current and recent kings) and 204, 217, 244 (validators): the four paid uids are 252 (40.4%, 1,117.5 alpha a day), 20 (20.2%, 558.8) and 202, 47 (19.7% each, 544.0); 252 and 47 are ck:d5104e (72 uids), uid 20 is ck:6ab5fe (17 uids), uid 202 is ck:8db448 (2 uids, registered 2026-11-22 11:29Z); uids 247, 32, 149, 113 and 93 have 0.0% incentive; uid 252 holds a validator permit (False at block 9563707) with hotkey alpha 1,146 (937 at block 9563707) and has not set weights since its registration; revealed weights of 204, 217 and 244 (weights 3 --all and --uid): all three give uid 252 40% and uid 20 20%, uid 204 puts 20% each on uids 202 and 47, uids 217 and 244 on uids 247 and 32; dividends: uid 204 98.60% (hotkey alpha 21,585), uid 244 0.87% (44,658), uid 217 0.53% (27,971); emission split 0/0/18/41/41 -&gt; 0/0/18/41/36 at block 9550904 (2026-11-20 22:44Z; pinned reads of blocks 9550903 and 9550904: only SN3 changed; not re-read); refresh --since 2026-11-22: no setting changed in 33 items, registration burn 1.30 -&gt; 1.00 TAO.</li>
+<li><strong>web</strong> Chain read at block 9565134 (2026-11-22 22:14Z): price SN3, 3 samples every 15d from block 9349134 (2026-10-23 22:06Z): price 0.022768 -&gt; 0.018173 TAO per alpha (-20.2%), pool TAO 72021.3 -&gt; 64905.5; over the 2 intervals where the pool change equals flow + protocol: net user flow -10056.8 TAO (staked minus unstaked), protocol flow +2941.0 TAO, gross volume 33516.2 TAO. Last 7 days (1d samples): net user flow -2796.8 TAO (out on 7 of 7 days: -99.5, -768.1, -68.7, -318.4, -943.2, -209.2, -389.6 from 11-15 to 11-22; last day -389.6), price -6.6%. Pool rank 6 and price rank 18 of 128 from the all-subnet snapshot at block 9565134.</li>
+<li><strong>web</strong> Chain read at block 9565134 (2026-11-22 22:14Z): SN3 stake by coldkey: 3137 coldkeys hold 1581010.207 alpha on 233 hotkeys (83.765% of the chain&#x27;s staked total); top coldkey 30.585%, top 5 47.088%, top 10 55.667%; owner coldkey 0.937%; 6.032% of the stake sits on validator-permit hotkeys; 16 hotkeys&#x27; stake rows were not fully read (16.235% of the staked total unattributed), shares are of what was read.</li>
+<li><strong>msg</strong> #3-teutonic 2026-04-13 to 2026-10-29 (archive unreachable on 2026-11-22)</li>
+<li><strong>msg</strong> #81-reliquary 2026-10-20 (related)</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/2.html"><small>← Previous</small>SN2 DaniLabs</a><a rel="next" href="/bittensor-docs/subnets/4.html"><small>Next →</small>SN4 Targon</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-11-22. Site built 2026-11-28. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

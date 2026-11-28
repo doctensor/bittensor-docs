@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Allways (SN7) | Bittensor Subnet Docs</title>
+<meta name="description" content="Was a cross-chain swap subnet; since 2026-11-17 every validator pins all weight on one &#x27;treasury&#x27; uid.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h1">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>7</span><div>
+<h1>Allways <span class="muted">SN7</span></h1>
+<p class="tagline">Was a cross-chain swap subnet; since 2026-11-17 every validator pins all weight on one &#x27;treasury&#x27; uid.</p>
+<span class="st s-transitioning">transitioning</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl2"><b>0.43<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>8.3<small>/day</small></b><span>days 8-30</span></li><li class="pl3"><b>1.7<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-11-02</b><span>last chat</span></li><li class="pw"><b>1,388</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Shipping</b><span>code activity</span></li><li class="pw"><b>3</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-11-17</b><span>last commit</span></li><li class="pw"><b>2026-11-17</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>cross-chain swaps (subnet now a treasury pin)</dd>
+<dt>Status</dt><dd>2026-11-17: the repo was cut to a one-target validator and the swap code archived; the chain pays one pinned treasury uid.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-11-23</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Docs vs code vs chain</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-similar">Similar subnets</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>since 2026-11-17 the validator sets 100% of its weight on one pinned uid (78); swap miner, CLI and contracts left main.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>uid 78 earns 100% of incentive, about 2,944 alpha (4.7 TAO) a day, and has sold none; no other miner earns (2026-11-23).</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>all-ways.io routes swaps &#x27;across exchanges&#x27; and names no miners; docs and old API are offline.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>on 2026-11-22 one holder&#x27;s stake fell by 340,000 alpha (60%) amid heavy unstaking; price -25% in a day, pool 5.2k to 4.5k TAO.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-high">High barrier</span></h3><p>Nothing to run: the miner code is archived and the weight is pinned to one uid.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-bad">Permissioned</li></ul><dl class="v2-needs"><div class="v2-need n-no"><dt>Hardware</dt><dd>None: no miner software is maintained (old code on allways-old)</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>0.15 TAO burn to register; a new uid cannot earn while weight is pinned</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Not possible: validators send all weight to uid 78</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Run the validator image: it sets one weight on uid 78 every epoch (no scoring).</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>Small server with Docker; no GPU, no open ports (README)</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None: it needs only a Bittensor connection (README)</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Validator permit: 1,000 TAO stake threshold (2026-11-23); 0.15 TAO burn to register</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Docker compose with auto-update (watchtower); a registered hotkey with a permit</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-fair">Fairly valued</span></span><span class="v2-conf muted">medium confidence, as of 2026-11-23. Not financial advice.</span></div><p>One pinned uid takes all miner pay; price -28% in a month after a big holder cut its stake; swap code archived, usage unverifiable. <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>Allways was built for native cross-chain swaps: miners delivered the destination asset against posted collateral, a Solana program settled. On 2026-11-17 the owner merged a change that moved that code to branch allways-old and makes every validator put all weight on one pinned uid, the &#x27;treasury miner&#x27;. The team&#x27;s site now offers a routed swap app that names no miners.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>No independent miner can earn: validator code pins all weight on uid 78, the repo&#x27;s &#x27;treasury miner&#x27;, registered nine minutes before the change merged on 2026-11-17.</p></div><div><h3>Validators</h3><p>Each validator runs a small program that sets weight 1.0 on uid 78 every epoch (on the owner&#x27;s uid, which burns it, if that slot holds another hotkey). No scoring, no open port. 10 of 11 weight rows on chain point at uid 78; the eleventh is the owner&#x27;s, last updated 2026-04-02.</p></div><div><h3>Incentive</h3><p>The miner side of emission, half of what the subnet pays to uids, goes to uid 78: 147.6 alpha per epoch, about 2,944 a day. Its hotkey holds 16,384 alpha, the exact sum of every epoch since 2026-11-18, so none was sold. The owner slot (uid 53) earns 0%.</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-11-23, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-good">Open</span>Code: any hotkey with a permit can run the one-target validator; 12 permits, 11 weight rows.</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">0%</span>Owner uids hold 0% of emission and incentive; owner cut 18%; uid 78 is not under the owner&#x27;s keys.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">1 uid</span><span class="v2-sx muted">top 5 hold 100% of incentive.</span> 1 uid earns: uid 78, the pinned treasury miner (100% of incentive).</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Converged</span>10 of 11 rows put their top weight on uid 78: pinned by code, not independent scoring.</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-caution">Partial</span>Validator public (MIT); treasury miner and swap app have no public code; old code on allways-old.</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-high">High barrier</span></h3><p>Nothing to run: the miner code is archived and the weight is pinned to one uid.</p><ul>
+<li>Until 2026-11-17 a miner posted a rate backed by SOL or a TAO bond; a missed delivery slashed 110% (docs, archived). Uids 32 and 120 read 0%.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Run the validator image: it sets one weight on uid 78 every epoch (no scoring).</p><ul>
+<li>12 permit holders (2026-11-23); 11 have weight rows, 10 on uid 78. Without a permit the program submits nothing.</li>
+</ul></section></div>
+<h2 id="sn-x0">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Who can earn</td><td>Team (2026-07-28): miners can earn 100% of emission</td><td>Chain: uid 78 holds 100% of incentive; the validator code pins it</td><td>2026-11-23</td></tr><tr><td>What the product is</td><td>Team site: swaps &#x27;across exchanges&#x27; through an app, MCP server and API</td><td>Code: main holds only the validator; swap code sits on allways-old</td><td>2026-11-23</td></tr></tbody></table></div>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-fair">Fairly valued</span></span><span class="v2-conf muted">medium confidence, as of 2026-11-23. Not financial advice.</span></div>
+<p class="v2-thesis">Pool rank 87 of 128 (was 82) after a sale on 2026-11-22: price -28% and net flow -796 TAO in 30 days, 619 of it in one hour. The miner share no longer burns but accrues to one pinned uid; the swap product moved to an app that does not mention the subnet.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.001593 TAO per alpha</dd></div><div><dt>Pool</dt><dd>4,499 TAO, rank 87</dd></div><div><dt>Price, 30 days</dt><dd>-28%, 2026-10-24 to 2026-11-23</dd></div><div><dt>Net flow, 30 days</dt><dd>-796 TAO, 2026-10-24 to 2026-11-23</dd></div><div><dt>Miner pay</dt><dd>4.69 TAO per day over 1 uid (all to uid 78; gross)</dd></div><div><dt>Code activity</dt><dd>last commit 2026-11-17; 3 commits in 30 days; release 2026-11-17</dd></div></dl>
+<div class="v2-trend"><h3>Trend</h3><div class="v2-tbody"><figure class="v2-tfig"><svg class="v2-spark up" viewBox="0 0 240 56" role="img" aria-label="Price in TAO per alpha, 2026-11-23 to 2026-11-28: 0.004271 to 0.01263, +195.8%"><polyline points="5.0,51.0 51.0,50.9 97.0,50.9 143.0,10.7 189.0,7.7 235.0,5.0"/><circle cx="235.0" cy="5.0" r="3"/></svg><figcaption><strong>Price</strong> <span class="up">+195.8%</span> <span class="muted">0.004271 to 0.01263 TAO per alpha, 2026-11-23 to 2026-11-28</span></figcaption></figure><dl class="v2-tfacts"><div><dt>Verdict history</dt><dd><ol class="v2-vh"><li><span class="muted">2026-11-15</span> <span class="st s-bearish">Bearish</span> <span class="st v-fair">Fairly valued</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-17</span> <span class="st s-bearish">Bearish</span> <span class="st v-fair">Fairly valued</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-21</span> <span class="st s-bearish">Bearish</span> <span class="st v-fair">Fairly valued</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-23</span> <span class="st s-bearish">Bearish</span> <span class="st v-fair">Fairly valued</span> <span class="muted">medium confidence</span></li></ol></dd></div></dl></div></div>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>Pool steady at 4.5k TAO in the 8 hours to 08:12Z (net flow -1 TAO)</li>
+<li>The miner share no longer burns; it accrues to one uid that has sold none</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>No independent miner can earn: all validator weight is pinned on one uid the team calls its treasury</li>
+<li>Swap code left main; docs and the old API are offline; the only usage figure is 37 referral swaps (about USD 282)</li>
+<li>-883 TAO net flow in 10 days; one holder cut its stake 60% on 2026-11-22, reason unknown</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> Bullish if the team shows how the treasury or the swap app pays the subnet, or independent miners can earn again. Bearish if outflows deepen, the pin switches to burn, or the treasury sells its alpha.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-similar">Similar subnets</h2>
+<div class="v2-sim"><p>By pool size this is <strong>rank 3 of 3</strong> among the subnets grouped as <em>infrastructure</em> (what they mainly sell). Pool and price as of 2026-11-26 to 2026-11-28, price in TAO per alpha; the barrier is the easiest miner role.</p><div class="scroll"><table class="v2-table"><thead><tr><th>#</th><th>Subnet</th><th>Pool</th><th>Price</th><th>Miner barrier</th></tr></thead><tbody><tr><td>1</td><td><a href="/bittensor-docs/subnets/19.html">blockmachine</a> <span class="muted">SN19</span></td><td>28,660 TAO</td><td>0.007648</td><td><span class="v2-barrier b-high">High</span></td></tr><tr><td>2</td><td><a href="/bittensor-docs/subnets/122.html">CookingTAO</a> <span class="muted">SN122</span></td><td>1,066 TAO</td><td>0.002404</td><td><span class="v2-barrier b-high">High</span></td></tr><tr class="me" aria-current="true"><td>3</td><td>Allways <span class="muted">SN7, this page</span></td><td>451 TAO</td><td>0.01263</td><td><span class="v2-barrier b-high">High</span></td></tr></tbody></table></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-11-23</span> <span class="muted">(on-chain read)</span> Uid 78 still holds 100% of incentive; its hotkey alpha reached 16,384 with no sale since 11-18. No chain setting has changed since 11-17.</li>
+<li><span class="when">2026-11-22</span> <span class="muted">(on-chain read)</span> Ten unstakes of 742 TAO in 13 minutes from about 22:29Z (largest 537 TAO); the then second-largest holder fell from 567,521 to 226,959 alpha.</li>
+<li><span class="when">2026-11-20</span> <span class="muted">(web check)</span> all-ways.io offers routed swaps by MCP server, API and referral programme (Ventura Labs); the docs and old API hosts still fail.</li>
+<li><span class="when">2026-11-17</span> <span class="muted">(GitHub entrius/allways)</span> Pull request #830 merged: the repo became a validator that puts all weight on uid 78, the treasury miner registered that morning. Release the same day.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Do not plan to mine: while validators pin all weight on uid 78, no other miner can earn.</li>
+<li>To validate: register a hotkey, reach the validator permit (1,000 TAO stake threshold) and start docker-compose.vali.yml; no GPU, no open ports.</li>
+<li>Preview first: run the validator with --dry-run; it logs the target uid and exits, no wallet needed.</li>
+<li>To swap assets, use all-ways.io, its MCP server or HTTP API; no account or key is needed.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Who controls uid 78 and what the treasury does with its alpha are not stated; the chain shows only that it is not under the owner&#x27;s keys.</li>
+<li>Whether the swap app settles through subnet miners is not stated: its docs and API name providers, not miners or the subnet.</li>
+<li>Usage: the old API is offline (last read 2026-11-15); the new app shows only a referral leaderboard (37 swaps, about USD 282), unchecked.</li>
+<li>No docs describe the archived code: the docs and Ventura Labs hosts return 502. Chat after 2026-10-30 not read (archive down).</li>
+<li>Who sold on 2026-11-22 and why is unknown (the chain shows amounts, not intent); also why weight rows fell from 12 to 11 and permits from 13 to 12.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/entrius/allways" rel="noopener noreferrer">GitHub</a></li>
+<li><a href="https://all-ways.io/" rel="noopener noreferrer">Website and swap app</a></li>
+<li><a href="https://all-ways.io/agents" rel="noopener noreferrer">Agent quickstart</a></li>
+<li><a href="https://github.com/entrius/allways/tree/allways-old" rel="noopener noreferrer">Old code (branch allways-old)</a></li>
+<li><a href="https://x.com/allways_io" rel="noopener noreferrer">X</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 6 sources</summary>
+<ul>
+<li><strong>repo</strong> entrius/allways@b405999 (main and test, 2026-11-17): README.md, allways/constants.py, allways/weights.py; pull requests #830 (merged 2026-11-17 13:41Z), #831 (16:01Z) and #793 (merged into allways-old, 15:14Z) read 2026-11-21; heads main = test = b405999, allways-old 25ff2c0, no pull request after #831 on 2026-11-23 (ls-remote byte-identical to 2026-11-21); the old miner, scoring and program sources were read 2026-11-04 and now live only on allways-old</li>
+<li><strong>web</strong> all-ways.io (home, llms.txt, llms-full.txt, openapi.json, agents page, referral leaderboard and payouts), read 2026-11-23 and byte-identical to 2026-11-21; docs.all-ways.io and allways.venturalabs.ai returned 502 on 2026-11-23 (docs last read 2026-11-15, unchanged since 2026-10-26)</li>
+<li><strong>web</strong> Allways public API api.all-ways.io (/swaps: all 4,102 rows), last read 2026-11-15, newest row 2026-11-04; the host no longer resolves (2026-11-23); July figures are team posts</li>
+<li><strong>msg</strong> #allways 2025-11-10 to 2026-10-30 (whole channel read 2026-10-30; newer messages not read: archive unreachable 2026-11-23); former-occupant channel SubVortex 2025-11-05 to 2025-11-10; team daily post of 2026-10-14</li>
+<li><strong>web</strong> Chain read at block 9568121 (2026-11-23 08:12Z UTC): SN7 (Allways): registered 2024-03-24, tempo 360, 256 of 256 uids, commit-reveal on; emission weights burn/recycle/owner/validator/miner = 0/0/18/41/41 % (stored, same values as the chain default), RecycleOrBurn = Recycle; uids under the owner hotkey or owner coldkey hold 0 % of incentive and 0 % of last-epoch emission (a floor); 11 validators have weight rows, on average 0 % of weight goes to uid 0. Uid 78 (registered 2026-11-17 13:32Z) had no incentive at 17:00Z, 100% and 147.6 alpha at 20:00Z, 16,383.7 alpha on 2026-11-23; 10 of 11 weight rows put their top weight on uid 78. Holders read 2026-11-23: the second-largest coldkey (ck:97575c, one permit hotkey) held 567,520.6 alpha on 2026-11-21 and 226,958.9 on 2026-11-23.</li>
+<li><strong>web</strong> Chain read at block 9568121 (2026-11-23 08:12Z): price SN7 from 2026-10-24 08:04Z in 7-day steps: price 0.002218 -&gt; 0.001593 TAO per alpha (-28.2%), pool 5306.8 -&gt; 4498.6 TAO, net user flow -796.0 TAO, protocol -12.2 TAO, gross volume 7170.2 TAO; pool rank 87 of 128 (shared snapshot). Last 10 days (daily read from 2026-11-13 08:06Z): net user flow -882.6 TAO, price -30.2%, pool 5383.2 -&gt; 4498.6. Hourly read 2026-11-22 08:12Z..2026-11-23 08:12Z: 22:12Z -&gt; 23:12Z net user flow -619.3 TAO, price -22.6%, pool 5146.4 -&gt; 4527.0. StakeRemoved events on SN7, blocks 9565122-9565421: 10 events, 741.9 TAO, 411,366 alpha, blocks 9565205-9565270 (about 22:29Z-22:42Z), largest 537.1 TAO / 287,659.8 alpha at block 9565205.</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/6.html"><small>← Previous</small>SN6 Numinous</a><a rel="next" href="/bittensor-docs/subnets/8.html"><small>Next →</small>SN8 Vanta</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-11-23. Site built 2026-11-28. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

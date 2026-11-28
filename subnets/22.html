@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Desearch (SN22) | Bittensor Subnet Docs</title>
+<meta name="description" content="Miners crawl web pages and embed text on GPUs for Desearch&#x27;s search index; validators spot-check uploads.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h10">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>22</span><div>
+<h1>Desearch <span class="muted">SN22</span></h1>
+<p class="tagline">Miners crawl web pages and embed text on GPUs for Desearch&#x27;s search index; validators spot-check uploads.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl4"><b>3.0<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>6.8<small>/day</small></b><span>days 8-30</span></li><li class="pl4"><b>3.4<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-10-31</b><span>last chat</span></li><li class="pw"><b>6,433</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Shipping</b><span>code activity</span></li><li class="pw"><b>416</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-11-25</b><span>last commit</span></li><li class="pw"><b>2026-03-18</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>web crawling and embeddings (search index)</dd>
+<dt>Status</dt><dd>Desearch 2.0 since early October 2026; burn 30%; main took more task-API fixes on 11-25; UIDs turn over daily.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-11-27</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Task supply and concentration</a></li><li><a href="#sn-x1">Docs vs code vs chain</a></li><li><a href="#sn-x2">Validators and dividends</a></li><li><a href="#sn-x3">Code: main took more task-API fixes</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-similar">Similar subnets</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>miners crawl pages and embed text on GPUs for the team&#x27;s search index.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>the burn UID holds 30.3% of incentive on 2026-11-27, down from 50% on 10-23.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>24 h totals are 444k crawl and 49k embed tasks; no slow hour in the day.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>160 of 246 crawl UIDs got new hotkeys since 11-22; coldkeys fell to 29; the top four hold 40, 30, 28 and 27.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner (crawl) <span class="v2-barrier b-low">Low barrier</span></h3><p>Fetches URLs through its own proxies.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-caution">Paid service needed</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-no"><dt>Hardware</dt><dd>No GPU; 2-4 cores, 8 GB RAM, 48 GB SSD</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>Rotating proxies (price not stated)</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Burn 0.011-0.048 TAO in 3 days; no stake</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Python, PM2, .env; local test setup</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Miner (embed) <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Embeds page texts on its own GPU.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-caution">GPU needed</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>NVIDIA GPU, 16 GB VRAM (24 GB recommended)</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None for the model (free weights)</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Burn 0.011-0.048 TAO in 3 days; no stake</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Python, PM2, vLLM with the pinned model in float16</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Re-checks sampled uploads; sets weights.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-caution">Paid service needed</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>CPU only: 4-8 cores, 8 GB RAM, 48 GB SSD (GPU optional)</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>ScrapingDog key (required)</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Permit, 10,000 stake and 20 alpha (docs); burn 0.011-0.048 TAO in 3 days</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>PM2 and run.sh (self-updating)</dd></div></dl><a class="v2-more" href="#sn-role-2">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-neutral">Neutral</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">low confidence, as of 2026-11-27. Not financial advice.</span></div><p>Price -6% in 30 days; net outflow in both 15-day steps, the second far smaller; usage unverifiable. <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>The subnet behind the Desearch search API. Since late September 2026 miners no longer answer searches; they crawl pages and embed text on GPUs, and the team builds its search index from the work that passes checks.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Crawl tasks: up to 1,000 URLs fetched through the miner&#x27;s own proxies, uploaded as text within 3 minutes. Embed tasks: up to 1,000 page texts embedded on a GPU within 5 minutes. A task budget (cap 100) grows with well-paid tasks and halves on failures; strikes lock a key out for 1, 12, then 48 hours.</p></div><div><h3>Validators</h3><p>Validators re-fetch sampled pages and compare the text; for embeddings they re-embed 48 texts and need cosine similarity of 0.999. About 2% of crawl and 14% of embed uploads are checked in a day; the rest are paid at the miner&#x27;s 72-hour check rate.</p></div><div><h3>Incentive</h3><p>Emission splits 30% burn (the burn UID is the owner hotkey), 20% crawl, 50% embed; a pool nobody earned burns too. A miner&#x27;s share is its credited work over 24 hours minus what failed checks take back.</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-11-27, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-good">Open</span>Anyone with a permit, 10,000 stake and 20 alpha can validate; 8 hold weight rows, one reports to the team&#x27;s API.</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">46.9%</span>Owner-linked UIDs (burn UID 19, validator UID 58) hold 46.9% of emission (floor); owner cut 18%, RecycleOrBurn Burn.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">243 uids</span><span class="v2-sx muted">top 5 hold 31.9% of incentive.</span> 243 UIDs hold incentive; the top 5 hold 31.9% of it, 30.3% the burn UID; 29 coldkeys own the crawl miners.</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Converged</span>All 8 weight setters put their top weight on the burn UID by design; the scoring is deterministic, not copying.</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-good">Open</span>MIT licence; miner, validator, task API and bot code are public; the live task API cannot be audited.</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner (crawl) <span class="v2-barrier b-low">Low barrier</span></h3><p>Fetches URLs through its own proxies.</p><p class="muted">No further detail found in the sources.</p></section><section class="v2-rdetail" id="sn-role-1"><h3>Miner (embed) <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Embeds page texts on its own GPU.</p><ul>
+<li>Other precisions or model revisions fail the check.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-2"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Re-checks sampled uploads; sets weights.</p><ul>
+<li>Embed checks use your own model server or the team&#x27;s via the task API.</li>
+</ul></section></div>
+<h2 id="sn-x0">Task supply and concentration</h2>
+<ul class="v2-list">
+<li>Groups changed again: the top four coldkeys hold 40, 30, 28 and 27 UIDs, 50% of crawl and embed work (23% and 29% on 11-22). Coldkeys fell from 95 to 29; 18 hold one UID.</li>
+<li>Team, 10-21: extra UIDs claiming scarce tasks are a flaw with no clear fix. Queues ran empty 166,173 (crawl) and 180,987 (embed) times a day.</li>
+<li>No slow hour in the last 24 h (19,800-20,400 crawl tasks an hour).</li>
+<li>Slots keep turning over: 160 of 246 crawl UIDs got a new hotkey since 11-22, 150 under a new coldkey; 210 of 246 since 11-17.</li>
+</ul>
+<h2 id="sn-x1">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Embedding runs</td><td>architecture.md said embedding was switched off until 11-13</td><td>Code: docs fixed on main 11-13 (de0795a); 48,854 embed tasks passed in 24 h</td><td>2026-11-27</td></tr><tr><td>Validators</td><td>docs: every validator checks every upload</td><td>Chain: 9 permits, 8 with weight rows; task API shows 1 active</td><td>2026-11-27</td></tr></tbody></table></div>
+<h2 id="sn-x2">Validators and dividends</h2>
+<ul class="v2-list">
+<li>Eight UIDs set weights, each putting its top weight on burn UID 19 (the owner hotkey, which never sets weights). One of nine permit holders has not set weights for over five tempos.</li>
+<li>Dividends: 8 UIDs earn them; the top one (owner coldkey UID 58) 63.6%, the top five 99.2%. Weights are near-identical, so unread bonds explain the gap.</li>
+</ul>
+<h2 id="sn-x3">Code: main took more task-API fixes</h2>
+<ul class="v2-list">
+<li>Main is dfc0af5 (PR 414, 11-25): 6 commits past 11-17&#x27;s ff5ce35, mostly task-api/: one claim per task kind per hotkey every 12 s, signed requests for the watchdog and planner, two-week deletion of logs and votes. The reference miner now claims at most every 12.5 s.</li>
+<li>Develop has 7 commits main lacks (11-20 to 11-24): a Wikipedia redirects lister, planner set-file pages and language-detection fixes. Whether the live task API runs the new commits is not shown.</li>
+</ul>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-neutral">Neutral</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">low confidence, as of 2026-11-27. Not financial advice.</span></div>
+<p class="v2-thesis">Price is down 6% in 30 days on 210 TAO net outflow; 178 TAO of it fell in the first half and 33 TAO in the second. Usage is unverifiable.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.002703 TAO per alpha</dd></div><div><dt>Pool</dt><dd>7,143 TAO, rank 54</dd></div><div><dt>Price, 30 days</dt><dd>-6%, 2026-10-28 to 2026-11-27</dd></div><div><dt>Net flow, 30 days</dt><dd>-210 TAO, 2026-10-28 to 2026-11-27</dd></div><div><dt>Miner pay</dt><dd>0.023 TAO per day on average (5.55 TAO per day over 243 uids)</dd></div><div><dt>Code activity</dt><dd>last commit 2026-11-25 (develop); 439 commits in 30 days; last release 2026-03-18</dd></div></dl>
+<div class="v2-trend"><h3>Trend</h3><div class="v2-tbody"><figure class="v2-tfig"><svg class="v2-spark down" viewBox="0 0 240 56" role="img" aria-label="Price in TAO per alpha, 2026-09-28 to 2026-11-27: 0.002947 to 0.002703, -8.3%"><polyline points="5.0,23.7 12.7,23.7 16.5,18.8 24.2,6.4 28.0,15.1 31.8,16.2 39.5,16.6 43.3,10.8 51.0,5.0 54.8,6.8 58.7,7.2 66.3,15.2 70.2,21.6 74.0,22.3 77.8,22.5 81.7,25.6 85.5,23.3 93.2,23.0 97.0,25.4 100.8,26.7 104.7,24.6 108.5,25.2 112.3,24.4 116.2,26.4 120.0,29.1 123.8,30.1 127.7,30.4 131.5,29.6 135.3,31.8 139.2,28.8 143.0,37.7 146.8,38.0 150.7,40.1 154.5,40.5 158.3,38.7 162.2,39.5 166.0,39.0 169.8,41.9 173.7,42.4 177.5,42.6 181.3,42.9 185.2,43.5 189.0,46.3 192.8,46.9 196.7,47.5 200.5,48.0 204.3,47.5 208.2,48.1 212.0,51.0 215.8,45.8 219.7,37.8 227.3,36.1 235.0,45.5"/><circle cx="235.0" cy="45.5" r="3"/></svg><figcaption><strong>Price</strong> <span class="down">-8.3%</span> <span class="muted">0.002947 to 0.002703 TAO per alpha, 2026-09-28 to 2026-11-27</span></figcaption></figure><dl class="v2-tfacts"><div><dt>Net flow, 30 days</dt><dd><span class="down">-210 TAO</span> <span class="muted">2026-10-28 to 2026-11-27</span></dd></div><div><dt>Verdict history</dt><dd><ol class="v2-vh"><li><span class="muted">2026-11-17</span> <span class="st s-neutral">Neutral</span> <span class="st v-unclear">Unclear</span> <span class="muted">low confidence</span></li><li><span class="muted">2026-11-20</span> <span class="st s-neutral">Neutral</span> <span class="st v-unclear">Unclear</span> <span class="muted">low confidence</span></li><li><span class="muted">2026-11-22</span> <span class="st s-neutral">Neutral</span> <span class="st v-unclear">Unclear</span> <span class="muted">low confidence</span></li><li><span class="muted">2026-11-27</span> <span class="st s-neutral">Neutral</span> <span class="st v-unclear">Unclear</span> <span class="muted">low confidence</span></li></ol></dd></div></dl></div></div>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>Team ships: 421 code commits in 30 days; main and develop both moved on 11-24 and 11-25</li>
+<li>Tasks pass: 444k crawl tasks in 24 h, 3 failed and 0 void</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>Net outflow in both 15-day steps; embed tasks -25% since 11-10</li>
+<li>Crawl coldkeys fell from 95 to 29 in five days; the top four hold half the credit</li>
+<li>Only one validator reports to the task API</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> More outflow, a task-volume fall or a stalled team: bearish. A burn cut with rising miner pay, or independent usage figures: bullish.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-similar">Similar subnets</h2>
+<div class="v2-sim"><p>By pool size this is <strong>rank 5 of 8</strong> among the subnets grouped as <em>data</em> (what they mainly sell). Pool and price as of 2026-11-25 to 2026-11-27, price in TAO per alpha; the barrier is the easiest miner role.</p><div class="scroll"><table class="v2-table"><thead><tr><th>#</th><th>Subnet</th><th>Pool</th><th>Price</th><th>Miner barrier</th></tr></thead><tbody><tr><td>3</td><td><a href="/bittensor-docs/subnets/33.html">ReadyAI</a> <span class="muted">SN33</span></td><td>11,397 TAO</td><td>0.002811</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr><td>4</td><td><a href="/bittensor-docs/subnets/54.html">Yanez</a> <span class="muted">SN54</span></td><td>8,270 TAO</td><td>0.004123</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr class="me" aria-current="true"><td>5</td><td>Desearch <span class="muted">SN22, this page</span></td><td>7,143 TAO</td><td>0.002703</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr><td>6</td><td><a href="/bittensor-docs/subnets/45.html">AlphaRidge</a> <span class="muted">SN45</span></td><td>5,591 TAO</td><td>0.001946</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>7</td><td><a href="/bittensor-docs/subnets/111.html">Claims</a> <span class="muted">SN111</span></td><td>5,180 TAO</td><td>0.003608</td><td><span class="v2-barrier b-medium">Medium</span></td></tr></tbody></table></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-11-27</span> <span class="muted">(chain, task API)</span> Crawl coldkeys fell to 29 (95 on 11-22); 160 UIDs got new hotkeys since 11-22.</li>
+<li><span class="when">2026-11-25</span> <span class="muted">(GitHub)</span> Main took task-API claim-pace limits and a slower reference miner (PR 414); develop merged main.</li>
+<li><span class="when">2026-11-24</span> <span class="muted">(GitHub)</span> Develop got language-detection fixes (PR 415) and planner set-file pages.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Choose crawl (proxies, fast uploads) or embed (NVIDIA GPU, 16 GB or more).</li>
+<li>Test locally with docs/test-your-miner.md before registering on netuid 22 (burn 0.011-0.048 TAO in 3 days, it moves with demand).</li>
+<li>Copy neurons/miners/.env.template to .env, set proxies or the model server, and start with PM2.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>The task API is team-run and its live code cannot be audited; a critic&#x27;s claim of favoured keys (10-21) is unproven.</li>
+<li>Search-API usage and revenue are team claims, not visible on chain or in the repo.</li>
+<li>Reliability reports are mostly miners&#x27; own; no team post after 10-23 and chat unreadable after 11-02, so the 11-07 task gap and 11-08 verdict slowdown stay unexplained.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/Desearch-ai/subnet-22" rel="noopener noreferrer">GitHub</a></li>
+<li><a href="https://desearch.ai" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://console.desearch.ai" rel="noopener noreferrer">Search API console</a></li>
+<li><a href="https://huggingface.co/desearch/Desearch-Embedding-4B" rel="noopener noreferrer">Embedding model (Hugging Face)</a></li>
+<li><a href="https://api-22.desearch.ai/v1/overview" rel="noopener noreferrer">Public task API overview (read only)</a></li>
+<li><a href="https://mining.desearch.ai" rel="noopener noreferrer">Task-log dashboard</a></li>
+<li><a href="https://x.com/desearch_ai" rel="noopener noreferrer">X</a></li>
+<li><a href="https://huggingface.co/datasets/desearch/subnet-22" rel="noopener noreferrer">Crawl domain list (Hugging Face dataset)</a></li>
+<li><a href="https://www.desearch.ai/crawler" rel="noopener noreferrer">Crawler policy and opt-out</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 7 sources</summary>
+<ul>
+<li><strong>repo</strong> Desearch-ai/subnet-22@dfc0af5 (main, PR 414, 2026-11-25; compare ff5ce35...main = 6 commits, 27 files) and develop @ff61ec2 (2026-11-25; main...develop = 7 ahead, 0 behind); heads read with git ls-remote on 2026-11-27; repo numbers checked 2026-11-26; earlier passes: READMEs, docs, bulk/, publisher/, task-api/, desearch/{credit,manifest}.py, neurons/validators/</li>
+<li><strong>web</strong> Chain read at block 9596325 (2026-11-27 06:12Z UTC): SN22 (Desearch): registered 2023-12-26, tempo 360, 256 of 256 uids, commit-reveal on; emission weights burn/recycle/owner/validator/miner = 0/0/18/41/41 % (stored, same values as the chain default), RecycleOrBurn = Burn; uids under the owner hotkey or owner coldkey hold 30.33 % of incentive and 46.93 % of last-epoch emission (a floor); 8 validators have weight rows, on average 0.3 % of weight goes to uid 0. Shared snapshot over 129 subnets at block 9596325: pool rank 54 of 129.</li>
+<li><strong>web</strong> Chain read at block 9596325 (2026-11-27 06:12Z): price SN22, 3 samples every 15d from block 9380325 (2026-10-28 06:04Z): price 0.002878 -&gt; 0.002703 TAO per alpha (-6.1%), pool TAO 7364.1 -&gt; 7143.0; over the 2 intervals where the pool change equals flow + protocol: net user flow -210.3 TAO (staked minus unstaked), protocol flow -10.8 TAO, gross volume 5426.0 TAO.</li>
+<li><strong>web</strong> Chain read at block 9596325 (2026-11-27 06:12Z UTC): SN22 registration burn 0.03423 TAO; 3-hour samples from block 9574725 (2026-11-24 06:12Z) ranged 0.0107 to 0.0483 TAO. Burn UID incentive was 50.34% at block 9343602 (2026-10-23).</li>
+<li><strong>web</strong> Block 9596325 dossier: 9 validator permits, 8 with weight rows, all 8 top-weighting uid 19; dividends on 8 uids (top 63.6%, top five 99.2%); one permit holder&#x27;s weights older than 5 tempos.</li>
+<li><strong>web</strong> https://api-22.desearch.ai/v1/overview (also ?kind=embed), /v1/validators, /v1/miners (also ?kind=embed) and /v1/stats/hours, read 2026-11-27 06:2xZ (counts only; roster compared with the copies of 11-17, 11-22 and 11-25); page links checked 2026-11-27 (9 checked, none dead)</li>
+<li><strong>msg</strong> #22-desearch, 2026-10-23 to 2026-11-02 (46 messages); earlier months from earlier passes</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/21.html"><small>← Previous</small>SN21 AdTAO</a><a rel="next" href="/bittensor-docs/subnets/23.html"><small>Next →</small>SN23 Trishool</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-11-27. Site built 2026-11-28. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

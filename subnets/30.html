@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Endure (SN30) | Bittensor Subnet Docs</title>
+<meta name="description" content="Miners forecast risk for 15 subnets, scored on real outcomes; the owner burns 98% of miner reward for now">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h18">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>30</span><div>
+<h1>Endure <span class="muted">SN30</span></h1>
+<p class="tagline">Miners forecast risk for 15 subnets, scored on real outcomes; the owner burns 98% of miner reward for now</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl4"><b>2.6<small>/day</small></b><span>last 7 d</span></li><li class="pl4"><b>5.7<small>/day</small></b><span>days 8-30</span></li><li class="pl3"><b>1.9<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-11-02</b><span>last chat</span></li><li class="pw"><b>410</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Shipping</b><span>code activity</span></li><li class="pw"><b>4</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-11-26</b><span>last commit</span></li><li class="pw"><b>2026-11-27</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>financial risk forecasting</dd>
+<dt>Status</dt><dd>Live on mainnet since 2026-10-06. Key 2045 (v0.1.4) went live on 2026-11-27; the owner&#x27;s uid still takes 98% of incentive.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-11-27</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Product and consumers</a></li><li><a href="#sn-x1">Docs vs code vs chain</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-similar">Similar subnets</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>Miners forecast drawdown, volatility, price and pool depth for 15 subnets; validators score them against real outcomes.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>The owner&#x27;s uid takes 98.06% of incentive; 43 other paid miners share about 0.2 TAO a day (2026-11-27).</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>Pool is 8,056 TAO (rank 50); price -6% and net flow -214 TAO in 30 days, -141 in the last 3 (2026-11-27).</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>v0.1.4 (key 2045) went live 2026-11-27; chain shows all 11 permit holders setting weights.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>Forge lending (testnet) is the first consumer; mainnet planned soon (2026-10-27).</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-low">Low barrier</span></h3><p>Sends daily forecasts for 15 subnets and is scored on real outcomes.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-unk">Paid service unknown</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-no"><dt>Hardware</dt><dd>No GPU; Python 3.12 container; sizing not published</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>Mainnet archive RPC; cost not documented, public default is rate-limited</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Burn 0.999999999 TAO (2026-11-27); no extra stake floor</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Docker or Python 3.12; build your own forecasts; keep the state folder</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Scores forecasts against archive data, sets weights, serves a signed feed.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-unk">Paid service unknown</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-no"><dt>Hardware</dt><dd>No GPU; one Python 3.12 process on SQLite; sizing not published</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>Mainnet archive RPC; cost not documented</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Burn 0.999999999 TAO; permit needs 1,000 TAO stake weight (2026-11-27)</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Docker, durable database with backups, public axon and read API</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-11-27. Not financial advice.</span></div><p>Price at a 10-day low (-6% in 30 days); selling resumed (-141 TAO in 3 days); v0.1.4 live. <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>Endure (SN30) is a risk-intelligence subnet. Miners forecast four risk figures for 15 subnets&#x27; alpha tokens over 5 and 30 days; validators score them against real outcomes. The owner burns 98% of miner reward.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Each day a miner commits a hash of its forecast bundle (11:00 to 19:30 UTC), then reveals it with a nonce (20:30 to 00:00). The bundle is 15 subnets x 4 outputs x 2 horizons = 120 forecasts. Identical forecasts share one hotkey&#x27;s weight.</p></div><div><h3>Validators</h3><p>A validator freezes the subnet list and resolves the real values from archive data after each horizon (about 6 or 31 days). A forecast scores 1 inside a grace band and falls linearly to 0 at a cutoff, three times sooner for understated risk. Skipped forecasts score 0; scores feed a 5-round half-life average.</p></div><div><h3>Incentive</h3><p>Weight is the blended score cubed. Since v0.1.4, a forecast&#x27;s 5-day and 30-day averages are added and divided by 1 plus the 30-day record&#x27;s maturity; up to 20% of the 5-day score is held back until that record matures. Each validator gives the owner&#x27;s uid its burn share (9800 of 10,000 on the team validator) and splits the rest by earned weight. On chain the owner&#x27;s uid holds 98.06% of incentive.</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-11-27, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-good">Open</span>Anyone with a permit (1,000 TAO stake threshold) can run the public validator; 11 hold permits.</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">66.5%</span>66.49% of last-epoch emission is on the owner&#x27;s uid (50.41% on 11-23, while it was silent); owner cut 18%, burn on.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">44 uids</span><span class="v2-sx muted">top 5 hold 98.3% of incentive.</span> 44 uids have incentive (41 on 11-23); the owner&#x27;s uid takes 98.06%, the other 43 share about 1.9%.</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Converged</span>All 11 validators rank the owner&#x27;s uid first; the shared burn rule makes that expected, not copying.</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-good">Open</span>Subnet, miner and validator code are public on GitHub (MIT); the team runs the main validator.</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-low">Low barrier</span></h3><p>Sends daily forecasts for 15 subnets and is scored on real outcomes.</p><ul>
+<li>Pay is small: about 0.004 TAO a day per paid miner, gross (2026-11-27).</li>
+<li>v0.1.4: a hotkey with no 30-day record earns about half of an equally accurate miner until about day 30 to 60; key-2044 peers are rejected.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Scores forecasts against archive data, sets weights, serves a signed feed.</p><ul>
+<li>11 hotkeys hold permits, all setting weights; uid 27 (not owner-linked) takes 40.9% of dividends, the owner&#x27;s uid 48 35% (2026-11-27).</li>
+<li>Docs list two independent validators as an open requirement; use your own keyed archive, the public one throttles.</li>
+</ul></section></div>
+<h2 id="sn-x0">Product and consumers</h2>
+<ul class="v2-list">
+<li>Forge, a TAO lending market on testnet, is the first intended consumer; its risk limits start manual, with Endure&#x27;s feed the long-term aim.</li>
+<li>Alpha buybacks: Endure&#x27;s site says 60% of Forge revenue, Forge&#x27;s docs over 50%; audit &#x27;planned&#x27; (team, 2026-11-02).</li>
+</ul>
+<h2 id="sn-x1">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Subnet list</td><td>Docs: launch whitelist of 12 netuids</td><td>Code: whitelist and live round have 15 netuids</td><td>2026-11-27</td></tr><tr><td>Burn</td><td>Team: will lower the burn slowly</td><td>Chain: owner&#x27;s uid holds 98.06% of incentive</td><td>2026-11-27</td></tr><tr><td>Miner count</td><td>Team post: 245 &#x27;historic&#x27; miners (7-day window)</td><td>Chain: 64 uids, 44 with incentive; dashboard: 32 active (11-25)</td><td>2026-11-27</td></tr><tr><td>What miners produce</td><td>Site: miners set LTV ratios and interest curves</td><td>Code: four risk forecasts; the lending schema is unserved</td><td>2026-11-27</td></tr><tr><td>Miner guide</td><td>Docs: mining.md says testnet alpha, netuid 504</td><td>Chain: miners are paid on mainnet SN30 (44 uids)</td><td>2026-11-27</td></tr></tbody></table></div>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-11-27. Not financial advice.</span></div>
+<p class="v2-thesis">Price is down 6% in 30 days (net flow -214 TAO): +156 to 11-12, -370 since. v0.1.4 and the validators&#x27; return fix reliability, not demand; 98% of miner pay is still burned.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.00305 TAO per alpha</dd></div><div><dt>Pool</dt><dd>8,056 TAO, rank 50</dd></div><div><dt>Price, 30 days</dt><dd>-6%, 2026-10-28 to 2026-11-27</dd></div><div><dt>Net flow, 30 days</dt><dd>-214 TAO, 2026-10-28 to 2026-11-27</dd></div><div><dt>Miner pay</dt><dd>0.004 TAO per day on average (0.176 TAO per day over 44 uids)</dd></div><div><dt>Miner pay outside top 5</dt><dd>0.004 TAO per day on average (0.153 TAO per day over 39 uids outside the top 5)</dd></div><div><dt>Code activity</dt><dd>last commit 2026-11-26; 7 commits in 30 days; release v0.1.4 on 2026-11-27</dd></div></dl>
+<div class="v2-trend"><h3>Trend</h3><div class="v2-tbody"><figure class="v2-tfig"><svg class="v2-spark down" viewBox="0 0 240 56" role="img" aria-label="Price in TAO per alpha, 2026-09-28 to 2026-11-27: 0.003253 to 0.00305, -6.2%"><polyline points="5.0,35.9 12.7,36.0 16.5,38.8 24.2,38.8 28.0,37.3 31.8,27.0 39.5,16.1 43.3,30.2 51.0,29.0 54.8,31.6 58.7,31.9 66.3,27.9 70.2,31.6 74.0,30.8 77.8,32.2 81.7,32.7 85.5,33.6 93.2,34.0 97.0,35.0 100.8,35.0 104.7,38.6 108.5,39.0 112.3,37.4 116.2,37.5 120.0,37.6 123.8,37.6 127.7,37.3 131.5,37.9 135.3,36.7 139.2,34.3 143.0,27.6 146.8,27.6 150.7,25.8 154.5,16.0 158.3,5.0 162.2,9.5 166.0,18.9 169.8,30.1 173.7,25.7 177.5,29.0 181.3,32.5 185.2,31.4 189.0,34.2 192.8,35.4 196.7,34.8 200.5,44.5 204.3,45.9 208.2,46.6 212.0,47.1 215.8,47.1 219.7,48.0 223.5,43.1 227.3,45.2 231.2,49.4 235.0,51.0"/><circle cx="235.0" cy="51.0" r="3"/></svg><figcaption><strong>Price</strong> <span class="down">-6.2%</span> <span class="muted">0.003253 to 0.00305 TAO per alpha, 2026-09-28 to 2026-11-27</span></figcaption></figure><dl class="v2-tfacts"><div><dt>Net flow, 30 days</dt><dd><span class="down">-214 TAO</span> <span class="muted">2026-10-28 to 2026-11-27</span></dd></div><div><dt>Verdict history</dt><dd><ol class="v2-vh"><li><span class="muted">2026-11-17</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">low confidence</span></li><li><span class="muted">2026-11-21</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-23</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-27</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li></ol></dd></div></dl></div></div>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>v0.1.4 (key 2045) is live and all 11 permit holders set weights.</li>
+<li>Code is shipping: 7 commits in 30 days, v0.1.4 released.</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>98% of incentive goes to the owner&#x27;s uid, with no step down in 30 days.</li>
+<li>Net outflow resumed: -141 TAO in 3 days, price at a 10-day low.</li>
+<li>No paying consumer visible; Forge is testnet-only.</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> A lower burn, a mainnet Forge using the feed or a week of net buying would point up; a higher burn would point down.</p>
+<p class="muted">Since the last pass: Bearish, medium unchanged since 11-23: the outage is over, but selling resumed.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-similar">Similar subnets</h2>
+<div class="v2-sim"><p>By pool size this is <strong>rank 6 of 12</strong> among the subnets grouped as <em>trading</em> (what they mainly sell). Pool and price as of 2026-11-26 to 2026-11-28, price in TAO per alpha; the barrier is the easiest miner role.</p><div class="scroll"><table class="v2-table"><thead><tr><th>#</th><th>Subnet</th><th>Pool</th><th>Price</th><th>Miner barrier</th></tr></thead><tbody><tr><td>4</td><td><a href="/bittensor-docs/subnets/50.html">Synth</a> <span class="muted">SN50</span></td><td>11,664 TAO</td><td>0.005148</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr><td>5</td><td><a href="/bittensor-docs/subnets/77.html">Liquidity</a> <span class="muted">SN77</span></td><td>10,966 TAO</td><td>0.004307</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr class="me" aria-current="true"><td>6</td><td>Endure <span class="muted">SN30, this page</span></td><td>8,056 TAO</td><td>0.00305</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr><td>7</td><td><a href="/bittensor-docs/subnets/6.html">Numinous</a> <span class="muted">SN6</span></td><td>6,750 TAO</td><td>0.001878</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr><td>8</td><td><a href="/bittensor-docs/subnets/79.html">MVTRX</a> <span class="muted">SN79</span></td><td>6,741 TAO</td><td>0.002841</td><td><span class="v2-barrier b-low">Low</span></td></tr></tbody></table></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-11-27</span> <span class="muted">(release v0.1.4, api /health, chain permits read (2026-11-27))</span> Key 2045 (v0.1.4) went live on mainnet; the team API answers again.</li>
+<li><span class="when">2026-11-26</span> <span class="muted">(pull request 98 (2026-11-27))</span> v0.1.4 promoted to main (pull request 98).</li>
+<li><span class="when">2026-11-23</span> <span class="muted">(chain uid 48 reads, 11-23 to 11-25 (2026-11-27))</span> Owner&#x27;s validator (uid 48), silent since 11-21, set weights again by 11-23 18:33Z.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Read docs/running_on_mainnet.md and docs/mining.md or validating.md; the miner guide still says testnet (netuid 504), mainnet is 30.</li>
+<li>Get your own mainnet archive RPC: the public default is rate-limited and a non-archive endpoint is refused.</li>
+<li>Register a hotkey on netuid 30 (burn 0.999999999 TAO, 64 of 96 slots used on 2026-11-27).</li>
+<li>Run the prod image (ghcr.io/endure-network/endure-subnet-miner or -validator, v0.1.4, key 2045) with --endure.serving_stage mainnet.</li>
+<li>Miners: build your own forecasts; a validator&#x27;s /health shows its key.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>The 98% burn rate is the team validator&#x27;s own report (2026-11-27), matching the chain&#x27;s 98.04%; the on-chain commitment was not read.</li>
+<li>Accuracy, usage and Forge plans come from team sources; none is visible on chain, and the accuracy view is frozen since 11-27.</li>
+<li>Only the team&#x27;s validators (uid 48, 55) are said to run v0.1.4; the other 9 permit holders, incl. uid 27 (41% of dividends), are unidentified.</li>
+<li>Team chat after 2026-10-31 was not read.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://docs.endure.network/" rel="noopener noreferrer">Docs</a></li>
+<li><a href="https://docs.endure.network/build/resources/litepaper" rel="noopener noreferrer">Litepaper</a></li>
+<li><a href="https://github.com/Endure-Network/endure-subnet" rel="noopener noreferrer">GitHub (subnet repo)</a></li>
+<li><a href="https://dashboard.endure.network" rel="noopener noreferrer">Mainnet dashboard</a></li>
+<li><a href="https://api.endure.network/health" rel="noopener noreferrer">Mainnet validator API (health)</a></li>
+<li><a href="https://testnet.forge.endure.network" rel="noopener noreferrer">Forge (testnet)</a></li>
+<li><a href="https://x.com/EndureNet" rel="noopener noreferrer">X (team account)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 10 sources</summary>
+<ul>
+<li><strong>msg</strong> #30-endure, 2026-06-03 to 2026-10-31 (launch post 2026-10-06, burn replies 2026-10-05 to 10-09, hyperparameter tracker 2026-10-05, 10-14, 10-19, team X posts 2026-10-27, 10-28 and 10-30, team answers 2026-10-30; channel search 2026-06-03 to 2026-10-05)</li>
+<li><strong>repo</strong> Endure-Network/endure-subnet: main at dc7f4b8 (merge of pull request 98, 2026-11-26 00:20Z), develop 0deeaf8 (2026-11-16, docs only), staging and tag v0.1.4 at 7917711 (2026-11-12 06:53Z merge of pull request 95; CI, devnet qualification and image publish green); heads, pull requests 91-98, release v0.1.4 (published 2026-11-27 00:13Z) and docs/releases/v0.1.4.md read via GitHub API and raw.githubusercontent.com on 2026-11-27; endure/scoring/weights.py and policy.py (blend, 20% hold-back, gamma 3), docs/mining.md, docs/validating.md and docs/running_on_mainnet.md as at dc7f4b8 on 2026-11-27; README.md, deploy/operator-node, docker/, pyproject.toml, LICENSE as read on 2026-10-26 and 2026-11-01</li>
+<li><strong>web</strong> Chain read at block 9600211 (2026-11-27 19:10Z UTC): SN30 (Endure Network): registered 2024-06-24, tempo 360, 64 of 96 uids, commit-reveal off; emission weights burn/recycle/owner/validator/miner = 0/0/18/41/41 % (stored, same values as the chain default), RecycleOrBurn = Burn; uids under the owner hotkey or owner coldkey hold 98.06 % of incentive and 66.49 % of last-epoch emission (a floor); 44 uids have incentive; 11 validators have weight rows, on average 0 % of weight goes to uid 0. The permit table (local checker, the hosted line has no `permits` command yet): 11 permit holders, all set weights within one tempo (8 to 186 blocks), uid 27 holds 40.92 % of dividends, uid 48 34.95 %, uid 55 last update 18:35Z.</li>
+<li><strong>web</strong> Chain read at block 9600211 (2026-11-27 19:10Z UTC), compared with block 9565661 (2026-11-23 00:00Z UTC): SN30: no setting changed in 33 checked items; emission split unchanged; pool 8127.2 -&gt; 8055.73 TAO.</li>
+<li><strong>web</strong> Chain read at block 9600211 (2026-11-27 19:10Z): price SN30, 11 samples every 1d from block 9528211 (2026-11-17 19:04Z): price 0.003173 -&gt; 0.003050 TAO per alpha (-3.9%), pool TAO 8215.5 -&gt; 8055.7; over the 10 intervals where the pool change equals flow + protocol: net user flow -152.2 TAO (staked minus unstaked), protocol flow -7.5 TAO, gross volume 1919.2 TAO; 3 samples every 15d from 2026-10-28: net user flow +156 TAO to 2026-11-12, -370 TAO to 2026-11-27 (-214 in 30 days, price -5.6%).</li>
+<li><strong>web</strong> Chain read at block 9600211 (2026-11-27 19:10Z): shared all-subnet snapshot: SN30 pool 8055.7 TAO, rank 50 of 129 alpha pools (0.42 % of all pools).</li>
+<li><strong>web</strong> Chain reads of uid 48 at blocks 9571411, 9578611 and 9585811 (2026-11-23, 11-24 and 11-25 19:10Z): last weight update 18:33Z, 19:05Z and 18:56Z, dividends 7.6 %, 31.4 % and 34.3 %.</li>
+<li><strong>web</strong> https://dashboard.endure.network JSON endpoints /api/mainnet (live: 32 active miners in round 2026-11-25, 11 active validators, checked 2026-11-27 19:17Z), /api/accuracy (sourceStatus &#x27;unavailable&#x27;, accepted index last checked 2026-11-27 00:30Z, newest scored 5-day round 2026-11-20; 5-day overall 0.9369 over 3,240 cells, 30-day 0.8852 over 1,716 cells, 266 accepted hotkeys) and /api/scoreboard (40 ranked hotkeys, blended 0.90 to 0.67), read 2026-11-27 19:18Z</li>
+<li><strong>web</strong> https://api.endure.network /health read 2026-11-27 19:17Z: status ok, version 0.1.4, protocol key 2045, source revision 7917711, process started 2026-11-27 01:11Z, last weights set 18:54Z, emission_burn_bps 9800, 30 rounds waiting only for the 30-day horizon (first due 2026-11-28 00:00Z); /rounds, /miners, /risk/v1/subnets and /schemas answered 200 (the 2026-11-23 reads were a hosting 503 page)</li>
+<li><strong>web</strong> https://docs.endure.network/ (miners overview, litepaper, roadmap, blog; sizes and hashes re-read 2026-11-27, identical to 2026-11-23 and 2026-11-21, no byte diff; API reference last read 2026-11-04); https://endure.network/ (size 110,371 bytes as on 2026-11-21; the hash changes on every fetch); https://docs.forge.endure.network/ (sizes and hashes unchanged)</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/29.html"><small>← Previous</small>SN29 Hotfloat</a><a rel="next" href="/bittensor-docs/subnets/31.html"><small>Next →</small>SN31 Recall</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-11-27. Site built 2026-11-28. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

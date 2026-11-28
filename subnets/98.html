@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NeverPlayAlone (SN98) | Bittensor Subnet Docs</title>
+<meta name="description" content="Daily Minecraft agent contest: miners submit bots, validators score them in NPA-Bench, one winner takes each round.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h14">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>98</span><div>
+<h1>NeverPlayAlone <span class="muted">SN98</span></h1>
+<p class="tagline">Daily Minecraft agent contest: miners submit bots, validators score them in NPA-Bench, one winner takes each round.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>13<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>12<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>14<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-11-02</b><span>last chat</span></li><li class="pw"><b>1,545</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Shipping</b><span>code activity</span></li><li class="pw"><b>2</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-10-30</b><span>last commit</span></li><li class="pw"><b>none</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>AI game agents (Minecraft benchmark)</dd>
+<dt>Status</dt><dd>Round 111 under way (ends about 11-27 02:00Z). UID 197 is the feed&#x27;s king (60.0); the chain pays UID 85.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-11-26</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">Docs vs code vs chain</a></li><li><a href="#sn-x1">Results since the mission change</a></li><li><a href="#sn-x2">Slot history</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-similar">Similar subnets</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>one winner a day takes all miner reward; a challenger must beat the champion&#x27;s re-run.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>the paid uid went 197, 241, 85 in three days; the feed&#x27;s king is still UID 197.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>staked alpha fell 19% since 11-23; UID 0 holds 88% of permit-holder alpha.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>paid worlds on sale since 11-21; the docs do not say miners power them.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>validators now default to a light mode that copies UID 0&#x27;s weights; no Docker, no keys.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-low">Low barrier</span></h3><p>Submits a Node.js Minecraft agent each round; the winner takes all miner reward.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-no"><dt>Hardware</dt><dd>No GPU; Node.js, Python 3.10+ and Docker for local tests (docs)</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None; LLM calls use the validator&#x27;s capped proxy</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Registration burn 0.05 TAO (2026-11-26); no stake</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Node.js agent work; scripted CLI install</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-low">Low barrier</span></h3><p>Light mode copies the main validator&#x27;s weights; full mode runs entries in Docker.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>Light: any small host, no GPU. Full: 8 vCPU, 16 GB RAM, 100 GB SSD (docs)</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>Light: none. Full: OpenRouter and Chutes keys (0.01 USD cap per miner per task)</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Burn 0.05 TAO; permits seen from 1,296 hotkey alpha, none at 1,080 (2026-11-26)</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Ubuntu, pm2, one setup script; full mode adds Docker, Node 20+</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-11-26. Not financial advice.</span></div><p>Price down 26% in 30 days; 760 TAO net sold in three days. <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>NeverPlayAlone is a daily contest for Minecraft-playing AI agents by a two-person team. Miners write Node.js bots, validators score them, and the winner takes all. The team sells paid AI-companion worlds (from 11-21); the docs do not say miners run them.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>A miner submits a Node.js agent (tar.gz, at most 1 MB) with npacli during an open round. The mission is crafting, combat, farming, then animal husbandry (since 10-28).</p></div><div><h3>Validators</h3><p>Full mode: the validator takes each round&#x27;s roster from the team&#x27;s private backend, runs every entry in Docker on five seeded tasks and computes the winner from stake-weighted scores. Light mode (default since 11-24): it copies the owner&#x27;s weight row a tempo late.</p></div><div><h3>Incentive</h3><p>One winner gets all weight, so one uid holds 100% of incentive: UID 85 on 11-26, now backed by all five weight rows; UID 0&#x27;s row named UID 197 at 06:04Z and names UID 85 at 11:14Z. Champion code stays private until dethroned or three rounds.</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-11-26, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-good">Open</span>Registered, staked hotkeys can validate (8 permits; 10 on 11-23); UID 0 holds about 88% of permit-holder alpha.</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">37%</span>UID 0 gets 37.0% of last-epoch emission to uids; the owner cut is set to 33%; RecycleOrBurn is Burn.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">1 uid</span><span class="v2-sx muted">top 5 hold 100% of incentive.</span> One uid (UID 85) earns all incentive (winner-take-all); five uids earn dividends.</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Converged</span>All 5 weight rows back UID 85 (UID 0&#x27;s moved from 197 after 06:04Z); one scorer makes agreement easy.</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-caution">Partial</span>Subnet and bench repos are public but have no licence; the backend with roster and bans is private.</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-low">Low barrier</span></h3><p>Submits a Node.js Minecraft agent each round; the winner takes all miner reward.</p><ul>
+<li>The sandbox has no internet, 1 GB memory and a 64 MB /tmp.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-low">Low barrier</span></h3><p>Light mode copies the main validator&#x27;s weights; full mode runs entries in Docker.</p><ul>
+<li>Light mode (since 11-24) needs no evaluation, backend, Docker or LLM keys; it copies the owner&#x27;s weight row unless another main hotkey is set. Evaluating validators must set NPA_VALIDATOR_MODE=full before updating (code, docs).</li>
+<li>8 permits (UIDs 0, 71, 85, 153, 183, 213, 241, 244); UIDs 85, 241, 244 never set weights; UIDs 22, 30, 124, 132 lost theirs.</li>
+</ul></section></div>
+<h2 id="sn-x0">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Round length</td><td>Two 12-hour rounds a day</td><td>Chat: one daily round since 2026-08-08; the feed has no rounds 109 or 110</td><td>2026-11-26</td></tr><tr><td>Missions</td><td>Docs list gathering, mining, crafting</td><td>Code: bench has crafting, combat, farming, animal husbandry</td><td>2026-11-26</td></tr><tr><td>Open source</td><td>Every agent is open source</td><td>Chat: champion code private up to three rounds (team)</td><td>2026-10-31</td></tr><tr><td>Burn</td><td>90-95% burn at first</td><td>Chain: no burn; split 33/7/60 since 2026-10-26</td><td>2026-11-26</td></tr><tr><td>Who is paid</td><td>Every validator scores each agent; winner paid</td><td>Chain: 5 of 8 permits set weights, all on UID 85</td><td>2026-11-26</td></tr><tr><td>Validator needs</td><td>Web docs: 8 vCPU, 16 GB, LLM keys</td><td>Code: light mode is the default; no Docker, no keys</td><td>2026-11-26</td></tr></tbody></table></div>
+<h2 id="sn-x1">Results since the mission change</h2>
+<ul class="v2-list">
+<li>Round 108: six entrants, winner UID 197 (60.0) against its own champion re-run (50.0); the bar was 61.0, so no dethroning.</li>
+<li>Rounds 83 to 108: 179 of 256 runs timed out, including every winner since round 93; rounds 109 and 110 never ran; round 111 is being evaluated.</li>
+</ul>
+<h2 id="sn-x2">Slot history</h2>
+<p>The slot ran as ForeverMoney until its sale (2026-06-23); the owner coldkey changed 06-29 and the name 07-02; the buyer is unnamed.</p>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-11-26. Not financial advice.</span></div>
+<p class="v2-thesis">Price is 0.00158 TAO, down 30% since 11-23. The owner&#x27;s coldkey now holds 63% of staked alpha, and 16 coldkeys hold 90%.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.001581 TAO per alpha</dd></div><div><dt>Pool</dt><dd>3,923 TAO, rank 88</dd></div><div><dt>Price, 30 days</dt><dd>-26%, 2026-10-27 to 2026-11-26</dd></div><div><dt>Net flow, 30 days</dt><dd>-623 TAO, 2026-10-27 to 2026-11-26</dd></div><div><dt>Miner pay</dt><dd>3.80 TAO per day over 1 paid uid (too few for an average)</dd></div><div><dt>Code activity</dt><dd>subnet repo: last commit 2026-11-25, 2 in 30 days; bench repo: 2026-10-30, 2; no releases</dd></div></dl>
+<div class="v2-trend"><h3>Trend</h3><div class="v2-tbody"><figure class="v2-tfig"><svg class="v2-spark down" viewBox="0 0 240 56" role="img" aria-label="Price in TAO per alpha, 2026-09-28 to 2026-11-26: 0.002128 to 0.001581, -25.7%"><polyline points="5.0,21.9 8.9,22.0 16.7,22.0 24.5,21.9 28.4,21.3 32.3,21.5 36.2,20.6 44.0,20.7 51.8,20.9 55.7,20.7 59.6,21.1 63.5,17.9 67.4,19.5 71.3,18.7 79.1,18.9 83.0,18.9 86.9,19.1 90.8,18.1 94.7,18.2 98.6,17.7 102.5,19.2 106.4,19.9 110.3,19.9 114.2,21.3 118.1,21.3 121.9,21.2 125.8,23.0 129.7,23.0 133.6,8.2 137.5,5.0 141.4,19.7 145.3,19.3 149.2,18.7 153.1,21.5 157.0,21.5 160.9,21.6 164.8,21.6 168.7,21.6 172.6,21.6 176.5,21.9 180.4,22.7 184.3,22.7 188.2,22.8 192.1,22.7 196.0,22.2 199.9,20.3 203.8,20.2 207.7,14.4 211.6,14.9 215.5,15.2 219.4,14.5 223.3,15.2 227.2,23.3 231.1,50.9 235.0,51.0"/><circle cx="235.0" cy="51.0" r="3"/></svg><figcaption><strong>Price</strong> <span class="down">-25.7%</span> <span class="muted">0.002128 to 0.001581 TAO per alpha, 2026-09-28 to 2026-11-26</span></figcaption></figure><dl class="v2-tfacts"><div><dt>Net flow, 30 days</dt><dd><span class="down">-623 TAO</span> <span class="muted">2026-10-27 to 2026-11-26</span></dd></div><div><dt>Verdict history</dt><dd><ol class="v2-vh"><li><span class="muted">2026-11-17</span> <span class="st s-neutral">Neutral</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-20</span> <span class="st s-neutral">Neutral</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-23</span> <span class="st s-neutral">Neutral</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-26</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li></ol></dd></div></dl></div></div>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>Team ships: light validator mode 11-24 and 11-25; paid plans since 11-21</li>
+<li>No registration or setting change on chain</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>Net outflow 760 TAO in three days; pool rank 84 to 88</li>
+<li>Six entrants; one validator feeds every score; paid uid differs from the feed&#x27;s king</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> Net buying for a week, 8+ entrants or a second scorer would lift it; more outflow or fewer entrants would lower it.</p>
+<p class="muted">Since the last pass: Was neutral on 2026-11-23; now bearish on outflow and thinner stake.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-similar">Similar subnets</h2>
+<div class="v2-sim"><p>By pool size this is <strong>rank 4 of 8</strong> among the subnets grouped as <em>agents</em> (what they mainly sell). Pool and price as of 2026-11-25 to 2026-11-28, price in TAO per alpha; the barrier is the easiest miner role.</p><div class="scroll"><table class="v2-table"><thead><tr><th>#</th><th>Subnet</th><th>Pool</th><th>Price</th><th>Miner barrier</th></tr></thead><tbody><tr><td>2</td><td><a href="/bittensor-docs/subnets/15.html">ORO</a> <span class="muted">SN15</span></td><td>13,028 TAO</td><td>0.01515</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr><td>3</td><td><a href="/bittensor-docs/subnets/121.html">sundae_bar</a> <span class="muted">SN121</span></td><td>5,255 TAO</td><td>0.003194</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr class="me" aria-current="true"><td>4</td><td>NeverPlayAlone <span class="muted">SN98, this page</span></td><td>3,923 TAO</td><td>0.001581</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr><td>5</td><td><a href="/bittensor-docs/subnets/71.html">Leadpoet</a> <span class="muted">SN71</span></td><td>3,884 TAO</td><td>0.002377</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr><td>6</td><td><a href="/bittensor-docs/subnets/118.html">Ditto</a> <span class="muted">SN118</span></td><td>3,566 TAO</td><td>0.002229</td><td><span class="v2-barrier b-low">Low</span></td></tr></tbody></table></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-11-26</span> <span class="muted">(chain, feed)</span> The chain pays UID 85 (100% of incentive since 11-25 07:00Z), after UIDs 197 and 241; all five weight rows now name it, UID 0&#x27;s too; the feed&#x27;s king is still UID 197.</li>
+<li><span class="when">2026-11-25</span> <span class="muted">(repo)</span> Light validator mode (default since 11-24, @38218e9) was hardened in @257c81a: failed submissions back off up to one epoch.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Check the current mission and round on the dashboard; the docs lag.</li>
+<li>Register a hotkey on subnet 98 with btcli (burn 0.05 TAO on 2026-11-26).</li>
+<li>Clone the subnet repo, run scripts/miner_setup.sh for npacli, and test a Node.js agent with npabench (needs Docker).</li>
+<li>Package it as a tar.gz up to 1 MB and run npacli submit during an open round.</li>
+<li>Validators: stake a registered hotkey and run the repo&#x27;s setup; light mode is the default.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Round figures are from the team&#x27;s feed; weights and emission 11:14Z, price and holders 06:04Z (2026-11-26). Chat after 11-02 was unreadable.</li>
+<li>The closed backend sets roster, margin, mission and bans; scoring code is unchanged since 09-09; web docs omit light mode.</li>
+<li>Despite the stored 60/7 split, last-epoch emission is 50/50 winner and dividend holders; why is unknown.</li>
+<li>Unproven: why UID 0&#x27;s row moved to UID 85, why the paid uid differs from the feed&#x27;s king, and whether UIDs 71, 153, 183, 213 run light mode.</li>
+<li>Self-mining, code-copying and swap claims (11-02) are unproven; several uids share UID 197&#x27;s coldkeys, none the owner&#x27;s.</li>
+<li>Unknown: whether agents finish within 1,200 s, power the paid product, or run the 10-30 prompt cut.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://neverplayalone.ai" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://docs.neverplayalone.ai" rel="noopener noreferrer">Docs</a></li>
+<li><a href="https://dashboard.neverplayalone.ai" rel="noopener noreferrer">Dashboard</a></li>
+<li><a href="https://github.com/neverplayalone/neverplayalone_subnet" rel="noopener noreferrer">Subnet repo (miner CLI and validator)</a></li>
+<li><a href="https://github.com/neverplayalone/neverplayalone_bench" rel="noopener noreferrer">NPA-Bench repo (missions and harness)</a></li>
+<li><a href="https://api.neverplayalone.ai/api/v1/rounds" rel="noopener noreferrer">Dashboard data API (read only)</a></li>
+<li><a href="https://x.com/NPA_Agents" rel="noopener noreferrer">X</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 8 sources</summary>
+<ul>
+<li><strong>repo</strong> neverplayalone/neverplayalone_subnet@257c81a (2026-11-25, head on 11-26; 2 commits since 2026-11-23: @38218e9 light validator mode, @257c81a hardening): README, docs/validator.md, validator mode / light / config, loop and round evaluation (scoring code unchanged since @0d43c5a, 2026-09-09)</li>
+<li><strong>repo</strong> neverplayalone/neverplayalone_bench@00bf207 (2026-10-30, prompt cut, unchanged on 2026-11-26): animal husbandry scoring, default config, single_runner, event_stream and sandboxed_agent (timeout rule); @7f46cd0 (2026-10-27, animal husbandry mission) and @4b4d074 (2026-10-05, farming mission)</li>
+<li><strong>web</strong> Chain read at block 9589083 (2026-11-26 06:04Z): SN98, tempo 360, 256 of 256 uids, commit-reveal on; emission split burn/recycle/owner/validator/miner = 0/0/33/7/60 %, RecycleOrBurn = Burn; registration burn 0.05 TAO; 8 validator permits (uids 0, 71, 85, 153, 183, 213, 241, 244), StakeThreshold 1000 TAO; 5 weight rows (uid 0 to 197; uids 71, 153, 183, 213 to 85); uid 85 holds 100 % of incentive; owner-linked uids hold 0 % of incentive and 36.4 % of last-epoch emission (a floor); hotkey alpha, permit flags and weight state of the permit holders and of uids 20, 22, 30, 88, 124, 132, 194, 197, 198 at the same block; uid 197 / 241 / 85 incentive at pinned blocks 11-23 12:00Z to 11-25 08:00Z; no setting changed in 33 checked items since 2026-11-23</li>
+<li><strong>web</strong> Chain read at block 9590634 (2026-11-26 11:14Z): dossier SN98: 5 weight rows, all to uid 85 (06:04Z: uid 0 to 197); 8 permits; uid 0 emission 37.0 %; uid 85 100 % of incentive; 3 commits queued; pool and price unchanged; no setting changed. Per-uid weights not re-read.</li>
+<li><strong>web</strong> Chain read at block 9589083 (2026-11-26 06:04Z): price SN98, 3 samples every 15d from block 9373083 (2026-10-27 05:56Z): price 0.002139 -&gt; 0.001581 TAO per alpha, pool TAO 4555.9 -&gt; 3922.6, net user flow -623.3 TAO over 2 intervals (+1.7, -625.0); 10 daily samples from 2026-11-17 05:59Z (net flow -616.0 TAO over 9 days; -272.5, -373.8 and -113.8 on the last three days); pool rank 88 and price rank 125 of 129 from the shared snapshot at the same block; holders 2026-11-23 02:00Z vs 2026-11-26: staked alpha 1,994,678 -&gt; 1,614,028, 16 coldkeys hold 90 %</li>
+<li><strong>web</strong> Chain lifecycle read from 2026-06-20: owner coldkey change at block 8510257 (2026-06-29), identity change at block 8534245 (2026-07-02), emission off at block 8463544 and on at block 8778234 (2026-08-05)</li>
+<li><strong>web</strong> https://api.neverplayalone.ai/api/v1/rounds (rounds 49 to 108, 111: winners, scoreboard feeders, run status) and /overview/metrics (read 2026-11-26 11:22Z; round 111 still evaluating); https://docs.neverplayalone.ai (home and /subnet/ unchanged on 2026-11-26, the /subnet/ text still describes the full validator; Mission specs read 2026-11-05) and https://neverplayalone.ai and its changelog (unchanged on 2026-11-26); on 2026-11-26 5 of 7 links were probed and answered 200</li>
+<li><strong>msg</strong> #98-neverplayalone, 2026-05-28 to 2026-11-02 (team posts read in full from 2026-06-20; 2026-10-22 to 11-02 read in full; the chat archive was unreachable on 2026-11-26, so nothing after 11-02 02:46Z was read); former occupant channel (ForeverMoney), whole channel 2025-04-28 to 2026-06-29</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/97.html"><small>← Previous</small>SN97 Ingot</a><a rel="next" href="/bittensor-docs/subnets/99.html"><small>Next →</small>SN99 Axonry</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-11-26. Site built 2026-11-28. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

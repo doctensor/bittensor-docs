@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Affine (SN120) | Bittensor Subnet Docs</title>
+<meta name="description" content="Two jobs: upload training files that improve a shared math model, or find problems that model solves only sometimes.">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h0">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>120</span><div>
+<h1>Affine <span class="muted">SN120</span></h1>
+<p class="tagline">Two jobs: upload training files that improve a shared math model, or find problems that model solves only sometimes.</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>46<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>39<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>78<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-11-02</b><span>last chat</span></li><li class="pw"><b>36,502</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Shipping</b><span>code activity</span></li><li class="pw"><b>599</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-11-27</b><span>last commit</span></li><li class="pw"><b>2026-11-19</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>Collaborative model training (reasoning)</dd>
+<dt>Status</dt><dd>Live: one winner paid on training, 261 uids on the Generator, which pays again since 11-27.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-11-28</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">How the rules changed</a></li><li><a href="#sn-x1">Docs vs code vs chain</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-similar">Similar subnets</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>mechanism 0 weights name 1 uid (870) at 100%, down from 6 on 11-25; held rounds drop the oldest paid winner.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>mechanism 1 (10% of emission) pays 261 uids again; results resumed 11-27 after three void epochs.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>of 17 crowns since round 134, 7 were paid, 9 failed confirmation and 1 was rolled back.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>round 168 crowned uid 870 (z 2.15) and round 169 confirmed it; round 163&#x27;s crown was rolled back 11-27.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>7,650 TAO net outflow in 30 days, only 295 in the last 2; price at its 30-day low; pool rank 5 of 130.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner (training file) <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Uploads one file; paid only if it wins a round, then while among the last 10 winners.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-unk">GPU unknown</li><li class="fl fl-unk">Paid service unknown</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-unk"><dt>Hardware</dt><dd>Not documented; head M is 9B; rebuilding it needs about 115 GB disk</dd></div><div class="v2-need n-unk"><dt>API tokens / subscriptions</dt><dd>Not documented</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>About 0.6 TAO registration burn (2026-11-28; all 1,000 uids used)</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Activate a hotkey, build one file, check it locally, upload, wait for a seat</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Miner (Generator) <span class="v2-barrier b-low">Low barrier</span></h3><p>Signs problem IDs per 4-hour epoch; each accepted problem earns an equal share for 24 hours.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-no"><dt>Hardware</dt><dd>None to submit (Python 3.11); optional GPU search</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None named</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>About 0.6 TAO registration burn plus a one-time activation</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Download the pool, sign a batch, upload before the deadline</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Sets the weights; in practice only the owner&#x27;s validator does.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-caution">GPU needed</li><li class="fl fl-caution">Paid service needed</li><li class="fl fl-bad">Permissioned</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>Owner-run: one 8-GPU box trains and scores the files; closed</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>Rented GPU pods; no price cap since 11-03 (repo); closed</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>1 permit slot, held by the owner; stake threshold 1,000 TAO</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Closed: weights come only from UID 0</dd></div></dl><a class="v2-more" href="#sn-role-2">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-neutral">Neutral</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">low confidence, as of 2026-11-28. Not financial advice.</span></div><p>Neutral: outflow slowed to 295 TAO in 2 days and the Generator pays again; training pays one winner. <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>Affine pays miners for improving one shared math model. Mechanism 0: training files; each round crowns the best, and the next round must confirm it before it is paid. Mechanism 1, the Generator (10% of emission): problems the model solves only sometimes; its weight is spread over 261 uids again.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Training files: one JSON file (up to 2,000 prompts); one registration buys one turn; 86 seats wait. Generator: sign and upload up to 3 problem IDs from a pool of 811,609 before each 4-hour UTC deadline.</p></div><div><h3>Validators</h3><p>Only the owner&#x27;s validator sets weights (UID 0), hourly, for both mechanisms. Each round trains one LoRA per file and scores it on 2,000 public tasks; the best gain wins if z is above 1.5. The next round re-scores the new head against its parent and pays the crown only on a gain with a fresh z above 0.5.</p></div><div><h3>Incentive</h3><p>Mechanism 0 (90%): up to 10 confirmed winners split the weight equally while their hotkey holds the UID; each held round drops the oldest, down to one (one uid now: 870). Mechanism 1 (10%): an equal share per accepted problem over 24 hours (261 uids); a payout over six hours old burns to UID 0.</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-11-28, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-bad">Owner only</span>One permit, held by the owner&#x27;s UID 0; the chain allows 1 validator.</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">46.2%</span>46.2% of last-epoch emission sits on UID 0 (dividends 98.7%); owner cut 13%; RecycleOrBurn is Burn.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">261 uids</span><span class="v2-sx muted">top 5 hold 90.5% of incentive.</span> Weights name 261 of 1,000 uids: uid 870 holds 90% (mechanism 0), 260 more share the Generator&#x27;s 10%.</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-caution">Single validator</span>One validator sets weights, so there is nothing to compare.</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-caution">Partial</span>Judge, payout, writers and Generator public in the repo (v2 in main since 11-25); no licence; read in part.</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner (training file) <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Uploads one file; paid only if it wins a round, then while among the last 10 winners.</p><ul>
+<li>Per-file settings (learning rate, steps, LoRA rank) are published only if you win.</li>
+<li>File check 04:27 UTC on 11-28: 3 of 86 waiting seats valid.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Miner (Generator) <span class="v2-barrier b-low">Low barrier</span></h3><p>Signs problem IDs per 4-hour epoch; each accepted problem earns an equal share for 24 hours.</p><ul>
+<li>Accepted when the frozen head passes 25% to 75% of 8 to 32 samples; a problem pays once, the first upload wins.</li>
+<li>00:00 UTC epoch on 11-28: 80 of 1,413 tasks accepted; payout file 02:32 UTC: 362 claims, 264 UIDs; epochs 11-25 to 11-27 12:00 UTC were void.</li>
+</ul></section><section class="v2-rdetail" id="sn-role-2"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Sets the weights; in practice only the owner&#x27;s validator does.</p><ul>
+<li>Judge, payout and weight writers are public in the repo (v2 merged into main on 11-25).</li>
+</ul></section></div>
+<h2 id="sn-x0">How the rules changed</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Date</th><th>Change</th></tr></thead><tbody><tr><td>2026-11-14</td><td>v2 starts: up to 6 files a round; the last 10 winners share the pay.</td></tr><tr><td>2026-11-22</td><td>A round where the king holds drops the oldest king.</td></tr><tr><td>2026-11-24</td><td>A crown is paid only once the next round confirms it (site).</td></tr><tr><td>2026-11-28</td><td>Crown bar z 1.5, confirmation bar z 0.5; anti-recite check and KL ceiling.</td></tr></tbody></table></div>
+<h2 id="sn-x1">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Pay pruning</td><td>Site: held rounds drop the oldest king, down to one</td><td>Code: payout.py; Chain: 1 weighted uid (870) = the paid king listed</td><td>2026-11-28</td></tr><tr><td>Crown confirmation</td><td>Site: paid only after the next round confirms</td><td>Code: crown bar 1.5 apart from confirmation bar 0.5; Chain: weights name the confirmed king</td><td>2026-11-28</td></tr><tr><td>Generator payout</td><td>Site: equal share per accepted task</td><td>Code: weights.py burns all of mechanism 1 on a claimant hotkey change; Chain: 261 uids paid, UID 0 1.7%; cause not read</td><td>2026-11-28</td></tr></tbody></table></div>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-neutral">Neutral</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">low confidence, as of 2026-11-28. Not financial advice.</span></div>
+<p class="v2-thesis">Outflow (-7,650 TAO in 30 days) and a 30-day-low price weigh against it, but only -295 TAO left in the last 2 days. The Generator pays 261 uids again; training pays one winner. Usage cannot be verified.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.03823 TAO per alpha</dd></div><div><dt>Pool</dt><dd>72,783 TAO, rank 5</dd></div><div><dt>Price, 30 days</dt><dd>-9%, 2026-10-29 to 2026-11-28</dd></div><div><dt>Net flow, 30 days</dt><dd>-7,650 TAO, 2026-10-29 to 2026-11-28</dd></div><div><dt>Miner pay</dt><dd>Mechanism 0: uid 870 at 100%; mechanism 1: 261 uids</dd></div><div><dt>Code activity</dt><dd>main: 755 commits in 30 days (about 600 from the 11-25 v2 merge)</dd></div></dl>
+<div class="v2-trend"><h3>Trend</h3><div class="v2-tbody"><figure class="v2-tfig"><svg class="v2-spark down" viewBox="0 0 240 56" role="img" aria-label="Price in TAO per alpha, 2026-09-28 to 2026-11-28: 0.04967 to 0.03823, -23.0%"><polyline points="5.0,5.0 16.3,16.6 20.1,18.1 27.6,19.3 31.4,18.5 35.2,17.0 38.9,21.7 42.7,23.0 46.5,23.2 54.0,24.4 57.8,26.6 61.6,29.2 65.3,31.7 69.1,34.8 72.9,31.6 76.6,31.8 80.4,32.0 84.2,31.8 88.0,33.9 91.7,33.4 95.5,39.7 99.3,39.5 103.0,35.2 106.8,36.0 110.6,37.5 114.3,31.8 118.1,36.4 121.9,36.7 125.7,37.4 129.4,37.5 133.2,37.3 137.0,36.9 140.7,36.4 144.5,33.3 148.3,31.5 152.0,33.6 155.8,34.0 159.6,34.1 163.4,33.9 167.1,32.9 170.9,35.7 174.7,35.6 178.4,37.3 182.2,39.7 186.0,40.4 189.8,41.1 193.5,44.6 197.3,46.0 201.1,47.1 204.8,47.2 208.6,47.5 212.4,47.2 216.1,45.8 219.9,50.2 223.7,49.9 227.5,50.7 231.2,50.7 235.0,51.0"/><circle cx="235.0" cy="51.0" r="3"/></svg><figcaption><strong>Price</strong> <span class="down">-23.0%</span> <span class="muted">0.04967 to 0.03823 TAO per alpha, 2026-09-28 to 2026-11-28</span></figcaption></figure><dl class="v2-tfacts"><div><dt>Net flow, 30 days</dt><dd><span class="down">-7,650 TAO</span> <span class="muted">2026-10-29 to 2026-11-28</span></dd></div><div><dt>Verdict history</dt><dd><ol class="v2-vh"><li><span class="muted">2026-11-16</span> <span class="st s-neutral">Neutral</span> <span class="st v-unclear">Unclear</span> <span class="muted">low confidence</span></li><li><span class="muted">2026-11-23</span> <span class="st s-neutral">Neutral</span> <span class="st v-unclear">Unclear</span> <span class="muted">low confidence</span></li><li><span class="muted">2026-11-25</span> <span class="st s-neutral">Neutral</span> <span class="st v-unclear">Unclear</span> <span class="muted">low confidence</span></li><li><span class="muted">2026-11-28</span> <span class="st s-neutral">Neutral</span> <span class="st v-unclear">Unclear</span> <span class="muted">low confidence</span></li></ol></dd></div></dl></div></div>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>Generator pays 261 uids again; tasks and problem pool are public</li>
+<li>The team ships; round 169 confirmed crown 870</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>Price -9%; net outflow in 4 of 5 weekly steps</li>
+<li>Training pays one winner; 9 of 17 crowns since round 134 failed confirmation; chat unread</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> Net inflow, several confirmed winners and a steady Generator payout point to bullish; more failed crowns or renewed outflow, to bearish.</p>
+<p class="muted">Since the last pass: Unchanged from 2026-11-25 (neutral): outflow slowed and the Generator pays again; training pays one winner.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-similar">Similar subnets</h2>
+<div class="v2-sim"><p>By pool size this is <strong>rank 1 of 20</strong> among the subnets grouped as <em>training</em> (what they mainly sell). Pool and price as of 2026-11-26 to 2026-11-28, price in TAO per alpha; the barrier is the easiest miner role.</p><div class="scroll"><table class="v2-table"><thead><tr><th>#</th><th>Subnet</th><th>Pool</th><th>Price</th><th>Miner barrier</th></tr></thead><tbody><tr class="me" aria-current="true"><td>1</td><td>Affine <span class="muted">SN120, this page</span></td><td>72,783 TAO</td><td>0.03823</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr><td>2</td><td><a href="/bittensor-docs/subnets/3.html">Teutonic</a> <span class="muted">SN3</span></td><td>63,591 TAO</td><td>0.0174</td><td><span class="v2-barrier b-high">High</span></td></tr><tr><td>3</td><td><a href="/bittensor-docs/subnets/9.html">IOTA</a> <span class="muted">SN9</span></td><td>54,535 TAO</td><td>0.02447</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>4</td><td><a href="/bittensor-docs/subnets/56.html">Gradients</a> <span class="muted">SN56</span></td><td>47,907 TAO</td><td>0.01356</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>5</td><td><a href="/bittensor-docs/subnets/1.html">Apex</a> <span class="muted">SN1</span></td><td>20,898 TAO</td><td>0.005394</td><td><span class="v2-barrier b-medium">Medium</span></td></tr></tbody></table></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-11-28</span> <span class="muted">(team site)</span> Round 168 crowned uid 870 (z 2.15); round 169 confirmed it (+0.0108) with no new king; round 170 opened 04:30 UTC.</li>
+<li><span class="when">2026-11-27</span> <span class="muted">(team site)</span> The head was rolled back at 19:36 UTC: round 163&#x27;s crown (uid 829) failed confirmation, its training data matched pool answers.</li>
+<li><span class="when">2026-11-27</span> <span class="muted">(team site)</span> Generator results resumed at the 16:00 UTC epoch after three void epochs; 80 of 1,413 tasks accepted on 11-28.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Read the guide and the v2 code.</li>
+<li>Register a hotkey (burn about 0.6 TAO on 2026-11-28), then publish the one-time activation.</li>
+<li>Training file: build one file, check it locally, upload; 86 seats wait.</li>
+<li>Generator: sign up to 3 problem IDs and upload before the 4-hour deadline.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Rules changed several times in two weeks; older figures may not hold.</li>
+<li>The team site is the only source for round scores, confirmations and Generator results.</li>
+<li>Team posts after 2026-11-01 were not read (archive down).</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/AffineFoundation/affine" rel="noopener noreferrer">GitHub (main repo)</a></li>
+<li><a href="https://affine.io/" rel="noopener noreferrer">Dashboard</a></li>
+<li><a href="https://affine.io/llms.txt" rel="noopener noreferrer">Mining guide (free-file protocol)</a></li>
+<li><a href="https://github.com/AffineFoundation/affine/blob/main/docs/MINER_QUICKSTART.md" rel="noopener noreferrer">Miner quickstart (repo)</a></li>
+<li><a href="https://affine.io/mining.json" rel="noopener noreferrer">Live contract and batch cap (JSON)</a></li>
+<li><a href="https://affine.io/ff/status.json" rel="noopener noreferrer">Batch-file check status (JSON)</a></li>
+<li><a href="https://github.com/AffineFoundation/affine/tree/main/ops/free_file" rel="noopener noreferrer">Validator side of the file protocol (repo)</a></li>
+<li><a href="https://affine.io/scores.json" rel="noopener noreferrer">Latest scores (JSON)</a></li>
+<li><a href="https://affine.io/k1.json" rel="noopener noreferrer">Turn results and queue (JSON)</a></li>
+<li><a href="https://affine.io/gate.json" rel="noopener noreferrer">Promotion gate ledger (JSON)</a></li>
+<li><a href="https://affine.io/k1/replay/README.md" rel="noopener noreferrer">Replay a turn (README)</a></li>
+<li><a href="https://affine.io/k1/dev/README.md" rel="noopener noreferrer">Public dev task split (README)</a></li>
+<li><a href="https://github.com/AffineFoundation/affine/tree/main/miner" rel="noopener noreferrer">Miner kit (repo)</a></li>
+<li><a href="https://affine.io/performance.json" rel="noopener noreferrer">Kings list (JSON)</a></li>
+<li><a href="https://affine.io/gate/heldout/current.json" rel="noopener noreferrer">Held-out gate, current round (JSON)</a></li>
+<li><a href="https://affine.io/k1/fp32-master/current.json" rel="noopener noreferrer">Latest fp32 master announcement (JSON)</a></li>
+<li><a href="https://github.com/AffineFoundation/affine/blob/main/miner/kit/fetch_fp32_master.py" rel="noopener noreferrer">fp32 master download script (repo)</a></li>
+<li><a href="https://affine.io/caps.json" rel="noopener noreferrer">Token caps (JSON)</a></li>
+<li><a href="https://github.com/AffineFoundation/affine/blob/main/miner/data/gate-pool-v2.jsonl" rel="noopener noreferrer">Gate pool v2 (repo)</a></li>
+<li><a href="https://affine.io/generator" rel="noopener noreferrer">Generator page (mechanism 1)</a></li>
+<li><a href="https://affine.io/generator/generator-guide.md" rel="noopener noreferrer">Generator miner guide</a></li>
+<li><a href="https://affine.io/generator/state.json" rel="noopener noreferrer">Generator epoch state (JSON)</a></li>
+<li><a href="https://affine.io/generator/payout.json" rel="noopener noreferrer">Generator payout vector (JSON)</a></li>
+<li><a href="https://github.com/AffineFoundation/affine/releases/tag/sn120-math-prior-v1" rel="noopener noreferrer">Problem pool release (GitHub)</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 8 sources</summary>
+<ul>
+<li><strong>msg</strong> #affine 2026-10-29 to 2026-11-01 (179 messages: team gate posts and notices, miner reports, owner statements; newest 2026-11-01 22:00 UTC; the archive was unreachable again on 2026-11-25, so later posts are unread)</li>
+<li><strong>repo</strong> AffineFoundation/affine, 2026-11-28 06:0x UTC: main at 04e15ad (2026-11-28 00:27 UTC, merge of PR 356), v2 at 43bf73b (00:28 UTC); main is 9 commits past 76cbaa2 (the 11-25 v2 merge): PRs 339 (public math dashboard), 349, 353, 356; diff read for params.py, judging.py, REPLICATE.md; v2 files read: payout.py in full, generator/payout.py and generator/weights.py in part.</li>
+<li><strong>web</strong> affine.io/llms.txt (v2 miner contract, generated 2026-11-28 04:29:56 UTC) and mining.json (same snapshot; round 170 open since 04:29:56 UTC; history r150 to r169: 9 null, 7 applied, 4 no decision; paid king uid 870 (r168); confirmation record r114 to r168: 10 paid, 16 unpaid, 5 no decision; head rolled back 2026-11-27 19:36:42 UTC); generator/state.json (last epoch 20261128T0000Z, current 20261128T0800Z), payout.json (updated 2026-11-28 02:32:00 UTC, 362 claims, 261 weighted uids, max age 21,600 s) and the manifests of epochs 20261126T0000Z and 20261127T1200Z (void_missed_king_capture).</li>
+<li><strong>web</strong> Chain reads at block 9603370 (2026-11-28 05:41 UTC): SN120 (Affine): dossier (1,000 of 1,000 uids, 2 mechanisms, registration burn 0.62 TAO, owner uid 0 holds 46.2% of last-epoch emission, emission split 0/0/13/36/41), refresh since 2026-11-25 00:00 UTC (no setting changed apart from the burn; pool 72,801.56 to 72,783.06 TAO), weights mechanism 0 (uid 870 at 100%, set about 05:05 UTC) and mechanism 1 (261 uids, UID 0 1.7%), uids (last-epoch incentive still on uid 809, the previous paid king).</li>
+<li><strong>web</strong> Chain read at block 9603370 (2026-11-28 05:41Z): price SN120, 6 samples every 7d from block 9387370 (2026-10-29 05:33Z): price 0.041778 -&gt; 0.038234 TAO per alpha (-8.5%), pool TAO 74529.5 -&gt; 72783.1; over the 5 intervals where the pool change equals flow + protocol: net user flow -7649.7 TAO (staked minus unstaked), protocol flow +5903.3 TAO, gross volume 57810.1 TAO. The page&#x27;s -9% runs from the price-file point at 2026-10-29 09:31Z (block 9388558).</li>
+<li><strong>web</strong> Chain read at block 9603370 (2026-11-28 05:41Z): price SN120, 9 samples every 1d from block 9545770 (2026-11-20 05:36Z): price 0.038826 -&gt; 0.038234 TAO per alpha (-1.5%); net user flow -1566.9 TAO over 8 intervals (7 out, last day -182.9 TAO), protocol +1391.1 TAO, gross volume 9466.9 TAO.</li>
+<li><strong>web</strong> Chain read at block 9603370 (2026-11-28 05:41Z): price SN120, 9 samples every 6h from block 9588970 (2026-11-26 05:41Z): price 0.038303 -&gt; 0.038234 TAO per alpha (-0.2%), net user flow -295.1 TAO over 8 intervals (7 out); the snapshot at the same block puts SN120 5th of 130 non-root pools by pool TAO (72,783).</li>
+<li><strong>web</strong> Repo pace 2026-11-28: AffineFoundation/affine (main) last_commit 2026-11-27, commits_30d 755, code_30d 599, last release 2026-11-19 (repo_numbers.py); about 600 of the 30-day commits came with the v2 merge into main on 11-25; ls-remote: main 04e15ad, v2 43bf73b.</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/119.html"><small>← Previous</small>SN119 CapabilityForge Next</a><a rel="next" href="/bittensor-docs/subnets/121.html"><small>Next →</small>SN121 sundae_bar</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-11-28. Site built 2026-11-28. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

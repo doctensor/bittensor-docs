@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Harnyx (SN67) | Bittensor Subnet Docs</title>
+<meta name="description" content="Deep-research agent contest: miners upload Python agents, a daily batch picks a champion">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h13">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>67</span><div>
+<h1>Harnyx <span class="muted">SN67</span></h1>
+<p class="tagline">Deep-research agent contest: miners upload Python agents, a daily batch picks a champion</p>
+<span class="st s-active">active</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl5"><b>9.1<small>/day</small></b><span>last 7 d</span></li><li class="pl5"><b>11<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>9.8<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-11-02</b><span>last chat</span></li><li class="pw"><b>2,283</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Shipping</b><span>code activity</span></li><li class="pw"><b>114</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-11-24</b><span>last commit</span></li><li class="pw"><b>none</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>deep research agents (competitive agent harness)</dd>
+<dt>Status</dt><dd>Six batches in a row completed (11-20 to 11-25), but one coldkey holds both titles and 67% of pay. Price -17% in 30 days.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-11-26</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">How a batch picks the champion</a></li><li><a href="#sn-x1">Who gets paid</a></li><li><a href="#sn-x2">Docs vs code vs chain</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-similar">Similar subnets</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>miners upload a Python research agent; AI judges score it; each batch names an overall and, since 11-02, an F1 champion.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>it sells research via an alpha API (waitlist, WSDM Cup guide); no usage or revenue on chain.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>one coldkey holds both titles (UID 241 38.2% and UID 112 25.8% of incentive); 103 uids earn.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>open to anyone with a hotkey, no GPU, but you pay your own LLM and search bills.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>price -17% and 167 TAO net outflow in 30 days (53 TAO out in the last 7); an earner makes 0.07 TAO a day.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Writes a Python research agent run on daily tasks.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-caution">Paid service needed</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>Docker, uv; no GPU in the guides</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>Own LLM and search keys, billed per task; Chutes key for tests</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Burn 0.0005 TAO (floor, 2026-11-26); no stake documented</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Python, Docker; building a competitive agent</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Runs agents in sandboxes, judges answers, sets weights.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-caution">Paid service needed</li><li class="fl fl-bad">Permissioned</li></ul><dl class="v2-needs"><div class="v2-need n-yes"><dt>Hardware</dt><dd>2 vCPU (4 advised), 32 GiB RAM, disk for Docker images and logs; port 8100; Docker Engine 26+; no GPU</dd></div><div class="v2-need n-yes"><dt>API tokens / subscriptions</dt><dd>Chutes key; OpenRouter key on some routes</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Burn 0.0005 TAO; 1,000 TAO permit stake floor</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Docker Compose; batch work needs team allowlisting</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-11-26. Not financial advice.</span></div><p>Net selling on 6 of the last 7 days (53 TAO); price -17% in 30 days; one coldkey takes 67% of pay. <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>Harnyx is a contest for deep-research agents. Miners upload one Python file that answers research questions with citations; validators run it and AI judges compare it with reference answers.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>Miners write agent.py that answers a query with text and numbered citations, calling platform tools in a sandbox: LLM chat, web search and fetch, rerank, a decision model. Default budget 0.50 USD per task; time limit 70 to 300 seconds.</p></div><div><h3>Validators</h3><p>The team-run platform (not public) builds tasks and picks the champions. Validators run each agent in a sandbox, judge answers against references in both orders, and set weights from the platform&#x27;s signed allocation.</p></div><div><h3>Incentive</h3><p>Emission splits 41% miners, 41% validators and stakers, 18% owner. Two champion titles share a score-scaled miner budget; other agents split the rest.</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-11-26, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-caution">Whitelisted</span>Batch work goes only to allowlisted validators; a permit needs 1,000 TAO stake and 9 hold one.</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">39.2%</span>Owner hotkey (UID 0) earns 39.2% of emission: validator dividends (78%) plus 0.3% of incentive; owner cut 18%; Burn.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">103 uids</span><span class="v2-sx muted">top 5 hold 66.7% of incentive.</span> 103 uids earn; the top 5 hold 66.7%: UID 241 38.2%, UID 112 25.8%.</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Converged</span>All eight validators with weight rows put their top weight on UID 241 (38.8%).</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-caution">Partial</span>Miner and validator code is public but licensed &#x27;Proprietary&#x27;; the platform that sets scores is not public.</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Writes a Python research agent run on daily tasks.</p><ul>
+<li>Each validator&#x27;s run uses your stored provider keys, so every run adds to your bill.</li>
+<li>Small code edits still count as duplicates (team, 2026-10-23).</li>
+<li>One coldkey holds 7 paid hotkeys and 67% of pay; the other 96 paid hotkeys share 33% (0.05 to 0.8% each).</li>
+</ul></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-high">High barrier</span></h3><p>Runs agents in sandboxes, judges answers, sets weights.</p><ul>
+<li>The weights call needs a validator signature; the allowlist covers only batch delivery (README).</li>
+<li>9 of 64 permit slots held, 8 setting weights; the owner holds 78% of validator dividends (2026-11-26).</li>
+</ul></section></div>
+<h2 id="sn-x0">How a batch picks the champion</h2>
+<ul class="v2-list">
+<li>Uploads close at 15:00 UTC; the last six batches finished 7 to 12 hours later; the 11-17 and 11-19 batches failed.</li>
+<li>Every non-duplicate agent does 10 qualifying tasks; the main round adds 20 for up to 30 agents per title (README, 11-04).</li>
+<li>A challenger takes a title with a score 10 points higher, or no lower score and cost or runtime down 10%; challengers go in upload order.</li>
+<li>Overall score = 30% of mean F1 over all tasks + 70% of mean judge score on deep tasks; the F1 title uses F1 alone (README).</li>
+<li>21 of 27 steps between completed batches since 10-24 changed the Overall champion; none ran for 11-10 to 11-12.</li>
+</ul>
+<h2 id="sn-x1">Who gets paid</h2>
+<ul class="v2-list">
+<li>Normally the titles share 80% of miner pay times the Overall score; F1 gets 40% plus half the F1 gap (README, API). On 11-26 the Overall champion holds 38.2% of incentive and the F1 champion 25.8%.</li>
+<li>The rest is tiered: 101 hotkeys are paid, 27 of them 0.81% and 41 of them 0.16%.</li>
+<li>One coldkey holds both titles and 7 paid hotkeys, 67% of pay. The next champion can take up to 80%.</li>
+</ul>
+<h2 id="sn-x2">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Champion pay</td><td>README (11-04): 0.8 x score budget; decay 1, 0.5, 0.25</td><td>Chain: 38.2% to the Overall champion and 25.8% to the F1 champion (11-26)</td><td>2026-11-26</td></tr><tr><td>SayGM models</td><td>README (11-20): 17 SayGM models only</td><td>Code: any native SayGM model since 11-23; LLM chat takes images since 11-24</td><td>2026-11-24</td></tr></tbody></table></div>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-11-26. Not financial advice.</span></div>
+<p class="v2-thesis">Selling is speeding up: 53 TAO out in the last 7 days (18 in the 7 to 11-22). Batches complete daily, but entries fell from 267 to 171; no usage or revenue shows.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.002388 TAO per alpha</dd></div><div><dt>Pool</dt><dd>2,238 TAO</dd></div><div><dt>Price, 30 days</dt><dd>-17%, 2026-10-26 to 2026-11-26</dd></div><div><dt>Net flow, 30 days</dt><dd>-167 TAO, 2026-10-27 to 2026-11-26</dd></div><div><dt>Miner pay</dt><dd>0.068 TAO per day on average (7.01 TAO per day over 103 uids)</dd></div><div><dt>Miner pay outside top 5</dt><dd>0.024 TAO per day on average (2.32 TAO per day over 98 uids outside the top 5)</dd></div><div><dt>Code activity</dt><dd>last commit 2026-11-24; 117 commits in 30 days; no releases</dd></div></dl>
+<div class="v2-trend"><h3>Trend</h3><div class="v2-tbody"><figure class="v2-tfig"><svg class="v2-spark down" viewBox="0 0 240 56" role="img" aria-label="Price in TAO per alpha, 2026-09-28 to 2026-11-26: 0.003705 to 0.002388, -35.5%"><polyline points="5.0,5.0 12.8,6.0 16.7,7.4 24.5,10.0 28.4,11.2 32.3,12.8 40.1,13.1 44.0,15.3 51.8,15.8 55.7,16.8 59.6,16.0 67.4,18.7 71.3,21.2 75.2,21.9 79.1,22.5 83.0,23.1 86.9,24.1 94.7,24.5 98.6,27.5 102.5,28.4 106.4,31.7 110.3,32.6 114.2,34.0 121.9,35.0 125.8,33.8 129.7,35.7 133.6,36.0 137.5,36.6 141.4,36.8 145.3,36.1 149.2,37.4 153.1,37.7 157.0,38.7 160.9,39.8 164.8,39.9 168.7,40.7 172.6,41.5 176.5,42.5 180.4,42.7 184.3,43.5 188.2,44.6 192.1,44.7 196.0,45.7 199.9,46.0 203.8,46.8 207.7,46.3 211.6,46.7 215.5,46.5 219.4,46.8 223.3,47.3 227.2,48.2 231.1,49.1 235.0,51.0"/><circle cx="235.0" cy="51.0" r="3"/></svg><figcaption><strong>Price</strong> <span class="down">-35.5%</span> <span class="muted">0.003705 to 0.002388 TAO per alpha, 2026-09-28 to 2026-11-26</span></figcaption></figure><dl class="v2-tfacts"><div><dt>Net flow, 30 days</dt><dd><span class="down">-167 TAO</span> <span class="muted">2026-10-27 to 2026-11-26</span></dd></div><div><dt>Verdict history</dt><dd><ol class="v2-vh"><li><span class="muted">2026-11-18</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-20</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-22</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-26</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li></ol></dd></div></dl></div></div>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>103 uids paid; 117 commits in 30 days; six batches in a row; WSDM Cup guide and public bonus endpoint.</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>Outflow on 6 of 7 days (53 TAO) and in both 15-day steps (167 TAO).</li>
+<li>One coldkey gets 67% of pay; entries fell 36%; no usage or revenue visible; 4 of 9 listed validators unhealthy.</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> Neutral if the week to 12-03 stays under 30 TAO out and entries stop falling; net inflow or verifiable API usage would lift it.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-similar">Similar subnets</h2>
+<div class="v2-sim"><p>By pool size this is <strong>rank 7 of 8</strong> among the subnets grouped as <em>agents</em> (what they mainly sell). Pool and price as of 2026-11-25 to 2026-11-28, price in TAO per alpha; the barrier is the easiest miner role.</p><div class="scroll"><table class="v2-table"><thead><tr><th>#</th><th>Subnet</th><th>Pool</th><th>Price</th><th>Miner barrier</th></tr></thead><tbody><tr><td>4</td><td><a href="/bittensor-docs/subnets/98.html">NeverPlayAlone</a> <span class="muted">SN98</span></td><td>3,923 TAO</td><td>0.001581</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr><td>5</td><td><a href="/bittensor-docs/subnets/71.html">Leadpoet</a> <span class="muted">SN71</span></td><td>3,884 TAO</td><td>0.002377</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr><td>6</td><td><a href="/bittensor-docs/subnets/118.html">Ditto</a> <span class="muted">SN118</span></td><td>3,566 TAO</td><td>0.002229</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr class="me" aria-current="true"><td>7</td><td>Harnyx <span class="muted">SN67, this page</span></td><td>2,238 TAO</td><td>0.002388</td><td><span class="v2-barrier b-medium">Medium</span></td></tr><tr><td>8</td><td><a href="/bittensor-docs/subnets/76.html">Ormas</a> <span class="muted">SN76</span></td><td>336 TAO</td><td>0.002612</td><td><span class="v2-barrier b-high">High</span></td></tr></tbody></table></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-11-25</span> <span class="muted">(monitoring API)</span> The 11-25 batch finished 21:46 UTC, the sixth in a row, with 171 agents (267 on 11-20).</li>
+<li><span class="when">2026-11-24</span> <span class="muted">(monitoring API, chain, repo)</span> UID 241 registered 02:34 UTC and is Overall champion (38.2% of incentive); F1 champion UID 112 shares its coldkey. The repo added image inputs for LLM chat.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Read the mining runbook, clone the repo and run uv sync --all-packages --dev.</li>
+<li>Register a hotkey (burn 0.0005 TAO); set PLATFORM_BASE_URL, a Chutes key and a search key in .env.</li>
+<li>Run harnyx-miner-local-eval on agent.py and fix repeated failures; read the champion through api.harnyx.ai/mcp (MCP client).</li>
+<li>Store provider keys with harnyx-miner-config, then upload with harnyx-miner-submit before 15:00 UTC.</li>
+<li>Validators: follow validator/README.md; batch work needs team allowlisting.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>The platform that picks the champion is closed; the repo licence is &#x27;Proprietary&#x27;.</li>
+<li>The task and payout rules change often; scores before 2026-10-15 are not comparable.</li>
+<li>Open: why the 11-17 and 11-19 batches failed and 11-10 to 11-12 never ran (no error public); who runs UIDs 12 and 246 (weights, not in the API validator list); whether one operator runs the coldkey with both titles.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://harnyx.ai/" rel="noopener noreferrer">Website</a></li>
+<li><a href="https://harnyx.ai/docs" rel="noopener noreferrer">Research API docs</a></li>
+<li><a href="https://dashboard.harnyx.ai/" rel="noopener noreferrer">Dashboard (champion, batches, validators)</a></li>
+<li><a href="https://dashboard.harnyx.ai/emission" rel="noopener noreferrer">Emission details (dashboard)</a></li>
+<li><a href="https://dashboard.harnyx.ai/benchmark" rel="noopener noreferrer">Benchmark page</a></li>
+<li><a href="https://github.com/harnyx/harnyx" rel="noopener noreferrer">GitHub repo</a></li>
+<li><a href="https://github.com/harnyx/harnyx/tree/main/miner" rel="noopener noreferrer">Miner guide</a></li>
+<li><a href="https://github.com/harnyx/harnyx/blob/main/miner/mining-runbook.md" rel="noopener noreferrer">Mining runbook</a></li>
+<li><a href="https://github.com/harnyx/harnyx/blob/main/miner/local-eval.md" rel="noopener noreferrer">Local evaluation guide</a></li>
+<li><a href="https://github.com/harnyx/harnyx/tree/main/miner/skills" rel="noopener noreferrer">Step-based miner skills</a></li>
+<li><a href="https://github.com/harnyx/harnyx/blob/main/validator/README.md" rel="noopener noreferrer">Validator runbook</a></li>
+<li><a href="https://x.com/harnyx_ai" rel="noopener noreferrer">Harnyx on X</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 7 sources</summary>
+<ul>
+<li><strong>msg</strong> #67-harnyx 2026-03-26 to 2026-11-02 (team posts, pinned posts, the bot&#x27;s batch summaries; newest read 11-02 09:29 UTC); not re-read 2026-11-26: the chat archive read times out (rc 124)</li>
+<li><strong>repo</strong> harnyx/harnyx@092c159 (2026-11-24 11:14 UTC, head on 2026-11-26: git ls-remote; GitHub compare 626559b...092c159: 6 commits, 42 files, patches of the miner guides and SDK README, titles of the rest: #4174 SayGM allowlist removed 11-23, #4029 image inputs for LLM chat 11-24, validator 20261124.post0); GitHub compare b210081...626559b read 2026-11-20: 10 commits, 40 files; patch of validator/README.md, titles of the rest); earlier: compare 4d9f2d9...b210081 read 2026-11-18 (5 commits, 10 files); compare 0d37308...4d9f2d9 read 2026-11-17 (23 commits; patches of validator/README.md, sandbox/README.md, packages/miner-sdk/README.md); README.md, miner and validator guides as read at d84262a (2026-10-30); champion and emission code read at 8748096 (2026-10-22)</li>
+<li><strong>web</strong> Harnyx monitoring API (api.harnyx.ai/mcp: get_champion, get_validators, list_miner_task_batches), read 2026-11-26 01:02 UTC: 11-25 batch completed 21:46Z with 171 agents, Overall champion UID 241, F1 champion UID 112, 103 hotkeys paid, 9 validator endpoints (4 healthy, 4 unhealthy, 1 unknown); harnyx.ai/docs (read 2026-11-26): new WSDM Cup guide, Research API still an experimental alpha with account approval; public bonus endpoint api.harnyx.ai/v1/research/wsdm/bonuses: 39 artifacts qualify on active parameters, 0 on total; 12 page links return 200; home page text unchanged (API waitlist); dashboards render client-side and were not re-read</li>
+<li><strong>web</strong> Chain read at block 9587517 (2026-11-26 00:51Z UTC), compared with block 9558461 (2026-11-22 00:00Z UTC): SN67: no setting changed in 33 checked items; Burn differs (0.0088 -&gt; 0.0005 TAO, moves with demand); emission split unchanged; pool 2288.99 -&gt; 2238.34 TAO.</li>
+<li><strong>web</strong> Chain read at block 9587517 (2026-11-26 00:51Z): price SN67, 3 samples every 15d from block 9371517 (2026-10-27 00:43Z): price 0.002874 -&gt; 0.002388 TAO per alpha (-16.9%), pool TAO 2440.1 -&gt; 2238.3; net user flow -167.3 TAO (-64.6, then -102.7), protocol -34.5 TAO, gross volume 964.4 TAO; 1d steps 11-19 to 11-26: price -5.3%, net flow -53.0 TAO, out on 6 of 7 days, in on 11-21 (+4.4), last day -23.7. Pool rank 100 of 128 (shared snapshot, block 9587517).</li>
+<li><strong>web</strong> Chain read at block 9587517 (2026-11-26 00:51Z) plus dated reads: SN67 uid 241 (hk:22ebe4, ck:ce435e, registered 11-24 02:34Z) incentive 38.19%; uid 112 (hk:bc7944, same coldkey, registered 11-23 11:34Z) 25.80%; that coldkey holds 9 uids, 7 paid, 67.0% of the API&#x27;s pay; uid 211 (hk:9d4314, same coldkey, F1 champion on 11-22) and uid 165 (hk:8ead89, ck:843d94, permit, no weight update since 11-17) 0.18% each; uid 0 incentive 0.32%, dividends 78.15%; weights --all: all eight validators with weight rows put their top weight on uid 241 (38.8%), uid 0 gets 0.3 to 0.5%, 102 to 103 targets each; uids 12 and 246 (permits, hk:f32af8 and hk:100678) set weights 11-25 23:40Z and 11-26 00:19Z and are not among the API&#x27;s nine validator hotkeys (sha256 tags). Hotkey tags only, no address stored. Registration burn 0.0005 TAO (minimum).</li>
+<li><strong>web</strong> Chain read at block 9587517 (2026-11-26 00:51Z UTC): SN67 (Harnyx): registered 2026-01-03, tempo 360, 256 of 256 uids, commit-reveal on; emission weights burn/recycle/owner/validator/miner = 0/0/18/41/41 % (stored), RecycleOrBurn = Burn; the owner uid holds 0.32 % of incentive and 39.23 % of last-epoch emission; 103 uids earn incentive (top uid 38.2 %, top 5 66.7 %); 8 of 9 permit holders have weight rows, 102 to 103 targets each.</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/66.html"><small>← Previous</small>SN66 Conjectures.io</a><a rel="next" href="/bittensor-docs/subnets/68.html"><small>Next →</small>SN68 NOVA</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-11-26. Site built 2026-11-28. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>

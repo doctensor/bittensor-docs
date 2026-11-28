@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>InfiniteQuant (SN89) | Bittensor Subnet Docs</title>
+<meta name="description" content="Miners post trade calls graded on public prices; a team-run entity UID holds 79% of main-mechanism pay (2026-11-28).">
+<link rel="preload" href="/bittensor-docs/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/bittensor-docs/style.css">
+</head>
+<body>
+<main class="sn-page">
+<article class="subnet h23">
+<nav class="top"><a href="/bittensor-docs/">All subnets</a></nav>
+<header class="sn-head"><span class="sn-num" aria-hidden="true"><small>SN</small>89</span><div>
+<h1>InfiniteQuant <span class="muted">SN89</span></h1>
+<p class="tagline">Miners post trade calls graded on public prices; a team-run entity UID holds 79% of main-mechanism pay (2026-11-28).</p>
+<span class="st s-transitioning">transitioning</span></div></header>
+<ul class="sn-pace" aria-label="Chat pace, messages per day"><li class="pl4"><b>4.7<small>/day</small></b><span>last 7 d</span></li><li class="pl4"><b>2.7<small>/day</small></b><span>days 8-30</span></li><li class="pl5"><b>7.0<small>/day</small></b><span>days 31-90</span></li><li class="pw"><b>2026-11-02</b><span>last chat</span></li><li class="pw"><b>1,383</b><span>chat msgs in all</span></li></ul>
+<ul class="sn-pace sn-code" aria-label="Code activity"><li class="pw"><b>Shipping</b><span>code activity</span></li><li class="pw"><b>44</b><span>code commits in 30 d</span></li><li class="pw"><b>2026-11-27</b><span>last commit</span></li><li class="pw"><b>2026-11-04</b><span>last release</span></li></ul>
+<div class="sn-grid">
+<aside class="sn-rail">
+<dl class="meta">
+<dt>Category</dt><dd>trading signals / prediction markets</dd>
+<dt>Status</dt><dd>Since 2026-11-09 one entity UID takes 79% of pay (11-28); 22 others earn the rest; new agent pool rules run from the week of 11-23.</dd>
+<dt>Confidence</dt><dd>medium</dd>
+<dt>Researched</dt><dd>2026-11-28</dd>
+</dl>
+<nav class="sn-toc" aria-label="On this page"><ol><li><a href="#sn-glance">At a glance</a></li><li><a href="#sn-what">What it is</a></li><li><a href="#sn-how">How it works</a></li><li><a href="#sn-scorecard">Scorecard</a></li><li><a href="#sn-roles">Roles and requirements</a></li><li><a href="#sn-x0">What changed since 2026-11-22</a></li><li><a href="#sn-x1">The entity route</a></li><li><a href="#sn-x2">The Agent contest</a></li><li><a href="#sn-x3">Docs vs code vs chain</a></li><li><a href="#sn-market">Market view</a></li><li><a href="#sn-similar">Similar subnets</a></li><li><a href="#sn-activity">Recent activity</a></li><li><a href="#sn-start">Getting started</a></li><li><a href="#sn-caveats">Caveats</a></li><li><a href="#sn-links">Links</a></li><li><a href="#sn-sources">Sources</a></li></ol></nav>
+</aside>
+<div class="sn-body">
+<h2 id="sn-glance">At a glance</h2>
+<div class="v2-glance"><ul class="v2-points"><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>entity UID 39 holds 79.3% of main-mechanism incentive (81.2% on 11-22), 23 other UIDs 20.7%; 7 of 8 weight-setters back it.</span></li><li class="tg"><span class="v2-tag t-code" title="Seen in the public repository">Code</span><span>from the week of 11-23 half the agent pool pays 90-day, drawdown-adjusted gains; validators must update before the 11-30 freeze.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>bond coldkey holds 48,215 alpha (44,205 on 11-26); unstakes match 9,694 alpha of drops in UID 39&#x27;s stake, 11-22 to 11-25.</span></li><li class="tg"><span class="v2-tag t-team" title="Stated by the team only; chain and code do not confirm it">Team says</span><span>the 11-16 agent file pays 24 of 67 accounts (bond 53,166); 895 LF traders, 65 earn.</span></li><li class="tg"><span class="v2-tag t-chain" title="Seen on chain, as of the market date">Chain</span><span>price -9.0% in 30 days, at its 30-day low; outflow 262 TAO in 30 days; pool 5,849 TAO, rank 65.</span></li></ul><div class="v2-roles"><div class="v2-role"><h3>Miner <span class="v2-barrier b-low">Low barrier</span></h3><p>23 other UIDs earn 20.7% of main-mechanism pay (11-28); the rest runs through the team&#x27;s entity accounts.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-no"><dt>Hardware</dt><dd>No GPU (no GPU library in the code); CPU specs not stated</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None required; a free feed token comes from the team&#x27;s Telegram bot</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Burn 0.025 TAO (11-28); 500-alpha bond per own UID (about 1.3 TAO), code only</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Python 3.10 and btcli, or the team&#x27;s Telegram bot; 8-day warmup; entity route not documented</dd></div></dl><a class="v2-more" href="#sn-role-0">Full requirements</a></div><div class="v2-role"><h3>Validator <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Grade calls on public prices and set weights; the repo expects one authoritative validator.</p><ul class="v2-flags" aria-label="Quick answers"><li class="fl fl-good">No GPU</li><li class="fl fl-good">No paid service</li><li class="fl fl-good">Open to anyone</li></ul><dl class="v2-needs"><div class="v2-need n-no"><dt>Hardware</dt><dd>No GPU (no GPU library in the code); CPU specs not stated</dd></div><div class="v2-need n-no"><dt>API tokens / subscriptions</dt><dd>None: no market-data key is needed (README)</dd></div><div class="v2-need n-yes"><dt>Stake / fees</dt><dd>Burn 0.025 TAO; permit needs top-64 stake and 1,000 TAO</dd></div><div class="v2-need n-info"><dt>Setup effort</dt><dd>Python 3.10; pull master (builds the weekly agent file itself since 11-13)</dd></div></dl><a class="v2-more" href="#sn-role-1">Full requirements</a></div></div><div class="v2-mkline"><div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-11-28. Not financial advice.</span></div><p>Bearish: the entity takes 79% of main-mechanism pay on undocumented terms; 30-day flow -262 TAO. <a class="v2-more" href="#sn-market">Market view</a></p></div></div>
+<h2 id="sn-what">What it is</h2>
+<p>SN89 pays miners who show skill at calling price direction. Since 2026-11-09 most main-mechanism emission lands on one team-run entity UID that pays accounts off chain; 23 other UIDs earn the rest.</p>
+<h2 id="sn-how">How it works</h2>
+<div class="sn-how"><div><h3>Miners</h3><p>LF miners seal a call (pair and direction) under a 15-minute timelock and post its hash on chain, up to 3 a day. Since 2026-11-09 they earn through the team&#x27;s entity accounts, or on their own UID with a bond (500 alpha from 11-11, 1,000 before).</p></div><div><h3>Validators</h3><p>Validators open the commitments after the timelock and grade each call on public prices: take-profit first wins, stop-loss first loses.</p></div><div><h3>Incentive</h3><p>Mechanism 0 gets 80% of emission, mechanism 1 (referrers) 20%; mechanism 0 pays LF 37.5% and agent books 62.5%. A miner qualifies with 8+ decisive calls beating a coin flip at about 90% confidence; weight is qualified wins times a tier (1.0x at 55% to 2.0x at 70%), fading over 30 days.</p></div></div>
+<h2 id="sn-scorecard">Scorecard</h2>
+<div class="v2-score"><p class="muted">Chain figures as of 2026-11-28, main mechanism only. Owner share is a floor: it counts only emission to uids under the owner&#x27;s keys.</p><dl class="v2-sc"><div class="v2-scrow"><dt>Who can validate</dt><dd><span class="v2-sv sv-good">Open</span>8 of 10 permit holders set weights; UID 42 takes 74.0% of dividends; 7 of 8 send 76-80% to UID 39.</dd></div><div class="v2-scrow"><dt>Owner-controlled emission</dt><dd><span class="v2-sv sv-num">2.2%</span>Owner UID 0 holds 2.2% of emission, incentive 0%; owner cut 18%, RecycleOrBurn Burn. UID 39 (the entity) holds 38.2%.</dd></div><div class="v2-scrow"><dt>Earners</dt><dd><span class="v2-sv sv-num">24 uids</span><span class="v2-sx muted">top 5 hold 86.5% of incentive.</span> 24 UIDs earn on the main mechanism: the entity UID 39 (79.3%) and 23 others (20.7%); 23 on 11-27.</dd></div><div class="v2-scrow"><dt>Validator agreement</dt><dd><span class="v2-sv sv-info">Converged</span>7 of 8 weight-setters send 76-80% to UID 39; UID 47 ranks UID 0 first (62.5%).</dd></div><div class="v2-scrow"><dt>Code</dt><dd><span class="v2-sv sv-good">Open</span>Miner and validator code are public under MIT; hosted-account payouts and the vault release path are not documented.</dd></div></dl></div>
+<h2 id="sn-roles">Roles and requirements</h2>
+<div class="v2-rdetails"><section class="v2-rdetail" id="sn-role-0"><h3>Miner <span class="v2-barrier b-low">Low barrier</span></h3><p>23 other UIDs earn 20.7% of main-mechanism pay (11-28); the rest runs through the team&#x27;s entity accounts.</p><p class="muted">No further detail found in the sources.</p></section><section class="v2-rdetail" id="sn-role-1"><h3>Validator <span class="v2-barrier b-medium">Medium barrier</span></h3><p>Grade calls on public prices and set weights; the repo expects one authoritative validator.</p><p class="muted">No further detail found in the sources.</p></section></div>
+<h2 id="sn-x0">What changed since 2026-11-22</h2>
+<p>Chain reads, UTC: 11-22 15:39, 11-26 05:17, 11-27 04:40, 11-28 10:44-10:59.</p>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Item</th><th>2026-11-22</th><th>2026-11-26</th><th>2026-11-27</th><th>2026-11-28</th></tr></thead><tbody><tr><td>Earning UIDs, main mechanism</td><td>23</td><td>24</td><td>23</td><td>24</td></tr><tr><td>UID 39 share of emission</td><td>39.3%</td><td>38.8%</td><td>38.3%</td><td>38.2%</td></tr><tr><td>UID 39 hotkey stake (alpha)</td><td>52,104</td><td>42,261</td><td>44,036</td><td>46,234</td></tr><tr><td>Bond coldkey alpha, chain (40,000 needed)</td><td>54,180</td><td>44,205</td><td>46,034</td><td>48,215</td></tr></tbody></table></div>
+<h2 id="sn-x1">The entity route</h2>
+<ul class="v2-list">
+<li>Chain: earners went 23 (11-22), 25, 24, 23 and now 24 (11-28; UID 50 is back at a trace share). UID 39 holds 79.3% (84.2% on 11-20); the 23 others sit under 12 coldkeys.</li>
+<li>Team: the week-11-16 file (sha256 matches the index) shows bond 53,166 alpha on ck:d86559 (eligible), 24 of 67 accounts with a share and 11 eliminated. Chain: ck:d86559 holds 48,215 alpha (54,180 on 11-22, 44,205 on 11-26). Drops in UID 39&#x27;s hotkey stake of 1,296 (11-22), 2,398 (11-23) and 6,000 (11-25) match unstake events, fees included; signers not confirmed, payouts not read.</li>
+</ul>
+<h2 id="sn-x2">The Agent contest</h2>
+<ul class="v2-list">
+<li>Code: only the allow-listed entity&#x27;s accounts enter; the agent share (62.5%) goes by weekly high-water gain; a book is out 8% below its high, 3% since 11-16.</li>
+<li>Code: commit 05ce1f4 (11-20) splits the agent pool from the week of 11-23 (first paid 11-30): half pays last week&#x27;s high-water gain, half pays 90-day return times a return-to-drawdown ratio (capped at 10), scaled by track length (zero in week one, full at 90 days). Validators must run this release before the 11-30 freeze.</li>
+<li>Code: with no qualifying entity the share burns on UID 0. Chain: UID 47 puts 62.5% on UID 0; seven validators put 76-80% on UID 39, consistent with paying the 11-16 file (timing only).</li>
+<li>Team: issue #41 (Markets payouts) is open, unanswered.</li>
+</ul>
+<h2 id="sn-x3">Docs vs code vs chain</h2>
+<div class="scroll"><table class="v2-table"><thead><tr><th>Claim</th><th>Docs or team say</th><th>Code or chain shows</th><th>As of</th></tr></thead><tbody><tr><td>Miner pay</td><td>How-to-mine: earnings go to your wallet</td><td>Chain: UID 39 earns 79.3%, 23 other UIDs 20.7%</td><td>2026-11-28</td></tr></tbody></table></div>
+<h2 id="sn-market">Market view</h2>
+<div class="v2-market">
+<div class="v2-verdict"><span class="v2-pill"><small>Sentiment</small><span class="st s-bearish">Bearish</span></span><span class="v2-pill"><small>Valuation</small><span class="st v-unclear">Unclear</span></span><span class="v2-conf muted">medium confidence, as of 2026-11-28. Not financial advice.</span></div>
+<p class="v2-thesis">Net outflow was 262 TAO in 30 days (205 in the last 15) on a 5,849 TAO pool; the price fell 9.0% to its 30-day low. Entity UID 39 takes 79% and pays accounts off chain.</p>
+<dl class="v2-stats"><div><dt>Price</dt><dd>0.002691 TAO per alpha</dd></div><div><dt>Pool</dt><dd>5,849 TAO, rank 65</dd></div><div><dt>Price, 30 days</dt><dd>-9%, 2026-10-29 to 2026-11-28</dd></div><div><dt>Net flow, 30 days</dt><dd>-262 TAO, 2026-10-29 to 2026-11-28</dd></div><div><dt>Miner pay</dt><dd>not computed (2 mechanisms)</dd></div><div><dt>Code activity</dt><dd>last commit 2026-11-27; 48 commits (44 code) in 30 days; no releases</dd></div></dl>
+<div class="v2-trend"><h3>Trend</h3><div class="v2-tbody"><figure class="v2-tfig"><svg class="v2-spark down" viewBox="0 0 240 56" role="img" aria-label="Price in TAO per alpha, 2026-09-28 to 2026-11-28: 0.003018 to 0.002691, -10.8%"><polyline points="5.0,9.2 12.5,5.0 16.3,6.7 23.9,10.6 31.4,11.9 38.9,13.6 42.7,12.7 46.5,14.3 50.2,13.3 57.8,11.5 65.3,13.0 69.1,11.6 72.9,14.5 76.6,15.1 84.2,16.8 88.0,17.3 91.7,17.8 95.5,15.5 99.3,16.1 103.0,5.6 106.8,8.1 110.6,13.8 114.3,14.7 118.1,16.6 121.9,16.1 125.7,17.3 129.4,18.0 133.2,18.5 137.0,19.9 140.7,20.2 144.5,21.9 148.3,22.9 152.0,23.3 155.8,23.7 159.6,23.9 163.4,23.9 167.1,22.9 170.9,24.7 174.7,25.2 178.4,25.1 182.2,26.1 186.0,26.1 189.8,26.3 193.5,30.0 197.3,30.8 201.1,32.5 204.8,32.7 208.6,36.8 212.4,38.7 216.1,43.2 219.9,41.7 223.7,45.4 227.5,45.2 231.2,45.5 235.0,51.0"/><circle cx="235.0" cy="51.0" r="3"/></svg><figcaption><strong>Price</strong> <span class="down">-10.8%</span> <span class="muted">0.003018 to 0.002691 TAO per alpha, 2026-09-28 to 2026-11-28</span></figcaption></figure><dl class="v2-tfacts"><div><dt>Net flow, 30 days</dt><dd><span class="down">-262 TAO</span> <span class="muted">2026-10-29 to 2026-11-28</span></dd></div><div><dt>Verdict history</dt><dd><ol class="v2-vh"><li><span class="muted">2026-11-19</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-22</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-27</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li><li><span class="muted">2026-11-28</span> <span class="st s-bearish">Bearish</span> <span class="st v-unclear">Unclear</span> <span class="muted">medium confidence</span></li></ol></dd></div></dl></div></div>
+<div class="v2-cases"><div class="v2-bull"><h3>Bull case</h3><ul>
+<li>The 11-16 week pays 24 accounts; 90-day pool rules run from the week of 11-23</li>
+<li>23 other UIDs earn; 71 books live</li>
+</ul></div><div class="v2-bear"><h3>Bear case</h3><ul>
+<li>Net outflow of 262 TAO in 30 days (205 in the last 15); the price is at its 30-day low</li>
+<li>One team-run UID takes 79% on undocumented terms; who runs the 23 others is unknown</li>
+</ul></div></div>
+<p><strong>What would change this view:</strong> Bullish: documented payouts, inflow. Bearish: the bond under 40,000, the agent share burning again, more outflow.</p>
+<p class="muted">Since the last pass: Unchanged (bearish): outflow continued and the price is at its 30-day low.</p>
+<p class="v2-disc muted">Informational analysis written from public data. It is not financial advice or a recommendation to buy or sell. Prices are in TAO per alpha; chain data shows what happened, not why.</p>
+</div>
+<h2 id="sn-similar">Similar subnets</h2>
+<div class="v2-sim"><p>By pool size this is <strong>rank 10 of 12</strong> among the subnets grouped as <em>trading</em> (what they mainly sell). Pool and price as of 2026-11-26 to 2026-11-28, price in TAO per alpha; the barrier is the easiest miner role.</p><div class="scroll"><table class="v2-table"><thead><tr><th>#</th><th>Subnet</th><th>Pool</th><th>Price</th><th>Miner barrier</th></tr></thead><tbody><tr><td>8</td><td><a href="/bittensor-docs/subnets/79.html">MVTRX</a> <span class="muted">SN79</span></td><td>6,741 TAO</td><td>0.002841</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr><td>9</td><td><a href="/bittensor-docs/subnets/21.html">AdTAO</a> <span class="muted">SN21</span></td><td>6,676 TAO</td><td>0.002602</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr class="me" aria-current="true"><td>10</td><td>InfiniteQuant <span class="muted">SN89, this page</span></td><td>5,849 TAO</td><td>0.002691</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr><td>11</td><td><a href="/bittensor-docs/subnets/88.html">Investing88</a> <span class="muted">SN88</span></td><td>5,209 TAO</td><td>0.002136</td><td><span class="v2-barrier b-low">Low</span></td></tr><tr><td>12</td><td><a href="/bittensor-docs/subnets/123.html">MANTIS</a> <span class="muted">SN123</span></td><td>4,931 TAO</td><td>0.001762</td><td><span class="v2-barrier b-low">Low</span></td></tr></tbody></table></div></div>
+<h2 id="sn-activity">Recent activity</h2>
+<ul class="log">
+<li><span class="when">2026-11-27</span> <span class="muted">(repo)</span> Code: commit 7491915 speeds up the live book board, which it says froze for 21 hours on 11-26; payouts unchanged.</li>
+<li><span class="when">2026-11-25</span> <span class="muted">(web)</span> Chain: UID 39&#x27;s hotkey stake fell 6,000 alpha, matching two 3,000-alpha unstakes.</li>
+</ul>
+<h2 id="sn-start">Getting started</h2>
+<ol>
+<li>Use Python 3.10, clone the repo and install requirements.txt.</li>
+<li>Register a hotkey on netuid 89 with btcli (burn 0.025 TAO on 11-28); an own-UID LF miner also needs a 500-alpha bond (code).</li>
+<li>Send /token to the team&#x27;s Telegram signals bot and export it as SN89_FEED_TOKEN.</li>
+<li>Run neurons/miner.py for LF calls. Expect 8 days at dust weight; call at least every 3 days.</li>
+<li>Hosted: the team&#x27;s Telegram bot (infinitequant.app/how-to-mine) runs a miner for you; payout terms are undocumented.</li>
+</ol>
+<h2 id="sn-caveats">Caveats</h2>
+<ul>
+<li>Chain figures are validator outputs on 2026-11-28 (10:44-10:59 UTC), not payouts; chat after 2026-11-01 was not read.</li>
+<li>That the seven validators pay the 11-16 file is inferred from timing; payout terms, who runs the 23 other UIDs and why stake was unstaked are undocumented.</li>
+</ul>
+<h2 id="sn-links">Links</h2>
+<ul>
+<li><a href="https://github.com/DeltaCompute24/InfiniteQuant-Subnet" rel="noopener noreferrer">GitHub</a></li>
+<li><a href="https://infinitequant.app/signals-program" rel="noopener noreferrer">Signals program</a></li>
+<li><a href="https://infinitequant.app/challenges" rel="noopener noreferrer">IQ Challenges</a></li>
+<li><a href="https://infinitequant.app/agent" rel="noopener noreferrer">IQ Agent</a></li>
+<li><a href="https://infinitequant.app/how-to-mine" rel="noopener noreferrer">How to mine</a></li>
+<li><a href="https://infinitequant.app/recruiters" rel="noopener noreferrer">Recruiters</a></li>
+</ul>
+<h2 id="sn-sources">Sources</h2>
+<details class="sn-src"><summary>Show 9 sources</summary>
+<ul>
+<li><strong>repo</strong> DeltaCompute24/InfiniteQuant-Subnet @7491915 (2026-11-27 16:24Z UTC, head on 2026-11-28): commit message and diff of 7491915 (live-board drawdown checkpoint; diff read in part); earlier passes read 05ce1f4, 7c892c3, 50446e1, 38fea22, 88d818d, 7bb92a0, config.py, agent_books.py, competitions.py; 48 commits (44 code) in 30 days (counted 2026-11-28), no releases (one backup tag)</li>
+<li><strong>web</strong> Chain read at block 9604884 (2026-11-28 10:44Z UTC): SN89 (InfiniteQuant): registered 2025-04-09, tempo 360, 256 of 256 uids, 2 mechanisms (uids / weights below = mechanism 0), commit-reveal on; emission weights burn/recycle/owner/validator/miner = 0/0/18/41/41 % (stored, same values as the chain default), RecycleOrBurn = Burn; uids under the owner hotkey or owner coldkey hold 0 % of incentive and 2.24 % of last-epoch emission (a floor); 8 validators have weight rows, on average 7.8 % of weight goes to uid 0.</li>
+<li><strong>web</strong> Chain read at block 9604884 (2026-11-28 10:44Z UTC), compared with block 9594461 (2026-11-27 00:00Z UTC): SN89: no setting changed in 33 checked items; emission split unchanged; pool 5899.49 -&gt; 5848.96 TAO.</li>
+<li><strong>web</strong> Chain reads at blocks 9604884 and 9604959 (2026-11-28 10:44Z and 10:59Z UTC): SN89 mechanism 0 has 24 uids with incentive (uid 39 79.3 %, the other 23 together 20.7 %, under 12 coldkeys; uids 26 and 50 hold trace shares); mechanism 1 has 12, top uid 39 at 30.1 %; 7 weight rows send 76-80 % to uid 39, uid 47 sends 62.5 % to uid 0; uid 39 emission 38.2 % (1,529.9 alpha a day), hotkey stake 46,234.5 alpha, never set weights; uid 42 holds 74.0 % of dividends. Incentive also read at blocks 9598061, 9599861, 9600761, 9601661, 9603461 (11-27 12:00 to 11-28 06:00 UTC, 12 s blocks): 24 earners at each, uid 39 79.5 % falling to 79.4 %.</li>
+<li><strong>web</strong> Chain read at block 9604959 (2026-11-28 10:59Z): price SN89, 3 samples every 15d from block 9388959 (2026-10-29 10:51Z): price 0.002958 -&gt; 0.002691 TAO per alpha (-9.0%), pool TAO 6109.2 -&gt; 5849.0; over the 2 intervals where the pool change equals flow + protocol: net user flow -261.5 TAO (staked minus unstaked), protocol flow +1.3 TAO, gross volume 4041.1 TAO. Daily samples over 7 days: net user flow -114.4 TAO, price -4.0%. Shared snapshot of block 9604959: pool rank 65 of 130.</li>
+<li><strong>web</strong> Chain read at block 9604959 (2026-11-28 10:59Z): SN89 stake by coldkey: 1018 coldkeys hold 2405779.342 alpha on 534 hotkeys (98.967% of the chain&#x27;s staked total); top coldkey 37.802%, top 5 87.159%, top 10 90.471%; owner coldkey 37.802%; 90.78% of the stake sits on validator-permit hotkeys; 4 hotkeys&#x27; stake rows were not fully read (1.033% of the staked total unattributed), shares are of what was read. Rank 5 is the coldkey of uid 39 (ck:d86559, 2.00%, 48,214.6 alpha on 2 hotkeys; 54,180 on 11-22, 44,204.8 on 11-26): the code&#x27;s entity bond coldkey since commit 88d818d. Tags only.</li>
+<li><strong>web</strong> infinitequant.app pages read 2026-11-28: signals-program (LF 895 traders, 65 earning, 77 submitted in 3 days, total paid out $31,111, pool 2.38 TAO a day), recruiters (pool 1.59 TAO a day, 30 of 99 scoring, 78 of 590 recruits earning, 507 pairs valid on chain), home (71 books live; total paid to traders and miners $731,525), challenges, agent, how-to-mine and docs (text unchanged since 11-27); counts only, no handles kept; team API partner.infinitequant.app/sn89/agent/weeks/index.json unchanged (weeks 11-02, 11-09, 11-16); 11-16 file read earlier (sha256 529f8d46 matched the index): bond 53,165.7 alpha on ck:d86559, eligible, 67 accounts, 47 active, 11 eliminated, 24 with a share; GitHub issue #41 still open with 1 comment on 2026-11-28</li>
+<li><strong>web</strong> Chain events read 2026-11-27 for SN89, blocks 9564159-9564258, 9569327-9569377 and 9581218-9581317, with uid 39 hotkey stake bisected between blocks 9563156 and 9588846 (11-22 15:39Z to 11-26 05:17Z UTC): StakeRemoved amounts plus fees of 1,296.0 (block 9564175), 2,398.5 (9569331) and two of 3,000.0 alpha (9581254, 9581262) equal the stake drops in those windows; addresses masked, so the signer is not confirmed; other drops not matched.</li>
+<li><strong>msg</strong> #89 chat 2026-08-16 to 2026-11-01 and pinned posts, including the team announcement of 2026-10-29; archive unreachable (HTTP 502) on 2026-11-02 and 2026-11-04, reads that timed out on 2026-11-05 to 2026-11-08, on 2026-11-22, 2026-11-25, 2026-11-26, 2026-11-27 and 2026-11-28; nothing newer read</li>
+</ul>
+</details>
+</div>
+</div>
+<footer><nav class="sn-pn" aria-label="Other subnets"><a rel="prev" href="/bittensor-docs/subnets/88.html"><small>← Previous</small>SN88 Investing88</a><a rel="next" href="/bittensor-docs/subnets/90.html"><small>Next →</small>SN90 KubeTEE</a></nav><p>Written from public repositories, project docs and community chat. Chat is cited by channel and date only. Treat it as a starting point and check the sources before relying on it.</p><p>Researched 2026-11-28. Site built 2026-11-28. <a href="/bittensor-docs/">All subnets</a></p></footer>
+</article>
+</main>
+</body>
+</html>
